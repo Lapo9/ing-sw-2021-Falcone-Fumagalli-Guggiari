@@ -1,23 +1,21 @@
 package it.polimi.ingsw.model;
 
-import java.util.ArrayList;
-
 public class SupplyContainer implements AcceptsSupplies, HasStatus{
-    private int coins;
-    private int stones;
-    private int servants;
-    private int shields;
-    private int faith;
+    private int coin;
+    private int stone;
+    private int servant;
+    private int shield;
+    private int faith_marker;
 
     /**
      * class constructor
      */
     public SupplyContainer() {
-        coins=0;
-        stones=0;
-        servants=0;
-        shields=0;
-        faith=0;
+        coin=0;
+        stone=0;
+        servant=0;
+        shield=0;
+        faith_marker=0;
     }
 
     /**
@@ -27,20 +25,20 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      */
     public int getQuantity(WarehouseObjectType wot){
         switch(wot){
-            case(COINS):
-                return coins;
+            case(COIN):
+                return coin;
                 break;
-            case(STONES):
-                return stones;
+            case(STONE):
+                return stone;
                 break;
-            case(SERVANTS):
-                return servants;
+            case(SERVANT):
+                return servant;
                 break;
-            case(SHIELDS):
-                return shields;
+            case(SHIELD):
+                return shield;
                 break;
             default:
-                return faith;
+                return faith_marker;
         }
     }
 
@@ -50,11 +48,11 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      * @param sc is the SupplyContainer that you want to add to your SupplyContainer
      */
     public void add(SupplyContainer sc){
-        this.coins = sc.coins + this.coins;
-        this.stones = sc.stones + this.stones;
-        this.servants = sc.servants + this.servants;
-        this.shields = sc.shields + this.shields;
-        this.faith = sc.faith + this.faith;
+        this.coin = sc.coin + this.coin;
+        this.stone = sc.stone + this.stone;
+        this.servant = sc.servant + this.servant;
+        this.shield = sc.shield + this.shield;
+        this.faith_marker = sc.faith_marker + this.faith_marker;
     }
 
     //TODO
@@ -69,16 +67,16 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      */
     public void addSupply(WarehouseObjectType wot) throws SupplyException{
         switch(wot) {
-            case (COINS):
-                coins++;
-            case (STONES):
-                stones++;
-            case (SERVANTS):
-                servants++;
-            case (SHIELDS):
-                shields++;
-            case(FAITH):
-                faith++;
+            case(COIN):
+                coin++;
+            case(STONE):
+                stone++;
+            case(SERVANT):
+                servant++;
+            case(SHIELD):
+                shield++;
+            case(FAITH_MARKER):
+                faith_marker++;
         }
     }
 
@@ -89,40 +87,40 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      */
     public void removeSupply(WarehouseObjectType wot) throws SupplyException{
         switch(wot){
-            case(COINS):
+            case(COIN):
             {
-                if(coins <= 0)
+                if(coin <= 0)
                     throw new SupplyException();
                 else
-                    coins--;
+                    coin--;
             }
-            case(STONES):
+            case(STONE):
             {
-                if(stones <= 0)
+                if(stone <= 0)
                     throw new SupplyException();
                 else
-                    stones--;
+                    stone--;
             }
-            case(SERVANTS):
+            case(SERVANT):
             {
-                if(servants <= 0)
+                if(servant <= 0)
                     throw new SupplyException();
                 else
-                    servants--;
+                    servant--;
             }
-            case(SHIELDS):
+            case(SHIELD):
             {
-                if(shields <= 0)
+                if(shield <= 0)
                     throw new SupplyException();
                 else
-                    shields--;
+                    shield--;
             }
-            case(FAITH):
+            case(FAITH_MARKER):
             {
-                if(faith <= 0)
+                if(faith_marker <= 0)
                     throw new SupplyException();
                 else
-                    faith--;
+                    faith_marker--;
             }
         }
     }
