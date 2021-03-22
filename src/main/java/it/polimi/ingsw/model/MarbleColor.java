@@ -2,6 +2,6 @@ package it.polimi.ingsw.model;
 
 public enum MarbleColor {
 
-    GOLD, GREY, VIOLET, BLUE
+    YELLOW, GREY, VIOLET, BLUE, WHITE, RED
 
 }

@@ -2,6 +2,6 @@ package it.polimi.ingsw.model;
 
 public enum WarehouseObjectType {
 
-    MONEY, ROCK, SLAVE, SHIELD
+    MONEY, ROCK, SLAVE, SHIELD, FAITH_MARKER 
 
 }
