@@ -27,15 +27,15 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
         for(WarehouseObjectType wot : wots) {
             if (wot == WarehouseObjectType.COIN)
-                temp = coin;
+                temp += coin;
             else if (wot == WarehouseObjectType.STONE)
-                temp = stone;
+                temp += stone;
             else if (wot == WarehouseObjectType.SERVANT)
-                temp = servant;
+                temp += servant;
             else if (wot == WarehouseObjectType.SHIELD)
-                temp = shield;
+                temp += shield;
             else if (wot == WarehouseObjectType.FAITH_MARKER)
-                temp = faithMarker;
+                temp += faithMarker;
         }
         return temp;
     }
