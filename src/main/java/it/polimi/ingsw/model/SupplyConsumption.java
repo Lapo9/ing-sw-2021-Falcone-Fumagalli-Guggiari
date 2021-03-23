@@ -9,6 +9,7 @@ public class SupplyConsumption implements HasStatus{
 
     /**
      * Class constructor
+     * @param source is the source of the resources contained in the SupplyContainer
      */
     public SupplyConsumption(int source) {
         sc = new SupplyContainer();
