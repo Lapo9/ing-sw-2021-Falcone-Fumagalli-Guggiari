@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 /**
  * This interface manages every object which can get every type of supplies
  */
-public interface AcceptSupplies {
+public interface AcceptsSupplies {
 
     /**
      * Method that allows every type of object who can storage a supply to get it

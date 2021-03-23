@@ -69,9 +69,9 @@ public class Dashboard {
      * @return How many non-red marbles are discarded. Does the player triggered a vatican report?
      */
     public Pair<Integer, Boolean> discardSupplies(){
-        Integer totalDiscarded = unassignedSupplies.getQuantity(MarbleColor.WHITE, MarbleColor.BLUE, MarbleColor.GREY, MarbleColor.VIOLET, MarbleColor.YELLOW);
+        int totalDiscarded = unassignedSupplies.getQuantity(MarbleColor.WHITE, MarbleColor.BLUE, MarbleColor.GREY, MarbleColor.VIOLET, MarbleColor.YELLOW);
 
-        Boolean vaticanReport = false;
+        boolean vaticanReport = false;
         for(int i = 0; i < unassignedSupplies.getQuantity(MarbleColor.RED); ++i){
             vaticanReport |= goAhead();
         }

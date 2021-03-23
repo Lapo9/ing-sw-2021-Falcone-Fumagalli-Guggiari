@@ -19,21 +19,24 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
     /**
      * The getQuantity method returns the quantity of the supply type passed as input that currently is in the SupplyContainer
-     * @param wot is one of the five types of resources in the game
-     * @return is the supply quantity of the given type present in the SupplyContainer
+     * @param wots resources to return the sum of the quantity
+     * @return is the sum supply quantity of the given type present in the SupplyContainer
      */
-    public int getQuantity(WarehouseObjectType wot){
+    public int getQuantity(WarehouseObjectType... wots){
         int temp = 0;
-        if(wot == WarehouseObjectType.COIN)
-            temp = coin;
-        else if(wot == WarehouseObjectType.STONE)
-            temp = stone;
-        else if(wot == WarehouseObjectType.SERVANT)
-            temp = servant;
-        else if(wot == WarehouseObjectType.SHIELD)
-            temp = shield;
-        else if(wot == WarehouseObjectType.FAITH_MARKER)
-            temp = faithMarker;
+
+        for(WarehouseObjectType wot : wots) {
+            if (wot == WarehouseObjectType.COIN)
+                temp = coin;
+            else if (wot == WarehouseObjectType.STONE)
+                temp = stone;
+            else if (wot == WarehouseObjectType.SERVANT)
+                temp = servant;
+            else if (wot == WarehouseObjectType.SHIELD)
+                temp = shield;
+            else if (wot == WarehouseObjectType.FAITH_MARKER)
+                temp = faithMarker;
+        }
         return temp;
     }
 
@@ -50,17 +53,15 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         this.faithMarker = sc.faithMarker + this.faithMarker;
     }
 
-    //TODO
-    public ArrayList<Integer> getStatus(){
-
-    }
-
     /**
      * The addSupply method add one supply of the given type to the SupplyContainer
      * @param wot is one of the five types of resources in the game
      * @throws SupplyException is not required here
      */
+    @Override
     public void addSupply(WarehouseObjectType wot) throws SupplyException{
+        if(wot == null)
+            throw new SupplyException();
         if(wot == WarehouseObjectType.COIN)
             coin++;
         else if(wot == WarehouseObjectType.STONE)
@@ -78,6 +79,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      * @param wot is one of the five types of resources in the game
      * @throws SupplyException if there are zero resources of the given type
      */
+    @Override
     public void removeSupply(WarehouseObjectType wot) throws SupplyException{
         if(wot == WarehouseObjectType.COIN)
         {
@@ -120,6 +122,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      * The clearSupplies method removes all the resources that are in the SupplyContainer
      * @return an empty SupplyContainer
      */
+    @Override
     public SupplyContainer clearSupplies(){
         this.coin = 0;
         this.faithMarker = 0;
@@ -127,5 +130,12 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         this.shield = 0;
         this.stone = 0;
         return this;
+    }
+
+
+    //TODO
+    @Override
+    public ArrayList<Integer> getStatus(){
+
     }
 }

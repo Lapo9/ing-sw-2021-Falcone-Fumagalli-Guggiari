@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Conventions: shelf number 1 can contain 3 supplies, shelf number 2 can contain 2 supplies and shelf number 3 can
  * contain 1 supply. A BoundedSupplyContainer can store just one type of supplies
  */
-public class BoundedSupplyContainer implements AcceptsSupplies{
+public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
     private SupplyContainer sc;
     private int position;
     private int max;
@@ -106,7 +106,11 @@ public class BoundedSupplyContainer implements AcceptsSupplies{
      * @throws SupplyException if the BoundedSupplyContainer is already full or if the supply type passed as an input is
      * different than the type of supplies that already are in the BoundedSupplyContainer
      */
+    @Override
     public void addSupply(WarehouseObjectType wot)throws SupplyException{
+        //TODO compact these 3 ifs into only one if
+        if(wot == WarehouseObjectType.FAITH_MARKER || wot == null)
+            throw new SupplyException(); //this container cannot contain faith markers
         if(getQuantity() == max)
             throw new SupplyException();
         if(wot != getType() && getQuantity() != 0)
@@ -120,6 +124,7 @@ public class BoundedSupplyContainer implements AcceptsSupplies{
      * @throws SupplyExcecption if the BoundedSupplyContainer is already empty or if the supply type passed as an input
      * is different than the type of supplies stored in the BoundedSupplyContainer
      */
+    @Override
     public void removeSupply(WarehouseObjectType wot)throws SupplyExcecption{
         if(getQuantity() == 0)
             throw new SupplyException();
@@ -132,6 +137,7 @@ public class BoundedSupplyContainer implements AcceptsSupplies{
      * The clearSupplies method removes all the supplies from the SupplyContainer
      * @return an empty SupplyContainer
      */
+    @Override
     public SupplyContainer clearSupplies(){
         if(getQuantity() == 0)
             return sc;
@@ -139,7 +145,45 @@ public class BoundedSupplyContainer implements AcceptsSupplies{
             return sc.clearSupplies();
     }
 
+    /**
+     * Tries to convert the marble to the supply it can contain, and, if possible, adds the marble to the container.
+     * @param color Color of the marble to add
+     * @param ls leaders space, utilized to check if a white marble is convertible
+     * @throws MarbleException Cannot convert the marble to the desired supply type
+     * @throws SupplyException The container is full
+     */
+    public void addMarble(MarbleColor color, LeadersSpace ls) throws MarbleException, SupplyException{
+        WarehouseObjectType wot = MarbleContainer.colorToSupply(color);
+
+        //if wot is null, then we must deal with a white ball
+        if (wot == null){
+            //try if first leader is able to convert the white ball to something
+            try {
+                if (ls.getLeaderAbility(0).getWhiteBall() == getType()){
+                    wot = getType(); //does the leader convert the white ball to the required type?
+                }
+            }
+            catch (LeaderAbilityNotSupportedException lanse){} //if the first leader cannot transform a white ball, try the second leader
+
+            //same as above
+            try {
+                if (ls.getLeaderAbility(1).getWhiteBall() == getType()){
+                    wot = getType();
+                }
+            }
+            catch (LeaderAbilityNotSupportedException lanse){}
+        }
+
+        if(wot != null && wot == getType()) {
+            addSupply(wot);
+        }
+        else {
+            throw new MarbleException();
+        }
+    }
+
     //TODO
+    @Override
     public ArrayList<Integer> getStatus(){
 
     }
