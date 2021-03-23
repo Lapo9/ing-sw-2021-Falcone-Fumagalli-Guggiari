@@ -14,6 +14,7 @@ public class Dashboard {
     private FaithTrack faithTrack;
     private LeadersSpace leadersSpace;
     private Developments developments;
+    private MarbleContainer unassignedSupplies;
     private boolean inkwell;
 
 
@@ -28,17 +29,55 @@ public class Dashboard {
     }
 
 
-    public Pair<Integer, Boolean> buySupplies(MarketDirection dir, int index) {
-        MarbleContainer marbles = marketplace.obtain(dir, index);
-        boolean vaticanReport = false;
+    /**
+     * Transfers the marbles contained in the selected column/row to the user unassigned objects.
+     * @param dir vertical or horizontal
+     * @param index column or row number
+     */
+    public void buySupplies(MarketDirection dir, int index) {
+        unassignedSupplies = marketplace.obtain(dir, index);
+    }
 
-        //for each red marble goAhead one tile on faith track
-        for (int i = 0; i < marbles.getQuantity(MarbleColor.RED); ++i) {
-            vaticanReport = vaticanReport || goAhead();
+
+    /**
+     * Transforms a marble into the supply contained in the destination deposit. If the transformation is not possible a MarbleException is thrown.
+     * @param to destination deposit (a BoundedSupplyContainer)
+     * @param color the color of the marble
+     * @throws SupplyException Destination is full
+     * @throws MarbleException Destination cannot accept this color of marble
+     * @throws LeaderAbilityNotSupportedException Leader hasn't a deposit ability
+     */
+    public void assignMarble(int to, MarbleColor color) throws SupplyException, MarbleException, LeaderAbilityNotSupportedException{
+        if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException();}
+
+        if(to <= 2){
+            warehouse.addMarble(to, color);
+            unassignedSupplies.removeMarble(color);
         }
 
-        //for each not white or red marble, try to store them in a container
-        for (int i = 0; i <)
+        else if(to >= 6 && to <= 7){
+            leadersSpace.getLeaderAbility(to-6).addMarble();
+            unassignedSupplies.removeMarble(color);
+        }
+    }
+
+
+    /**
+     * Discards all the remaining marbles in the unassigned supply container.
+     * If the marble is red, then the player goes ahead one tile on the faith track.
+     * For each non-red discarded marble, all of the other player go ahead one tile on the faith track.
+     * @return How many non-red marbles are discarded. Does the player triggered a vatican report?
+     */
+    public Pair<Integer, Boolean> discardSupplies(){
+        Integer totalDiscarded = unassignedSupplies.getQuantity(MarbleColor.WHITE, MarbleColor.BLUE, MarbleColor.GREY, MarbleColor.VIOLET, MarbleColor.YELLOW);
+
+        Boolean vaticanReport = false;
+        for(int i = 0; i < unassignedSupplies.getQuantity(MarbleColor.RED); ++i){
+            vaticanReport |= goAhead();
+        }
+
+        unassignedSupplies.clear();
+        return new Pair<>(totalDiscarded, vaticanReport);
     }
 
 
@@ -52,7 +91,7 @@ public class Dashboard {
      * @param type Type of resource to move
      * @throws SupplyException Thrown if the source doesn't have the specified type of resource, or if the destination cannot accept the resource
      */
-    public void moveSupply(int from, int to, WarehouseObjectType type) throws SupplyException {
+    public void moveSupply(int from, int to, WarehouseObjectType type) throws SupplyException, LeaderAbilityNotSupportedException {
         //remove supply from specified container
         if(from <= 2){
             warehouse.removeObject(from, type);
