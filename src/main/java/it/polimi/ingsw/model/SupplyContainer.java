@@ -117,10 +117,10 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
     /**
-     * The clearSupply method removes all the resources that are in the SupplyContainer
+     * The clearSupplies method removes all the resources that are in the SupplyContainer
      * @return an empty SupplyContainer
      */
-    public SupplyContainer clearSupply(){
+    public SupplyContainer clearSupplies(){
         this.coin = 0;
         this.faithMarker = 0;
         this.servant = 0;

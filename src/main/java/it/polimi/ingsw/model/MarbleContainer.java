@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.MarbleColor;
+import java.util.ArrayList;
 
 public class MarbleContainer {
     private int yellow = 0;
@@ -11,7 +12,7 @@ public class MarbleContainer {
     private int red = 0;
 
     /**
-     * class constructor
+     * Class constructor
      * @param y number of yellow marbles
      * @param b number of blue marbles
      * @param g number of grey marbles
@@ -48,5 +49,10 @@ public class MarbleContainer {
         else if(mc == MarbleColor.RED)
             temp = red;
         return temp;
+    }
+
+    //TODO
+    public ArrayList<Integer> getStatus(){
+
     }
 }
