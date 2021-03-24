@@ -38,6 +38,7 @@ public class Dashboard implements HasStatus{
     }
 
 
+
     /**
      * Swaps 2 rows of the Warehouse. Row 1 is the bottom one. If it is not possible a SupplyException is thrown.
      * @param r1 row 1
@@ -67,16 +68,16 @@ public class Dashboard implements HasStatus{
      * @throws MarbleException Destination cannot accept this color of marble
      * @throws LeaderAbilityNotSupportedException Leader hasn't a deposit ability
      */
-    public void assignMarble(int to, MarbleColor color) throws SupplyException, MarbleException, LeaderAbilityNotSupportedException{
+    public void assignMarble(DepositID to, MarbleColor color) throws SupplyException, MarbleException, LeaderAbilityNotSupportedException{
         if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException();}
 
-        if(to <= 2){
-            warehouse.addMarble(to, color);
+        if(to.getType() == DepositID.DepositType.WAREHOUSE){
+            warehouse.addMarble(to.getNum(), color);
             unassignedSupplies.removeMarble(color);
         }
 
-        else if(to >= 6 && to <= 7){
-            leadersSpace.getLeaderAbility(to-6).addMarble();
+        else if(to.getType() == DepositID.DepositType.LEADER){
+            leadersSpace.getLeaderAbility(to.getNum()).addMarble();
             unassignedSupplies.removeMarble(color);
         }
     }
@@ -101,6 +102,7 @@ public class Dashboard implements HasStatus{
     }
 
 
+    //TODO add other types of deposits
     /**
      * Moves a supply of the specified type from the from container to the to container.
      * The ID number of the containers is as follows:
@@ -111,39 +113,64 @@ public class Dashboard implements HasStatus{
      * @param type Type of resource to move
      * @throws SupplyException Thrown if the source doesn't have the specified type of resource, or if the destination cannot accept the resource
      */
-    public void moveSupply(int from, int to, WarehouseObjectType type) throws SupplyException, LeaderAbilityNotSupportedException {
-        //remove supply from specified container
-        if(from <= 2){
-            warehouse.removeObject(from, type);
-        }
-        else if(from >= 3 && from <= 5){
-            developments.removeSupply(from-3, type);
-        }
-        else{
-            leadersSpace.getLeaderAbility(from-6).removeSupply(type);
+    public void moveSupply(DepositID from, DepositID to, WarehouseObjectType type) throws SupplyException, LeaderAbilityNotSupportedException {
+
+        //deny illegal movements (from/to deposits to/from coffer)
+        if(((from.getType() == DepositID.DepositType.WAREHOUSE || from.getType() == DepositID.DepositType.DEVELOPMENT || from.getType() == DepositID.DepositType.LEADER) && to.getType() == DepositID.DepositType.COFFER)
+                || (from.getType() == DepositID.DepositType.COFFER && (to.getType() == DepositID.DepositType.WAREHOUSE || to.getType() == DepositID.DepositType.DEVELOPMENT || to.getType() == DepositID.DepositType.LEADER))){
+            throw new SupplyException();
         }
 
-        //add supply to specified container, if you cannot, put supply back to original container
+        //remove supply from specified container
+        if(from.getType() == DepositID.DepositType.WAREHOUSE){
+            warehouse.removeObject(from.getNum(), type);
+        }
+        else if(from.getType() == DepositID.DepositType.DEVELOPMENT){
+            developments.removeSupply(from.getNum(), type);
+        }
+        else if(from.getType() == DepositID.DepositType.LEADER){
+            leadersSpace.getLeaderAbility(from.getNum()).removeSupply(type);
+        }
+        else if(from.getType() == DepositID.DepositType.COFFER){
+            coffer.removeSupply(type);
+        }
+        else if(from.getType() == DepositID.DepositType.PAYCHECK){
+            paycheck.remove(from.getNum(), to, type);
+        }
+
+        //add supply to specified container, if you cannot, put supply back to original container and throw the exception
         try {
-            if (to <= 2) {
-                warehouse.addObject(to, type);
+            if (to.getType() == DepositID.DepositType.WAREHOUSE) {
+                warehouse.addObject(to.getNum(), type);
             }
-            else if (to >= 3 && from <= 5) {
-                developments.addSupply(to - 3, type);
+            else if (to.getType() == DepositID.DepositType.DEVELOPMENT) {
+                developments.addSupply(to.getNum(), type);
             }
-            else {
-                leadersSpace.getLeaderAbility(to - 6).addSupply(type);
+            else if (to.getType() == DepositID.DepositType.LEADER){
+                leadersSpace.getLeaderAbility(to.getNum()).addSupply(type);
+            }
+            else if (to.getType() == DepositID.DepositType.COFFER){
+                coffer.addSupply(type);
+            }
+            else if (to.getType() == DepositID.DepositType.PAYCHECK){
+                paycheck.add(from, type);
             }
         }
         catch(SupplyException se){
-            if(from <= 2){
-                warehouse.addObject(from, type);
+            if(from.getType() == DepositID.DepositType.WAREHOUSE){
+                warehouse.addObject(from.getNum(), type);
             }
-            else if(from >= 3 && from <= 5){
-                developments.addSupply(from-3, type);
+            else if(from.getType() == DepositID.DepositType.DEVELOPMENT){
+                developments.addSupply(from.getNum(), type);
             }
-            else{
-                leadersSpace.getLeaderAbility(from-6).addSupply(type);
+            else if(from.getType() == DepositID.DepositType.LEADER){
+                leadersSpace.getLeaderAbility(from.getNum()).addSupply(type);
+            }
+            else if(from.getType() == DepositID.DepositType.COFFER){
+                coffer.addSupply(type);
+            }
+            else if(from.getType() == DepositID.DepositType.PAYCHECK){
+                paycheck.add(from, type);
             }
             throw se;
         }
@@ -182,10 +209,10 @@ public class Dashboard implements HasStatus{
         }
 
         //store outputs in the coffer
-        coffer.add(developmentProduction);
-        coffer.add(baseProduction);
-        coffer.add(leader1Production);
-        coffer.add(leader2Production);
+        coffer.sum(developmentProduction);
+        coffer.sum(baseProduction);
+        coffer.sum(leader1Production);
+        coffer.sum(leader2Production);
 
         //go ahead in faith track
         boolean vaticanReport = false;

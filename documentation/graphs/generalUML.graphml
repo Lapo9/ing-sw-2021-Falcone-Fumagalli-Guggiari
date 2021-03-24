@@ -31,7 +31,7 @@
 + Pair&lt;Integer, Boolean&gt; discardSupplies()
 + bool produce(bool s1, bool s2, bool s3, bool l1, bool l2, bool base)
 + checkProduction(bool s1, bool s2, bool s3, bool l1, bool l2, bool base) throws SupplyException
-+ buyDevelopment(int supplyCardID, int space, SupplyConsumption... sc) throws DevelopmentException, SupplyException, NoSuchCardException
++ buyDevelopment(int column, int row, int space) throws DevelopmentException, SupplyException, NoSuchCardException
 + bool discardLeader(int i) throws LeaderException
 + playLeader(int i) throws SupplyException, LeaderException
 + bool goAhead()
@@ -66,7 +66,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="178.59983254114036" width="649.0729307694223" x="-472.7452783895111" y="761.4437571318811"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Fill color="#00FF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="202.0322265625" x="223.52035210346116" xml:space="preserve" y="3.0">BoundedSupplyContainer<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
@@ -126,7 +126,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="93.9208984375" width="254.4375" x="-2243.4253561818314" y="-895.4352597813219"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="85.01318359375" x="84.712158203125" xml:space="preserve" y="27.66796875">HasStatus<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="interface" use3DEffect="false">
@@ -141,7 +141,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="93.9208984375" width="186.0263671875" x="-2243.4253561818314" y="-757.7680576833382"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="166.0263671875" x="10.0" xml:space="preserve" y="27.66796875">WinPointsCountable<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="interface" use3DEffect="false">
@@ -175,7 +175,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="204.5966796875" width="384.05859375" x="457.87593174452275" y="498.49893574701355"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Fill color="#FFFF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="94.0146484375" x="145.02197265625" xml:space="preserve" y="3.0">SupplyCard<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
@@ -197,7 +197,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="141.9248046875" width="290.443359375" x="-1339.2216796875" y="0.0"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Fill color="#FFFF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="94.0146484375" x="98.21435546875" xml:space="preserve" y="3.0">FaithTrack<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
@@ -214,14 +214,15 @@
       <data key="d4" xml:space="preserve"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="84.9208984375" width="146.419921875" x="-1267.2099609375" y="235.101806640625"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Geometry height="104.4027364189077" width="146.419921875" x="-1267.2099609375" y="235.101806640625"/>
+          <y:Fill color="#00FF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="121.01904296875" x="12.700439453125" xml:space="preserve" y="3.0">PopeFavorTile<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve"/>
             <y:MethodLabel xml:space="preserve">+ bool isActive()
-+ activate()</y:MethodLabel>
++ activate()
++ discarrd()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -267,7 +268,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="157.5927734375" width="412.86328125" x="-1915.2283800050232" y="198.765869140625"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Fill color="#FFFF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="94.0146484375" x="159.42431640625" xml:space="preserve" y="3.0">LeaderCard<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
@@ -286,9 +287,9 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="125.2568359375" width="470.47265625" x="-580.47265625" y="1198.3814052310454"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="139.02197265625" x="165.725341796875" xml:space="preserve" y="50.8359375">AcceptsSupplies<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="139.02197265625" x="165.725341796875" xml:space="preserve" y="27.66796875">AcceptsSupplies<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="interface" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve"/>
             <y:MethodLabel xml:space="preserve">+ addSupply(WarehouseObjectType wot) throws SupplyException
@@ -303,7 +304,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="69.2529296875" width="326.44921875" x="-890.0258456929797" y="0.0"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Fill color="#00FF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="139.02197265625" x="93.713623046875" xml:space="preserve" y="3.0">SupplyContainer<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
@@ -344,7 +345,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="68.2529296875" width="195.02783203125" x="-1057.240111193581" y="-140.12680882695935"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Fill color="#00FF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="175.02783203125" x="10.0" xml:space="preserve" y="27.66796875">WarehouseObjectType<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="enum" use3DEffect="false">
@@ -359,7 +360,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="126.2568359375" width="326.44921875" x="-890.0258456929797" y="244.45071406339673"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Fill color="#00FF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="148.0234375" x="89.212890625" xml:space="preserve" y="3.0">SupplyConsuption<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
@@ -376,7 +377,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="100.5888671875" width="189.626953125" x="-2258.2029529545784" y="198.765869140625"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Fill color="#00FF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="148.0234375" x="20.8017578125" xml:space="preserve" y="3.0">CardsRequirement<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
@@ -392,10 +393,10 @@
       <data key="d4" xml:space="preserve"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="207.82058408491037" width="708.111328125" x="-2051.9499448849347" y="431.7101565863591"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
+          <y:Geometry height="207.82058408491037" width="892.2596551369522" x="-2051.9499448849347" y="431.7101565863591"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="121.01904296875" x="293.546142578125" xml:space="preserve" y="27.66796875">LeaderAbility<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="121.01904296875" x="385.6203060841011" xml:space="preserve" y="27.66796875">LeaderAbility<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="interface" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve"/>
             <y:MethodLabel xml:space="preserve">+ SupplyContainer getDiscount() throws LeaderAbilityNotSupportedException
@@ -417,7 +418,7 @@
           <y:Geometry height="69.2529296875" width="247.236328125" x="-2448.618996259688" y="400.7809978428171"/>
           <y:Fill color="#C0C0C0" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="76.01171875" x="85.6123046875" xml:space="preserve" y="22.833984375">Discount<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="76.01171875" x="85.6123046875" xml:space="preserve" y="3.0">Discount<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve"/>
             <y:MethodLabel xml:space="preserve">+ SupplyContainer getDiscount()</y:MethodLabel>
@@ -432,7 +433,7 @@
           <y:Geometry height="69.2529296875" width="283.2421875" x="-2484.624855634688" y="517.822559266468"/>
           <y:Fill color="#C0C0C0" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="58.0087890625" x="112.61669921875" xml:space="preserve" y="22.833984375">Market<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="58.0087890625" x="112.61669921875" xml:space="preserve" y="3.0">Market<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve"/>
             <y:MethodLabel xml:space="preserve">+ WarehouseObjectType getWhiteBall()</y:MethodLabel>
@@ -444,10 +445,10 @@
       <data key="d4" xml:space="preserve"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="94.9208984375" width="501.8964598663679" x="-2703.279128001056" y="634.864120690119"/>
+          <y:Geometry height="94.9208984375" width="529.7105300921316" x="-2731.0931982268203" y="634.864120690119"/>
           <y:Fill color="#C0C0C0" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="67.01025390625" x="217.44310298005894" xml:space="preserve" y="35.66796875">Deposit<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="67.01025390625" x="231.35013809294082" xml:space="preserve" y="3.0">Deposit<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve">- BoundedSupplyContainer bsc</y:AttributeLabel>
             <y:MethodLabel xml:space="preserve">+ Pair&lt;WarehouseObjectType, Integer&gt; getDepositInfo()
@@ -463,7 +464,7 @@
           <y:Geometry height="141.9248046875" width="448.869140625" x="-2650.251808759688" y="777.5736508637699"/>
           <y:Fill color="#C0C0C0" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="94.0146484375" x="177.42724609375" xml:space="preserve" y="59.169921875">Production<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="94.0146484375" x="177.42724609375" xml:space="preserve" y="3.0">Production<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve">- MutableProduction prod</y:AttributeLabel>
             <y:MethodLabel xml:space="preserve">+ SupplyContainer produce(bool isActive)
@@ -478,13 +479,14 @@
       <data key="d4" xml:space="preserve"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="69.2529296875" width="427.265625" x="-376.12795422444975" y="-461.12646484375"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Geometry height="70.02021438338306" width="427.265625" x="-376.12795422444975" y="-461.89374953963306"/>
+          <y:Fill color="#FFFF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="103.01611328125" x="162.124755859375" xml:space="preserve" y="3.0">Marketplace<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve"/>
-            <y:MethodLabel xml:space="preserve">+ MarbleContainer obtain(MarketDirection dir, int index)</y:MethodLabel>
+            <y:MethodLabel xml:space="preserve">+ MarbleContainer obtain(MarketDirection dir, int index)
+</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -494,7 +496,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="88.43504708457834" width="773.7741318891102" x="79.3292442467756" y="-480.3085822408284"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Fill color="#FFFF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="139.02197265625" x="317.3760796164301" xml:space="preserve" y="3.0">DevelopmentGrid<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
@@ -525,7 +527,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="68.2529296875" width="132.017578125" x="1093.4590327793217" y="577.1596837458685"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Fill color="#00FF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="112.017578125" x="10.0" xml:space="preserve" y="27.66796875">CardCategory<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="enum" use3DEffect="false">
@@ -612,15 +614,16 @@
       <data key="d4" xml:space="preserve"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="94.67032315363548" width="326.44921875" x="1776.1021514503277" y="0.0"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Geometry height="122.24461691193568" width="417.56427638612195" x="1727.7775505663726" y="0.0"/>
+          <y:Fill color="#00FF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="139.02197265625" x="93.713623046875" xml:space="preserve" y="3.0">MarbleContainer<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="139.02197265625" x="139.27115186493597" xml:space="preserve" y="3.0">MarbleContainer<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve"/>
             <y:MethodLabel xml:space="preserve">+ int getQuantity(MarbleColor... mcs)
 + removeMarble(MarbleColor mc) throws MarbleException
-+ clear()</y:MethodLabel>
++ clear()
++ static WarehouseObjectType colorToSupply(MarbleColor c)</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -630,7 +633,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="162.56749258964146" width="584.9225996822711" x="2200.2727172504974" y="0.0"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Fill color="#FFFF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="76.01171875" x="254.45544046613554" xml:space="preserve" y="3.0">Paycheck<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
@@ -778,7 +781,7 @@
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="123.6181640625" sy="24.5925373134329" tx="-354.0556640625" ty="-75.6204486288143"/>
+          <y:Path sx="123.6181640625" sy="24.5925373134329" tx="-446.12982756847623" ty="-75.6204486288143"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
           <y:EdgeLabel alignment="center" anchorX="71.83907998757695" anchorY="17.836929711337064" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="0.5424187228435483" upY="-0.8401082841567353" verticalTextPosition="bottom" visible="true" width="4.0" x="71.83907998757695" y="14.476496574710122">
@@ -798,7 +801,7 @@
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="141.62109375" sy="7.5509758897819665" tx="-354.0556640625" ty="24.3795513711857"/>
+          <y:Path sx="141.62109375" sy="7.5509758897819665" tx="-446.12982756847623" ty="24.3795513711857"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
           <y:EdgeLabel alignment="center" anchorX="71.83907998757695" anchorY="17.836929711337007" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="0.5424187228435483" upY="-0.8401082841567353" verticalTextPosition="bottom" visible="true" width="4.0" x="71.83907998757695" y="14.476496574710065">
@@ -818,12 +821,12 @@
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="250.94822993318394" sy="-22.324569908868966" tx="-22.105719177565334" ty="103.91029204245524">
-            <y:Point x="-1720.0" y="660.0"/>
+          <y:Path sx="264.8552650460658" sy="-22.324569908868966" tx="-14.179882683541564" ty="103.91029204245524">
+            <y:Point x="-1620.0" y="660.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
-          <y:EdgeLabel alignment="center" anchorX="499.19020119571223" anchorY="-3.579861667072123" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="-0.8401082841567354" upY="-0.5424187228435481" verticalTextPosition="bottom" visible="true" width="4.0" x="495.82976805908527" y="-9.109969695073257">
+          <y:EdgeLabel alignment="center" anchorX="599.219498070712" anchorY="-3.579861667072123" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="-0.8401082841567354" upY="-0.5424187228435481" verticalTextPosition="bottom" visible="true" width="4.0" x="595.859064934085" y="-9.109969695073257">
             <y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="true" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
@@ -840,12 +843,12 @@
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="224.4345703125" sy="-8.536053207519899" tx="-2.1057191775653337" ty="103.91029204245524">
-            <y:Point x="-1700.0" y="840.0"/>
+          <y:Path sx="224.4345703125" sy="-8.536053207519899" tx="5.820117316458436" ty="103.91029204245524">
+            <y:Point x="-1600.0" y="840.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
-          <y:EdgeLabel alignment="center" anchorX="519.1889804925868" anchorY="-93.47803272928513" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="-0.8401082841567354" upY="-0.5424187228435481" verticalTextPosition="bottom" visible="true" width="4.0" x="515.8285473559598" y="-99.00814075728626">
+          <y:EdgeLabel alignment="center" anchorX="619.1828769769618" anchorY="-93.47803272928513" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="-0.8401082841567354" upY="-0.5424187228435481" verticalTextPosition="bottom" visible="true" width="4.0" x="615.8224438403348" y="-99.00814075728626">
             <y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="true" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
@@ -862,7 +865,7 @@
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="-6.0" sy="70.96240234375" tx="-6.0" ty="-42.46044921875"/>
+          <y:Path sx="-6.0" sy="70.96240234375" tx="-6.0" ty="-52.20136820945385"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="white_diamond" target="plain"/>
           <y:EdgeLabel alignment="center" anchorX="-17.836929711337007" anchorY="43.734019138406126" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="0.8401082841567353" upY="0.5424187228435482" verticalTextPosition="bottom" visible="true" width="4.0" x="-20.0066046027112" y="43.734019138406126">
@@ -882,7 +885,7 @@
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="8.796739380023155" sy="78.79638671875" tx="-2.1057191775653337" ty="-103.91029204245518"/>
+          <y:Path sx="108.79673938002315" sy="78.79638671875" tx="5.820117316458436" ty="-103.91029204245518"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="plain"/>
           <y:EdgeLabel alignment="center" anchorX="-17.836929711337007" anchorY="34.84005684518729" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="0.8401082841567353" upY="0.5424187228435482" verticalTextPosition="bottom" visible="true" width="4.0" x="-20.0066046027112" y="34.84005684518729">
@@ -1275,7 +1278,7 @@
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="-73.2099609375" sy="2.437744140625" tx="93.01318359375" ty="30.807608464588156">
+          <y:Path sx="-73.2099609375" sy="-7.303174850078847" tx="93.01318359375" ty="30.807608464588156">
             <y:Point x="-1400.0" y="280.0"/>
             <y:Point x="-1400.0" y="-680.0"/>
           </y:Path>
@@ -1432,12 +1435,12 @@
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="17.894280822434666" sy="103.91029204245524" tx="-235.236328125" ty="-1.0098231997953917">
-            <y:Point x="-1680.0" y="1260.0"/>
+          <y:Path sx="25.820117316458436" sy="103.91029204245524" tx="-235.236328125" ty="-1.0098231997953917">
+            <y:Point x="-1580.0" y="1260.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
-          <y:EdgeLabel alignment="center" anchorX="542.498463108001" anchorY="638.268326195712" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="0.5424187228435483" upY="-0.8401082841567353" verticalTextPosition="bottom" visible="true" width="4.0" x="542.498463108001" y="634.907893059085">
+          <y:EdgeLabel alignment="center" anchorX="492.55503474010493" anchorY="638.268326195712" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="0.5424187228435483" upY="-0.8401082841567353" verticalTextPosition="bottom" visible="true" width="4.0" x="492.55503474010493" y="634.907893059085">
             <y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="true" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
@@ -1454,7 +1457,7 @@
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="-66.56670526154448" sy="-132.24186381077388" tx="2.495141724449752" ty="34.62646484375"/>
+          <y:Path sx="-66.56670526154448" sy="-132.24186381077388" tx="2.495141724449752" ty="35.01010719169153"/>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" anchorX="17.836929711337007" anchorY="-36.876336123425745" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="-0.8401082841567354" upY="-0.5424187228435481" verticalTextPosition="bottom" visible="true" width="4.0" x="14.476496574710065" y="-42.40644415142688">
@@ -1494,12 +1497,12 @@
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="250.94822993318394" sy="-2.324569908868966" tx="8.208813004799936" ty="-89.29991627057018">
+          <y:Path sx="264.8552650460658" sy="-2.324569908868966" tx="8.208813004799936" ty="-89.29991627057018">
             <y:Point x="-140.0" y="680.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="white_diamond" target="plain"/>
-          <y:EdgeLabel alignment="center" anchorX="2043.514388648038" anchorY="34.03261630007307" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="0.8401082841567353" upY="0.5424187228435482" verticalTextPosition="bottom" visible="true" width="4.0" x="2041.3447137566639" y="34.03261630007307">
+          <y:EdgeLabel alignment="center" anchorX="2043.545638648038" anchorY="34.03261630007307" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="0.8401082841567353" upY="0.5424187228435482" verticalTextPosition="bottom" visible="true" width="4.0" x="2041.3759637566639" y="34.03261630007307">
             <y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="true" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
@@ -1654,13 +1657,13 @@
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="2.495141724449752" sy="-34.62646484375" tx="0.6732391746722897" ty="-47.33516157681774">
+          <y:Path sx="2.495141724449752" sy="-35.01010719169153" tx="3.440311240566416" ty="-61.12230845596784">
             <y:Point x="-160.0" y="-520.0"/>
             <y:Point x="1940.0" y="-520.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
-          <y:EdgeLabel alignment="center" anchorX="2082.163070288663" anchorY="194.2178517121922" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="0.8401082841567353" upY="0.5424187228435482" verticalTextPosition="bottom" visible="true" width="4.0" x="2079.993395397289" y="194.2178517121922">
+          <y:EdgeLabel alignment="center" anchorX="2082.163070288663" anchorY="194.98475845047346" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="0.8401082841567353" upY="0.5424187228435482" verticalTextPosition="bottom" visible="true" width="4.0" x="2079.993395397289" y="194.98475845047346">
             <y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="true" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
@@ -1677,7 +1680,7 @@
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="506.8581005065197" sy="60.19903330213694" tx="-19.32676082532771" ty="-47.33516157681774">
+          <y:Path sx="506.8581005065197" sy="60.19903330213694" tx="-16.559688759433584" ty="-61.12230845596784">
             <y:Point x="1920.0" y="-120.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>

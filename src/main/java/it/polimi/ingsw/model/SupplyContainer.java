@@ -18,6 +18,18 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
     /**
+     * Copy constructor.
+     * @param sc object to copy
+     */
+    public SupplyContainer(SupplyContainer sc){
+        sc.coin = coin;
+        sc.servant = servant;
+        sc.stone = stone;
+        sc.shield = shield;
+        sc.faithMarker = faithMarker;
+    }
+
+    /**
      * The getQuantity method returns the quantity of the supply type passed as input that currently is in the SupplyContainer
      * @param wots resources to return the sum of the quantity
      * @return is the sum supply quantity of the given type present in the SupplyContainer
@@ -45,7 +57,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      * elements of the second container in the first one
      * @param sc is the SupplyContainer that you want to add to your SupplyContainer
      */
-    public void add(SupplyContainer sc){
+    public void sum(SupplyContainer sc){
         this.coin = sc.coin + this.coin;
         this.stone = sc.stone + this.stone;
         this.servant = sc.servant + this.servant;
@@ -124,12 +136,13 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      */
     @Override
     public SupplyContainer clearSupplies(){
+        SupplyContainer tmp = new SupplyContainer(this);
         this.coin = 0;
         this.faithMarker = 0;
         this.servant = 0;
         this.shield = 0;
         this.stone = 0;
-        return this;
+        return tmp;
     }
 
 
