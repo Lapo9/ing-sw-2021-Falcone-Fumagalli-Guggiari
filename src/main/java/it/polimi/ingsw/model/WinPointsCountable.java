@@ -6,9 +6,9 @@ package it.polimi.ingsw.model;
 public interface WinPointsCountable {
 
     /**
-     * Method that gets the total number of win points from every card or resource
-     * @return Player's total number of WinPoints
+     * Method that gets the win points of the object
+     * @return the win points of the object
      */
-    public int getWinPoints(/*TODO*/)
+    public int getWinPoints();
 
 }

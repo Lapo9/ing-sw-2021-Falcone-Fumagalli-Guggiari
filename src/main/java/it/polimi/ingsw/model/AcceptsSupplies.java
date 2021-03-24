@@ -6,23 +6,23 @@ package it.polimi.ingsw.model;
 public interface AcceptsSupplies {
 
     /**
-     * Method that allows every type of object who can storage a supply to get it
+     * Method that adds the resource to the object
      * @param wot Is one of the five types of resources in the game
      * @throws SupplyException If the required resource is not available
      */
     public void addSupply(WarehouseObjectType wot) throws SupplyException;
 
     /**
-     * Method that allows every type of object who can storage a supply to remove it
+     * Method that that removes the resource to the object
      * @param wot Is one of the five types of resources in the game
      * @throws SupplyException If the required resource is not available
      */
     public void removeSupply(WarehouseObjectType wot) throws SupplyException;
 
     /**
-     * Method that allows to empty every type of object which can storage a supply
-     * @return An empty SupplyContainer
+     * Method that removes all the resources from that object
+     * @return The removed resources in a temporary SupplyContainer
      */
-    public SupplyContainer clearSupplies(/*TODO*/);
+    public SupplyContainer clearSupplies();
 
 }
