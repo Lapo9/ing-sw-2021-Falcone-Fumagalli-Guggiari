@@ -4,12 +4,14 @@ import it.polimi.ingsw.model.MarbleColor;
 import java.util.ArrayList;
 
 public class MarbleContainer implements HasStatus {
-    private int yellow = 0;
-    private int blue = 0;
-    private int grey = 0;
-    private int white = 0;
-    private int violet = 0;
-    private int red = 0;
+    private int yellow;
+    private int blue;
+    private int grey;
+    private int white;
+    private int violet;
+    private int red;
+
+
 
     /**
      * Class constructor

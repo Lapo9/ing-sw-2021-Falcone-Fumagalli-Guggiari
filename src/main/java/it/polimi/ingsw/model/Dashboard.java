@@ -2,27 +2,47 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Pair;
 
+import java.util.ArrayList;
+
 /**
- * TODO
+ * The dashboard is the access point of the controller to the model.
+ * It exposes a function for all of the possible actions a player can perform during a match.
+ * Generally, when an action performed goes well, nothing is returned, but if the action violates any of the game rule an exception is thrown.
+ * TODO maybe there should be methods to check if an action is possible before performing it? It can be useful if you want to visualize only the actions that can be executed (for example if you don't have enough supplies to buy a card, then the card is grey and not clickable)
  */
-public class Dashboard {
+public class Dashboard implements HasStatus{
 
     private Marketplace marketplace;
-    private Warehouse warehouse;
-    private SupplyContainer coffer;
-    private MutableProduction baseProduction;
-    private FaithTrack faithTrack;
-    private LeadersSpace leadersSpace;
-    private Developments developments;
+    private DevelopmentGrid developmentGrid;
+    private Warehouse warehouse = new Warehouse();
+    private SupplyContainer coffer = new SupplyContainer();
+    private MutableProduction baseProduction = new MutableProduction();
+    private FaithTrack faithTrack = new FaithTrack();
+    private LeadersSpace leadersSpace = new LeadersSpace();
+    private Developments developments = new Developments();
     private MarbleContainer unassignedSupplies;
+    private Paycheck paycheck = new Paycheck();
     private boolean inkwell;
 
 
     /**
+     * Creates an empty dashboard specifying if the player is the first one to play, and assign to it the match marketplace and the match development grid.
+     * @param inkwell is the player the first one to play?
+     * @param marketplace match marketplace, to collect the supplies from
+     * @param developmentGrid match development grid, to buy the development cards from
+     */
+    public Dashboard(boolean inkwell, Marketplace marketplace, DevelopmentGrid developmentGrid){
+        this.inkwell = inkwell;
+        this.marketplace = marketplace;
+        this.developmentGrid = developmentGrid;
+    }
+
+
+    /**
      * Swaps 2 rows of the Warehouse. Row 1 is the bottom one. If it is not possible a SupplyException is thrown.
-     * @param r1
-     * @param r2
-     * @throws SupplyException
+     * @param r1 row 1
+     * @param r2 row 2
+     * @throws SupplyException Cannot swap the 2 rows
      */
     public void swapWarehouseRows(int r1, int r2) throws SupplyException {
         warehouse.swapRows(r1, r2);
@@ -69,7 +89,7 @@ public class Dashboard {
      * @return How many non-red marbles are discarded. Does the player triggered a vatican report?
      */
     public Pair<Integer, Boolean> discardSupplies(){
-        int totalDiscarded = unassignedSupplies.getQuantity(MarbleColor.WHITE, MarbleColor.BLUE, MarbleColor.GREY, MarbleColor.VIOLET, MarbleColor.YELLOW);
+        int totalDiscarded = unassignedSupplies.getQuantity(MarbleColor.BLUE, MarbleColor.GREY, MarbleColor.VIOLET, MarbleColor.YELLOW);
 
         boolean vaticanReport = false;
         for(int i = 0; i < unassignedSupplies.getQuantity(MarbleColor.RED); ++i){
@@ -202,11 +222,25 @@ public class Dashboard {
     }
 
 
-    public void buyDevelopment(int supplyCardID, int space, SupplyConsumption... sc) throws SupplyException, DevelopmentException {
-        ResourcesManager rm = new ResourcesManager(warehouse, coffer, leadersSpace);
-        rm.check(sc);
+    /**
+     * Tries to buy the card in the specified space of the grid, and places it in the specified development space on the dashboard.
+     * @param column column of the selected card in the grid
+     * @param row row of the selected card in the grid
+     * @param space development space where to place the card
+     * @throws SupplyException There isn't the exact number of supplies in the paycheck to buy the card
+     * @throws DevelopmentException You cannot place the card you want to buy in the specified development space
+     * @throws NoSuchCardException The space in the grid you selected contains no cards
+     */
+    public void buyDevelopment(int column, int row, int space) throws SupplyException, DevelopmentException, NoSuchCardException {
+        ArrayList<Integer> buyableLevels = developments.buyableLevels(); //get what levels you can buy
 
+        //check if you can buy a card of that level in that space
+        if(buyableLevels.get(space-1 != developmentGrid.getLevel(column, row)){
+            throw new DevelopmentException();
+        }
 
+        //buy the card
+        developments.addToSpace(developmentGrid.buyCard(column, row, paycheck), space);
     }
 
 
@@ -258,6 +292,15 @@ public class Dashboard {
         return inkwell;
     }
 
+
+    /**
+     * The status of the dashboard.
+     * @return the current status of the dashboard, expressed in a concise way.
+     */
+    @Override
+    public ArrayList<Integer> getStatus(){
+        //TODO
+    }
 
     /**
      * Attach an observer.
