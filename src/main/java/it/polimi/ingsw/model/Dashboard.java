@@ -72,7 +72,7 @@ public class Dashboard implements HasStatus{
         if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException();}
 
         if(to.getType() == DepositID.DepositType.WAREHOUSE){
-            warehouse.addMarble(to.getNum(), color);
+            warehouse.addMarble(to.getNum(), color, leadersSpace);
             unassignedSupplies.removeMarble(color);
         }
 
@@ -102,7 +102,6 @@ public class Dashboard implements HasStatus{
     }
 
 
-    //TODO add other types of deposits
     /**
      * Moves a supply of the specified type from the from container to the to container.
      * The ID number of the containers is as follows:
@@ -123,7 +122,7 @@ public class Dashboard implements HasStatus{
 
         //remove supply from specified container
         if(from.getType() == DepositID.DepositType.WAREHOUSE){
-            warehouse.removeObject(from.getNum(), type);
+            warehouse.removeObject(type);
         }
         else if(from.getType() == DepositID.DepositType.DEVELOPMENT){
             developments.removeSupply(from.getNum(), type);

@@ -47,7 +47,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="126.2568359375" width="720.3488663258331" x="-440.0" y="0.0"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
+          <y:Fill color="#00FF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="85.01318359375" x="317.66784136604156" xml:space="preserve" y="3.0">Warehouse<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
