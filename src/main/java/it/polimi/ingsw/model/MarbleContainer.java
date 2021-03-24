@@ -3,6 +3,9 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.MarbleColor;
 import java.util.ArrayList;
 
+/**
+ * The MarbleContainer class is meant to be a temporary container for marbles
+ */
 public class MarbleContainer implements HasStatus {
     private int yellow;
     private int blue;
@@ -10,8 +13,6 @@ public class MarbleContainer implements HasStatus {
     private int white;
     private int violet;
     private int red;
-
-
 
     /**
      * Class constructor
@@ -107,7 +108,6 @@ public class MarbleContainer implements HasStatus {
         }
     }
 
-
     /**
      * Empties the container
      */
@@ -120,13 +120,10 @@ public class MarbleContainer implements HasStatus {
         red = 0;
     }
 
-
     //TODO
     public ArrayList<Integer> getStatus(){
 
     }
-
-
 
     public static WarehouseObjectType colorToSupply(MarbleColor mc){
         WarehouseObjectType wot;
@@ -150,5 +147,4 @@ public class MarbleContainer implements HasStatus {
 
         return wot;
     }
-
 }

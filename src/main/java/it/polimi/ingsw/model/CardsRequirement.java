@@ -1,9 +1,11 @@
 package it.polimi.ingsw.model;
 
+import java.util.ArrayList;
+
 /**
  * The CardsRequirement class contains the SupplyCard features needed to activate a LeaderCard
  */
-public class CardsRequirement {
+public class CardsRequirement implements HasStatus{
     private int number;
     private int level;
     private CardCategory category;
@@ -42,5 +44,11 @@ public class CardsRequirement {
      */
     public CardCategory reqCard(){
         return category;
+    }
+
+    //TODO
+    @Override
+    public ArrayList<Integer> getStatus(){
+
     }
 }

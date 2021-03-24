@@ -100,12 +100,6 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
             return null;
     }
 
-    /**
-     * The addSupply method adds a supply to the BoundedSupplyContainer
-     * @param wot is the type of supply that we want to add
-     * @throws SupplyException if the BoundedSupplyContainer is already full or if the supply type passed as an input is
-     * different than the type of supplies that already are in the BoundedSupplyContainer
-     */
     @Override
     public void addSupply(WarehouseObjectType wot)throws SupplyException{
         //TODO compact these 3 ifs into only one if
@@ -118,12 +112,6 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
         sc.addSupply(wot);
     }
 
-    /**
-     * The removeSupply method removes a supply from the BoundedSupplyContainer
-     * @param wot is the type of supply that we want to remove
-     * @throws SupplyExcecption if the BoundedSupplyContainer is already empty or if the supply type passed as an input
-     * is different than the type of supplies stored in the BoundedSupplyContainer
-     */
     @Override
     public void removeSupply(WarehouseObjectType wot)throws SupplyExcecption{
         if(getQuantity() == 0)
@@ -133,10 +121,6 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
         sc.removeSupply(wot);
     }
 
-    /**
-     * The clearSupplies method removes all the supplies from the SupplyContainer
-     * @return an empty SupplyContainer
-     */
     @Override
     public SupplyContainer clearSupplies(){
         if(getQuantity() == 0)

@@ -3,6 +3,9 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.WarehouseObjectType;
 import java.util.ArrayList;
 
+/**
+ * The SupplyContainer class can store resources
+ */
 public class SupplyContainer implements AcceptsSupplies, HasStatus{
     private int coin = 0;
     private int stone = 0;
@@ -65,11 +68,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         this.faithMarker = sc.faithMarker + this.faithMarker;
     }
 
-    /**
-     * The addSupply method add one supply of the given type to the SupplyContainer
-     * @param wot is one of the five types of resources in the game
-     * @throws SupplyException is not required here
-     */
     @Override
     public void addSupply(WarehouseObjectType wot) throws SupplyException{
         if(wot == null)
@@ -86,11 +84,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
             faithMarker++;
     }
 
-    /**
-     * The addSupply method add one supply of the given type to the SupplyContainer
-     * @param wot is one of the five types of resources in the game
-     * @throws SupplyException if there are zero resources of the given type
-     */
     @Override
     public void removeSupply(WarehouseObjectType wot) throws SupplyException{
         if(wot == WarehouseObjectType.COIN)
@@ -130,10 +123,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         }
     }
 
-    /**
-     * The clearSupplies method removes all the resources that are in the SupplyContainer
-     * @return an empty SupplyContainer
-     */
     @Override
     public SupplyContainer clearSupplies(){
         SupplyContainer tmp = new SupplyContainer(this);
@@ -144,7 +133,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         this.stone = 0;
         return tmp;
     }
-
 
     //TODO
     @Override

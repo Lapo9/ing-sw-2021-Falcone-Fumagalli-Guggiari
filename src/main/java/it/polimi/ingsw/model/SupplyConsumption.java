@@ -3,6 +3,9 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.SupplyContainer;
 import java.util.ArrayList;
 
+/**
+ * SupplyConsumption is a special type of SupplyContainer which can store the source of the resources that it contains
+ */
 public class SupplyConsumption implements HasStatus{
     private SupplyContainer sc;
     private int containerID;
