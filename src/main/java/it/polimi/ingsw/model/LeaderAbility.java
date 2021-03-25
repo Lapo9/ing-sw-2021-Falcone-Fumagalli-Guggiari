@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.exceptions.*;
 
 /**
  * Interface that manages the ability of Leader Cards
  */
-public interface LeaderAbility extends AcceptsSupplies{
+public interface LeaderAbility{
 
     /**
      * Method that manages the following ability: when the player buys a DevelopmentCard, he can do it using less resources
@@ -60,6 +61,9 @@ public interface LeaderAbility extends AcceptsSupplies{
      * @throws LeaderAbilityNotSupportedException If the LeaderCard is not allowed to use that ability
      */
     public void removeOutput(WarehouseObjectType wot) throws BoundsException, LeaderAbilityNotSupportedException;
+
+
+    //TODO addSupplies, removeSupplies, clearSupplies
 
 
 }

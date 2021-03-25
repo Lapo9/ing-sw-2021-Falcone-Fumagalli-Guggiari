@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.*;
+
 /**
  * This interface manages every object which can get every type of supplies
  */

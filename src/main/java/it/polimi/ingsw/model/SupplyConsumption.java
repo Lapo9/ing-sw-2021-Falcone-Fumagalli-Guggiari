@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.SupplyContainer;
 import java.util.ArrayList;
 
 /**
