@@ -8,6 +8,6 @@ import java.util.ArrayList;
  */
 public interface HasStatus {
 
-    public ArrayList<Integer> getStatus(/*TODO*/);
+    public ArrayList<Integer> getStatus();
 
 }

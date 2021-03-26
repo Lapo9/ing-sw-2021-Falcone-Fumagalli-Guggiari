@@ -405,6 +405,9 @@
 + addMarble(MarbleColor color, LeaderAbility otherLeader) throws LeaderAbilityNotSupportedException, MarbleException
 + SupplyContainer produce() throws SupplyException, LeaderAbilityNotSupportedException
 + check() throws SupplyException, LeaderAbilityNotSupportedException
++ addSupply(WarehouseObjectType wot) throws SupplException, LeaderAbilityNotSupportedException
++ removeSupply(WarehouseObjectType wot) throws SupplException, LeaderAbilityNotSupportedException
++ SupplyContainer clearSupplies() throws LeaderAbilityNotSupportedException
 + addOutput(WarehouseObjectType wot) throws BoundsException, LeaderAbilityNotSupportedException
 + removeOutput(WarehouseObjectType) throws BoundsException, LeaderAbilityNotSupportedException</y:MethodLabel>
           </y:UML>
@@ -514,7 +517,7 @@
           <y:Geometry height="113.951171875" width="144.01953125" x="2210.154843109278" y="-312.9168665693958"/>
           <y:Fill color="#FFCC99" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="50" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="69.283203125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="124.01953125" x="10.0" xml:space="preserve" y="27.66796875">View<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="50" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="69.283203125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="124.01953125" x="10.0" xml:space="preserve" y="22.333984375">View<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="observer" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve"/>
             <y:MethodLabel xml:space="preserve"/>
@@ -599,7 +602,7 @@
           <y:Geometry height="116.2568359375" width="182.42578125" x="-383.088258956496" y="-1621.2424340709795"/>
           <y:Fill color="#C0C0C0" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="58.0087890625" x="62.20849609375" xml:space="preserve" y="3.0">Joiner<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="58.0087890625" x="62.20849609375" xml:space="preserve" y="46.3359375">Joiner<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve"/>
             <y:MethodLabel xml:space="preserve">+ start()
@@ -635,7 +638,7 @@
           <y:Geometry height="162.56749258964146" width="584.9225996822711" x="2200.2727172504974" y="0.0"/>
           <y:Fill color="#FFFF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="76.01171875" x="254.45544046613554" xml:space="preserve" y="3.0">Paycheck<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="76.01171875" x="254.45544046613577" xml:space="preserve" y="69.49126582607073">Paycheck<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve">- SupplyContainer fromDeposits
 - SupplyContainer fromCoffer</y:AttributeLabel>
@@ -1431,29 +1434,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e37" source="n20" target="n14">
-      <data key="d8" xml:space="preserve"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="25.820117316458436" sy="103.91029204245524" tx="-235.236328125" ty="-1.0098231997953917">
-            <y:Point x="-1580.0" y="1260.0"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-          <y:Arrows source="none" target="white_delta"/>
-          <y:EdgeLabel alignment="center" anchorX="492.55503474010493" anchorY="638.268326195712" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Monospaced" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" upX="0.5424187228435483" upY="-0.8401082841567353" verticalTextPosition="bottom" visible="true" width="4.0" x="492.55503474010493" y="634.907893059085">
-            <y:LabelModel>
-              <y:SmartEdgeLabelModel autoRotationEnabled="true" defaultAngle="0.0" defaultDistance="10.0"/>
-            </y:LabelModel>
-            <y:ModelParameter>
-              <y:SmartEdgeLabelModelParameter angle="0.5733135032336998" distance="14.476496574710078" distanceToCenter="false" position="right" ratio="0.49943428367896125" segment="-1"/>
-            </y:ModelParameter>
-            <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
-          </y:EdgeLabel>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e38" source="n0" target="n25">
+    <edge id="e37" source="n0" target="n25">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1473,7 +1454,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e39" source="n0" target="n26">
+    <edge id="e38" source="n0" target="n26">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1493,7 +1474,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e40" source="n23" target="n2">
+    <edge id="e39" source="n23" target="n2">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1515,7 +1496,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e41" source="n29" target="n0">
+    <edge id="e40" source="n29" target="n0">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1527,7 +1508,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e42" source="n0" target="n27">
+    <edge id="e41" source="n0" target="n27">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1539,7 +1520,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e43" source="n8" target="n28">
+    <edge id="e42" source="n8" target="n28">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1559,7 +1540,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e44" source="n0" target="n6">
+    <edge id="e43" source="n0" target="n6">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1581,7 +1562,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e45" source="n30" target="n29">
+    <edge id="e44" source="n30" target="n29">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1601,7 +1582,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e46" source="n30" target="n31">
+    <edge id="e45" source="n30" target="n31">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1613,7 +1594,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e47" source="n32" target="n30">
+    <edge id="e46" source="n32" target="n30">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1625,7 +1606,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e48" source="n29" target="n27">
+    <edge id="e47" source="n29" target="n27">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1639,7 +1620,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e49" source="n27" target="n29">
+    <edge id="e48" source="n27" target="n29">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1653,7 +1634,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e50" source="n25" target="n33">
+    <edge id="e49" source="n25" target="n33">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1676,7 +1657,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e51" source="n0" target="n33">
+    <edge id="e50" source="n0" target="n33">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1698,7 +1679,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e52" source="n0" target="n34">
+    <edge id="e51" source="n0" target="n34">
       <data key="d8" xml:space="preserve"/>
       <data key="d10">
         <y:PolyLineEdge>

@@ -26,11 +26,11 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      * @param sc object to copy
      */
     public SupplyContainer(SupplyContainer sc){
-        sc.coin = coin;
-        sc.servant = servant;
-        sc.stone = stone;
-        sc.shield = shield;
-        sc.faithMarker = faithMarker;
+        this.coin = sc.coin;
+        this.servant = sc.servant;
+        this.stone = sc.stone;
+        this.shield = sc.shield;
+        this.faithMarker = sc.faithMarker;
     }
 
     /**

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * SupplyConsumption is a special type of SupplyContainer which can store the source of the resources that it contains
  */
+@Deprecated
 public class SupplyConsumption implements HasStatus{
     private SupplyContainer sc;
     private int containerID;

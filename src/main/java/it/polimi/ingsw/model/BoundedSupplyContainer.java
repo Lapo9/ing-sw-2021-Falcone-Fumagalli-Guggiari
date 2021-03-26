@@ -114,7 +114,7 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
     @Override
-    public void removeSupply(WarehouseObjectType wot)throws SupplyExcecption{
+    public void removeSupply(WarehouseObjectType wot)throws SupplyException{
         if(getQuantity() == 0)
             throw new SupplyException();
         if(wot != getType())
