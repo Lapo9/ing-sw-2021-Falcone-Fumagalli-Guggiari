@@ -9,8 +9,8 @@ import it.polimi.ingsw.exceptions.*;
 public interface LeaderAbility{
 
     /**
-     * Method that manages the following ability: when the player buys a DevelopmentCard, he can do it using less resources
-     * @return The discount to apply to the DevelopmentCard
+     * Method that manages the following ability: when the player buys a SupplyCard, he can do it using less resources
+     * @return The discount to apply to the SupplyCard
      * @throws LeaderAbilityNotSupportedException If the LeaderCard is not allowed to use that ability
      */
     public SupplyContainer getDiscount() throws LeaderAbilityNotSupportedException;
@@ -23,11 +23,11 @@ public interface LeaderAbility{
     public WarehouseObjectType getWhiteBall() throws LeaderAbilityNotSupportedException;
 
     /**
-     * Method that gives information about the quantity of every resource in that deposit
+     * Method that gives information about the quantity of every resource in that depot
      * @return The pair composed by the resource and its quantity
      * @throws LeaderAbilityNotSupportedException If the LeaderCard is not allowed to use that ability
      */
-    public Pair<WarehouseObjectType, Integer> getDepositInfo() throws LeaderAbilityNotSupportedException;
+    public Pair<WarehouseObjectType, Integer> getdepotInfo() throws LeaderAbilityNotSupportedException;
 
 
     //fourth ability

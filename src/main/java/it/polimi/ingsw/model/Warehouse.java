@@ -7,8 +7,8 @@ import java.util.Collections;
 
 
 /**
- * A Warehouse contains 3 deposits, which can contain respectively 1, 2 and 3 resources of one type. Two deposits cannot contain the same type.
- * User can add and remove resources from deposits, can swap the order of 2 deposits and can try to convert a marble to a resource and add it to one of the deposits.
+ * A Warehouse contains 3 depots, which can contain respectively 1, 2 and 3 resources of one type. Two depots cannot contain the same type.
+ * User can add and remove resources from depots, can swap the order of 2 depots and can try to convert a marble to a resource and add it to one of the depots.
  */
 public class Warehouse {
 
@@ -21,10 +21,10 @@ public class Warehouse {
     public int getResourceCount(WarehouseObjectType... wots){
         int count = 0;
 
-        for(BoundedSupplyContainer deposit : deposits){
+        for(BoundedSupplyContainer depot : depots){
             for(WarehouseObjectType wot : wots) {
-                if(deposit.getType() == wot) {
-                    count += deposit.getQuantity();
+                if(depot.getType() == wot) {
+                    count += depot.getQuantity();
                 }
             }
         }
@@ -42,19 +42,19 @@ public class Warehouse {
     public void swapRows(int r1, int r2) throws SupplyException {
         if(r1==r2){return;}
 
-        //find what deposit has the maximum and minimum position
-        BoundedSupplyContainer rMax = deposits.get(r1>r2 ? r1-1 : r2-1);
-        BoundedSupplyContainer rMin = deposits.get(r1>r2 ? r2-1 : r1-1);
+        //find what depot has the maximum and minimum position
+        BoundedSupplyContainer rMax = depots.get(r1>r2 ? r1-1 : r2-1);
+        BoundedSupplyContainer rMin = depots.get(r1>r2 ? r2-1 : r1-1);
 
-        //if the deposit in min position has less or equal elements than the elements the deposit in max position can contain, then the swap is possible
+        //if the depot in min position has less or equal elements than the elements the depot in max position can contain, then the swap is possible
         if(rMin.getQuantity() <= rMax.getMax()){
-            //swap position of the 2 deposits
+            //swap position of the 2 depots
             int tmpPos = rMin.getPosition();
             rMin.setPosition(rMax.getPosition());
             rMax.setPosition(tmpPos);
 
-            //swap the order of the deposits in the array list
-            Collections.swap(deposits, r1-1, r2-1);
+            //swap the order of the depots in the array list
+            Collections.swap(depots, r1-1, r2-1);
         }
 
         else{
@@ -69,11 +69,11 @@ public class Warehouse {
      * @param row row to add the marble to
      * @param color color of the marble to add
      * @param ls leaders (utilized to know if a conversion is possible)
-     * @throws SupplyException Specified deposit is full
+     * @throws SupplyException Specified depot is full
      * @throws MarbleException Marble cannot be converted to a compatible supply type
      */
     public void addMarble(int row, MarbleColor color, LeadersSpace ls) throws SupplyException, MarbleException {
-        deposits.get(row-1).addMarble(color, ls);
+        depots.get(row-1).addMarble(color, ls);
     }
 
 
@@ -85,12 +85,12 @@ public class Warehouse {
      */
     public void addToRow(int row, WarehouseObjectType wot) throws SupplyException {
         for(int i = 0; i<3; ++i){
-            if(i != row-1 && deposits.get(i).getType() == wot){
+            if(i != row-1 && depots.get(i).getType() == wot){
                 throw new SupplyException(); //there is another row that contains the specified type of resource
             }
         }
 
-        deposits.get(row-1).addSupply(wot);
+        depots.get(row-1).addSupply(wot);
     }
 
 
@@ -102,9 +102,9 @@ public class Warehouse {
     public void removeObject(WarehouseObjectType wot) throws SupplyException {
         //find which row contains the specified type of resource
         BoundedSupplyContainer tmp = null;
-        for(BoundedSupplyContainer deposit : deposits){
-            if(deposit.getType() == wot){
-                tmp = deposit;
+        for(BoundedSupplyContainer depot : depots){
+            if(depot.getType() == wot){
+                tmp = depot;
             }
         }
 
@@ -120,6 +120,6 @@ public class Warehouse {
 
 
 
-    private ArrayList<BoundedSupplyContainer> deposits;
+    private ArrayList<BoundedSupplyContainer> depots;
 
 }

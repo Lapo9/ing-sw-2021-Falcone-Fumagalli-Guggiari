@@ -62,22 +62,22 @@ public class Dashboard implements HasStatus{
 
 
     /**
-     * Transforms a marble into the supply contained in the destination deposit. If the transformation is not possible a MarbleException is thrown.
-     * @param to destination deposit (a BoundedSupplyContainer)
+     * Transforms a marble into the supply contained in the destination depot. If the transformation is not possible a MarbleException is thrown.
+     * @param to destination depot (a BoundedSupplyContainer)
      * @param color the color of the marble
      * @throws SupplyException Destination is full
      * @throws MarbleException Destination cannot accept this color of marble
-     * @throws LeaderAbilityNotSupportedException Leader hasn't a deposit ability
+     * @throws LeaderAbilityNotSupportedException Leader hasn't a depot ability
      */
-    public void assignMarble(DepositID to, MarbleColor color) throws SupplyException, MarbleException, LeaderAbilityNotSupportedException{
+    public void assignMarble(depotID to, MarbleColor color) throws SupplyException, MarbleException, LeaderAbilityNotSupportedException{
         if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException();}
 
-        if(to.getType() == DepositID.DepositType.WAREHOUSE){
+        if(to.getType() == depotID.depotType.WAREHOUSE){
             warehouse.addMarble(to.getNum(), color, leadersSpace);
             unassignedSupplies.removeMarble(color);
         }
 
-        else if(to.getType() == DepositID.DepositType.LEADER){
+        else if(to.getType() == depotID.depotType.LEADER){
             leadersSpace.getLeaderAbility(to.getNum()).addMarble();
             unassignedSupplies.removeMarble(color);
         }
@@ -113,63 +113,63 @@ public class Dashboard implements HasStatus{
      * @param type Type of resource to move
      * @throws SupplyException Thrown if the source doesn't have the specified type of resource, or if the destination cannot accept the resource
      */
-    public void moveSupply(DepositID from, DepositID to, WarehouseObjectType type) throws SupplyException, LeaderAbilityNotSupportedException {
+    public void moveSupply(depotID from, depotID to, WarehouseObjectType type) throws SupplyException, LeaderAbilityNotSupportedException {
 
-        //deny illegal movements (from/to deposits to/from coffer)
-        if(((from.getType() == DepositID.DepositType.WAREHOUSE || from.getType() == DepositID.DepositType.DEVELOPMENT || from.getType() == DepositID.DepositType.LEADER) && to.getType() == DepositID.DepositType.COFFER)
-                || (from.getType() == DepositID.DepositType.COFFER && (to.getType() == DepositID.DepositType.WAREHOUSE || to.getType() == DepositID.DepositType.DEVELOPMENT || to.getType() == DepositID.DepositType.LEADER))){
+        //deny illegal movements (from/to depots to/from coffer)
+        if(((from.getType() == depotID.depotType.WAREHOUSE || from.getType() == depotID.depotType.DEVELOPMENT || from.getType() == depotID.depotType.LEADER) && to.getType() == depotID.depotType.COFFER)
+                || (from.getType() == depotID.depotType.COFFER && (to.getType() == depotID.depotType.WAREHOUSE || to.getType() == depotID.depotType.DEVELOPMENT || to.getType() == depotID.depotType.LEADER))){
             throw new SupplyException();
         }
 
         //remove supply from specified container
-        if(from.getType() == DepositID.DepositType.WAREHOUSE){
+        if(from.getType() == depotID.depotType.WAREHOUSE){
             warehouse.removeObject(type);
         }
-        else if(from.getType() == DepositID.DepositType.DEVELOPMENT){
+        else if(from.getType() == depotID.depotType.DEVELOPMENT){
             developments.removeSupply(from.getNum(), type);
         }
-        else if(from.getType() == DepositID.DepositType.LEADER){
+        else if(from.getType() == depotID.depotType.LEADER){
             leadersSpace.getLeaderAbility(from.getNum()).removeSupply(type);
         }
-        else if(from.getType() == DepositID.DepositType.COFFER){
+        else if(from.getType() == depotID.depotType.COFFER){
             coffer.removeSupply(type);
         }
-        else if(from.getType() == DepositID.DepositType.PAYCHECK){
+        else if(from.getType() == depotID.depotType.PAYCHECK){
             paycheck.remove(from.getNum(), to, type);
         }
 
         //add supply to specified container, if you cannot, put supply back to original container and throw the exception
         try {
-            if (to.getType() == DepositID.DepositType.WAREHOUSE) {
+            if (to.getType() == depotID.depotType.WAREHOUSE) {
                 warehouse.addObject(to.getNum(), type);
             }
-            else if (to.getType() == DepositID.DepositType.DEVELOPMENT) {
+            else if (to.getType() == depotID.depotType.DEVELOPMENT) {
                 developments.addSupply(to.getNum(), type);
             }
-            else if (to.getType() == DepositID.DepositType.LEADER){
+            else if (to.getType() == depotID.depotType.LEADER){
                 leadersSpace.getLeaderAbility(to.getNum()).addSupply(type);
             }
-            else if (to.getType() == DepositID.DepositType.COFFER){
+            else if (to.getType() == depotID.depotType.COFFER){
                 coffer.addSupply(type);
             }
-            else if (to.getType() == DepositID.DepositType.PAYCHECK){
+            else if (to.getType() == depotID.depotType.PAYCHECK){
                 paycheck.add(from, type);
             }
         }
         catch(SupplyException se){
-            if(from.getType() == DepositID.DepositType.WAREHOUSE){
+            if(from.getType() == depotID.depotType.WAREHOUSE){
                 warehouse.addObject(from.getNum(), type);
             }
-            else if(from.getType() == DepositID.DepositType.DEVELOPMENT){
+            else if(from.getType() == depotID.depotType.DEVELOPMENT){
                 developments.addSupply(from.getNum(), type);
             }
-            else if(from.getType() == DepositID.DepositType.LEADER){
+            else if(from.getType() == depotID.depotType.LEADER){
                 leadersSpace.getLeaderAbility(from.getNum()).addSupply(type);
             }
-            else if(from.getType() == DepositID.DepositType.COFFER){
+            else if(from.getType() == depotID.depotType.COFFER){
                 coffer.addSupply(type);
             }
-            else if(from.getType() == DepositID.DepositType.PAYCHECK){
+            else if(from.getType() == depotID.depotType.PAYCHECK){
                 paycheck.add(from, type);
             }
             throw se;

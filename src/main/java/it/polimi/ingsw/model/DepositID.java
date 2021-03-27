@@ -3,26 +3,26 @@ package it.polimi.ingsw.model;
 /**
  * Contains the numerical IDs of the places where you can store resources.
  */
-public enum DepositID {
-    WAREHOUSE1(DepositType.WAREHOUSE, 1), WAREHOUSE2(DepositType.WAREHOUSE, 2), WAREHOUSE3(DepositType.WAREHOUSE, 3),
-    DEVELOPMENT1(DepositType.DEVELOPMENT, 1), DEVELOPMENT2(DepositType.DEVELOPMENT, 2), DEVELOPMENT3(DepositType.DEVELOPMENT, 3),
-    LEADER1(DepositType.LEADER, 1), LEADER2(DepositType.LEADER, 2),
-    COFFER(DepositType.COFFER, 1),
-    PAYCHECK_DEPOSIT(DepositType.PAYCHECK, 1), PAYCHECK_COFFER(DepositType.PAYCHECK, 2);
+public enum depotID {
+    WAREHOUSE1(depotType.WAREHOUSE, 1), WAREHOUSE2(depotType.WAREHOUSE, 2), WAREHOUSE3(depotType.WAREHOUSE, 3),
+    DEVELOPMENT1(depotType.DEVELOPMENT, 1), DEVELOPMENT2(depotType.DEVELOPMENT, 2), DEVELOPMENT3(depotType.DEVELOPMENT, 3),
+    LEADER1(depotType.LEADER, 1), LEADER2(depotType.LEADER, 2),
+    COFFER(depotType.COFFER, 1),
+    PAYCHECK_depot(depotType.PAYCHECK, 1), PAYCHECK_COFFER(depotType.PAYCHECK, 2);
 
-    public enum DepositType {
+    public enum depotType {
         WAREHOUSE, DEVELOPMENT, LEADER, PAYCHECK, COFFER;
     }
 
-    private DepositType type;
+    private depotType type;
     private int typeOrder;
 
-    private DepositID(DepositType depositType, int typeOrder){
-        this.type = depositType;
+    private depotID(depotType depotType, int typeOrder){
+        this.type = depotType;
         this.typeOrder = typeOrder;
     }
 
-    public DepositType getType(){
+    public depotType getType(){
         return type;
     }
 

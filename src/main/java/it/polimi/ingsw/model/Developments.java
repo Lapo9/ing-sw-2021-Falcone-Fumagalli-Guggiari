@@ -91,7 +91,7 @@ public class Developments extends HasStatus, WinPointsCountable{
      * @param card card to add
      * @throws DevelopmentException Card level doesn't match required level, or the space is full (max is 3 cards).
      */
-    public void addCardToSpace(int space, DevelopmentCard card) throws DevelopmentException {
+    public void addCardToSpace(int space, SupplyCard card) throws DevelopmentException {
         spaces.get(space).addCard(card);
     }
 
