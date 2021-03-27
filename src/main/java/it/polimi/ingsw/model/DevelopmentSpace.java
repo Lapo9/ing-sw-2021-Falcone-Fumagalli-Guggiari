@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Class that has the responsibility to manage the cards in a specific development space.
  * You can add a card to the space, activate production of the last card added and get info about the cards present in this development space.
  */
-public class DevelopmentSpace {
+public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCountable{
 
     private ArrayList<SupplyCard> cards = new ArrayList<SupplyCard>();
 
@@ -76,4 +76,31 @@ public class DevelopmentSpace {
         return result;
     }
 
+
+    @Override
+    public void addSupply(WarehouseObjectType wot) throws SupplyException {
+        cards.get(cards.size()-1).addSupply(wot);
+    }
+
+
+    @Override
+    public void removeSupply(WarehouseObjectType wot) throws SupplyException {
+        cards.get(cards.size()-1).removeSupply(wot);
+    }
+
+
+    @Override
+    public SupplyContainer clearSupplies() {
+        return cards.get(cards.size()-1).clearSupplies;
+    }
+
+
+    @Override
+    public int getWinPoints() {
+        int result = 0;
+        for (int i=0; i<cards.size(); ++i){
+            result += cards.get(i).getWinPoints();
+        }
+        return result;
+    }
 }

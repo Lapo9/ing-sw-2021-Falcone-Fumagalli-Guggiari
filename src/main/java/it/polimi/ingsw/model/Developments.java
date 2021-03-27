@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * You can add a card to a specified development space, and you can activate the production on the specified spaces.
  * The class also has functions to get information about the cards in the 3 development spaces.
  */
-public class Developments extends HasStatus, WinPointsCountable{
+public class Developments implements HasStatus, WinPointsCountable, AcceptsSupplies{
 
     private ArrayList<DevelopmentSpace> spaces = new ArrayList<DevelopmentSpace>(3);
 
@@ -69,8 +69,9 @@ public class Developments extends HasStatus, WinPointsCountable{
      * @param wot type of supply to add
      * @throws SupplyException The card on the specified space doesn't accept this type of supply, or there is enough supply of the specified type on the card.
      */
-    public void addSupply(int space, WarehouseObjectType wot) throws SupplyException {
-        spaces.get(space).addSupply(wot);
+    @Override
+    public void addSupply(DepotID space, WarehouseObjectType wot) throws SupplyException {
+        spaces.get(space.getNum()).addSupply(wot);
     }
 
 
@@ -80,8 +81,23 @@ public class Developments extends HasStatus, WinPointsCountable{
      * @param wot type of supply to remove
      * @throws SupplyException There isn't the specified type of supply on the specified space.
      */
-    public void removeSupply(int space, WarehouseObjectType wot) throws SupplyException {
-        spaces.get(space).removeSupply(wot);
+    @Override
+    public void removeSupply(DepotID space, WarehouseObjectType wot) throws SupplyException {
+        spaces.get(space.getNum()).removeSupply(wot);
+    }
+
+
+    /**
+     * Clear all of the supplies in the spaces.
+     * @return Supplies removed
+     */
+    @Override
+    public SupplyContainer clearSupplies(){
+        SupplyContainer result = new SupplyContainer();
+
+        for (int i = 0; i<3; ++i){
+            result.sum(spaces.get(i).clearSupplies());
+        }
     }
 
 

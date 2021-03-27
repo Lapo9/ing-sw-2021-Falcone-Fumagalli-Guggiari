@@ -15,7 +15,7 @@ public class Dashboard implements HasStatus{
 
     private Marketplace marketplace;
     private DevelopmentGrid developmentGrid;
-    private Warehouse warehouse = new Warehouse();
+    private Warehouse warehouse;
     private SupplyContainer coffer = new SupplyContainer();
     private MutableProduction baseProduction = new MutableProduction();
     private FaithTrack faithTrack = new FaithTrack();
@@ -24,6 +24,7 @@ public class Dashboard implements HasStatus{
     private MarbleContainer unassignedSupplies;
     private Paycheck paycheck = new Paycheck();
     private boolean inkwell;
+    private ArrayList<AcceptsSupplies> containers;
 
 
     /**
@@ -36,6 +37,10 @@ public class Dashboard implements HasStatus{
         this.inkwell = inkwell;
         this.marketplace = marketplace;
         this.developmentGrid = developmentGrid;
+
+        containers.add(warehouse);
+        containers.add(developments);
+        //TODO add paycheck when you make it
     }
 
 
@@ -67,17 +72,17 @@ public class Dashboard implements HasStatus{
      * @param color the color of the marble
      * @throws SupplyException Destination is full
      * @throws MarbleException Destination cannot accept this color of marble
-     * @throws LeaderAbilityNotSupportedException Leader hasn't a depot ability
+     * @throws UnsupportedOperationException Leader hasn't a depot ability
      */
-    public void assignMarble(depotID to, MarbleColor color) throws SupplyException, MarbleException, LeaderAbilityNotSupportedException{
+    public void assignMarble(DepotID to, MarbleColor color) throws SupplyException, MarbleException, UnsupportedOperationException{
         if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException();}
 
-        if(to.getType() == depotID.depotType.WAREHOUSE){
+        if(to.getType() == DepotID.DepotType.WAREHOUSE){
             warehouse.addMarble(to.getNum(), color, leadersSpace);
             unassignedSupplies.removeMarble(color);
         }
 
-        else if(to.getType() == depotID.depotType.LEADER){
+        else if(to.getType() == DepotID.DepotType.LEADER){
             leadersSpace.getLeaderAbility(to.getNum()).addMarble();
             unassignedSupplies.removeMarble(color);
         }
@@ -113,67 +118,82 @@ public class Dashboard implements HasStatus{
      * @param type Type of resource to move
      * @throws SupplyException Thrown if the source doesn't have the specified type of resource, or if the destination cannot accept the resource
      */
-    public void moveSupply(depotID from, depotID to, WarehouseObjectType type) throws SupplyException, LeaderAbilityNotSupportedException {
-
+    public void moveSupply(DepotID from, DepotID to, WarehouseObjectType type) throws SupplyException, UnsupportedOperationException {
+        //TODO now leaders depots are managed by the warehouse. Some signatures have changed!
         //deny illegal movements (from/to depots to/from coffer)
-        if(((from.getType() == depotID.depotType.WAREHOUSE || from.getType() == depotID.depotType.DEVELOPMENT || from.getType() == depotID.depotType.LEADER) && to.getType() == depotID.depotType.COFFER)
-                || (from.getType() == depotID.depotType.COFFER && (to.getType() == depotID.depotType.WAREHOUSE || to.getType() == depotID.depotType.DEVELOPMENT || to.getType() == depotID.depotType.LEADER))){
+        if(((from.getType() == DepotID.DepotType.WAREHOUSE || from.getType() == DepotID.DepotType.DEVELOPMENT || from.getType() == DepotID.DepotType.LEADER) && to.getType() == DepotID.DepotType.COFFER)
+                || (from.getType() == DepotID.DepotType.COFFER && (to.getType() == DepotID.DepotType.WAREHOUSE || to.getType() == DepotID.DepotType.DEVELOPMENT || to.getType() == DepotID.DepotType.LEADER))){
             throw new SupplyException();
         }
 
         //remove supply from specified container
-        if(from.getType() == depotID.depotType.WAREHOUSE){
-            warehouse.removeObject(type);
+        containers.get(from.getType().getOrder()).removeSupply(from, type);
+
+        //add supply to specified container, if you cannot, put supply back to original container and throw the exception
+        try{
+            containers.get(to.getType().getOrder()).addSupply(to, type);
+        } catch (SupplyException se) {
+            containers.get(from.getType().getOrder()).addSupply(from, type);
+            throw se;
         }
-        else if(from.getType() == depotID.depotType.DEVELOPMENT){
+
+
+        //TODO remove this part only when you make the paycheck and know it works!
+        /*
+        //remove supply from specified container
+        if(from.getType() == DepotID.DepotType.WAREHOUSE){
+            warehouse.removeSupply(type);
+        }
+        else if(from.getType() == DepotID.DepotType.DEVELOPMENT){
             developments.removeSupply(from.getNum(), type);
         }
-        else if(from.getType() == depotID.depotType.LEADER){
+        else if(from.getType() == DepotID.DepotType.LEADER){
             leadersSpace.getLeaderAbility(from.getNum()).removeSupply(type);
         }
-        else if(from.getType() == depotID.depotType.COFFER){
+        else if(from.getType() == DepotID.DepotType.COFFER){
             coffer.removeSupply(type);
         }
-        else if(from.getType() == depotID.depotType.PAYCHECK){
+        else if(from.getType() == DepotID.DepotType.PAYCHECK){
             paycheck.remove(from.getNum(), to, type);
         }
 
         //add supply to specified container, if you cannot, put supply back to original container and throw the exception
         try {
-            if (to.getType() == depotID.depotType.WAREHOUSE) {
+            if (to.getType() == DepotID.DepotType.WAREHOUSE) {
                 warehouse.addObject(to.getNum(), type);
             }
-            else if (to.getType() == depotID.depotType.DEVELOPMENT) {
+            else if (to.getType() == DepotID.DepotType.DEVELOPMENT) {
                 developments.addSupply(to.getNum(), type);
             }
-            else if (to.getType() == depotID.depotType.LEADER){
+            else if (to.getType() == DepotID.DepotType.LEADER){
                 leadersSpace.getLeaderAbility(to.getNum()).addSupply(type);
             }
-            else if (to.getType() == depotID.depotType.COFFER){
+            else if (to.getType() == DepotID.DepotType.COFFER){
                 coffer.addSupply(type);
             }
-            else if (to.getType() == depotID.depotType.PAYCHECK){
+            else if (to.getType() == DepotID.DepotType.PAYCHECK){
                 paycheck.add(from, type);
             }
         }
         catch(SupplyException se){
-            if(from.getType() == depotID.depotType.WAREHOUSE){
+            if(from.getType() == DepotID.DepotType.WAREHOUSE){
                 warehouse.addObject(from.getNum(), type);
             }
-            else if(from.getType() == depotID.depotType.DEVELOPMENT){
+            else if(from.getType() == DepotID.DepotType.DEVELOPMENT){
                 developments.addSupply(from.getNum(), type);
             }
-            else if(from.getType() == depotID.depotType.LEADER){
+            else if(from.getType() == DepotID.DepotType.LEADER){
                 leadersSpace.getLeaderAbility(from.getNum()).addSupply(type);
             }
-            else if(from.getType() == depotID.depotType.COFFER){
+            else if(from.getType() == DepotID.DepotType.COFFER){
                 coffer.addSupply(type);
             }
-            else if(from.getType() == depotID.depotType.PAYCHECK){
+            else if(from.getType() == DepotID.DepotType.PAYCHECK){
                 paycheck.add(from, type);
             }
             throw se;
         }
+         */
     }
 
 
@@ -196,7 +216,7 @@ public class Dashboard implements HasStatus{
         try {
             leader1Production = leadersSpace.getLeaderAbility(0).produce(l1);
         }
-        catch(LeaderAbilityNotSupportedException lanse){
+        catch(UnsupportedOperationException lanse){
             leader1Production = new SupplyContainer();
         }
 
@@ -204,7 +224,7 @@ public class Dashboard implements HasStatus{
         try {
             leader2Production = leadersSpace.getLeaderAbility(1).produce(l2);
         }
-        catch(LeaderAbilityNotSupportedException lanse){
+        catch(UnsupportedOperationException lanse){
             leader2Production = new SupplyContainer();
         }
 
@@ -241,11 +261,11 @@ public class Dashboard implements HasStatus{
         try {
             leadersSpace.getLeaderAbility(0).checkProduction(l1);
         }
-        catch(LeaderAbilityNotSupportedException lanse){}
+        catch(UnsupportedOperationException lanse){}
         try {
             leadersSpace.getLeaderAbility(1).checkProduction(l2);
         }
-        catch(LeaderAbilityNotSupportedException lanse){}
+        catch(UnsupportedOperationException lanse){}
     }
 
 

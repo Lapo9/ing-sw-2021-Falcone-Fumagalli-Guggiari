@@ -10,7 +10,15 @@ import java.util.Collections;
  * A Warehouse contains 3 depots, which can contain respectively 1, 2 and 3 resources of one type. Two depots cannot contain the same type.
  * User can add and remove resources from depots, can swap the order of 2 depots and can try to convert a marble to a resource and add it to one of the depots.
  */
-public class Warehouse {
+public class Warehouse implements AcceptsSupplies{
+
+    /**
+     * Creates a new warehouse.
+     * @param ls Warehouse needs to know leaders, because if leaders have ability of Depot type, then the Warehouse has the responsibility to manage their resources.
+     */
+    public Warehouse(LeadersSpace ls){
+        leadersSpace = ls;
+    }
 
 
     /**
@@ -83,43 +91,61 @@ public class Warehouse {
      * @param wot type of resource
      * @throws SupplyException Row cannot accept the specified resource. Probably the row is full or accepts a different type, or there is another row with the same type.
      */
-    public void addToRow(int row, WarehouseObjectType wot) throws SupplyException {
-        for(int i = 0; i<3; ++i){
-            if(i != row-1 && depots.get(i).getType() == wot){
-                throw new SupplyException(); //there is another row that contains the specified type of resource
-            }
+    @Override
+    public void addSupply(DepotID row, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException {
+        //check if the user wants to add a resource to one of the leaders or to one of the warehouse spaces
+        if(row.getType() == DepotID.DepotType.LEADER){
+            leadersSpace.getLeaderAbility(row.getNum()).addSupply(wot);
         }
+        else {
+            for (int i = 0; i < 3; ++i) {
+                if (i != row.getNum() - 1 && depots.get(i).getType() == wot) {
+                    throw new SupplyException(); //there is another row that contains the specified type of resource
+                }
+            }
 
-        depots.get(row-1).addSupply(wot);
+            depots.get(row.getNum() - 1).addSupply(wot);
+        }
     }
 
 
     /**
-     * Removes the specified resource type from the warehouse. It is not necessary to specify the row, since there can be only one row with the specified resource type.
+     * Removes the specified resource type from the warehouse.
      * @param wot resource type to remove
      * @throws SupplyException There isn't such resource
      */
-    public void removeObject(WarehouseObjectType wot) throws SupplyException {
-        //find which row contains the specified type of resource
-        BoundedSupplyContainer tmp = null;
-        for(BoundedSupplyContainer depot : depots){
-            if(depot.getType() == wot){
-                tmp = depot;
-            }
+    @Override
+    public void removeSupply(DepotID row, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException {
+        //check if the user wants to remove a resource from one of the leaders or from one of the warehouse spaces
+        if(row.getType() == DepotID.DepotType.LEADER){
+            leadersSpace.getLeaderAbility(row.getNum()).addSupply(wot);
         }
-
-        //there isn't a row that has the specified supply type
-        if(tmp == null){
-            throw new SupplyException();
+        else {
+            depots.get(row.getNum() - 1).removeSupply(wot);
         }
-
-        //remove
-        tmp.removeSupply(wot);
     }
 
 
+    @Override
+    public SupplyContainer clearSupplies() {
+        SupplyContainer result = new SupplyContainer();
+        //clear warehouse spaces
+        for(int i = 0; i<3; ++i){
+            result.sum(depots.get(i).clearSupplies());
+        }
 
+        //clear leader spaces
+        for(int i=0; i<2; ++i){
+            //in this case I use instanceof because to me it makes more sense to clear only the leaders that are "true" depots, and not production leaders
+            if(leadersSpace.getLeaderAbility(i) instanceof Depot){
+                result.sum(leadersSpace.getLeaderAbility(i).clearSupplies());
+            }
+        }
+
+        return result;
+    }
 
     private ArrayList<BoundedSupplyContainer> depots;
+    private LeadersSpace leadersSpace;
 
 }

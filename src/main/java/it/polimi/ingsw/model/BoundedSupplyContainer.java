@@ -148,7 +148,7 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
                     wot = getType(); //does the leader convert the white ball to the required type?
                 }
             }
-            catch (LeaderAbilityNotSupportedException lanse){} //if the first leader cannot transform a white ball, try the second leader
+            catch (UnsupportedOperationException lanse){} //if the first leader cannot transform a white ball, try the second leader
 
             //same as above
             try {
@@ -156,7 +156,7 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
                     wot = getType();
                 }
             }
-            catch (LeaderAbilityNotSupportedException lanse){}
+            catch (UnsupportedOperationException lanse){}
         }
 
         if(wot != null && wot == getType()) {
