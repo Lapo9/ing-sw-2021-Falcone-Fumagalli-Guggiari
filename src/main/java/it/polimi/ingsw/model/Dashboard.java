@@ -38,8 +38,11 @@ public class Dashboard implements HasStatus{
         this.marketplace = marketplace;
         this.developmentGrid = developmentGrid;
 
+        warehouse = new Warehouse(leadersSpace);
+
         containers.add(warehouse);
         containers.add(developments);
+        containers.add(coffer);
         //TODO add paycheck when you make it
     }
 

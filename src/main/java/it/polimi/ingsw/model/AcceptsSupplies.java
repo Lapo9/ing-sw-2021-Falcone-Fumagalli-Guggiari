@@ -24,8 +24,9 @@ public interface AcceptsSupplies {
      * @throws SupplyException
      */
     public default void addSupply(DepotID slot, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException{
-        throw new UnsupportedOperationException();
+        addSupply(wot);
     }
+
 
     /**
      * Method that that removes the resource to the object
@@ -44,8 +45,9 @@ public interface AcceptsSupplies {
      * @throws SupplyException If the required resource is not available
      */
     public default void removeSupply(DepotID slot, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException{
-        throw new UnsupportedOperationException();
+        removeSupply(wot);
     }
+
 
     /**
      * Method that removes all the resources from that object
