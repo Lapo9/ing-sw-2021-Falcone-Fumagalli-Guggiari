@@ -114,8 +114,8 @@
 + check(bool s1, bool s2, bool s3) throws SupplyException
 + addSupply(int space, WarehouseObjectType wot) throws SupplyException
 + removeSupply(int space, WarehouseObjectType wot) throws SupplyException
-+ addToSpace(SupplyCard card, int s) throws DevelopmentException
-+ ArrayList&lt;Integer&gt; buyableLevel()
++ addCardToSpace(int space, SupplyCard card) throws DevelopmentException
++ ArrayList&lt;Integer&gt; buyableLevels()
 + ArrayList&lt;Pair&lt;CardCategory, Integer&gt;&gt; getCardsTypes()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
@@ -517,7 +517,7 @@
           <y:Geometry height="113.951171875" width="144.01953125" x="2210.154843109278" y="-312.9168665693958"/>
           <y:Fill color="#FFCC99" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="50" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="69.283203125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="124.01953125" x="10.0" xml:space="preserve" y="22.333984375">View<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="50" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="69.283203125" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="124.01953125" x="10.0" xml:space="preserve" y="27.66796875">View<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="observer" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve"/>
             <y:MethodLabel xml:space="preserve"/>
@@ -638,7 +638,7 @@
           <y:Geometry height="162.56749258964146" width="584.9225996822711" x="2200.2727172504974" y="0.0"/>
           <y:Fill color="#FFFF00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="76.01171875" x="254.45544046613577" xml:space="preserve" y="69.49126582607073">Paycheck<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Monospaced" fontSize="15" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="23.5849609375" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="76.01171875" x="254.45544046613554" xml:space="preserve" y="3.0">Paycheck<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
           <y:UML clipContent="true" constraint="" hasDetailsColor="false" omitDetails="false" stereotype="" use3DEffect="false">
             <y:AttributeLabel xml:space="preserve">- SupplyContainer fromDeposits
 - SupplyContainer fromCoffer</y:AttributeLabel>

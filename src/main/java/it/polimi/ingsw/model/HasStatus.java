@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * We have to decide how to implement this interface
- * TODO
+ * TODO map<string, something>
  */
 public interface HasStatus {
 

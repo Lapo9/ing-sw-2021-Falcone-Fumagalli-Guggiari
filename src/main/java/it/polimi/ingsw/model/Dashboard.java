@@ -267,7 +267,7 @@ public class Dashboard implements HasStatus{
         }
 
         //buy the card
-        developments.addToSpace(developmentGrid.buyCard(column, row, paycheck), space);
+        developments.addCardToSpace(space, developmentGrid.buyCard(column, row, paycheck));
     }
 
 
