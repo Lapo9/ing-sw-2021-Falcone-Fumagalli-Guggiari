@@ -69,6 +69,16 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         this.faithMarker = sc.faithMarker + this.faithMarker;
     }
 
+    /**
+     * The confront method returns true if this.SupplyContainer is equal to sc
+     * @param sc is a SupplyContainer
+     * @return true if this.SupplyContainer is equal to sc
+     */
+    public boolean confront(SupplyContainer sc){
+        return this.coin == sc.coin && this.faithMarker == sc.faithMarker && this.servant == sc.servant &&
+                this.shield == sc.shield && this.stone == sc.stone;
+    }
+
     @Override
     public void addSupply(WarehouseObjectType wot) throws SupplyException{
         if(wot == null)
