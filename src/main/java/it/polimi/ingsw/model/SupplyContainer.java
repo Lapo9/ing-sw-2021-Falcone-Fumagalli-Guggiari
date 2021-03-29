@@ -22,6 +22,22 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
     /**
+     * Create a supply container and fills it with the passed parameters.
+     * @param coin coins
+     * @param stone stones
+     * @param servant servants
+     * @param shield shields
+     * @param faithMarker faith markers
+     */
+    public SupplyContainer(int coin, int stone, int servant, int shield, int faithMarker) {
+        this.coin = coin;
+        this.stone = stone;
+        this.servant = servant;
+        this.shield = shield;
+        this.faithMarker = faithMarker;
+    }
+
+    /**
      * Copy constructor.
      * @param sc object to copy
      */
@@ -150,6 +166,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     //TODO
     @Override
     public ArrayList<Integer> getStatus(){
-
+        return new ArrayList<>();
     }
 }
