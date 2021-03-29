@@ -60,13 +60,15 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      * The add method is used when you have two different SupplyContainer, sc1 and sc2, and you want to add all the
      * elements of the second container in the first one
      * @param sc is the SupplyContainer that you want to add to your SupplyContainer
+     * @return this object, to enable chain calls.
      */
-    public void sum(SupplyContainer sc){
+    public SupplyContainer sum(SupplyContainer sc){
         this.coin = sc.coin + this.coin;
         this.stone = sc.stone + this.stone;
         this.servant = sc.servant + this.servant;
         this.shield = sc.shield + this.shield;
         this.faithMarker = sc.faithMarker + this.faithMarker;
+        return this;
     }
 
     /**
