@@ -15,7 +15,7 @@ import it.polimi.ingsw.model.SupplyCard;
  * and the fourth is for purple SupplyCard
  */
 public class DevelopmentGrid implements HasStatus{
-    ArrayList<ArrayList<SupplyCard>> grid;
+    private ArrayList<ArrayList<SupplyCard>> grid;
 
     /**
      * Class constructor
@@ -25,7 +25,7 @@ public class DevelopmentGrid implements HasStatus{
         for(int i=0; i<12; i++){
             grid.add(new ArrayList<SupplyCard>());
             for(int j=0; j<4; j++)
-                grid.get(i).add(new SupplyCard());
+                grid.get(i).add(new SupplyCard()); //FIXME we have to choose what card goes where
         }
     }
 
@@ -53,10 +53,11 @@ public class DevelopmentGrid implements HasStatus{
         SupplyContainer container = p.getAll();
         SupplyCard temp = new SupplyCard();
         int pos = getPlace(column, row);
+        //FIXME probably invert line 57 and 58?
         int lastIndex = grid.get(pos).size() - 1;       //lastIndex is the number (-1) of SupplyCard in pos
         if(grid.get(pos).isEmpty())
             throw new NoSuchCardException();
-        if(container.confront(grid.get(pos).get(lastIndex.cost)))
+        if(container.confront(grid.get(pos).get(lastIndex.cost))) //FIXME lastIndex.cost? What's that?
             temp = grid.get(pos).remove(lastIndex);
         else
             throw new SupplyException();

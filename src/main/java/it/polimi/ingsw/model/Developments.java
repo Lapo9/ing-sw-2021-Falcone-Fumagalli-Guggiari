@@ -13,16 +13,16 @@ import java.util.ArrayList;
  */
 public class Developments implements HasStatus, WinPointsCountable, AcceptsSupplies{
 
-    private ArrayList<DevelopmentSpace> spaces = new ArrayList<DevelopmentSpace>(3);
+    private ArrayList<DevelopmentSpace> spaces;
 
 
     /**
      * Creates the 3 development spaces.
      */
     public Developments(){
-        spaces.get(0) = new DevelopmentSpace();
-        spaces.get(1) = new DevelopmentSpace();
-        spaces.get(2) = new DevelopmentSpace();
+        spaces.add(new DevelopmentSpace());
+        spaces.add(new DevelopmentSpace());
+        spaces.add(new DevelopmentSpace());
     }
 
 
@@ -70,7 +70,12 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
      * @throws SupplyException The card on the specified space doesn't accept this type of supply, or there is enough supply of the specified type on the card.
      */
     @Override
-    public void addSupply(DepotID space, WarehouseObjectType wot) throws SupplyException {
+    public void addSupply(DepotID space, WarehouseObjectType wot, DepotID from) throws SupplyException {
+        //check if the resource comes from an acceptable source
+        if(from.getType() == DepotID.DepotType.COFFER || from == DepotID.PAYCHECK_COFFER){
+            throw new SupplyException();
+        }
+
         spaces.get(space.getNum()).addSupply(wot);
     }
 

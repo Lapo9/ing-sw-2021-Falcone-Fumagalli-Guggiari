@@ -16,7 +16,15 @@ public class Dashboard implements HasStatus{
     private Marketplace marketplace;
     private DevelopmentGrid developmentGrid;
     private Warehouse warehouse;
-    private SupplyContainer coffer = new SupplyContainer();
+    private SupplyContainer coffer = new SupplyContainer() {@Override
+                                                            public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
+                                                                //check if the resource comes from an acceptable source
+                                                                if(from.getType() == DepotID.DepotType.WAREHOUSE || from.getType() == DepotID.DepotType.LEADER || from.getType() == DepotID.DepotType.DEVELOPMENT || from == DepotID.PAYCHECK_DEPOT){
+                                                                    throw new SupplyException();
+                                                                }
+                                                                addSupply(wot);
+                                                            }};
+
     private MutableProduction baseProduction = new MutableProduction();
     private FaithTrack faithTrack = new FaithTrack();
     private LeadersSpace leadersSpace = new LeadersSpace();
@@ -122,21 +130,14 @@ public class Dashboard implements HasStatus{
      * @throws SupplyException Thrown if the source doesn't have the specified type of resource, or if the destination cannot accept the resource
      */
     public void moveSupply(DepotID from, DepotID to, WarehouseObjectType type) throws SupplyException, UnsupportedOperationException {
-        //TODO now leaders depots are managed by the warehouse. Some signatures have changed!
-        //deny illegal movements (from/to depots to/from coffer)
-        if(((from.getType() == DepotID.DepotType.WAREHOUSE || from.getType() == DepotID.DepotType.DEVELOPMENT || from.getType() == DepotID.DepotType.LEADER) && to.getType() == DepotID.DepotType.COFFER)
-                || (from.getType() == DepotID.DepotType.COFFER && (to.getType() == DepotID.DepotType.WAREHOUSE || to.getType() == DepotID.DepotType.DEVELOPMENT || to.getType() == DepotID.DepotType.LEADER))){
-            throw new SupplyException();
-        }
-
         //remove supply from specified container
         containers.get(from.getType().getOrder()).removeSupply(from, type);
 
         //add supply to specified container, if you cannot, put supply back to original container and throw the exception
         try{
-            containers.get(to.getType().getOrder()).addSupply(to, type);
+            containers.get(to.getType().getOrder()).addSupply(to, type, from);
         } catch (SupplyException se) {
-            containers.get(from.getType().getOrder()).addSupply(from, type);
+            containers.get(from.getType().getOrder()).addSupply(from, type, from);
             throw se;
         }
 

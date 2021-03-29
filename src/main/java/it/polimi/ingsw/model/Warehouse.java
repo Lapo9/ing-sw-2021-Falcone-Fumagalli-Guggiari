@@ -86,13 +86,20 @@ public class Warehouse implements AcceptsSupplies{
 
 
     /**
-     * Tries to add the specified resource to the specified row.
+     * Tries to add the specified resource to the specified row. Checks if the source of the resource is acceptable.
      * @param row row to add the resource to
      * @param wot type of resource
+     * @param from source of the supply
      * @throws SupplyException Row cannot accept the specified resource. Probably the row is full or accepts a different type, or there is another row with the same type.
+     * @throws UnsupportedOperationException This object needs more information to store the supply
      */
     @Override
-    public void addSupply(DepotID row, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException {
+    public void addSupply(DepotID row, WarehouseObjectType wot, DepotID from) throws SupplyException, UnsupportedOperationException {
+        //check if the resource comes from an acceptable source
+        if(from.getType() == DepotID.DepotType.COFFER || from == DepotID.PAYCHECK_COFFER){
+            throw new SupplyException();
+        }
+
         //check if the user wants to add a resource to one of the leaders or to one of the warehouse spaces
         if(row.getType() == DepotID.DepotType.LEADER){
             leadersSpace.getLeaderAbility(row.getNum()).addSupply(wot);
@@ -107,6 +114,7 @@ public class Warehouse implements AcceptsSupplies{
             depots.get(row.getNum() - 1).addSupply(wot);
         }
     }
+
 
 
     /**
