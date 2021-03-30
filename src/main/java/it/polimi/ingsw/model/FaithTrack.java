@@ -11,6 +11,7 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
 
     private int position;
     private int winPoints;
+    private int vaticanReportCounter;               //counts how many times a vatican report has been issued in the game
     private ArrayList<PopeFavorTile> popeFavors;
     private ArrayList<FaithTrackTiles> track;
 
@@ -61,6 +62,7 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
     public FaithTrack(){
         position = 0;
         winPoints = 0;
+        vaticanReportCounter = 0;
         popeFavors = new ArrayList<PopeFavorTile>(3);
         for(int i=2; i<5; i++)
             popeFavors.add(new PopeFavorTile(i));
@@ -93,7 +95,10 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
     private boolean goAhead(){
         boolean vr = false;
         position++;
-        if(track.get(position).isPopeSpace) {
+        // You can activate a vaticanReport only if you are the first player to reach the PopeSpace tile
+        if(track.get(position).isPopeSpace &&
+                ((position == 8 && vaticanReportCounter == 0) ||(position ==16 && vaticanReportCounter == 1)||
+                        (position == 24 && vaticanReportCounter == 2))) {
             vaticanReport();
             vr = true;
         }
@@ -105,7 +110,57 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
      * The vaticanReport method triggers a vatican report
      */
     public void vaticanReport(){
-        //TODO
+        //Check if the player who called the vaticanReport method is the one who activated it
+        if((position == 8 && vaticanReportCounter == 0) ||(position ==16 && vaticanReportCounter == 1)||
+                (position == 24 && vaticanReportCounter == 2)){
+            popeFavors.get(vaticanReportCounter).activate();
+            vaticanReportCounter++;          //update the vaticanReportCounter
+        }
+        //If you aren't the player who triggered the vaticanReport, the game needs to check your position and if you
+        //are in the right vatican report section. If yes, you can activate the right Pope's favor tile
+        else{
+            //The player isn't in a vatican report section
+            if(position < 5 || (position > 8 && position < 12) || position == 17 || position == 18){
+                popeFavors.get(vaticanReportCounter).discard();
+                vaticanReportCounter++;
+            }
+            //The player is in the first vatican report section, if he is there when the first vaticanReport has been
+            //called, he can turn the first PopeFavorTile
+            else if(position >= 5 && position <= 8){
+                if(vaticanReportCounter == 0){
+                    popeFavors.get(vaticanReportCounter).activate();
+                    vaticanReportCounter++;
+                }
+                else{
+                    popeFavors.get(vaticanReportCounter).discard();
+                    vaticanReportCounter++;
+                }
+            }
+            //The player is in the second vatican report section, if he is there when the second vaticanReport has been
+            //called, he can turn the second PopeFavorTile
+            else if(position >= 12 && position <= 16){
+                if(vaticanReportCounter == 1){
+                    popeFavors.get(vaticanReportCounter).activate();
+                    vaticanReportCounter++;
+                }
+                else{
+                    popeFavors.get(vaticanReportCounter).discard();
+                    vaticanReportCounter++;
+                }
+            }
+            //The player is in the third vatican report section, if he is there when the third vaticanReport has been
+            //called, he can turn the third PopeFavorTile
+            else{
+                if(vaticanReportCounter == 2){
+                    popeFavors.get(vaticanReportCounter).activate();
+                    vaticanReportCounter++;
+                }
+                else{
+                    popeFavors.get(vaticanReportCounter).discard();
+                    vaticanReportCounter++;
+                }
+            }
+        }
     }
 
     @Override
