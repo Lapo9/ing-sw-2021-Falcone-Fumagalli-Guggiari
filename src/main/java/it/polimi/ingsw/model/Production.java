@@ -9,8 +9,8 @@ import it.polimi.ingsw.model.SupplyContainer;
  * The Production class represents the production mechanism of the game
  */
 public class Production implements AcceptsSupplies, HasStatus{
-    private SupplyContainer input;
-    private SupplyContainer output;
+    private final SupplyContainer input;
+    private final SupplyContainer output;
     private SupplyContainer currentSupply;
 
     /**
@@ -32,12 +32,11 @@ public class Production implements AcceptsSupplies, HasStatus{
     public SupplyContainer produce(){
         try {
             check();
-            return new SupplyContainer(output);
         } catch (SupplyException e) {
             //FIXME
             //Idk what to put in here
-            return new SupplyContainer(output);
         }
+        return new SupplyContainer(output);
     }
 
     /**

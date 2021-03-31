@@ -30,7 +30,7 @@ public class DevelopmentGrid implements HasStatus{
         }
     }
 
-    /**
+    /*
      * The getPlace method returns the index of the ArrayList given column and row number
      * @param column is the column number
      * @param row is the row number
@@ -52,16 +52,14 @@ public class DevelopmentGrid implements HasStatus{
      */
     public SupplyCard buyCard(int column, int row, Paycheck p)throws SupplyException, NoSuchCardException{
         SupplyContainer container = p.getAll();
-        SupplyCard temp = new SupplyCard();
         int pos = getPlace(column, row);
         if(grid.get(pos).isEmpty())
             throw new NoSuchCardException();
         int lastIndex = grid.get(pos).size() - 1;       //lastIndex is the number (-1) of SupplyCard in pos
-        if(container.confront(grid.get(pos).get(lastIndex).cost))
-            temp = grid.get(pos).remove(lastIndex);
+        if(container.confront(grid.get(pos).get(lastIndex).getCost()))
+            return grid.get(pos).remove(lastIndex);
         else
             throw new SupplyException();
-        return temp;
     }
 
     /**
@@ -75,12 +73,7 @@ public class DevelopmentGrid implements HasStatus{
         int pos = getPlace(column, row);
         if(grid.get(pos).isEmpty())
             throw new NoSuchCardException();
-        if(row == 1)
-            return 3;
-        else if(row == 2)
-            return 2;
-        else
-            return 1;
+        return grid.get(pos).getLevel();
     }
 
     //TODO

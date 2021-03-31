@@ -16,9 +16,9 @@ import it.polimi.ingsw.model.SupplyContainer;
 public class LeaderCard implements WinPointsCountable, HasStatus{
     private Pair<SupplyContainer, ArrayList<CardsRequirement>> requirements;
     private LeaderAbility ability;
-    private boolean active;
-    private boolean discard;
-    private int winPoints;
+    private boolean active = false;
+    private boolean discard = false;
+    private final int winPoints;
 
     /**
      * Class constructor
@@ -46,7 +46,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
      * @throws LeaderException if the LeaderCard is not active yet or if it has been discard
      */
     public LeaderAbility getAbility() throws LeaderException{
-        if(!active || !discard)
+        if(!active || discard)
             throw new LeaderException();
         return ability;
     }
@@ -61,7 +61,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
     /**
      * The setDiscard method discard the LeaderCard
      */
-    public void setDiscard(){
+    public void discard(){
         discard = true;
     }
 

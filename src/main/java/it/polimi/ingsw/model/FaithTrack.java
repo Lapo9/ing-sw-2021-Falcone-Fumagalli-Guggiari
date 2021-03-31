@@ -9,18 +9,18 @@ import it.polimi.ingsw.model.PopeFavorTile;
 
 public class FaithTrack implements WinPointsCountable, HasStatus{
 
-    private int position;
-    private int winPoints;
-    private int vaticanReportCounter;               //counts how many times a vatican report has been issued in the game
+    private int position = 0;
+    private int winPoints = 0;
+    private int vaticanReportCounter = 0;               //counts how many times a vatican report has been issued in the game
     private ArrayList<PopeFavorTile> popeFavors;
     private ArrayList<FaithTrackTiles> track;
 
     /**
      * The FaithTrackTiles class represents a tile of the FaithTrack
      */
-    public class FaithTrackTiles{
-        private int points;
-        private int number;
+    private class FaithTrackTiles{
+        private final int points;
+        private final int number;
         private boolean isPopeSpace;
 
         /**
@@ -34,20 +34,28 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
             switch(num){
                 case 3:
                     points = 1;
+                    break;
                 case 6:
                     points = 2;
+                    break;
                 case 9:
                     points = 4;
+                    break;
                 case 12:
                     points = 6;
+                    break;
                 case 15:
                     points = 9;
+                    break;
                 case 18:
                     points = 12;
+                    break;
                 case 21:
                     points = 16;
+                    break;
                 case 24:
                     points = 20;
+                    break;
                 default:
                     points = 0;
             }
@@ -60,13 +68,10 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
      * Class constructor
      */
     public FaithTrack(){
-        position = 0;
-        winPoints = 0;
-        vaticanReportCounter = 0;
-        popeFavors = new ArrayList<PopeFavorTile>(3);
+        popeFavors = new ArrayList<PopeFavorTile>();
         for(int i=2; i<5; i++)
             popeFavors.add(new PopeFavorTile(i));
-        track = new ArrayList<FaithTrackTiles>(25);
+        track = new ArrayList<FaithTrackTiles>();
         for(int i=0; i<25; i++)
             track.add(new FaithTrackTiles(i));
 
@@ -78,14 +83,11 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
      * @return true if a vaticanReport has been issued
      */
     public boolean goAhead(int num){
-        boolean vr;
-        boolean res = false;
+        boolean vr = false;
         for(int i = 0; i < num; i++) {
-            vr = goAhead();
-            if(vr)
-                res = true;
+            vr |= goAhead();
         }
-        return res;
+        return vr;
     }
 
     /**
@@ -97,7 +99,7 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
         position++;
         // You can activate a vaticanReport only if you are the first player to reach the PopeSpace tile
         if(track.get(position).isPopeSpace &&
-                ((position == 8 && vaticanReportCounter == 0) ||(position ==16 && vaticanReportCounter == 1)||
+                ((position == 8 && vaticanReportCounter == 0) ||(position == 16 && vaticanReportCounter == 1)||
                         (position == 24 && vaticanReportCounter == 2))) {
             vaticanReport();
             vr = true;
