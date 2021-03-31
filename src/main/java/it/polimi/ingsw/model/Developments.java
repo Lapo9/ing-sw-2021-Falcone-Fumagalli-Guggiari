@@ -158,5 +158,6 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
         for(int i = 0; i<3; ++i){
             totalPoints += spaces.get(i).getWinPoints();
         }
+        return totalPoints;
     }
 }

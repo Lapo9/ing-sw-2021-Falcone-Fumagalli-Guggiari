@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.*;
 
 import java.util.ArrayList;
@@ -33,6 +34,18 @@ public class Warehouse implements AcceptsSupplies{
             for(WarehouseObjectType wot : wots) {
                 if(depot.getType() == wot) {
                     count += depot.getQuantity();
+                }
+            }
+        }
+
+        for (int i=0; i<2; ++i){
+            Pair<WarehouseObjectType, Integer> leaderDepot;
+            for(WarehouseObjectType wot : wots) {
+                try{
+                    leaderDepot = leadersSpace.getLeaderAbility(i).getDepotInfo();
+                } catch(UnsupportedOperationException uoe) {break;}
+                if(leaderDepot.first == wot) {
+                    count += leaderDepot.second;
                 }
             }
         }
@@ -76,12 +89,17 @@ public class Warehouse implements AcceptsSupplies{
      * Tries to convert the marble to the specified row supply type, and, if possible, adds it to the row.
      * @param row row to add the marble to
      * @param color color of the marble to add
-     * @param ls leaders (utilized to know if a conversion is possible)
      * @throws SupplyException Specified depot is full
      * @throws MarbleException Marble cannot be converted to a compatible supply type
+     * @throws UnsupportedOperationException Leader cannot accept a marble
      */
-    public void addMarble(int row, MarbleColor color, LeadersSpace ls) throws SupplyException, MarbleException {
-        depots.get(row-1).addMarble(color, ls);
+    public void addMarble(DepotID row, MarbleColor color) throws SupplyException, MarbleException, UnsupportedOperationException {
+        if(row.getType() == DepotID.DepotType.WAREHOUSE) {
+            depots.get(row.getNum()).addMarble(color, leadersSpace);
+        }
+        if(row.getType() == DepotID.DepotType.LEADER) {
+            leadersSpace.getLeaderAbility(row.getNum()).addMarble(color, leadersSpace);
+        }
     }
 
 

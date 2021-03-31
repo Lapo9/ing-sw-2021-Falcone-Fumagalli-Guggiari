@@ -11,12 +11,12 @@ import java.util.ArrayList;
  * Generally, when an action performed goes well, nothing is returned, but if the action violates any of the game rule an exception is thrown.
  * TODO maybe there should be methods to check if an action is possible before performing it? It can be useful if you want to visualize only the actions that can be executed (for example if you don't have enough supplies to buy a card, then the card is grey and not clickable)
  */
-public class Dashboard implements HasStatus{
+public class Dashboard implements HasStatus, WinPointsCountable{
 
-    private Marketplace marketplace;
-    private DevelopmentGrid developmentGrid;
-    private Warehouse warehouse;
-    private SupplyContainer coffer = new SupplyContainer() {@Override
+    private final Marketplace marketplace;
+    private final DevelopmentGrid developmentGrid;
+    private final Warehouse warehouse;
+    private final SupplyContainer coffer = new SupplyContainer() {@Override
                                                             public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
                                                                 //check if the resource comes from an acceptable source
                                                                 if(from.getType() == DepotID.DepotType.WAREHOUSE || from.getType() == DepotID.DepotType.LEADER || from.getType() == DepotID.DepotType.DEVELOPMENT || from == DepotID.PAYCHECK_DEPOT){
@@ -25,14 +25,14 @@ public class Dashboard implements HasStatus{
                                                                 addSupply(wot);
                                                             }};
 
-    private MutableProduction baseProduction = new MutableProduction();
-    private FaithTrack faithTrack = new FaithTrack();
-    private LeadersSpace leadersSpace = new LeadersSpace();
-    private Developments developments = new Developments();
+    private final MutableProduction baseProduction = new MutableProduction();
+    private final FaithTrack faithTrack = new FaithTrack();
+    private final LeadersSpace leadersSpace = new LeadersSpace();
+    private final Developments developments = new Developments();
     private MarbleContainer unassignedSupplies;
-    private Paycheck paycheck = new Paycheck();
-    private boolean inkwell;
-    private ArrayList<AcceptsSupplies> containers;
+    private final Paycheck paycheck = new Paycheck();
+    private final boolean inkwell;
+    private final ArrayList<AcceptsSupplies> containers = new ArrayList<>();
 
 
     /**
@@ -89,7 +89,7 @@ public class Dashboard implements HasStatus{
         if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException();}
 
         if(to.getType() == DepotID.DepotType.WAREHOUSE){
-            warehouse.addMarble(to.getNum(), color, leadersSpace);
+            warehouse.addMarble(to, color);
             unassignedSupplies.removeMarble(color);
         }
 
@@ -214,7 +214,7 @@ public class Dashboard implements HasStatus{
     public boolean produce(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base){
         //get productions outputs
         SupplyContainer developmentProduction = developments.produce(s1, s2, s3);
-        SupplyContainer baseProduction = developments.produce(base);
+        SupplyContainer baseProduction = this.baseProduction.produce(base);
 
         SupplyContainer leader1Production;
         try {
@@ -232,20 +232,25 @@ public class Dashboard implements HasStatus{
             leader2Production = new SupplyContainer();
         }
 
-        //store outputs in the coffer
-        coffer.sum(developmentProduction);
-        coffer.sum(baseProduction);
-        coffer.sum(leader1Production);
-        coffer.sum(leader2Production);
+        //sum output in temporary container
+        SupplyContainer tmp = new SupplyContainer();
+        tmp.sum(developmentProduction).sum(baseProduction).sum(leader1Production).sum(leader2Production);
 
-        //go ahead in faith track
-        boolean vaticanReport = false;
-        while(coffer.getQuantity(WarehouseObjectType.FAITH_MARKER) > 0){
-            coffer.removeSupply(WarehouseObjectType.FAITH_MARKER);
-            vaticanReport |= goAhead();
+        //count faith markers
+        int faithPoints = tmp.getQuantity(WarehouseObjectType.FAITH_MARKER);
+
+        //remove faith markers
+        for (int i = 0; i<faithPoints; ++i){
+            try {
+                tmp.removeSupply(WarehouseObjectType.FAITH_MARKER);
+            } catch (SupplyException se) {/*TODO this should never happen, so maybe fail the program*/}
         }
 
-        return vaticanReport;
+        //store outputs in the coffer
+        coffer.sum(tmp);
+
+        //go ahead in faith track
+        return faithTrack.goAhead(faithPoints);
     }
 
 
@@ -286,7 +291,7 @@ public class Dashboard implements HasStatus{
         ArrayList<Integer> buyableLevels = developments.buyableLevels(); //get what levels you can buy
 
         //check if you can buy a card of that level in that space
-        if(buyableLevels.get(space-1 != developmentGrid.getLevel(column, row)){
+        if(buyableLevels.get(space-1) != developmentGrid.getLevel(column, row)){
             throw new DevelopmentException();
         }
 
@@ -303,7 +308,7 @@ public class Dashboard implements HasStatus{
      */
     public boolean discardLeader(int i) throws LeaderException {
         leadersSpace.discardLeader(i);
-        return faithTrack.goAhead();
+        return faithTrack.goAhead(1);
     }
 
 
@@ -323,7 +328,7 @@ public class Dashboard implements HasStatus{
      * @return Returns if a vatican report has been issued
      */
     public boolean goAhead(){
-        return faithTrack.goAhead();
+        return faithTrack.goAhead(1);
     }
 
 
@@ -351,6 +356,13 @@ public class Dashboard implements HasStatus{
     @Override
     public ArrayList<Integer> getStatus(){
         //TODO
+    }
+
+
+    @Override
+    public int getWinPoints() {
+        int supplies = warehouse.getResourceCount(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE) + coffer.getQuantity(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE);
+        return developments.getWinPoints() + leadersSpace.getWinPoints() + faithTrack.getWinPoints() + supplies/5;
     }
 
     /**
