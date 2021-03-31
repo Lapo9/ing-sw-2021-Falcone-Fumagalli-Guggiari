@@ -8,14 +8,14 @@ import static org.junit.Assert.*;
 public class SupplyContainerTest {
 
     @Test
-    public void getQuantityOne() {
+    public void getQuantity_one() {
         SupplyContainer sc = new SupplyContainer(2, 0, 3, 14, 9);
         int res = sc.getQuantity(WarehouseObjectType.SHIELD);
         assertEquals(14, res);
     }
 
     @Test
-    public void getQuantityMultiple() {
+    public void getQuantity_multiple() {
         SupplyContainer sc = new SupplyContainer(2, 0, 3, 14, 9);
         int res = sc.getQuantity(WarehouseObjectType.SHIELD, WarehouseObjectType.COIN, WarehouseObjectType.STONE);
         assertEquals(16, res);
@@ -44,7 +44,7 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void confrontEquals() {
+    public void confront_equals() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         SupplyContainer sc2 = new SupplyContainer(3, 7, 7, 2, 0);
         boolean res = sc1.confront(sc2);
@@ -52,7 +52,7 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void confrontNotEquals() {
+    public void confront_notEquals() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         SupplyContainer sc2 = new SupplyContainer(3, 7, 7, 0, 2);
         boolean res = sc1.confront(sc2);
@@ -60,7 +60,7 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void addSupplyOne() {
+    public void addSupply_one() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         try {
             sc1.addSupply(WarehouseObjectType.SERVANT);
@@ -78,7 +78,7 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void addSupplyMultiple() {
+    public void addSupply_multiple() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
 
         try {
@@ -99,7 +99,7 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void removeSupplyOneOk() {
+    public void removeSupply_oneOk() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
 
         try {
@@ -118,7 +118,7 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void removeSupplyMultipleOk() {
+    public void removeSupply_multipleOk() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
 
         try {
@@ -139,7 +139,7 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void removeSupplyOneKo() {
+    public void removeSupply_oneKo() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         boolean exc = false;
 
@@ -151,7 +151,7 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void removeSupplyMultipleKo() {
+    public void removeSupply_multipleKo() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         boolean exc = false;
 

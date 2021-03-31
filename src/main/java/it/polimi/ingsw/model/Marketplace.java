@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.*;
 
 import java.util.Random;
@@ -12,80 +13,47 @@ import java.util.List;
 
 public class Marketplace implements HasStatus{
 
-    /**
-     * List of int that correspond to y, b, g, w, v, r
-     * //TODO
-     */
-    private List<Integer> marblesList = new ArrayList<>();
-        list.add(y);
-        list.add(b);
-        list.add(g);
-        list.add(w);
-        list.add(v);
-        list.add(r);
+    private ArrayList<MarbleColor> grid = new ArrayList<>();
+    private MarbleColor slide;
 
-    /**
-     * This method calculate a random marble to insert in the Marketplace
-     * @param marblesList List of type of marbles
-     * @return Random marble
-     */
-    public int randomMarble(List<Integer> marblesList){
-        Random rand = new Random();
-        return marblesList.get(rand.nextInt(marblesList.size()));
-    }
 
     /**
      * Class constructor: creates the Marketplace, places 12 random marbles and places the remaining marble in the 'slide'
      */
     public Marketplace(){
 
-        int i, j, slide, rand, mp[3][4];
-
-        totMarbles = new MarbleContainer(2, 2, 2, 4, 2, 1);
-
-        for(i=0; i<mp.length; i++) {
-            for (j = 0; j < mp.length; j++) {
-
-                rand = randomMarble(marblesList);
-
-                if (totMarbles.rand > 0)
-                    mp[i][j] = rand;
-                    //if all 'x' marbles have been placed, then go back and re-extract another rand marble
-                else
-                    //if it is the first column, j can't be lower zero
-                    if (j > 0)
-                        j--;
-                    else
-                        i--;
-
-                //now we reduce the counter of the marble inserted
-
-                if (rand == y)
-                    totMarbles.y--;
-
-                else if (rand == b)
-                    totMarbles.b--;
-
-                else if (rand == g)
-                    totMarbles.g--;
-
-                else if (rand == w)
-                    totMarbles.w--;
-
-                else if (rand == v)
-                    totMarbles.v--;
-
-                else
-                    totMarbles.r--;
-
-            }
+        //list with all of the possible marbles (4 white, 2 blu, 2 yellow, 2 violet, 2 grey, 1 red)
+        ArrayList<MarbleColor> listOfMarbles = new ArrayList<>();
+        for (int i = 0; i<4; ++i) {
+            listOfMarbles.add(MarbleColor.WHITE);
         }
+        for (int i = 0; i<2; ++i) {
+            listOfMarbles.add(MarbleColor.BLUE);
+            listOfMarbles.add(MarbleColor.YELLOW);
+            listOfMarbles.add(MarbleColor.VIOLET);
+            listOfMarbles.add(MarbleColor.GREY);
+        }
+        listOfMarbles.add(MarbleColor.RED);
 
-        //insert the remaining marble in the slide
-        for(i=0; i<5; i++)
-            if(totMarbles.y > 0)
-                slide=y;
-            //if series? easier way?
+        //cycle through the positions of the grid, adn add a random marble. Then remove the added marble from the listOfMarbles
+        for (int i=0; i<12; ++i){
+            int rnd = (int)(Math.random() * (13-i));
+            MarbleColor tmp = listOfMarbles.remove(rnd);
+            grid.add(tmp);
+        }
+        slide = listOfMarbles.get(0);
+
+    }
+
+
+    //returns the index given row and column
+    private int getPos(int r, int c){
+        return c+r*4;
+    }
+
+    //returns the row and column given the index
+    private Pair<Integer, Integer> getRowCol(int i){
+        return new Pair((Integer)(i/4), (Integer)(i%3));
     }
 
     /**
