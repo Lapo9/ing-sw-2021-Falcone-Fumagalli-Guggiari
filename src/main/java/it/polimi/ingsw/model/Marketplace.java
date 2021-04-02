@@ -13,8 +13,8 @@ import java.util.List;
 
 public class Marketplace implements HasStatus{
 
-    private ArrayList<MarbleColor> grid = new ArrayList<>();
-    private MarbleColor slide;
+    private final ArrayList<MarbleColor> grid = new ArrayList<>();
+    private MarbleColor slide; //not final so i can shift
 
 
     /**
@@ -92,7 +92,7 @@ public class Marketplace implements HasStatus{
         else{
             for(int i = index; i < 12; i++){
 
-                MarbleColor currentColor1 = grid.get(i); // get one element from the array list grid
+                MarbleColor currentColor = grid.get(i); // get one element from the array list grid
 
                 //increment the counter for the got marble
                 if(currentColor == MarbleColor.YELLOW)
@@ -113,15 +113,57 @@ public class Marketplace implements HasStatus{
 
         MarbleContainer mc = new MarbleContainer(y, b, g, w, v, r);
 
-        shiftMarket();
+        shiftMarketplace(dir, index);
 
         return mc;
     }
 
     /**
      * This private method allows to shift the market after one player get his marbles
+     * @param dir This method can shift in two ways: horizontal or vertical
+     * @param index This method positions the slide in the selected row/column and shift the rest
      */
-    private void shiftMarket(){
+    private void shiftMarketplace(MarketDirection dir, int index){
+
+        MarbleColor tmp;
+
+        if(dir == MarketDirection.HORIZONTAL){
+
+            tmp = grid.get(index*4); //copy in tmp the first MarbleColor of the row, it will be placed in the slide
+
+            grid.remove(index*4); //remove that MarbleColor
+
+            //shift the three elements remaining
+            for(int i = 0; i < 3; i++){
+
+                grid.add(index*4, grid.get(index*4+i)); //the second element of the row takes place of the first
+
+                grid.remove(index*4+i);
+
+            }
+
+            grid.add(index*4+3, slide); //add the marble which is in the slide in the last column of the row
+
+            slide = tmp; //the first MarbleColor i removed goes in the slide
+        }
+
+        else{
+
+            tmp = grid.get(index); //copy in tmp the MarbleColor in the first row of the selected column, ... slide
+
+            grid.remove(index); //remove that element
+
+            for(int i = 1; i < 3; i++){
+
+                grid.add(index, grid.get(index+4*i)); //add the element below in the "matrix"
+
+                grid.remove(index+4*i);
+
+            }
+
+            grid.add(index+8, slide);
+            slide = tmp;
+        }
 
     }
 
