@@ -53,7 +53,7 @@ public class Marketplace implements HasStatus{
 
     //returns the row and column given the index
     private Pair<Integer, Integer> getRowCol(int i){
-        return new Pair((Integer)(i/4), (Integer)(i%3));
+        return new Pair((i/4), (i%3)); //explicit casting "(Integer)" in "Pair()" is redundant 
     }
 
     /**
@@ -64,54 +64,44 @@ public class Marketplace implements HasStatus{
      */
     public MarbleContainer obtain(MarketDirection dir, int index){
 
-        int y=0, b=0, g=0, w=0, v=0, r=0;
+        //create a list of counters for every type of MarbleColor
+        ArrayList<Integer> marbleCounters = new ArrayList<>();
+        for(int i=0; i < 6; i++)
+            marbleCounters.add(i, 0);
 
         //if the direction is HORIZONTAL, i have to take the marbles consequently with a cycle for
         if (dir == MarketDirection.HORIZONTAL){
 
-            for(int i = index * 4; i < (index * 4) + 3; i++){
-                MarbleColor currentColor = grid.get(i); // get one element from the array list grid
+            for(int i = 0; i < 3; i++){
 
-                //increment the counter for the got marble
-                if(currentColor == MarbleColor.YELLOW)
-                    y++;
-                else if(currentColor == MarbleColor.BLUE)
-                    b++;
-                else if(currentColor == MarbleColor.GREY)
-                    g++;
-                else if(currentColor == MarbleColor.WHITE)
-                    w++;
-                else if(currentColor == MarbleColor.VIOLET)
-                    v++;
-                else
-                    r++;
+                int pos = getPos(index, i);
+
+                MarbleColor currentMarble = grid.get(pos); // get one MarbleColor from the array list grid
+
+                //this instruction increase the counter of the currentMarble in the marbleCounters array list
+                //parameter1: counter of the currentColor position in the list MarbleCounters
+                //parameter2: the current value of the currentColor counter increased by 1 (to increase the counter)
+                marbleCounters.set(currentMarble.ordinal(), marbleCounters.get(currentMarble.ordinal())+1);
+
             }
         }
 
         //if the direction is VERTICAL, i have to take one marble and skip the next three
         else{
-            for(int i = index; i < 12; i++){
 
-                MarbleColor currentColor = grid.get(i); // get one element from the array list grid
+            for(int i = 0; i < 2; i++){
 
-                //increment the counter for the got marble
-                if(currentColor == MarbleColor.YELLOW)
-                    y++;
-                else if(currentColor == MarbleColor.BLUE)
-                    b++;
-                else if(currentColor == MarbleColor.GREY)
-                    g++;
-                else if(currentColor == MarbleColor.WHITE)
-                    w++;
-                else if(currentColor == MarbleColor.VIOLET)
-                    v++;
-                else
-                    r++;
-                i += 3; //so i can take one element and skip the next three
+                int pos = getPos(i, index);
+
+                MarbleColor currentMarble = grid.get(pos); // get one element from the array list grid
+
+                marbleCounters.set(currentMarble.ordinal(), marbleCounters.get(currentMarble.ordinal())+1);
+
             }
         }
 
-        MarbleContainer mc = new MarbleContainer(y, b, g, w, v, r);
+        //create a MarbleContainer by inserting the values of the marbleCounter array list
+        MarbleContainer mc = new MarbleContainer(marbleCounters.get(0), marbleCounters.get(1), marbleCounters.get(2), marbleCounters.get(3), marbleCounters.get(4), marbleCounters.get(5));
 
         shiftMarketplace(dir, index);
 
@@ -136,15 +126,16 @@ public class Marketplace implements HasStatus{
             //shift the three elements remaining
             for(int i = 0; i < 3; i++){
 
-                grid.add(index*4, grid.get(index*4+i)); //the second element of the row takes place of the first
+                int pos = getPos(index, i);
 
-                grid.remove(index*4+i);
+                grid.add(index*4, grid.get(pos)); //the second element of the row takes place of the first
+
+                grid.remove(pos);
 
             }
 
             grid.add(index*4+3, slide); //add the marble which is in the slide in the last column of the row
 
-            slide = tmp; //the first MarbleColor i removed goes in the slide
         }
 
         else{
@@ -155,15 +146,19 @@ public class Marketplace implements HasStatus{
 
             for(int i = 1; i < 3; i++){
 
-                grid.add(index, grid.get(index+4*i)); //add the element below in the "matrix"
+                int pos = getPos(i, index);
 
-                grid.remove(index+4*i);
+                grid.add(index, grid.get(pos)); //add the element below in the "matrix"
+
+                grid.remove(pos);
 
             }
 
-            grid.add(index+8, slide);
-            slide = tmp;
+            grid.add(index+8, slide); //add the marble in the slide
+
         }
+
+        slide = tmp; //the first MarbleColor i removed goes in the slide
 
     }
 
