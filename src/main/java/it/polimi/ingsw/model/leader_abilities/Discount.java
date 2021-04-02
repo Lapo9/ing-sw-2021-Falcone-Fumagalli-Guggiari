@@ -21,7 +21,7 @@ public class Discount implements LeaderAbility {
 
 
     @Override
-    public SupplyContainer getDiscount() throws UnsupportedOperationException {
+    public SupplyContainer getDiscount() {
         return discount;
     }
 }

@@ -18,7 +18,7 @@ public class Market implements LeaderAbility {
 
 
     @Override
-    public WarehouseObjectType transformWhiteMarble() throws UnsupportedOperationException {
+    public WarehouseObjectType transformWhiteMarble() {
         return transformTo;
     }
 }

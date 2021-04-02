@@ -39,6 +39,19 @@ public interface LeaderAbility extends AcceptsSupplies{
 
 
     /**
+     * Tries to add a marble to a depot container
+     * @param color color to add
+     * @param ls used to check if a white ball conversion is possible
+     * @throws MarbleException cannot add the specified marble color to the depot, or conversion is not possible
+     * @throws SupplyException depot is full
+     * @throws UnsupportedOperationException If the LeaderCard is not allowed to use that ability
+     */
+    public default void addMarble(MarbleColor color, LeadersSpace ls) throws MarbleException, SupplyException, UnsupportedOperationException {
+        throw new UnsupportedOperationException();
+    }
+
+
+    /**
      * This method activates the leader card production
      * @return An extra SupplyContainer that contains the resource
      * @throws UnsupportedOperationException If the LeaderCard is not allowed to use that ability

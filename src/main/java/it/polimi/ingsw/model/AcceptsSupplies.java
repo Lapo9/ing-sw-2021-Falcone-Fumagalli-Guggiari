@@ -13,7 +13,7 @@ public interface AcceptsSupplies {
      * @throws SupplyException If the container cannot accept the supply (already full, type not accepted)
      * @throws UnsupportedOperationException This object needs more information to store the supply
      */
-    public default void addSupply(WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException{
+    public default void addSupply(WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException, LeaderException{
         throw new UnsupportedOperationException();
     }
 
@@ -25,7 +25,7 @@ public interface AcceptsSupplies {
      * @throws SupplyException If the container cannot accept the supply (already full, type not accepted)
      * @throws UnsupportedOperationException This object needs more information to store the supply
      */
-    public default void addSupply(DepotID slot, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException{
+    public default void addSupply(DepotID slot, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException, LeaderException{
         addSupply(wot);
     }
 
@@ -37,7 +37,7 @@ public interface AcceptsSupplies {
      * @throws SupplyException If the container cannot accept the supply (already full, type not accepted, source not accepted)
      * @throws UnsupportedOperationException This object needs more information to store the supply
      */
-    public default void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException, UnsupportedOperationException{
+    public default void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException, UnsupportedOperationException, LeaderException{
         addSupply(wot);
     }
 
@@ -50,7 +50,7 @@ public interface AcceptsSupplies {
      * @throws SupplyException If the container cannot accept the supply (already full, type not accepted, source not accepted)
      * @throws UnsupportedOperationException This object needs more information to store the supply
      */
-    public default void addSupply(DepotID slot, WarehouseObjectType wot, DepotID from) throws SupplyException, UnsupportedOperationException{
+    public default void addSupply(DepotID slot, WarehouseObjectType wot, DepotID from) throws SupplyException, UnsupportedOperationException, LeaderException{
         try {
             //initially try to call the function without the slot (do this before because the from constraint is more important than the slot constraint)
             addSupply(wot, from);
@@ -67,7 +67,7 @@ public interface AcceptsSupplies {
      * @throws SupplyException If the required resource is not available
      * @throws UnsupportedOperationException This object needs more information to store the supply
      */
-    public default void removeSupply(WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException{
+    public default void removeSupply(WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException, LeaderException {
         throw new UnsupportedOperationException();
     }
 
@@ -79,7 +79,7 @@ public interface AcceptsSupplies {
      * @throws SupplyException If the required resource is not available
      * @throws UnsupportedOperationException This object needs more information to store the supply
      */
-    public default void removeSupply(DepotID slot, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException{
+    public default void removeSupply(DepotID slot, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException, LeaderException {
         removeSupply(wot);
     }
 

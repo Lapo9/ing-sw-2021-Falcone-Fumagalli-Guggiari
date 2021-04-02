@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.model.leader_abilities.Depot;
 
 import java.util.ArrayList;
 import java.util.Collections;
