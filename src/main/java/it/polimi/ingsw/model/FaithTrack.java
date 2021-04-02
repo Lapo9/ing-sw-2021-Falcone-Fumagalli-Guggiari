@@ -29,38 +29,48 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
          */
         public FaithTrackTiles(int num){
             number = num;
-            //FIXME
-            //va scritto in modo più compatto, devo capire come
             switch(num){
                 case 3:
                     points = 1;
+                    isPopeSpace = false;
                     break;
                 case 6:
                     points = 2;
+                    isPopeSpace = false;
+                    break;
+                case 8:
+                case 16:
+                    points = 0;
+                    isPopeSpace = true;
                     break;
                 case 9:
                     points = 4;
+                    isPopeSpace = false;
                     break;
                 case 12:
                     points = 6;
+                    isPopeSpace = false;
                     break;
                 case 15:
                     points = 9;
+                    isPopeSpace = false;
                     break;
                 case 18:
                     points = 12;
+                    isPopeSpace = false;
                     break;
                 case 21:
                     points = 16;
+                    isPopeSpace = false;
                     break;
                 case 24:
                     points = 20;
+                    isPopeSpace = true;
                     break;
                 default:
                     points = 0;
+                    isPopeSpace = false;
             }
-            if(num == 8 || num == 16 || num == 24)
-                isPopeSpace = true;
         }
     }
 

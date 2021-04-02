@@ -25,6 +25,30 @@ public class Production implements AcceptsSupplies, HasStatus{
     }
 
     /**
+     * The getInput method returns the input SupplyContainer
+     * @return the input SupplyContainer
+     */
+    protected SupplyContainer getInput() {
+        return input;
+    }
+
+    /**
+     * The getOutput method returns the output SupplyContainer
+     * @return the output SupplyContainer
+     */
+    protected SupplyContainer getOutput(){
+        return output;
+    }
+
+    /**
+     * The getCurrentSupply method returns the currentSupply
+     * @return the currentSupply
+     */
+    protected SupplyContainer getCurrentSupply(){
+        return currentSupply;
+    }
+
+    /**
      * The produce method activates the production only if the supplies in the currentSupply are equal to the one in the
      * input SupplyContainer
      * @return a SupplyContainer which container the output resources
