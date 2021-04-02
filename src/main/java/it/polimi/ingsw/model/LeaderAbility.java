@@ -23,7 +23,7 @@ public interface LeaderAbility extends AcceptsSupplies{
      * @return The resource to get in exchange for white marble
      * @throws UnsupportedOperationException If the LeaderCard is not allowed to use that ability
      */
-    public default WarehouseObjectType getWhiteBall() throws UnsupportedOperationException{
+    public default WarehouseObjectType transformWhiteMarble() throws UnsupportedOperationException{
         throw new UnsupportedOperationException();
     };
 
