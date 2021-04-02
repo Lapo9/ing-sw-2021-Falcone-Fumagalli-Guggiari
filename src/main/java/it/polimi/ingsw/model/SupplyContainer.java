@@ -98,9 +98,9 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
     @Override
-    public void addSupply(WarehouseObjectType wot) throws SupplyException{
+    public void addSupply(WarehouseObjectType wot){
         if(wot == null)
-            throw new SupplyException();
+            return;
         if(wot == WarehouseObjectType.COIN)
             coin++;
         else if(wot == WarehouseObjectType.STONE)
