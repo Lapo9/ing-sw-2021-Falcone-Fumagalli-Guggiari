@@ -51,11 +51,7 @@ public class Marketplace implements HasStatus{
         return c+r*4;
     }
 
-    //returns the row and column given the index
-    private Pair<Integer, Integer> getRowCol(int i){
-        return new Pair((i/4), (i%3)); //explicit casting "(Integer)" in "Pair()" is redundant 
-    }
-
+    
     /**
      * This method allows to obtain marbles from the Marketplace
      * @param dir Parameter to select one row/column of the Marketplace
