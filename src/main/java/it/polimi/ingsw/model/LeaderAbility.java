@@ -76,18 +76,7 @@ public interface LeaderAbility extends AcceptsSupplies{
      * @throws BoundsException If you want to add more than one resource
      * @throws UnsupportedOperationException If the LeaderCard is not allowed to use that ability
      */
-    public default void addOutput(WarehouseObjectType wot) throws BoundsException, UnsupportedOperationException{
-        throw new UnsupportedOperationException();
-    };
-
-
-    /**
-     * Method that remove the desired resource that player will get from the LeaderCard
-     * @param wot Is one of the five types of resources in the game
-     * @throws BoundsException If you want to remove a resource where there is no one
-     * @throws UnsupportedOperationException If the LeaderCard is not allowed to use that ability
-     */
-    public default void removeOutput(WarehouseObjectType wot) throws BoundsException, UnsupportedOperationException{
+    public default void changeOutput(WarehouseObjectType wot) throws UnsupportedOperationException{
         throw new UnsupportedOperationException();
     };
 
