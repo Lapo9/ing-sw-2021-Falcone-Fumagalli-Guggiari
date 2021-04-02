@@ -147,16 +147,14 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
                 if (ls.getLeaderAbility(0).getWhiteBall() == getType()){
                     wot = getType(); //does the leader convert the white ball to the required type?
                 }
-            }
-            catch (UnsupportedOperationException lanse){} //if the first leader cannot transform a white ball, try the second leader
+            } catch (UnsupportedOperationException | LeaderException e){} //if the first leader cannot transform a white ball or isn't active yet, try the second leader
 
             //same as above
             try {
                 if (ls.getLeaderAbility(1).getWhiteBall() == getType()){
                     wot = getType();
                 }
-            }
-            catch (UnsupportedOperationException lanse){}
+            } catch (UnsupportedOperationException | LeaderException e){}
         }
 
         if(wot != null && wot == getType()) {

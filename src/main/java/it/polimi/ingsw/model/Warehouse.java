@@ -43,7 +43,7 @@ public class Warehouse implements AcceptsSupplies{
             for(WarehouseObjectType wot : wots) {
                 try{
                     leaderDepot = leadersSpace.getLeaderAbility(i).getDepotInfo();
-                } catch(UnsupportedOperationException uoe) {break;}
+                } catch(UnsupportedOperationException | LeaderException e) {break;}
                 if(leaderDepot.first == wot) {
                     count += leaderDepot.second;
                 }
@@ -93,7 +93,7 @@ public class Warehouse implements AcceptsSupplies{
      * @throws MarbleException Marble cannot be converted to a compatible supply type
      * @throws UnsupportedOperationException Leader cannot accept a marble
      */
-    public void addMarble(DepotID row, MarbleColor color) throws SupplyException, MarbleException, UnsupportedOperationException {
+    public void addMarble(DepotID row, MarbleColor color) throws SupplyException, MarbleException, UnsupportedOperationException, LeaderException {
         if(row.getType() == DepotID.DepotType.WAREHOUSE) {
             depots.get(row.getNum()).addMarble(color, leadersSpace);
         }
@@ -112,7 +112,7 @@ public class Warehouse implements AcceptsSupplies{
      * @throws UnsupportedOperationException This object needs more information to store the supply
      */
     @Override
-    public void addSupply(DepotID row, WarehouseObjectType wot, DepotID from) throws SupplyException, UnsupportedOperationException {
+    public void addSupply(DepotID row, WarehouseObjectType wot, DepotID from) throws SupplyException, UnsupportedOperationException, LeaderException {
         //check if the resource comes from an acceptable source
         if(from.getType() == DepotID.DepotType.COFFER || from == DepotID.PAYCHECK_COFFER){
             throw new SupplyException();
@@ -141,7 +141,7 @@ public class Warehouse implements AcceptsSupplies{
      * @throws SupplyException There isn't such resource
      */
     @Override
-    public void removeSupply(DepotID row, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException {
+    public void removeSupply(DepotID row, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException, LeaderException {
         //check if the user wants to remove a resource from one of the leaders or from one of the warehouse spaces
         if(row.getType() == DepotID.DepotType.LEADER){
             leadersSpace.getLeaderAbility(row.getNum()).addSupply(wot);
@@ -162,10 +162,12 @@ public class Warehouse implements AcceptsSupplies{
 
         //clear leader spaces
         for(int i=0; i<2; ++i){
-            //in this case I use instanceof because to me it makes more sense to clear only the leaders that are "true" depots, and not production leaders
-            if(leadersSpace.getLeaderAbility(i) instanceof Depot){
-                result.sum(leadersSpace.getLeaderAbility(i).clearSupplies());
-            }
+            try {
+                //in this case I use instanceof because to me it makes more sense to clear only the leaders that are "true" depots, and not production leaders
+                if (leadersSpace.getLeaderAbility(i) instanceof Depot) {
+                    result.sum(leadersSpace.getLeaderAbility(i).clearSupplies());
+                }
+            } catch (UnsupportedOperationException | LeaderException e) {}
         }
 
         return result;

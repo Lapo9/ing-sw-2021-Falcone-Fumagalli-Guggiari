@@ -43,7 +43,7 @@ public interface LeaderAbility extends AcceptsSupplies{
      * @throws SupplyException If the required resource is not available
      * @throws UnsupportedOperationException If the LeaderCard is not allowed to use that ability
      */
-    public default SupplyContainer produce() throws SupplyException, UnsupportedOperationException{
+    public default SupplyContainer produce(boolean prod) throws UnsupportedOperationException{
         throw new UnsupportedOperationException();
     };
 
@@ -51,7 +51,7 @@ public interface LeaderAbility extends AcceptsSupplies{
      * This method checks if the LeaderCard actually can activate the production
      * @throws UnsupportedOperationException If the LeaderCard is not allowed to use that ability
      */
-    public default void checkProduction() throws UnsupportedOperationException{
+    public default void checkProduction(boolean prod) throws SupplyException, UnsupportedOperationException{
         throw new UnsupportedOperationException();
     };
 

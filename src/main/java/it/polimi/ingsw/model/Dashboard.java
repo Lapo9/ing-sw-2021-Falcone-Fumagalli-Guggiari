@@ -85,18 +85,11 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @throws MarbleException Destination cannot accept this color of marble
      * @throws UnsupportedOperationException Leader hasn't a depot ability
      */
-    public void assignMarble(DepotID to, MarbleColor color) throws SupplyException, MarbleException, UnsupportedOperationException{
+    public void assignMarble(DepotID to, MarbleColor color) throws SupplyException, MarbleException, UnsupportedOperationException, LeaderException{
         if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException();}
 
-        if(to.getType() == DepotID.DepotType.WAREHOUSE){
-            warehouse.addMarble(to, color);
-            unassignedSupplies.removeMarble(color);
-        }
-
-        else if(to.getType() == DepotID.DepotType.LEADER){
-            leadersSpace.getLeaderAbility(to.getNum()).addMarble();
-            unassignedSupplies.removeMarble(color);
-        }
+        warehouse.addMarble(to, color);
+        unassignedSupplies.removeMarble(color);
     }
 
 
@@ -219,16 +212,14 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         SupplyContainer leader1Production;
         try {
             leader1Production = leadersSpace.getLeaderAbility(0).produce(l1);
-        }
-        catch(UnsupportedOperationException lanse){
+        } catch(UnsupportedOperationException | LeaderException e){
             leader1Production = new SupplyContainer();
         }
 
         SupplyContainer leader2Production;
         try {
             leader2Production = leadersSpace.getLeaderAbility(1).produce(l2);
-        }
-        catch(UnsupportedOperationException lanse){
+        } catch(UnsupportedOperationException | LeaderException e){
             leader2Production = new SupplyContainer();
         }
 

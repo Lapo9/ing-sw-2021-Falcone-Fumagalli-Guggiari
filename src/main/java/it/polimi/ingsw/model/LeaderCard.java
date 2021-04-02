@@ -4,9 +4,6 @@ import it.polimi.ingsw.Pair;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.exceptions.LeaderException;
-import it.polimi.ingsw.model.CardsRequirement;
-import it.polimi.ingsw.model.CardCategory;
-import it.polimi.ingsw.model.SupplyContainer;
 
 /**
  * The LeaderCard class represents a leader card of the game, each card has its own ability, winPoints and requirements
@@ -17,7 +14,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
     private Pair<SupplyContainer, ArrayList<CardsRequirement>> requirements;
     private LeaderAbility ability;
     private boolean active = false;
-    private boolean discard = false;
+    private boolean discarded = false;
     private final int winPoints;
 
     /**
@@ -46,23 +43,35 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
      * @throws LeaderException if the LeaderCard is not active yet or if it has been discard
      */
     public LeaderAbility getAbility() throws LeaderException{
-        if(!active || discard)
+        if(!active || discarded)
             throw new LeaderException();
         return ability;
     }
 
     /**
      * The activate method activates the LeaderCard
+     * @throws LeaderException leader cannot be discarded, because it was already discarded or activated
      */
-    public void activate(){
-        active = true;
+    public void activate() throws LeaderException{
+        if(!discarded && !active) {
+            active = true;
+        }
+        else {
+            throw new LeaderException();
+        }
     }
 
     /**
      * The setDiscard method discard the LeaderCard
+     * @throws LeaderException leader cannot be discarded, because it was already discarded or activated
      */
-    public void discard(){
-        discard = true;
+    public void discard() throws LeaderException{
+        if(!active && !discarded) {
+            discarded = true;
+        }
+        else {
+            throw new LeaderException();
+        }
     }
 
     //TODO
