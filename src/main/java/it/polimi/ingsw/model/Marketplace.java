@@ -1,11 +1,8 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.Pair;
-import it.polimi.ingsw.exceptions.*;
 
 import java.util.Random;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The MarketPlace class represents the place that contains marbles
@@ -51,7 +48,7 @@ public class Marketplace implements HasStatus{
         return c+r*4;
     }
 
-    
+
     /**
      * This method allows to obtain marbles from the Marketplace
      * @param dir Parameter to select one row/column of the Marketplace
@@ -117,20 +114,17 @@ public class Marketplace implements HasStatus{
 
             tmp = grid.get(index*4); //copy in tmp the first MarbleColor of the row, it will be placed in the slide
 
-            grid.remove(index*4); //remove that MarbleColor
-
             //shift the three elements remaining
-            for(int i = 0; i < 3; i++){
+            for(int i = 0; i < 2; i++){
 
-                int pos = getPos(index, i);
+                int pos = getPos(index, i); // pos = (index * 4) + i
 
-                grid.add(index*4, grid.get(pos)); //the second element of the row takes place of the first
-
-                grid.remove(pos);
+                grid.set(pos, grid.get(pos+1)); //the second element of the row takes place of the first
 
             }
 
-            grid.add(index*4+3, slide); //add the marble which is in the slide in the last column of the row
+            //can't use pose instead of index*4+3
+            grid.set(index*4+3, slide); //add the marble which is in the slide in the last column of the row
 
         }
 
@@ -138,19 +132,15 @@ public class Marketplace implements HasStatus{
 
             tmp = grid.get(index); //copy in tmp the MarbleColor in the first row of the selected column, ... slide
 
-            grid.remove(index); //remove that element
-
             for(int i = 1; i < 3; i++){
 
                 int pos = getPos(i, index);
 
-                grid.add(index, grid.get(pos)); //add the element below in the "matrix"
-
-                grid.remove(pos);
+                grid.set(pos, grid.get(pos+1)); //add the element below in the "matrix"
 
             }
 
-            grid.add(index+8, slide); //add the marble in the slide
+            grid.set(index+8, slide); //add the marble in the slide
 
         }
 
