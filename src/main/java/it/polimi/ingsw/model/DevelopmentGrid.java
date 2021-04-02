@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.SupplyContainer;
 import it.polimi.ingsw.model.SupplyCard;
+import it.polimi.ingsw.model.LeadersSpace;
 
 /**
  * The DevelopmentGrid class is meant to contain the SupplyCard, divided by level and color in three rows and four columns,
@@ -46,17 +47,82 @@ public class DevelopmentGrid implements HasStatus{
      * @param column is the column number
      * @param row is the row number
      * @param p is a type of SupplyContainer which contains resources to buy a SupplyCard
+     * @param leadersSpace is the LeaderCard container
      * @return the chosen SupplyCard if the Paycheck contains the right supplies
      * @throws SupplyException if the Paycheck doesn't contain the right supplies to buy the chosen SupplyCard
      * @throws NoSuchCardException if the row x column position is empty
      */
-    public SupplyCard buyCard(int column, int row, Paycheck p)throws SupplyException, NoSuchCardException{
+    public SupplyCard buyCard(int column, int row, Paycheck p, LeadersSpace leadersSpace)throws SupplyException, NoSuchCardException{
         SupplyContainer container = p.getAll();
         int pos = getPlace(column, row);
         if(grid.get(pos).isEmpty())
             throw new NoSuchCardException();
+
+        //We have to check if there are any active LeaderCard that have the ability to get a discount
+        WarehouseObjectType discountType0 = null;
+        int discount0 = 0;
+        WarehouseObjectType discountType1 = null;
+        int discount1 = 0;
+        try{
+            LeaderAbility leadAbil0 = leadersSpace.getLeaderAbility(0);
+            SupplyContainer abil0 = new SupplyContainer(leadAbil0.getDiscount());
+            if(abil0.getQuantity() != 0) {
+               if(abil0.getQuantity(WarehouseObjectType.COIN) != 0){
+                   discountType0 = WarehouseObjectType.COIN;
+                   discount0 = abil0.getQuantity(WarehouseObjectType.COIN);
+               }
+               else if(abil0.getQuantity(WarehouseObjectType.SERVANT) != 0){
+                   discountType0 = WarehouseObjectType.SERVANT;
+                   discount0 = abil0.getQuantity(WarehouseObjectType.SERVANT);
+               }
+               else if(abil0.getQuantity(WarehouseObjectType.SHIELD) != 0){
+                   discountType0 = WarehouseObjectType.SHIELD;
+                   discount0 = abil0.getQuantity(WarehouseObjectType.SHIELD);
+               }
+               else if(abil0.getQuantity(WarehouseObjectType.STONE) != 0){
+                   discountType0 = WarehouseObjectType.STONE;
+                   discount0 = abil0.getQuantity(WarehouseObjectType.STONE);
+               }
+            }
+        }catch(LeaderException le0){
+            discount0 = 0;
+        }
+
+        try{
+            LeaderAbility leadAbil1 = leadersSpace.getLeaderAbility(1);
+            SupplyContainer abil1 = new SupplyContainer(leadAbil1.getDiscount());
+            if(abil1.getQuantity() != 0) {
+                if(abil1.getQuantity(WarehouseObjectType.COIN) != 0){
+                    discountType1 = WarehouseObjectType.COIN;
+                    discount1 = abil1.getQuantity(WarehouseObjectType.COIN);
+                }
+                else if(abil1.getQuantity(WarehouseObjectType.SERVANT) != 0){
+                    discountType1 = WarehouseObjectType.SERVANT;
+                    discount1 = abil1.getQuantity(WarehouseObjectType.SERVANT);
+                }
+                else if(abil1.getQuantity(WarehouseObjectType.SHIELD) != 0){
+                    discountType1 = WarehouseObjectType.SHIELD;
+                    discount1 = abil1.getQuantity(WarehouseObjectType.SHIELD);
+                }
+                else if(abil1.getQuantity(WarehouseObjectType.STONE) != 0){
+                    discountType1 = WarehouseObjectType.STONE;
+                    discount1 = abil1.getQuantity(WarehouseObjectType.STONE);
+                }
+            }
+        }catch(LeaderException le1){
+            discount1 = 0;
+        }
+
         int lastIndex = grid.get(pos).size() - 1;       //lastIndex is the number (-1) of SupplyCard in pos
-        if(container.confront(grid.get(pos).get(lastIndex).getCost()))
+        SupplyContainer priceContainer = new SupplyContainer(grid.get(pos).get(lastIndex).getCost());
+        if(discount0 != 0 || discount1 != 0) {
+            if(priceContainer.getQuantity(discountType0, discountType1) != 0)
+                if(discount0 != 0)
+                    priceContainer.removeSupply(discountType0);
+                if(discount1 != 0)
+                    priceContainer.removeSupply(discountType1);
+        }
+        if(container.confront(priceContainer))
             return grid.get(pos).remove(lastIndex);
         else
             throw new SupplyException();
