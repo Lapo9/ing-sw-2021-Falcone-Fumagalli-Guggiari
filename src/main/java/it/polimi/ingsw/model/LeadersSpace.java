@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * The class that manages tho operations on the 2 leaders.
  */
-public class LeadersSpace {
+public class LeadersSpace implements HasStatus, WinPointsCountable{
 
     private ArrayList<LeaderCard> leaders = new ArrayList<>();
 
@@ -54,4 +54,13 @@ public class LeadersSpace {
     }
 
 
+    @Override
+    public int getWinPoints() {
+        return leaders.get(0).getWinPoints() + leaders.get(1).getWinPoints();
+    }
+
+    @Override
+    public ArrayList<Integer> getStatus() {
+        return null; //TODO
+    }
 }

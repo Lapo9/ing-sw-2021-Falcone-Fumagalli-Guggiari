@@ -25,7 +25,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
                                                                 addSupply(wot);
                                                             }};
 
-    private final MutableProduction baseProduction = new MutableProduction();
+    private final MutableProduction baseProduction = new MutableProduction(2, 1);
     private final FaithTrack faithTrack = new FaithTrack();
     private final LeadersSpace leadersSpace = new LeadersSpace();
     private final Developments developments = new Developments();
@@ -122,75 +122,17 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @param type Type of resource to move
      * @throws SupplyException Thrown if the source doesn't have the specified type of resource, or if the destination cannot accept the resource
      */
-    public void moveSupply(DepotID from, DepotID to, WarehouseObjectType type) throws SupplyException, UnsupportedOperationException {
+    public void moveSupply(DepotID from, DepotID to, WarehouseObjectType type) throws SupplyException, UnsupportedOperationException, LeaderException {
         //remove supply from specified container
         containers.get(from.getType().getOrder()).removeSupply(from, type);
 
         //add supply to specified container, if you cannot, put supply back to original container and throw the exception
         try{
             containers.get(to.getType().getOrder()).addSupply(to, type, from);
-        } catch (SupplyException se) {
+        } catch (SupplyException | LeaderException | UnsupportedOperationException e) {
             containers.get(from.getType().getOrder()).addSupply(from, type, from);
-            throw se;
+            throw e;
         }
-
-
-        //TODO remove this part only when you make the paycheck and know it works!
-        /*
-        //remove supply from specified container
-        if(from.getType() == DepotID.DepotType.WAREHOUSE){
-            warehouse.removeSupply(type);
-        }
-        else if(from.getType() == DepotID.DepotType.DEVELOPMENT){
-            developments.removeSupply(from.getNum(), type);
-        }
-        else if(from.getType() == DepotID.DepotType.LEADER){
-            leadersSpace.getLeaderAbility(from.getNum()).removeSupply(type);
-        }
-        else if(from.getType() == DepotID.DepotType.COFFER){
-            coffer.removeSupply(type);
-        }
-        else if(from.getType() == DepotID.DepotType.PAYCHECK){
-            paycheck.remove(from.getNum(), to, type);
-        }
-
-        //add supply to specified container, if you cannot, put supply back to original container and throw the exception
-        try {
-            if (to.getType() == DepotID.DepotType.WAREHOUSE) {
-                warehouse.addObject(to.getNum(), type);
-            }
-            else if (to.getType() == DepotID.DepotType.DEVELOPMENT) {
-                developments.addSupply(to.getNum(), type);
-            }
-            else if (to.getType() == DepotID.DepotType.LEADER){
-                leadersSpace.getLeaderAbility(to.getNum()).addSupply(type);
-            }
-            else if (to.getType() == DepotID.DepotType.COFFER){
-                coffer.addSupply(type);
-            }
-            else if (to.getType() == DepotID.DepotType.PAYCHECK){
-                paycheck.add(from, type);
-            }
-        }
-        catch(SupplyException se){
-            if(from.getType() == DepotID.DepotType.WAREHOUSE){
-                warehouse.addObject(from.getNum(), type);
-            }
-            else if(from.getType() == DepotID.DepotType.DEVELOPMENT){
-                developments.addSupply(from.getNum(), type);
-            }
-            else if(from.getType() == DepotID.DepotType.LEADER){
-                leadersSpace.getLeaderAbility(from.getNum()).addSupply(type);
-            }
-            else if(from.getType() == DepotID.DepotType.COFFER){
-                coffer.addSupply(type);
-            }
-            else if(from.getType() == DepotID.DepotType.PAYCHECK){
-                paycheck.add(from, type);
-            }
-            throw se;
-        }
-         */
     }
 
 
@@ -207,7 +149,11 @@ public class Dashboard implements HasStatus, WinPointsCountable{
     public boolean produce(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base){
         //get productions outputs
         SupplyContainer developmentProduction = developments.produce(s1, s2, s3);
-        SupplyContainer baseProduction = this.baseProduction.produce(base);
+
+        SupplyContainer baseProduction = new SupplyContainer();
+        if(base) {
+            baseProduction = this.baseProduction.produce();
+        }
 
         SupplyContainer leader1Production;
         try {
@@ -257,15 +203,19 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      */
     public void checkProduction(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base) throws SupplyException {
         developments.checkProduction(s1, s2, s3);
-        baseProduction.checkProduction(base);
+
+        if(base) {
+            baseProduction.check();
+        }
+
         try {
             leadersSpace.getLeaderAbility(0).checkProduction(l1);
         }
-        catch(UnsupportedOperationException lanse){}
+        catch(UnsupportedOperationException | LeaderException e){}
         try {
             leadersSpace.getLeaderAbility(1).checkProduction(l2);
         }
-        catch(UnsupportedOperationException lanse){}
+    catch(UnsupportedOperationException | LeaderException e){}
     }
 
 
@@ -287,7 +237,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         }
 
         //buy the card
-        developments.addCardToSpace(space, developmentGrid.buyCard(column, row, paycheck));
+        developments.addCardToSpace(space, developmentGrid.buyCard(column, row, paycheck, leadersSpace));
     }
 
 
@@ -310,7 +260,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @throws LeaderException The specified leader cannot be played (already discarded or active)
      */
     public void playLeader(int i) throws SupplyException, LeaderException {
-        leadersSpace.playLeader(i, new ResourceManager(warehouse, coffer, leadersSpace));
+        leadersSpace.playLeader(i, new ResourceChecker(warehouse, coffer, leadersSpace));
     }
 
 
@@ -346,7 +296,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      */
     @Override
     public ArrayList<Integer> getStatus(){
-        //TODO
+        return null; //TODO
     }
 
 

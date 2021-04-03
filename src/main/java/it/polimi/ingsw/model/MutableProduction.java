@@ -30,27 +30,42 @@ public class MutableProduction extends Production implements HasStatus{
         mutableOutput = new SupplyContainer();
     }
 
+
+
+    /**
+     * Creates an object without any fixed input or output
+     * @param dimInput is the max dimension of the input
+     * @param dimOutput is the max dimension of the output
+     */
+    public MutableProduction(int dimInput, int dimOutput){
+        super(new SupplyContainer(), new SupplyContainer()); //0 resources in fixed input/output
+        maxInput = dimInput;         //maxInput is the dimension of the mutableInput
+        maxOutput = dimOutput;      //maxOutput is the dimension of the mutableOutput
+        mutableInput = new SupplyContainer();
+        mutableOutput = new SupplyContainer();
+    }
+
+
+
     /**
      * The produce method activates the production is the isActive parameter is true
      * @param isActive is true if the player wants to activate the production
      * @return a SupplyContainer containing the output + mutableOutput
      */
-    public SupplyContainer produce(boolean isActive){
-        if(isActive) {
-            check(isActive);
-            return new SupplyContainer(mutableOutput.sum(getOutput()));
-        }
-        else
-            return null;
+    @Override
+    public SupplyContainer produce(){
+        check(isActive);
+        return new SupplyContainer(mutableOutput.sum(getOutput()));
     }
 
     /**
      * The check method verifies if the supplies contained in the currentSupply are right to start a production
      * @param isActive is true if the player wants to check if the production can be called
      */
-    public void check(boolean isActive) throws SupplyException{
+    @Override
+    public void check() throws SupplyException{
         SupplyContainer temp = getInput().sum(mutableInput);
-        if(isActive && temp.confront(getCurrentSupply()))
+        if(temp.confront(getCurrentSupply()))
             throw new SupplyException();
     }
 
