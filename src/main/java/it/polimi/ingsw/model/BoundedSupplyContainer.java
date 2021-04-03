@@ -103,21 +103,16 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
 
     @Override
     public void addSupply(WarehouseObjectType wot)throws SupplyException{
-        //TODO compact these 3 ifs into only one if
-        if(wot == WarehouseObjectType.FAITH_MARKER || wot == null)
-            throw new SupplyException(); //this container cannot contain faith markers
-        if(getQuantity() == max)
-            throw new SupplyException();
-        if(wot != getType() && getQuantity() != 0)
+        if(wot == WarehouseObjectType.FAITH_MARKER || //this container cannot contain faith markers
+                wot == null || getQuantity() == max ||
+                (wot != getType() && getQuantity() != 0)) //the BoundedSupplyContainer can contains only one type of supply
             throw new SupplyException();
         sc.addSupply(wot);
     }
 
     @Override
     public void removeSupply(WarehouseObjectType wot)throws SupplyException{
-        if(getQuantity() == 0)
-            throw new SupplyException();
-        if(wot != getType())
+        if(getQuantity() == 0 || wot != getType())
             throw new SupplyException();
         sc.removeSupply(wot);
     }
