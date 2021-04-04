@@ -135,7 +135,7 @@ public class MarbleContainer implements HasStatus {
         else if (mc == MarbleColor.BLUE){
             wot = WarehouseObjectType.SHIELD;
         }
-        else if (mc == MarbleColor.GREY){
+        else if (mc == MarbleColor.VIOLET){
             wot = WarehouseObjectType.SERVANT;
         }
         else if (mc == MarbleColor.GREY){
