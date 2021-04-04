@@ -42,20 +42,15 @@ public class SupplyCard implements HasStatus{
      * @return A SupplyContainer containing the resource in output from the card production
      */
     public SupplyContainer produce() {
-
-
-
-        return new SupplyContainer();
+        return new SupplyContainer(production.produce());
     }
 
     /**
      * This method checks if the input resources can produce the output
      * @throws SupplyException If there isn't the right number of supplies to activate production
-     * FIXME
-     * error because in LeaderSpace is used another method check in ResourceChecker (undefined class)
      */
     public void check() throws SupplyException{
-
+        production.check();
     }
 
     /**
