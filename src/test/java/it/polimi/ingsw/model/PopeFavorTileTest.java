@@ -22,6 +22,14 @@ public class PopeFavorTileTest {
     }
 
     @Test
+    public void discard_noChanges(){
+        PopeFavorTile pft = new PopeFavorTile(2);
+        pft.activate();
+        pft.discard();
+        assertTrue(pft.isActive());
+    }
+
+    @Test
     public void getWinPoint_points(){
         PopeFavorTile pft = new PopeFavorTile(2);
         pft.activate();

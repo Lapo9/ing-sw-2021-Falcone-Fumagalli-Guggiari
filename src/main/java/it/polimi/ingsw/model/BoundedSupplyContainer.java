@@ -45,6 +45,7 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
     /**
      * The setMax method modify the dimension of the BoundedSupplyContainer. Since max and position are related, if max
      * changes, position changes
+     * [pre: i must be between 1 and 3]
      * @param i is the new max dimension of the BoundedSupplyContainer
      */
     public void setMax(int i){
@@ -60,6 +61,7 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
     /**
      * The setPosition method modify the position of the BoundedSupplyContainer. Since max and position are related,
      * if position changes, max changes
+     * [pre: i must be between 1 and 3]
      * @param i is the new position of the BoundedSupplyContainer
      */
     public void setPosition(int i) {
