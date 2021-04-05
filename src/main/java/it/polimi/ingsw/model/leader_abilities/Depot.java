@@ -29,7 +29,7 @@ public class Depot implements LeaderAbility {
 
     @Override
     public Pair<WarehouseObjectType, Integer> getDepotInfo() {
-        return new Pair<>(depot.getType(), 2);
+        return new Pair<>(depot.getType(), depot.getQuantity());
     }
 
 
