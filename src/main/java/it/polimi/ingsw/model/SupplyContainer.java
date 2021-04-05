@@ -13,12 +13,20 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     private int servant = 0;
     private int shield = 0;
     private int faithMarker = 0;
+    DepotID id;
+
+
+    /**
+     * Class constructor
+     */
+    public SupplyContainer() {}
 
     /**
      * class constructor
+     * @param id depot ID
      */
-    public SupplyContainer() {
-
+    public SupplyContainer(DepotID id) {
+        this.id = id;
     }
 
     /**
@@ -29,12 +37,13 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      * @param shield shields
      * @param faithMarker faith markers
      */
-    public SupplyContainer(int coin, int stone, int servant, int shield, int faithMarker) {
+    public SupplyContainer(DepotID id, int coin, int stone, int servant, int shield, int faithMarker) {
         this.coin = coin;
         this.stone = stone;
         this.servant = servant;
         this.shield = shield;
         this.faithMarker = faithMarker;
+        this.id = id;
     }
 
     /**
@@ -47,6 +56,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         this.stone = sc.stone;
         this.shield = sc.shield;
         this.faithMarker = sc.faithMarker;
+        this.id = sc.id;
     }
 
     /**
@@ -96,6 +106,16 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         return this.coin == sc.coin && this.faithMarker == sc.faithMarker && this.servant == sc.servant &&
                 this.shield == sc.shield && this.stone == sc.stone;
     }
+
+
+    /**
+     * Sets the depot ID
+     * @param id depot ID
+     */
+    public void setId(DepotID id){
+        this.id = id;
+    }
+
 
     @Override
     public void addSupply(WarehouseObjectType wot){
@@ -150,6 +170,14 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
             else
                 faithMarker--;
         }
+    }
+
+
+    @Override
+    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
+        ArrayList<DepotID> res = new ArrayList<>();
+        res.add(id);
+        return res;
     }
 
     @Override

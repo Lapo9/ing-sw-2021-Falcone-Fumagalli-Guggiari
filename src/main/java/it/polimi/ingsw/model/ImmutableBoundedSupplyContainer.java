@@ -8,12 +8,14 @@ import java.util.ArrayList;
 
 public class ImmutableBoundedSupplyContainer implements HasStatus, AcceptsSupplies {
 
-    private SupplyContainer sc = new SupplyContainer();
+    private SupplyContainer sc;
     private final int max;
     private final WarehouseObjectType type;
 
 
-    public ImmutableBoundedSupplyContainer(int max, WarehouseObjectType type) throws SupplyException{
+    public ImmutableBoundedSupplyContainer(DepotID id, int max, WarehouseObjectType type) throws SupplyException{
+        sc = new SupplyContainer(id);
+
         if(type == WarehouseObjectType.FAITH_MARKER){
             throw new SupplyException();
         }
@@ -58,6 +60,16 @@ public class ImmutableBoundedSupplyContainer implements HasStatus, AcceptsSuppli
         sc.removeSupply(wot);
     }
 
+
+    @Override
+    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
+        if(wot != getType() || getMax() == getQuantity()){
+            return new ArrayList<>();
+        }
+        else {
+            return sc.availableDepots(from, wot);
+        }
+    }
 
     @Override
     public SupplyContainer clearSupplies() throws UnsupportedOperationException {

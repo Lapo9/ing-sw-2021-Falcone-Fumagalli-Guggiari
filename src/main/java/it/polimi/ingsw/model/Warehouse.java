@@ -154,6 +154,33 @@ public class Warehouse implements AcceptsSupplies{
 
 
     @Override
+    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
+        ArrayList<DepotID> res = new ArrayList<>();
+
+        for (int i = 0; i<3; ++i){
+            if(depots.get(i).getQuantity() == 0){
+                boolean sameType = false;
+                for (int j = 0; j<3; ++j){
+                    if(j!=i && depots.get(j).getType() == wot){
+                        sameType = true;
+                    }
+                }
+                if(sameType){
+                    res.addAll(depots.get(i).availableDepots(from, wot));
+                }
+            }
+            else {
+                res.addAll(depots.get(i).availableDepots(from, wot));
+            }
+        }
+
+
+        //TODO leaders
+
+
+    }
+
+    @Override
     public SupplyContainer clearSupplies() {
         SupplyContainer result = new SupplyContainer();
         //clear warehouse spaces

@@ -4,7 +4,7 @@ import it.polimi.ingsw.exceptions.SupplyException;
 
 import java.util.ArrayList;
 
-public class SupplyCard implements HasStatus{
+public class SupplyCard implements HasStatus, WinPointsCountable, AcceptsSupplies{
 
     private int level = 0;
     private int winPoints = 0;
@@ -42,7 +42,7 @@ public class SupplyCard implements HasStatus{
      * @return A SupplyContainer containing the resource in output from the card production
      */
     public SupplyContainer produce() {
-        return new SupplyContainer(production.produce());
+        return production.produce();
     }
 
     /**
@@ -77,6 +77,8 @@ public class SupplyCard implements HasStatus{
         return category;
     }
 
+
+    //TODO implement interfaces methods!!
 
     //TODO
     @Override

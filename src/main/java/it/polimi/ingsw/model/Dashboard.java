@@ -16,7 +16,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
     private final Marketplace marketplace;
     private final DevelopmentGrid developmentGrid;
     private final Warehouse warehouse;
-    private final SupplyContainer coffer = new SupplyContainer() {@Override
+    private final SupplyContainer coffer = new SupplyContainer(DepotID.COFFER) {@Override
                                                             public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
                                                                 //check if the resource comes from an acceptable source
                                                                 if(from.getType() == DepotID.DepotType.WAREHOUSE || from.getType() == DepotID.DepotType.LEADER || from.getType() == DepotID.DepotType.DEVELOPMENT || from == DepotID.PAYCHECK_DEPOT){
@@ -51,7 +51,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         containers.add(warehouse);
         containers.add(developments);
         containers.add(coffer);
-        //TODO add paycheck when you make it
+        containers.add(paycheck);
     }
 
 
@@ -155,18 +155,20 @@ public class Dashboard implements HasStatus, WinPointsCountable{
             baseProduction = this.baseProduction.produce();
         }
 
-        SupplyContainer leader1Production;
-        try {
-            leader1Production = leadersSpace.getLeaderAbility(0).produce(l1);
-        } catch(UnsupportedOperationException | LeaderException e){
-            leader1Production = new SupplyContainer();
+        SupplyContainer leader1Production = new SupplyContainer();
+        if(l1) {
+            try {
+                leader1Production = leadersSpace.getLeaderAbility(0).produce();
+            } catch (UnsupportedOperationException | LeaderException e) {
+            }
         }
 
-        SupplyContainer leader2Production;
-        try {
-            leader2Production = leadersSpace.getLeaderAbility(1).produce(l2);
-        } catch(UnsupportedOperationException | LeaderException e){
-            leader2Production = new SupplyContainer();
+            SupplyContainer leader2Production = new SupplyContainer();
+        if(l2) {
+            try {
+                leader2Production = leadersSpace.getLeaderAbility(1).produce();
+            } catch (UnsupportedOperationException | LeaderException e) {
+            }
         }
 
         //sum output in temporary container
@@ -209,11 +211,11 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         }
 
         try {
-            leadersSpace.getLeaderAbility(0).checkProduction(l1);
+            leadersSpace.getLeaderAbility(0).checkProduction();
         }
         catch(UnsupportedOperationException | LeaderException e){}
         try {
-            leadersSpace.getLeaderAbility(1).checkProduction(l2);
+            leadersSpace.getLeaderAbility(1).checkProduction();
         }
     catch(UnsupportedOperationException | LeaderException e){}
     }
@@ -288,6 +290,23 @@ public class Dashboard implements HasStatus, WinPointsCountable{
     public boolean hasInkwell(){
         return inkwell;
     }
+
+
+    /**
+     * Checks which depots can accept the supply from the specified depot
+     * @param from source of the supply
+     * @param wot type of the supply
+     * @return list of depots IDs where the supply can be transferred to
+     */
+    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot){
+        ArrayList<DepotID> res = new ArrayList<>();
+
+        for (int i = 0; i<containers.size(); ++i){
+            res.addAll(containers.get(i).availableDepots(from, wot));
+        }
+        return res;
+    }
+
 
 
     /**

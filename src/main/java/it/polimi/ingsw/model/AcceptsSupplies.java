@@ -2,6 +2,8 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.*;
 
+import java.util.ArrayList;
+
 /**
  * This interface manages every object which can get every type of supplies
  */
@@ -82,6 +84,15 @@ public interface AcceptsSupplies {
     public default void removeSupply(DepotID slot, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException, LeaderException {
         removeSupply(wot);
     }
+
+
+    /**
+     * Returns a list of all the depots that can receive the specified supply
+     * @param from source of the supply
+     * @param wot type of the supply
+     * @return list of depots that can receive the specified supply
+     */
+    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot);
 
 
 

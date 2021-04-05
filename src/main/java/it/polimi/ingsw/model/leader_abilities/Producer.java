@@ -20,14 +20,14 @@ public class Producer implements LeaderAbility {
 
 
     @Override
-    public SupplyContainer produce(boolean prod) {
-        return production.produce(prod);
+    public SupplyContainer produce() {
+        return production.produce();
     }
 
 
     @Override
-    public void checkProduction(boolean prod) throws SupplyException {
-        production.check(prod);
+    public void checkProduction() throws SupplyException {
+        production.check();
     }
 
 
@@ -72,6 +72,6 @@ public class Producer implements LeaderAbility {
 
     @Override
     public SupplyContainer clearSupplies() {
-        production.clearSupplies();
+        return production.clearSupplies();
     }
 }
