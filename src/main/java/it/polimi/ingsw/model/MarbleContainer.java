@@ -126,6 +126,11 @@ public class MarbleContainer implements HasStatus {
 
     }
 
+    /**
+     * The colorToSupply method can turn the MarbleColor in input in the right WareHouseObjectType
+     * @param mc is a MarbleColor
+     * @return the WarehouseObjectType of the MarbleColor in input
+     */
     public static WarehouseObjectType colorToSupply(MarbleColor mc){
         WarehouseObjectType wot;
 
