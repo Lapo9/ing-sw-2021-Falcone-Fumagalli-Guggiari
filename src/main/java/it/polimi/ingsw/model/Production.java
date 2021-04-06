@@ -101,7 +101,7 @@ public class Production implements AcceptsSupplies, HasStatus{
 
     //TODO
     @Override
-    public ArrayList<Integer> getStatus(){
-
+    public ArrayList<Integer> getStatus() {
+        return null;
     }
 }
