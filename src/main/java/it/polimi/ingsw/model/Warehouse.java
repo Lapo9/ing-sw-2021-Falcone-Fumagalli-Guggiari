@@ -21,9 +21,9 @@ public class Warehouse implements AcceptsSupplies{
     public Warehouse(LeadersSpace ls){
         leadersSpace = ls;
 
-        depots.add(new BoundedSupplyContainer(DepotID.WAREHOUSE1, 1));
-        depots.add(new BoundedSupplyContainer(DepotID.WAREHOUSE2, 2));
-        depots.add(new BoundedSupplyContainer(DepotID.WAREHOUSE3, 3));
+        depots.add(new BoundedSupplyContainer(1));
+        depots.add(new BoundedSupplyContainer(2));
+        depots.add(new BoundedSupplyContainer(3));
     }
 
 
@@ -75,12 +75,9 @@ public class Warehouse implements AcceptsSupplies{
         //if the depot in min position has less or equal elements than the elements the depot in max position can contain, then the swap is possible
         if(rMin.getQuantity() <= rMax.getMax()){
             //swap position of the 2 depots
-            ArrayList<DepotID> tmp = new ArrayList<>(); tmp.add(DepotID.WAREHOUSE1); tmp.add(DepotID.WAREHOUSE2); tmp.add(DepotID.WAREHOUSE3);
             int tmpPos = rMin.getPosition();
             rMin.setPosition(rMax.getPosition());
-            rMin.setId(tmp.get(rMax.getPosition())); //update depot ID
             rMax.setPosition(tmpPos);
-            rMax.setId(tmp.get(tmpPos)); //update depot ID
 
             //swap the order of the depots in the array list
             Collections.swap(depots, r1-1, r2-1);
@@ -121,15 +118,14 @@ public class Warehouse implements AcceptsSupplies{
      */
     @Override
     public void addSupply(DepotID row, WarehouseObjectType wot, DepotID from) throws SupplyException, NoSuchMethodException, LeaderException {
-        //TODO maybe use available depots to check?
         //check if the resource comes from an acceptable source
-        if(from.getType() == DepotID.DepotType.COFFER || from == DepotID.PAYCHECK_COFFER){
+        if(row.getType() == DepotID.DepotType.WAREHOUSE && from.getSource() == DepotID.DepotType.COFFER){
             throw new SupplyException();
         }
 
         //check if the user wants to add a resource to one of the leaders or to one of the warehouse spaces
         if(row.getType() == DepotID.DepotType.LEADER){
-            leadersSpace.getLeaderAbility(row.getNum()).addSupply(wot);
+            leadersSpace.getLeaderAbility(row.getNum()).addSupply(row, wot, from);
         }
         else {
             for (int i = 0; i < 3; ++i) {
@@ -153,53 +149,13 @@ public class Warehouse implements AcceptsSupplies{
     public void removeSupply(DepotID row, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException, LeaderException {
         //check if the user wants to remove a resource from one of the leaders or from one of the warehouse spaces
         if(row.getType() == DepotID.DepotType.LEADER){
-            leadersSpace.getLeaderAbility(row.getNum()).addSupply(wot);
+            leadersSpace.getLeaderAbility(row.getNum()).removeSupply(row, wot);
         }
         else {
             depots.get(row.getNum() - 1).removeSupply(wot);
         }
     }
 
-
-    @Override
-    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
-        ArrayList<DepotID> res = new ArrayList<>();
-
-        //check if the resource comes from an acceptable source
-        if(from.getType() == DepotID.DepotType.COFFER || from == DepotID.PAYCHECK_COFFER){
-            return res;
-        }
-
-        //check rows
-        for (int i = 0; i<3; ++i){
-            //if we are analyzing an empty row, check if there is another row that accepts the same type of warehouse object type
-            if(depots.get(i).getQuantity() == 0){
-                boolean sameType = false;
-                for (int j = 0; j<3; ++j){
-                    if(j!=i && depots.get(j).getType() == wot){
-                        sameType = true;
-                    }
-                }
-                if(!sameType){
-                    res.addAll(depots.get(i).availableDepots(from, wot));
-                }
-            }
-            else {
-                res.addAll(depots.get(i).availableDepots(from, wot));
-            }
-        }
-
-        //check leaders
-        try{
-            res.addAll(leadersSpace.getLeaderAbility(0).availableDepots(from, wot));
-        } catch (LeaderException | NoSuchMethodException e){}
-
-        try{
-            res.addAll(leadersSpace.getLeaderAbility(1).availableDepots(from, wot));
-        } catch (LeaderException | NoSuchMethodException e){}
-
-        return res;
-    }
 
 
     @Override

@@ -87,19 +87,10 @@ public interface AcceptsSupplies {
 
 
     /**
-     * Returns a list of all the depots that can receive the specified supply
-     * @param from source of the supply
-     * @param wot type of the supply
-     * @return list of depots that can receive the specified supply
-     */
-    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) throws NoSuchMethodException;
-
-
-
-    /**
      * Method that removes all the resources from that object
      * @return The removed resources in a temporary SupplyContainer
      */
+    @Deprecated
     public SupplyContainer clearSupplies() throws NoSuchMethodException;
 
 }

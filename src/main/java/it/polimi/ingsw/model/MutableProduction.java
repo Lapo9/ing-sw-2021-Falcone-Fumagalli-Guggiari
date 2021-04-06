@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.*;
-import it.polimi.ingsw.model.SupplyContainer;
 
 import java.util.ArrayList;
 
@@ -23,8 +22,8 @@ public class MutableProduction extends Production implements HasStatus{
      * @param dimOutput is the max dimension of the output
      * @param id depot ID of this production
      */
-    public MutableProduction(SupplyContainer in, SupplyContainer out, int dimInput, int dimOutput, DepotID id){
-        super(in, out, id);
+    public MutableProduction(SupplyContainer in, SupplyContainer out, int dimInput, int dimOutput){
+        super(in, out);
         maxInput = dimInput - in.getQuantity();         //maxInput is the dimension of the mutableInput
         maxOutput = dimOutput - out.getQuantity();      //maxOutput is the dimension of the mutableOutput
         mutableInput = new SupplyContainer();
@@ -39,8 +38,8 @@ public class MutableProduction extends Production implements HasStatus{
      * @param dimOutput is the max dimension of the output
      * @param id depot ID of this production
      */
-    public MutableProduction(int dimInput, int dimOutput, DepotID id){
-        super(new SupplyContainer(), new SupplyContainer(), id); //0 resources in fixed input/output
+    public MutableProduction(int dimInput, int dimOutput){
+        super(new SupplyContainer(), new SupplyContainer()); //0 resources in fixed input/output
         maxInput = dimInput;         //maxInput is the dimension of the mutableInput
         maxOutput = dimOutput;      //maxOutput is the dimension of the mutableOutput
         mutableInput = new SupplyContainer();
@@ -70,19 +69,6 @@ public class MutableProduction extends Production implements HasStatus{
         if(temp.confront(getCurrentSupply()))
             throw new SupplyException();
     }
-
-
-
-    @Override
-    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
-        ArrayList<DepotID> res = new ArrayList<>();
-        if(currentSupply.getQuantity(wot) >= input.sum(mutableInput).getQuantity(wot)){
-            return res;
-        }
-        res.add(depotId);
-        return res;
-    }
-
 
 
     /**

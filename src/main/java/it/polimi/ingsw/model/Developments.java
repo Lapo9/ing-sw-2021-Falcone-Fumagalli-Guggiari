@@ -71,12 +71,7 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
      */
     @Override
     public void addSupply(DepotID space, WarehouseObjectType wot, DepotID from) throws SupplyException {
-        //check if the resource comes from an acceptable source
-        if(from.getType() == DepotID.DepotType.COFFER || from == DepotID.PAYCHECK_COFFER){
-            throw new SupplyException();
-        }
-
-        spaces.get(space.getNum()).addSupply(wot);
+        spaces.get(space.getNum()).addSupply(wot, from);
     }
 
 
@@ -88,18 +83,9 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
      */
     @Override
     public void removeSupply(DepotID space, WarehouseObjectType wot) throws SupplyException {
-        spaces.get(space.getNum()).removeSupply(wot);
+        spaces.get(space.getNum()).removeSupply(space, wot);
     }
 
-
-    @Override
-    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
-        ArrayList<DepotID> res = new ArrayList<>();
-        for (DevelopmentSpace space : spaces){
-            res.addAll(space.availableDepots(from, wot));
-        }
-        return res;
-    }
 
     /**
      * Clear all of the supplies in the spaces.

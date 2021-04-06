@@ -1,12 +1,9 @@
 package it.polimi.ingsw.model.leader_abilities;
 
 import it.polimi.ingsw.Pair;
-import it.polimi.ingsw.exceptions.LeaderException;
 import it.polimi.ingsw.exceptions.MarbleException;
 import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.*;
-
-import java.util.ArrayList;
 
 
 /**
@@ -24,7 +21,7 @@ public class Depot implements LeaderAbility {
      */
     public Depot(WarehouseObjectType type, int abilityID){
         try {
-            depot = new ImmutableBoundedSupplyContainer(abilityID==1?DepotID.LEADER1:DepotID.LEADER2, 2, type);
+            depot = new ImmutableBoundedSupplyContainer(2, type);
         } catch (SupplyException se){/*TODO end program*/}
 
     }
@@ -43,7 +40,10 @@ public class Depot implements LeaderAbility {
 
 
     @Override
-    public void addSupply(WarehouseObjectType wot) throws SupplyException {
+    public void addSupply(DepotID to, WarehouseObjectType wot, DepotID from) throws SupplyException {
+        if(from.getSource() == DepotID.DepotType.COFFER){
+            throw new SupplyException();
+        }
         depot.addSupply(wot);
     }
 
@@ -60,13 +60,4 @@ public class Depot implements LeaderAbility {
     }
 
 
-    @Override
-    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) throws NoSuchMethodException {
-        //check if the resource comes from an acceptable source
-        if(from.getType() == DepotID.DepotType.COFFER || from == DepotID.PAYCHECK_COFFER){
-            return new ArrayList<>();
-        }
-
-        return depot.availableDepots(from, wot);
-    }
 }

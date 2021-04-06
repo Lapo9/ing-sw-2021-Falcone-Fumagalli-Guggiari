@@ -20,8 +20,8 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
      * Class constructor
      * @param pos shelf's number
      */
-    public BoundedSupplyContainer(DepotID id, int pos){
-        sc = new SupplyContainer(id);
+    public BoundedSupplyContainer(int pos){
+        sc = new SupplyContainer();
         position = pos;
         max = 4-pos;
     }
@@ -76,15 +76,6 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
 
 
     /**
-     * Sets the id of the depot
-     * @param id new id
-     */
-    public void setId(DepotID id){
-        sc.setId(id);
-    }
-
-
-    /**
      * The getQuantity method can be used to find the number of supplies that are currently in the BoundedSupplyContainer
      * @return number of supplies in the BoundedSupplyContainer
      */
@@ -129,16 +120,6 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
         sc.removeSupply(wot);
     }
 
-
-    @Override
-    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
-        if(wot != getType() || getMax() == getQuantity()){
-            return new ArrayList<>();
-        }
-        else {
-            return sc.availableDepots(from, wot);
-        }
-    }
 
     @Override
     public SupplyContainer clearSupplies(){

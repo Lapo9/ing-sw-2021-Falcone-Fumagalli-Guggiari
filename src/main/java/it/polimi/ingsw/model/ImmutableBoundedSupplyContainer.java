@@ -13,8 +13,8 @@ public class ImmutableBoundedSupplyContainer implements HasStatus, AcceptsSuppli
     private final WarehouseObjectType type;
 
 
-    public ImmutableBoundedSupplyContainer(DepotID id, int max, WarehouseObjectType type) throws SupplyException{
-        sc = new SupplyContainer(id);
+    public ImmutableBoundedSupplyContainer(int max, WarehouseObjectType type) throws SupplyException{
+        sc = new SupplyContainer();
 
         if(type == WarehouseObjectType.FAITH_MARKER){
             throw new SupplyException();
@@ -60,16 +60,6 @@ public class ImmutableBoundedSupplyContainer implements HasStatus, AcceptsSuppli
         sc.removeSupply(wot);
     }
 
-
-    @Override
-    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
-        if(wot != getType() || getMax() == getQuantity()){
-            return new ArrayList<>();
-        }
-        else {
-            return sc.availableDepots(from, wot);
-        }
-    }
 
     @Override
     public SupplyContainer clearSupplies() throws NoSuchMethodException {

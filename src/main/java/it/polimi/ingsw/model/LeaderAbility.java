@@ -3,8 +3,6 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.*;
 
-import java.util.ArrayList;
-
 /**
  * Interface that manages the ability of Leader Cards
  */
@@ -89,8 +87,4 @@ public interface LeaderAbility extends AcceptsSupplies{
     }
 
 
-    @Override
-    public default ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) throws NoSuchMethodException{
-        throw new NoSuchMethodException();
-    }
 }

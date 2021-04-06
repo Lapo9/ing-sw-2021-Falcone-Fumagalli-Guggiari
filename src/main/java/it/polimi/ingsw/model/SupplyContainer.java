@@ -13,7 +13,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     private int servant = 0;
     private int shield = 0;
     private int faithMarker = 0;
-    DepotID id;
 
 
     /**
@@ -21,13 +20,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      */
     public SupplyContainer() {}
 
-    /**
-     * class constructor
-     * @param id depot ID
-     */
-    public SupplyContainer(DepotID id) {
-        this.id = id;
-    }
 
     /**
      * Create a supply container and fills it with the passed parameters.
@@ -43,7 +35,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         this.servant = servant;
         this.shield = shield;
         this.faithMarker = faithMarker;
-        this.id = id;
     }
 
     /**
@@ -56,7 +47,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         this.stone = sc.stone;
         this.shield = sc.shield;
         this.faithMarker = sc.faithMarker;
-        this.id = sc.id;
     }
 
     /**
@@ -107,14 +97,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
                 this.shield == sc.shield && this.stone == sc.stone;
     }
 
-
-    /**
-     * Sets the depot ID
-     * @param id depot ID
-     */
-    public void setId(DepotID id){
-        this.id = id;
-    }
 
 
     @Override
@@ -172,13 +154,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         }
     }
 
-
-    @Override
-    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
-        ArrayList<DepotID> res = new ArrayList<>();
-        res.add(id);
-        return res;
-    }
 
     @Override
     public SupplyContainer clearSupplies(){

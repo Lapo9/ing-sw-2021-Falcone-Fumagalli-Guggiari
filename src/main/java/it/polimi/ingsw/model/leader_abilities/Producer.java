@@ -4,8 +4,6 @@ import it.polimi.ingsw.exceptions.BoundsException;
 import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.*;
 
-import java.util.ArrayList;
-
 
 //TODO check the class and write javadoc
 public class Producer implements LeaderAbility {
@@ -64,22 +62,16 @@ public class Producer implements LeaderAbility {
 
 
     @Override
-    public void addSupply(WarehouseObjectType wot) throws SupplyException {
-        //TODO maybe we can put here a check to deny the user to put more resources than necessary
-        production.addSupply(wot);
+    public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
+        production.addSupply(wot, from);
     }
 
 
     @Override
-    public void removeSupply(WarehouseObjectType wot) throws SupplyException {
-        production.removeSupply(wot);
+    public void removeSupply(DepotID from, WarehouseObjectType wot) throws SupplyException {
+        production.removeSupply(from, wot);
     }
 
-
-    @Override
-    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) throws NoSuchMethodException {
-        return production.availableDepots(from, wot);
-    }
 
     @Override
     public SupplyContainer clearSupplies() {

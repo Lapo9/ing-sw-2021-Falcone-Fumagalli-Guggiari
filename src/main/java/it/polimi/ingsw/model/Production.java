@@ -3,7 +3,6 @@ package it.polimi.ingsw.model;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.exceptions.*;
-import it.polimi.ingsw.model.SupplyContainer;
 
 /**
  * The Production class represents the production mechanism of the game
@@ -11,8 +10,8 @@ import it.polimi.ingsw.model.SupplyContainer;
 public class Production implements AcceptsSupplies, HasStatus{
     protected final SupplyContainer input;
     protected final SupplyContainer output;
-    protected SupplyContainer currentSupply;
-    protected DepotID depotId;
+    protected SupplyContainer currentSupplyCoffer = new SupplyContainer();
+    protected SupplyContainer currentSupplyDepot = new SupplyContainer();
 
 
     /**
@@ -20,11 +19,9 @@ public class Production implements AcceptsSupplies, HasStatus{
      * @param in is a SupplyContainer which contains the supplies needed as input
      * @param out is a SupplyContainer which contains the supplies produces by output when the production is triggered
      */
-    public Production(SupplyContainer in, SupplyContainer out, DepotID id){
+    public Production(SupplyContainer in, SupplyContainer out){
         input = in;
         output = out;
-        currentSupply = new SupplyContainer();
-        depotId = id;
     }
 
     /**
@@ -48,7 +45,7 @@ public class Production implements AcceptsSupplies, HasStatus{
      * @return the currentSupply
      */
     protected SupplyContainer getCurrentSupply(){
-        return currentSupply;
+        return currentSupplyCoffer.sum(currentSupplyDepot);
     }
 
     /**
@@ -71,23 +68,29 @@ public class Production implements AcceptsSupplies, HasStatus{
      * @throws SupplyException if the currentSupply doesn't contain the right supplies
      */
     public void check() throws SupplyException{
-        if(!input.confront(currentSupply))
+        if(!input.confront(getCurrentSupply()))
             throw new SupplyException();
     }
 
     @Override
-    public void addSupply(WarehouseObjectType wot) throws SupplyException{
-        if(availableDepots(null, wot).contains(depotId)) {
-            currentSupply.addSupply(wot);
+    public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException{
+        if(from.getSource() == DepotID.DepotType.COFFER){
+            currentSupplyCoffer.addSupply(wot);
         }
         else {
-            throw new SupplyException();
+            currentSupplyDepot.addSupply(wot);
         }
     }
 
     @Override
-    public void removeSupply(WarehouseObjectType wot) throws SupplyException{
-        currentSupply.removeSupply(wot);
+    public void removeSupply(DepotID from, WarehouseObjectType wot) throws SupplyException{
+        if (from.getSource() == DepotID.DepotType.COFFER){
+            currentSupplyCoffer.removeSupply(wot);
+        }
+        else {
+            currentSupplyDepot.removeSupply(wot);
+        }
+
     }
 
     @Override
@@ -95,16 +98,6 @@ public class Production implements AcceptsSupplies, HasStatus{
         return new SupplyContainer(currentSupply.clearSupplies());
     }
 
-
-    @Override
-    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
-        ArrayList<DepotID> res = new ArrayList<>();
-        if(currentSupply.getQuantity(wot) >= input.getQuantity(wot)){
-            return res;
-        }
-        res.add(depotId);
-        return res;
-    }
 
     //TODO
     @Override

@@ -16,7 +16,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
     private final Marketplace marketplace;
     private final DevelopmentGrid developmentGrid;
     private final Warehouse warehouse;
-    private final SupplyContainer coffer = new SupplyContainer(DepotID.COFFER) {@Override
+    private final SupplyContainer coffer = new SupplyContainer() {@Override
                                                             public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
                                                                 //check if the resource comes from an acceptable source
                                                                 if(from.getType() == DepotID.DepotType.WAREHOUSE || from.getType() == DepotID.DepotType.LEADER || from.getType() == DepotID.DepotType.DEVELOPMENT || from == DepotID.PAYCHECK_DEPOT){
@@ -25,7 +25,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
                                                                 addSupply(wot);
                                                             }};
 
-    private final MutableProduction baseProduction = new MutableProduction(2, 1, DepotID.BASE_PRODUCTION);
+    private final MutableProduction baseProduction = new MutableProduction(2, 1);
     private final FaithTrack faithTrack = new FaithTrack();
     private final LeadersSpace leadersSpace = new LeadersSpace();
     private final Developments developments = new Developments();
@@ -290,24 +290,6 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      */
     public boolean hasInkwell(){
         return inkwell;
-    }
-
-
-    /**
-     * Checks which depots can accept the supply from the specified depot
-     * @param from source of the supply
-     * @param wot type of the supply
-     * @return list of depots IDs where the supply can be transferred to
-     */
-    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot){
-        ArrayList<DepotID> res = new ArrayList<>();
-
-        for (int i = 0; i<containers.size(); ++i){
-            try {
-                res.addAll(containers.get(i).availableDepots(from, wot));
-            } catch (NoSuchMethodException nsme){}
-        }
-        return res;
     }
 
 

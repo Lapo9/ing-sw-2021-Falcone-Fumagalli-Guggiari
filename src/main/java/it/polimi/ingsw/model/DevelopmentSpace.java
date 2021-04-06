@@ -13,24 +13,13 @@ import java.util.ArrayList;
 public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCountable{
 
     private ArrayList<SupplyCard> cards = new ArrayList<SupplyCard>();
-    private DepotID id;
 
 
     /**
      * Creates a development space without any card.
      * @param spaceNumber can be 1, 2 or 3
      */
-    public DevelopmentSpace(int spaceNumber){
-        if (spaceNumber == 1){
-            id = DepotID.DEVELOPMENT1;
-        }
-        else if (spaceNumber == 2){
-            id = DepotID.DEVELOPMENT2;
-        }
-        else if (spaceNumber == 3){
-            id = DepotID.DEVELOPMENT3;
-        }
-    }
+    public DevelopmentSpace(){}
 
 
     /**
@@ -44,7 +33,6 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
             throw new DevelopmentException();
         }
 
-        card.setID(id);
         cards.add(card);
     }
 
@@ -91,20 +79,14 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
 
 
     @Override
-    public void addSupply(WarehouseObjectType wot) throws SupplyException {
-        cards.get(cards.size()-1).addSupply(wot);
+    public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
+        cards.get(cards.size()-1).addSupply(wot, from);
     }
 
 
     @Override
-    public void removeSupply(WarehouseObjectType wot) throws SupplyException {
-        cards.get(cards.size()-1).removeSupply(wot);
-    }
-
-
-    @Override
-    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
-        return cards.get(cards.size()-1).availableDepots(from, wot);
+    public void removeSupply(DepotID from, WarehouseObjectType wot) throws SupplyException {
+        cards.get(cards.size()-1).removeSupply(from, wot);
     }
 
 
