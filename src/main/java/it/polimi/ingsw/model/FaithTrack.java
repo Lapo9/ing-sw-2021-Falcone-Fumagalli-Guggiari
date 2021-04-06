@@ -15,7 +15,7 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
     private ArrayList<PopeFavorTile> popeFavors;
     private ArrayList<FaithTrackTiles> track;
 
-    /**
+    /*
      * The FaithTrackTiles class represents a tile of the FaithTrack
      */
     private class FaithTrackTiles{
@@ -100,7 +100,7 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
         return vr;
     }
 
-    /**
+    /*
      * The goAhead method moves the player one tile ahead in the FaithTrack
      * @return true is a vaticanReport has been issued
      */
