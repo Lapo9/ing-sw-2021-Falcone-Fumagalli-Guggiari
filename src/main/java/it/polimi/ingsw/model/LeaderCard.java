@@ -22,6 +22,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
      * @param reqSC is a SupplyContainer which contains all the supplies needed to buy the LeaderCard
      * @param reqCR is an ArrayList of CardRequirement which contains the details about the SupplyCards needed to buy the LeaderCard
      * @param abil is the type of the LeaderCard's ability
+     * @param points win points given by this leader when active
      */
     public LeaderCard(SupplyContainer reqSC, ArrayList<CardsRequirement> reqCR, LeaderAbility abil, int points){
         requirements = new Pair<SupplyContainer, ArrayList<CardsRequirement>>(reqSC, reqCR);

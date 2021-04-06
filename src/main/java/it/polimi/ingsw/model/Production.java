@@ -9,19 +9,22 @@ import it.polimi.ingsw.model.SupplyContainer;
  * The Production class represents the production mechanism of the game
  */
 public class Production implements AcceptsSupplies, HasStatus{
-    private final SupplyContainer input;
-    private final SupplyContainer output;
-    private SupplyContainer currentSupply;
+    protected final SupplyContainer input;
+    protected final SupplyContainer output;
+    protected SupplyContainer currentSupply;
+    protected DepotID depotId;
+
 
     /**
      * Class constructor
      * @param in is a SupplyContainer which contains the supplies needed as input
      * @param out is a SupplyContainer which contains the supplies produces by output when the production is triggered
      */
-    public Production(SupplyContainer in, SupplyContainer out){
-        input = new SupplyContainer(in);
-        output = new SupplyContainer(out);
+    public Production(SupplyContainer in, SupplyContainer out, DepotID id){
+        input = in;
+        output = out;
         currentSupply = new SupplyContainer();
+        depotId = id;
     }
 
     /**
@@ -74,7 +77,12 @@ public class Production implements AcceptsSupplies, HasStatus{
 
     @Override
     public void addSupply(WarehouseObjectType wot) throws SupplyException{
-        currentSupply.addSupply(wot);
+        if(availableDepots(null, wot).contains(depotId)) {
+            currentSupply.addSupply(wot);
+        }
+        else {
+            throw new SupplyException();
+        }
     }
 
     @Override
@@ -85,6 +93,17 @@ public class Production implements AcceptsSupplies, HasStatus{
     @Override
     public SupplyContainer clearSupplies(){
         return new SupplyContainer(currentSupply.clearSupplies());
+    }
+
+
+    @Override
+    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
+        ArrayList<DepotID> res = new ArrayList<>();
+        if(currentSupply.getQuantity(wot) >= input.getQuantity(wot)){
+            return res;
+        }
+        res.add(depotId);
+        return res;
     }
 
     //TODO

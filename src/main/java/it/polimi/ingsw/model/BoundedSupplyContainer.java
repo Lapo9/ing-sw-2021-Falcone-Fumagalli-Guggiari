@@ -74,6 +74,16 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
             max = 1;
     }
 
+
+    /**
+     * Sets the id of the depot
+     * @param id new id
+     */
+    public void setId(DepotID id){
+        sc.setId(id);
+    }
+
+
     /**
      * The getQuantity method can be used to find the number of supplies that are currently in the BoundedSupplyContainer
      * @return number of supplies in the BoundedSupplyContainer

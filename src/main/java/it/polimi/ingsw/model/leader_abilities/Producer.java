@@ -2,10 +2,9 @@ package it.polimi.ingsw.model.leader_abilities;
 
 import it.polimi.ingsw.exceptions.BoundsException;
 import it.polimi.ingsw.exceptions.SupplyException;
-import it.polimi.ingsw.model.LeaderAbility;
-import it.polimi.ingsw.model.MutableProduction;
-import it.polimi.ingsw.model.SupplyContainer;
-import it.polimi.ingsw.model.WarehouseObjectType;
+import it.polimi.ingsw.model.*;
+
+import java.util.ArrayList;
 
 
 //TODO check the class and write javadoc
@@ -14,7 +13,14 @@ public class Producer implements LeaderAbility {
     MutableProduction production;
 
 
-    public Producer(SupplyContainer fixedInput, SupplyContainer fixedOutput){
+    /**
+     * Creates a new producer leader, whose fixed output is always a faith point
+     * @param fixedInput what is the fixed input of the leader?
+     * @param leaderID is this leader 1 or 2?
+     */
+    public Producer(SupplyContainer fixedInput, int leaderID){
+        SupplyContainer fixedOutput = new SupplyContainer();
+        fixedOutput.addSupply(WarehouseObjectType.FAITH_MARKER);
         production = new MutableProduction(fixedInput, fixedOutput, 1, 2);
     }
 
@@ -69,6 +75,11 @@ public class Producer implements LeaderAbility {
         production.removeSupply(wot);
     }
 
+
+    @Override
+    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) throws NoSuchMethodException {
+        return production.availableDepots(from, wot);
+    }
 
     @Override
     public SupplyContainer clearSupplies() {

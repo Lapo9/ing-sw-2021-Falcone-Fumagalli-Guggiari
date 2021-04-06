@@ -92,6 +92,15 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
     }
 
 
+    @Override
+    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
+        ArrayList<DepotID> res = new ArrayList<>();
+        for (DevelopmentSpace space : spaces){
+            res.addAll(space.availableDepots(from, wot));
+        }
+        return res;
+    }
+
     /**
      * Clear all of the supplies in the spaces.
      * @return Supplies removed
@@ -103,6 +112,7 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
         for (int i = 0; i<3; ++i){
             result.sum(spaces.get(i).clearSupplies());
         }
+        return result;
     }
 
 

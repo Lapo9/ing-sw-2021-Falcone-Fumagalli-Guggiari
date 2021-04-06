@@ -21,9 +21,10 @@ public class MutableProduction extends Production implements HasStatus{
      * @param out is a SupplyContainer which contains the supplies produces by output when the production is triggered
      * @param dimInput is the max dimension of the input
      * @param dimOutput is the max dimension of the output
+     * @param id depot ID of this production
      */
-    public MutableProduction(SupplyContainer in, SupplyContainer out, int dimInput, int dimOutput){
-        super(in, out);
+    public MutableProduction(SupplyContainer in, SupplyContainer out, int dimInput, int dimOutput, DepotID id){
+        super(in, out, id);
         maxInput = dimInput - in.getQuantity();         //maxInput is the dimension of the mutableInput
         maxOutput = dimOutput - out.getQuantity();      //maxOutput is the dimension of the mutableOutput
         mutableInput = new SupplyContainer();
@@ -36,9 +37,10 @@ public class MutableProduction extends Production implements HasStatus{
      * Creates an object without any fixed input or output
      * @param dimInput is the max dimension of the input
      * @param dimOutput is the max dimension of the output
+     * @param id depot ID of this production
      */
-    public MutableProduction(int dimInput, int dimOutput){
-        super(new SupplyContainer(), new SupplyContainer()); //0 resources in fixed input/output
+    public MutableProduction(int dimInput, int dimOutput, DepotID id){
+        super(new SupplyContainer(), new SupplyContainer(), id); //0 resources in fixed input/output
         maxInput = dimInput;         //maxInput is the dimension of the mutableInput
         maxOutput = dimOutput;      //maxOutput is the dimension of the mutableOutput
         mutableInput = new SupplyContainer();
@@ -49,18 +51,18 @@ public class MutableProduction extends Production implements HasStatus{
 
     /**
      * The produce method activates the production is the isActive parameter is true
-     * @param isActive is true if the player wants to activate the production
      * @return a SupplyContainer containing the output + mutableOutput
      */
     @Override
     public SupplyContainer produce(){
-        check(isActive);
+        try{
+            check();
+        } catch (SupplyException se){/*FIXME end program*/}
         return new SupplyContainer(mutableOutput.sum(getOutput()));
     }
 
     /**
      * The check method verifies if the supplies contained in the currentSupply are right to start a production
-     * @param isActive is true if the player wants to check if the production can be called
      */
     @Override
     public void check() throws SupplyException{
@@ -68,6 +70,20 @@ public class MutableProduction extends Production implements HasStatus{
         if(temp.confront(getCurrentSupply()))
             throw new SupplyException();
     }
+
+
+
+    @Override
+    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) {
+        ArrayList<DepotID> res = new ArrayList<>();
+        if(currentSupply.getQuantity(wot) >= input.sum(mutableInput).getQuantity(wot)){
+            return res;
+        }
+        res.add(depotId);
+        return res;
+    }
+
+
 
     /**
      * The addInput method adds a WarehouseObjectType to the mutableInput
@@ -78,11 +94,9 @@ public class MutableProduction extends Production implements HasStatus{
         int temp = mutableInput.getQuantity();
         if (temp >= maxInput)
             throw new BoundsException();
-        try {
-            mutableInput.addSupply(wot);
-        } catch (SupplyException e) {
-            //FIXME
-        }
+
+        mutableInput.addSupply(wot);
+
     }
 
     /**
@@ -94,11 +108,8 @@ public class MutableProduction extends Production implements HasStatus{
         int temp = mutableOutput.getQuantity();
         if (temp >= maxOutput)
             throw new BoundsException();
-        try {
-            mutableOutput.addSupply(wot);
-        } catch (SupplyException e) {
-            //FIXME
-        }
+
+        mutableOutput.addSupply(wot);
     }
 
     /**
@@ -126,11 +137,8 @@ public class MutableProduction extends Production implements HasStatus{
         int temp = mutableOutput.getQuantity();
         if (temp == 0)
             throw new BoundsException();
-        try {
-            mutableOutput.addSupply(wot);
-        } catch (SupplyException e) {
-            //FIXME
-        }
+
+        mutableOutput.addSupply(wot);
     }
 
     @Override

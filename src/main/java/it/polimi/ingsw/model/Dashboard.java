@@ -25,7 +25,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
                                                                 addSupply(wot);
                                                             }};
 
-    private final MutableProduction baseProduction = new MutableProduction(2, 1);
+    private final MutableProduction baseProduction = new MutableProduction(2, 1, DepotID.BASE_PRODUCTION);
     private final FaithTrack faithTrack = new FaithTrack();
     private final LeadersSpace leadersSpace = new LeadersSpace();
     private final Developments developments = new Developments();
@@ -52,6 +52,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         containers.add(developments);
         containers.add(coffer);
         containers.add(paycheck);
+        containers.add(baseProduction);
     }
 
 
@@ -302,7 +303,9 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         ArrayList<DepotID> res = new ArrayList<>();
 
         for (int i = 0; i<containers.size(); ++i){
-            res.addAll(containers.get(i).availableDepots(from, wot));
+            try {
+                res.addAll(containers.get(i).availableDepots(from, wot));
+            } catch (NoSuchMethodException nsme){}
         }
         return res;
     }

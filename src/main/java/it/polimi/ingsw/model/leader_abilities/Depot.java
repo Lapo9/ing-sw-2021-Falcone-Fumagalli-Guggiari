@@ -6,6 +6,8 @@ import it.polimi.ingsw.exceptions.MarbleException;
 import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.*;
 
+import java.util.ArrayList;
+
 
 /**
  * This implementation of LeaderAbility is a depot, so it implements all of the methods to manage a depot (add and remove supplies).
@@ -18,10 +20,11 @@ public class Depot implements LeaderAbility {
     /**
      * Builds a Depot with the specified type and always 2 as maximum storage.
      * @param type type contained by the depot
+     * @param abilityID is this leader 1 or 2?
      */
-    public Depot(WarehouseObjectType type){
+    public Depot(WarehouseObjectType type, int abilityID){
         try {
-            depot = new ImmutableBoundedSupplyContainer(2, type);
+            depot = new ImmutableBoundedSupplyContainer(abilityID==1?DepotID.LEADER1:DepotID.LEADER2, 2, type);
         } catch (SupplyException se){/*TODO end program*/}
 
     }
@@ -54,5 +57,16 @@ public class Depot implements LeaderAbility {
     @Override
     public SupplyContainer clearSupplies() throws NoSuchMethodException {
         return depot.clearSupplies();
+    }
+
+
+    @Override
+    public ArrayList<DepotID> availableDepots(DepotID from, WarehouseObjectType wot) throws NoSuchMethodException {
+        //check if the resource comes from an acceptable source
+        if(from.getType() == DepotID.DepotType.COFFER || from == DepotID.PAYCHECK_COFFER){
+            return new ArrayList<>();
+        }
+
+        return depot.availableDepots(from, wot);
     }
 }
