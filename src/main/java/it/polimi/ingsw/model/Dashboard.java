@@ -83,9 +83,9 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @param color the color of the marble
      * @throws SupplyException Destination is full
      * @throws MarbleException Destination cannot accept this color of marble
-     * @throws UnsupportedOperationException Leader hasn't a depot ability
+     * @throws NoSuchMethodException Leader hasn't a depot ability
      */
-    public void assignMarble(DepotID to, MarbleColor color) throws SupplyException, MarbleException, UnsupportedOperationException, LeaderException{
+    public void assignMarble(DepotID to, MarbleColor color) throws SupplyException, MarbleException, NoSuchMethodException, LeaderException{
         if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException();}
 
         warehouse.addMarble(to, color);
@@ -122,14 +122,14 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @param type Type of resource to move
      * @throws SupplyException Thrown if the source doesn't have the specified type of resource, or if the destination cannot accept the resource
      */
-    public void moveSupply(DepotID from, DepotID to, WarehouseObjectType type) throws SupplyException, UnsupportedOperationException, LeaderException {
+    public void moveSupply(DepotID from, DepotID to, WarehouseObjectType type) throws SupplyException, NoSuchMethodException, LeaderException {
         //remove supply from specified container
         containers.get(from.getType().getOrder()).removeSupply(from, type);
 
         //add supply to specified container, if you cannot, put supply back to original container and throw the exception
         try{
             containers.get(to.getType().getOrder()).addSupply(to, type, from);
-        } catch (SupplyException | LeaderException | UnsupportedOperationException e) {
+        } catch (SupplyException | LeaderException | NoSuchMethodException e) {
             containers.get(from.getType().getOrder()).addSupply(from, type, from);
             throw e;
         }
@@ -159,7 +159,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         if(l1) {
             try {
                 leader1Production = leadersSpace.getLeaderAbility(0).produce();
-            } catch (UnsupportedOperationException | LeaderException e) {
+            } catch (NoSuchMethodException | LeaderException e) {
             }
         }
 
@@ -167,7 +167,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         if(l2) {
             try {
                 leader2Production = leadersSpace.getLeaderAbility(1).produce();
-            } catch (UnsupportedOperationException | LeaderException e) {
+            } catch (NoSuchMethodException | LeaderException e) {
             }
         }
 
@@ -213,11 +213,11 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         try {
             leadersSpace.getLeaderAbility(0).checkProduction();
         }
-        catch(UnsupportedOperationException | LeaderException e){}
+        catch(NoSuchMethodException | LeaderException e){}
         try {
             leadersSpace.getLeaderAbility(1).checkProduction();
         }
-    catch(UnsupportedOperationException | LeaderException e){}
+    catch(NoSuchMethodException | LeaderException e){}
     }
 
 

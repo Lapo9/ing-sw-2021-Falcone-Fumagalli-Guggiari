@@ -44,7 +44,7 @@ public class Warehouse implements AcceptsSupplies{
             for(WarehouseObjectType wot : wots) {
                 try{
                     leaderDepot = leadersSpace.getLeaderAbility(i).getDepotInfo();
-                } catch(UnsupportedOperationException | LeaderException e) {break;}
+                } catch(NoSuchMethodException | LeaderException e) {break;}
                 if(leaderDepot.first == wot) {
                     count += leaderDepot.second;
                 }
@@ -92,9 +92,9 @@ public class Warehouse implements AcceptsSupplies{
      * @param color color of the marble to add
      * @throws SupplyException Specified depot is full
      * @throws MarbleException Marble cannot be converted to a compatible supply type
-     * @throws UnsupportedOperationException Leader cannot accept a marble
+     * @throws NoSuchMethodException Leader cannot accept a marble
      */
-    public void addMarble(DepotID row, MarbleColor color) throws SupplyException, MarbleException, UnsupportedOperationException, LeaderException {
+    public void addMarble(DepotID row, MarbleColor color) throws SupplyException, MarbleException, NoSuchMethodException, LeaderException {
         if(row.getType() == DepotID.DepotType.WAREHOUSE) {
             depots.get(row.getNum()).addMarble(color, leadersSpace);
         }
@@ -110,10 +110,10 @@ public class Warehouse implements AcceptsSupplies{
      * @param wot type of resource
      * @param from source of the supply
      * @throws SupplyException Row cannot accept the specified resource. Probably the row is full or accepts a different type, or there is another row with the same type.
-     * @throws UnsupportedOperationException This object needs more information to store the supply
+     * @throws NoSuchMethodException This object needs more information to store the supply
      */
     @Override
-    public void addSupply(DepotID row, WarehouseObjectType wot, DepotID from) throws SupplyException, UnsupportedOperationException, LeaderException {
+    public void addSupply(DepotID row, WarehouseObjectType wot, DepotID from) throws SupplyException, NoSuchMethodException, LeaderException {
         //check if the resource comes from an acceptable source
         if(from.getType() == DepotID.DepotType.COFFER || from == DepotID.PAYCHECK_COFFER){
             throw new SupplyException();
@@ -142,7 +142,7 @@ public class Warehouse implements AcceptsSupplies{
      * @throws SupplyException There isn't such resource
      */
     @Override
-    public void removeSupply(DepotID row, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException, LeaderException {
+    public void removeSupply(DepotID row, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException, LeaderException {
         //check if the user wants to remove a resource from one of the leaders or from one of the warehouse spaces
         if(row.getType() == DepotID.DepotType.LEADER){
             leadersSpace.getLeaderAbility(row.getNum()).addSupply(wot);
@@ -165,7 +165,7 @@ public class Warehouse implements AcceptsSupplies{
                         sameType = true;
                     }
                 }
-                if(sameType){
+                if(!sameType){
                     res.addAll(depots.get(i).availableDepots(from, wot));
                 }
             }
@@ -175,7 +175,9 @@ public class Warehouse implements AcceptsSupplies{
         }
 
 
-        //TODO leaders
+        try{
+            res.addAll(leadersSpace.getLeaderAbility(0).availableDepots(from, wot));
+        } catch (LeaderException e){}
 
 
     }
@@ -195,7 +197,7 @@ public class Warehouse implements AcceptsSupplies{
                 if (leadersSpace.getLeaderAbility(i) instanceof Depot) {
                     result.sum(leadersSpace.getLeaderAbility(i).clearSupplies());
                 }
-            } catch (UnsupportedOperationException | LeaderException e) {}
+            } catch (NoSuchMethodException | LeaderException e) {}
         }
 
         return result;

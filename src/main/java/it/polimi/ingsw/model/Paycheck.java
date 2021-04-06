@@ -24,7 +24,7 @@ public class Paycheck implements AcceptsSupplies {
 
 
     @Override
-    public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException, UnsupportedOperationException {
+    public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException, NoSuchMethodException {
         //check where to put the new supply
         if (from == DepotID.COFFER){
             fromCoffer.addSupply(wot);
@@ -35,7 +35,7 @@ public class Paycheck implements AcceptsSupplies {
     }
 
     @Override
-    public void removeSupply(DepotID slot, WarehouseObjectType wot) throws SupplyException, UnsupportedOperationException {
+    public void removeSupply(DepotID slot, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException {
         if (slot == DepotID.PAYCHECK_COFFER){
             fromCoffer.removeSupply(wot);
         }
@@ -45,7 +45,7 @@ public class Paycheck implements AcceptsSupplies {
     }
 
     @Override
-    public SupplyContainer clearSupplies() throws UnsupportedOperationException {
+    public SupplyContainer clearSupplies() throws NoSuchMethodException {
         SupplyContainer result = new SupplyContainer();
         result.sum(fromCoffer.clearSupplies()).sum(fromDepot.clearSupplies());
         return result;

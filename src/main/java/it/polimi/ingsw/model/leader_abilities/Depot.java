@@ -52,7 +52,7 @@ public class Depot implements LeaderAbility {
 
 
     @Override
-    public SupplyContainer clearSupplies() throws UnsupportedOperationException {
+    public SupplyContainer clearSupplies() throws NoSuchMethodException {
         return depot.clearSupplies();
     }
 }
