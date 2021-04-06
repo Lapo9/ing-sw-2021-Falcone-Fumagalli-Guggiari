@@ -52,6 +52,6 @@ public class PopeFavorTile implements HasStatus, WinPointsCountable{
     //TODO
     @Override
     public ArrayList<Integer> getStatus(){
-
+        return null;
     }
 }

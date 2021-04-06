@@ -187,6 +187,6 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
     //TODO
     @Override
     public ArrayList<Integer> getStatus() {
-
+        return null;
     }
 }
