@@ -29,7 +29,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      * @param shield shields
      * @param faithMarker faith markers
      */
-    public SupplyContainer(DepotID id, int coin, int stone, int servant, int shield, int faithMarker) {
+    public SupplyContainer(int coin, int stone, int servant, int shield, int faithMarker) {
         this.coin = coin;
         this.stone = stone;
         this.servant = servant;

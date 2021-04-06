@@ -167,6 +167,6 @@ public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
     //TODO
     @Override
     public ArrayList<Integer> getStatus(){
-
+        return null;
     }
 }

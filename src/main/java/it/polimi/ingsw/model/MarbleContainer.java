@@ -123,7 +123,7 @@ public class MarbleContainer implements HasStatus {
 
     //TODO
     public ArrayList<Integer> getStatus(){
-
+        return null;
     }
 
     /**

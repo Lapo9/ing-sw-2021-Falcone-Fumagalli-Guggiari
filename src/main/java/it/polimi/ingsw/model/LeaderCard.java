@@ -78,7 +78,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
     //TODO
     @Override
     public ArrayList<Integer> getStatus() {
-
+        return null;
     }
 
     @Override

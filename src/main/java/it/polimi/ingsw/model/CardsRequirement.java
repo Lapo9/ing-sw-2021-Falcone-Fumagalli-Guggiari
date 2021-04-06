@@ -49,6 +49,6 @@ public class CardsRequirement implements HasStatus{
     //TODO
     @Override
     public ArrayList<Integer> getStatus(){
-
+        return null;
     }
 }
