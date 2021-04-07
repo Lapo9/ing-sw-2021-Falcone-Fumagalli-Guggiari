@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * Conventions: shelf number 1 can contain 3 supplies, shelf number 2 can contain 2 supplies and shelf number 3 can
  * contain 1 supply. A BoundedSupplyContainer can store just one type of supplies
  */
+@Deprecated
 public class BoundedSupplyContainer implements AcceptsSupplies, HasStatus{
     private SupplyContainer sc;
     private int position;

@@ -6,6 +6,7 @@ import it.polimi.ingsw.exceptions.SupplyException;
 
 import java.util.ArrayList;
 
+@Deprecated
 public class ImmutableBoundedSupplyContainer implements HasStatus, AcceptsSupplies {
 
     private SupplyContainer sc;

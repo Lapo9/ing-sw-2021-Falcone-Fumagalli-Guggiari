@@ -3,9 +3,6 @@ package it.polimi.ingsw.model;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.exceptions.*;
-import it.polimi.ingsw.model.SupplyContainer;
-import it.polimi.ingsw.model.SupplyCard;
-import it.polimi.ingsw.model.LeadersSpace;
 
 /**
  * The DevelopmentGrid class is meant to contain the SupplyCard, divided by level and color in three rows and four columns,
@@ -16,17 +13,17 @@ import it.polimi.ingsw.model.LeadersSpace;
  * and the fourth is for purple SupplyCard
  */
 public class DevelopmentGrid implements HasStatus{
-    private ArrayList<ArrayList<SupplyCard>> grid;
+    private ArrayList<ArrayList<DevelopmentCard>> grid;
 
     /**
      * Class constructor
      */
     public DevelopmentGrid() {
-        grid = new ArrayList<ArrayList<SupplyCard>>();
+        grid = new ArrayList<ArrayList<DevelopmentCard>>();
         for(int i=0; i<12; i++){
-            grid.add(new ArrayList<SupplyCard>());
+            grid.add(new ArrayList<DevelopmentCard>());
             for(int j=0; j<4; j++){
-                grid.get(i).add(new SupplyCard()); //FIXME we have to choose what card goes where
+                grid.get(i).add(new DevelopmentCard()); //FIXME we have to choose what card goes where
             }
         }
     }
@@ -52,7 +49,7 @@ public class DevelopmentGrid implements HasStatus{
      * @throws SupplyException if the Paycheck doesn't contain the right supplies to buy the chosen SupplyCard
      * @throws NoSuchCardException if the row x column position is empty
      */
-    public SupplyCard buyCard(int column, int row, Paycheck p, LeadersSpace leadersSpace)throws SupplyException, NoSuchCardException{
+    public DevelopmentCard buyCard(int column, int row, Paycheck p, LeadersSpace leadersSpace)throws SupplyException, NoSuchCardException{
         SupplyContainer container = p.getAll();
         int pos = getPlace(column, row);
         if(grid.get(pos).isEmpty())

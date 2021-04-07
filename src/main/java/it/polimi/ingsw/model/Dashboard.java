@@ -4,6 +4,7 @@ import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The dashboard is the access point of the controller to the model.
@@ -32,7 +33,8 @@ public class Dashboard implements HasStatus, WinPointsCountable{
     private MarbleContainer unassignedSupplies;
     private final Paycheck paycheck = new Paycheck();
     private final boolean inkwell;
-    private final ArrayList<AcceptsSupplies> containers = new ArrayList<>();
+
+    private final HashMap<DepotID.DepotType, AcceptsSupplies> containers = new HashMap<>();
 
 
     /**
@@ -48,11 +50,13 @@ public class Dashboard implements HasStatus, WinPointsCountable{
 
         warehouse = new Warehouse(leadersSpace);
 
-        containers.add(warehouse);
-        containers.add(developments);
-        containers.add(coffer);
-        containers.add(paycheck);
-        containers.add(baseProduction);
+        containers.put(DepotID.DepotType.WAREHOUSE, warehouse);
+        containers.put(DepotID.DepotType.LEADER_DEPOT, warehouse);
+        containers.put(DepotID.DepotType.DEVELOPMENT, developments);
+        containers.put(DepotID.DepotType.LEADER_PRODUCTION, developments); //TODO where is the component that manages supplies for a leader that produces?
+        containers.put(DepotID.DepotType.COFFER, coffer);
+        containers.put(DepotID.DepotType.PAYCHECK, paycheck);
+        containers.put(DepotID.DepotType.BASE_PRODUCTION, baseProduction);
     }
 
 
@@ -124,14 +128,18 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @throws SupplyException Thrown if the source doesn't have the specified type of resource, or if the destination cannot accept the resource
      */
     public void moveSupply(DepotID from, DepotID to, WarehouseObjectType type) throws SupplyException, NoSuchMethodException, LeaderException {
+        if(!containers.get(from.getType()).checkRemove(to, type, from) || !containers.get(to.getType()).checkAccept(to, type, from)){
+            throw new SupplyException();
+        }
+
         //remove supply from specified container
-        containers.get(from.getType().getOrder()).removeSupply(from, type);
+        containers.get(from.getType()).removeSupply(to, type, from);
 
         //add supply to specified container, if you cannot, put supply back to original container and throw the exception
         try{
-            containers.get(to.getType().getOrder()).addSupply(to, type, from);
+            containers.get(to.getType()).addSupply(to, type, from);
         } catch (SupplyException | LeaderException | NoSuchMethodException e) {
-            containers.get(from.getType().getOrder()).addSupply(from, type, from);
+            containers.get(from.getType()).addSupply(from, type, from);
             throw e;
         }
     }
@@ -160,16 +168,14 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         if(l1) {
             try {
                 leader1Production = leadersSpace.getLeaderAbility(0).produce();
-            } catch (NoSuchMethodException | LeaderException e) {
-            }
+            } catch (NoSuchMethodException | LeaderException e) {}
         }
 
-            SupplyContainer leader2Production = new SupplyContainer();
+        SupplyContainer leader2Production = new SupplyContainer();
         if(l2) {
             try {
                 leader2Production = leadersSpace.getLeaderAbility(1).produce();
-            } catch (NoSuchMethodException | LeaderException e) {
-            }
+            } catch (NoSuchMethodException | LeaderException e) {}
         }
 
         //sum output in temporary container
@@ -213,12 +219,11 @@ public class Dashboard implements HasStatus, WinPointsCountable{
 
         try {
             leadersSpace.getLeaderAbility(0).checkProduction();
-        }
-        catch(NoSuchMethodException | LeaderException e){}
+        } catch(NoSuchMethodException | LeaderException e){}
+
         try {
             leadersSpace.getLeaderAbility(1).checkProduction();
-        }
-    catch(NoSuchMethodException | LeaderException e){}
+        } catch(NoSuchMethodException | LeaderException e){}
     }
 
 

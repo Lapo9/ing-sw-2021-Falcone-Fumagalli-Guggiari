@@ -19,7 +19,6 @@ public interface AcceptsSupplies {
         throw new NoSuchMethodException();
     }
 
-
     /**
      * Adds the supply to the specified slot of the object
      * @param slot space of the object to remove the supply from
@@ -31,7 +30,6 @@ public interface AcceptsSupplies {
         addSupply(wot);
     }
 
-
     /**
      * Adds the supply to the specified slot of the object, and gives information about the source of the object
      * @param wot type of supply
@@ -42,7 +40,6 @@ public interface AcceptsSupplies {
     public default void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException, NoSuchMethodException, LeaderException{
         addSupply(wot);
     }
-
 
     /**
      * Adds the supply to the specified slot of the object, and gives information about the source of the object
@@ -63,6 +60,34 @@ public interface AcceptsSupplies {
     }
 
 
+
+    public default boolean checkAccept(WarehouseObjectType wot) throws NoSuchMethodException {
+        throw new NoSuchMethodException();
+    }
+
+
+    public default boolean checkAccept(DepotID slot, WarehouseObjectType wot) throws NoSuchMethodException {
+        return checkAccept(wot);
+    }
+
+
+    public default boolean checkAccept(WarehouseObjectType wot, DepotID from) throws NoSuchMethodException {
+        return checkAccept(wot);
+    }
+
+
+    public default boolean checkAccept(DepotID slot, WarehouseObjectType wot, DepotID from) throws NoSuchMethodException {
+        try {
+            //initially try to call the function without the slot (do this before because the from constraint is more important than the slot constraint)
+            return checkAccept(wot, from);
+        } catch (NoSuchMethodException uoe) {
+            //if it fails try the last overload remained
+            return checkAccept(slot, wot);
+        }
+    }
+
+
+
     /**
      * Method that that removes the resource to the object
      * @param wot Is one of the five types of resources in the game
@@ -74,15 +99,29 @@ public interface AcceptsSupplies {
     }
 
 
-    /**
-     * Removes the resource from the specified slot of the object
-     * @param slot space of the object to remove the supply from
-     * @param wot type of supply to remove
-     * @throws SupplyException If the required resource is not available
-     * @throws NoSuchMethodException This object needs more information to store the supply
-     */
-    public default void removeSupply(DepotID slot, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException, LeaderException {
+    public default void removeSupply(DepotID to, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException, LeaderException {
         removeSupply(wot);
+    }
+
+
+    public default void removeSupply(DepotID from, WarehouseObjectType wot, DepotID to) throws SupplyException, NoSuchMethodException, LeaderException {
+        removeSupply(from, wot);
+    }
+
+
+
+    public default boolean checkRemove (WarehouseObjectType wot) throws NoSuchMethodException {
+        throw new NoSuchMethodException();
+    }
+
+
+    public default boolean checkRemove(DepotID to, WarehouseObjectType wot) throws NoSuchMethodException {
+        return checkRemove(wot);
+    }
+
+
+    public default boolean checkRemove(DepotID from, WarehouseObjectType wot, DepotID to) throws NoSuchMethodException {
+        return checkRemove(from, wot);
     }
 
 

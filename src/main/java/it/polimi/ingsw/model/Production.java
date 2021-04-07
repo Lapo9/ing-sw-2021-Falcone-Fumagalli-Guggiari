@@ -8,10 +8,11 @@ import it.polimi.ingsw.exceptions.*;
  * The Production class represents the production mechanism of the game
  */
 public class Production implements AcceptsSupplies, HasStatus{
+
     protected final SupplyContainer input;
     protected final SupplyContainer output;
-    protected SupplyContainer currentSupplyCoffer = new SupplyContainer();
-    protected SupplyContainer currentSupplyDepot = new SupplyContainer();
+    protected SupplyContainer currentSupply = new SupplyContainer(/*TODO maybe cannot accept supplies from Paycheck and cannot accept faith markers?*/);
+    ProductionDepotsManager manager;
 
 
     /**
@@ -19,34 +20,14 @@ public class Production implements AcceptsSupplies, HasStatus{
      * @param in is a SupplyContainer which contains the supplies needed as input
      * @param out is a SupplyContainer which contains the supplies produces by output when the production is triggered
      */
-    public Production(SupplyContainer in, SupplyContainer out){
+    public Production(SupplyContainer in, SupplyContainer out, ProductionDepotsManager manager){
         input = in;
         output = out;
+        this.manager = manager;
     }
 
-    /**
-     * The getInput method returns the input SupplyContainer
-     * @return the input SupplyContainer
-     */
-    protected SupplyContainer getInput() {
-        return input;
-    }
 
-    /**
-     * The getOutput method returns the output SupplyContainer
-     * @return the output SupplyContainer
-     */
-    protected SupplyContainer getOutput(){
-        return output;
-    }
 
-    /**
-     * The getCurrentSupply method returns the currentSupply
-     * @return the currentSupply
-     */
-    protected SupplyContainer getCurrentSupply(){
-        return currentSupplyCoffer.sum(currentSupplyDepot);
-    }
 
     /**
      * The produce method activates the production only if the supplies in the currentSupply are equal to the one in the
@@ -56,10 +37,8 @@ public class Production implements AcceptsSupplies, HasStatus{
     public SupplyContainer produce(){
         try {
             check();
-        } catch (SupplyException e) {
-            //FIXME
-            //Idk what to put in here
-        }
+        } catch (SupplyException e) {/*TODO terminate program*/ }
+        clearSupplies();
         return new SupplyContainer(output);
     }
 
@@ -68,40 +47,37 @@ public class Production implements AcceptsSupplies, HasStatus{
      * @throws SupplyException if the currentSupply doesn't contain the right supplies
      */
     public void check() throws SupplyException{
-        if(!input.confront(getCurrentSupply()))
+        if(!input.equals(currentSupply))
             throw new SupplyException();
     }
 
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException{
-        if(from.getSource() == DepotID.DepotType.COFFER){
-            currentSupplyCoffer.addSupply(wot);
-        }
-        else {
-            currentSupplyDepot.addSupply(wot);
-        }
+        currentSupply.addSupply(wot, from);
+        manager.notifyAddition(wot, from);
     }
 
     @Override
-    public void removeSupply(DepotID from, WarehouseObjectType wot) throws SupplyException{
-        if (from.getSource() == DepotID.DepotType.COFFER){
-            currentSupplyCoffer.removeSupply(wot);
+    public void removeSupply(DepotID to, WarehouseObjectType wot) throws SupplyException{
+        //ask to the manager if it is possible to remove the specified resource, and check if you actually can remove them (relies on short circuit OR)
+        if(currentSupply.checkRemove(wot) || !manager.canDelete(wot, to)){
+            throw new SupplyException();
         }
         else {
-            currentSupplyDepot.removeSupply(wot);
+            currentSupply.removeSupply(wot);
         }
-
     }
 
     @Override
     public SupplyContainer clearSupplies(){
-        return new SupplyContainer(currentSupply.clearSupplies());
+        SupplyContainer tmp = new SupplyContainer(currentSupply);
+        manager.notifyDeletion(currentSupply.clearSupplies()); //tell the manager about the cleared resources
+        return tmp;
     }
 
 
-    //TODO
     @Override
     public ArrayList<Integer> getStatus(){
-
+        return null; //TODO
     }
 }

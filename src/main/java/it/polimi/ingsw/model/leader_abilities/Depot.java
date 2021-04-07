@@ -11,7 +11,7 @@ import it.polimi.ingsw.model.*;
  */
 public class Depot implements LeaderAbility {
 
-    private ImmutableBoundedSupplyContainer depot;
+    private SupplyContainer depot;
 
 
     /**
@@ -19,17 +19,18 @@ public class Depot implements LeaderAbility {
      * @param type type contained by the depot
      * @param abilityID is this leader 1 or 2?
      */
-    public Depot(WarehouseObjectType type, int abilityID){
-        try {
-            depot = new ImmutableBoundedSupplyContainer(2, type);
-        } catch (SupplyException se){/*TODO end program*/}
-
+    public Depot(WarehouseObjectType type){
+        depot = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFromMaxSpecificType(type, 2, DepotID.SourceType.DEPOT));
     }
 
 
     @Override
     public Pair<WarehouseObjectType, Integer> getDepotInfo() {
-        return new Pair<>(depot.getType(), depot.getQuantity());
+        Pair<WarehouseObjectType, Integer> res = null;
+        try {
+            res = new Pair<>(depot.getType(), depot.getQuantity());
+        } catch (SupplyException se){/*TODO terminate program*/}
+        return res;
     }
 
 

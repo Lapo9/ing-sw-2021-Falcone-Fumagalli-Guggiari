@@ -82,8 +82,8 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
      * @throws SupplyException There isn't the specified type of supply on the specified space.
      */
     @Override
-    public void removeSupply(DepotID space, WarehouseObjectType wot) throws SupplyException {
-        spaces.get(space.getNum()).removeSupply(space, wot);
+    public void removeSupply(DepotID space, WarehouseObjectType wot, DepotID to) throws SupplyException {
+        spaces.get(space.getNum()).removeSupply(to, wot);
     }
 
 
@@ -108,7 +108,7 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
      * @param card card to add
      * @throws DevelopmentException Card level doesn't match required level, or the space is full (max is 3 cards).
      */
-    public void addCardToSpace(int space, SupplyCard card) throws DevelopmentException {
+    public void addCardToSpace(int space, DevelopmentCard card) throws DevelopmentException {
         spaces.get(space).addCard(card);
     }
 

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCountable{
 
-    private ArrayList<SupplyCard> cards = new ArrayList<SupplyCard>();
+    private ArrayList<DevelopmentCard> cards = new ArrayList<DevelopmentCard>();
 
 
     /**
@@ -27,7 +27,7 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
      * @param card development card to add
      * @throws DevelopmentException If the card to add hasn't the expected level or if the space is full (max 3 cards)
      */
-    public void addCard(SupplyCard card) throws DevelopmentException {
+    public void addCard(DevelopmentCard card) throws DevelopmentException {
         //check if we already have 3 cards or if the card level is not the expected one
         if(cards.size() == 3 || card.getLevel() != cards.size()+1){
             throw new DevelopmentException();
@@ -85,8 +85,8 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
 
 
     @Override
-    public void removeSupply(DepotID from, WarehouseObjectType wot) throws SupplyException {
-        cards.get(cards.size()-1).removeSupply(from, wot);
+    public void removeSupply(DepotID to, WarehouseObjectType wot) throws SupplyException {
+        cards.get(cards.size()-1).removeSupply(to, wot);
     }
 
 

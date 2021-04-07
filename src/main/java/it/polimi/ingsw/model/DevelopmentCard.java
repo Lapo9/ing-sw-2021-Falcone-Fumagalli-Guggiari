@@ -5,7 +5,7 @@ import it.polimi.ingsw.exceptions.SupplyException;
 
 import java.util.ArrayList;
 
-public class SupplyCard implements HasStatus, WinPointsCountable, AcceptsSupplies{
+public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSupplies{
 
     private int level = 0;
     private int winPoints = 0;
@@ -16,7 +16,7 @@ public class SupplyCard implements HasStatus, WinPointsCountable, AcceptsSupplie
     /**
      * Class constructor
      */
-    public SupplyCard(){
+    public DevelopmentCard(){
 
     }
 
@@ -28,7 +28,7 @@ public class SupplyCard implements HasStatus, WinPointsCountable, AcceptsSupplie
      * @param production Card power production
      * @param cost Resources needed to buy the card
      */
-    public SupplyCard(int level, int winPoints, CardCategory category, Production production, SupplyContainer cost) {
+    public DevelopmentCard(int level, int winPoints, CardCategory category, Production production, SupplyContainer cost) {
 
         this.level = level;
         this.winPoints = winPoints;
@@ -53,6 +53,10 @@ public class SupplyCard implements HasStatus, WinPointsCountable, AcceptsSupplie
     public void check() throws SupplyException{
         production.check();
     }
+
+
+
+
 
     /**
      * This method gets the cost of the card
@@ -79,6 +83,9 @@ public class SupplyCard implements HasStatus, WinPointsCountable, AcceptsSupplie
     }
 
 
+
+
+
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
         production.addSupply(wot, from);
@@ -86,8 +93,14 @@ public class SupplyCard implements HasStatus, WinPointsCountable, AcceptsSupplie
 
 
     @Override
-    public void removeSupply(DepotID from, WarehouseObjectType wot) throws SupplyException {
-        production.removeSupply(from, wot);
+    public void removeSupply(DepotID to, WarehouseObjectType wot) throws SupplyException {
+        production.removeSupply(to, wot);
+    }
+
+
+    @Override
+    public int getWinPoints() {
+        return winPoints;
     }
 
     //TODO
