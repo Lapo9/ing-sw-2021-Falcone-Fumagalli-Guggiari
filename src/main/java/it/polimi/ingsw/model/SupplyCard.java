@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.LeaderException;
 import it.polimi.ingsw.exceptions.SupplyException;
 
 import java.util.ArrayList;
@@ -88,6 +87,16 @@ public class SupplyCard implements HasStatus, WinPointsCountable, AcceptsSupplie
     @Override
     public void removeSupply(DepotID from, WarehouseObjectType wot) throws SupplyException {
         production.removeSupply(from, wot);
+    }
+
+    @Override
+    public SupplyContainer clearSupplies(){
+        return production.clearSupplies();
+    }
+
+    @Override
+    public int getWinPoints() {
+        return this.winPoints;
     }
 
     //TODO
