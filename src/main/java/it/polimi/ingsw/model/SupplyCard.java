@@ -90,7 +90,7 @@ public class SupplyCard implements HasStatus, WinPointsCountable, AcceptsSupplie
     }
 
     @Override
-    public SupplyContainer clearSupplies(){
+    public SupplyContainer clearSupplies() throws NoSuchMethodException{
         return production.clearSupplies();
     }
 
