@@ -16,16 +16,8 @@ public class Dashboard implements HasStatus, WinPointsCountable{
 
     private final Marketplace marketplace;
     private final DevelopmentGrid developmentGrid;
-    private final Warehouse warehouse;
-    private final SupplyContainer coffer = new SupplyContainer() {@Override
-                                                            public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
-                                                                //check if the resource comes from an acceptable source
-                                                                if(from.getType() == DepotID.DepotType.WAREHOUSE || from.getType() == DepotID.DepotType.LEADER || from.getType() == DepotID.DepotType.DEVELOPMENT || from == DepotID.PAYCHECK_DEPOT){
-                                                                    throw new SupplyException();
-                                                                }
-                                                                addSupply(wot);
-                                                            }};
-
+    private final Warehouse warehouse = new Warehouse();
+    private final SupplyContainer coffer = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).and(SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.FAITH_MARKER)).negate());
     private final MutableProduction baseProduction = new MutableProduction(2, 1);
     private final FaithTrack faithTrack = new FaithTrack();
     private final LeadersSpace leadersSpace = new LeadersSpace();
@@ -33,6 +25,8 @@ public class Dashboard implements HasStatus, WinPointsCountable{
     private MarbleContainer unassignedSupplies;
     private final Paycheck paycheck = new Paycheck();
     private final boolean inkwell;
+    private final ProductionManager productionManager = new ProductionManager(developments, baseProduction, leadersSpace);
+    private final DepotsManager depotsManager = new DepotsManager(warehouse, leadersSpace);
 
     private final HashMap<DepotID.DepotType, AcceptsSupplies> containers = new HashMap<>();
 
@@ -48,15 +42,13 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         this.marketplace = marketplace;
         this.developmentGrid = developmentGrid;
 
-        warehouse = new Warehouse(leadersSpace);
-
-        containers.put(DepotID.DepotType.WAREHOUSE, warehouse);
-        containers.put(DepotID.DepotType.LEADER_DEPOT, warehouse);
-        containers.put(DepotID.DepotType.DEVELOPMENT, developments);
-        containers.put(DepotID.DepotType.LEADER_PRODUCTION, developments); //TODO where is the component that manages supplies for a leader that produces?
+        containers.put(DepotID.DepotType.WAREHOUSE, depotsManager);
+        containers.put(DepotID.DepotType.LEADER_DEPOT, depotsManager);
+        containers.put(DepotID.DepotType.DEVELOPMENT, productionManager);
+        containers.put(DepotID.DepotType.LEADER_PRODUCTION, productionManager);
         containers.put(DepotID.DepotType.COFFER, coffer);
         containers.put(DepotID.DepotType.PAYCHECK, paycheck);
-        containers.put(DepotID.DepotType.BASE_PRODUCTION, baseProduction);
+        containers.put(DepotID.DepotType.BASE_PRODUCTION, productionManager);
     }
 
 
@@ -128,10 +120,6 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @throws SupplyException Thrown if the source doesn't have the specified type of resource, or if the destination cannot accept the resource
      */
     public void moveSupply(DepotID from, DepotID to, WarehouseObjectType type) throws SupplyException, NoSuchMethodException, LeaderException {
-        if(!containers.get(from.getType()).checkRemove(to, type, from) || !containers.get(to.getType()).checkAccept(to, type, from)){
-            throw new SupplyException();
-        }
-
         //remove supply from specified container
         containers.get(from.getType()).removeSupply(to, type, from);
 
@@ -156,31 +144,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @return Returns if a vatican report has been issued as a result of the production of faith markers
      */
     public boolean produce(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base){
-        //get productions outputs
-        SupplyContainer developmentProduction = developments.produce(s1, s2, s3);
-
-        SupplyContainer baseProduction = new SupplyContainer();
-        if(base) {
-            baseProduction = this.baseProduction.produce();
-        }
-
-        SupplyContainer leader1Production = new SupplyContainer();
-        if(l1) {
-            try {
-                leader1Production = leadersSpace.getLeaderAbility(0).produce();
-            } catch (NoSuchMethodException | LeaderException e) {}
-        }
-
-        SupplyContainer leader2Production = new SupplyContainer();
-        if(l2) {
-            try {
-                leader2Production = leadersSpace.getLeaderAbility(1).produce();
-            } catch (NoSuchMethodException | LeaderException e) {}
-        }
-
-        //sum output in temporary container
-        SupplyContainer tmp = new SupplyContainer();
-        tmp.sum(developmentProduction).sum(baseProduction).sum(leader1Production).sum(leader2Production);
+        SupplyContainer tmp = productionManager.produce(s1, s2, s3, l1, l2, base);
 
         //count faith markers
         int faithPoints = tmp.getQuantity(WarehouseObjectType.FAITH_MARKER);
@@ -211,19 +175,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @throws SupplyException Thrown if in at least one supply space there isn't the correct amount of resources
      */
     public void checkProduction(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base) throws SupplyException {
-        developments.checkProduction(s1, s2, s3);
-
-        if(base) {
-            baseProduction.check();
-        }
-
-        try {
-            leadersSpace.getLeaderAbility(0).checkProduction();
-        } catch(NoSuchMethodException | LeaderException e){}
-
-        try {
-            leadersSpace.getLeaderAbility(1).checkProduction();
-        } catch(NoSuchMethodException | LeaderException e){}
+        productionManager.checkProduction(s1, s2, s3, l1, l2, base);
     }
 
 

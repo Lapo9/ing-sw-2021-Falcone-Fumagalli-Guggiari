@@ -47,6 +47,23 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
 
 
     /**
+     * Returns information about the cards present in this space.
+     * @return A list of Pairs<category of the card, level of the card> of all of the cards present in this space.
+     */
+    public ArrayList<Pair<CardCategory, Integer>> getCardsTypes() {
+        ArrayList<Pair<CardCategory, Integer>> result = new ArrayList<>();
+
+        for(int i=0; i<cards.size(); ++i){
+            result.add(new Pair<CardCategory, Integer>(cards.get(i).getCategory(), cards.get(i).getLevel()));
+        }
+        return result;
+    }
+
+
+
+
+
+    /**
      * Activates production of the last added card.
      * @return A SupplyContainer containing the production output.
      */
@@ -64,20 +81,6 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
     }
 
 
-    /**
-     * Returns information about the cards present in this space.
-     * @return A list of Pairs<category of the card, level of the card> of all of the cards present in this space.
-     */
-    public ArrayList<Pair<CardCategory, Integer>> getCardsTypes() {
-        ArrayList<Pair<CardCategory, Integer>> result = new ArrayList<>();
-
-        for(int i=0; i<cards.size(); ++i){
-            result.add(new Pair<CardCategory, Integer>(cards.get(i).getCategory(), cards.get(i).getLevel()));
-        }
-        return result;
-    }
-
-
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
         cards.get(cards.size()-1).addSupply(wot, from);
@@ -85,8 +88,20 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
 
 
     @Override
-    public void removeSupply(DepotID to, WarehouseObjectType wot) throws SupplyException {
-        cards.get(cards.size()-1).removeSupply(to, wot);
+    public void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException {
+        cards.get(cards.size()-1).removeSupply(wot, to);
+    }
+
+
+    @Override
+    public boolean checkAccept(WarehouseObjectType wot, DepotID from) {
+        return cards.get(cards.size()-1).checkAccept(wot, from);
+    }
+
+
+    @Override
+    public boolean checkRemove(WarehouseObjectType wot, DepotID to) {
+        return cards.get(cards.size()-1).checkRemove(wot, to);
     }
 
 
@@ -94,6 +109,10 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
     public SupplyContainer clearSupplies() {
         return cards.get(cards.size()-1).clearSupplies();
     }
+
+
+
+
 
 
     @Override

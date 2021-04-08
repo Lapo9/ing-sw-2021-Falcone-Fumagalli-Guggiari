@@ -11,8 +11,10 @@ public class Production implements AcceptsSupplies, HasStatus{
 
     protected final SupplyContainer input;
     protected final SupplyContainer output;
-    protected SupplyContainer currentSupply = new SupplyContainer(/*TODO maybe cannot accept supplies from Paycheck and cannot accept faith markers?*/);
-    ProductionDepotsManager manager;
+    protected SupplyContainer currentSupply = new SupplyContainer(  SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.PAYCHECK).negate().
+                                                                        and(SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.FAITH_MARKER).negate()),
+                                                                    SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.PAYCHECK).negate());
+    //TODO maybe add that you cannot add more that the  max?
 
 
     /**
@@ -20,10 +22,9 @@ public class Production implements AcceptsSupplies, HasStatus{
      * @param in is a SupplyContainer which contains the supplies needed as input
      * @param out is a SupplyContainer which contains the supplies produces by output when the production is triggered
      */
-    public Production(SupplyContainer in, SupplyContainer out, ProductionDepotsManager manager){
+    public Production(SupplyContainer in, SupplyContainer out, ProductionManager manager){
         input = in;
         output = out;
-        this.manager = manager;
     }
 
 
@@ -54,18 +55,23 @@ public class Production implements AcceptsSupplies, HasStatus{
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException{
         currentSupply.addSupply(wot, from);
-        manager.notifyAddition(wot, from);
+    }
+
+
+    @Override
+    public void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException{
+        currentSupply.removeSupply(wot);
+    }
+
+
+    @Override
+    public boolean checkAccept(WarehouseObjectType wot, DepotID from) {
+        return currentSupply.checkAccept(wot, from);
     }
 
     @Override
-    public void removeSupply(DepotID to, WarehouseObjectType wot) throws SupplyException{
-        //ask to the manager if it is possible to remove the specified resource, and check if you actually can remove them (relies on short circuit OR)
-        if(currentSupply.checkRemove(wot) || !manager.canDelete(wot, to)){
-            throw new SupplyException();
-        }
-        else {
-            currentSupply.removeSupply(wot);
-        }
+    public boolean checkRemove(WarehouseObjectType wot, DepotID to) {
+        return currentSupply.checkRemove(wot, to);
     }
 
     @Override

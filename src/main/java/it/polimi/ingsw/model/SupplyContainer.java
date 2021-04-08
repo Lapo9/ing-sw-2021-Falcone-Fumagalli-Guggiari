@@ -13,7 +13,8 @@ import java.util.Map;
 public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
     HashMap<WarehouseObjectType, Integer> supplies = new HashMap<>();
-    TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> accept = AcceptStrategy.any();
+    TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> tryAdd = AcceptStrategy.any();
+    TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> tryRemove = AcceptStrategy.any();
 
 
     /**
@@ -27,14 +28,26 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         supplies.put(WarehouseObjectType.FAITH_MARKER, 0);
     }
 
-    public SupplyContainer(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> accept) {
+    public SupplyContainer(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck) {
         supplies.put(WarehouseObjectType.COIN, 0);
         supplies.put(WarehouseObjectType.SERVANT, 0);
         supplies.put(WarehouseObjectType.SHIELD, 0);
         supplies.put(WarehouseObjectType.STONE, 0);
         supplies.put(WarehouseObjectType.FAITH_MARKER, 0);
 
-        this.accept = accept;
+        this.tryAdd = acceptCheck;
+    }
+
+
+    public SupplyContainer(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> removeCheck) {
+        supplies.put(WarehouseObjectType.COIN, 0);
+        supplies.put(WarehouseObjectType.SERVANT, 0);
+        supplies.put(WarehouseObjectType.SHIELD, 0);
+        supplies.put(WarehouseObjectType.STONE, 0);
+        supplies.put(WarehouseObjectType.FAITH_MARKER, 0);
+
+        this.tryAdd = acceptCheck;
+        this.tryRemove = removeCheck;
     }
 
     /**
@@ -61,14 +74,14 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      * @param shield shields
      * @param faithMarker faith markers
      */
-    public SupplyContainer(int coin, int stone, int servant, int shield, int faithMarker, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> accept) {
+    public SupplyContainer(int coin, int stone, int servant, int shield, int faithMarker, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck) {
         supplies.put(WarehouseObjectType.COIN, coin);
         supplies.put(WarehouseObjectType.SERVANT, servant);
         supplies.put(WarehouseObjectType.SHIELD, shield);
         supplies.put(WarehouseObjectType.STONE, stone);
         supplies.put(WarehouseObjectType.FAITH_MARKER, faithMarker);
 
-        this.accept = accept;
+        this.tryAdd = acceptCheck;
     }
 
     /**
@@ -82,17 +95,17 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         supplies.put(WarehouseObjectType.STONE, sc.getQuantity(WarehouseObjectType.STONE));
         supplies.put(WarehouseObjectType.FAITH_MARKER, sc.getQuantity(WarehouseObjectType.FAITH_MARKER));
 
-        accept = sc.accept;
+        tryAdd = sc.tryAdd;
     }
 
-    public SupplyContainer(SupplyContainer sc, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> accept){
+    public SupplyContainer(SupplyContainer sc, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck){
         supplies.put(WarehouseObjectType.COIN, sc.getQuantity(WarehouseObjectType.COIN));
         supplies.put(WarehouseObjectType.SERVANT, sc.getQuantity(WarehouseObjectType.SERVANT));
         supplies.put(WarehouseObjectType.SHIELD, sc.getQuantity(WarehouseObjectType.SHIELD));
         supplies.put(WarehouseObjectType.STONE, sc.getQuantity(WarehouseObjectType.STONE));
         supplies.put(WarehouseObjectType.FAITH_MARKER, sc.getQuantity(WarehouseObjectType.FAITH_MARKER));
 
-        this.accept = accept;
+        this.tryAdd = acceptCheck;
     }
 
 
@@ -145,8 +158,13 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
 
-    public void setAccept(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> accept) {
-        this.accept = accept;
+    public void setAcceptCheck(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck) {
+        this.tryAdd = acceptCheck;
+    }
+
+
+    public void setRemoveCheck(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> removeCheck) {
+        this.tryRemove = removeCheck;
     }
 
 
@@ -178,20 +196,16 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
 
 
-    public boolean checkAccept(WarehouseObjectType wot){
-        return accept.test(this, wot, DepotID.ANY);
+
+    @Override
+    public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
+        if (checkAccept(wot, from)){
+            supplies.put(wot, supplies.get(wot)+1);
+        }
+        else {
+            throw new SupplyException();
+        }
     }
-
-
-    public boolean checkAccept(WarehouseObjectType wot, DepotID from){
-        return accept.test(this, wot, from);
-    }
-
-
-    public boolean checkRemove(WarehouseObjectType wot){
-        return supplies.get(wot) > 0;
-    }
-
 
     @Override
     public void addSupply(WarehouseObjectType wot) throws SupplyException{
@@ -214,15 +228,36 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
     @Override
-    public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
-        if (checkAccept(wot, from)){
-            supplies.put(wot, supplies.get(wot)+1);
+    public void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException{
+        if (checkRemove(wot, to)) {
+            supplies.put(wot, supplies.get(wot)-1);
         }
         else {
             throw new SupplyException();
         }
     }
 
+
+    @Override
+    public boolean checkAccept(WarehouseObjectType wot){
+        return tryAdd.test(this, wot, DepotID.ANY);
+    }
+
+    @Override
+    public boolean checkAccept(WarehouseObjectType wot, DepotID from){
+        return tryAdd.test(this, wot, from);
+    }
+
+
+    @Override
+    public boolean checkRemove(WarehouseObjectType wot){
+        return supplies.get(wot) > 0 && tryRemove.test(this, wot, DepotID.ANY);
+    }
+
+    @Override
+    public boolean checkRemove(WarehouseObjectType wot, DepotID to){
+        return supplies.get(wot) > 0 && tryRemove.test(this, wot, to);
+    }
 
 
     @Override
@@ -233,6 +268,34 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
 
+    /**
+     * Tries to add the marble to the container.
+     * @param color color of the marble to add
+     * @param ls where to look for white marble transformations
+     * @throws SupplyException Transformation succeeded but cannot add
+     * @throws MarbleException Cannot transform marble
+     */
+    public void addMarble(MarbleColor color, LeadersSpace ls) throws SupplyException, MarbleException{
+
+        WarehouseObjectType newType = MarbleContainer.colorToSupply(color);
+
+        if (newType == null) {
+            boolean cannotAdd = false;
+            for(int i = 0; i<2; ++i) {
+                try {
+                    addSupply(ls.getLeaderAbility(i).transformWhiteMarble());
+                    return; //if added, we are done
+                }   catch (LeaderException | NoSuchMethodException e){/*couldn't transform, try next*/}
+                    catch (SupplyException se){cannotAdd = true;}
+            }
+            if (cannotAdd){throw new SupplyException();}
+            else {throw new MarbleException();}
+        }
+        else {
+            addSupply(newType);
+        }
+
+    }
 
 
     //TODO
@@ -263,7 +326,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> specificType(WarehouseObjectType type){
             return (container, wot, depot) -> {
-                return oneType().test(container, wot, depot) && wot == type;
+                return wot == type;
             };
         }
 
@@ -275,9 +338,24 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         }
 
 
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxOneTypeNotPresentIn(int max, SupplyContainer... scs){
+            return (container, type, depot) -> {
+                boolean isPresent = false;
+                try {
+                    for (SupplyContainer sc : scs){
+                        isPresent |= sc.getType()==type;
+                    }
+                } catch (SupplyException se){/*TODO terminate*/}
+                return maxOneType(max).test(container, type, depot) && !isPresent;
+            };
+        }
+
+
+
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxSpecificType(WarehouseObjectType type, int max){
             return (container, wot, depot) -> {
-                return maxOneType(max).test(container, wot, depot) && specificType(type).test(container, wot, depot);
+                return container.getQuantity() < max && specificType(type).test(container, wot, depot);
             };
         }
 

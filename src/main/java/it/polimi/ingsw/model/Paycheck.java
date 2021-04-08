@@ -35,7 +35,7 @@ public class Paycheck implements AcceptsSupplies {
     }
 
     @Override
-    public void removeSupply(DepotID slot, WarehouseObjectType wot) throws SupplyException {
+    public void removeSupply(WarehouseObjectType wot, DepotID slot) throws SupplyException {
         if (slot == DepotID.PAYCHECK_COFFER){
             fromCoffer.removeSupply(wot);
         }

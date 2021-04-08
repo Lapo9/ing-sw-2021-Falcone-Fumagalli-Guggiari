@@ -83,8 +83,21 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
      */
     @Override
     public void removeSupply(DepotID space, WarehouseObjectType wot, DepotID to) throws SupplyException {
-        spaces.get(space.getNum()).removeSupply(to, wot);
+        spaces.get(space.getNum()).removeSupply(wot, to);
     }
+
+
+    @Override
+    public boolean checkAccept(DepotID space, WarehouseObjectType wot, DepotID from) {
+        return spaces.get(space.getNum()).checkAccept(wot, from);
+    }
+
+
+    @Override
+    public boolean checkRemove(DepotID space, WarehouseObjectType wot, DepotID to) {
+        return spaces.get(space.getNum()).checkRemove(wot, to);
+    }
+
 
 
     /**
@@ -100,6 +113,11 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
         }
         return result;
     }
+
+
+
+
+
 
 
     /**

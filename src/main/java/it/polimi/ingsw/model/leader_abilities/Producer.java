@@ -68,8 +68,8 @@ public class Producer implements LeaderAbility {
 
 
     @Override
-    public void removeSupply(DepotID from, WarehouseObjectType wot) throws SupplyException {
-        production.removeSupply(from, wot);
+    public void removeSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
+        production.removeSupply(wot, from);
     }
 
 

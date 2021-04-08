@@ -2,8 +2,6 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.*;
 
-import java.util.ArrayList;
-
 /**
  * This interface manages every object which can get every type of supplies
  */
@@ -80,7 +78,7 @@ public interface AcceptsSupplies {
         try {
             //initially try to call the function without the slot (do this before because the from constraint is more important than the slot constraint)
             return checkAccept(wot, from);
-        } catch (NoSuchMethodException uoe) {
+        } catch (NoSuchMethodException nsme) {
             //if it fails try the last overload remained
             return checkAccept(slot, wot);
         }
@@ -99,13 +97,24 @@ public interface AcceptsSupplies {
     }
 
 
-    public default void removeSupply(DepotID to, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException, LeaderException {
+    public default void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException, NoSuchMethodException, LeaderException {
+        removeSupply(wot);
+    }
+
+
+    public default void removeSupply(DepotID slot, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException, LeaderException {
         removeSupply(wot);
     }
 
 
     public default void removeSupply(DepotID from, WarehouseObjectType wot, DepotID to) throws SupplyException, NoSuchMethodException, LeaderException {
-        removeSupply(from, wot);
+        try {
+            //initially try to call the function without the slot (do this before because the from constraint is more important than the slot constraint)
+            removeSupply(wot, to);
+        } catch (NoSuchMethodException nsme) {
+            //if it fails try the last overload remained
+            removeSupply(from, wot);
+        }
     }
 
 
@@ -115,13 +124,24 @@ public interface AcceptsSupplies {
     }
 
 
-    public default boolean checkRemove(DepotID to, WarehouseObjectType wot) throws NoSuchMethodException {
+    public default boolean checkRemove(WarehouseObjectType wot, DepotID to) throws NoSuchMethodException {
+        return checkRemove(wot);
+    }
+
+
+    public default boolean checkRemove(DepotID slot, WarehouseObjectType wot) throws NoSuchMethodException {
         return checkRemove(wot);
     }
 
 
     public default boolean checkRemove(DepotID from, WarehouseObjectType wot, DepotID to) throws NoSuchMethodException {
-        return checkRemove(from, wot);
+        try {
+            //initially try to call the function without the slot (do this before because the from constraint is more important than the slot constraint)
+            return checkRemove(wot, to);
+        } catch (NoSuchMethodException nsme) {
+            //if it fails try the last overload remained
+            return checkRemove(from, wot);
+        }
     }
 
 

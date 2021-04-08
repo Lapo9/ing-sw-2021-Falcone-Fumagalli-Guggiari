@@ -41,11 +41,8 @@ public class Depot implements LeaderAbility {
 
 
     @Override
-    public void addSupply(DepotID to, WarehouseObjectType wot, DepotID from) throws SupplyException {
-        if(from.getSource() == DepotID.DepotType.COFFER){
-            throw new SupplyException();
-        }
-        depot.addSupply(wot);
+    public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
+        depot.addSupply(wot, from);
     }
 
 
@@ -56,7 +53,7 @@ public class Depot implements LeaderAbility {
 
 
     @Override
-    public SupplyContainer clearSupplies() throws NoSuchMethodException {
+    public SupplyContainer clearSupplies() {
         return depot.clearSupplies();
     }
 
