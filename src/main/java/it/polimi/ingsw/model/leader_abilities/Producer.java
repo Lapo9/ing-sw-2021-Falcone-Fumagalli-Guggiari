@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.leader_abilities;
 
-import it.polimi.ingsw.exceptions.BoundsException;
 import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.*;
 
@@ -18,7 +17,10 @@ public class Producer implements LeaderAbility {
      */
     public Producer(SupplyContainer fixedInput, int leaderID){
         SupplyContainer fixedOutput = new SupplyContainer();
-        fixedOutput.addSupply(WarehouseObjectType.FAITH_MARKER);
+        try {
+            fixedOutput.addSupply(WarehouseObjectType.FAITH_MARKER);
+        } catch (SupplyException se) {/*TODO terminate program*/}
+
         production = new MutableProduction(fixedInput, fixedOutput, 1, 2);
     }
 
@@ -37,27 +39,7 @@ public class Producer implements LeaderAbility {
 
     @Override
     public void changeOutput(WarehouseObjectType wot) {
-        //remove what is currently inside
-        try {
-            production.removeOutput(WarehouseObjectType.COIN);
-        } catch (BoundsException be) {}
-        try {
-            production.removeOutput(WarehouseObjectType.SHIELD);
-        } catch (BoundsException be) {}
-        try {
-            production.removeOutput(WarehouseObjectType.STONE);
-        } catch (BoundsException be) {}
-        try {
-            production.removeOutput(WarehouseObjectType.SERVANT);
-        } catch (BoundsException be) {}
-        try {
-            production.removeOutput(WarehouseObjectType.FAITH_MARKER);
-        } catch (BoundsException be) {}
-
-        //add what the user wants
-        try {
-            production.addOutput(wot);
-        } catch (BoundsException be) {/*TODO ends program, fatal error*/}
+        production.swapOutput(0, wot);
     }
 
 
@@ -68,8 +50,8 @@ public class Producer implements LeaderAbility {
 
 
     @Override
-    public void removeSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
-        production.removeSupply(wot, from);
+    public void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException {
+        production.removeSupply(wot, to);
     }
 
 

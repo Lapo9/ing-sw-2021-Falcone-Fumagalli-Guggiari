@@ -31,7 +31,7 @@ public class ProductionManager implements AcceptsSupplies{
     @Override
     public void addSupply(DepotID slot, WarehouseObjectType wot, DepotID from) throws SupplyException {
         //check if you can add, if not throw
-        checkAccept(slot, wot, from);
+        additionAllowed(slot, wot, from);
 
         //add supply to common "virtual" reserve
         if (from.getSource() != DepotID.SourceType.ANY) {
@@ -62,7 +62,7 @@ public class ProductionManager implements AcceptsSupplies{
     @Override
     public void removeSupply(DepotID slot, WarehouseObjectType wot, DepotID to) throws SupplyException {
         //check if you can remove, if not throw
-        checkRemove(slot, wot, to);
+        removalAllowed(slot, wot, to);
 
 
         //remove supply to common "virtual" reserve
@@ -95,19 +95,19 @@ public class ProductionManager implements AcceptsSupplies{
 
 
     @Override
-    public boolean checkAccept(DepotID slot, WarehouseObjectType wot, DepotID from){
+    public boolean additionAllowed(DepotID slot, WarehouseObjectType wot, DepotID from){
 
         if (slot.getType() == DepotID.DepotType.DEVELOPMENT){
-            return developments.checkAccept(slot, wot, from);
+            return developments.additionAllowed(slot, wot, from);
         }
 
         else if (slot.getType() == DepotID.DepotType.BASE_PRODUCTION){
-            return baseProduction.checkAccept(wot, from);
+            return baseProduction.additionAllowed(wot, from);
         }
 
         else if (slot.getType() == DepotID.DepotType.LEADER_PRODUCTION){
             try {
-                return leadersSpace.getLeaderAbility(slot.getNum()).checkAccept(wot, from);
+                return leadersSpace.getLeaderAbility(slot.getNum()).additionAllowed(wot, from);
             } catch (LeaderException | NoSuchMethodException e){return false;}
         }
 
@@ -118,18 +118,18 @@ public class ProductionManager implements AcceptsSupplies{
 
 
     @Override
-    public boolean checkRemove(DepotID from, WarehouseObjectType wot, DepotID to) {
+    public boolean removalAllowed(DepotID from, WarehouseObjectType wot, DepotID to) {
         if (from.getType() == DepotID.DepotType.DEVELOPMENT){
-            return developments.checkRemove(from, wot, to);
+            return developments.removalAllowed(from, wot, to);
         }
 
         else if (from.getType() == DepotID.DepotType.BASE_PRODUCTION){
-            return baseProduction.checkRemove(wot, to);
+            return baseProduction.removalAllowed(wot, to);
         }
 
         else if (from.getType() == DepotID.DepotType.LEADER_PRODUCTION){
             try {
-                return leadersSpace.getLeaderAbility(from.getNum()).checkRemove(wot, to);
+                return leadersSpace.getLeaderAbility(from.getNum()).removalAllowed(wot, to);
             } catch (LeaderException | NoSuchMethodException e){return false;}
         }
 

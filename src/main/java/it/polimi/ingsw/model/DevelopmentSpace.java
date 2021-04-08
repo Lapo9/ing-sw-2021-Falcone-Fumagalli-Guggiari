@@ -94,14 +94,14 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
 
 
     @Override
-    public boolean checkAccept(WarehouseObjectType wot, DepotID from) {
-        return cards.get(cards.size()-1).checkAccept(wot, from);
+    public boolean additionAllowed(WarehouseObjectType wot, DepotID from) {
+        return cards.get(cards.size()-1).additionAllowed(wot, from);
     }
 
 
     @Override
-    public boolean checkRemove(WarehouseObjectType wot, DepotID to) {
-        return cards.get(cards.size()-1).checkRemove(wot, to);
+    public boolean removalAllowed(WarehouseObjectType wot, DepotID to) {
+        return cards.get(cards.size()-1).removalAllowed(wot, to);
     }
 
 

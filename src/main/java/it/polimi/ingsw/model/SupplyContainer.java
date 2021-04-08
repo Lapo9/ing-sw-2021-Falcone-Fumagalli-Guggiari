@@ -84,6 +84,17 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         this.tryAdd = acceptCheck;
     }
 
+    public SupplyContainer(int coin, int stone, int servant, int shield, int faithMarker, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> removeCheck) {
+        supplies.put(WarehouseObjectType.COIN, coin);
+        supplies.put(WarehouseObjectType.SERVANT, servant);
+        supplies.put(WarehouseObjectType.SHIELD, shield);
+        supplies.put(WarehouseObjectType.STONE, stone);
+        supplies.put(WarehouseObjectType.FAITH_MARKER, faithMarker);
+
+        this.tryAdd = acceptCheck;
+        this.tryRemove = removeCheck;
+    }
+
     /**
      * Copy constructor.
      * @param sc object to copy
@@ -199,7 +210,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
-        if (checkAccept(wot, from)){
+        if (additionAllowed(wot, from)){
             supplies.put(wot, supplies.get(wot)+1);
         }
         else {
@@ -209,7 +220,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
     @Override
     public void addSupply(WarehouseObjectType wot) throws SupplyException{
-        if (checkAccept(wot)){
+        if (additionAllowed(wot)){
             supplies.put(wot, supplies.get(wot)+1);
         }
         else {
@@ -219,7 +230,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
     @Override
     public void removeSupply(WarehouseObjectType wot) throws SupplyException{
-        if (checkRemove(wot)) {
+        if (removalAllowed(wot)) {
             supplies.put(wot, supplies.get(wot)-1);
         }
         else {
@@ -229,7 +240,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
     @Override
     public void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException{
-        if (checkRemove(wot, to)) {
+        if (removalAllowed(wot, to)) {
             supplies.put(wot, supplies.get(wot)-1);
         }
         else {
@@ -239,25 +250,26 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
 
     @Override
-    public boolean checkAccept(WarehouseObjectType wot){
+    public boolean additionAllowed(WarehouseObjectType wot){
         return tryAdd.test(this, wot, DepotID.ANY);
     }
 
     @Override
-    public boolean checkAccept(WarehouseObjectType wot, DepotID from){
+    public boolean additionAllowed(WarehouseObjectType wot, DepotID from){
         return tryAdd.test(this, wot, from);
     }
 
 
     @Override
-    public boolean checkRemove(WarehouseObjectType wot){
+    public boolean removalAllowed(WarehouseObjectType wot){
         return supplies.get(wot) > 0 && tryRemove.test(this, wot, DepotID.ANY);
     }
 
     @Override
-    public boolean checkRemove(WarehouseObjectType wot, DepotID to){
+    public boolean removalAllowed(WarehouseObjectType wot, DepotID to){
         return supplies.get(wot) > 0 && tryRemove.test(this, wot, to);
     }
+
 
 
     @Override
@@ -313,6 +325,25 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         }
 
 
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> none(){
+            return (supplyContainer, warehouseObjectType, depotID) -> false;
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> max(int max){
+            return (supplyContainer, warehouseObjectType, depotID) -> {
+                return supplyContainer.getQuantity() < max;
+            };
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> min(int min){
+            return (supplyContainer, warehouseObjectType, depotID) -> {
+                return supplyContainer.getQuantity() > min;
+            };
+        }
+
+
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> oneType(){
             return (container, type, depot) -> {
                 boolean res = false;
@@ -338,7 +369,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         }
 
 
-
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxOneTypeNotPresentIn(int max, SupplyContainer... scs){
             return (container, type, depot) -> {
                 boolean isPresent = false;
@@ -350,7 +380,6 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
                 return maxOneType(max).test(container, type, depot) && !isPresent;
             };
         }
-
 
 
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxSpecificType(WarehouseObjectType type, int max){

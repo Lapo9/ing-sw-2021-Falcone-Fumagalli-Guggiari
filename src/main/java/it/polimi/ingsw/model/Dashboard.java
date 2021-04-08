@@ -76,7 +76,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
 
     /**
      * Transforms a marble into the supply contained in the destination depot. If the transformation is not possible a MarbleException is thrown.
-     * @param to destination depot (a BoundedSupplyContainer)
+     * @param to destination depot
      * @param color the color of the marble
      * @throws SupplyException Destination is full
      * @throws MarbleException Destination cannot accept this color of marble
@@ -85,7 +85,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
     public void assignMarble(DepotID to, MarbleColor color) throws SupplyException, MarbleException, NoSuchMethodException, LeaderException{
         if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException();}
 
-        warehouse.addMarble(to, color);
+        depotsManager.addMarble(to, color);
         unassignedSupplies.removeMarble(color);
     }
 

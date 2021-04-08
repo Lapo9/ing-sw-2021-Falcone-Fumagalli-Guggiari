@@ -88,14 +88,14 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
 
 
     @Override
-    public boolean checkAccept(DepotID space, WarehouseObjectType wot, DepotID from) {
-        return spaces.get(space.getNum()).checkAccept(wot, from);
+    public boolean additionAllowed(DepotID space, WarehouseObjectType wot, DepotID from) {
+        return spaces.get(space.getNum()).additionAllowed(wot, from);
     }
 
 
     @Override
-    public boolean checkRemove(DepotID space, WarehouseObjectType wot, DepotID to) {
-        return spaces.get(space.getNum()).checkRemove(wot, to);
+    public boolean removalAllowed(DepotID space, WarehouseObjectType wot, DepotID to) {
+        return spaces.get(space.getNum()).removalAllowed(wot, to);
     }
 
 

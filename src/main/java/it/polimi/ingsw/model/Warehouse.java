@@ -115,14 +115,14 @@ public class Warehouse implements AcceptsSupplies {
 
 
     @Override
-    public boolean checkAccept(DepotID row, WarehouseObjectType wot, DepotID from) {
-        return depots.get(row.getNum()).checkAccept(wot, from);
+    public boolean additionAllowed(DepotID row, WarehouseObjectType wot, DepotID from) {
+        return depots.get(row.getNum()).additionAllowed(wot, from);
     }
 
 
     @Override
-    public boolean checkRemove(DepotID row, WarehouseObjectType wot) {
-        return depots.get(row.getNum()).checkRemove(wot);
+    public boolean removalAllowed(DepotID row, WarehouseObjectType wot) {
+        return depots.get(row.getNum()).removalAllowed(wot);
     }
 
     //TODO

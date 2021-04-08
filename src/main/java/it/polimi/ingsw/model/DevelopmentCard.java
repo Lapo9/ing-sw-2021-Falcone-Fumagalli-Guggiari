@@ -98,14 +98,14 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
 
 
     @Override
-    public boolean checkAccept(WarehouseObjectType wot, DepotID from) {
-        return production.checkAccept(wot, from);
+    public boolean additionAllowed(WarehouseObjectType wot, DepotID from) {
+        return production.additionAllowed(wot, from);
     }
 
 
     @Override
-    public boolean checkRemove(WarehouseObjectType wot, DepotID to) {
-        return production.checkRemove(wot, to);
+    public boolean removalAllowed(WarehouseObjectType wot, DepotID to) {
+        return production.removalAllowed(wot, to);
     }
 
 

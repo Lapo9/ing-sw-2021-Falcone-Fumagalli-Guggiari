@@ -54,14 +54,14 @@ public class DepotsManager implements AcceptsSupplies {
 
 
     @Override
-    public boolean checkAccept(DepotID slot, WarehouseObjectType wot, DepotID from) {
+    public boolean additionAllowed(DepotID slot, WarehouseObjectType wot, DepotID from) {
         if (slot.getType() == DepotID.DepotType.WAREHOUSE){
-            return warehouse.checkAccept(slot, wot, from);
+            return warehouse.additionAllowed(slot, wot, from);
         }
 
         else if (slot.getType() == DepotID.DepotType.LEADER_DEPOT){
             try {
-                return leadersSpace.getLeaderAbility(slot.getNum()).checkAccept(wot, from);
+                return leadersSpace.getLeaderAbility(slot.getNum()).additionAllowed(wot, from);
             } catch (LeaderException | NoSuchMethodException e){return false;}
         }
 
@@ -72,14 +72,14 @@ public class DepotsManager implements AcceptsSupplies {
 
 
     @Override
-    public boolean checkRemove(DepotID from, WarehouseObjectType wot, DepotID to) throws NoSuchMethodException {
+    public boolean removalAllowed(DepotID from, WarehouseObjectType wot, DepotID to) throws NoSuchMethodException {
         if (from.getType() == DepotID.DepotType.WAREHOUSE){
-            return warehouse.checkRemove(from, wot, to);
+            return warehouse.removalAllowed(from, wot, to);
         }
 
         else if (from.getType() == DepotID.DepotType.LEADER_DEPOT){
             try {
-                return leadersSpace.getLeaderAbility(from.getNum()).checkRemove(wot, to);
+                return leadersSpace.getLeaderAbility(from.getNum()).removalAllowed(wot, to);
             } catch (LeaderException | NoSuchMethodException e){return false;}
         }
 

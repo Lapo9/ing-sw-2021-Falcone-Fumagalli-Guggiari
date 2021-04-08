@@ -9,10 +9,10 @@ import java.util.ArrayList;
  * the input and the output of the production
  */
 public class MutableProduction extends Production implements HasStatus{
-    private SupplyContainer mutableInput;
-    private SupplyContainer mutableOutput;
-    private final int maxInput;
-    private final int maxOutput;
+
+    private ArrayList<WarehouseObjectType> mutableInput = new ArrayList<>();
+    private ArrayList<WarehouseObjectType> mutableOutput = new ArrayList<>();
+
 
     /**
      * Class constructor
@@ -24,13 +24,16 @@ public class MutableProduction extends Production implements HasStatus{
      */
     public MutableProduction(SupplyContainer in, SupplyContainer out, int dimInput, int dimOutput){
         super(in, out);
-        maxInput = dimInput - in.getQuantity();         //maxInput is the dimension of the mutableInput
-        maxOutput = dimOutput - out.getQuantity();      //maxOutput is the dimension of the mutableOutput
-        mutableInput = new SupplyContainer();
-        mutableOutput = new SupplyContainer();
+        int maxInput = dimInput - in.getQuantity();         //maxInput is the dimension of the mutableInput
+        int maxOutput = dimOutput - out.getQuantity();      //maxOutput is the dimension of the mutableOutput
+
+        for (int i = 0; i < maxInput; ++i) {
+            mutableInput.add(WarehouseObjectType.COIN);
+        }
+        for (int i = 0; i < maxOutput; ++i) {
+            mutableOutput.add(WarehouseObjectType.COIN);
+        }
     }
-
-
 
     /**
      * Creates an object without any fixed input or output
@@ -39,11 +42,16 @@ public class MutableProduction extends Production implements HasStatus{
      * @param id depot ID of this production
      */
     public MutableProduction(int dimInput, int dimOutput){
-        super(new SupplyContainer(), new SupplyContainer()); //0 resources in fixed input/output
-        maxInput = dimInput;         //maxInput is the dimension of the mutableInput
-        maxOutput = dimOutput;      //maxOutput is the dimension of the mutableOutput
-        mutableInput = new SupplyContainer();
-        mutableOutput = new SupplyContainer();
+        super(new SupplyContainer(SupplyContainer.AcceptStrategy.none()), new SupplyContainer(SupplyContainer.AcceptStrategy.none())); //0 resources in fixed input/output
+        int maxInput = dimInput;         //maxInput is the dimension of the mutableInput
+        int maxOutput = dimOutput;      //maxOutput is the dimension of the mutableOutput
+
+        for (int i = 0; i < maxInput; ++i) {
+            mutableInput.add(WarehouseObjectType.COIN);
+        }
+        for (int i = 0; i < maxOutput; ++i) {
+            mutableOutput.add(WarehouseObjectType.COIN);
+        }
     }
 
 
@@ -57,7 +65,18 @@ public class MutableProduction extends Production implements HasStatus{
         try{
             check();
         } catch (SupplyException se){/*FIXME end program*/}
-        return new SupplyContainer(mutableOutput.sum(getOutput()));
+
+        SupplyContainer res = new SupplyContainer();
+        res.sum(output);
+        mutableOutput.forEach(warehouseObjectType -> {
+            try{
+                res.addSupply(warehouseObjectType);
+            } catch (SupplyException se){/*FIXME end program*/}
+        });
+
+        currentSupply.clearSupplies();
+
+        return res;
     }
 
     /**
@@ -65,67 +84,28 @@ public class MutableProduction extends Production implements HasStatus{
      */
     @Override
     public void check() throws SupplyException{
-        SupplyContainer temp = getInput().sum(mutableInput);
-        if(temp.confront(getCurrentSupply()))
+        SupplyContainer tmp = new SupplyContainer();
+
+        tmp.sum(input);
+        mutableInput.forEach(warehouseObjectType -> {
+            try{
+                tmp.addSupply(warehouseObjectType);
+            } catch (SupplyException se){/*FIXME end program*/}
+        });
+
+        if(!tmp.equals(currentSupply))
             throw new SupplyException();
     }
 
 
-    /**
-     * The addInput method adds a WarehouseObjectType to the mutableInput
-     * @param wot is the type of supply that the player wants to add to the mutableInput SupplyContainer
-     * @throws BoundsException if the mutableInput is already full
-     */
-    public void addInput(WarehouseObjectType wot)throws BoundsException {
-        int temp = mutableInput.getQuantity();
-        if (temp >= maxInput)
-            throw new BoundsException();
-
-        mutableInput.addSupply(wot);
-
+    public void swapInput(int num, WarehouseObjectType newInput){
+        mutableInput.set(num, newInput);
     }
 
-    /**
-     * The addOutput method adds a WarehouseObjectType to the mutableOuput
-     * @param wot is the type of supply that the player wants to add to the mutableOutput SupplyContainer
-     * @throws BoundsException if the mutableOutput is already full
-     */
-    public void addOutput(WarehouseObjectType wot) throws BoundsException{
-        int temp = mutableOutput.getQuantity();
-        if (temp >= maxOutput)
-            throw new BoundsException();
-
-        mutableOutput.addSupply(wot);
+    public void swapOutput(int num, WarehouseObjectType newOutput){
+        mutableOutput.set(num, newOutput);
     }
 
-    /**
-     * The removeInput method removes a WarehouseObjectType from the mutableInput
-     * @param wot is the type of supply that the player wants to remove from the mutableInput SupplyContainer
-     * @throws BoundsException if the mutableInput is already empty
-     */
-    public void removeInput(WarehouseObjectType wot) throws BoundsException{
-        int temp = mutableInput.getQuantity();
-        if (temp == 0)
-            throw new BoundsException();
-        try {
-            mutableInput.removeSupply(wot);
-        } catch (SupplyException e) {
-            //FIXME
-        }
-    }
-
-    /**
-     * The removeOutput method removes a WarehouseObjectType from the mutableOutput
-     * @param wot is the type of supply that the player wants to remove from the mutableOutput SupplyContainer
-     * @throws BoundsException if the mutableOutput is already empty
-     */
-    public void removeOutput(WarehouseObjectType wot) throws BoundsException{
-        int temp = mutableOutput.getQuantity();
-        if (temp == 0)
-            throw new BoundsException();
-
-        mutableOutput.addSupply(wot);
-    }
 
     @Override
     public ArrayList<Integer> getStatus(){

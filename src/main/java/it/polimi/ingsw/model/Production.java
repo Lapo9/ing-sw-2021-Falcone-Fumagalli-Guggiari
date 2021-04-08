@@ -22,7 +22,7 @@ public class Production implements AcceptsSupplies, HasStatus{
      * @param in is a SupplyContainer which contains the supplies needed as input
      * @param out is a SupplyContainer which contains the supplies produces by output when the production is triggered
      */
-    public Production(SupplyContainer in, SupplyContainer out, ProductionManager manager){
+    public Production(SupplyContainer in, SupplyContainer out){
         input = in;
         output = out;
     }
@@ -65,13 +65,13 @@ public class Production implements AcceptsSupplies, HasStatus{
 
 
     @Override
-    public boolean checkAccept(WarehouseObjectType wot, DepotID from) {
-        return currentSupply.checkAccept(wot, from);
+    public boolean additionAllowed(WarehouseObjectType wot, DepotID from) {
+        return currentSupply.additionAllowed(wot, from);
     }
 
     @Override
-    public boolean checkRemove(WarehouseObjectType wot, DepotID to) {
-        return currentSupply.checkRemove(wot, to);
+    public boolean removalAllowed(WarehouseObjectType wot, DepotID to) {
+        return currentSupply.removalAllowed(wot, to);
     }
 
     @Override
