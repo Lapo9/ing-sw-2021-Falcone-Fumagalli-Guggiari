@@ -88,7 +88,7 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
     }
 
     /**
-     * The goAhead method moves the player position ahead of num tiles in the FaithTrack
+     * Moves the player position ahead of num tiles in the FaithTrack
      * @param num is the number of steps taken by the player
      * @return true if a vaticanReport has been issued
      */
@@ -100,8 +100,8 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
         return vr;
     }
 
-    /**
-     * The goAhead method moves the player one tile ahead in the FaithTrack
+    /*
+     * Moves the player one tile ahead in the FaithTrack
      * @return true is a vaticanReport has been issued
      */
     private boolean goAhead(){
@@ -119,7 +119,7 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
     }
 
     /**
-     * The vaticanReport method triggers a vatican report
+     * Triggers a vatican report
      */
     public void vaticanReport(){
         //Check if the player who called the vaticanReport method is the one who activated it

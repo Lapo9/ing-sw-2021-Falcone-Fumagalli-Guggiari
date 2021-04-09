@@ -127,36 +127,36 @@ public class MarbleContainerTest {
     @Test
     public void colorToSupply_yellow(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
-        assertEquals(WarehouseObjectType.COIN, mc.colorToSupply(MarbleColor.YELLOW));
+        assertEquals(WarehouseObjectType.COIN, MarbleContainer.colorToSupply(MarbleColor.YELLOW));
     }
 
     @Test
     public void colorToSupply_blue(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
-        assertEquals(WarehouseObjectType.SHIELD, mc.colorToSupply(MarbleColor.BLUE));
+        assertEquals(WarehouseObjectType.SHIELD, MarbleContainer.colorToSupply(MarbleColor.BLUE));
     }
 
     @Test
     public void colorToSupply_grey(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
-        assertEquals(WarehouseObjectType.STONE, mc.colorToSupply(MarbleColor.GREY));
+        assertEquals(WarehouseObjectType.STONE, MarbleContainer.colorToSupply(MarbleColor.GREY));
     }
 
     @Test
     public void colorToSupply_violet(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
-        assertEquals(WarehouseObjectType.SERVANT, mc.colorToSupply(MarbleColor.VIOLET));
+        assertEquals(WarehouseObjectType.SERVANT, MarbleContainer.colorToSupply(MarbleColor.VIOLET));
     }
 
     @Test
     public void colorToSupply_red(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
-        assertEquals(WarehouseObjectType.FAITH_MARKER, mc.colorToSupply(MarbleColor.RED));
+        assertEquals(WarehouseObjectType.FAITH_MARKER, MarbleContainer.colorToSupply(MarbleColor.RED));
     }
 
     @Test
     public void colorToSupply_whiteEqualsNull(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
-        assertNull(mc.colorToSupply(MarbleColor.WHITE));
+        assertNull(MarbleContainer.colorToSupply(MarbleColor.WHITE));
     }
 }

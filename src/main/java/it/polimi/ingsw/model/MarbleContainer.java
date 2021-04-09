@@ -34,9 +34,9 @@ public class MarbleContainer implements HasStatus {
     }
 
     /**
-     * The getQuantity method returns the quantity of the marble type passed as input that currently is in the MarbleContainer
+     * Returns the quantity of the marbles color passed as input that currently are in the MarbleContainer
      * @param mcs colors to return the sum of the quantity
-     * @return is the marble quantity of the given type present in the MarbleContainer
+     * @return the marble quantity of the given type present in the MarbleContainer
      */
     public int getQuantity(MarbleColor... mcs){
 
@@ -60,7 +60,7 @@ public class MarbleContainer implements HasStatus {
 
 
     /**
-     * Removes a marble of the specified color.
+     * Removes a marble of the specified color
      * @param mc color to remove
      * @throws MarbleException There isn't a marble of the specified color
      */
@@ -123,11 +123,11 @@ public class MarbleContainer implements HasStatus {
 
     //TODO
     public ArrayList<Integer> getStatus(){
-
+        return null;
     }
 
     /**
-     * The colorToSupply method can turn the MarbleColor in input in the right WareHouseObjectType
+     * Turns the MarbleColor in input in the right WarehouseObjectType
      * @param mc is a MarbleColor
      * @return the WarehouseObjectType of the MarbleColor in input
      */
