@@ -47,7 +47,7 @@ public class SupplyContainerTest {
     public void confront_equals() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         SupplyContainer sc2 = new SupplyContainer(3, 7, 7, 2, 0);
-        boolean res = sc1.confront(sc2);
+        boolean res = sc1.equals(sc2);
         assertEquals(true, res);
     }
 
@@ -55,7 +55,7 @@ public class SupplyContainerTest {
     public void confront_notEquals() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         SupplyContainer sc2 = new SupplyContainer(3, 7, 7, 0, 2);
-        boolean res = sc1.confront(sc2);
+        boolean res = sc1.equals(sc2);
         assertEquals(false, res);
     }
 
@@ -172,7 +172,7 @@ public class SupplyContainerTest {
     public void clearSupplies() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
 
-        SupplyContainer res = sc1.clearSupplies();
+        SupplyContainer res = sc1.clearSupplies().first;
 
         int[] objectsResExpected = {3, 7, 7, 2, 0};
 

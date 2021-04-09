@@ -112,7 +112,7 @@ public class MutableProduction extends Production implements HasStatus{
      * @param newOutput New supply type to add (cannot be FAITH_MARKER or NO_TYPE)
      */
     public void swapOutput(int num, WarehouseObjectType newOutput) throws SupplyException{
-        if(newOutput == WarehouseObjectType.FAITH_MARKER || newOutput == WarehouseObjectType.NO_TYPE){
+        if(newOutput == WarehouseObjectType.NO_TYPE){
             throw new SupplyException();
         }
         mutableOutput.set(num, newOutput);

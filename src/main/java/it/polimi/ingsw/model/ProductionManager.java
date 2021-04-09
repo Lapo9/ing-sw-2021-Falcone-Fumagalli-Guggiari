@@ -33,13 +33,14 @@ public class ProductionManager implements AcceptsSupplies{
 
     @Override
     public void addSupply(DepotID slot, WarehouseObjectType wot, DepotID from) throws SupplyException {
-        //check if you can add, if not throw
+        //TODO check if you can add, if not throw
         additionAllowed(slot, wot, from);
 
         //add supply to common "virtual" reserve
         if (from.getSource() != DepotID.SourceType.ANY) {
             containers.get(from.getSource()).addSupply(wot, from);
         }
+
 
         //actual addition, cannot fail cause of the previous check
         if (slot.getType() == DepotID.DepotType.DEVELOPMENT){
@@ -63,7 +64,7 @@ public class ProductionManager implements AcceptsSupplies{
 
     @Override
     public void removeSupply(DepotID slot, WarehouseObjectType wot, DepotID to) throws SupplyException {
-        //check if you can remove, if not throw
+        //TODO check if you can remove, if not throw
         removalAllowed(slot, wot, to);
 
 
@@ -185,7 +186,7 @@ public class ProductionManager implements AcceptsSupplies{
 
         //initially try to remove from the strongbox, if you can't try from the depots
         Pair<SupplyContainer, SupplyContainer> res = new Pair<>(new SupplyContainer(), new SupplyContainer());
-        //for each type of supply
+        //for each type of supply FIXME
         for (WarehouseObjectType wot : WarehouseObjectType.values()) {
             //for each supply of the processed type removed previously
             for (int i = 0; i<removed.getQuantity(wot); ++i) {
@@ -204,7 +205,7 @@ public class ProductionManager implements AcceptsSupplies{
         return res;
     }
 
-    
+
     public SupplyContainer produce(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base){
         //get productions outputs
         SupplyContainer developmentProduction = developments.produce(s1, s2, s3);

@@ -227,7 +227,6 @@ public interface AcceptsSupplies {
      */
     public Pair<SupplyContainer, SupplyContainer> clearSupplies() throws NoSuchMethodException;
 
-
     /**
      * Removes all of the supplies in the specified storage.
      * @param slot Storage to clear.
@@ -236,7 +235,5 @@ public interface AcceptsSupplies {
     public default Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) throws NoSuchMethodException {
         throw new NoSuchMethodException();
     }
-
-
 
 }

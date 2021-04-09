@@ -14,6 +14,10 @@ import java.util.Collections;
  */
 public class Warehouse implements AcceptsSupplies {
 
+    private ArrayList<SupplyContainer> depots = new ArrayList<>();
+
+
+
     /**
      * Creates a new warehouse.
      * @param ls Warehouse needs to know leaders, because if leaders have ability of Depot type, then the Warehouse has the responsibility to manage their resources.
@@ -138,7 +142,5 @@ public class Warehouse implements AcceptsSupplies {
     public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) {
         return depots.get(slot.getNum()).clearSupplies();
     }
-
-    private ArrayList<SupplyContainer> depots = new ArrayList<>();
 
 }

@@ -106,7 +106,7 @@ public class DepotsManager implements AcceptsSupplies {
 
     @Override
     public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) {
-        SupplyContainer result;
+        SupplyContainer result = new SupplyContainer();
 
         if (slot.getType() == DepotID.DepotType.WAREHOUSE){
             result = warehouse.clearSupplies(slot).first;
@@ -127,7 +127,7 @@ public class DepotsManager implements AcceptsSupplies {
             /*TODO terminate the program*/
         }
 
-        return result;
+        return new Pair<>(result, new SupplyContainer());
     }
 
 
