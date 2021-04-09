@@ -106,7 +106,7 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
 
 
     @Override
-    public SupplyContainer clearSupplies() {
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies() {
         return cards.get(cards.size()-1).clearSupplies();
     }
 

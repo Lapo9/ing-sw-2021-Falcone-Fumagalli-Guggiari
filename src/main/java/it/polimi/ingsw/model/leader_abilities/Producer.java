@@ -1,10 +1,13 @@
 package it.polimi.ingsw.model.leader_abilities;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.*;
 
 
-//TODO check the class and write javadoc
+/**
+ * This implementation of LeaderAbility only supports the methods related to the production process.
+ */
 public class Producer implements LeaderAbility {
 
     MutableProduction production;
@@ -12,10 +15,9 @@ public class Producer implements LeaderAbility {
 
     /**
      * Creates a new producer leader, whose fixed output is always a faith point
-     * @param fixedInput what is the fixed input of the leader?
-     * @param leaderID is this leader 1 or 2?
+     * @param fixedInput Fixed input of the leader
      */
-    public Producer(SupplyContainer fixedInput, int leaderID){
+    public Producer(SupplyContainer fixedInput){
         SupplyContainer fixedOutput = new SupplyContainer();
         try {
             fixedOutput.addSupply(WarehouseObjectType.FAITH_MARKER);
@@ -38,7 +40,7 @@ public class Producer implements LeaderAbility {
 
 
     @Override
-    public void changeOutput(WarehouseObjectType wot) {
+    public void changeOutput(WarehouseObjectType wot) throws SupplyException{
         production.swapOutput(0, wot);
     }
 
@@ -56,7 +58,19 @@ public class Producer implements LeaderAbility {
 
 
     @Override
-    public SupplyContainer clearSupplies() {
+    public boolean additionAllowed(WarehouseObjectType wot, DepotID from) {
+        return production.additionAllowed(wot, from);
+    }
+
+
+    @Override
+    public boolean removalAllowed(WarehouseObjectType wot, DepotID to) throws NoSuchMethodException {
+        return production.removalAllowed(wot, to);
+    }
+
+
+    @Override
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies() {
         return production.clearSupplies();
     }
 }

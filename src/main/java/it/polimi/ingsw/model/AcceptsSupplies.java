@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.*;
 
 /**
@@ -9,7 +10,7 @@ import it.polimi.ingsw.exceptions.*;
 public interface AcceptsSupplies {
 
     /**
-     * Adds the supply to the storage.
+     * Adds the supply to the storage. Beforehand the corresponding additionAllowed method is called to check if the operation can be performed.
      * @param wot One of the five types of resources in the game
      * @throws SupplyException The container cannot accept the supply
      * @throws NoSuchMethodException More information needed to store the supply
@@ -19,7 +20,7 @@ public interface AcceptsSupplies {
     }
 
     /**
-     * Adds the supply to the specified storage.
+     * Adds the supply to the specified storage. Beforehand the corresponding additionAllowed method is called to check if the operation can be performed.
      * @param slot Storage to add the supply to
      * @param wot One of the five types of resources in the game
      * @throws SupplyException The container cannot accept the supply
@@ -31,6 +32,7 @@ public interface AcceptsSupplies {
 
     /**
      * Adds the supply to the storage. Information about the source of the object needed.
+     * Beforehand the corresponding additionAllowed method is called to check if the operation can be performed.
      * @param wot One of the five types of resources in the game
      * @param from Source of the supply
      * @throws SupplyException The container cannot accept the supply
@@ -42,6 +44,7 @@ public interface AcceptsSupplies {
 
     /**
      * Adds the supply to the specified storage. Information about the source of the object needed.
+     * Beforehand the corresponding additionAllowed method is called to check if the operation can be performed.
      * @param slot Storage to add the supply to
      * @param wot One of the five types of resources in the game
      * @param from Source of the supply
@@ -61,7 +64,7 @@ public interface AcceptsSupplies {
 
 
     /**
-     * Removes the supply from the storage.
+     * Removes the supply from the storage. Beforehand the corresponding removalAllowed method is called to check if the operation can be performed.
      * @param wot One of the five types of resources in the game
      * @throws SupplyException The container cannot remove the supply
      * @throws NoSuchMethodException More information needed to remove the supply
@@ -71,18 +74,7 @@ public interface AcceptsSupplies {
     }
 
     /**
-     * Removes the supply from the storage. Information about the destination of the object needed.
-     * @param wot One of the five types of resources in the game
-     * @param to Destination of the supply
-     * @throws SupplyException The container cannot remove the supply
-     * @throws NoSuchMethodException More information needed to remove the supply
-     */
-    public default void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException, NoSuchMethodException, LeaderException {
-        removeSupply(wot);
-    }
-
-    /**
-     * Removes the supply from the specified storage.
+     * Removes the supply from the specified storage. Beforehand the corresponding removalAllowed method is called to check if the operation can be performed.
      * @param from Storage to remove the supply from
      * @param wot One of the five types of resources in the game
      * @throws SupplyException The container cannot remove the supply
@@ -93,7 +85,20 @@ public interface AcceptsSupplies {
     }
 
     /**
+     * Removes the supply from the storage. Information about the destination of the object needed.
+     * Beforehand the corresponding removalAllowed method is called to check if the operation can be performed.
+     * @param wot One of the five types of resources in the game
+     * @param to Destination of the supply
+     * @throws SupplyException The container cannot remove the supply
+     * @throws NoSuchMethodException More information needed to remove the supply
+     */
+    public default void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException, NoSuchMethodException, LeaderException {
+        removeSupply(wot);
+    }
+
+    /**
      * Removes the supply from the specified storage. Information about the destination of the object needed.
+     * Beforehand the corresponding removalAllowed method is called to check if the operation can be performed.
      * @param from Storage to remove the supply from
      * @param wot One of the five types of resources in the game
      * @param to Destination of the supply
@@ -175,17 +180,6 @@ public interface AcceptsSupplies {
     }
 
     /**
-     * Checks if the removal of the supply from the storage, direct to the specified destination, is allowed.
-     * @param wot One of the five types of resources in the game
-     * @param to Destination of the supply
-     * @return Whether the container can remove the supply or not
-     * @throws NoSuchMethodException More information needed to remove the supply
-     */
-    public default boolean removalAllowed(WarehouseObjectType wot, DepotID to) throws NoSuchMethodException {
-        return removalAllowed(wot);
-    }
-
-    /**
      * Checks if the removal of the supply from the specified storage is allowed.
      * @param from Storage to remove the supply from
      * @param wot One of the five types of resources in the game
@@ -193,6 +187,17 @@ public interface AcceptsSupplies {
      * @throws NoSuchMethodException More information needed to remove the supply
      */
     public default boolean removalAllowed(DepotID from, WarehouseObjectType wot) throws NoSuchMethodException {
+        return removalAllowed(wot);
+    }
+
+    /**
+     * Checks if the removal of the supply from the storage, direct to the specified destination, is allowed.
+     * @param wot One of the five types of resources in the game
+     * @param to Destination of the supply
+     * @return Whether the container can remove the supply or not
+     * @throws NoSuchMethodException More information needed to remove the supply
+     */
+    public default boolean removalAllowed(WarehouseObjectType wot, DepotID to) throws NoSuchMethodException {
         return removalAllowed(wot);
     }
 
@@ -217,10 +222,21 @@ public interface AcceptsSupplies {
 
 
     /**
-     * Removes all the supplies.
+     * Removes all of the supplies.
      * @return A pair of SupplyContainer(s) containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
      */
-    @Deprecated
-    public SupplyContainer clearSupplies() throws NoSuchMethodException;
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies() throws NoSuchMethodException;
+
+
+    /**
+     * Removes all of the supplies in the specified storage.
+     * @param slot Storage to clear.
+     * @return A pair of SupplyContainer(s) containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     */
+    public default Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) throws NoSuchMethodException {
+        throw new NoSuchMethodException();
+    }
+
+
 
 }

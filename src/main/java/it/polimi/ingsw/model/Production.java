@@ -2,10 +2,13 @@ package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.*;
 
 /**
- * The Production class represents the production mechanism of the game
+ * The Production class represents the production mechanism of the game.
+ * It has an input and an output, and can store supplies.
+ * When the production is triggered, if the input equals the current supply store, then the current supply store is wiped and the output is returned.
  */
 public class Production implements AcceptsSupplies, HasStatus{
 
@@ -14,13 +17,13 @@ public class Production implements AcceptsSupplies, HasStatus{
     protected SupplyContainer currentSupply = new SupplyContainer(  SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.PAYCHECK).negate().
                                                                         and(SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.FAITH_MARKER).negate()),
                                                                     SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.PAYCHECK).negate());
-    //TODO maybe add that you cannot add more that the  max?
+    //TODO maybe add that you cannot add more than the max?
 
 
     /**
      * Class constructor
-     * @param in is a SupplyContainer which contains the supplies needed as input
-     * @param out is a SupplyContainer which contains the supplies produces by output when the production is triggered
+     * @param in SupplyContainer which contains the supplies needed as input
+     * @param out SupplyContainer which contains the supplies produces by output when the production is triggered
      */
     public Production(SupplyContainer in, SupplyContainer out){
         input = in;
@@ -31,9 +34,9 @@ public class Production implements AcceptsSupplies, HasStatus{
 
 
     /**
-     * The produce method activates the production only if the supplies in the currentSupply are equal to the one in the
-     * input SupplyContainer
-     * @return a SupplyContainer which container the output resources
+     * Activates the production. If the input equals the current supply store, then the current supply store is wiped and the output is returned.
+     * If not a fatal error is produced and the program is terminated.
+     * @return A SupplyContainer containing the output
      */
     public SupplyContainer produce(){
         try {
@@ -44,25 +47,24 @@ public class Production implements AcceptsSupplies, HasStatus{
     }
 
     /**
-     * The check method verifies if the supplies contained in the currentSupply are right to start a production
-     * @throws SupplyException if the currentSupply doesn't contain the right supplies
+     * Verifies if the current supplies present in the production depot are the same as the input supplies.
+     * @throws SupplyException The current supplies present in the production depot are not the same as the input supplies.
      */
     public void check() throws SupplyException{
         if(!input.equals(currentSupply))
             throw new SupplyException();
     }
 
+
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException{
         currentSupply.addSupply(wot, from);
     }
 
-
     @Override
     public void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException{
         currentSupply.removeSupply(wot);
     }
-
 
     @Override
     public boolean additionAllowed(WarehouseObjectType wot, DepotID from) {
@@ -74,11 +76,10 @@ public class Production implements AcceptsSupplies, HasStatus{
         return currentSupply.removalAllowed(wot, to);
     }
 
+
     @Override
-    public SupplyContainer clearSupplies(){
-        SupplyContainer tmp = new SupplyContainer(currentSupply);
-        manager.notifyDeletion(currentSupply.clearSupplies()); //tell the manager about the cleared resources
-        return tmp;
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies(){
+        return currentSupply.clearSupplies();
     }
 
 

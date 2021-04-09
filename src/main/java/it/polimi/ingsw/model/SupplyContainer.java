@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.TriPredicate;
 import it.polimi.ingsw.exceptions.*;
 
@@ -8,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * The SupplyContainer class can store resources
+ * The SupplyContainer class can store supplies given a policy that decides what supplies are acceptable/removable based on the current state of the container, the type of the object to be added and the source of the object to be added.
  */
 public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
@@ -18,7 +19,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
 
     /**
-     * Class constructor
+     * Creates a new empty container that can accept and remove any supply.
      */
     public SupplyContainer() {
         supplies.put(WarehouseObjectType.COIN, 0);
@@ -28,6 +29,10 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         supplies.put(WarehouseObjectType.FAITH_MARKER, 0);
     }
 
+    /**
+     * Creates a new empty container that can remove any supply and can accept supplies based on the given policy.
+     * @param acceptCheck Predicate that decides what supplies can be accepted based on the current state of the container, the type of the object to be added and the source of the object to be added
+     */
     public SupplyContainer(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck) {
         supplies.put(WarehouseObjectType.COIN, 0);
         supplies.put(WarehouseObjectType.SERVANT, 0);
@@ -38,7 +43,11 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         this.tryAdd = acceptCheck;
     }
 
-
+    /**
+     * Creates a new empty container that can accept/remove supplies based on the given policies.
+     * @param acceptCheck Predicate that decides what supplies can be accepted based on the current state of the container, the type of the object to be added and the source of the object to be added
+     * @param removeCheck Predicate that decides what supplies can be removed from the container based on the current state of the container, the type of the object to be added and the source of the object to be added
+     */
     public SupplyContainer(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> removeCheck) {
         supplies.put(WarehouseObjectType.COIN, 0);
         supplies.put(WarehouseObjectType.SERVANT, 0);
@@ -51,12 +60,12 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
     /**
-     * Create a supply container and fills it with the passed parameters.
-     * @param coin coins
-     * @param stone stones
-     * @param servant servants
-     * @param shield shields
-     * @param faithMarker faith markers
+     * Creates a new container with the specified initial content, that can accept and remove any supply.
+     * @param coin Coins
+     * @param stone Stones
+     * @param servant Servants
+     * @param shield Shields
+     * @param faithMarker Faith markers
      */
     public SupplyContainer(int coin, int stone, int servant, int shield, int faithMarker) {
         supplies.put(WarehouseObjectType.COIN, coin);
@@ -67,12 +76,13 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
     /**
-     * Create a supply container and fills it with the passed parameters.
-     * @param coin coins
-     * @param stone stones
-     * @param servant servants
-     * @param shield shields
-     * @param faithMarker faith markers
+     * Creates a new empty container that can remove any supply and can accept supplies based on the given policy.
+     * @param coin Coins
+     * @param stone Stones
+     * @param servant Servants
+     * @param shield Shields
+     * @param faithMarker Faith markers
+     * @param acceptCheck Predicate that decides what supplies can be accepted based on the current state of the container, the type of the object to be added and the source of the object to be added
      */
     public SupplyContainer(int coin, int stone, int servant, int shield, int faithMarker, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck) {
         supplies.put(WarehouseObjectType.COIN, coin);
@@ -84,6 +94,16 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         this.tryAdd = acceptCheck;
     }
 
+    /**
+     * Creates a new empty container that can accept/remove supplies based on the given policies
+     * @param coin Coins
+     * @param stone Stones
+     * @param servant Servants
+     * @param shield Shields
+     * @param faithMarker Faith markers
+     * @param acceptCheck Predicate that decides what supplies can be accepted based on the current state of the container, the type of the object to be added and the source of the object to be added
+     * @param removeCheck Predicate that decides what supplies can be removed from the container based on the current state of the container, the type of the object to be added and the source of the object to be added
+     */
     public SupplyContainer(int coin, int stone, int servant, int shield, int faithMarker, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> removeCheck) {
         supplies.put(WarehouseObjectType.COIN, coin);
         supplies.put(WarehouseObjectType.SERVANT, servant);
@@ -97,7 +117,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
     /**
      * Copy constructor.
-     * @param sc object to copy
+     * @param sc Container to copy
      */
     public SupplyContainer(SupplyContainer sc){
         supplies.put(WarehouseObjectType.COIN, sc.getQuantity(WarehouseObjectType.COIN));
@@ -107,8 +127,14 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         supplies.put(WarehouseObjectType.FAITH_MARKER, sc.getQuantity(WarehouseObjectType.FAITH_MARKER));
 
         tryAdd = sc.tryAdd;
+        tryRemove = sc.tryRemove;
     }
 
+    /**
+     * Copy constructor, but the accept policy is changed.
+     * @param sc Container to copy
+     * @param acceptCheck Predicate that decides what supplies can be accepted based on the current state of the container, the type of the object to be added and the source of the object to be added
+     */
     public SupplyContainer(SupplyContainer sc, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck){
         supplies.put(WarehouseObjectType.COIN, sc.getQuantity(WarehouseObjectType.COIN));
         supplies.put(WarehouseObjectType.SERVANT, sc.getQuantity(WarehouseObjectType.SERVANT));
@@ -117,15 +143,16 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         supplies.put(WarehouseObjectType.FAITH_MARKER, sc.getQuantity(WarehouseObjectType.FAITH_MARKER));
 
         this.tryAdd = acceptCheck;
+        tryRemove = sc.tryRemove;
     }
 
 
 
 
     /**
-     * The getQuantity method returns the quantity of the supply type passed as input that currently is in the SupplyContainer
-     * @param wots resources to return the sum of the quantity
-     * @return is the sum supply quantity of the given type present in the SupplyContainer
+     * Returns the amount of the supply types passed as arguments currently stored in the container.
+     * @param wots Supplies to return the sum of the quantity
+     * @return The amount of the supply types passed as arguments currently stored in the container
      */
     public int getQuantity(WarehouseObjectType... wots){
         int temp = 0;
@@ -136,7 +163,10 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         return temp;
     }
 
-
+    /**
+     * Returns the amount of all of the supplies currently stored in the container.
+     * @return The amount of all of the supplies currently stored in the container
+     */
     public int getQuantity(){
         int tot = 0;
         for (Map.Entry<WarehouseObjectType, Integer> type : supplies.entrySet()){
@@ -147,7 +177,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
 
     /**
-     * Returns the type of the container if only one type of object is present.
+     * Returns the type of the container if only one type of supply is present.
      * @return The type of the object present in the container, if no objects are present NO_TYPE is returned
      * @throws SupplyException If more than one object type is present
      */
@@ -169,33 +199,37 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
 
+    /**
+     * Modifies the accept policy.
+     * @param acceptCheck New accept policy
+     */
     public void setAcceptCheck(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck) {
         this.tryAdd = acceptCheck;
     }
 
-
+    /**
+     * Modifies the remove policy.
+     * @param removeCheck New remove policy
+     */
     public void setRemoveCheck(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> removeCheck) {
         this.tryRemove = removeCheck;
     }
 
 
-
     /**
-     * The add method is used when you have two different SupplyContainer, sc1 and sc2, and you want to add all the
-     * elements of the second container in the first one
-     * @param sc is the SupplyContainer that you want to add to your SupplyContainer
-     * @return this object, to enable chain calls.
+     * Adds to this container the container passed ad argument.
+     * @param sc The container that you want to add to this container
+     * @return This container, to enable chain calls.
      */
     public SupplyContainer sum(SupplyContainer sc){
-        supplies.forEach((type, qty) -> {qty += sc.getQuantity(type);});
+        supplies.forEach((type, qty) -> qty += sc.getQuantity(type));
         return this;
     }
 
-
     /**
-     * The confront method returns true if this.SupplyContainer is equal to sc
-     * @param sc is a SupplyContainer
-     * @return true if this.SupplyContainer is equal to sc
+     * Compare the content of this container with the content of the container passed as argument.
+     * @param sc Container to confront to this
+     * @return True if the content of this container is the same as the content of the container passed as argument
      */
     public boolean equals(SupplyContainer sc){
         boolean equals = true;
@@ -227,6 +261,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
             throw new SupplyException();
         }
     }
+
 
     @Override
     public void removeSupply(WarehouseObjectType wot) throws SupplyException{
@@ -271,13 +306,13 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
 
-
     @Override
-    public SupplyContainer clearSupplies(){
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies(){
         SupplyContainer tmp = new SupplyContainer(this);
         supplies.forEach((type, qty) -> {supplies.put(type, 0);});
-        return tmp;
+        return new Pair<>(tmp, new SupplyContainer());
     }
+
 
 
     /**
@@ -310,6 +345,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
 
+
     //TODO
     @Override
     public ArrayList<Integer> getStatus(){
@@ -317,7 +353,9 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     }
 
 
-
+    /**
+     * A list of static functions that return common TriPredicate that can be used as accept/remove policy for a SupplyContainer.
+     */
     public static class AcceptStrategy {
 
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> any(){
@@ -391,7 +429,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> onlyFrom(DepotID.SourceType source){
             return (container, type, depot) -> {
-                return depot.getSource() == source || depot.getSource() == DepotID.SourceType.ANY;
+                return depot.getSource() == source;
             };
         }
 

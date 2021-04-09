@@ -15,9 +15,8 @@ public class Depot implements LeaderAbility {
 
 
     /**
-     * Builds a Depot with the specified type and always 2 as maximum storage.
-     * @param type type contained by the depot
-     * @param abilityID is this leader 1 or 2?
+     * Builds a new depot leader with the specified type and always 2 as maximum storage.
+     * @param type Type contained by the depot
      */
     public Depot(WarehouseObjectType type){
         depot = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFromMaxSpecificType(type, 2, DepotID.SourceType.DEPOT));
@@ -53,7 +52,19 @@ public class Depot implements LeaderAbility {
 
 
     @Override
-    public SupplyContainer clearSupplies() {
+    public boolean additionAllowed(WarehouseObjectType wot, DepotID from) {
+        return depot.additionAllowed(wot, from);
+    }
+
+
+    @Override
+    public boolean removalAllowed(WarehouseObjectType wot, DepotID to) {
+        return depot.removalAllowed(wot, to);
+    }
+
+
+    @Override
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies() {
         return depot.clearSupplies();
     }
 

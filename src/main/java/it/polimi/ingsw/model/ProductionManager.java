@@ -1,7 +1,10 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.LeaderException;
 import it.polimi.ingsw.exceptions.SupplyException;
+import it.polimi.ingsw.model.leader_abilities.Depot;
+import it.polimi.ingsw.model.leader_abilities.Producer;
 
 import java.util.HashMap;
 
@@ -58,7 +61,6 @@ public class ProductionManager implements AcceptsSupplies{
         }
     }
 
-
     @Override
     public void removeSupply(DepotID slot, WarehouseObjectType wot, DepotID to) throws SupplyException {
         //check if you can remove, if not throw
@@ -93,7 +95,6 @@ public class ProductionManager implements AcceptsSupplies{
         } catch(Exception e){/*TODO terminate the program because we checked before, so everything should go smooth*/}
     }
 
-
     @Override
     public boolean additionAllowed(DepotID slot, WarehouseObjectType wot, DepotID from){
 
@@ -116,7 +117,6 @@ public class ProductionManager implements AcceptsSupplies{
         }
     }
 
-
     @Override
     public boolean removalAllowed(DepotID from, WarehouseObjectType wot, DepotID to) {
         if (from.getType() == DepotID.DepotType.DEVELOPMENT){
@@ -138,8 +138,73 @@ public class ProductionManager implements AcceptsSupplies{
         }
     }
 
+    @Override
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies() {
+        developments.clearSupplies();
+        baseProduction.clearSupplies();
+
+        //clear only producer leaders
+        for (int i = 0; i<2; ++i){
+            try {
+                if (leadersSpace.getLeaderAbility(0) instanceof Producer) {
+                    leadersSpace.getLeaderAbility(i).clearSupplies();
+                }
+            } catch (LeaderException | NoSuchMethodException e){}
+        }
+
+        return new Pair<>(containers.get(DepotID.SourceType.DEPOT).clearSupplies().first, containers.get(DepotID.SourceType.DEPOT).clearSupplies().second);
+    }
+
+    @Override
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) throws NoSuchMethodException {
+        SupplyContainer removed = new SupplyContainer();
+
+        if (slot.getType() == DepotID.DepotType.DEVELOPMENT){
+            removed = developments.clearSupplies(slot).first;
+        }
+
+        else if (slot.getType() == DepotID.DepotType.BASE_PRODUCTION){
+            removed = baseProduction.clearSupplies(slot).first;
+        }
+
+        else if (slot.getType() == DepotID.DepotType.LEADER_PRODUCTION){
+            try {
+                if (leadersSpace.getLeaderAbility(0) instanceof Depot) {
+                    removed = leadersSpace.getLeaderAbility(slot.getNum()).clearSupplies(slot).first;
+                }
+                else {
+                    //TODO terminate the program
+                }
+            } catch (LeaderException | NoSuchMethodException e){/*TODO terminate program*/}
+        }
+
+        else {
+            /*TODO terminate program*/
+        }
 
 
+        //initially try to remove from the strongbox, if you can't try from the depots
+        Pair<SupplyContainer, SupplyContainer> res = new Pair<>(new SupplyContainer(), new SupplyContainer());
+        //for each type of supply
+        for (WarehouseObjectType wot : WarehouseObjectType.values()) {
+            //for each supply of the processed type removed previously
+            for (int i = 0; i<removed.getQuantity(wot); ++i) {
+                try {
+                    containers.get(DepotID.SourceType.STRONGBOX).removeSupply(wot); //try to remove from strongbox
+                    res.second.addSupply(wot); //add supply to return from strongbox
+                } catch (SupplyException se){
+                    try {
+                        containers.get(DepotID.SourceType.DEPOT).removeSupply(wot); //if cannot remove from strongbox try to remove from depots
+                        res.first.addSupply(wot); //add supply to return from depots
+                    } catch (SupplyException se1){/*TODO terminate program*/}
+                }
+            }
+        }
+
+        return res;
+    }
+
+    
     public SupplyContainer produce(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base){
         //get productions outputs
         SupplyContainer developmentProduction = developments.produce(s1, s2, s3);

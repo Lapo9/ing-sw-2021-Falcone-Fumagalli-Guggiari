@@ -5,8 +5,7 @@ import it.polimi.ingsw.exceptions.*;
 import java.util.ArrayList;
 
 /**
- * The MutableProduction class represent the mutable production mechanism of the game, where the player can choose
- * the input and the output of the production
+ * The MutableProduction class represent the mutable production mechanism of the game, where the player can choose the input and the output of the production.
  */
 public class MutableProduction extends Production implements HasStatus{
 
@@ -15,41 +14,36 @@ public class MutableProduction extends Production implements HasStatus{
 
 
     /**
-     * Class constructor
-     * @param in  is a SupplyContainer which contains the supplies needed as input
-     * @param out is a SupplyContainer which contains the supplies produces by output when the production is triggered
-     * @param dimInput is the max dimension of the input
-     * @param dimOutput is the max dimension of the output
-     * @param id depot ID of this production
+     * Class constructor.
+     * @param in  is a SupplyContainer which contains the supplies needed as fixed input
+     * @param out is a SupplyContainer which contains the supplies produced as fixed output when the production is triggered
+     * @param dimInput is the maximum size of the input (fixed + mutable)
+     * @param dimOutput is the maximum dimension of the output (fixed + mutable)
      */
     public MutableProduction(SupplyContainer in, SupplyContainer out, int dimInput, int dimOutput){
         super(in, out);
-        int maxInput = dimInput - in.getQuantity();         //maxInput is the dimension of the mutableInput
-        int maxOutput = dimOutput - out.getQuantity();      //maxOutput is the dimension of the mutableOutput
+        int maxMutableInput = dimInput - in.getQuantity();         //maxMutableInput is the dimension of the mutableInput
+        int maxMutableOutput = dimOutput - out.getQuantity();      //maxMutableOutput is the dimension of the mutableOutput
 
-        for (int i = 0; i < maxInput; ++i) {
+        for (int i = 0; i < maxMutableInput; ++i) {
             mutableInput.add(WarehouseObjectType.COIN);
         }
-        for (int i = 0; i < maxOutput; ++i) {
+        for (int i = 0; i < maxMutableOutput; ++i) {
             mutableOutput.add(WarehouseObjectType.COIN);
         }
     }
 
     /**
-     * Creates an object without any fixed input or output
-     * @param dimInput is the max dimension of the input
-     * @param dimOutput is the max dimension of the output
-     * @param id depot ID of this production
+     * Creates an object without any fixed input ano output.
+     * @param dimInput is the maximum size of the input (mutable)
+     * @param dimOutput is the maximum dimension of the output (mutable)
      */
     public MutableProduction(int dimInput, int dimOutput){
         super(new SupplyContainer(SupplyContainer.AcceptStrategy.none()), new SupplyContainer(SupplyContainer.AcceptStrategy.none())); //0 resources in fixed input/output
-        int maxInput = dimInput;         //maxInput is the dimension of the mutableInput
-        int maxOutput = dimOutput;      //maxOutput is the dimension of the mutableOutput
-
-        for (int i = 0; i < maxInput; ++i) {
+        for (int i = 0; i < dimInput; ++i) {
             mutableInput.add(WarehouseObjectType.COIN);
         }
-        for (int i = 0; i < maxOutput; ++i) {
+        for (int i = 0; i < dimOutput; ++i) {
             mutableOutput.add(WarehouseObjectType.COIN);
         }
     }
@@ -57,8 +51,9 @@ public class MutableProduction extends Production implements HasStatus{
 
 
     /**
-     * The produce method activates the production is the isActive parameter is true
-     * @return a SupplyContainer containing the output + mutableOutput
+     * Activates the production. If the total input (fixed + mutable) equals the current supply store, then the current supply store is wiped and the total output (fixed + mutable) is returned.
+     * If not a fatal error is produced and the program is terminated.
+     * @return A SupplyContainer containing the total output (fixed + mutable)
      */
     @Override
     public SupplyContainer produce(){
@@ -80,7 +75,8 @@ public class MutableProduction extends Production implements HasStatus{
     }
 
     /**
-     * The check method verifies if the supplies contained in the currentSupply are right to start a production
+     * Verifies if the current supplies present in the production depot are the same as the total input (fixed + mutable) supplies.
+     * @throws SupplyException The current supplies present in the production depot are not the same as the total input (fixed + mutable) supplies.
      */
     @Override
     public void check() throws SupplyException{
@@ -98,11 +94,27 @@ public class MutableProduction extends Production implements HasStatus{
     }
 
 
-    public void swapInput(int num, WarehouseObjectType newInput){
+    /**
+     * Substitutes the current supply present in the specified input slot with the supply given as argument.
+     * @param num Slot
+     * @param newInput New supply type to add (cannot be FAITH_MARKER or NO_TYPE)
+     */
+    public void swapInput(int num, WarehouseObjectType newInput) throws SupplyException{
+        if(newInput == WarehouseObjectType.FAITH_MARKER || newInput == WarehouseObjectType.NO_TYPE){
+            throw new SupplyException();
+        }
         mutableInput.set(num, newInput);
     }
 
-    public void swapOutput(int num, WarehouseObjectType newOutput){
+    /**
+     * Substitutes the current supply present in the specified output slot with the supply given as argument.
+     * @param num Slot
+     * @param newOutput New supply type to add (cannot be FAITH_MARKER or NO_TYPE)
+     */
+    public void swapOutput(int num, WarehouseObjectType newOutput) throws SupplyException{
+        if(newOutput == WarehouseObjectType.FAITH_MARKER || newOutput == WarehouseObjectType.NO_TYPE){
+            throw new SupplyException();
+        }
         mutableOutput.set(num, newOutput);
     }
 

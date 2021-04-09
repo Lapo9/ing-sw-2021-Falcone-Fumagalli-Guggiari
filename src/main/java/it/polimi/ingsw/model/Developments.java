@@ -100,20 +100,19 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
 
 
 
-    /**
-     * Clear all of the supplies in the spaces.
-     * @return Supplies removed
-     */
     @Override
-    public SupplyContainer clearSupplies(){
-        SupplyContainer result = new SupplyContainer();
-
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies(){
         for (int i = 0; i<3; ++i){
-            result.sum(spaces.get(i).clearSupplies());
+            spaces.get(i).clearSupplies();
         }
-        return result;
+        return null;
     }
 
+
+    @Override
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot){
+        return spaces.get(slot.getNum()).clearSupplies();
+    }
 
 
 

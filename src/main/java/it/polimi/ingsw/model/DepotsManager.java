@@ -4,6 +4,7 @@ import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.LeaderException;
 import it.polimi.ingsw.exceptions.MarbleException;
 import it.polimi.ingsw.exceptions.SupplyException;
+import it.polimi.ingsw.model.leader_abilities.Depot;
 
 public class DepotsManager implements AcceptsSupplies {
 
@@ -34,7 +35,6 @@ public class DepotsManager implements AcceptsSupplies {
         }
     }
 
-
     @Override
     public void removeSupply(DepotID from, WarehouseObjectType wot) throws SupplyException {
         if (from.getType() == DepotID.DepotType.WAREHOUSE){
@@ -51,7 +51,6 @@ public class DepotsManager implements AcceptsSupplies {
             /*TODO terminate the program*/
         }
     }
-
 
     @Override
     public boolean additionAllowed(DepotID slot, WarehouseObjectType wot, DepotID from) {
@@ -70,11 +69,10 @@ public class DepotsManager implements AcceptsSupplies {
         }
     }
 
-
     @Override
-    public boolean removalAllowed(DepotID from, WarehouseObjectType wot, DepotID to) throws NoSuchMethodException {
+    public boolean removalAllowed(DepotID from, WarehouseObjectType wot, DepotID to) {
         if (from.getType() == DepotID.DepotType.WAREHOUSE){
-            return warehouse.removalAllowed(from, wot, to);
+            return warehouse.removalAllowed(from, wot);
         }
 
         else if (from.getType() == DepotID.DepotType.LEADER_DEPOT){
@@ -86,6 +84,50 @@ public class DepotsManager implements AcceptsSupplies {
         else {
             return false;
         }
+    }
+
+    @Override
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies() {
+        SupplyContainer res = new SupplyContainer();
+
+        res.sum(warehouse.clearSupplies().first);
+
+        //clear only depot leaders
+        for (int i = 0; i<2; ++i){
+            try {
+                if (leadersSpace.getLeaderAbility(0) instanceof Depot) {
+                    res.sum(leadersSpace.getLeaderAbility(i).clearSupplies().first);
+                }
+            } catch (LeaderException | NoSuchMethodException e){}
+        }
+
+        return new Pair<>(res, new SupplyContainer());
+    }
+
+    @Override
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) {
+        SupplyContainer result;
+
+        if (slot.getType() == DepotID.DepotType.WAREHOUSE){
+            result = warehouse.clearSupplies(slot).first;
+        }
+
+        else if (slot.getType() == DepotID.DepotType.LEADER_DEPOT){
+            try {
+                if (leadersSpace.getLeaderAbility(0) instanceof Depot) {
+                    result = leadersSpace.getLeaderAbility(slot.getNum()).clearSupplies(slot).first;
+                }
+                else {
+                    //TODO terminate the program
+                }
+            } catch (LeaderException | NoSuchMethodException e){/*TODO terminate program*/}
+        }
+
+        else {
+            /*TODO terminate the program*/
+        }
+
+        return result;
     }
 
 

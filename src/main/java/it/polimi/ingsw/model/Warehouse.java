@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.leader_abilities.Depot;
 
@@ -22,9 +23,9 @@ public class Warehouse implements AcceptsSupplies {
         SupplyContainer s2 = new SupplyContainer();
         SupplyContainer s3 = new SupplyContainer();
 
-        s1.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(1, s2, s3));
-        s2.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(2, s1, s3));
-        s3.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(3, s1, s2));
+        s1.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(1, s2, s3).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT)));
+        s2.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(2, s1, s3).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT)));
+        s3.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(3, s1, s2).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT)));
 
         depots.add(s1);
         depots.add(s2);
@@ -102,7 +103,6 @@ public class Warehouse implements AcceptsSupplies {
         depots.get(row.getNum()).addSupply(wot, from);
     }
 
-
     /**
      * Removes the specified resource type from the warehouse.
      * @param wot resource type to remove
@@ -113,40 +113,31 @@ public class Warehouse implements AcceptsSupplies {
         depots.get(row.getNum()).removeSupply(wot);
     }
 
-
     @Override
     public boolean additionAllowed(DepotID row, WarehouseObjectType wot, DepotID from) {
         return depots.get(row.getNum()).additionAllowed(wot, from);
     }
-
 
     @Override
     public boolean removalAllowed(DepotID row, WarehouseObjectType wot) {
         return depots.get(row.getNum()).removalAllowed(wot);
     }
 
-    //TODO
     @Override
-    public SupplyContainer clearSupplies() {
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies() {
         SupplyContainer result = new SupplyContainer();
-        //clear warehouse spaces
+
         for(int i = 0; i<3; ++i){
-            result.sum(depots.get(i).clearSupplies());
+            result.sum(depots.get(i).clearSupplies().first);
         }
 
-        //clear leader spaces
-        for(int i=0; i<2; ++i){
-            try {
-                //in this case I use instanceof because to me it makes more sense to clear only the leaders that are "true" depots, and not production leaders
-                if (leadersSpace.getLeaderAbility(i) instanceof Depot) {
-                    result.sum(leadersSpace.getLeaderAbility(i).clearSupplies());
-                }
-            } catch (NoSuchMethodException | LeaderException e) {}
-        }
-
-        return result;
+        return new Pair<>(result, new SupplyContainer());
     }
 
+    @Override
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) {
+        return depots.get(slot.getNum()).clearSupplies();
+    }
 
     private ArrayList<SupplyContainer> depots = new ArrayList<>();
 

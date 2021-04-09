@@ -73,16 +73,16 @@ public interface LeaderAbility extends AcceptsSupplies{
     /**
      * Method that set the desired resource in addition to the FAITH_MARKER that player will get from the LeaderCard
      * @param wot Is one of the five types of resources in the game
-     * @throws BoundsException If you want to add more than one resource
+     * @throws SupplyException If you want to add more than one resource
      * @throws NoSuchMethodException If the LeaderCard is not allowed to use that ability
      */
-    public default void changeOutput(WarehouseObjectType wot) throws NoSuchMethodException{
+    public default void changeOutput(WarehouseObjectType wot) throws SupplyException, NoSuchMethodException{
         throw new NoSuchMethodException();
     };
 
 
     @Override
-    public default SupplyContainer clearSupplies() throws NoSuchMethodException{
+    public default Pair<SupplyContainer, SupplyContainer> clearSupplies() throws NoSuchMethodException{
         throw new NoSuchMethodException();
     }
 

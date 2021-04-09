@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.leader_abilities;
 
+import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.LeaderAbility;
 import it.polimi.ingsw.model.SupplyContainer;
 import it.polimi.ingsw.model.WarehouseObjectType;
@@ -10,13 +11,16 @@ import it.polimi.ingsw.model.WarehouseObjectType;
  */
 public class Discount implements LeaderAbility {
 
-    private final SupplyContainer discount = new SupplyContainer();
+    private final SupplyContainer discount = new SupplyContainer(SupplyContainer.AcceptStrategy.max(1));
 
-
-    public Discount(WarehouseObjectType... wots){
-        for (WarehouseObjectType wot : wots){
+    /**
+     * Creates a new discount leader.
+     * @param wot Value of the discount
+     */
+    public Discount(WarehouseObjectType wot){
+        try {
             discount.addSupply(wot);
-        }
+        } catch (SupplyException se){/*TODO terminate program*/}
     }
 
 

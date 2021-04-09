@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.SupplyException;
 
 import java.util.ArrayList;
@@ -90,29 +91,25 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         production.addSupply(wot, from);
     }
 
-
     @Override
     public void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException {
         production.removeSupply(wot, to);
     }
-
 
     @Override
     public boolean additionAllowed(WarehouseObjectType wot, DepotID from) {
         return production.additionAllowed(wot, from);
     }
 
-
     @Override
     public boolean removalAllowed(WarehouseObjectType wot, DepotID to) {
         return production.removalAllowed(wot, to);
     }
 
-
-
-
-
-
+    @Override
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies() {
+        return production.clearSupplies();
+    }
 
     @Override
     public int getWinPoints() {
