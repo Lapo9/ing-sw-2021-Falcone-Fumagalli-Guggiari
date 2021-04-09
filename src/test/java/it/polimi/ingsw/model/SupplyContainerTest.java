@@ -22,9 +22,54 @@ public class SupplyContainerTest {
     }
 
     @Test
+    public void getQuantity_all() {
+        SupplyContainer sc = new SupplyContainer(6, 2, 0, 1, 9);
+        int res = sc.getQuantity();
+        assertEquals(18, res);
+    }
+
+    @Test
+    public void getType_emptyContainer(){
+        SupplyContainer sc = new SupplyContainer();
+        WarehouseObjectType result = null;
+        try {
+            result = sc.getType();
+        } catch (SupplyException e) {fail();}
+        assertEquals(WarehouseObjectType.NO_TYPE, result);
+    }
+
+    @Test
+    public void getType_noException(){
+        SupplyContainer sc = new SupplyContainer(0, 2, 0, 0, 0);
+        WarehouseObjectType result = null;
+        try {
+            result = sc.getType();
+        } catch (SupplyException e) {fail();}
+        assertEquals(WarehouseObjectType.STONE, result);
+    }
+
+    @Test
+    public void getType_moreThanOneTypeEx(){
+        SupplyContainer sc = new SupplyContainer(0, 2, 0, 1, 0);
+        WarehouseObjectType result = null;
+        boolean exc = false;
+        try {
+            result = sc.getType();
+        } catch (SupplyException e) {
+            exc = true;
+        }
+        assertTrue(exc);
+    }
+
+    //TODO
+    //Test setAcceptCheck and setRemoveCheck
+
+    //TODO
+    //There is something wrong in here
+    @Test
     public void sum() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
-        SupplyContainer sc2 = new SupplyContainer(0, 0, 6, 2, 0);
+        SupplyContainer sc2 = new SupplyContainer(1, 0, 6, 2, 0);
 
         int[] objectsExpected = {   sc1.getQuantity(WarehouseObjectType.COIN) +         sc2.getQuantity(WarehouseObjectType.COIN),
                                     sc1.getQuantity(WarehouseObjectType.STONE) +        sc2.getQuantity(WarehouseObjectType.STONE),
@@ -44,21 +89,23 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void confront_equals() {
+    public void equals_true() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         SupplyContainer sc2 = new SupplyContainer(3, 7, 7, 2, 0);
         boolean res = sc1.equals(sc2);
-        assertEquals(true, res);
+        assertTrue(res);
     }
 
     @Test
-    public void confront_notEquals() {
+    public void equals_false() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         SupplyContainer sc2 = new SupplyContainer(3, 7, 7, 0, 2);
         boolean res = sc1.equals(sc2);
-        assertEquals(false, res);
+        assertFalse(res);
     }
 
+    //TODO
+    //We need to check addSupply(wot, from) and removeSupply(wot, to)
     @Test
     public void addSupply_one() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
@@ -167,6 +214,9 @@ public class SupplyContainerTest {
 
         assertTrue(exc);
     }
+
+    //TODO
+    //We need to check additionAllowed and removalAllowed
 
     @Test
     public void clearSupplies() {
