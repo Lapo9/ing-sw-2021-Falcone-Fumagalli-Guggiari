@@ -29,7 +29,7 @@ public class ProductionTest {
         assertArrayEquals(objectResExpected, objectResActual);
     }
 
-    //maybe test what happens if produce launches an exceptions
+    //maybe test what happens if produce launches an exception
 
     @Test
     public void check_noEx() {
