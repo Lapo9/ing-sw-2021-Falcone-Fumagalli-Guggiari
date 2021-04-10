@@ -54,10 +54,6 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         production.check();
     }
 
-
-
-
-
     /**
      * This method gets the cost of the card
      * @return The cost of the card
@@ -81,10 +77,6 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
     public CardCategory getCategory() {
         return category;
     }
-
-
-
-
 
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {

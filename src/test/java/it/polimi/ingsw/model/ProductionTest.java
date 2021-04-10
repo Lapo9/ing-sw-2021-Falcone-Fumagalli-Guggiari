@@ -70,7 +70,7 @@ public class ProductionTest {
     }
 
     @Test
-    public void addSupply() {
+    public void addSupply_noEx() {
         SupplyContainer in = new SupplyContainer(0, 2, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 2, 0,0, 2);
         Production prd = new Production(in, out);
@@ -90,6 +90,7 @@ public class ProductionTest {
         SupplyContainer out = new SupplyContainer(0, 2, 0,0, 2);
         Production prd = new Production(in, out);
         boolean exc =false;
+
         try {
             prd.addSupply(WarehouseObjectType.STONE, DepotID.COFFER);
             prd.addSupply(WarehouseObjectType.SHIELD, DepotID.DEVELOPMENT2);
@@ -102,4 +103,43 @@ public class ProductionTest {
         assertFalse(exc);
     }
 
+    @Test
+    public void additionAllowedTest() {
+        SupplyContainer in = new SupplyContainer(0, 1, 0, 1, 0);
+        SupplyContainer out = new SupplyContainer(1, 0, 3,0, 2);
+        Production prd = new Production(in, out);
+
+        //try to add supplies from player depots
+        try {
+            prd.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
+        } catch (SupplyException e) {fail();}
+
+        assertTrue(prd.additionAllowed(WarehouseObjectType.STONE, DepotID.WAREHOUSE1));
+    }
+
+    @Test
+    public void removalAllowedTest() {
+        SupplyContainer in = new SupplyContainer(0, 1, 0, 1, 0);
+        SupplyContainer out = new SupplyContainer(1, 0, 3,0, 2);
+        Production prd = new Production(in, out);
+        try {
+            prd.addSupply(WarehouseObjectType.STONE, DepotID.COFFER);
+        } catch (SupplyException e) {fail();}
+        //before trying to remove, i have to add
+        try {
+            prd.removeSupply(WarehouseObjectType.STONE, DepotID.COFFER);
+        } catch (SupplyException e) {fail();}
+
+        assertTrue(prd.removalAllowed(WarehouseObjectType.STONE, DepotID.COFFER));
+    }
+
+    @Test
+    public void clearSuppliesTest(){
+        SupplyContainer in = new SupplyContainer(0, 1, 0, 1, 0);
+        SupplyContainer out = new SupplyContainer(1, 0, 3,0, 2);
+        Production prd = new Production(in, out);
+
+
+
+    }
 }
