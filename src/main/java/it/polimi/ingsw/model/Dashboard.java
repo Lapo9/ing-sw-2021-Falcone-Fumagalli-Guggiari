@@ -188,6 +188,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @throws DevelopmentException You cannot place the card you want to buy in the specified development space
      * @throws NoSuchCardException The space in the grid you selected contains no cards
      */
+
     public void buyDevelopment(int column, int row, int space) throws SupplyException, DevelopmentException, NoSuchCardException {
         ArrayList<Integer> buyableLevels = developments.buyableLevels(); //get what levels you can buy
 
@@ -219,6 +220,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @throws SupplyException Leader activation requirements aren't matched
      * @throws LeaderException The specified leader cannot be played (already discarded or active)
      */
+
     public void playLeader(int i) throws SupplyException, LeaderException {
         leadersSpace.playLeader(i, new ResourceChecker(warehouse, coffer, leadersSpace));
     }

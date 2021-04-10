@@ -121,6 +121,6 @@ public class MutableProduction extends Production implements HasStatus{
 
     @Override
     public ArrayList<Integer> getStatus(){
-
+        return null;
     }
 }

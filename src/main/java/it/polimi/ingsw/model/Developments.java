@@ -161,6 +161,7 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
 
     @Override
     public ArrayList<Integer> getStatus(){
+        return null;
         //TODO
     }
 

@@ -111,10 +111,6 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
     }
 
 
-
-
-
-
     @Override
     public int getWinPoints() {
         int result = 0;
@@ -122,5 +118,10 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
             result += cards.get(i).getWinPoints();
         }
         return result;
+    }
+
+    @Override
+    public ArrayList<Integer> getStatus(){
+        return null; //TODO
     }
 }

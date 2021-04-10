@@ -49,6 +49,7 @@ public class DevelopmentGrid implements HasStatus{
      * @throws SupplyException if the Paycheck doesn't contain the right supplies to buy the chosen SupplyCard
      * @throws NoSuchCardException if the row x column position is empty
      */
+
     public DevelopmentCard buyCard(int column, int row, Paycheck p, LeadersSpace leadersSpace)throws SupplyException, NoSuchCardException{
         SupplyContainer container = p.getAll();
         int pos = getPlace(column, row);
@@ -125,6 +126,7 @@ public class DevelopmentGrid implements HasStatus{
             throw new SupplyException();
     }
 
+
     /**
      * The getLevel function returns the level of the SupplyCard contained in row x column space in the DevelopmentGrid
      * @param column is the column number
@@ -132,6 +134,7 @@ public class DevelopmentGrid implements HasStatus{
      * @return the level of the SupplyCard in the given position
      * @throws NoSuchCardException if the place is empty
      */
+
     public int getLevel(int column, int row) throws NoSuchCardException{
         int pos = getPlace(column, row);
         if(grid.get(pos).isEmpty())
@@ -141,6 +144,6 @@ public class DevelopmentGrid implements HasStatus{
 
     //TODO
     public ArrayList<Integer> getStatus(){
-
+        return null;
     }
 }

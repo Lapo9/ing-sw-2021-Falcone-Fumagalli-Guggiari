@@ -41,6 +41,7 @@ public class LeadersSpace implements HasStatus, WinPointsCountable{
      * @throws SupplyException Requirements to activate the leader aren't met
      * @throws LeaderException Leader is already active or discarded
      */
+    /*
     public void playLeader(int i, ResourcesChecker rc) throws SupplyException, LeaderException{
         Pair<SupplyContainer, ArrayList<CardsRequirement>> req = leaders.get(i).getCost(); //get the requirements
 
@@ -52,7 +53,7 @@ public class LeadersSpace implements HasStatus, WinPointsCountable{
             throw new SupplyException();
         }
     }
-
+*/
 
     @Override
     public int getWinPoints() {
