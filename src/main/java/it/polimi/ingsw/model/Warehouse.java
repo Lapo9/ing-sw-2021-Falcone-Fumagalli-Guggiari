@@ -20,7 +20,6 @@ public class Warehouse implements AcceptsSupplies {
 
     /**
      * Creates a new warehouse.
-     * @param ls Warehouse needs to know leaders, because if leaders have ability of Depot type, then the Warehouse has the responsibility to manage their resources.
      */
     public Warehouse(){
         SupplyContainer s1 = new SupplyContainer();
