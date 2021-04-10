@@ -222,7 +222,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      * @return This container, to enable chain calls.
      */
     public SupplyContainer sum(SupplyContainer sc){
-        supplies.forEach((type, qty) -> qty += sc.getQuantity(type));
+        supplies.forEach((type, qty) -> supplies.put(type, qty += sc.getQuantity(type)));
         return this;
     }
 

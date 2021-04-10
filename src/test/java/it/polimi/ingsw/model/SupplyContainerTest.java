@@ -61,11 +61,42 @@ public class SupplyContainerTest {
         assertTrue(exc);
     }
 
-    //TODO
-    //Test setAcceptCheck and setRemoveCheck
+    @Test
+    public void setAcceptCheck(){
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX));
+        boolean exc = false;
+        try {
+            sc.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
+        } catch (SupplyException e) {
+            exc = true;
+        }
+        sc.setAcceptCheck(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT));
+        try {
+            sc.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
+        } catch (SupplyException e) {fail();}
+        assertTrue(exc);
+    }
 
-    //TODO
-    //There is something wrong in here
+    @Test
+    public void setRemoveCheck(){
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX), SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.SHIELD));
+        boolean exc = false;
+        try {
+            sc.addSupply(WarehouseObjectType.SHIELD, DepotID.COFFER);
+            sc.addSupply(WarehouseObjectType.COIN, DepotID.COFFER);
+        } catch (SupplyException e) {fail();}
+        try {
+            sc.removeSupply(WarehouseObjectType.COIN);
+        } catch (SupplyException e) {
+            exc = true;
+        }
+        sc.setRemoveCheck(SupplyContainer.AcceptStrategy.any());
+        try {
+            sc.removeSupply(WarehouseObjectType.COIN);
+        } catch (SupplyException e) {fail();}
+        assertTrue(exc);
+    }
+
     @Test
     public void sum() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
@@ -104,10 +135,8 @@ public class SupplyContainerTest {
         assertFalse(res);
     }
 
-    //TODO
-    //We need to check addSupply(wot, from) and removeSupply(wot, to)
     @Test
-    public void addSupply_one() {
+    public void addSupply_oneNoEx() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         try {
             sc1.addSupply(WarehouseObjectType.SERVANT);
@@ -125,7 +154,7 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void addSupply_multiple() {
+    public void addSupply_multipleNoEx() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
 
         try {
@@ -146,7 +175,49 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void removeSupply_oneOk() {
+    public void addSupply_notAllowedEx() {
+        SupplyContainer sc1 = new SupplyContainer(SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.SHIELD));
+        boolean exc = false;
+        try {
+            sc1.addSupply(WarehouseObjectType.SERVANT);
+        } catch (Exception e) {
+            exc = true;
+        }
+        assertTrue(exc);
+    }
+
+    @Test
+    public void addSupply_sourceSpecifiedNoEx(){
+        SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0, SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX));
+        try {
+            sc1.addSupply(WarehouseObjectType.SERVANT, DepotID.COFFER);
+        } catch (Exception e) {fail();}
+
+        int[] objectsExpected = {3, 7, 8, 2, 0};
+
+        int[] objectsActual = {  sc1.getQuantity(WarehouseObjectType.COIN),
+                sc1.getQuantity(WarehouseObjectType.STONE),
+                sc1.getQuantity(WarehouseObjectType.SERVANT),
+                sc1.getQuantity(WarehouseObjectType.SHIELD),
+                sc1.getQuantity(WarehouseObjectType.FAITH_MARKER)};
+
+        assertArrayEquals(objectsExpected, objectsActual);
+    }
+
+    @Test
+    public void addSupply_sourceSpecifiedWrongSourceEx(){
+        SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0, SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX));
+        boolean exc = false;
+        try {
+            sc1.addSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE1);
+        } catch (Exception e) {
+            exc = true;
+        }
+        assertTrue(exc);
+    }
+
+    @Test
+    public void removeSupply_oneNoEx() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
 
         try {
@@ -165,7 +236,7 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void removeSupply_multipleOk() {
+    public void removeSupply_multipleNoEx() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
 
         try {
@@ -186,7 +257,7 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void removeSupply_oneKo() {
+    public void removeSupply_oneEx() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         boolean exc = false;
 
@@ -198,7 +269,7 @@ public class SupplyContainerTest {
     }
 
     @Test
-    public void removeSupply_multipleKo() {
+    public void removeSupply_multipleEx() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         boolean exc = false;
 
@@ -215,8 +286,65 @@ public class SupplyContainerTest {
         assertTrue(exc);
     }
 
-    //TODO
-    //We need to check additionAllowed and removalAllowed
+    @Test
+    public void removeSupply_withDestinationNoEx(){
+        SupplyContainer sc = new SupplyContainer(2, 7, 6, 2, 0, SupplyContainer.AcceptStrategy.any(), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT));
+        try {
+            sc.removeSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE2);
+        } catch (Exception e) {fail();}
+        int[] objectsExpected = {2, 7, 5, 2, 0};
+        int[] objectsActual = {  sc.getQuantity(WarehouseObjectType.COIN),
+                                 sc.getQuantity(WarehouseObjectType.STONE),
+                                 sc.getQuantity(WarehouseObjectType.SERVANT),
+                                 sc.getQuantity(WarehouseObjectType.SHIELD),
+                                 sc.getQuantity(WarehouseObjectType.FAITH_MARKER)};
+        assertArrayEquals(objectsExpected, objectsActual);
+    }
+
+    @Test
+    public void removeSupply_withWrongDestinationEx(){
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.any(), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT));
+        boolean exc = false;
+        try {
+            sc.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
+        } catch (SupplyException e) {fail();}
+        try {
+            sc.removeSupply(WarehouseObjectType.SERVANT, DepotID.COFFER);
+        } catch (Exception e) {
+            exc = true;
+        }
+        assertTrue(exc);
+    }
+
+    @Test
+    public void additionAllowed_true(){
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT));
+        assertTrue(sc.additionAllowed(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE3));
+    }
+
+    @Test
+    public void additionAllowed_false(){
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT));
+        assertFalse(sc.additionAllowed(WarehouseObjectType.STONE, DepotID.COFFER));
+    }
+
+    @Test
+    public void removalAllowed_true(){
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.any(), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX));
+        try {
+            sc.addSupply(WarehouseObjectType.SHIELD, DepotID.COFFER);
+        } catch (SupplyException e) {fail();}
+        assertTrue(sc.removalAllowed(WarehouseObjectType.SHIELD, DepotID.COFFER));
+    }
+
+    @Test
+    public void removalAllowed_false(){
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.any(), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX));
+        try {
+            sc.addSupply(WarehouseObjectType.COIN, DepotID.COFFER);
+        } catch (SupplyException e) {fail();}
+        assertFalse(sc.removalAllowed(WarehouseObjectType.COIN, DepotID.WAREHOUSE2));
+    }
 
     @Test
     public void clearSupplies() {
