@@ -66,6 +66,6 @@ public class Paycheck implements AcceptsSupplies {
 
     @Override
     public Pair<SupplyContainer, SupplyContainer> clearSupplies() {
-        return new Pair<>(fromDepot.clearSupplies().first, fromStrongbox.clearSupplies().second);
+        return new Pair<>(fromDepot.clearSupplies().first, fromStrongbox.clearSupplies().first);
     }
 }
