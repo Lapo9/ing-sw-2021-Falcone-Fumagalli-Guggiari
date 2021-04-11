@@ -386,7 +386,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
             return (container, type, depot) -> {
                 boolean res = false;
                 try {
-                    res = container.getType() != type || container.getType() == WarehouseObjectType.NO_TYPE;
+                    res = container.getType() == type || container.getType() == WarehouseObjectType.NO_TYPE;
                 } catch (SupplyException se) {/*TODO end program?*/}
                 return res;
             };

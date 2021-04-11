@@ -26,9 +26,9 @@ public class Warehouse implements AcceptsSupplies {
         SupplyContainer s2 = new SupplyContainer();
         SupplyContainer s3 = new SupplyContainer();
 
-        s1.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(1, s2, s3).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT)));
-        s2.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(2, s1, s3).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT)));
-        s3.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(3, s1, s2).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT)));
+        s1.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(1, s2, s3).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
+        s2.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(2, s1, s3).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
+        s3.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(3, s1, s2).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
 
         depots.add(s1);
         depots.add(s2);
@@ -62,10 +62,11 @@ public class Warehouse implements AcceptsSupplies {
         //find what depot has the maximum and minimum position, and store the remaining container in a third variable
         SupplyContainer rMax = depots.get(Math.max(r1, r2) -1);
         SupplyContainer rMin = depots.get(Math.min(r1, r2) -1);
-        SupplyContainer theThird = depots.get((r1==1 && r2==2) ? 3 : ((r1==1 && r2==3) ? 2 : 1));
+        SupplyContainer theThird = depots.get((r1==1 && r2==2) ? 2 : ((r1==1 && r2==3) ? 1 : 0));
 
         //if the depot in min position (so with higher capacity) has less or equal elements than the elements in the depot in max position can contain, then the swap is possible
-        if(rMin.getQuantity() <= 4 - Math.max(r1, r2)){
+        //if(rMin.getQuantity() <= 4 - Math.max(r1, r2)){
+        if(rMax.getQuantity() <= Math.min(r1, r2)){
             //swap the max accepted by the depots
             rMin.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(4-Math.max(r1, r2), rMax, theThird));
             rMax.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(4-Math.min(r1, r2), rMin, theThird));

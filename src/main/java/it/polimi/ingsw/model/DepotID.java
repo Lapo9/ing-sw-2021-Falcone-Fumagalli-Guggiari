@@ -4,7 +4,7 @@ package it.polimi.ingsw.model;
  * Contains the numerical IDs of the places where you can store resources.
  */
 public enum DepotID {
-    WAREHOUSE1(DepotType.WAREHOUSE, SourceType.DEPOT, 1), WAREHOUSE2(DepotType.WAREHOUSE, SourceType.DEPOT, 2), WAREHOUSE3(DepotType.WAREHOUSE, SourceType.DEPOT, 3),
+    WAREHOUSE1(DepotType.WAREHOUSE, SourceType.DEPOT, 0), WAREHOUSE2(DepotType.WAREHOUSE, SourceType.DEPOT, 1), WAREHOUSE3(DepotType.WAREHOUSE, SourceType.DEPOT, 2),
     DEVELOPMENT1(DepotType.DEVELOPMENT, SourceType.ANY, 1), DEVELOPMENT2(DepotType.DEVELOPMENT, SourceType.ANY, 2), DEVELOPMENT3(DepotType.DEVELOPMENT, SourceType.ANY, 3),
     LEADER1_DEPOT(DepotType.LEADER_DEPOT, SourceType.ANY, 1), LEADER2_DEPOT(DepotType.LEADER_DEPOT, SourceType.ANY, 2),
     LEADER1_PRODUCTION(DepotType.LEADER_PRODUCTION, SourceType.STRONGBOX, 1), LEADER2_PRODUCTION(DepotType.LEADER_PRODUCTION, SourceType.STRONGBOX, 2),
