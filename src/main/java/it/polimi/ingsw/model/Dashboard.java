@@ -9,7 +9,7 @@ import java.util.HashMap;
 /**
  * The dashboard is the access point of the controller to the model.
  * It exposes a function for all of the possible actions a player can perform during a match.
- * Generally, when an action performed goes well, nothing is returned, but if the action violates any of the game rule an exception is thrown.
+ * Generally, when the action performed goes well, nothing is returned, but if the action violates any of the game rule an exception is thrown.
  * TODO maybe there should be methods to check if an action is possible before performing it? It can be useful if you want to visualize only the actions that can be executed (for example if you don't have enough supplies to buy a card, then the card is grey and not clickable)
  */
 public class Dashboard implements HasStatus, WinPointsCountable{
@@ -54,7 +54,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
 
 
     /**
-     * Swaps 2 rows of the Warehouse. Row 1 is the bottom one. If it is not possible a SupplyException is thrown.
+     * Swaps 2 rows of the Warehouse. If it is not possible a SupplyException is thrown.
      * @param r1 row 1
      * @param r2 row 2
      * @throws SupplyException Cannot swap the 2 rows
@@ -100,9 +100,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         int totalDiscarded = unassignedSupplies.getQuantity(MarbleColor.BLUE, MarbleColor.GREY, MarbleColor.VIOLET, MarbleColor.YELLOW);
 
         boolean vaticanReport = false;
-        for(int i = 0; i < unassignedSupplies.getQuantity(MarbleColor.RED); ++i){
-            vaticanReport |= goAhead();
-        }
+        faithTrack.goAhead(unassignedSupplies.getQuantity(MarbleColor.RED));
 
         unassignedSupplies.clear();
         return new Pair<>(totalDiscarded, vaticanReport);
@@ -188,7 +186,6 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @throws DevelopmentException You cannot place the card you want to buy in the specified development space
      * @throws NoSuchCardException The space in the grid you selected contains no cards
      */
-
     public void buyDevelopment(int column, int row, int space) throws SupplyException, DevelopmentException, NoSuchCardException {
         ArrayList<Integer> buyableLevels = developments.buyableLevels(); //get what levels you can buy
 
@@ -220,7 +217,6 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @throws SupplyException Leader activation requirements aren't matched
      * @throws LeaderException The specified leader cannot be played (already discarded or active)
      */
-
     public void playLeader(int i) throws SupplyException, LeaderException {
         leadersSpace.playLeader(i, new ResourceChecker(warehouse, coffer, leadersSpace));
     }
@@ -240,6 +236,77 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      */
     public void vaticanReport(){
         faithTrack.vaticanReport();
+    }
+
+
+    /**
+     * Swaps one of the mutable inputs/outputs of the base production.
+     * @param i 0 = first input, 1 = second input, 2 = output
+     * @param wot new supply to insert
+     * @throws SupplyException A faith marker or no type supply type was added
+     */
+    public void swapBaseProduction(int i, WarehouseObjectType wot) throws SupplyException{
+        if(wot == WarehouseObjectType.FAITH_MARKER){
+            throw new SupplyException();
+        }
+
+        if (i==2){
+            baseProduction.swapOutput(0, wot);
+        }
+        else {
+            baseProduction.swapInput(i, wot);
+        }
+    }
+
+
+    /**
+     * Swaps the only mutable output in the specified leader
+     * @param i number of leader
+     * @param wot new supply to insert
+     * @throws SupplyException A no type supply type was added
+     * @throws NoSuchMethodException Specified leader is not a Producer
+     * @throws LeaderException Specified leader is not active or is discarded
+     */
+    public void swapLeaderProduction(int i, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException, LeaderException{
+        leadersSpace.getLeaderAbility(i).swapProduction(wot);
+    }
+
+
+    /**
+     * Clears the specified depot, and reinsert the cleared supplies to their source.
+     * @param id depot to clear
+     * @throws NoSuchMethodException tried to clear a non Depot or Producer leader
+     */
+    public void clearDepot(DepotID id) throws NoSuchMethodException{
+        Pair<SupplyContainer, SupplyContainer> destination;
+        destination = containers.get(id.getType()).clearSupplies(id);
+
+        coffer.sum(destination.second);
+        depotsManager.allocate(destination.first);
+    }
+
+
+    /**
+     * Clears all of the production depots, and reinsert the cleared supplies to their source.
+     */
+    public void clearProductions(){
+        Pair<SupplyContainer, SupplyContainer> destination;
+        destination = productionManager.clearSupplies();
+
+        coffer.sum(destination.second);
+        depotsManager.allocate(destination.first);
+    }
+
+
+    /**
+     * Clears the paycheck, and reinsert the cleared supplies to their source.
+     */
+    public void clearPaycheck(){
+        Pair<SupplyContainer, SupplyContainer> destination;
+        destination = paycheck.clearSupplies();
+
+        coffer.sum(destination.second);
+        depotsManager.allocate(destination.first);
     }
 
 
@@ -265,7 +332,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
 
     @Override
     public int getWinPoints() {
-        int supplies = warehouse.getResourceCount(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE) + coffer.getQuantity(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE);
+        int supplies = depotsManager.getResourceCount(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE) + coffer.getQuantity(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE);
         return developments.getWinPoints() + leadersSpace.getWinPoints() + faithTrack.getWinPoints() + supplies/5;
     }
 

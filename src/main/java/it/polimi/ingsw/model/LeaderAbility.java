@@ -70,6 +70,11 @@ public interface LeaderAbility extends AcceptsSupplies{
     };
 
 
+    public default void swapProduction(WarehouseObjectType wot) throws SupplyException, NoSuchMethodException{
+        throw new NoSuchMethodException();
+    }
+
+
     /**
      * Method that set the desired resource in addition to the FAITH_MARKER that player will get from the LeaderCard
      * @param wot Is one of the five types of resources in the game

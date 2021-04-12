@@ -40,7 +40,7 @@ public class Producer implements LeaderAbility {
 
 
     @Override
-    public void changeOutput(WarehouseObjectType wot) throws SupplyException{
+    public void swapProduction(WarehouseObjectType wot) throws SupplyException{
         production.swapOutput(0, wot);
     }
 
