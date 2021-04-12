@@ -27,6 +27,8 @@ public class Dashboard implements HasStatus, WinPointsCountable{
     private final boolean inkwell;
     private final ProductionManager productionManager = new ProductionManager(developments, baseProduction, leadersSpace);
     private final DepotsManager depotsManager = new DepotsManager(warehouse, leadersSpace);
+    private final ActionTilesStack actionTilesStack = new ActionTilesStack();
+    private int blackCrossPosition = 0;
 
     private final HashMap<DepotID.DepotType, AcceptsSupplies> containers = new HashMap<>();
 
@@ -316,6 +318,73 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      */
     public boolean hasInkwell(){
         return inkwell;
+    }
+
+
+    /**
+     * Checks if the match ended, so if the player got to the last tile in the faith track or id he bought at least 7 development cards.
+     * @return If the player triggered an end match condition.
+     */
+    public boolean isMatchEnded(){
+        return developmentGrid.getBoughtCards() >= 7 || faithTrack.getPosition() >= 24;
+    }
+
+
+
+    //SINGLE PLAYER METHOD
+    /**
+     * Extracts one tile from the stack, and performs the associated action.
+     * @return True if the match is ended, so if the black cross finished the faith track or if all the cards of one color are gone.
+     */
+    public boolean extractActionTile(){
+        ActionTilesStack.ActionTile at = actionTilesStack.extractTile();
+        switch (at){
+            case YELLOW:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.YELLOW);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case GREEN:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.GREEN);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case BLUE:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.BLUE);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case VIOLET:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.VIOLET);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case PLUS_2:
+                for(int i=0; i<2; ++i) {
+                    blackCrossPosition++;
+                    if (blackCrossPosition == 8 || blackCrossPosition == 16 || blackCrossPosition == 24) {
+                        vaticanReport();
+                    }
+                }
+                break;
+            case PLUS_1_SHUFFLE:
+                blackCrossPosition++;
+                if (blackCrossPosition == 8 || blackCrossPosition == 16 || blackCrossPosition == 24) {
+                    vaticanReport();
+                }
+                actionTilesStack.reinsertAll();
+                break;
+        }
+
+        return blackCrossPosition >= 24;
     }
 
 

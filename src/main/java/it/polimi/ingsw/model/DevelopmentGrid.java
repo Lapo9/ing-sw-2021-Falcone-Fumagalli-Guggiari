@@ -14,6 +14,7 @@ import it.polimi.ingsw.exceptions.*;
  */
 public class DevelopmentGrid implements HasStatus{
     private ArrayList<ArrayList<DevelopmentCard>> grid;
+    private int boughtCards = 0;
 
     /**
      * Class constructor
@@ -49,7 +50,6 @@ public class DevelopmentGrid implements HasStatus{
      * @throws SupplyException if the Paycheck doesn't contain the right supplies to buy the chosen SupplyCard
      * @throws NoSuchCardException if the row x column position is empty
      */
-
     public DevelopmentCard buyCard(int column, int row, Paycheck p, LeadersSpace leadersSpace)throws SupplyException, NoSuchCardException{
         SupplyContainer container = p.getAll();
         int pos = getPlace(column, row);
@@ -120,12 +120,37 @@ public class DevelopmentGrid implements HasStatus{
                 if(discount1 != 0)
                     priceContainer.removeSupply(discountType1);
         }
-        if(container.confront(priceContainer))
+        if(container.equals(priceContainer)) {
             return grid.get(pos).remove(lastIndex);
-        else
+            boughtCards++;
+        }
+        else {
             throw new SupplyException();
+        }
     }
 
+    /**
+     * Removes a card of the specified color. It tries to remove first cards of level 1, then 2, then 3.
+     * @param color Color to remove
+     * @throws NoSuchCardException Cards of specified color are not present
+     */
+    public void removeCard(ActionTilesStack.ActionTile color) throws NoSuchCardException{
+        for(int i=0; i<3; ++i){
+            if (!grid.get(getPlace(color.ordinal()+1, 3-i)).isEmpty()){
+                grid.remove(getPlace(color.ordinal()+1, 3-i)).get(grid.get(getPlace(color.ordinal()+1, 3-i)).size()-1);
+                return;
+            }
+        }
+        throw new NoSuchCardException();
+    }
+
+    /**
+     * Returns the number of cards that have been bought.
+     * @return the number of cards that have been bought
+     */
+    public int getBoughtCards() {
+        return boughtCards;
+    }
 
     /**
      * The getLevel function returns the level of the SupplyCard contained in row x column space in the DevelopmentGrid
@@ -134,7 +159,6 @@ public class DevelopmentGrid implements HasStatus{
      * @return the level of the SupplyCard in the given position
      * @throws NoSuchCardException if the place is empty
      */
-
     public int getLevel(int column, int row) throws NoSuchCardException{
         int pos = getPlace(column, row);
         if(grid.get(pos).isEmpty())
