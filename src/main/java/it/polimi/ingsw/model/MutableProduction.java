@@ -5,7 +5,8 @@ import it.polimi.ingsw.exceptions.*;
 import java.util.ArrayList;
 
 /**
- * The MutableProduction class represent the mutable production mechanism of the game, where the player can choose the input and the output of the production.
+ * The MutableProduction class represents the mutable production mechanism of the game,
+ * where the player can choose the input and the output of the production.
  */
 public class MutableProduction extends Production implements HasStatus{
 
@@ -34,7 +35,7 @@ public class MutableProduction extends Production implements HasStatus{
     }
 
     /**
-     * Creates an object without any fixed input ano output.
+     * Creates an object without any fixed input and output.
      * @param dimInput is the maximum size of the input (mutable)
      * @param dimOutput is the maximum dimension of the output (mutable)
      */
@@ -51,7 +52,8 @@ public class MutableProduction extends Production implements HasStatus{
 
 
     /**
-     * Activates the production. If the total input (fixed + mutable) equals the current supply store, then the current supply store is wiped and the total output (fixed + mutable) is returned.
+     * Activates the production. If the total input (fixed + mutable) equals the current supply store,
+     * then the current supply store is wiped and the total output (fixed + mutable) is returned.
      * If not a fatal error is produced and the program is terminated.
      * @return A SupplyContainer containing the total output (fixed + mutable)
      */
