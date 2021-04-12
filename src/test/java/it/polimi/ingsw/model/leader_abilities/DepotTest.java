@@ -143,6 +143,28 @@ public class DepotTest {
     }
 
     @Test
+    public void additionAllowedTest() {
+        Depot dpt = new Depot(WarehouseObjectType.STONE);
+
+        // i can only add STONE
+        assertTrue(dpt.additionAllowed(WarehouseObjectType.STONE, DepotID.WAREHOUSE2));
+        assertFalse(dpt.additionAllowed(WarehouseObjectType.COIN, DepotID.WAREHOUSE2));
+    }
+
+    @Test
+    public void removalAllowedTest() {
+        Depot dpt = new Depot(WarehouseObjectType.COIN);
+        try {
+            dpt.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
+            dpt.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE1);
+            dpt.removeSupply(WarehouseObjectType.COIN);
+        } catch (SupplyException e) {fail();}
+
+        assertTrue(dpt.removalAllowed(WarehouseObjectType.COIN, DepotID.WAREHOUSE3));
+        assertFalse(dpt.removalAllowed(WarehouseObjectType.STONE, DepotID.WAREHOUSE2));
+    }
+
+    @Test
     public void clearSupplies() {
         Depot dpt = new Depot(WarehouseObjectType.COIN);
         try {
