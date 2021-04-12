@@ -34,7 +34,7 @@ public class LeadersSpace implements HasStatus, WinPointsCountable{
         return leaders.get(i).getAbility();
     }
 
-
+/*
     /**
      * Tries to activate the leader ability
      * @param i what leader? 0 or 1?
@@ -53,7 +53,7 @@ public class LeadersSpace implements HasStatus, WinPointsCountable{
             throw new SupplyException();
         }
     }
-*/
+    */
 
     @Override
     public int getWinPoints() {
