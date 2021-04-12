@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.LeaderException;
+import it.polimi.ingsw.model.leader_abilities.Discount;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -17,12 +18,8 @@ public class LeaderCardTest {
         CardsRequirement cs2 = new CardsRequirement(1, 2, CardCategory.BLUE);
         reqDevelopmentCard.add(cs1);
         reqDevelopmentCard.add(cs2);
-        LeaderAbility la = new LeaderAbility() {
-            @Override
-            public SupplyContainer getDiscount() throws NoSuchMethodException {
-                return null;
-            }
-        };
+        LeaderAbility la = new Discount(WarehouseObjectType.COIN);
+
         LeaderCard lc = new LeaderCard(reqSupplyContainer, reqDevelopmentCard, la, 5);
         boolean exc = false;
         try {
@@ -42,12 +39,7 @@ public class LeaderCardTest {
         CardsRequirement cs2 = new CardsRequirement(1, 2, CardCategory.BLUE);
         reqDevelopmentCard.add(cs1);
         reqDevelopmentCard.add(cs2);
-        LeaderAbility la = new LeaderAbility() {
-            @Override
-            public SupplyContainer getDiscount() throws NoSuchMethodException {
-                return null;
-            }
-        };
+        LeaderAbility la = new Discount(WarehouseObjectType.COIN);
         LeaderCard lc = new LeaderCard(reqSupplyContainer, reqDevelopmentCard, la, 5);
         boolean exc = false;
         try {
@@ -67,12 +59,7 @@ public class LeaderCardTest {
         CardsRequirement cs2 = new CardsRequirement(1, 2, CardCategory.BLUE);
         reqDevelopmentCard.add(cs1);
         reqDevelopmentCard.add(cs2);
-        LeaderAbility la = new LeaderAbility() {
-            @Override
-            public SupplyContainer getDiscount() throws NoSuchMethodException {
-                return null;
-            }
-        };
+        LeaderAbility la = new Discount(WarehouseObjectType.COIN);
         LeaderCard lc = new LeaderCard(reqSupplyContainer, reqDevelopmentCard, la, 5);
 
         int expectedWP = 5;
