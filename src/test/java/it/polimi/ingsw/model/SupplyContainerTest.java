@@ -372,6 +372,22 @@ public class SupplyContainerTest {
         assertArrayEquals(objectsExpected, objectsActual);
     }
 
+    @Test
+    public void addMarble_notWhite(){
+        SupplyContainer sc1 = new SupplyContainer();
+        LeadersSpace ls = new LeadersSpace();
+        try {
+            sc1.addMarble(MarbleColor.BLUE, ls);
+            sc1.addMarble(MarbleColor.YELLOW, ls);
+        } catch (Exception e) {fail();}
+        int[] objectsExpected = {1, 0, 0, 1, 0};
+        int[] objectsActual = {  sc1.getQuantity(WarehouseObjectType.COIN),
+                                 sc1.getQuantity(WarehouseObjectType.STONE),
+                                 sc1.getQuantity(WarehouseObjectType.SERVANT),
+                                 sc1.getQuantity(WarehouseObjectType.SHIELD),
+                                 sc1.getQuantity(WarehouseObjectType.FAITH_MARKER)};
+        assertArrayEquals(objectsExpected, objectsActual);
+    }
     //TODO
-    //test addMarble
+    //test addMarble with leaderSpace and white marble
 }

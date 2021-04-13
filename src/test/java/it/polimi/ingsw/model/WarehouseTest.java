@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.MarbleException;
 import it.polimi.ingsw.exceptions.SupplyException;
 import org.junit.Test;
 
@@ -76,13 +77,30 @@ public class WarehouseTest {
     }
 
     //TODO
+    //Test addMarble with white marble and leaderSpace active with market ability
+
     @Test
-    public void addMarble() {
+    public void addMarble_notWhite() {
+        Warehouse wrhs =  new Warehouse();
+        LeadersSpace ldrspc = new LeadersSpace();
+        try {
+            wrhs.addMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE, ldrspc);
+            wrhs.addMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE, ldrspc);
+            wrhs.addMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET, ldrspc);
+        } catch (SupplyException | MarbleException e) {fail();}
+        SupplyContainer result = wrhs.clearSupplies().first;
+        int[] objectsExpected = {0, 0, 1, 2, 0};
+        int[] objectsActual = { result.getQuantity(WarehouseObjectType.COIN),
+                result.getQuantity(WarehouseObjectType.STONE),
+                result.getQuantity(WarehouseObjectType.SERVANT),
+                result.getQuantity(WarehouseObjectType.SHIELD),
+                result.getQuantity(WarehouseObjectType.FAITH_MARKER)};
+        assertArrayEquals(objectsExpected, objectsActual);
     }
 
     @Test
     public void addSupply_oneNoEx() {
-        Warehouse wrhs =  new Warehouse();
+        Warehouse wrhs = new Warehouse();
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e) {fail();}
@@ -214,6 +232,7 @@ public class WarehouseTest {
     public void clearSupplies_checkAllSupplies() {
         Warehouse wrhs = new Warehouse();
         try {
+            wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.LEADER1_DEPOT);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.PAYCHECK);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e){fail();}
@@ -223,7 +242,7 @@ public class WarehouseTest {
                               result.getQuantity(WarehouseObjectType.SERVANT),
                               result.getQuantity(WarehouseObjectType.SHIELD),
                               result.getQuantity(WarehouseObjectType.FAITH_MARKER)};
-        int[] expectedResult = {0, 0, 2, 0, 0};
+        int[] expectedResult = {0, 0, 2, 1, 0};
         assertArrayEquals(expectedResult, actualResult);
     }
 

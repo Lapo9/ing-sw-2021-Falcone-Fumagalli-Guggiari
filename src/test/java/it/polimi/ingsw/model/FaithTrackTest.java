@@ -98,4 +98,11 @@ public class FaithTrackTest {
         fTrack2.goAhead(16);
         assertEquals(25, fTrack2.getWinPoints());
     }
+
+    @Test
+    public void getPosition(){
+        FaithTrack fTrack = new FaithTrack();
+        fTrack.goAhead(10);
+        assertEquals(10, fTrack.getPosition());
+    }
 }
