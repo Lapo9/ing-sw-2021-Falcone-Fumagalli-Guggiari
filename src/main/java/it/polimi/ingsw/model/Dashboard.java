@@ -252,12 +252,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
             throw new SupplyException();
         }
 
-        if (i==2){
-            baseProduction.swapOutput(0, wot);
-        }
-        else {
-            baseProduction.swapInput(i, wot);
-        }
+        productionManager.swapBaseProduction(i, wot);
     }
 
 
@@ -270,7 +265,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @throws LeaderException Specified leader is not active or is discarded
      */
     public void swapLeaderProduction(int i, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException, LeaderException{
-        leadersSpace.getLeaderAbility(i).swapProduction(wot);
+        productionManager.swapLeaderProduction(i, wot);
     }
 
 

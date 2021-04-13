@@ -235,8 +235,6 @@ public class ProductionManager implements AcceptsSupplies{
         return res;
     }
 
-
-
     public void checkProduction(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base) throws SupplyException{
         developments.checkProduction(s1, s2, s3);
 
@@ -255,5 +253,32 @@ public class ProductionManager implements AcceptsSupplies{
                 leadersSpace.getLeaderAbility(1).checkProduction();
             } catch (NoSuchMethodException | LeaderException e) {}
         }
+    }
+
+    /**
+     * Swaps one of the mutable inputs/outputs of the base production.
+     * @param i 0 = first input, 1 = second input, 2 = output
+     * @param wot new supply to insert
+     * @throws SupplyException A faith marker or no type supply type was added
+     */
+    public void swapBaseProduction(int i, WarehouseObjectType wot) throws SupplyException{
+        if (i==2){
+            baseProduction.swapOutput(0, wot);
+        }
+        else {
+            baseProduction.swapInput(i, wot);
+        }
+    }
+
+    /**
+     * Swaps the only mutable output in the specified leader
+     * @param i number of leader
+     * @param wot new supply to insert
+     * @throws SupplyException A no type supply type was added
+     * @throws NoSuchMethodException Specified leader is not a Producer
+     * @throws LeaderException Specified leader is not active or is discarded
+     */
+    public void swapLeaderProduction(int i, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException, LeaderException{
+        leadersSpace.getLeaderAbility(i).swapProduction(wot);
     }
 }
