@@ -4,6 +4,8 @@ import it.polimi.ingsw.exceptions.MarbleException;
 import it.polimi.ingsw.exceptions.SupplyException;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class WarehouseTest {
@@ -261,6 +263,43 @@ public class WarehouseTest {
                               result.getQuantity(WarehouseObjectType.SHIELD),
                               result.getQuantity(WarehouseObjectType.FAITH_MARKER)};
         int[] expectedResult = {0, 0, 0, 0, 0};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void getAllowedDepots_warehouseEmptyAllAllowed() {
+        Warehouse wrhs = new Warehouse();
+        ArrayList<DepotID> result= new ArrayList<DepotID>(wrhs.getAllowedDepots(DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD));
+        int[] expectedResult = {1, 1, 1};
+        int[] actualResult = {result.contains(DepotID.WAREHOUSE1) ? 1 : 0,
+                              result.contains(DepotID.WAREHOUSE2) ? 1 : 0,
+                              result.contains(DepotID.WAREHOUSE3) ? 1 : 0};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void getAllowedDepots_oneAllowed() {
+        Warehouse wrhs = new Warehouse();
+        try {
+            wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
+            wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.COIN, DepotID.LEADER1_DEPOT);
+        } catch (SupplyException e) {fail();}
+        ArrayList<DepotID> result= new ArrayList<DepotID>(wrhs.getAllowedDepots(DepotID.DEVELOPMENT2, WarehouseObjectType.SHIELD));
+        int[] expectedResult = {0, 1, 0};
+        int[] actualResult = {result.contains(DepotID.WAREHOUSE1) ? 1 : 0,
+                              result.contains(DepotID.WAREHOUSE2) ? 1 : 0,
+                              result.contains(DepotID.WAREHOUSE3) ? 1 : 0};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void getAllowedDepots_wrongSource() {
+        Warehouse wrhs = new Warehouse();
+        ArrayList<DepotID> result= new ArrayList<DepotID>(wrhs.getAllowedDepots(DepotID.COFFER, WarehouseObjectType.SHIELD));
+        int[] expectedResult = {0, 0, 0};
+        int[] actualResult = {result.contains(DepotID.WAREHOUSE1) ? 1 : 0,
+                              result.contains(DepotID.WAREHOUSE2) ? 1 : 0,
+                              result.contains(DepotID.WAREHOUSE3) ? 1 : 0};
         assertArrayEquals(expectedResult, actualResult);
     }
 }
