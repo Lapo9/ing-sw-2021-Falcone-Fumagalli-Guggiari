@@ -206,7 +206,16 @@ public class ProductionManager implements AcceptsSupplies{
         return res;
     }
 
-
+    /**
+     * Activates production in the specified production spaces
+     * @param s1 Development space 1
+     * @param s2 Development space 2
+     * @param s3 Development space 3
+     * @param l1 Leader 1 production (if leader 1 has that ability)
+     * @param l2 Leader 2 production (if leader 2 has that ability)
+     * @param base Production of the board
+     * @return Returns the sum of the output of the active productions
+     */
     public SupplyContainer produce(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base){
         //get productions outputs
         SupplyContainer developmentProduction = developments.produce(s1, s2, s3);
@@ -236,6 +245,16 @@ public class ProductionManager implements AcceptsSupplies{
         return res;
     }
 
+    /**
+     * Checks if the production in the specified productions spaces can be triggered
+     * @param s1 Development space 1
+     * @param s2 Development space 2
+     * @param s3 Development space 3
+     * @param l1 Leader 1 production (if leader 1 has that ability)
+     * @param l2 Leader 2 production (if leader 2 has that ability)
+     * @param base Production of the board
+     * @throws SupplyException if the supplies on the productions spaces are not the right amount
+     */
     public void checkProduction(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base) throws SupplyException{
         developments.checkProduction(s1, s2, s3);
 
