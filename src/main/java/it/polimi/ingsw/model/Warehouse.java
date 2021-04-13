@@ -143,4 +143,29 @@ public class Warehouse implements AcceptsSupplies {
         return depots.get(slot.getNum()).clearSupplies();
     }
 
+    /**
+     * Returns the depots that can receive the specified supply.
+     * @param from Source of the supply
+     * @param type Type of the supply
+     * @return The depots that can receive the specified supply
+     */
+    public ArrayList<DepotID> getAllowedDepots(DepotID from, WarehouseObjectType type) {
+        ArrayList<DepotID> res = new ArrayList<>();
+
+        for (int i=0; i<3; ++i){
+            if(depots.get(i).additionAllowed(type, from)){
+                if(i == 0){
+                    res.add(DepotID.WAREHOUSE1);
+                }
+                else if(i == 1){
+                    res.add(DepotID.WAREHOUSE2);
+                }
+                else {
+                    res.add(DepotID.WAREHOUSE3);
+                }
+            }
+        }
+        return res;
+    }
+
 }

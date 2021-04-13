@@ -6,6 +6,7 @@ import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.leader_abilities.Depot;
 import it.polimi.ingsw.model.leader_abilities.Producer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -280,5 +281,24 @@ public class ProductionManager implements AcceptsSupplies{
      */
     public void swapLeaderProduction(int i, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException, LeaderException{
         leadersSpace.getLeaderAbility(i).swapProduction(wot);
+    }
+
+
+    /**
+     * Returns the depots that can receive the specified supply.
+     * @param from Source of the supply
+     * @param type Type of the supply
+     * @return The depots that can receive the specified supply
+     */
+    public ArrayList<DepotID> getAllowedDepots(DepotID from, WarehouseObjectType type){
+        ArrayList<DepotID> res = new ArrayList<>();
+
+        for(DepotID id : DepotID.values()) {
+            if (additionAllowed(id, type, from)) {
+                res.add(id);
+            }
+        }
+
+        return res;
     }
 }

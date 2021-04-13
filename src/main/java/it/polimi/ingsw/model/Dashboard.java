@@ -325,6 +325,30 @@ public class Dashboard implements HasStatus, WinPointsCountable{
     }
 
 
+    /**
+     * Returns the depots that can receive the specified supply.
+     * @param from Source of the supply
+     * @param type Type of the supply
+     * @return The depots that can receive the specified supply
+     */
+    public ArrayList<DepotID> getAllowedDepots(DepotID from, WarehouseObjectType type) {
+        ArrayList<DepotID> res = new ArrayList<>();
+
+        res.addAll(depotsManager.getAllowedDepots(from, type));
+
+        res.addAll(productionManager.getAllowedDepots(from, type));
+
+        if (paycheck.additionAllowed(type, from)){
+            res.add(DepotID.PAYCHECK);
+        }
+
+        if (coffer.additionAllowed(type, from)){
+            res.add(DepotID.COFFER);
+        }
+
+        return res;
+    }
+
 
     //SINGLE PLAYER METHOD
     /**

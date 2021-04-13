@@ -5,6 +5,9 @@ import it.polimi.ingsw.exceptions.LeaderException;
 import it.polimi.ingsw.exceptions.MarbleException;
 import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.leader_abilities.Depot;
+import it.polimi.ingsw.model.leader_abilities.Producer;
+
+import java.util.ArrayList;
 
 public class DepotsManager implements AcceptsSupplies {
 
@@ -149,6 +152,38 @@ public class DepotsManager implements AcceptsSupplies {
         }
 
         return count;
+    }
+
+
+    /**
+     * Returns the depots that can receive the specified supply.
+     * @param from Source of the supply
+     * @param type Type of the supply
+     * @return The depots that can receive the specified supply
+     */
+    public ArrayList<DepotID> getAllowedDepots(DepotID from, WarehouseObjectType type) {
+        ArrayList<DepotID> res = new ArrayList<>();
+        res.addAll(warehouse.getAllowedDepots(from, type));
+
+        try {
+            if(leadersSpace.getLeaderAbility(0).additionAllowed(type, from) && leadersSpace.getLeaderAbility(0) instanceof Depot) {
+                res.add(DepotID.LEADER1_DEPOT);
+            }
+            else if(leadersSpace.getLeaderAbility(0).additionAllowed(type, from) && leadersSpace.getLeaderAbility(0) instanceof Producer) {
+                res.add(DepotID.LEADER1_PRODUCTION);
+            }
+        } catch (Exception e){}
+
+        try {
+            if(leadersSpace.getLeaderAbility(1).additionAllowed(type, from) && leadersSpace.getLeaderAbility(1) instanceof Depot) {
+                res.add(DepotID.LEADER2_DEPOT);
+            }
+            else if(leadersSpace.getLeaderAbility(1).additionAllowed(type, from) && leadersSpace.getLeaderAbility(1) instanceof Producer) {
+                res.add(DepotID.LEADER2_PRODUCTION);
+            }
+        } catch (Exception e){}
+
+        return res;
     }
 
 
