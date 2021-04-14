@@ -9,6 +9,9 @@ import it.polimi.ingsw.model.leader_abilities.Producer;
 
 import java.util.ArrayList;
 
+/**
+ * Manages all the depot that can contain resources from the market and the productions, namely warehouse and leader depots
+ */
 public class DepotsManager implements AcceptsSupplies {
 
     private Warehouse warehouse;
@@ -134,6 +137,11 @@ public class DepotsManager implements AcceptsSupplies {
     }
 
 
+    /**
+     * Returns the number of the given supplies contained in warehouse and in leader depots
+     * @param wots Type of resources
+     * @return Number of the given resources
+     */
     public int getResourceCount(WarehouseObjectType... wots){
         int count = 0;
 
@@ -187,7 +195,15 @@ public class DepotsManager implements AcceptsSupplies {
     }
 
 
-
+    /**
+     * Tries to add the marble to the given depot.
+     * @param slot ID of the depot
+     * @param color Color of the marble
+     * @throws MarbleException Wrong depot ID
+     * @throws SupplyException Cannot add the marble
+     * @throws LeaderException No active leader yet
+     * @throws NoSuchMethodException No leader with the market ability
+     */
     public void addMarble(DepotID slot, MarbleColor color) throws MarbleException, SupplyException, LeaderException, NoSuchMethodException {
         if (slot.getType() == DepotID.DepotType.WAREHOUSE){
             warehouse.addMarble(slot, color, leadersSpace);
