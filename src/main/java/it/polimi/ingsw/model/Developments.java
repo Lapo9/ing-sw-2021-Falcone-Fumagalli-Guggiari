@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Developments implements HasStatus, WinPointsCountable, AcceptsSupplies{
 
-    private ArrayList<DevelopmentSpace> spaces;
+    private ArrayList<DevelopmentSpace> spaces = new ArrayList<>();
 
 
     /**
@@ -124,6 +124,7 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
      * @param space where to add the card to
      * @param card card to add
      * @throws DevelopmentException Card level doesn't match required level, or the space is full (max is 3 cards).
+     * [pre: space is between 0 and 2]
      */
     public void addCardToSpace(int space, DevelopmentCard card) throws DevelopmentException {
         spaces.get(space).addCard(card);

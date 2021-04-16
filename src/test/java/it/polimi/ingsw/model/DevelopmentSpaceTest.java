@@ -89,9 +89,12 @@ public class DevelopmentSpaceTest {
             dvlspc.addCard(new DevelopmentCard(3, 9, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 2, 0), new SupplyContainer(0, 0, 3, 0, 2)), new SupplyContainer(0, 6, 0, 0, 0)));
         } catch (DevelopmentException e) {fail();}
         ArrayList<Pair<CardCategory, Integer>> result = new ArrayList<>(dvlspc.getCardsTypes());
-        int[] expectedResult = {1, 2, 3};
-        int[] actualResult = {result.get(0).second,
+        int[] expectedResult = {4, 1, 3, 2, 1, 3};
+        int[] actualResult = {result.get(0).first == CardCategory.YELLOW ? 1 : result.get(0).first == CardCategory.GREEN ? 2: result.get(0).first == CardCategory.VIOLET ? 3: 4,
+                              result.get(0).second,
+                              result.get(1).first == CardCategory.YELLOW ? 1 : result.get(1).first == CardCategory.GREEN ? 2: result.get(1).first == CardCategory.VIOLET ? 3: 4,
                               result.get(1).second,
+                              result.get(2).first == CardCategory.YELLOW ? 1 : result.get(2).first == CardCategory.GREEN ? 2: result.get(2).first == CardCategory.VIOLET ? 3: 4,
                               result.get(2).second};
         assertArrayEquals(expectedResult, actualResult);
     }
