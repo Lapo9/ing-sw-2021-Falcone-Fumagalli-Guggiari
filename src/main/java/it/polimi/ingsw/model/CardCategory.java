@@ -1,11 +1,11 @@
 package it.polimi.ingsw.model;
 
-/** enum containing every type of development card
- * @author Marco Fumagalli
+/**
+ * enum containing every type of development card
  */
 
 public enum CardCategory {
 
-    YELLOW, GREY, VIOLET, BLUE
+    YELLOW, GREEN, VIOLET, BLUE
 
 }

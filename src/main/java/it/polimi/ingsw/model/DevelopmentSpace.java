@@ -17,7 +17,6 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
 
     /**
      * Creates a development space without any card.
-     * @param spaceNumber can be 1, 2 or 3
      */
     public DevelopmentSpace(){}
 
