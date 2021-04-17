@@ -196,6 +196,34 @@ public class DepotsManager implements AcceptsSupplies {
 
 
     /**
+     * Adds the supplies in the container passed as argument to the warehouse and leaders depots. In the process it is likely that the order of the depots in the warehouse will be modified.
+     * @param sc SupplyContainer containing the resources to add to the depots
+     */
+    public void allocate(SupplyContainer sc){
+        //first, place as supplies as you can in the leaders depots
+        for (WarehouseObjectType wot : WarehouseObjectType.values()){
+            int qty = sc.getQuantity(wot);
+            //for each leader, try to add the current type of resource (as long as there is a supply of the current type)
+            //the cycle is repeated as most 4 times because if the 2 leaders both have the same contained supply, then at most you can add 4 supplies of that type to the leaders depots
+            for (int i=0; i<4 && qty>0; ++i){
+                try {
+                    if (leadersSpace.getLeaderAbility(i/2) instanceof Depot && leadersSpace.getLeaderAbility(i/2).additionAllowed(wot, DepotID.WAREHOUSE1)) {
+                        sc.removeSupply(wot);
+                        leadersSpace.getLeaderAbility(i/2).addSupply(wot, DepotID.WAREHOUSE1);
+                        qty--;
+                    }
+                } catch (LeaderException le) {
+                } catch (SupplyException | NoSuchMethodException se) {/*TODO terminate*/}
+            }
+        }
+
+
+        //second, reorganize the warehouse with the remaining resources
+        warehouse.allocate(sc);
+    }
+
+
+    /**
      * Tries to add the marble to the given depot.
      * @param slot ID of the depot
      * @param color Color of the marble

@@ -4,6 +4,8 @@ import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.SupplyException;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ResourceChecker {
 
@@ -52,14 +54,14 @@ public class ResourceChecker {
         //check cards requirement
         //for each requirement
         for(CardsRequirement req : developmentReqs) {
-            ArrayList<Pair<CardCategory, Integer>> allCards = developments.getCardsTypes();
+            List<Pair<CardCategory, Integer>> allCards = developments.getCardsTypes();
 
             //keep only the cards with a level higher than the requested one
-            allCards.stream().filter(card -> card.second >= req.minLevel());
+            allCards = allCards.stream().filter(card -> card.second >= req.minLevel()).collect(Collectors.toList());
 
             //keep only the cards of the specified category
             if(req.reqCard() != null) {
-                allCards.stream().filter(card -> card.first == req.reqCard());
+                allCards = allCards.stream().filter(card -> card.first == req.reqCard()).collect(Collectors.toList());
             }
 
             //check if the remaining cards are more than the required number

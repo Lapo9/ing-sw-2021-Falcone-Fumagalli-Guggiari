@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * The CardsRequirement class contains the SupplyCard features needed to activate a LeaderCard
  */
-public class CardsRequirement implements HasStatus{
+public class CardsRequirement{
     private int number;
     private int level;
     private CardCategory category;
@@ -46,9 +46,4 @@ public class CardsRequirement implements HasStatus{
         return category;
     }
 
-    //TODO
-    @Override
-    public ArrayList<Integer> getStatus(){
-        return null;
-    }
 }

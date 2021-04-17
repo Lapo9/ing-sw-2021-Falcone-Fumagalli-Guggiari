@@ -6,6 +6,8 @@ import it.polimi.ingsw.model.leader_abilities.Depot;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -167,6 +169,46 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         }
         return res;
     }
+
+
+    /**
+     * Adds the supplies in the container passed as argument to the warehouse depots. In the process it is likely that the order of the depots will be modified.
+     * @param sc SupplyContainer containing the resources to add to the warehouse
+     */
+    public void allocate(SupplyContainer sc){
+        //empty the warehouse and re-add everything
+        for(int i=0; i<3; ++i){
+            sc.sum(depots.get(i).clearSupplies().first);
+        }
+
+        //create ArrayList of sc
+        List<Pair<WarehouseObjectType, Integer>> listOfSc = new ArrayList<>();
+        for(WarehouseObjectType wot : WarehouseObjectType.values()){
+            listOfSc.add(new Pair<>(wot, sc.getQuantity(wot)));
+        }
+
+        //keep only types that have at least 1 unit
+        listOfSc = listOfSc.stream().filter(pair -> pair.second > 0).collect(Collectors.toList());
+
+        //order the list
+        listOfSc = listOfSc.stream().sorted((pair1, pair2) -> pair1.second>pair2.second ? 1 : (pair1.second==pair2.second ? 0 : -1)).collect(Collectors.toList());
+
+        //if we have more than 3 items, we're fucked
+        if(listOfSc.size() > 3){
+            //TODO terminate
+        }
+
+        //add to the depots
+        for(int i=0; i<3; ++i){
+            for (int j=0; j<listOfSc.get(i).second; ++j){
+                try {
+                    depots.get(i).addSupply(listOfSc.get(i).first);
+                } catch (SupplyException se){/*TODO terminate*/}
+            }
+        }
+
+    }
+
 
 
     @Override
