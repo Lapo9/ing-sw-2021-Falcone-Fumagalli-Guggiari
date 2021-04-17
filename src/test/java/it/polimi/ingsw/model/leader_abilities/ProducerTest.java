@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.leader_abilities;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.DepotID;
 import it.polimi.ingsw.model.SupplyContainer;
@@ -40,6 +41,9 @@ public class ProducerTest {
     public void checkProduction_no_exc() {
         Producer prod = new Producer(new SupplyContainer(0,1,0,0,0));
         boolean exc = false;
+        try{
+            prod.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
+        } catch (SupplyException e){fail();}
         try {
             prod.checkProduction();
         } catch (SupplyException e){
@@ -67,17 +71,20 @@ public class ProducerTest {
     public void addSupply_no_exc() {
         SupplyContainer input = new SupplyContainer(0,1,0,0,0);
         Producer prod = new Producer(input);
-        //the only way to test if addSupply works is to test if this method throws an exception
-        //FIXME i don't know where the resource goes: In the input(?)
-        boolean exc = false;
         try{
-            prod.addSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE1);
-        } catch (SupplyException e){
-            exc = true;
-        }
+            prod.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
+        } catch (SupplyException e){fail();}
+        Pair<SupplyContainer, SupplyContainer> collector = prod.clearSupplies();
+        SupplyContainer result = new SupplyContainer(collector.first.sum(collector.second));
+        int[] actualObject = {result.getQuantity(WarehouseObjectType.COIN),
+                result.getQuantity(WarehouseObjectType.STONE),
+                result.getQuantity(WarehouseObjectType.SERVANT),
+                result.getQuantity(WarehouseObjectType.SHIELD),
+                result.getQuantity(WarehouseObjectType.FAITH_MARKER)
+        };
+        int[] expectedObject = {0, 1, 0, 0, 0};
 
-
-        assertFalse(exc);
+        assertArrayEquals(actualObject, expectedObject);
     }
 
     @Test
@@ -86,26 +93,67 @@ public class ProducerTest {
         Producer prod = new Producer(input);
         try{
             prod.addSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE1);
+            prod.addSupply(WarehouseObjectType.STONE, DepotID.COFFER);
         } catch (SupplyException e){fail();}
-        boolean exc = false;
         try{
             prod.removeSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE1);
-        } catch (SupplyException e){
-            exc = true;
-        }
+        } catch (SupplyException e){fail();}
+        Pair<SupplyContainer, SupplyContainer> collector = prod.clearSupplies();
+        SupplyContainer result = new SupplyContainer(collector.first.sum(collector.second));
+        int[] actualObject = {result.getQuantity(WarehouseObjectType.COIN),
+                result.getQuantity(WarehouseObjectType.STONE),
+                result.getQuantity(WarehouseObjectType.SERVANT),
+                result.getQuantity(WarehouseObjectType.SHIELD),
+                result.getQuantity(WarehouseObjectType.FAITH_MARKER)
+        };
+        int[] expectedObject = {0, 1, 0, 0, 0};
 
-        assertFalse(exc);
+        assertArrayEquals(actualObject, expectedObject);
     }
 
     @Test
     public void additionAllowed() {
+        SupplyContainer input = new SupplyContainer(0,1,0,0,0);
+        Producer prod = new Producer(input);
+
+        assertTrue(prod.additionAllowed(WarehouseObjectType.COIN, DepotID.WAREHOUSE1));
     }
 
     @Test
     public void removalAllowed() {
+        SupplyContainer input = new SupplyContainer(0,1,0,0,0);
+        Producer prod = new Producer(input);
+        try{
+            prod.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
+        } catch (SupplyException e){fail();}
+        boolean ris1 = false;
+        boolean ris2 = true;
+        try {
+            ris1 = prod.removalAllowed(WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
+            ris2 = prod.removalAllowed(WarehouseObjectType.COIN, DepotID.WAREHOUSE1);
+        } catch(NoSuchMethodException e){fail();}
+
+        assertTrue(ris1);
+        assertFalse(ris2);
     }
 
     @Test
     public void clearSupplies() {
+        SupplyContainer input = new SupplyContainer(0,1,0,0,0);
+        Producer prod = new Producer(input);
+        try{
+            prod.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
+        } catch (SupplyException e){fail();}
+        Pair<SupplyContainer, SupplyContainer> collector = prod.clearSupplies();
+        SupplyContainer result = new SupplyContainer(collector.first.sum(collector.second));
+        int[] actualObject = {result.getQuantity(WarehouseObjectType.COIN),
+                result.getQuantity(WarehouseObjectType.STONE),
+                result.getQuantity(WarehouseObjectType.SERVANT),
+                result.getQuantity(WarehouseObjectType.SHIELD),
+                result.getQuantity(WarehouseObjectType.FAITH_MARKER)
+        };
+        int[] expectedObject = {0, 1, 0, 0, 0};
+
+        assertArrayEquals(actualObject, expectedObject);
     }
 }
