@@ -9,9 +9,9 @@ public class MarketplaceTest {
     @Test
     public void obtain() {
         Marketplace market = new Marketplace(true);
-        int index = 2;
+        int index = 0;
         MarbleContainer mc = market.obtain(MarketDirection.HORIZONTAL, index);
-        int [] expectedObject = {2, 0, 0, 2, 0, 0};
+        int [] expectedObject = {0, 0, 0, 2, 2, 0};
         int [] actualObject = {
                 mc.getQuantity(MarbleColor.YELLOW),
                 mc.getQuantity(MarbleColor.BLUE),
