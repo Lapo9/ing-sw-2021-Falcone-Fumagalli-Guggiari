@@ -16,7 +16,7 @@ public class DevelopmentSpaceTest {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         boolean exc = false;
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0,1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
         } catch (DevelopmentException e) {
             exc = true;
         }
@@ -28,10 +28,10 @@ public class DevelopmentSpaceTest {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         boolean exc = false;
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
         } catch (DevelopmentException e) {fail();}
         try {
-            dvlspc.addCard(new DevelopmentCard(3, 12, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 1, 0), new SupplyContainer(0, 1, 3, 0, 0)), new SupplyContainer(0, 4, 4, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 3, 12, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 1, 0), new SupplyContainer(0, 1, 3, 0, 0)), new SupplyContainer(0, 4, 4, 0, 0)));
         } catch (DevelopmentException e) {
             exc = true;
         }
@@ -43,12 +43,12 @@ public class DevelopmentSpaceTest {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         boolean exc = false;
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
-            dvlspc.addCard(new DevelopmentCard(2, 5, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(0, 0, 4, 0, 0)));
-            dvlspc.addCard(new DevelopmentCard(3, 9, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 2, 0), new SupplyContainer(0, 0, 3, 0, 2)), new SupplyContainer(0, 6, 0, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 2, 5, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(0, 0, 4, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 3, 9, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 2, 0), new SupplyContainer(0, 0, 3, 0, 2)), new SupplyContainer(0, 6, 0, 0, 0)));
         } catch (DevelopmentException e) {fail();}
         try {
-            dvlspc.addCard(new DevelopmentCard(3, 12, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 1, 0), new SupplyContainer(0, 1, 3, 0, 0)), new SupplyContainer(0, 4, 4, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 3, 12, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 1, 0), new SupplyContainer(0, 1, 3, 0, 0)), new SupplyContainer(0, 4, 4, 0, 0)));
         } catch (DevelopmentException e) {
             exc = true;
         }
@@ -65,7 +65,7 @@ public class DevelopmentSpaceTest {
     public void buyableLevel_two() {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
         } catch (DevelopmentException e) {fail();}
         assertEquals(2, dvlspc.buyableLevel());
     }
@@ -74,8 +74,8 @@ public class DevelopmentSpaceTest {
     public void buyableLevel_three() {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
-            dvlspc.addCard(new DevelopmentCard(2, 5, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(0, 0, 4, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 2, 5, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(0, 0, 4, 0, 0)));
         } catch (DevelopmentException e) {fail();}
         assertEquals(3, dvlspc.buyableLevel());
     }
@@ -84,9 +84,9 @@ public class DevelopmentSpaceTest {
     public void getCardsTypes() {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
-            dvlspc.addCard(new DevelopmentCard(2, 5, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(0, 0, 4, 0, 0)));
-            dvlspc.addCard(new DevelopmentCard(3, 9, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 2, 0), new SupplyContainer(0, 0, 3, 0, 2)), new SupplyContainer(0, 6, 0, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 2, 5, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(0, 0, 4, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 3, 9, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 2, 0), new SupplyContainer(0, 0, 3, 0, 2)), new SupplyContainer(0, 6, 0, 0, 0)));
         } catch (DevelopmentException e) {fail();}
         ArrayList<Pair<CardCategory, Integer>> result = new ArrayList<>(dvlspc.getCardsTypes());
         int[] expectedResult = {4, 1, 3, 2, 1, 3};
@@ -103,7 +103,7 @@ public class DevelopmentSpaceTest {
     public void produce() {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 4, CardCategory.GREEN, new Production(new SupplyContainer(0, 1, 1, 0, 0), new SupplyContainer(2, 0, 0, 0, 1)), new SupplyContainer(2, 0, 0, 2, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 4, CardCategory.GREEN, new Production(new SupplyContainer(0, 1, 1, 0, 0), new SupplyContainer(2, 0, 0, 0, 1)), new SupplyContainer(2, 0, 0, 2, 0)));
         } catch (DevelopmentException e) {fail();}
         try {
             dvlspc.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
@@ -123,7 +123,7 @@ public class DevelopmentSpaceTest {
     public void checkProduction() {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 4, CardCategory.GREEN, new Production(new SupplyContainer(0, 1, 1, 0, 0), new SupplyContainer(2, 0, 0, 0, 1)), new SupplyContainer(2, 0, 0, 2, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 4, CardCategory.GREEN, new Production(new SupplyContainer(0, 1, 1, 0, 0), new SupplyContainer(2, 0, 0, 0, 1)), new SupplyContainer(2, 0, 0, 2, 0)));
         } catch (DevelopmentException e) {fail();}
         try {
             dvlspc.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
@@ -143,7 +143,7 @@ public class DevelopmentSpaceTest {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         boolean exc = false;
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
         } catch (DevelopmentException e) {fail();}
         try {
             dvlspc.addSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE1);
@@ -158,7 +158,7 @@ public class DevelopmentSpaceTest {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         boolean exc = false;
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
         } catch (DevelopmentException e) {fail();}
         try {
             dvlspc.addSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE1);
@@ -175,7 +175,7 @@ public class DevelopmentSpaceTest {
     public void additionAllowed() {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 3, CardCategory.VIOLET, new Production(new SupplyContainer(2, 0, 0, 0, 0), new SupplyContainer(0, 1, 1, 1, 0)), new SupplyContainer(0, 0, 3, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 3, CardCategory.VIOLET, new Production(new SupplyContainer(2, 0, 0, 0, 0), new SupplyContainer(0, 1, 1, 1, 0)), new SupplyContainer(0, 0, 3, 0, 0)));
         } catch (DevelopmentException e) {fail();}
         assertTrue(dvlspc.additionAllowed(WarehouseObjectType.COIN, DepotID.WAREHOUSE2));
     }
@@ -184,7 +184,7 @@ public class DevelopmentSpaceTest {
     public void removalAllowed() {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 3, CardCategory.VIOLET, new Production(new SupplyContainer(2, 0, 0, 0, 0), new SupplyContainer(0, 1, 1, 1, 0)), new SupplyContainer(0, 0, 3, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 3, CardCategory.VIOLET, new Production(new SupplyContainer(2, 0, 0, 0, 0), new SupplyContainer(0, 1, 1, 1, 0)), new SupplyContainer(0, 0, 3, 0, 0)));
         } catch (DevelopmentException e) {fail();}
         try {
             dvlspc.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE2);
@@ -196,7 +196,7 @@ public class DevelopmentSpaceTest {
     public void clearSupplies() {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 4, CardCategory.GREEN, new Production(new SupplyContainer(0, 1, 1, 0, 0), new SupplyContainer(2, 0, 0, 0, 1)), new SupplyContainer(2, 0, 0, 2, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 4, CardCategory.GREEN, new Production(new SupplyContainer(0, 1, 1, 0, 0), new SupplyContainer(2, 0, 0, 0, 1)), new SupplyContainer(2, 0, 0, 2, 0)));
         } catch (DevelopmentException e) {fail();}
         try {
             dvlspc.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
@@ -217,9 +217,9 @@ public class DevelopmentSpaceTest {
     public void getWinPoints() {
         DevelopmentSpace dvlspc = new DevelopmentSpace();
         try {
-            dvlspc.addCard(new DevelopmentCard(1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
-            dvlspc.addCard(new DevelopmentCard(2, 5, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(0, 0, 4, 0, 0)));
-            dvlspc.addCard(new DevelopmentCard(3, 9, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 2, 0), new SupplyContainer(0, 0, 3, 0, 2)), new SupplyContainer(0, 6, 0, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 2, 5, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(0, 0, 4, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 3, 9, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 2, 0), new SupplyContainer(0, 0, 3, 0, 2)), new SupplyContainer(0, 6, 0, 0, 0)));
         } catch (DevelopmentException e) {fail();}
         assertEquals(16, dvlspc.getWinPoints());
     }

@@ -20,7 +20,7 @@ public class LeaderCardTest {
         reqDevelopmentCard.add(cs2);
         LeaderAbility la = new Discount(WarehouseObjectType.COIN);
 
-        LeaderCard lc = new LeaderCard(reqSupplyContainer, reqDevelopmentCard, la, 5);
+        LeaderCard lc = new LeaderCard(0, reqSupplyContainer, reqDevelopmentCard, la, 5);
         boolean exc = false;
         try {
             lc.activate();
@@ -40,7 +40,7 @@ public class LeaderCardTest {
         reqDevelopmentCard.add(cs1);
         reqDevelopmentCard.add(cs2);
         LeaderAbility la = new Discount(WarehouseObjectType.COIN);
-        LeaderCard lc = new LeaderCard(reqSupplyContainer, reqDevelopmentCard, la, 5);
+        LeaderCard lc = new LeaderCard(0, reqSupplyContainer, reqDevelopmentCard, la, 5);
         boolean exc = false;
         try {
             lc.discard();
@@ -60,7 +60,7 @@ public class LeaderCardTest {
         reqDevelopmentCard.add(cs1);
         reqDevelopmentCard.add(cs2);
         LeaderAbility la = new Discount(WarehouseObjectType.COIN);
-        LeaderCard lc = new LeaderCard(reqSupplyContainer, reqDevelopmentCard, la, 5);
+        LeaderCard lc = new LeaderCard(0, reqSupplyContainer, reqDevelopmentCard, la, 5);
 
         int expectedWP = 5;
         int actualWP = lc.getWinPoints();

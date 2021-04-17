@@ -16,7 +16,7 @@ public class DevelopmentCardTest {
         SupplyContainer in = new SupplyContainer(0, 0, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
-        DevelopmentCard dc = new DevelopmentCard(2, 5, CardCategory.YELLOW, prod, cost);
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
         try {
             dc.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
         } catch (SupplyException e){
@@ -39,7 +39,7 @@ public class DevelopmentCardTest {
         SupplyContainer in = new SupplyContainer(0, 0, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
-        DevelopmentCard dc = new DevelopmentCard(2, 5, CardCategory.YELLOW, prod, cost);
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
 
         try {
             dc.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
@@ -61,7 +61,7 @@ public class DevelopmentCardTest {
         SupplyContainer in = new SupplyContainer(0, 0, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
-        DevelopmentCard dc = new DevelopmentCard(2, 5, CardCategory.YELLOW, prod, cost);
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
 
         try {
             //add to input one coin, useless for the production
@@ -84,7 +84,7 @@ public class DevelopmentCardTest {
         SupplyContainer in = new SupplyContainer(0, 0, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
-        DevelopmentCard dc = new DevelopmentCard(2, 5, CardCategory.YELLOW, prod, cost);
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
 
         int [] expectedCost = {0, 4, 0, 0, 0};
         int [] actualCost = {dc.getCost().getQuantity(WarehouseObjectType.COIN),
@@ -102,7 +102,7 @@ public class DevelopmentCardTest {
         SupplyContainer in = new SupplyContainer(0, 0, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
-        DevelopmentCard dc = new DevelopmentCard(2, 5, CardCategory.YELLOW, prod, cost);
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
 
         int expectedLevel = 2;
         int actualLevel = dc.getLevel();
@@ -116,7 +116,7 @@ public class DevelopmentCardTest {
         SupplyContainer in = new SupplyContainer(0, 0, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
-        DevelopmentCard dc = new DevelopmentCard(2, 5, CardCategory.YELLOW, prod, cost);
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
 
         CardCategory expectedCategory = CardCategory.YELLOW;
         CardCategory actualCategory = dc.getCategory();
@@ -130,7 +130,7 @@ public class DevelopmentCardTest {
         SupplyContainer in = new SupplyContainer(0, 0, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
-        DevelopmentCard dc = new DevelopmentCard(2, 5, CardCategory.YELLOW, prod, cost);
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
         try {
             dc.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
             dc.addSupply(WarehouseObjectType.SERVANT, DepotID.COFFER);
@@ -156,7 +156,7 @@ public class DevelopmentCardTest {
         SupplyContainer in = new SupplyContainer(0, 0, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
-        DevelopmentCard dc = new DevelopmentCard(2, 5, CardCategory.YELLOW, prod, cost);
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
         //i have to add before trying to remove something from the currentSupply
         try {
             dc.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1); //add to currentSupply from WAREHOUSE1
@@ -187,7 +187,7 @@ public class DevelopmentCardTest {
         SupplyContainer in = new SupplyContainer(0, 0, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
-        DevelopmentCard dc = new DevelopmentCard(2, 5, CardCategory.YELLOW, prod, cost);
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
         //FIXME same doubt of ProductionTest
         assertTrue(dc.additionAllowed(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1));
     }
@@ -198,7 +198,7 @@ public class DevelopmentCardTest {
         SupplyContainer in = new SupplyContainer(0, 0, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
-        DevelopmentCard dc = new DevelopmentCard(2, 5, CardCategory.YELLOW, prod, cost);
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
         try {
             dc.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
         } catch (SupplyException e){fail();}
@@ -212,7 +212,7 @@ public class DevelopmentCardTest {
         SupplyContainer in = new SupplyContainer(0, 0, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
-        DevelopmentCard dc = new DevelopmentCard(2, 5, CardCategory.YELLOW, prod, cost);
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
         try {
             dc.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
             dc.addSupply(WarehouseObjectType.SERVANT, DepotID.COFFER);
@@ -236,7 +236,7 @@ public class DevelopmentCardTest {
         SupplyContainer in = new SupplyContainer(0, 0, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
-        DevelopmentCard dc = new DevelopmentCard(2, 5, CardCategory.YELLOW, prod, cost);
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
 
         int expectedWP = 5;
         int actualWP = dc.getWinPoints();

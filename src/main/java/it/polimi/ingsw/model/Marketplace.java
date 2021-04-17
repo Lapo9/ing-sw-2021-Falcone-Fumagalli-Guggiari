@@ -12,7 +12,31 @@ public class Marketplace implements HasStatus{
 
     private final ArrayList<MarbleColor> grid = new ArrayList<>();
     private MarbleColor slide; //not final so i can shift
+    private boolean rand;
 
+    public Marketplace(boolean random){
+        ArrayList<MarbleColor> listOfMarbles = new ArrayList<>();
+        this.rand = random;
+        if(random){
+            listOfMarbles.add(MarbleColor.VIOLET);
+            listOfMarbles.add(MarbleColor.VIOLET);
+            listOfMarbles.add(MarbleColor.WHITE);
+            listOfMarbles.add(MarbleColor.WHITE);
+            listOfMarbles.add(MarbleColor.WHITE);
+            listOfMarbles.add(MarbleColor.WHITE);
+            listOfMarbles.add(MarbleColor.GREY);
+            listOfMarbles.add(MarbleColor.GREY);
+            listOfMarbles.add(MarbleColor.BLUE);
+            listOfMarbles.add(MarbleColor.BLUE);
+            listOfMarbles.add(MarbleColor.YELLOW);
+            listOfMarbles.add(MarbleColor.YELLOW);
+            for(int i=0; i<12; i++){
+                MarbleColor tmp = listOfMarbles.remove(0);
+                grid.add(i, tmp);
+            }
+            slide = MarbleColor.RED;
+        }
+    }
 
     /**
      * Class constructor: creates the Marketplace, places 12 random marbles and places the remaining marble in the 'slide'
@@ -50,59 +74,47 @@ public class Marketplace implements HasStatus{
 
 
     /**
-     * This method allows to obtain marbles from the Marketplace
+     * Allows to obtain marbles from the Marketplace
      * @param dir Parameter to select one row/column of the Marketplace
      * @param index Index of desired row/column
      * @return A temporary MarbleContainer that contains selected marbles
      */
     public MarbleContainer obtain(MarketDirection dir, int index){
-
         //create a list of counters for every type of MarbleColor
         ArrayList<Integer> marbleCounters = new ArrayList<>();
         for(int i=0; i < 6; i++)
             marbleCounters.add(i, 0);
-
         //if the direction is HORIZONTAL, i have to take the marbles consequently with a cycle for
         if (dir == MarketDirection.HORIZONTAL){
-
-            for(int i = 0; i < 3; i++){
-
+            for(int i = 0; i < 4; i++){
                 int pos = getPos(index, i);
-
                 MarbleColor currentMarble = grid.get(pos); // get one MarbleColor from the array list grid
 
                 //this instruction increase the counter of the currentMarble in the marbleCounters array list
                 //parameter1: counter of the currentColor position in the list MarbleCounters
                 //parameter2: the current value of the currentColor counter increased by 1 (to increase the counter)
                 marbleCounters.set(currentMarble.ordinal(), marbleCounters.get(currentMarble.ordinal())+1);
-
             }
         }
 
         //if the direction is VERTICAL, i have to take one marble and skip the next three
         else{
-
-            for(int i = 0; i < 2; i++){
-
+            for(int i = 0; i < 3; i++){
                 int pos = getPos(i, index);
-
                 MarbleColor currentMarble = grid.get(pos); // get one element from the array list grid
-
                 marbleCounters.set(currentMarble.ordinal(), marbleCounters.get(currentMarble.ordinal())+1);
-
             }
         }
 
         //create a MarbleContainer by inserting the values of the marbleCounter array list
         MarbleContainer mc = new MarbleContainer(marbleCounters.get(0), marbleCounters.get(1), marbleCounters.get(2), marbleCounters.get(3), marbleCounters.get(4), marbleCounters.get(5));
-
         shiftMarketplace(dir, index);
 
         return mc;
     }
 
     /**
-     * This private method allows to shift the market after one player get his marbles
+     * Allows to shift the market after one player get his marbles
      * @param dir This method can shift in two ways: horizontal or vertical
      * @param index This method positions the slide in the selected row/column and shift the rest
      */
@@ -111,41 +123,28 @@ public class Marketplace implements HasStatus{
         MarbleColor tmp;
 
         if(dir == MarketDirection.HORIZONTAL){
-
             tmp = grid.get(index*4); //copy in tmp the first MarbleColor of the row, it will be placed in the slide
 
             //shift the three elements remaining
             for(int i = 0; i < 2; i++){
-
                 int pos = getPos(index, i); // pos = (index * 4) + i
-
                 grid.set(pos, grid.get(pos+1)); //the second element of the row takes place of the first
-
             }
 
             //can't use pose instead of index*4+3
             grid.set(index*4+3, slide); //add the marble which is in the slide in the last column of the row
-
         }
 
         else{
-
             tmp = grid.get(index); //copy in tmp the MarbleColor in the first row of the selected column, ... slide
-
             for(int i = 1; i < 3; i++){
-
                 int pos = getPos(i, index);
-
                 grid.set(pos, grid.get(pos+1)); //add the element below in the "matrix"
-
             }
-
             grid.set(index+8, slide); //add the marble in the slide
-
         }
 
         slide = tmp; //the first MarbleColor i removed goes in the slide
-
     }
 
 

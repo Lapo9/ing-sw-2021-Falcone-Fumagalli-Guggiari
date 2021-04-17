@@ -22,7 +22,7 @@ public class LeadersSpaceTest {
         reqDevelopmentCard1.add(cs11);
         reqDevelopmentCard1.add(cs12);
         LeaderAbility la1 = new Discount(WarehouseObjectType.COIN);
-        LeaderCard lc1 = new LeaderCard(reqSupplyContainer1, reqDevelopmentCard1, la1, 5);
+        LeaderCard lc1 = new LeaderCard(0, reqSupplyContainer1, reqDevelopmentCard1, la1, 5);
 
         //create the second LeaderCard
         SupplyContainer reqSupplyContainer2 = new SupplyContainer(0, 1, 1, 0, 0);
@@ -32,7 +32,7 @@ public class LeadersSpaceTest {
         reqDevelopmentCard2.add(cs21);
         reqDevelopmentCard2.add(cs22);
         LeaderAbility la2 = new Discount(WarehouseObjectType.SHIELD);
-        LeaderCard lc2 = new LeaderCard(reqSupplyContainer2, reqDevelopmentCard2, la2, 3);
+        LeaderCard lc2 = new LeaderCard(0, reqSupplyContainer2, reqDevelopmentCard2, la2, 3);
 
         //create the LeaderSpace
         ls.add(lc1);
@@ -60,7 +60,7 @@ public class LeadersSpaceTest {
         reqDevelopmentCard1.add(cs11);
         reqDevelopmentCard1.add(cs12);
         LeaderAbility la1 = new Discount(WarehouseObjectType.COIN);
-        LeaderCard lc1 = new LeaderCard(reqSupplyContainer1, reqDevelopmentCard1, la1, 5);
+        LeaderCard lc1 = new LeaderCard(0, reqSupplyContainer1, reqDevelopmentCard1, la1, 5);
 
         //create the second LeaderCard
         SupplyContainer reqSupplyContainer2 = new SupplyContainer(0, 1, 1, 0, 0);
@@ -70,7 +70,7 @@ public class LeadersSpaceTest {
         reqDevelopmentCard2.add(cs21);
         reqDevelopmentCard2.add(cs22);
         LeaderAbility la2 = new Discount(WarehouseObjectType.SHIELD);
-        LeaderCard lc2 = new LeaderCard(reqSupplyContainer2, reqDevelopmentCard2, la2, 3);
+        LeaderCard lc2 = new LeaderCard(0, reqSupplyContainer2, reqDevelopmentCard2, la2, 3);
 
         //create the LeaderSpace
         ls.add(lc1);
