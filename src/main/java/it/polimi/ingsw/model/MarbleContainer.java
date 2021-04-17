@@ -121,9 +121,19 @@ public class MarbleContainer implements HasStatus {
         red = 0;
     }
 
-    //TODO
+    @Override
     public ArrayList<Integer> getStatus(){
-        return null;
+        ArrayList<Integer> status = new ArrayList<>();
+
+        //The getStatus array contains the number of the blue, gray, red, violet, white and yellow marbles contained in the MarbleContainer
+        status.add(blue);
+        status.add(grey);
+        status.add(red);
+        status.add(violet);
+        status.add(white);
+        status.add(yellow);
+
+        return status;
     }
 
     /**

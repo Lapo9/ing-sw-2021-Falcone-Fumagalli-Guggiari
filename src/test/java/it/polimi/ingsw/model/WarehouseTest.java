@@ -302,4 +302,23 @@ public class WarehouseTest {
                               result.contains(DepotID.WAREHOUSE3) ? 1 : 0};
         assertArrayEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void getStatus(){
+        Warehouse wrhs =  new Warehouse();
+        try {
+            wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.COIN, DepotID.DEVELOPMENT3);
+            wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.BASE_PRODUCTION);
+            wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.PAYCHECK);
+            wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.STONE, DepotID.PAYCHECK);
+        } catch (SupplyException e) {fail();}
+        ArrayList<Integer> result = new ArrayList<>(wrhs.getStatus());
+        int[] expectedResult = {1, 0, 0, 0, 0,
+                                0, 2, 0, 0, 0,
+                                0, 0, 0, 1, 0};
+        int[] actualResult = {result.get(0), result.get(1), result.get(2), result.get(3), result.get(4),
+                              result.get(5), result.get(6), result.get(7), result.get(8), result.get(9),
+                              result.get(10), result.get(11), result.get(12), result.get(13), result.get(14)};
+        assertArrayEquals(expectedResult, actualResult);
+    }
 }

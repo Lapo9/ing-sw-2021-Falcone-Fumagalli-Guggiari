@@ -3,6 +3,8 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.MarbleException;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class MarbleContainerTest {
@@ -158,5 +160,14 @@ public class MarbleContainerTest {
     public void colorToSupply_whiteEqualsNull(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
         assertNull(MarbleContainer.colorToSupply(MarbleColor.WHITE));
+    }
+
+    @Test
+    public void getStatus(){
+        MarbleContainer mc = new MarbleContainer(2, 4, 0, 1, 3, 2);
+        ArrayList<Integer> result = new ArrayList<>(mc.getStatus());
+        int[] expectedResult = {4, 0, 2, 3, 1, 2};
+        int[] actualResult = {result.get(0), result.get(1), result.get(2), result.get(3), result.get(4), result.get(5)};
+        assertArrayEquals(expectedResult, actualResult);
     }
 }

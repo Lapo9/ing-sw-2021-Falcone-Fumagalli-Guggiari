@@ -3,6 +3,8 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.SupplyException;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class SupplyContainerTest {
@@ -388,6 +390,23 @@ public class SupplyContainerTest {
                                  sc1.getQuantity(WarehouseObjectType.FAITH_MARKER)};
         assertArrayEquals(objectsExpected, objectsActual);
     }
+
     //TODO
     //test addMarble with leaderSpace and white marble
+
+    @Test
+    public void getStatus(){
+        SupplyContainer sc = new SupplyContainer(2, 3, 4, 0, 1);
+        try {
+            sc.addSupply(WarehouseObjectType.SHIELD);
+        } catch (SupplyException e) {fail();}
+        ArrayList<Integer> result = new ArrayList<>(sc.getStatus());
+        int[] expectedResult = {2, 4, 1, 3, 1};
+        int[] actualResult = {result.get(0),
+                              result.get(1),
+                              result.get(2),
+                              result.get(3),
+                              result.get(4)};
+        assertArrayEquals(expectedResult, actualResult);
+    }
 }

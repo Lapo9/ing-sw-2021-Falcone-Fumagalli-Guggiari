@@ -2,6 +2,9 @@ package it.polimi.ingsw.model;
 
 import org.junit.Test;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class FaithTrackTest {
@@ -104,5 +107,21 @@ public class FaithTrackTest {
         FaithTrack fTrack = new FaithTrack();
         fTrack.goAhead(10);
         assertEquals(10, fTrack.getPosition());
+    }
+
+    @Test
+    public void getStatus(){
+        FaithTrack fTrack1 = new FaithTrack();
+        FaithTrack fTrack2 = new FaithTrack();
+        fTrack1.goAhead(11);
+        fTrack2.vaticanReport();
+        fTrack2.goAhead(17);
+        fTrack1.vaticanReport();
+        ArrayList<Integer> result = new ArrayList<>(fTrack1.getStatus());
+        int[] expectedResult = {11, 1, 2};
+        int[] actualResult = {result.get(0),
+                              result.get(1),
+                              result.get(2)};
+        assertArrayEquals(expectedResult, actualResult);
     }
 }

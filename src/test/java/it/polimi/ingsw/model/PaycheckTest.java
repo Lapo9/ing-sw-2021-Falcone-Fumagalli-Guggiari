@@ -7,6 +7,9 @@ import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
 import org.junit.Test;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
+
 public class PaycheckTest {
 
     @Test
@@ -150,5 +153,22 @@ public class PaycheckTest {
                                  result.getQuantity(WarehouseObjectType.SHIELD),
                                  result.getQuantity(WarehouseObjectType.FAITH_MARKER)};
         assertArrayEquals(objectResExpected, objectResActual);
+    }
+
+    @Test
+    public void getStatus(){
+        Paycheck pychk = new Paycheck();
+        try {
+            pychk.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
+            pychk.addSupply(WarehouseObjectType.COIN, DepotID.COFFER);
+            pychk.addSupply(WarehouseObjectType.SHIELD, DepotID.COFFER);
+            pychk.addSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE2);
+        } catch (SupplyException e) {fail();}
+        ArrayList<Integer> result = new ArrayList<>(pychk.getStatus());
+        int[] expectedResult = {1, 0, 1, 0, 0,
+                                0, 1, 1, 0, 0};
+        int[] actualResult = {result.get(0), result.get(1), result.get(2), result.get(3), result.get(4),
+                              result.get(5), result.get(6), result.get(7), result.get(8), result.get(9)};
+        assertArrayEquals(expectedResult, actualResult);
     }
 }

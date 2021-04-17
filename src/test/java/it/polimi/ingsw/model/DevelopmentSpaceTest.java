@@ -5,6 +5,7 @@ import it.polimi.ingsw.exceptions.DevelopmentException;
 import it.polimi.ingsw.exceptions.SupplyException;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -222,5 +223,32 @@ public class DevelopmentSpaceTest {
             dvlspc.addCard(new DevelopmentCard(0, 3, 9, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 2, 0), new SupplyContainer(0, 0, 3, 0, 2)), new SupplyContainer(0, 6, 0, 0, 0)));
         } catch (DevelopmentException e) {fail();}
         assertEquals(16, dvlspc.getWinPoints());
+    }
+
+    @Test
+    public void getStatus(){
+        DevelopmentSpace dvlspc = new DevelopmentSpace();
+        try {
+            dvlspc.addCard(new DevelopmentCard(0, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 2, 5, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(0, 0, 4, 0, 0)));
+            dvlspc.addCard(new DevelopmentCard(0, 3, 9, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 2, 0), new SupplyContainer(0, 0, 3, 0, 2)), new SupplyContainer(0, 6, 0, 0, 0)));
+        } catch (DevelopmentException e) {fail();}
+        try {
+            dvlspc.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
+        } catch (SupplyException e) {fail();}
+        ArrayList<Integer> result = new ArrayList<>(dvlspc.getStatus());
+        int[] expectedResult = {0,
+                                0,
+                                0,
+                                0, 0, 2, 0, 0,
+                                0, 3, 0, 0, 2,
+                                0, 0, 1, 0, 0};
+        int[] actualResult = {result.get(0),
+                              result.get(1),
+                              result.get(2),
+                              result.get(3), result.get(4), result.get(5), result.get(6), result.get(7),
+                              result.get(8), result.get(9), result.get(10), result.get(11), result.get(12),
+                              result.get(13), result.get(14), result.get(15), result.get(16), result.get(17)};
+        assertArrayEquals(expectedResult, actualResult);
     }
 }

@@ -5,6 +5,8 @@ import it.polimi.ingsw.exceptions.SupplyException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class DevelopmentCardTest {
@@ -242,5 +244,23 @@ public class DevelopmentCardTest {
         int actualWP = dc.getWinPoints();
 
         assertEquals(expectedWP, actualWP);
+    }
+
+    @Test
+    public void getStatus() {
+        DevelopmentCard dc = new DevelopmentCard(0, 2, 8, CardCategory.GREEN, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 2, 1)), new SupplyContainer(3, 0, 0, 3, 0));
+        try {
+            dc.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE1);
+        } catch (SupplyException e){ fail();}
+        ArrayList<Integer> result = new ArrayList<>(dc.getStatus());
+        int[] expectedResult = {0,
+                                1, 0, 0, 0, 0,
+                                0, 0, 2, 0, 1,
+                                1, 0, 0, 0, 0};
+        int[] actualResult = {result.get(0),
+                              result.get(1), result.get(2), result.get(3), result.get(4), result.get(5),
+                              result.get(6), result.get(7), result.get(8), result.get(9), result.get(10),
+                              result.get(11), result.get(12), result.get(13), result.get(14), result.get(15)};
+        assertArrayEquals(expectedResult, actualResult);
     }
 }

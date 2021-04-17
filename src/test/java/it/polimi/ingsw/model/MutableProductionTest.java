@@ -3,6 +3,9 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.SupplyException;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class MutableProductionTest {
@@ -152,5 +155,31 @@ public class MutableProductionTest {
             exc = true;
         }
         assertTrue(exc);
+    }
+
+    @Test
+    public void getStatus(){
+        MutableProduction mtblprd = new MutableProduction(new SupplyContainer(0, 2, 0, 0, 0), new SupplyContainer(2, 0, 0, 0, 0), 3, 3);
+        try {
+            mtblprd.swapInput(0, WarehouseObjectType.SHIELD);
+            mtblprd.swapOutput(0, WarehouseObjectType.FAITH_MARKER);
+        } catch (SupplyException e) {fail();}
+        try {
+            mtblprd.currentSupply.addSupply(WarehouseObjectType.STONE);
+            mtblprd.currentSupply.addSupply(WarehouseObjectType.STONE);
+            mtblprd.currentSupply.addSupply(WarehouseObjectType.SHIELD);
+        } catch (SupplyException e) {fail();}
+        ArrayList<Integer> result = new ArrayList<>(mtblprd.getStatus());
+        int[] expectedResult = {0, 0, 0, 2, 0,
+                                2,
+                                2, 0, 0, 0, 0,
+                                4,
+                                0, 0, 1, 2, 0};
+        int[] actualResult = {result.get(0), result.get(1), result.get(2), result.get(3), result.get(4),
+                              result.get(5),
+                              result.get(6), result.get(7), result.get(8), result.get(9), result.get(10),
+                              result.get(11),
+                              result.get(12), result.get(13), result.get(14), result.get(15), result.get(16)};
+        assertArrayEquals(expectedResult, actualResult);
     }
 }

@@ -5,6 +5,8 @@ import it.polimi.ingsw.exceptions.SupplyException;
 import junit.framework.TestCase;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertFalse;
 
@@ -172,5 +174,25 @@ public class ProductionTest {
         };
 
         assertArrayEquals(expectedObject, actualObject);
+    }
+
+    @Test
+    public void getStatus(){
+        SupplyContainer in = new SupplyContainer(0, 2, 0, 1, 0);
+        SupplyContainer out = new SupplyContainer(0, 2, 0,0, 2);
+        Production prd = new Production(in, out);
+        try {
+            prd.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE2);
+            prd.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE2);
+            prd.addSupply(WarehouseObjectType.SHIELD, DepotID.DEVELOPMENT1);
+        } catch (SupplyException e) {fail();}
+        ArrayList<Integer> result = new ArrayList<>(prd.getStatus());
+        int[] expectedResult = {0, 0, 1, 2, 0,
+                                0, 0, 0, 2, 2,
+                                0, 0, 1, 2, 0};
+        int[] actualResult = {result.get(0), result.get(1), result.get(2), result.get(3), result.get(4),
+                              result.get(5), result.get(6), result.get(7), result.get(8), result.get(9),
+                              result.get(10), result.get(11), result.get(12), result.get(13), result.get(14)};
+        assertArrayEquals(expectedResult, actualResult);
     }
 }
