@@ -3,11 +3,13 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.SupplyException;
 
+import java.util.ArrayList;
+
 
 /**
  * A Paycheck can store resources based from their source (strongbox or depot).
  */
-public class Paycheck implements AcceptsSupplies {
+public class Paycheck implements AcceptsSupplies, HasStatus {
 
     private SupplyContainer fromStrongbox = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX));
     private SupplyContainer fromDepot = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT));
@@ -67,5 +69,16 @@ public class Paycheck implements AcceptsSupplies {
     @Override
     public Pair<SupplyContainer, SupplyContainer> clearSupplies() {
         return new Pair<>(fromDepot.clearSupplies().first, fromStrongbox.clearSupplies().first);
+    }
+
+
+    @Override
+    public ArrayList<Integer> getStatus() {
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.addAll(fromStrongbox.getStatus());
+        status.addAll(fromDepot.getStatus());
+
+        return status;
     }
 }

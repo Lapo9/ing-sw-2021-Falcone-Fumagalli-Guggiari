@@ -191,6 +191,14 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
     //TODO
     @Override
     public ArrayList<Integer> getStatus() {
-        return null;
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.add(position);
+
+        for (int i = 0; i<popeFavors.size(); ++i){
+            status.addAll(popeFavors.get(i).getStatus());
+        }
+
+        return status;
     }
 }

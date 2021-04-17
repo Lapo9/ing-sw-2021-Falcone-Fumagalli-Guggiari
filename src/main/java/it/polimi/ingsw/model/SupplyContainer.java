@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
-    HashMap<WarehouseObjectType, Integer> supplies = new HashMap<>();
-    TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> tryAdd = AcceptStrategy.any();
-    TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> tryRemove = AcceptStrategy.any();
+    private HashMap<WarehouseObjectType, Integer> supplies = new HashMap<>();
+    private TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> tryAdd = AcceptStrategy.any();
+    private TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> tryRemove = AcceptStrategy.any();
 
 
     /**
@@ -346,10 +346,18 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
 
 
 
-    //TODO
+
     @Override
     public ArrayList<Integer> getStatus(){
-        return new ArrayList<>();
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.add(supplies.get(WarehouseObjectType.COIN));
+        status.add(supplies.get(WarehouseObjectType.SERVANT));
+        status.add(supplies.get(WarehouseObjectType.SHIELD));
+        status.add(supplies.get(WarehouseObjectType.STONE));
+        status.add(supplies.get(WarehouseObjectType.FAITH_MARKER));
+
+        return status;
     }
 
 

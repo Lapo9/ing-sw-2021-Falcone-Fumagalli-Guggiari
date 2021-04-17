@@ -5,6 +5,8 @@ import it.polimi.ingsw.exceptions.MarbleException;
 import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.*;
 
+import java.util.ArrayList;
+
 
 /**
  * This implementation of LeaderAbility is a depot, so it implements all of the methods to manage a depot (add and remove supplies).
@@ -69,4 +71,17 @@ public class Depot implements LeaderAbility {
     }
 
 
+    @Override
+    public ArrayList<Integer> getStatus() {
+        ArrayList<Integer> status = new ArrayList<>();
+
+        //fixed input, fixed output, mutable output, production depot (COIN, SERVANT, SHIELD, STONE, FAITH_MARKER)
+        for(int i=0; i<8; ++i){
+            status.add(0);
+        }
+
+        status.addAll(depot.getStatus());
+
+        return status;
+    }
 }

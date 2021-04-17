@@ -11,6 +11,8 @@ import it.polimi.ingsw.exceptions.LeaderException;
  * the player in exchange for a faith point.
  */
 public class LeaderCard implements WinPointsCountable, HasStatus{
+
+    private int id;
     private Pair<SupplyContainer, ArrayList<CardsRequirement>> requirements;
     private LeaderAbility ability;
     private boolean active = false;
@@ -24,7 +26,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
      * @param abil is the type of the LeaderCard's ability
      * @param points win points given by this leader when active
      */
-    public LeaderCard(SupplyContainer reqSC, ArrayList<CardsRequirement> reqCR, LeaderAbility abil, int points){
+    public LeaderCard(int id, SupplyContainer reqSC, ArrayList<CardsRequirement> reqCR, LeaderAbility abil, int points){
         requirements = new Pair<SupplyContainer, ArrayList<CardsRequirement>>(reqSC, reqCR);
         ability = abil;
         winPoints = points;
@@ -78,7 +80,27 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
     //TODO
     @Override
     public ArrayList<Integer> getStatus() {
-        return null;
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.add(id);
+        int leaderState = (active ? 1 : (discarded ? 2 : 0));
+        status.add(leaderState);
+
+        try {
+            status.addAll(getAbility().getStatus());
+        } catch (LeaderException le) {
+            status.add(0); //fixed input (PRODUCER)
+            status.add(0); //fixed output (PRODUCER)
+            status.add(0); //mutable output (PRODUCER)
+            for(int i=0; i<5; ++i) {
+                status.add(0); //current production depot (PRODUCER)
+            }
+            for(int i=0; i<5; ++i) {
+                status.add(0); //current production depot (PRODUCER)
+            }
+        }
+
+        return status;
     }
 
     @Override

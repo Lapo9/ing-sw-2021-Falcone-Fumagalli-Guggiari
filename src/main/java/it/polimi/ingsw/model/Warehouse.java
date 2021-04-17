@@ -12,7 +12,7 @@ import java.util.Collections;
  * A Warehouse contains 3 depots, which can contain respectively 1, 2 and 3 resources of one type. Two depots cannot contain the same type.
  * User can add and remove resources from depots, can swap the order of 2 depots and can try to convert a marble to a resource and add it to one of the depots.
  */
-public class Warehouse implements AcceptsSupplies {
+public class Warehouse implements AcceptsSupplies, HasStatus {
 
     private ArrayList<SupplyContainer> depots = new ArrayList<>();
 
@@ -168,4 +168,15 @@ public class Warehouse implements AcceptsSupplies {
         return res;
     }
 
+
+    @Override
+    public ArrayList<Integer> getStatus() {
+        ArrayList<Integer> status = new ArrayList<>();
+
+        for (int i = 0; i<depots.size(); ++i){
+            status.addAll(depots.get(i).getStatus());
+        }
+
+        return status;
+    }
 }

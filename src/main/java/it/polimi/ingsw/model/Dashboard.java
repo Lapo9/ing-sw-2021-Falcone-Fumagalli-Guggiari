@@ -12,7 +12,7 @@ import java.util.HashMap;
  * Generally, when the action performed goes well, nothing is returned, but if the action violates any of the game rule an exception is thrown.
  * TODO maybe there should be methods to check if an action is possible before performing it? It can be useful if you want to visualize only the actions that can be executed (for example if you don't have enough supplies to buy a card, then the card is grey and not clickable)
  */
-public class Dashboard implements HasStatus, WinPointsCountable{
+public class Dashboard implements WinPointsCountable{
 
     private final Marketplace marketplace;
     private final DevelopmentGrid developmentGrid;
@@ -29,6 +29,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
     private final DepotsManager depotsManager = new DepotsManager(warehouse, leadersSpace);
     private final ActionTilesStack actionTilesStack = new ActionTilesStack();
     private int blackCrossPosition = 0;
+    private ArrayList<ModelObserver> observers = new ArrayList<ModelObserver>();
 
     private final HashMap<DepotID.DepotType, AcceptsSupplies> containers = new HashMap<>();
 
@@ -409,18 +410,88 @@ public class Dashboard implements HasStatus, WinPointsCountable{
 
 
     /**
-     * The status of the dashboard.
-     * @return the current status of the dashboard, expressed in a concise way.
+     * Gets the status of the dashboard and send it to all of the observers.
+     * The status is made this way:
+     *
+     * coffer (SupplyContainer style)
+     * wh1 (SupplyContainer style)
+     * wh2 (SupplyContainer style)
+     * wh3 (SupplyContainer style)
+     * devSpace1card1 (ID)
+     * devSpace1card2 (ID)
+     * devSpace1card3 (ID)
+     * devSpace1in (SupplyContainer style)
+     * devSpace1out (SupplyContainer style)
+     * devSpace1curr (SupplyContainer style)
+     * devSpace2card1 (ID)
+     * devSpace2card2 (ID)
+     * devSpace2card3 (ID)
+     * devSpace2in (SupplyContainer style)
+     * devSpace2out (SupplyContainer style)
+     * devSpace2curr (SupplyContainer style)
+     * devSpace3card3 (ID)
+     * devSpace3card2 (ID)
+     * devSpace3card1 (ID)
+     * devSpace3in (SupplyContainer style)
+     * devSpace3out (SupplyContainer style)
+     * devSpace3curr (SupplyContainer style)
+     * paycheckFromStrongbox (SupplyContainer style)
+     * paycheckFromDepots (SupplyContainer style)
+     * baseProdInFixed (always 00000)
+     * baseProdInMutable1 (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * baseProdInMutable2 (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * baseProdOutFixed (always 00000)
+     * baseProdOutMutable1 (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * baseProdOutMutable2 (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * baseProdCurr (SupplyContainer style)
+     * faithTrackPos
+     * popeTile1 (0 = inactive, 1 = active, 2 = discarded)
+     * popeTile2 (0 = inactive, 1 = active, 2 = discarded)
+     * popeTile3 (0 = inactive, 1 = active, 2 = discarded)
+     * leader1id (ID)
+     * leader1state (0 = inactive, 1 = active, 2 = discarded)
+     * leader1inFixed (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * leader1outFixed (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * leader1outMutable (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * leader1curr (SupplyContainer style)
+     * leader1depot (SupplyContainer style)
+     * leader2id (ID)
+     * leader2state (0 = inactive, 1 = active, 2 = discarded)
+     * leader2inFixed (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * leader2outFixed (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * leader2outMutable (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * leader2curr (SupplyContainer style)
+     * leader2depot (SupplyContainer style)
+     *
+     * SupplyContainer style means that there are 5 integers which represents, in this specific order, the number of: COIN, SERVANT, SHIELD, STONE, FAITH_MARKER
      */
-    @Override
-    public ArrayList<Integer> getStatus(){
-        return null; //TODO
+    private void notifyViews(){
+        //get the status of the dashboard
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.addAll(coffer.getStatus());
+        status.addAll(warehouse.getStatus());
+        status.addAll(developments.getStatus());
+        status.addAll(paycheck.getStatus());
+        status.addAll(baseProduction.getStatus());
+        status.addAll(faithTrack.getStatus());
+        status.addAll(leadersSpace.getStatus());
+
+        //send the status to the observers
+        for (ModelObserver mo : modelObservers) {
+            mo.updateStatus(status);
+        }
     }
 
 
     @Override
     public int getWinPoints() {
-        int supplies = depotsManager.getResourceCount(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE) + coffer.getQuantity(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE);
+        //place all "volatile" supplies to their depot
+        clearProductions();
+        clearPaycheck();
+
+        int supplies = depotsManager.getResourceCount(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE)
+                    + coffer.getQuantity(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE);
         return developments.getWinPoints() + leadersSpace.getWinPoints() + faithTrack.getWinPoints() + supplies/5;
     }
 

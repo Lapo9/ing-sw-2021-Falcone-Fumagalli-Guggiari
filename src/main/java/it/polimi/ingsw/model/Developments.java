@@ -162,8 +162,13 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
 
     @Override
     public ArrayList<Integer> getStatus(){
-        return null;
-        //TODO
+        ArrayList<Integer> status = new ArrayList<>();
+
+        for (int i = 0; i<spaces.size(); ++i){
+            status.addAll(spaces.get(i).getStatus());
+        }
+
+        return status;
     }
 
 

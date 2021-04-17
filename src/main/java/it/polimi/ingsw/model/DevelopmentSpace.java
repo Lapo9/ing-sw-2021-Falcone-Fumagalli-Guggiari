@@ -121,6 +121,16 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
 
     @Override
     public ArrayList<Integer> getStatus(){
-        return null; //TODO
+        ArrayList<Integer> status = new ArrayList<>();
+
+        //for all the cards but the active one, we only need to save the ID (not the production info)
+        for (int i = 0; i<cards.size()-1; ++i){
+            status.add(cards.get(i).getStatus().get(0));
+        }
+
+        //for the active card save everything
+        status.addAll(cards.get(cards.size()-1).getStatus());
+
+        return status;
     }
 }

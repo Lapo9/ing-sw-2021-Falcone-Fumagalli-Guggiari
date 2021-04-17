@@ -5,6 +5,8 @@ import it.polimi.ingsw.model.LeaderAbility;
 import it.polimi.ingsw.model.SupplyContainer;
 import it.polimi.ingsw.model.WarehouseObjectType;
 
+import java.util.ArrayList;
+
 
 /**
  * This implementation of LeaderAbility only supports the getDiscount method, which returns the discount an object of this class gives to the player.
@@ -28,4 +30,18 @@ public class Discount implements LeaderAbility {
     public SupplyContainer getDiscount() {
         return discount;
     }
+
+
+    @Override
+    public ArrayList<Integer> getStatus() {
+        ArrayList<Integer> status = new ArrayList<>();
+
+        //fixed input, fixed output, mutable output, production depot (COIN, SERVANT, SHIELD, STONE, FAITH_MARKER), "warehouse depot" (COIN, SERVANT, SHIELD, STONE, FAITH_MARKER)
+        for(int i=0; i<13; ++i){
+            status.add(0);
+        }
+
+        return status;
+    }
+
 }

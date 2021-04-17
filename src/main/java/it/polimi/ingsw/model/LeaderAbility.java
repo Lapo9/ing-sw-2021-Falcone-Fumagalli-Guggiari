@@ -6,7 +6,7 @@ import it.polimi.ingsw.exceptions.*;
 /**
  * Interface that manages the ability of Leader Cards
  */
-public interface LeaderAbility extends AcceptsSupplies{
+public interface LeaderAbility extends AcceptsSupplies, HasStatus{
 
     /**
      * First ability: when the player buys a SupplyCard, he can do it using less resources

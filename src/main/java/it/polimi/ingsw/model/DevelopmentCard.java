@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSupplies{
 
+    private int id;
     private int level = 0;
     private int winPoints = 0;
     private CardCategory category;
@@ -28,8 +29,9 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @param production Card power production
      * @param cost Resources needed to buy the card
      */
-    public DevelopmentCard(int level, int winPoints, CardCategory category, Production production, SupplyContainer cost) {
+    public DevelopmentCard(int id, int level, int winPoints, CardCategory category, Production production, SupplyContainer cost) {
 
+        this.id = id;
         this.level = level;
         this.winPoints = winPoints;
         this.category = category;
@@ -111,7 +113,12 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
     //TODO
     @Override
     public ArrayList<Integer> getStatus(){
-        return new ArrayList<>();
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.add(id);
+        status.addAll(production.getStatus());
+
+        return status;
     }
 
 }

@@ -87,6 +87,12 @@ public class Production implements AcceptsSupplies, HasStatus{
 
     @Override
     public ArrayList<Integer> getStatus(){
-        return null; //TODO
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.addAll(input.getStatus());
+        status.addAll(output.getStatus());
+        status.addAll(currentSupply.getStatus());
+
+        return status;
     }
 }

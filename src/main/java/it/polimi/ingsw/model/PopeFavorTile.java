@@ -52,6 +52,12 @@ public class PopeFavorTile implements HasStatus, WinPointsCountable{
     //TODO
     @Override
     public ArrayList<Integer> getStatus(){
-        return null;
+        ArrayList<Integer> status = new ArrayList<>();
+
+        //0 = inactive, 1 = active, 2 = discarded
+        int tileState = (active ? 1 : (discarded ? 2 : 0));
+        status.add(tileState);
+
+        return status;
     }
 }

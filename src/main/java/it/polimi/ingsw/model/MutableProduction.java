@@ -123,6 +123,24 @@ public class MutableProduction extends Production implements HasStatus{
 
     @Override
     public ArrayList<Integer> getStatus(){
-        return null;
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.addAll(input.getStatus());
+
+        //0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER
+        for(int i = 0; i<mutableInput.size(); ++i) {
+            status.add(mutableInput.get(i).ordinal());
+        }
+
+        status.addAll(output.getStatus());
+
+        //0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER
+        for(int i = 0; i<mutableInput.size(); ++i) {
+            status.add(mutableInput.get(i).ordinal());
+        }
+
+        status.addAll(currentSupply.getStatus());
+
+        return status;
     }
 }

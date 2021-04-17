@@ -62,6 +62,11 @@ public class LeadersSpace implements HasStatus, WinPointsCountable{
 
     @Override
     public ArrayList<Integer> getStatus() {
-        return null; //TODO
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.addAll(leaders.get(0).getStatus());
+        status.addAll(leaders.get(1).getStatus());
+
+        return status;
     }
 }
