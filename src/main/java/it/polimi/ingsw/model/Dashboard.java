@@ -203,6 +203,15 @@ public class Dashboard implements WinPointsCountable{
 
 
     /**
+     * Returns the levels of the development card the player can buy
+     * @return the levels of the development card the player can buy
+     */
+    public ArrayList<Integer> buyableDevelopmentLevels() {
+        return developments.buyableLevels();
+    }
+
+
+    /**
      * Discards the specified leader and goes ahead one tile on the faith track
      * @param i which leader
      * @return Returns if a vatican report has been issued
@@ -221,7 +230,11 @@ public class Dashboard implements WinPointsCountable{
      * @throws LeaderException The specified leader cannot be played (already discarded or active)
      */
     public void playLeader(int i) throws SupplyException, LeaderException {
-        leadersSpace.playLeader(i, new ResourceChecker(warehouse, coffer, leadersSpace));
+        //put all the cards to their place
+        clearProductions();
+        clearPaycheck();
+
+        leadersSpace.playLeader(i, new ResourceChecker(depotsManager, coffer, developments));
     }
 
 
