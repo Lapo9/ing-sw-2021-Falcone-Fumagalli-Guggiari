@@ -184,7 +184,8 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         //create ArrayList of sc
         List<Pair<WarehouseObjectType, Integer>> listOfSc = new ArrayList<>();
         for(WarehouseObjectType wot : WarehouseObjectType.values()){
-            listOfSc.add(new Pair<>(wot, sc.getQuantity(wot)));
+            if(wot != WarehouseObjectType.NO_TYPE)
+                listOfSc.add(new Pair<>(wot, sc.getQuantity(wot)));
         }
 
         //keep only types that have at least 1 unit
@@ -199,11 +200,12 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         }
 
         //add to the depots
-        for(int i=0; i<3; ++i){
-            for (int j=0; j<listOfSc.get(i).second; ++j){
+        for(int i=0; i<listOfSc.size(); ++i){
+            for (int j = 0; j < listOfSc.get(i).second; ++j) {
+                int k = listOfSc.get(i).second;
                 try {
-                    depots.get(i).addSupply(listOfSc.get(i).first);
-                } catch (SupplyException se){/*TODO terminate*/}
+                    depots.get(k-1).addSupply(listOfSc.get(i).first);
+                } catch (SupplyException se) {/*TODO terminate*/}
             }
         }
 

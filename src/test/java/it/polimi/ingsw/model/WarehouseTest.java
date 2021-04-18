@@ -304,6 +304,81 @@ public class WarehouseTest {
     }
 
     @Test
+    public void allocate_full(){
+        Warehouse wrhs = new Warehouse();
+        try {
+            wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
+            wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.DEVELOPMENT3);
+            wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.STONE, DepotID.BASE_PRODUCTION);
+            wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.STONE, DepotID.DEVELOPMENT2);
+        } catch (SupplyException e) {fail();}
+        wrhs.allocate(new SupplyContainer(0, 1, 0, 1, 0));
+        ArrayList<Integer> result = new ArrayList<>(wrhs.getStatus());
+        int[] expectedResult = {1, 0, 0, 0, 0,
+                                0, 0, 2, 0, 0,
+                                0, 0, 0, 3, 0};
+        int[] actualResult = {result.get(0), result.get(1), result.get(2), result.get(3), result.get(4),
+                              result.get(5), result.get(6), result.get(7), result.get(8), result.get(9),
+                              result.get(10), result.get(11), result.get(12), result.get(13), result.get(14)};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void allocate_warehouse2AndWarehouse3(){
+        Warehouse wrhs = new Warehouse();
+        try {
+            wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
+            wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.STONE, DepotID.BASE_PRODUCTION);
+            wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.STONE, DepotID.DEVELOPMENT2);
+        } catch (SupplyException e) {fail();}
+        wrhs.allocate(new SupplyContainer(0, 1, 0, 1, 0));
+        ArrayList<Integer> result = new ArrayList<>(wrhs.getStatus());
+        int[] expectedResult = {0, 0, 0, 0, 0,
+                                0, 0, 2, 0, 0,
+                                0, 0, 0, 3, 0};
+        int[] actualResult = {result.get(0), result.get(1), result.get(2), result.get(3), result.get(4),
+                              result.get(5), result.get(6), result.get(7), result.get(8), result.get(9),
+                              result.get(10), result.get(11), result.get(12), result.get(13), result.get(14)};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void allocate_warehouse1AndWarehouse2(){
+        Warehouse wrhs = new Warehouse();
+        try {
+            wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.STONE, DepotID.BASE_PRODUCTION);
+            wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
+        } catch (SupplyException e) {fail();}
+        wrhs.allocate(new SupplyContainer(0, 1, 0, 0, 0));
+        ArrayList<Integer> result = new ArrayList<>(wrhs.getStatus());
+        int[] expectedResult = {1, 0, 0, 0, 0,
+                                0, 0, 0, 2, 0,
+                                0, 0, 0, 0, 0};
+        int[] actualResult = {result.get(0), result.get(1), result.get(2), result.get(3), result.get(4),
+                result.get(5), result.get(6), result.get(7), result.get(8), result.get(9),
+                result.get(10), result.get(11), result.get(12), result.get(13), result.get(14)};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void allocate_warehouse1AndWarehouse3(){
+        Warehouse wrhs = new Warehouse();
+        try {
+            wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
+            wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.STONE, DepotID.BASE_PRODUCTION);
+        } catch (SupplyException e) {fail();}
+        wrhs.allocate(new SupplyContainer(0, 0, 0, 2, 0));
+        ArrayList<Integer> result = new ArrayList<>(wrhs.getStatus());
+        int[] expectedResult = {0, 0, 0, 1, 0,
+                                0, 0, 0, 0, 0,
+                                0, 0, 3, 0, 0};
+        int[] actualResult = {result.get(0), result.get(1), result.get(2), result.get(3), result.get(4),
+                result.get(5), result.get(6), result.get(7), result.get(8), result.get(9),
+                result.get(10), result.get(11), result.get(12), result.get(13), result.get(14)};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void getStatus(){
         Warehouse wrhs =  new Warehouse();
         try {
