@@ -1,7 +1,5 @@
 package it.polimi.ingsw.model;
 
-
-import java.util.Random;
 import java.util.ArrayList;
 
 /**
@@ -18,19 +16,21 @@ public class Marketplace implements HasStatus{
         ArrayList<MarbleColor> listOfMarbles = new ArrayList<>();
         this.rand = random;
         if(random){
-            listOfMarbles.add(MarbleColor.VIOLET);
-            listOfMarbles.add(MarbleColor.VIOLET);
+            //marbles inverted order
             listOfMarbles.add(MarbleColor.WHITE);
             listOfMarbles.add(MarbleColor.WHITE);
             listOfMarbles.add(MarbleColor.WHITE);
             listOfMarbles.add(MarbleColor.WHITE);
-            listOfMarbles.add(MarbleColor.GREY);
-            listOfMarbles.add(MarbleColor.GREY);
             listOfMarbles.add(MarbleColor.BLUE);
             listOfMarbles.add(MarbleColor.BLUE);
+            listOfMarbles.add(MarbleColor.VIOLET);
+            listOfMarbles.add(MarbleColor.VIOLET);
+            listOfMarbles.add(MarbleColor.GREY);
+            listOfMarbles.add(MarbleColor.GREY);
             listOfMarbles.add(MarbleColor.YELLOW);
             listOfMarbles.add(MarbleColor.YELLOW);
             for(int i=0; i<12; i++){
+                //marbles right order
                 MarbleColor tmp = listOfMarbles.remove(0);
                 grid.add(i, tmp);
             }
@@ -69,7 +69,7 @@ public class Marketplace implements HasStatus{
 
     //returns the index of the array list given row and column
     private int getPos(int r, int c){
-        return c+r*4;
+        return r*4 + c;
     }
 
 
@@ -92,7 +92,7 @@ public class Marketplace implements HasStatus{
 
                 //this instruction increase the counter of the currentMarble in the marbleCounters array list
                 //parameter1: counter of the currentColor position in the list MarbleCounters
-                //parameter2: the current value of the currentColor counter increased by 1 (to increase the counter)
+                //parameter2: increases the counter of the currentMarble in marbleCounters
                 marbleCounters.set(currentMarble.ordinal(), marbleCounters.get(currentMarble.ordinal())+1);
             }
         }
@@ -105,7 +105,6 @@ public class Marketplace implements HasStatus{
                 marbleCounters.set(currentMarble.ordinal(), marbleCounters.get(currentMarble.ordinal())+1);
             }
         }
-
         //create a MarbleContainer by inserting the values of the marbleCounter array list
         MarbleContainer mc = new MarbleContainer(marbleCounters.get(0), marbleCounters.get(1), marbleCounters.get(2), marbleCounters.get(3), marbleCounters.get(4), marbleCounters.get(5));
         shiftMarketplace(dir, index);
