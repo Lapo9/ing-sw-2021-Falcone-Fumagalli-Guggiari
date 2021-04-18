@@ -1,11 +1,14 @@
 package it.polimi.ingsw.model.leader_abilities;
 
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.exceptions.LeaderException;
 import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.DepotID;
 import it.polimi.ingsw.model.SupplyContainer;
 import it.polimi.ingsw.model.WarehouseObjectType;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -155,5 +158,28 @@ public class ProducerTest {
         int[] expectedObject = {0, 1, 0, 0, 0};
 
         assertArrayEquals(actualObject, expectedObject);
+    }
+
+    @Test
+    public void getStatus(){
+        Producer prdc = new Producer(new SupplyContainer(1, 0, 0, 0, 0));
+        try {
+            prdc.swapProduction(WarehouseObjectType.SHIELD);
+        }catch (SupplyException e) {fail();}
+        try{
+            prdc.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
+        } catch (SupplyException e) {fail();}
+        ArrayList<Integer> result = new ArrayList<>(prdc.getStatus());
+        int[] expectedResult = {0, //fixedInput
+                                4, //fixedOutput
+                                2,  //mutableOutput
+                                1, 0, 0, 0, 0, //currentSupply
+                                0, 0, 0, 0, 0};
+        int[] actualResult = {result.get(0),
+                              result.get(1),
+                              result.get(2),
+                              result.get(3), result.get(4), result.get(5), result.get(6), result.get(7),
+                              result.get(8), result.get(9), result.get(10), result.get(11), result.get(12)};
+        assertArrayEquals(expectedResult, actualResult);
     }
 }

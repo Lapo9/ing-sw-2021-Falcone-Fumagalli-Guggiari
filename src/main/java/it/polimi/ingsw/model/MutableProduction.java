@@ -132,6 +132,9 @@ public class MutableProduction extends Production implements HasStatus{
             status.add(mutableInput.get(i).ordinal());
         }
 
+        if(mutableInput.size() == 0)
+            status.add(0);
+
         status.addAll(output.getStatus());
 
         //0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER

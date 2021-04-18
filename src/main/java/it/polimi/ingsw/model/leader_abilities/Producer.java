@@ -106,7 +106,7 @@ public class Producer implements LeaderAbility {
         status.add(fixedInput);
         status.add(fixedOutput);
         status.add(mutableOutput);
-        status.addAll(tmp.subList(12, 16)); //current depot
+        status.addAll(tmp.subList(12, 17)); //current depot
 
         for(int i=0; i<5; ++i){
             status.add(0); //Producer doesn't have a "warehouse depot"
