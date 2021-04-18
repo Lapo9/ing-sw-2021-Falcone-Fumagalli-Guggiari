@@ -12,30 +12,11 @@ public class Marketplace implements HasStatus{
     private MarbleColor slide; //not final so i can shift
     private boolean rand;
 
-    public Marketplace(boolean random){
-        ArrayList<MarbleColor> listOfMarbles = new ArrayList<>();
-        this.rand = random;
-        if(random){
-            //marbles inverted order
-            listOfMarbles.add(MarbleColor.WHITE);
-            listOfMarbles.add(MarbleColor.WHITE);
-            listOfMarbles.add(MarbleColor.WHITE);
-            listOfMarbles.add(MarbleColor.WHITE);
-            listOfMarbles.add(MarbleColor.BLUE);
-            listOfMarbles.add(MarbleColor.BLUE);
-            listOfMarbles.add(MarbleColor.VIOLET);
-            listOfMarbles.add(MarbleColor.VIOLET);
-            listOfMarbles.add(MarbleColor.GREY);
-            listOfMarbles.add(MarbleColor.GREY);
-            listOfMarbles.add(MarbleColor.YELLOW);
-            listOfMarbles.add(MarbleColor.YELLOW);
-            for(int i=0; i<12; i++){
-                //marbles right order
-                MarbleColor tmp = listOfMarbles.remove(0);
-                grid.add(i, tmp);
-            }
-            slide = MarbleColor.RED;
+    public Marketplace(ArrayList<MarbleColor> mc){
+        for(int i=0; i<12; i++){
+            grid.add(i, mc.get(i));
         }
+        slide = MarbleColor.RED;
     }
 
     /**
@@ -123,22 +104,18 @@ public class Marketplace implements HasStatus{
 
         if(dir == MarketDirection.HORIZONTAL){
             tmp = grid.get(index*4); //copy in tmp the first MarbleColor of the row, it will be placed in the slide
-
-            //shift the three elements remaining
-            for(int i = 0; i < 2; i++){
+            //shift the 2 elements next
+            for(int i = 0; i < 3; i++){
                 int pos = getPos(index, i); // pos = (index * 4) + i
                 grid.set(pos, grid.get(pos+1)); //the second element of the row takes place of the first
             }
-
-            //can't use pose instead of index*4+3
             grid.set(index*4+3, slide); //add the marble which is in the slide in the last column of the row
         }
-
         else{
             tmp = grid.get(index); //copy in tmp the MarbleColor in the first row of the selected column, ... slide
-            for(int i = 1; i < 3; i++){
+            for(int i = 0; i < 2; i++){
                 int pos = getPos(i, index);
-                grid.set(pos, grid.get(pos+1)); //add the element below in the "matrix"
+                grid.set(pos, grid.get(pos+4)); //add the element below in the "matrix"
             }
             grid.set(index+8, slide); //add the marble in the slide
         }
