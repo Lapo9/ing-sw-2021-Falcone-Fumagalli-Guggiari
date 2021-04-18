@@ -5,6 +5,8 @@ import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.*;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class DepotTest {
@@ -192,5 +194,26 @@ public class DepotTest {
                               result.getQuantity(WarehouseObjectType.SHIELD)};
         int[] expectedObject = {0, 0, 0, 0};
         assertArrayEquals(expectedObject, actualObject);
+    }
+
+    @Test
+    public void getStatus(){
+        Depot dpt = new Depot(WarehouseObjectType.COIN);
+        try {
+            dpt.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE2);
+            dpt.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE2);
+        } catch (SupplyException e) {fail();}
+        ArrayList<Integer> result = new ArrayList<>(dpt.getStatus());
+        int[] expectedResult = {0,
+                                0,
+                                0,
+                                0, 0, 0, 0, 0,
+                                2, 0, 0, 0, 0};
+        int[] actualResult = {result.get(0),
+                              result.get(1),
+                              result.get(2),
+                              result.get(3), result.get(4), result.get(5), result.get(6), result.get(7),
+                              result.get(8), result.get(9), result.get(10), result.get(11), result.get(12)};
+        assertArrayEquals(expectedResult, actualResult);
     }
 }
