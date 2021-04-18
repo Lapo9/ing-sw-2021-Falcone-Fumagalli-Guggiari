@@ -14,10 +14,10 @@ public class MarketplaceTest {
         int [] expectedObject = {0, 2, 0, 0, 2, 0};
         int [] actualObject = {
                 mc.getQuantity(MarbleColor.YELLOW),
-                mc.getQuantity(MarbleColor.GREY),
-                mc.getQuantity(MarbleColor.VIOLET),
                 mc.getQuantity(MarbleColor.BLUE),
                 mc.getQuantity(MarbleColor.WHITE),
+                mc.getQuantity(MarbleColor.GREY),
+                mc.getQuantity(MarbleColor.VIOLET),
                 mc.getQuantity(MarbleColor.RED)
         };
 
