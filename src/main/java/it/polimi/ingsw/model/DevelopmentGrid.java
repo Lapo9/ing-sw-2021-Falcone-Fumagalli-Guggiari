@@ -82,7 +82,7 @@ public class DevelopmentGrid implements HasStatus{
                    discount0 = abil0.getQuantity(WarehouseObjectType.STONE);
                }
             }
-        }catch(LeaderException le0){
+        }catch(LeaderException | NoSuchMethodException le0){
             discount0 = 0;
         }
 
@@ -107,7 +107,7 @@ public class DevelopmentGrid implements HasStatus{
                     discount1 = abil1.getQuantity(WarehouseObjectType.STONE);
                 }
             }
-        }catch(LeaderException le1){
+        }catch(LeaderException | NoSuchMethodException le1){
             discount1 = 0;
         }
 
@@ -121,8 +121,8 @@ public class DevelopmentGrid implements HasStatus{
                     priceContainer.removeSupply(discountType1);
         }
         if(container.equals(priceContainer)) {
-            return grid.get(pos).remove(lastIndex);
             boughtCards++;
+            return grid.get(pos).remove(lastIndex);
         }
         else {
             throw new SupplyException();
@@ -163,7 +163,8 @@ public class DevelopmentGrid implements HasStatus{
         int pos = getPlace(column, row);
         if(grid.get(pos).isEmpty())
             throw new NoSuchCardException();
-        return grid.get(pos).getLevel();
+        else
+            return 4 - row;
     }
 
     //TODO
