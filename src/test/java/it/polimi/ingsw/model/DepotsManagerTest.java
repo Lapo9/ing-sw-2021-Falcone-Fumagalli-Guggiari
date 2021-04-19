@@ -224,4 +224,5 @@ public class DepotsManagerTest {
 
     //TODO
     //The addMarble method needs to be tested when a LeaderCard with market ability is active
+    //Test allocate
 }
