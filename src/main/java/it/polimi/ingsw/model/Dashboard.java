@@ -12,7 +12,7 @@ import java.util.HashMap;
  * Generally, when the action performed goes well, nothing is returned, but if the action violates any of the game rule an exception is thrown.
  * TODO maybe there should be methods to check if an action is possible before performing it? It can be useful if you want to visualize only the actions that can be executed (for example if you don't have enough supplies to buy a card, then the card is grey and not clickable)
  */
-public class Dashboard implements WinPointsCountable{
+public class Dashboard implements WinPointsCountable, HasStatus{
 
     private final Marketplace marketplace;
     private final DevelopmentGrid developmentGrid;
@@ -478,8 +478,8 @@ public class Dashboard implements WinPointsCountable{
      *
      * SupplyContainer style means that there are 5 integers which represents, in this specific order, the number of: COIN, SERVANT, SHIELD, STONE, FAITH_MARKER
      */
-    private void notifyViews(){
-        //get the status of the dashboard
+    @Override
+    public ArrayList<Integer> getStatus(){
         ArrayList<Integer> status = new ArrayList<>();
 
         status.addAll(coffer.getStatus());
@@ -489,6 +489,13 @@ public class Dashboard implements WinPointsCountable{
         status.addAll(baseProduction.getStatus());
         status.addAll(faithTrack.getStatus());
         status.addAll(leadersSpace.getStatus());
+
+        return status;
+    }
+
+    private void notifyViews(){
+        //get the status of the dashboard
+        ArrayList<Integer> status = new ArrayList<>(getStatus());
 
         //send the status to the observers
         for (ModelObserver mo : modelObservers) {
