@@ -6,7 +6,6 @@ import it.polimi.ingsw.model.leader_abilities.Discount;
 import it.polimi.ingsw.model.leader_abilities.Producer;
 import org.junit.Test;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -84,19 +83,13 @@ public class LeaderCardTest {
 
         try {
             la.swapProduction(WarehouseObjectType.SERVANT);
-        } catch (SupplyException e) {
-            fail();
-        } catch (NoSuchMethodException e) {
+        } catch (SupplyException | NoSuchMethodException e) {
             fail();
         }
 
         try {
             la.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE1);
-        } catch (SupplyException e) {
-            fail();
-        } catch (NoSuchMethodException e) {
-            fail();
-        } catch (LeaderException e) {
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {
             fail();
         }
 
@@ -138,36 +131,29 @@ public class LeaderCardTest {
         reqDevelopmentCard.add(cs1);
         reqDevelopmentCard.add(cs2);
         LeaderAbility la = new Producer(new SupplyContainer(1, 0, 0, 0, 0));
+
         LeaderCard lc = new LeaderCard(0, reqSupplyContainer, reqDevelopmentCard, la, 5);
 
-        try {
-            lc.activate();
-        } catch (LeaderException e) {fail();}
-
-        try {
-            lc.discard();
-        } catch (LeaderException e) {int [] expectedStatus ={
+        int [] expectedStatus ={
                 0, //id
-                1, //active
+                0, //active/discarded/nothing
                 0, //fixedInput
-                4, //why not zero? FIXME
+                0, //fixedOutput
                 0, //mutableOutput
                 0, 0 ,0 ,0 ,0, //currentSupply
                 0, 0, 0, 0, 0}; //for Depot ability
 
-            ArrayList<Integer> status = lc.getStatus();
-            int [] actualStatus = {
-                    status.get(0),
-                    status.get(1),
-                    status.get(2),
-                    status.get(3),
-                    status.get(4),
-                    status.get(5), status.get(6), status.get(7), status.get(8), status.get(9),
-                    status.get(10), status.get(11), status.get(12), status.get(13), status.get(14)};
+        ArrayList<Integer> status = lc.getStatus();
+        int [] actualStatus = {
+                status.get(0),
+                status.get(1),
+                status.get(2),
+                status.get(3),
+                status.get(4),
+                status.get(5), status.get(6), status.get(7), status.get(8), status.get(9),
+                status.get(10), status.get(11), status.get(12), status.get(13), status.get(14)};
 
-            assertArrayEquals(expectedStatus, actualStatus);}
-
+        assertArrayEquals(expectedStatus, actualStatus);
     }
-
 
 }
