@@ -68,42 +68,42 @@ public class MarbleContainer implements HasStatus {
         if(mc == MarbleColor.YELLOW)
         {
             if(yellow <= 0)
-                throw new MarbleException();
+                throw new MarbleException("There are no "+mc.toString()+" marbles");
             else
                 yellow--;
         }
         else if(mc == MarbleColor.BLUE)
         {
             if(blue <= 0)
-                throw new MarbleException();
+                throw new MarbleException("There are no "+mc.toString()+" marbles");
             else
                 blue--;
         }
         else if(mc == MarbleColor.GREY)
         {
             if(grey <= 0)
-                throw new MarbleException();
+                throw new MarbleException("There are no "+mc.toString()+" marbles");
             else
                 grey--;
         }
         else if(mc == MarbleColor.WHITE)
         {
             if(white <= 0)
-                throw new MarbleException();
+                throw new MarbleException("There are no "+mc.toString()+" marbles");
             else
                 white--;
         }
         else if(mc == MarbleColor.VIOLET)
         {
             if(violet <= 0)
-                throw new MarbleException();
+                throw new MarbleException("There are no "+mc.toString()+" marbles");
             else
                 violet--;
         }
         else if(mc == MarbleColor.RED)
         {
             if(red <= 0)
-                throw new MarbleException();
+                throw new MarbleException("There are no "+mc.toString()+" marbles");
             else
                 red--;
         }

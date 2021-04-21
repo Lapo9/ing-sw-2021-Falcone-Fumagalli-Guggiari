@@ -86,7 +86,7 @@ public class Dashboard implements WinPointsCountable, HasStatus{
      * @throws NoSuchMethodException Leader hasn't a depot ability
      */
     public void assignMarble(DepotID to, MarbleColor color) throws SupplyException, MarbleException, NoSuchMethodException, LeaderException{
-        if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException();}
+        if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException(color.toString() + " marbles are finished :(");}
 
         depotsManager.addMarble(to, color);
         unassignedSupplies.removeMarble(color);
@@ -194,7 +194,7 @@ public class Dashboard implements WinPointsCountable, HasStatus{
 
         //check if you can buy a card of that level in that space
         if(buyableLevels.get(space-1) != developmentGrid.getLevel(column, row)){
-            throw new DevelopmentException();
+            throw new DevelopmentException("Cannot buy a card of this level for the specified space");
         }
 
         //buy the card
@@ -208,6 +208,16 @@ public class Dashboard implements WinPointsCountable, HasStatus{
      */
     public ArrayList<Integer> buyableDevelopmentLevels() {
         return developments.buyableLevels();
+    }
+
+
+    /**
+     * Adds the specified leader to the leader space
+     * @param leader The leader to add
+     * @throws LeaderException There is already the maximum number of leaders (2)
+     */
+    public void addLeader(LeaderCard leader) throws LeaderException{
+        leadersSpace.addLeader(leader);
     }
 
 
@@ -263,7 +273,7 @@ public class Dashboard implements WinPointsCountable, HasStatus{
      */
     public void swapBaseProduction(int i, WarehouseObjectType wot) throws SupplyException{
         if(wot == WarehouseObjectType.FAITH_MARKER){
-            throw new SupplyException();
+            throw new SupplyException("Cannot add FAITH_MARKER base production input or output");
         }
 
         productionManager.swapBaseProduction(i, wot);

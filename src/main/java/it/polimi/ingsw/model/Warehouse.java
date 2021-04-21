@@ -78,7 +78,7 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         }
 
         else{
-            throw new SupplyException();
+            throw new SupplyException("Cannot swap the specified rows ("+r1+", "+r2+")");
         }
     }
 

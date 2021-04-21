@@ -14,6 +14,14 @@ public class LeadersSpace implements HasStatus, WinPointsCountable{
     private ArrayList<LeaderCard> leaders = new ArrayList<>();
 
 
+    public void addLeader(LeaderCard leader) throws LeaderException {
+        if(leaders.size()<2) {
+            leaders.add(leader);
+        }
+        else throw new LeaderException("Cannot add more than 2 leaders");
+    }
+
+
     /**
      * Tries to discard the leader card
      * @param i what leader? 0 or 1?
@@ -49,7 +57,7 @@ public class LeadersSpace implements HasStatus, WinPointsCountable{
             leaders.get(i).activate();
         }
         else {
-            throw new SupplyException();
+            throw new SupplyException("Cannot activate leader because of resources");
         }
     }
 

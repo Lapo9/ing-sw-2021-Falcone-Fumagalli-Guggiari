@@ -188,7 +188,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
                                         }});
 
         if (presentTypes.size() > 1){
-            throw new SupplyException();
+            throw new SupplyException("This SupplyContainer contains more than one single type");
         }
         else if (presentTypes.size() == 1){
             return presentTypes.get(0);
@@ -248,7 +248,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
             supplies.put(wot, supplies.get(wot)+1);
         }
         else {
-            throw new SupplyException();
+            throw new SupplyException("Cannot add "+wot.toString()+" to "+this.toString()+" from "+from.toString());
         }
     }
 
@@ -258,7 +258,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
             supplies.put(wot, supplies.get(wot)+1);
         }
         else {
-            throw new SupplyException();
+            throw new SupplyException("Cannot add "+wot.toString()+" to "+this.toString());
         }
     }
 
@@ -269,7 +269,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
             supplies.put(wot, supplies.get(wot)-1);
         }
         else {
-            throw new SupplyException();
+            throw new SupplyException("Cannot remove "+wot.toString()+" from "+this.toString());
         }
     }
 
@@ -279,7 +279,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
             supplies.put(wot, supplies.get(wot)-1);
         }
         else {
-            throw new SupplyException();
+            throw new SupplyException("Cannot remove "+wot.toString()+" from "+this.toString()+" to "+to.toString());
         }
     }
 
@@ -335,8 +335,8 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
                 }   catch (LeaderException | NoSuchMethodException e){/*couldn't transform, try next*/}
                     catch (SupplyException se){cannotAdd = true;}
             }
-            if (cannotAdd){throw new SupplyException();}
-            else {throw new MarbleException();}
+            if (cannotAdd){throw new SupplyException("Cannot add this color ("+color.toString()+") of marble to the specified SupplyContainer (" + this.toString() + ")");}
+            else {throw new MarbleException("Cannot add this color ("+color.toString()+") of marble to the specified SupplyContainer (" + this.toString() + ")");}
         }
         else {
             addSupply(newType);

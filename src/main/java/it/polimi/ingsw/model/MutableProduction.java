@@ -92,7 +92,7 @@ public class MutableProduction extends Production implements HasStatus{
         });
 
         if(!tmp.equals(currentSupply))
-            throw new SupplyException();
+            throw new SupplyException("There isn't the correct number of supplies to produce");
     }
 
 
@@ -103,7 +103,7 @@ public class MutableProduction extends Production implements HasStatus{
      */
     public void swapInput(int num, WarehouseObjectType newInput) throws SupplyException{
         if(newInput == WarehouseObjectType.FAITH_MARKER || newInput == WarehouseObjectType.NO_TYPE){
-            throw new SupplyException();
+            throw new SupplyException("Cannot use NO_TYPE as input in a MutableProduction");
         }
         mutableInput.set(num, newInput);
     }
@@ -115,7 +115,7 @@ public class MutableProduction extends Production implements HasStatus{
      */
     public void swapOutput(int num, WarehouseObjectType newOutput) throws SupplyException{
         if(newOutput == WarehouseObjectType.NO_TYPE){
-            throw new SupplyException();
+            throw new SupplyException("Cannot use NO_TYPE as output in a MutableProduction");
         }
         mutableOutput.set(num, newOutput);
     }

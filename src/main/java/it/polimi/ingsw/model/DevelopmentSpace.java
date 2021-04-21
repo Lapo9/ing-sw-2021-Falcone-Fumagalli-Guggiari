@@ -29,7 +29,7 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
     public void addCard(DevelopmentCard card) throws DevelopmentException {
         //check if we already have 3 cards or if the card level is not the expected one
         if(cards.size() == 3 || card.getLevel() != cards.size()+1){
-            throw new DevelopmentException();
+            throw new DevelopmentException("Cannot buy a card of the specified level");
         }
 
         cards.add(card);

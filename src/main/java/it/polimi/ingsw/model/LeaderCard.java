@@ -47,7 +47,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
      */
     public LeaderAbility getAbility() throws LeaderException{
         if(!active || discarded)
-            throw new LeaderException();
+            throw new LeaderException("The leader is already discarded or it isn't active");
         return ability;
     }
 
@@ -60,7 +60,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
             active = true;
         }
         else {
-            throw new LeaderException();
+            throw new LeaderException("Cannot activate the leader (already discarded or active)");
         }
     }
 
@@ -73,7 +73,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
             discarded = true;
         }
         else {
-            throw new LeaderException();
+            throw new LeaderException("Cannot discard the leader (already discarded or active)");
         }
     }
 

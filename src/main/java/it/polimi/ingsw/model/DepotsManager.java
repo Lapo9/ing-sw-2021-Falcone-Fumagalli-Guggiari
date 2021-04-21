@@ -242,7 +242,7 @@ public class DepotsManager implements AcceptsSupplies {
         }
 
         else {
-            throw new MarbleException();
+            throw new MarbleException("Cannot add this marble ("+color+") to the specified depot (" +slot.toString() + ")");
         }
     }
 }

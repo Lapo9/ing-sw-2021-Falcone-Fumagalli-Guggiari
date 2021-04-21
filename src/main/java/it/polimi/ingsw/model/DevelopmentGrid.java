@@ -54,7 +54,7 @@ public class DevelopmentGrid implements HasStatus{
         SupplyContainer container = p.getAll();
         int pos = getPlace(column, row);
         if(grid.get(pos).isEmpty())
-            throw new NoSuchCardException();
+            throw new NoSuchCardException("There isn't a card in position "+column+"; "+row);
 
         //We have to check if there are any active LeaderCard that have the ability to get a discount
         WarehouseObjectType discountType0 = null;
@@ -125,7 +125,7 @@ public class DevelopmentGrid implements HasStatus{
             return grid.get(pos).remove(lastIndex);
         }
         else {
-            throw new SupplyException();
+            throw new SupplyException("Cannot buy this card because of supplies if paycheck");
         }
     }
 
@@ -141,7 +141,7 @@ public class DevelopmentGrid implements HasStatus{
                 return;
             }
         }
-        throw new NoSuchCardException();
+        throw new NoSuchCardException("There isn't a "+color.toString()+" card");
     }
 
     /**
@@ -162,7 +162,7 @@ public class DevelopmentGrid implements HasStatus{
     public int getLevel(int column, int row) throws NoSuchCardException{
         int pos = getPlace(column, row);
         if(grid.get(pos).isEmpty())
-            throw new NoSuchCardException();
+            throw new NoSuchCardException("There isn't a card in position "+column+"; "+row);
         else
             return 4 - row;
     }

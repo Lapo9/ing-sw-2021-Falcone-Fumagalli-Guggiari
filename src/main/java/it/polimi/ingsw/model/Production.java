@@ -54,7 +54,7 @@ public class Production implements AcceptsSupplies, HasStatus{
      */
     public void check() throws SupplyException{
         if(!input.equals(currentSupply))
-            throw new SupplyException();
+            throw new SupplyException("There isn't the correct number of supplies to produce");
     }
 
 
