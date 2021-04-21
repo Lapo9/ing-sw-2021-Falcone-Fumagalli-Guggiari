@@ -123,13 +123,27 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
     public ArrayList<Integer> getStatus(){
         ArrayList<Integer> status = new ArrayList<>();
 
-        //for all the cards but the active one, we only need to save the ID (not the production info)
-        for (int i = 0; i<cards.size()-1; ++i){
-            status.add(cards.get(i).getStatus().get(0));
+        //if there are no cards adds all 0
+        if(cards.size() == 0){
+            for(int i = 0; i<18; ++i){
+                status.add(0);
+            }
         }
 
-        //for the active card save everything
-        status.addAll(cards.get(cards.size()-1).getStatus());
+        else {
+            //for all the cards but the active one, we only need to save the ID (not the production info)
+            for (int i = 0; i < cards.size() - 1; ++i) {
+                status.add(cards.get(i).getStatus().get(0));
+            }
+
+            //for the active card save everything
+            status.addAll(cards.get(cards.size() - 1).getStatus());
+
+            //ads IDs for empty spaces
+            for (int i = 0; i < 3 - cards.size(); ++i) {
+                status.add(cards.size(), 0);
+            }
+        }
 
         return status;
     }
