@@ -82,23 +82,6 @@ public class LeaderCardTest {
         //leaderAbility Producer
         LeaderAbility la = new Producer(new SupplyContainer(1, 0, 0, 0, 0));
 
-        try {
-            la.swapProduction(WarehouseObjectType.STONE);
-        } catch (SupplyException e) {
-            fail();
-        } catch (NoSuchMethodException e) {
-            fail();
-        }
-        try {
-            la.addSupply(WarehouseObjectType.COIN);
-        } catch (SupplyException e) {
-            fail();
-        } catch (NoSuchMethodException e) {
-            fail();
-        } catch (LeaderException e) {
-            fail();
-        }
-
         //LeaderCard creation
         LeaderCard lc = new LeaderCard(0, reqSupplyContainer, reqDevelopmentCard, la, 5);
 
@@ -109,9 +92,9 @@ public class LeaderCardTest {
         int [] expectedStatus ={0, //id
                                 1, //active
                                 0, //fixedInput
-                                2, //fixedOutput
+                                4, //fixedOutput -> FAITH_MARKER
                                 0, //mutableOutput
-                                1, 0 ,0 ,0 ,0, //currentSupply
+                                0, 0 ,0 ,0 ,0, //currentSupply
                                 0, 0, 0, 0, 0}; //for Depot ability
 
         ArrayList<Integer> status = lc.getStatus();
