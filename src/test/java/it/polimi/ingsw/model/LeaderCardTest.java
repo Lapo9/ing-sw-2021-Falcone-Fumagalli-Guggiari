@@ -89,13 +89,14 @@ public class LeaderCardTest {
             lc.activate();
         } catch (LeaderException e) {fail();}
 
-        int [] expectedStatus ={0, //id
-                                1, //active
-                                0, //fixedInput
-                                4, //fixedOutput -> FAITH_MARKER
-                                0, //mutableOutput
-                                0, 0 ,0 ,0 ,0, //currentSupply
-                                0, 0, 0, 0, 0}; //for Depot ability
+        int [] expectedStatus ={
+                0, //id
+                1, //active
+                0, //fixedInput
+                4, //fixedOutput -> FAITH_MARKER
+                0, //mutableOutput
+                0, 0 ,0 ,0 ,0, //currentSupply
+                0, 0, 0, 0, 0}; //for Depot ability
 
         ArrayList<Integer> status = lc.getStatus();
         int [] actualStatus = {
@@ -128,8 +129,26 @@ public class LeaderCardTest {
 
         try {
             lc.discard();
-        } catch (LeaderException e) {
-        }
+        } catch (LeaderException e) {int [] expectedStatus ={
+                0, //id
+                1, //active
+                0, //fixedInput
+                4, //fixedOutput -> FAITH_MARKER
+                0, //mutableOutput
+                0, 0 ,0 ,0 ,0, //currentSupply
+                0, 0, 0, 0, 0}; //for Depot ability
+
+            ArrayList<Integer> status = lc.getStatus();
+            int [] actualStatus = {
+                    status.get(0),
+                    status.get(1),
+                    status.get(2),
+                    status.get(3),
+                    status.get(4),
+                    status.get(5), status.get(6), status.get(7), status.get(8), status.get(9),
+                    status.get(10), status.get(11), status.get(12), status.get(13), status.get(14)};
+
+            assertArrayEquals(expectedStatus, actualStatus);}
 
     }
 
