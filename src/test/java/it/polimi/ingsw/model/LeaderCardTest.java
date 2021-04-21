@@ -82,6 +82,24 @@ public class LeaderCardTest {
         //leaderAbility Producer
         LeaderAbility la = new Producer(new SupplyContainer(1, 0, 0, 0, 0));
 
+        try {
+            la.swapProduction(WarehouseObjectType.SERVANT);
+        } catch (SupplyException e) {
+            fail();
+        } catch (NoSuchMethodException e) {
+            fail();
+        }
+
+        try {
+            la.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE1);
+        } catch (SupplyException e) {
+            fail();
+        } catch (NoSuchMethodException e) {
+            fail();
+        } catch (LeaderException e) {
+            fail();
+        }
+
         //LeaderCard creation
         LeaderCard lc = new LeaderCard(0, reqSupplyContainer, reqDevelopmentCard, la, 5);
 
@@ -94,8 +112,8 @@ public class LeaderCardTest {
                 1, //active
                 0, //fixedInput
                 4, //fixedOutput -> FAITH_MARKER
-                0, //mutableOutput
-                0, 0 ,0 ,0 ,0, //currentSupply
+                1, //mutableOutput -> SERVANT
+                1, 0 ,0 ,0 ,0, //currentSupply
                 0, 0, 0, 0, 0}; //for Depot ability
 
         ArrayList<Integer> status = lc.getStatus();
@@ -122,7 +140,6 @@ public class LeaderCardTest {
         LeaderAbility la = new Producer(new SupplyContainer(1, 0, 0, 0, 0));
         LeaderCard lc = new LeaderCard(0, reqSupplyContainer, reqDevelopmentCard, la, 5);
 
-        //TODO
         try {
             lc.activate();
         } catch (LeaderException e) {fail();}
@@ -133,7 +150,7 @@ public class LeaderCardTest {
                 0, //id
                 1, //active
                 0, //fixedInput
-                4, //fixedOutput -> FAITH_MARKER
+                4, //why not zero? FIXME
                 0, //mutableOutput
                 0, 0 ,0 ,0 ,0, //currentSupply
                 0, 0, 0, 0, 0}; //for Depot ability
