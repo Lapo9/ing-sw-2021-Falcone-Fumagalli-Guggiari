@@ -34,17 +34,19 @@ public class ResourceChecker {
 
         //add all of the supplies in the depots (warehouse + leaders)
         for (WarehouseObjectType wot : WarehouseObjectType.values()) {
-            int qty = depotsManager.getResourceCount(wot);
-            for (int i=0; i<qty; ++i){
-                try {
-                    allSupplies.addSupply(wot);
-                } catch (SupplyException se){/*TODO terminate program*/}
+            if(wot != WarehouseObjectType.NO_TYPE) {
+                int qty = depotsManager.getResourceCount(wot);
+                for (int i = 0; i < qty; ++i) {
+                    try {
+                        allSupplies.addSupply(wot);
+                    } catch (SupplyException se) {/*TODO terminate program*/}
+                }
             }
         }
 
         //check that the requirement is satisfied
         for (WarehouseObjectType wot : WarehouseObjectType.values()) {
-            if(supplyReq.getQuantity(wot) > allSupplies.getQuantity(wot)){
+            if(wot != WarehouseObjectType.NO_TYPE && supplyReq.getQuantity(wot) > allSupplies.getQuantity(wot)){
                 return false;
             }
         }

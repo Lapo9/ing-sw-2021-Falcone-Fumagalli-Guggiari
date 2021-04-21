@@ -1,6 +1,10 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.LeaderException;
+import it.polimi.ingsw.exceptions.MarbleException;
 import it.polimi.ingsw.exceptions.SupplyException;
+import it.polimi.ingsw.model.leader_abilities.Depot;
+import it.polimi.ingsw.model.leader_abilities.Market;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -391,8 +395,22 @@ public class SupplyContainerTest {
         assertArrayEquals(objectsExpected, objectsActual);
     }
 
-    //TODO
-    //test addMarble with leaderSpace and white marble
+    @Test
+    public void addMarble_white() {
+        LeadersSpace ldrspc = new LeadersSpace();
+        SupplyContainer sc = new SupplyContainer();
+        try {
+            ldrspc.addLeader(new LeaderCard(43, new SupplyContainer(2, 0, 0, 0, 0), new ArrayList<>(0), new Market(WarehouseObjectType.STONE), 5));
+            ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
+        } catch (LeaderException e) {fail();}
+        try {
+            ldrspc.playLeader(0, new ResourceChecker(new DepotsManager(new Warehouse(), ldrspc), new SupplyContainer(2, 0, 0, 0, 0), new Developments()));
+        } catch (SupplyException | LeaderException e) {fail();}
+        try {
+            sc.addMarble(MarbleColor.WHITE, ldrspc);
+        } catch (SupplyException | MarbleException e) {fail();}
+        assertEquals(1, sc.getQuantity(WarehouseObjectType.STONE));
+    }
 
     @Test
     public void getStatus(){

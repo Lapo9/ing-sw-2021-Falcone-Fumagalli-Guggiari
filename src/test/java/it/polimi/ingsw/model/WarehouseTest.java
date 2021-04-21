@@ -1,7 +1,11 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.LeaderException;
 import it.polimi.ingsw.exceptions.MarbleException;
 import it.polimi.ingsw.exceptions.SupplyException;
+import it.polimi.ingsw.model.leader_abilities.Depot;
+import it.polimi.ingsw.model.leader_abilities.Discount;
+import it.polimi.ingsw.model.leader_abilities.Market;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -78,8 +82,32 @@ public class WarehouseTest {
         assertTrue(exc);
     }
 
-    //TODO
-    //Test addMarble with white marble and leaderSpace active with market ability
+    @Test
+    public void addMarble_white() {
+        Warehouse wrhs =  new Warehouse();
+        LeadersSpace ldrspc = new LeadersSpace();
+        try {
+            ldrspc.addLeader(new LeaderCard(43, new SupplyContainer(2, 0, 0, 0, 0), new ArrayList<>(0), new Market(WarehouseObjectType.STONE), 5));
+            ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
+        } catch (LeaderException e) {fail();}
+        try {
+            ldrspc.playLeader(0, new ResourceChecker(new DepotsManager(wrhs, ldrspc), new SupplyContainer(2, 0, 0, 0, 0), new Developments()));
+        } catch (SupplyException | LeaderException e) {fail();}
+        try {
+            wrhs.addMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE, ldrspc);
+            wrhs.addMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE, ldrspc);
+            wrhs.addMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET, ldrspc);
+            wrhs.addMarble(DepotID.WAREHOUSE1, MarbleColor.WHITE, ldrspc);
+        } catch (SupplyException | MarbleException e) {fail();}
+        SupplyContainer result = wrhs.clearSupplies().first;
+        int[] objectsExpected = {0, 1, 1, 2, 0};
+        int[] objectsActual = { result.getQuantity(WarehouseObjectType.COIN),
+                                result.getQuantity(WarehouseObjectType.STONE),
+                                result.getQuantity(WarehouseObjectType.SERVANT),
+                                result.getQuantity(WarehouseObjectType.SHIELD),
+                                result.getQuantity(WarehouseObjectType.FAITH_MARKER)};
+        assertArrayEquals(objectsExpected, objectsActual);
+    }
 
     @Test
     public void addMarble_notWhite() {
@@ -93,10 +121,10 @@ public class WarehouseTest {
         SupplyContainer result = wrhs.clearSupplies().first;
         int[] objectsExpected = {0, 0, 1, 2, 0};
         int[] objectsActual = { result.getQuantity(WarehouseObjectType.COIN),
-                result.getQuantity(WarehouseObjectType.STONE),
-                result.getQuantity(WarehouseObjectType.SERVANT),
-                result.getQuantity(WarehouseObjectType.SHIELD),
-                result.getQuantity(WarehouseObjectType.FAITH_MARKER)};
+                                result.getQuantity(WarehouseObjectType.STONE),
+                                result.getQuantity(WarehouseObjectType.SERVANT),
+                                result.getQuantity(WarehouseObjectType.SHIELD),
+                                result.getQuantity(WarehouseObjectType.FAITH_MARKER)};
         assertArrayEquals(objectsExpected, objectsActual);
     }
 
