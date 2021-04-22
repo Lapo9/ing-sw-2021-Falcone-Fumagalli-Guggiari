@@ -34,6 +34,28 @@ public class LeaderCardTest {
     }
 
     @Test
+    public void activate_exc() {
+        SupplyContainer reqSupplyContainer = new SupplyContainer(2, 0, 0, 0, 0);
+        ArrayList<CardsRequirement> reqDevelopmentCard = new ArrayList<>();
+        CardsRequirement cs1 = new CardsRequirement(1, 1, CardCategory.YELLOW);
+        CardsRequirement cs2 = new CardsRequirement(1, 2, CardCategory.BLUE);
+        reqDevelopmentCard.add(cs1);
+        reqDevelopmentCard.add(cs2);
+        LeaderAbility la = new Discount(WarehouseObjectType.COIN);
+
+        LeaderCard lc = new LeaderCard(0, reqSupplyContainer, reqDevelopmentCard, la, 5);
+        boolean exc = false;
+        try {
+            lc.activate();
+        } catch (LeaderException e) {fail();}
+        //another activate()
+        try {
+            lc.activate();
+        } catch (LeaderException e) {exc = true;}
+        assertTrue(exc);
+    }
+
+    @Test
     public void discard_no_exc() {
         SupplyContainer reqSupplyContainer = new SupplyContainer(2, 0, 0, 0, 0);
         ArrayList<CardsRequirement> reqDevelopmentCard = new ArrayList<>();
@@ -51,6 +73,29 @@ public class LeaderCardTest {
         }
 
         assertFalse(exc);
+    }
+
+    @Test
+    public void discard_exc() {
+        SupplyContainer reqSupplyContainer = new SupplyContainer(2, 0, 0, 0, 0);
+        ArrayList<CardsRequirement> reqDevelopmentCard = new ArrayList<>();
+        CardsRequirement cs1 = new CardsRequirement(1, 1, CardCategory.YELLOW);
+        CardsRequirement cs2 = new CardsRequirement(1, 2, CardCategory.BLUE);
+        reqDevelopmentCard.add(cs1);
+        reqDevelopmentCard.add(cs2);
+        LeaderAbility la = new Discount(WarehouseObjectType.COIN);
+        LeaderCard lc = new LeaderCard(0, reqSupplyContainer, reqDevelopmentCard, la, 5);
+        boolean exc = false;
+        try {
+            lc.activate();
+        } catch (LeaderException e) {fail();}
+        try {
+            lc.discard();
+        } catch (LeaderException e) {
+            exc = true;
+        }
+
+        assertTrue(exc);
     }
 
     @Test
