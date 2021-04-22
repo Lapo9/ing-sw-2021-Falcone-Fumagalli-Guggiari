@@ -13,7 +13,7 @@ public class UserCommand {
 
     public UserCommand(boolean isServerOperation, String command, String... arguments){
         this.command = command;
-        this.arguments = new ArrayList<String>(Arrays.stream(arguments).toList());
+        this.arguments = new ArrayList<String>(Arrays.asList(arguments));
         this.isServerOperation = isServerOperation;
     }
 

@@ -11,7 +11,7 @@ import java.util.Scanner;
  */
 public class Screen {
 
-    private HashMap<ViewId, View> views = new HashMap<ViewId, View>();
+    private HashMap<String, View> views = new HashMap<String, View>();
     private View activeView;
     private CommandInterpreter userInterpreter = new CommandInterpreter();
     private String errorMessage = "";
@@ -30,7 +30,7 @@ public class Screen {
      * @param id ID of the welcome screen
      * @param startingView Actual welcome screen
      */
-    public Screen(ViewId id, View startingView) {
+    public Screen(String id, View startingView) {
         addView(id, startingView);
         try {
             show(id);
@@ -45,7 +45,7 @@ public class Screen {
      * @param id
      * @param view
      */
-    public void addView(ViewId id, View view) {
+    public void addView(String id, View view) {
         views.put(id, view);
     }
 
@@ -63,7 +63,7 @@ public class Screen {
      * Shows the specified view.
      * @param view ID of the view to show
      */
-    public synchronized void show(ViewId view) throws ViewException {
+    public synchronized void show(String view) throws ViewException {
         activeView = views.get(view); //set active view
         if(activeView == null){
             throw new ViewException(view.toString() + " is not a known view");
@@ -79,8 +79,7 @@ public class Screen {
     /**
      * Refreshes the current view. Useful when there is an update from the model.
      */
-    public synchronized void update() {
-        activeView = views.get(view); //set active view
+    public synchronized void refresh() {
         //TODO clear console
         System.out.print(errorMessage + activeView.toString());
     }
