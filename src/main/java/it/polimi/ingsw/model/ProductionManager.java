@@ -148,13 +148,13 @@ public class ProductionManager implements AcceptsSupplies{
         //clear only producer leaders
         for (int i = 0; i<2; ++i){
             try {
-                if (leadersSpace.getLeaderAbility(0) instanceof Producer) {
+                if (leadersSpace.getLeaderAbility(i) instanceof Producer) {
                     leadersSpace.getLeaderAbility(i).clearSupplies();
                 }
             } catch (LeaderException | NoSuchMethodException e){}
         }
 
-        return new Pair<>(containers.get(DepotID.SourceType.DEPOT).clearSupplies().first, containers.get(DepotID.SourceType.DEPOT).clearSupplies().second);
+        return new Pair<>(containers.get(DepotID.SourceType.DEPOT).clearSupplies().first, containers.get(DepotID.SourceType.STRONGBOX).clearSupplies().first);
     }
 
     @Override
@@ -166,13 +166,13 @@ public class ProductionManager implements AcceptsSupplies{
         }
 
         else if (slot.getType() == DepotID.DepotType.BASE_PRODUCTION){
-            removed = baseProduction.clearSupplies(slot).first;
+            removed = baseProduction.clearSupplies().first;
         }
 
         else if (slot.getType() == DepotID.DepotType.LEADER_PRODUCTION){
             try {
-                if (leadersSpace.getLeaderAbility(0) instanceof Depot) {
-                    removed = leadersSpace.getLeaderAbility(slot.getNum()).clearSupplies(slot).first;
+                if (leadersSpace.getLeaderAbility(slot.getNum()) instanceof Producer) {
+                    removed = leadersSpace.getLeaderAbility(slot.getNum()).clearSupplies().first;
                 }
                 else {
                     //TODO terminate the program
@@ -190,15 +190,17 @@ public class ProductionManager implements AcceptsSupplies{
         //for each type of supply FIXME
         for (WarehouseObjectType wot : WarehouseObjectType.values()) {
             //for each supply of the processed type removed previously
-            for (int i = 0; i<removed.getQuantity(wot); ++i) {
-                try {
-                    containers.get(DepotID.SourceType.STRONGBOX).removeSupply(wot); //try to remove from strongbox
-                    res.second.addSupply(wot); //add supply to return from strongbox
-                } catch (SupplyException se){
+            if (wot != WarehouseObjectType.NO_TYPE) {
+                for (int i = 0; i < removed.getQuantity(wot); ++i) {
                     try {
-                        containers.get(DepotID.SourceType.DEPOT).removeSupply(wot); //if cannot remove from strongbox try to remove from depots
-                        res.first.addSupply(wot); //add supply to return from depots
-                    } catch (SupplyException se1){/*TODO terminate program*/}
+                        containers.get(DepotID.SourceType.STRONGBOX).removeSupply(wot); //try to remove from strongbox
+                        res.second.addSupply(wot); //add supply to return from strongbox
+                    } catch (SupplyException se) {
+                        try {
+                            containers.get(DepotID.SourceType.DEPOT).removeSupply(wot); //if cannot remove from strongbox try to remove from depots
+                            res.first.addSupply(wot); //add supply to return from depots
+                        } catch (SupplyException se1) {/*TODO terminate program*/}
+                    }
                 }
             }
         }
