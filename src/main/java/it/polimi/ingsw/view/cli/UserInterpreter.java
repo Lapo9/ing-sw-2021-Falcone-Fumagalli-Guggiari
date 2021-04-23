@@ -48,6 +48,10 @@ public class UserInterpreter {
         //check if the command is syntactically correct
         String error = checkSyntacticalCorrectness(tokens);
         if(error.equals("OK")) {
+            //check if it is a connection request
+            if (tokens[0].equals("connect")){
+                socket.connect(tokens[1], Integer.parseInt(tokens[2]), tokens[3]); //connect to the specified server
+            }
             //check if the server is required
             if (commands.stream().filter(command -> command.toString().equals(tokens[0])).collect(Collectors.toList()).get(0).isServerOperation()) {
                 socket.sendMessage(userCommand); //TODO maybe we have to translate the message to something the server can understand
@@ -74,6 +78,11 @@ public class UserInterpreter {
         }
         else  {
             UserCommand actualCommand = tmp.get(0);
+            //connect is the only command that doesn't have a proper list of arguments (we cannot list all of the possible IPs or names obviously)
+            if (actualCommand.toString() == "connect"){
+                return "OK";
+            }
+
             for (int i=0; i<actualCommand.getArgsCount(); ++i) {
                 //check if the arguments are appropriate for the command
                 if(!actualCommand.getArg(i).contains(tokens[i+1])){
@@ -90,6 +99,7 @@ public class UserInterpreter {
         Set<UserCommand> commands = new HashSet<>();
         //TODO add all of the commands!
         commands.add(new UserCommand(false, "show", new ArrayList<>(Arrays.asList("ViewTest1", "ViewTest2")))); //TODO test to eliminate
+        commands.add(new UserCommand(false, "connect", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
         return commands;
     }
 

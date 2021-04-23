@@ -6,9 +6,9 @@ import java.nio.charset.StandardCharsets;
 
 public class ControllerSocket {
 
-    Socket socket;
-    ControllerInterpreter controllerInterpreter;
-    boolean connected = false;
+    private Socket socket;
+    private ControllerInterpreter controllerInterpreter;
+    private boolean connected = false;
 
 
     public ControllerSocket(){}
@@ -18,11 +18,16 @@ public class ControllerSocket {
         if(controllerInterpreter == null){
             throw new IllegalThreadStateException("Cannot connect without an interpreter");
         }
+        else if(connected){
+            controllerInterpreter.execute("error You are already connected!");
+            return;
+        }
 
         try {
             socket = new Socket(ip, port);
         } catch (IOException ioe) {
-            controllerInterpreter.execute("error Server is full or we messed up (probably the second one...");
+            controllerInterpreter.execute("error Server is full or we messed up (probably the second one...)");
+            return;
         }
 
         //send player name
