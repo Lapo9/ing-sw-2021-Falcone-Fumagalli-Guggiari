@@ -49,10 +49,31 @@ public class DepotTest {
     }
 
     @Test
-    public void addMarble(){
-        //TODO
-        //we still need to test what happens if there is a leader card with the 'Market' ability
-        //probably the addMarble test above is unnecessary when we add this test cases
+    public void addMarble_white(){
+        Depot dpt = new Depot(WarehouseObjectType.SERVANT);
+        LeadersSpace ldrspc = new LeadersSpace();
+        try {
+            ldrspc.addLeader(new LeaderCard(43, new SupplyContainer(2, 0, 0, 0, 0), new ArrayList<>(0), new Market(WarehouseObjectType.SERVANT), 5));
+            ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
+        } catch (LeaderException e) {fail();}
+        try {
+            ldrspc.playLeader(0, new ResourceChecker(new DepotsManager(new Warehouse(), ldrspc), new SupplyContainer(2, 0, 0, 0, 0), new Developments()));
+        } catch (SupplyException | LeaderException e) {fail();}
+        try {
+            dpt.addMarble(MarbleColor.WHITE, ldrspc);
+        } catch (MarbleException e) {
+            fail();
+        } catch (SupplyException e) {
+            fail();
+        }
+
+        boolean exc = false;
+        try {
+            dpt.removeSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE2);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {
+            exc = true;
+        }
+        assertFalse(exc);
     }
 
     @Test
