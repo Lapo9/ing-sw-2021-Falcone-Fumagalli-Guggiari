@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class View {
 
-    private ArrayList<Viewable> items;
+    private ArrayList<Viewable> items = new ArrayList<>();
 
     public String toString() {
         StringBuilder res = new StringBuilder();
         for(Viewable item : items){
-            res.append(item.toString());
+            res.append("\n" + item.toString() + "\n");
         }
 
         return res.toString();

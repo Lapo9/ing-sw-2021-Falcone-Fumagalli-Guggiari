@@ -7,6 +7,14 @@ public class ModelInterpreter {
     private ViewableFactory items;
     private Screen screen;
 
+
+
+    public ModelInterpreter(ViewableFactory viewableFactory, Screen screen) {
+        this.items = viewableFactory;
+        this.screen = screen;
+    }
+
+
     public void update(int[] status){
         //first byte in the status indicates
         if(status[0] <= 3){
@@ -24,8 +32,8 @@ public class ModelInterpreter {
 
     private void updatePlayer(int player, int[] status){
         items.get(player, ViewableId.COFFER).update(Arrays.copyOfRange(status, 1, 5));
-        items.get(player, ViewableId.WAREHOUSE).update(Arrays.copyOfRange(status, 6, 20));
         /* TODO
+        items.get(player, ViewableId.WAREHOUSE).update(Arrays.copyOfRange(status, 6, 20));
         items.get(player, DEV_SPACE1).update(Arrays.copyOfRange(status, 21, 38));
         items.get(player, DEV_SPACE2).update(Arrays.copyOfRange(status, 39, 56));
         items.get(player, DEV_SPACE3).update(Arrays.copyOfRange(status, 57, 74));

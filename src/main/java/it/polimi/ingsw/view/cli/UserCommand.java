@@ -6,15 +6,22 @@ import java.util.Arrays;
 public class UserCommand {
 
     private String command;
-    private ArrayList<String> arguments;
+    private ArrayList<ArrayList<String>> arguments = new ArrayList<>();
     private boolean isServerOperation;
 
 
 
-    public UserCommand(boolean isServerOperation, String command, String... arguments){
+    public UserCommand(boolean isServerOperation, String command, ArrayList<String>... arguments){
         this.command = command;
-        this.arguments = new ArrayList<String>(Arrays.asList(arguments));
         this.isServerOperation = isServerOperation;
+
+        for (ArrayList<String> argument : arguments){
+            ArrayList<String> currentArg = new ArrayList<String>();
+            this.arguments.add(currentArg);
+            for (String possibleArg : argument){
+                currentArg.add(possibleArg);
+            }
+        }
     }
 
 
@@ -28,7 +35,7 @@ public class UserCommand {
     }
 
 
-    public String getArg(int i) {
+    public ArrayList<String> getArg(int i) {
         return arguments.get(i);
     }
 

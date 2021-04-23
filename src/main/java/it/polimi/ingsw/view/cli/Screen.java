@@ -13,7 +13,7 @@ public class Screen {
 
     private HashMap<String, View> views = new HashMap<String, View>();
     private View activeView;
-    private CommandInterpreter userInterpreter;
+    private UserInterpreter userInterpreter;
     private String errorMessage = "";
     private boolean started = false;
 
@@ -35,18 +35,24 @@ public class Screen {
     /**
      * Starts the screen. It is now possible to show and refresh views.
      */
-    public void start() {
+    public void start(String startingViewId) {
+        started = true;
+
+        try {
+            show(startingViewId);
+        } catch (ViewException ve){/*TODO terminate*/}
+
         reader.start();
     }
 
 
     /**
      * Attaches the command interpreter to the screen. This method can be called only before the screen is started.
-     * @param userInterpreter CommandInterpreter to attach.
+     * @param userInterpreter UserInterpreter to attach.
      */
-    public void attachCommandInterpreter(CommandInterpreter userInterpreter) {
+    public void attachUserInterpreter(UserInterpreter userInterpreter) {
         if(started){
-            throw new IllegalThreadStateException("Cannot attach new CommandInterpreter after the call of start method on this screen");
+            throw new IllegalThreadStateException("Cannot attach new UserInterpreter after the call of start method on this screen");
         }
         this.userInterpreter = userInterpreter;
     }
@@ -76,6 +82,8 @@ public class Screen {
      * @param view ID of the view to show
      */
     public synchronized void show(String view) throws ViewException {
+        errorMessage = ""; //reset the error message
+
         if(!started){
             throw new IllegalThreadStateException("Cannot show anything until the screen has been started");
         }
@@ -87,8 +95,6 @@ public class Screen {
 
         //TODO clear console
         System.out.print(errorMessage + activeView.toString());
-
-        errorMessage = ""; //reset the error message
     }
 
 

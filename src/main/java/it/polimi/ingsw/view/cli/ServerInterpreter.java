@@ -29,7 +29,13 @@ public class ServerInterpreter {
             } catch (ViewException ve){/*TODO terminate*/}
         }
         else if(tokens[0].equals("error")){
-            screen.setErrorMessage(tokens[1]);
+            StringBuilder errorMessage = new StringBuilder("");
+            for (int i=1; i<tokens.length; ++i){
+                errorMessage.append(tokens[i]);
+                errorMessage.append(" ");
+            }
+
+            screen.setErrorMessage(errorMessage.toString());
             screen.refresh();
         }
         else {
