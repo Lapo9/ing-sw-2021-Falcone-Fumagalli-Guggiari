@@ -15,19 +15,27 @@ public class CommandInterpreter {
 
     //TODO private Socket serverSocket;
     private Set<UserCommand> commands;
-    private Screen screen;
     private ServerInterpreter serverInterpreter;
 
 
     /**
-     * Constructor.
-     * @param screen Where to show a possible error message
+     * Creates an interpreter and adds a standard set of known user commands.
      * @param serverInterpreter Where to send short circuit commands (commands which don't need the server to be executed)
      */
-    public CommandInterpreter(Screen screen, ServerInterpreter serverInterpreter) {
-        this.screen = screen;
+    public CommandInterpreter(ServerInterpreter serverInterpreter) {
         this.serverInterpreter = serverInterpreter;
         this.commands = allCommands();
+    }
+
+
+    /**
+     * Constructor.
+     * @param serverInterpreter Where to send short circuit commands (commands which don't need the server to be executed)
+     * @param knownCommands User commands known to the interpreter
+     */
+    public CommandInterpreter(ServerInterpreter serverInterpreter, Set<UserCommand> knownCommands) {
+        this.serverInterpreter = serverInterpreter;
+        this.commands = knownCommands;
     }
 
 
@@ -46,15 +54,16 @@ public class CommandInterpreter {
                 //TODO send the command to the socket
             }
             else {
-                serverInterpreter.executeCommand(userCommand); //since for this command the server isn't required (for example "show player2dashboard")
+                serverInterpreter.execute(userCommand); //since for this command the server isn't required (for example "show player2dashboard")
             }
         }
         else {
-            screen.setErrorMessage(error);
+            serverInterpreter.execute("error "+error);
         }
     }
 
 
+    //checks if the command is legal
     private String checkSyntacticalCorrectness(String[] tokens) {
         List<UserCommand> tmp = commands.stream().filter(command -> command.toString().equals(tokens[0])).collect(Collectors.toList());
         //check if the command exists and if the arguments count is correct
@@ -74,7 +83,7 @@ public class CommandInterpreter {
     }
 
 
-
+    //inserts all known commands
     private static Set<UserCommand> allCommands() {
         Set<UserCommand> commands = new HashSet<>();
         //TODO add all of the commands!

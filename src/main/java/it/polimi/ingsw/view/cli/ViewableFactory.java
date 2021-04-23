@@ -5,11 +5,11 @@ import java.util.HashMap;
 
 public class ViewableFactory {
 
-    private ArrayList<HashMap<ViewableID, Viewable>> items = new ArrayList<>();
+    private ArrayList<HashMap<ViewableId, Viewable>> items = new ArrayList<>();
 
     //TODO create method to build all of the implementations of Viewable, and when build one, add it to the items map
 
-    public Viewable get(int player, ViewableID id){
+    public Viewable get(int player, ViewableId id){
         return items.get(player).get(id);
     }
 

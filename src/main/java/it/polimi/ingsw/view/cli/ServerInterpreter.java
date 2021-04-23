@@ -6,6 +6,14 @@ public class ServerInterpreter {
 
     private Screen screen;
 
+
+
+    public ServerInterpreter(Screen screen) {
+        this.screen = screen;
+    }
+
+
+
     /**
      * Executes the command specified by the caller (the server most of the cases).
      * A server can only tells the CLI what view to show and the error message to show.

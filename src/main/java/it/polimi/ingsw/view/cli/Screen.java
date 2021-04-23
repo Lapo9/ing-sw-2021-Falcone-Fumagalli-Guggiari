@@ -13,8 +13,9 @@ public class Screen {
 
     private HashMap<String, View> views = new HashMap<String, View>();
     private View activeView;
-    private CommandInterpreter userInterpreter = new CommandInterpreter();
+    private CommandInterpreter userInterpreter;
     private String errorMessage = "";
+    private boolean started = false;
 
     private Thread reader = new Thread(() -> {
         Scanner in = new Scanner(System.in);
@@ -27,23 +28,34 @@ public class Screen {
 
     /**
      * Constructor
-     * @param id ID of the welcome screen
-     * @param startingView Actual welcome screen
      */
-    public Screen(String id, View startingView) {
-        addView(id, startingView);
-        try {
-            show(id);
-        } catch (ViewException ve){/*TODO terminate*/}
+    public Screen() {}
 
+
+    /**
+     * Starts the screen. It is now possible to show and refresh views.
+     */
+    public void start() {
         reader.start();
     }
 
 
     /**
+     * Attaches the command interpreter to the screen. This method can be called only before the screen is started.
+     * @param userInterpreter CommandInterpreter to attach.
+     */
+    public void attachCommandInterpreter(CommandInterpreter userInterpreter) {
+        if(started){
+            throw new IllegalThreadStateException("Cannot attach new CommandInterpreter after the call of start method on this screen");
+        }
+        this.userInterpreter = userInterpreter;
+    }
+
+
+    /**
      * Adds a view and its ID to the views the screen knows.
-     * @param id
-     * @param view
+     * @param id ID of the new view
+     * @param view actual view to add
      */
     public void addView(String id, View view) {
         views.put(id, view);
@@ -60,10 +72,14 @@ public class Screen {
 
 
     /**
-     * Shows the specified view.
+     * Shows the specified view. Cannot be called before the screen is started.
      * @param view ID of the view to show
      */
     public synchronized void show(String view) throws ViewException {
+        if(!started){
+            throw new IllegalThreadStateException("Cannot show anything until the screen has been started");
+        }
+
         activeView = views.get(view); //set active view
         if(activeView == null){
             throw new ViewException(view.toString() + " is not a known view");
@@ -77,9 +93,13 @@ public class Screen {
 
 
     /**
-     * Refreshes the current view. Useful when there is an update from the model.
+     * Refreshes the current view. Useful when there is an update from the model. Cannot be called before the screen is started.
      */
     public synchronized void refresh() {
+        if(!started){
+            throw new IllegalThreadStateException("Cannot show anything until the screen has been started");
+        }
+
         //TODO clear console
         System.out.print(errorMessage + activeView.toString());
     }
