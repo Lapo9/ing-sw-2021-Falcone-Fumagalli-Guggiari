@@ -2,18 +2,24 @@ package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.view.cli.viewables.SupplyContainer;
 
-import java.util.Arrays;
-
 public class Main {
 
     public static void main(String[] args) {
         Screen screen = new Screen();
-        ServerInterpreter serverInterpreter = new ServerInterpreter(screen);
-        UserInterpreter userInterpreter = new UserInterpreter(serverInterpreter);
 
-        screen.attachUserInterpreter(userInterpreter);
+        ControllerSocket controllerSocket = new ControllerSocket();
+        ModelSocket modelSocket = new ModelSocket();
 
         ViewableFactory factory = new ViewableFactory();
+
+        ControllerInterpreter controllerInterpreter = new ControllerInterpreter(screen);
+        UserInterpreter userInterpreter = new UserInterpreter(controllerInterpreter, controllerSocket);
+        ModelInterpreter modelInterpreter = new ModelInterpreter(factory, screen);
+
+        screen.attachUserInterpreter(userInterpreter);
+        controllerSocket.attachInterpreter(controllerInterpreter);
+        modelSocket.attachInterpreter(modelInterpreter);
+
 
         View viewTest1 = new View();
         SupplyContainer cofferTest1 = factory.buildSupplyContainer(1, ViewableId.COFFER, "Coffer1Test");
@@ -26,11 +32,11 @@ public class Main {
         screen.addView("ViewTest1", viewTest1);
         screen.addView("ViewTest2", viewTest2);
 
-        ModelInterpreter modelInterpreter = new ModelInterpreter(factory, screen);
-
         screen.start("ViewTest1");
 
-        Thread fakeModelSocket = new Thread(() -> {
+
+
+        new Thread(() -> {
             try {
                 Thread.sleep(5000);
                 int[] up1 = {0, 1, 3, 0, 1, 0};
@@ -39,9 +45,7 @@ public class Main {
                 int[] up2 = {1, 5, 0, 0, 1, 0};
                 modelInterpreter.update(up2);
             } catch (InterruptedException ie){}
-        });
-
-        fakeModelSocket.start();
+        }).start();
     }
 
 }

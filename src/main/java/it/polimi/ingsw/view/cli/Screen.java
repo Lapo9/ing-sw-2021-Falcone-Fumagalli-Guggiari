@@ -82,11 +82,11 @@ public class Screen {
      * @param view ID of the view to show
      */
     public synchronized void show(String view) throws ViewException {
-        errorMessage = ""; //reset the error message
-
         if(!started){
             throw new IllegalThreadStateException("Cannot show anything until the screen has been started");
         }
+
+        errorMessage = ""; //reset the error message
 
         activeView = views.get(view); //set active view
         if(activeView == null){

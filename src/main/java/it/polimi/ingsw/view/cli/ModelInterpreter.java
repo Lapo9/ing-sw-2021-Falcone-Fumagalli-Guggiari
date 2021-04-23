@@ -15,7 +15,7 @@ public class ModelInterpreter {
     }
 
 
-    public void update(int[] status){
+    public synchronized void update(int[] status){
         //first byte in the status indicates
         if(status[0] <= 3){
             updatePlayer(status[0], status);

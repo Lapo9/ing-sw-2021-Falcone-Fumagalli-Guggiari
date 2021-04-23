@@ -2,13 +2,13 @@ package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
 
-public class ServerInterpreter {
+public class ControllerInterpreter {
 
     private Screen screen;
 
 
 
-    public ServerInterpreter(Screen screen) {
+    public ControllerInterpreter(Screen screen) {
         this.screen = screen;
     }
 

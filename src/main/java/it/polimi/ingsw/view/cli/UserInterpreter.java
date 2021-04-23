@@ -11,28 +11,29 @@ import java.util.stream.Collectors;
  */
 public class UserInterpreter {
 
-    //TODO private Socket serverSocket;
+    private ControllerSocket socket;
     private Set<UserCommand> commands;
-    private ServerInterpreter serverInterpreter;
+    private ControllerInterpreter controllerInterpreter;
 
 
     /**
      * Creates an interpreter and adds a standard set of known user commands.
-     * @param serverInterpreter Where to send short circuit commands (commands which don't need the server to be executed)
+     * @param controllerInterpreter Where to send short circuit commands (commands which don't need the server to be executed)
      */
-    public UserInterpreter(ServerInterpreter serverInterpreter) {
-        this.serverInterpreter = serverInterpreter;
+    public UserInterpreter(ControllerInterpreter controllerInterpreter, ControllerSocket socket) {
+        this.socket = socket;
+        this.controllerInterpreter = controllerInterpreter;
         this.commands = allCommands();
     }
 
 
     /**
      * Constructor.
-     * @param serverInterpreter Where to send short circuit commands (commands which don't need the server to be executed)
+     * @param controllerInterpreter Where to send short circuit commands (commands which don't need the server to be executed)
      * @param knownCommands User commands known to the interpreter
      */
-    public UserInterpreter(ServerInterpreter serverInterpreter, Set<UserCommand> knownCommands) {
-        this.serverInterpreter = serverInterpreter;
+    public UserInterpreter(ControllerInterpreter controllerInterpreter, Set<UserCommand> knownCommands) {
+        this.controllerInterpreter = controllerInterpreter;
         this.commands = knownCommands;
     }
 
@@ -49,14 +50,14 @@ public class UserInterpreter {
         if(error.equals("OK")) {
             //check if the server is required
             if (commands.stream().filter(command -> command.toString().equals(tokens[0])).collect(Collectors.toList()).get(0).isServerOperation()) {
-                //TODO send the command to the socket
+                socket.sendMessage(userCommand); //TODO maybe we have to translate the message to something the server can understand
             }
             else {
-                serverInterpreter.execute(userCommand); //since for this command the server isn't required (for example "show player2dashboard")
+                controllerInterpreter.execute(userCommand); //since for this command the server isn't required (for example "show player2dashboard")
             }
         }
         else {
-            serverInterpreter.execute("error "+error);
+            controllerInterpreter.execute("error "+error);
         }
     }
 
