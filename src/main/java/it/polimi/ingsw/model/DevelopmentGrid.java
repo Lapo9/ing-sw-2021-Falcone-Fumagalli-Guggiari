@@ -21,12 +21,7 @@ public class DevelopmentGrid implements HasStatus{
      */
     public DevelopmentGrid() {
         grid = new ArrayList<ArrayList<DevelopmentCard>>();
-        for(int i=0; i<12; i++){
-            grid.add(new ArrayList<DevelopmentCard>());
-            for(int j=0; j<4; j++){
-                grid.get(i).add(new DevelopmentCard()); //FIXME we have to choose what card goes where
-            }
-        }
+        fill();
     }
 
     /*
@@ -171,4 +166,10 @@ public class DevelopmentGrid implements HasStatus{
     public ArrayList<Integer> getStatus(){
         return null;
     }
+
+
+    private void fill() {
+
+    }
+
 }

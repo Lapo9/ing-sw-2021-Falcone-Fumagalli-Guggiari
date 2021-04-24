@@ -53,7 +53,7 @@ public class UserInterpreter {
                 socket.connect(tokens[1], Integer.parseInt(tokens[2]), tokens[3]); //connect to the specified server
             }
             //check if the server is required
-            if (commands.stream().filter(command -> command.toString().equals(tokens[0])).collect(Collectors.toList()).get(0).isServerOperation()) {
+            else if (commands.stream().filter(command -> command.toString().equals(tokens[0])).collect(Collectors.toList()).get(0).isServerOperation()) {
                 socket.sendMessage(userCommand); //TODO maybe we have to translate the message to something the server can understand
             }
             else {
