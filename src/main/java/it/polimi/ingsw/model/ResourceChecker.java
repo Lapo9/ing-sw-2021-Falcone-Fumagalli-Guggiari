@@ -56,6 +56,7 @@ public class ResourceChecker {
         //check cards requirement
         //for each requirement
         for(CardsRequirement req : developmentReqs) {
+            //CardCategory and its level
             List<Pair<CardCategory, Integer>> allCards = developments.getCardsTypes();
 
             //keep only the cards with a level higher than the requested one
