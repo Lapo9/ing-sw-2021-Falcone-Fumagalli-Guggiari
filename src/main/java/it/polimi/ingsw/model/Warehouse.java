@@ -70,8 +70,8 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         //if(rMin.getQuantity() <= 4 - Math.max(r1, r2)){
         if(rMax.getQuantity() <= Math.min(r1, r2)){
             //swap the max accepted by the depots
-            rMin.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(4-Math.max(r1, r2), rMax, theThird));
-            rMax.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(4-Math.min(r1, r2), rMin, theThird));
+            rMin.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(4-Math.max(r1, r2), rMax, theThird).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
+            rMax.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(4-Math.min(r1, r2), rMin, theThird).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
 
             //swap the order of the depots in the array list
             Collections.swap(depots, r1-1, r2-1);
