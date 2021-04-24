@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  */
 public class UserInterpreter {
 
-    private ControllerSocket socket;
+    private ServerSocket socket;
     private Set<UserCommand> commands;
     private ControllerInterpreter controllerInterpreter;
 
@@ -20,7 +20,7 @@ public class UserInterpreter {
      * Creates an interpreter and adds a standard set of known user commands.
      * @param controllerInterpreter Where to send short circuit commands (commands which don't need the server to be executed)
      */
-    public UserInterpreter(ControllerInterpreter controllerInterpreter, ControllerSocket socket) {
+    public UserInterpreter(ControllerInterpreter controllerInterpreter, ServerSocket socket) {
         this.socket = socket;
         this.controllerInterpreter = controllerInterpreter;
         this.commands = allCommands();

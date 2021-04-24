@@ -2,12 +2,19 @@ package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
 
+
+/**
+ * The class is responsible for the interpretation of commands related to what to show on the screen. These commands are mostly issued by the server.
+ */
 public class ControllerInterpreter {
 
     private Screen screen;
 
 
-
+    /**
+     * Creates the interpreter and attaches the screen to it.
+     * @param screen Place where to show the commands received.
+     */
     public ControllerInterpreter(Screen screen) {
         this.screen = screen;
     }
@@ -16,11 +23,11 @@ public class ControllerInterpreter {
 
     /**
      * Executes the command specified by the caller (the server most of the cases).
-     * A server can only tells the CLI what view to show and the error message to show.
+     * A server can only tells the CLI what view to show, the error message to show and to refresh the screen.
      * Any other command results in the end of the program.
      * @param command Command of the server
      */
-    public void execute(String command){
+    public synchronized void execute(String command){
         String[] tokens = command.split(" ");
 
         if(tokens[0].equals("show")){

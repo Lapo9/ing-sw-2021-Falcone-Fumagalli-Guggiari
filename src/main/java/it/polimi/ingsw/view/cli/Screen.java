@@ -81,7 +81,7 @@ public class Screen {
      * Shows the specified view. Cannot be called before the screen is started.
      * @param view ID of the view to show
      */
-    public synchronized void show(String view) throws ViewException {
+    public void show(String view) throws ViewException {
         if(!started){
             throw new IllegalThreadStateException("Cannot show anything until the screen has been started");
         }
@@ -101,7 +101,7 @@ public class Screen {
     /**
      * Refreshes the current view. Useful when there is an update from the model. Cannot be called before the screen is started.
      */
-    public synchronized void refresh() {
+    public void refresh() {
         if(!started){
             throw new IllegalThreadStateException("Cannot show anything until the screen has been started");
         }

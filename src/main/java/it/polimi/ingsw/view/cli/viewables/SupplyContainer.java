@@ -10,7 +10,7 @@ public class SupplyContainer implements Viewable {
     private HashMap<WarehouseObjectType, Integer> items = new HashMap<>();
     private String name;
 
-    public SupplyContainer(String name){
+    SupplyContainer(String name){
         this.name = name;
         items.put(WarehouseObjectType.COIN, 0);
         items.put(WarehouseObjectType.SERVANT, 0);

@@ -1,24 +1,24 @@
 package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.view.cli.viewables.SupplyContainer;
+import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
 
 public class Main {
 
     public static void main(String[] args) {
         Screen screen = new Screen();
 
-        ControllerSocket controllerSocket = new ControllerSocket();
-        ModelSocket modelSocket = new ModelSocket();
+        ServerSocket serverSocket = new ServerSocket();
 
         ViewableFactory factory = new ViewableFactory();
 
         ControllerInterpreter controllerInterpreter = new ControllerInterpreter(screen);
-        UserInterpreter userInterpreter = new UserInterpreter(controllerInterpreter, controllerSocket);
-        ModelInterpreter modelInterpreter = new ModelInterpreter(factory, screen);
+        UserInterpreter userInterpreter = new UserInterpreter(controllerInterpreter, serverSocket);
+        ModelInterpreter modelInterpreter = new ModelInterpreter(factory, controllerInterpreter);
 
         screen.attachUserInterpreter(userInterpreter);
-        controllerSocket.attachInterpreter(controllerInterpreter);
-        modelSocket.attachInterpreter(modelInterpreter);
+        serverSocket.attachInterpreter(controllerInterpreter);
+        serverSocket.attachInterpreter(modelInterpreter);
 
 
         View viewTest1 = new View();
