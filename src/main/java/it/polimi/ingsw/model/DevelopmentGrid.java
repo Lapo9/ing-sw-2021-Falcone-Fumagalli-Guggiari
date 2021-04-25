@@ -40,14 +40,14 @@ public class DevelopmentGrid implements HasStatus{
      * @return the index of the ArrayList that represents the grid
      */
     private int getPlace(int column, int row){
-        return (4*column)+row-5;
+        return 4 * row + column;
     }
 
     /**
      * The buyCard method returns the last card in the row x column position in the DevelopmentGrid if the Paycheck
      * contains all the supplies required to buy the SupplyCard
-     * @param column is the column number
-     * @param row is the row number
+     * @param column is the column number (between 0 and 3)
+     * @param row is the row number (between 0 and 2)
      * @param p is a type of SupplyContainer which contains resources to buy a SupplyCard
      * @param leadersSpace is the LeaderCard container
      * @return the chosen SupplyCard if the Paycheck contains the right supplies
@@ -115,18 +115,16 @@ public class DevelopmentGrid implements HasStatus{
             discount1 = 0;
         }
 
-        int lastIndex = grid.get(pos).size() - 1;       //lastIndex is the number (-1) of SupplyCard in pos
-        SupplyContainer priceContainer = new SupplyContainer(grid.get(pos).get(lastIndex).getCost());
+        SupplyContainer priceContainer = new SupplyContainer(grid.get(pos).get(0).getCost());
         if(discount0 != 0 || discount1 != 0) {
-            if(priceContainer.getQuantity(discountType0, discountType1) != 0)
-                if(discount0 != 0)
-                    priceContainer.removeSupply(discountType0);
-                if(discount1 != 0)
-                    priceContainer.removeSupply(discountType1);
+            if(discount0 != 0 && priceContainer.getQuantity(discountType0) != 0)
+                priceContainer.removeSupply(discountType0);
+            if(discount1 != 0 && priceContainer.getQuantity(discountType1) != 0)
+                priceContainer.removeSupply(discountType1);
         }
         if(container.equals(priceContainer)) {
             boughtCards++;
-            return grid.get(pos).remove(lastIndex);
+            return grid.get(pos).remove(0);
         }
         else {
             throw new SupplyException("Cannot buy this card because of supplies if paycheck");
@@ -168,7 +166,7 @@ public class DevelopmentGrid implements HasStatus{
         if(grid.get(pos).isEmpty())
             throw new NoSuchCardException("There isn't a card in position "+column+"; "+row);
         else
-            return 4 - row;
+            return 3 - row;
     }
 
     //TODO
