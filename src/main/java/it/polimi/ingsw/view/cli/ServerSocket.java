@@ -51,6 +51,7 @@ public class ServerSocket {
 
         //start listening
         new Thread(this::socketListenRoutine).start();
+        new Thread(this::keepConnectionAlive).start();
 
         connected = true;
     }
@@ -104,6 +105,17 @@ public class ServerSocket {
 
     }
 
+
+    /*
+    Send an ACK once every 4 seconds in order to keep the connection to the server alive
+     */
+    private void keepConnectionAlive() {
+        try {
+            wait(4000);
+        }catch (InterruptedException ie){ie.printStackTrace();}
+
+        sendMessage("ACK");
+    }
 
 
 

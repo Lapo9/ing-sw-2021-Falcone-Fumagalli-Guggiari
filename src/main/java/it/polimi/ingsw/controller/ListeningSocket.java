@@ -1,5 +1,6 @@
 package it.polimi.ingsw.controller;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashSet;
@@ -7,21 +8,24 @@ import java.util.Set;
 
 public class ListeningSocket {
 
-    ServerSocket listeningSocket;
-    Set<Player> players = new HashSet<>();
+    private ServerSocket listeningSocket;
 
 
     public ListeningSocket(){}
 
 
     public void start() {
-        listeningSocket = new ServerSocket(14009);
+        try {
+            listeningSocket = new ServerSocket(14009);
+        } catch (IOException ioe){
+            ioe.printStackTrace();
+        }
 
         while (true) {
-            Socket client = listeningSocket.accept();
-            players.add(new Player(client));
+            try {
+                Socket client = listeningSocket.accept();
+            } catch (IOException ioe) {ioe.printStackTrace();}
         }
     }
-
 
 }
