@@ -138,8 +138,8 @@ public class DevelopmentGrid implements HasStatus{
      */
     public void removeCard(ActionTilesStack.ActionTile color) throws NoSuchCardException{
         for(int i=0; i<3; ++i){
-            if (!grid.get(getPlace(color.ordinal()+1, 3-i)).isEmpty()){
-                grid.remove(getPlace(color.ordinal()+1, 3-i)).get(grid.get(getPlace(color.ordinal()+1, 3-i)).size()-1);
+            if (!grid.get(getPlace(color.ordinal(), 2-i)).isEmpty()){
+                grid.get(getPlace(color.ordinal(), 2-i)).remove(0);
                 return;
             }
         }

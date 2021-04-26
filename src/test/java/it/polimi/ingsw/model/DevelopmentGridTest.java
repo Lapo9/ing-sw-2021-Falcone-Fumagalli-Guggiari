@@ -181,7 +181,46 @@ public class DevelopmentGridTest {
 
     @Test
     public void removeCard_noEx() {
+        DevelopmentGrid dvlpgrd = new DevelopmentGrid(false);
+        try {
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.GREEN);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.GREEN);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.GREEN);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.GREEN);
+        } catch (NoSuchCardException e) {fail();}
+        boolean exc = false;
+        try {
+            dvlpgrd.getLevel(0, 2);
+        } catch (NoSuchCardException e) {
+            exc = true;
+        }
+        assertTrue(exc);
+    }
 
+    @Test
+    public void removeCard_emptyColorEx() {
+        DevelopmentGrid dvlpgrd = new DevelopmentGrid(false);
+        try {
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+        } catch (NoSuchCardException e) {fail();}
+        boolean exc = false;
+        try {
+            dvlpgrd.removeCard(ActionTilesStack.ActionTile.BLUE);
+        } catch (NoSuchCardException e) {
+            exc = true;
+        }
+        assertTrue(exc);
     }
 
     @Test
