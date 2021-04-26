@@ -27,6 +27,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
      * @param points win points given by this leader when active
      */
     public LeaderCard(int id, SupplyContainer reqSC, ArrayList<CardsRequirement> reqCR, LeaderAbility abil, int points){
+        this.id = id;
         requirements = new Pair<SupplyContainer, ArrayList<CardsRequirement>>(reqSC, reqCR);
         ability = abil;
         winPoints = points;

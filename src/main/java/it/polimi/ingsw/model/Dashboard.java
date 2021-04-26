@@ -103,7 +103,7 @@ public class Dashboard implements WinPointsCountable, HasStatus{
         int totalDiscarded = unassignedSupplies.getQuantity(MarbleColor.BLUE, MarbleColor.GREY, MarbleColor.VIOLET, MarbleColor.YELLOW);
 
         boolean vaticanReport = false;
-        faithTrack.goAhead(unassignedSupplies.getQuantity(MarbleColor.RED));
+        vaticanReport = faithTrack.goAhead(unassignedSupplies.getQuantity(MarbleColor.RED));
 
         unassignedSupplies.clear();
         return new Pair<>(totalDiscarded, vaticanReport);
@@ -433,7 +433,6 @@ public class Dashboard implements WinPointsCountable, HasStatus{
 
 
     /**
-     * Gets the status of the dashboard and send it to all of the observers.
      * The status is made this way:
      *
      * coffer (SupplyContainer style)
@@ -503,6 +502,7 @@ public class Dashboard implements WinPointsCountable, HasStatus{
         return status;
     }
 
+    /*Gets the status of the dashboard and send it to all of the observers.*/
     private void notifyViews(){
         //get the status of the dashboard
         ArrayList<Integer> status = new ArrayList<>(getStatus());
@@ -529,8 +529,8 @@ public class Dashboard implements WinPointsCountable, HasStatus{
      * Attach an observer.
      * @param mo Observer to notify
      */
-    public void observe(ModelObserver mo){
+    /*public void observe(ModelObserver mo){
         //TODO
-    }
+    }*/
 
 }

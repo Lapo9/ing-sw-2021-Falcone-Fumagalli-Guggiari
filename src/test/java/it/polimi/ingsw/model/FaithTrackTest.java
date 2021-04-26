@@ -118,10 +118,11 @@ public class FaithTrackTest {
         fTrack2.goAhead(17);
         fTrack1.vaticanReport();
         ArrayList<Integer> result = new ArrayList<>(fTrack1.getStatus());
-        int[] expectedResult = {11, 1, 2};
+        int[] expectedResult = {11, 1, 2, 0};
         int[] actualResult = {result.get(0),
                               result.get(1),
-                              result.get(2)};
+                              result.get(2),
+                              result.get(3)};
         assertArrayEquals(expectedResult, actualResult);
     }
 }
