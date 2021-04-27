@@ -29,7 +29,7 @@ public class Dashboard implements WinPointsCountable, HasStatus{
     private final DepotsManager depotsManager = new DepotsManager(warehouse, leadersSpace);
     private final ActionTilesStack actionTilesStack = new ActionTilesStack();
     private int blackCrossPosition = 0;
-    private ArrayList<ModelObserver> observers = new ArrayList<ModelObserver>();
+    //private ArrayList<ModelObserver> observers = new ArrayList<ModelObserver>();
 
     private final HashMap<DepotID.DepotType, AcceptsSupplies> containers = new HashMap<>();
 
@@ -508,9 +508,9 @@ public class Dashboard implements WinPointsCountable, HasStatus{
         ArrayList<Integer> status = new ArrayList<>(getStatus());
 
         //send the status to the observers
-        for (ModelObserver mo : modelObservers) {
-            mo.updateStatus(status);
-        }
+//        for (ModelObserver mo : modelObservers) {
+//            mo.updateStatus(status);
+//        }
     }
 
 

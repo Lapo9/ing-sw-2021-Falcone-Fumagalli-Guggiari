@@ -48,9 +48,10 @@ public class Match {
         else {
             //simply add the new player
             players.add(p);
+            p.attachDashboard(new Dashboard(false, marketplace, developmentGrid));
         }
 
-        p.attachDashboard(new Dashboard(false, marketplace, developmentGrid));
+
     }
 
 
@@ -61,17 +62,29 @@ public class Match {
 
 
     private synchronized void performAction(String message, Player player) {
-        if(player != activePlayer) {
-            player.send('c', "" /*TODO*/);
+        String[] tokens = message.split(" ");
+
+        if(player != activePlayer && !tokens[0].equals("listPlayers")) {
+            player.send((byte)0, "" /*TODO*/);
         }
         else {
-            String[] tokens = message.split(" ");
-
-            if(tokens[0].equals("...")){
-                //TODO
+            if(tokens[0].equals("listPlayers")){
+                listPlayers(player);
             }
         }
     }
 
+
+
+    //TODO this is only a test, we have to change this
+    private void listPlayers(Player player) {
+        StringBuilder playersNames = new StringBuilder("error ");
+
+        for (Player p : players){
+            playersNames.append(p.getName() + " ");
+        }
+
+        player.send((byte)0, playersNames.toString());
+    }
 
 }

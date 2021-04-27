@@ -45,6 +45,9 @@ public class ControllerInterpreter {
             screen.setErrorMessage(errorMessage.toString());
             screen.refresh();
         }
+        else if(tokens[0].equals("refresh")){
+            screen.refresh();
+        }
         else {
             //TODO terminate
         }

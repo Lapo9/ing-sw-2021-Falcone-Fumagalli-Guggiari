@@ -50,7 +50,7 @@ public class UserInterpreter {
         if(error.equals("OK")) {
             //check if it is a connection request
             if (tokens[0].equals("connect")){
-                socket.connect(tokens[1], Integer.parseInt(tokens[2]), tokens[3]); //connect to the specified server
+                socket.connect(tokens[1], Integer.parseInt(tokens[2]), tokens[3], tokens[4]); //connect to the specified server
             }
             //check if the server is required
             else if (commands.stream().filter(command -> command.toString().equals(tokens[0])).collect(Collectors.toList()).get(0).isServerOperation()) {
@@ -74,7 +74,7 @@ public class UserInterpreter {
             return "\"" + tokens[0] + "\" is not a recognized command";
         }
         else if (tmp.get(0).getArgsCount() != tokens.length-1) {
-            return "Too many arguments for the command \"" + tokens[0] + "\"";
+            return "Too many/few arguments for the command \"" + tokens[0] + "\"";
         }
         else  {
             UserCommand actualCommand = tmp.get(0);
@@ -99,7 +99,8 @@ public class UserInterpreter {
         Set<UserCommand> commands = new HashSet<>();
         //TODO add all of the commands!
         commands.add(new UserCommand(false, "show", new ArrayList<>(Arrays.asList("ViewTest1", "ViewTest2")))); //TODO test to eliminate
-        commands.add(new UserCommand(false, "connect", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        commands.add(new UserCommand(false, "connect", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        commands.add(new UserCommand(true, "listPlayers"));
         return commands;
     }
 

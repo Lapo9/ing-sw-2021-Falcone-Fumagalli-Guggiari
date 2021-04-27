@@ -11,13 +11,14 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.TimeUnit;
 
 public class Player {
 
     Socket client;
     Match match;
     String name;
-    boolean isConnected;
+    boolean isConnected = false;
     Dashboard dashboard;
 
 
@@ -25,7 +26,15 @@ public class Player {
     public Player(Socket client, MatchManager matchManager) {
         this.client = client;
 
-        new Thread(() -> handshake(matchManager));
+        new Thread(() -> handshake(matchManager)).start();
+    }
+
+
+    private void destroy() {
+        isConnected = false;
+        try {
+            TimeUnit.SECONDS.sleep(6); //give time to close connection
+        } catch (InterruptedException ie){ie.printStackTrace();}
     }
 
 
@@ -42,9 +51,10 @@ public class Player {
 
 
     public void reconnect(Player replacingPlayer){
-        this.client = replacingPlayer.client;
-        replacingPlayer.client = null;
         isConnected = true;
+        replacingPlayer.destroy(); //terminate listening thread
+        this.client = replacingPlayer.client; //no problems because old this.client is for sure closed if this method is called
+        new Thread(this::listenRoutine).start(); //old player re-start listening
     }
 
 
@@ -68,20 +78,13 @@ public class Player {
     private String listen(int milliseconds){
         StringBuilder message = new StringBuilder(); //string where to put the message
         try {
-            InputStream in = client.getInputStream();
-            DataInputStream dataIn = new DataInputStream(in);
+            DataInputStream dataIn = new DataInputStream(client.getInputStream());
 
             int length = 0; //length in byte of the payload
             client.setSoTimeout(milliseconds); //wait max 5 seconds, if nothing arrives, the player disconnected
             try {
                 length = dataIn.readByte(); //first byte indicates the length of the message
             } catch (SocketTimeoutException ste) {
-                isConnected = false;
-                try {
-                    client.close();
-                } catch (IOException ioe) {
-                    ioe.printStackTrace();
-                }
                 return null;
             }
 
@@ -122,22 +125,21 @@ public class Player {
     }
 
 
-    public synchronized boolean send(char type, String message){
+    public synchronized boolean send(byte type, String message){
         //the format is the actual message, preceded by its length in bytes and its type
         byte[] stringByte = message.getBytes(StandardCharsets.UTF_8); //convert the message to bytes
         byte[] stringWithInfo = new byte[message.length()+2]; //create a new array where to save the length of the message + the message
         stringWithInfo[0] = (byte) message.length(); //add the length of the message as first element
-        stringWithInfo[1] = (byte) type; //add the type of message
+        stringWithInfo[1] = type; //add the type of message
 
         //copy the message in the new array
         for(int i=0; i<stringByte.length; ++i){
-            stringWithInfo[i+1] = stringByte[i];
+            stringWithInfo[i+2] = stringByte[i];
         }
 
         //send the new message
         try {
-            OutputStream out = client.getOutputStream();
-            DataOutputStream dataOut = new DataOutputStream(out);
+            DataOutputStream dataOut = new DataOutputStream(client.getOutputStream());
             dataOut.write(stringWithInfo);
         } catch (Exception e) {
             isConnected = false;
@@ -189,16 +191,19 @@ public class Player {
 
     //routine performed by the socket to listen. It is performed at max once every 5 seconds
     private void listenRoutine() {
-        while (true) {
-            String message = listen(5000); //the client must send an ACK once every 5 seconds, if not the server will consider that player disconnected
+        while (isConnected) {
+            String message = listen(500000); //the client must send an ACK once every 5 seconds, if not the server will consider that player disconnected
 
+            //if nothing arrived (not even the ACK), we assume the player has connection issues, so disconnect him
             if(message == null){
-                //TODO tell server player is dead
+                isConnected = false;
                 try {
-                    client.close(); //disconnect
-                } catch (IOException ioe) {ioe.printStackTrace();}
+                    client.close();
+                } catch (IOException ioe){
+                    ioe.printStackTrace();
+                }
             }
-            else {
+            else{
                 match.update(message, this); //send the command to the match
             }
         }

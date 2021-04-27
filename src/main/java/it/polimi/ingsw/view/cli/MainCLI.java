@@ -3,7 +3,7 @@ package it.polimi.ingsw.view.cli;
 import it.polimi.ingsw.view.cli.viewables.SupplyContainer;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
 
-public class Main {
+public class MainCLI {
 
     public static void main(String[] args) {
         Screen screen = new Screen();
@@ -36,7 +36,7 @@ public class Main {
 
 
 
-        new Thread(() -> {
+        /*new Thread(() -> {
             try {
                 Thread.sleep(5000);
                 int[] up1 = {0, 1, 3, 0, 1, 0};
@@ -45,7 +45,7 @@ public class Main {
                 int[] up2 = {1, 5, 0, 0, 1, 0};
                 modelInterpreter.update(up2);
             } catch (InterruptedException ie){}
-        }).start();
+        }).start();*/
     }
 
 }

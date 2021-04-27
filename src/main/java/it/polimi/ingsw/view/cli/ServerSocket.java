@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.cli;
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -29,7 +30,7 @@ public class ServerSocket {
      * @param port Port of the server
      * @param playerName Name of the player
      */
-    public void connect(String ip, int port, String playerName){
+    public void connect(String ip, int port, String playerName, String matchId){
         if(controllerInterpreter == null || modelInterpreter == null){
             throw new IllegalThreadStateException("Cannot connect without an interpreter");
         }
@@ -47,7 +48,7 @@ public class ServerSocket {
         }
 
         //send player name
-        sendMessage("name " + playerName);
+        sendMessage("name " + playerName + " " + matchId);
 
         //start listening
         new Thread(this::socketListenRoutine).start();
@@ -98,8 +99,7 @@ public class ServerSocket {
 
         //send the new message
         try {
-            OutputStream out = socket.getOutputStream();
-            DataOutputStream dataOut = new DataOutputStream(out);
+            DataOutputStream dataOut = new DataOutputStream(socket.getOutputStream());
             dataOut.write(stringWithLength);
         } catch (IOException ioe) {/*TODO terminate??*/}
 
@@ -110,11 +110,15 @@ public class ServerSocket {
     Send an ACK once every 4 seconds in order to keep the connection to the server alive
      */
     private void keepConnectionAlive() {
-        try {
-            wait(4000);
-        }catch (InterruptedException ie){ie.printStackTrace();}
+        while (true) {
+            try {
+                TimeUnit.SECONDS.sleep(4);
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
+            }
 
-        sendMessage("ACK");
+            sendMessage("ACK");
+        }
     }
 
 
@@ -131,8 +135,7 @@ Structure of the packet
         boolean exit = false;
         while (!exit) {
             try {
-                InputStream in = socket.getInputStream();
-                DataInputStream dataIn = new DataInputStream(in);
+                DataInputStream dataIn = new DataInputStream(socket.getInputStream());
 
                 int length = dataIn.readByte(); //get the length of the message tp be received (first byte)
                 int type = dataIn.readByte(); //get the type of message (0 = controller, 1 = model)
