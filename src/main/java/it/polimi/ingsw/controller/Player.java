@@ -58,7 +58,6 @@ public class Player {
 
     public void reconnect(Player replacingPlayer){
         isConnected = true;
-        replacingPlayer.destroy(); //terminate listening thread
         this.socket = replacingPlayer.socket; //no problems because old this.client is for sure closed if this method is called
         new Thread(this::listenRoutine).start(); //old player re-start listening
     }
@@ -125,7 +124,7 @@ public class Player {
         while (isConnected) {
             String message = "";
             try {
-                message = socket.receiveAndTransform(500000, ClientSocket::bytesToString); //the client must send an ACK once every 5 seconds, if not the server will consider that player disconnected
+                message = socket.receiveAndTransform(5000, ClientSocket::bytesToString); //the client must send an ACK once every 5 seconds, if not the server will consider that player disconnected
             } catch (Exception ioe){
                 destroy(); //if nothing arrived (not even the ACK), we assume the player has connection issues, so disconnect him
                 return;

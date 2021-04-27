@@ -34,16 +34,16 @@ public class Match {
 
 
     void addPlayer(Player p) throws MatchException {
-        if(players.stream().filter(player -> player.isConnected()).count() == 4){
-            throw new MatchException("The match is full already");
-        }
-        else if(players.stream().anyMatch(player -> player.getName().equals(p.getName()) && player.isConnected())){
+        if(players.stream().anyMatch(player -> player.getName().equals(p.getName()) && player.isConnected())){
             throw new MatchException("There is already a player named \"" + p.getName() + "\" in this match");
         }
         else if(players.stream().anyMatch(player -> player.getName().equals(p.getName()) && !player.isConnected())){
             //in this case there is a player with the same name who disconnected, so you can replace him
             Player replacingPlayer = players.stream().filter(player -> player.getName().equals(p.getName()) && !player.isConnected()).collect(Collectors.toList()).get(0);
             replacingPlayer.reconnect(p);
+        }
+        else if(players.size() >= 4){
+            throw new MatchException("The match is full already");
         }
         else {
             //simply add the new player

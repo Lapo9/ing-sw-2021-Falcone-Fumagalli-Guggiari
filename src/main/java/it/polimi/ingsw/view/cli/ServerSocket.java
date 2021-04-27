@@ -107,7 +107,7 @@ public class ServerSocket {
     private void keepConnectionAlive() {
         while (connected) {
             try {
-                TimeUnit.SECONDS.sleep(400);
+                TimeUnit.SECONDS.sleep(4);
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
             }
