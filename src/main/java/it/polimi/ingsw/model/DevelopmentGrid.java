@@ -133,7 +133,7 @@ public class DevelopmentGrid implements HasStatus{
 
     /**
      * Removes a card of the specified color. It tries to remove first cards of level 1, then 2, then 3.
-     * @param color Color to remove
+     * @param color Style to remove
      * @throws NoSuchCardException Cards of specified color are not present
      */
     public void removeCard(ActionTilesStack.ActionTile color) throws NoSuchCardException{

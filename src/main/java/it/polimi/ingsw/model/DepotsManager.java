@@ -228,7 +228,7 @@ public class DepotsManager implements AcceptsSupplies {
     /**
      * Tries to add the marble to the given depot.
      * @param slot ID of the depot
-     * @param color Color of the marble
+     * @param color Style of the marble
      * @throws MarbleException Wrong depot ID
      * @throws SupplyException Cannot add the marble
      * @throws LeaderException No active leader yet

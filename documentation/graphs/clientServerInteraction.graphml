@@ -19,8 +19,8 @@
       <data key="d6">
         <y:SVGNode>
           <y:Geometry height="45.56999588012695" width="67.49800109863281" x="236.62609100341774" y="192.50300361633316"/>
-          <y:Fill color="#CCCCFF" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:Fill style="#CCCCFF" transparent="false"/>
+          <y:BorderStyle style="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="31.749000549316406" y="49.56999588012695">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -41,8 +41,8 @@
       <data key="d6">
         <y:SVGNode>
           <y:Geometry height="56.231998443603516" width="35.095298767089844" x="711.577442169189" y="187.17200233459488"/>
-          <y:Fill color="#CCCCFF" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:Fill style="#CCCCFF" transparent="false"/>
+          <y:BorderStyle style="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="15.547649383544922" y="60.231998443603516">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -63,8 +63,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="264.0790915527341" y="271.85986822306313"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.295999999999992" y="4.2960000000000065">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -82,8 +82,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="722.8290915527339" y="271.85986822306313"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.295999999999992" y="4.2960000000000065">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -101,8 +101,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="264.07909155273427" y="301.485840846761"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.295999999999992" y="4.2960000000000065">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -120,8 +120,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="722.829091552734" y="301.485840846761"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.2960000000000065">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -139,8 +139,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="264.07909155273444" y="388.2598126922606"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000021" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -158,8 +158,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="722.8290915527341" y="388.2598126922606"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -177,8 +177,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="264.0790915527342" y="417.88578531595846"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.295999999999992" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -196,8 +196,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="722.8290915527339" y="417.88578531595846"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -215,8 +215,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="264.0790915527343" y="447.5117579396563"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000021" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -234,8 +234,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="722.8290915527341" y="447.5117579396563"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -254,8 +254,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="56.231998443603516" width="589.9348493835445" x="156.73789155273442" y="322.40781347045885"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#C0C0C0" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" underlinedText="true" verticalTextPosition="bottom" visible="true" width="23.79296875" x="4.0" xml:space="preserve" y="4.0">opt</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -266,8 +266,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="722.8290915527341" y="331.11181347045886"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -285,8 +285,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="264.07909155273444" y="331.11181347045886"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.295999999999992" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -304,8 +304,8 @@
       <data key="d6">
         <y:UMLNoteNode>
           <y:Geometry height="224.3466666666667" width="542.6399999999996" x="236.75009155273443" y="603.8557039652501"/>
-          <y:Fill color="#333333" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:Fill style="#333333" transparent="false"/>
+          <y:BorderStyle style="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_size" configuration="CroppingLabel" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="224.3466666666667" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#C0C0C0" verticalTextPosition="bottom" visible="true" width="542.6399999999996" x="0.0" xml:space="preserve" y="5.6843418860808015E-14">Client sends a connection request to the server. Server waits up to 5 seconds, where the client has to send its name and the match it wants to join (the user has already input the name and match when he made the first request, the 5 seconds are only for slow clients/connections). Server tries to add the client to the requested match (a server can manage multiple matches at the same time). If the player has the same name of another player connected to the same match or if the match is full, an error message with the motivation of the error is sent to the client, and the client gets immediately disconnected. If the name matches the name of a disconnected player in the specified match, then the player is reconnected to the match (in case the disconnected player had connection issues). If the requested match doesn't exist, a new match is created. If it exists and everything goes smooth, a confirmation message is sent to the client. The first player who joined a match is the leader, and can kick other players or start the match. To keep connection alive, the client must send at least one packet every 5 seconds, if this doesn't happen, the player is considered disconnected.<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:UMLNoteNode>
       </data>
@@ -315,8 +315,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="722.8290915527342" y="358.3817313415525"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -334,8 +334,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="264.0790915527345" y="358.3817313415525"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.295999999999992" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -353,8 +353,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="264.0790915527342" y="478.0037309524533"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.295999999999992" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -372,8 +372,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="722.8290915527339" y="478.0037309524533"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -391,8 +391,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="264.0790915527343" y="507.62970357615114"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000021" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -410,8 +410,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="722.8290915527341" y="507.62970357615114"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -429,8 +429,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="264.07909155273444" y="537.255676199849"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.295999999999992" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -448,8 +448,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="722.8290915527341" y="537.255676199849"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -467,8 +467,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="264.07909155273455" y="566.8816488235468"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000021" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -486,8 +486,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="722.8290915527343" y="566.8816488235468"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -505,8 +505,8 @@
       <data key="d6">
         <y:SVGNode>
           <y:Geometry height="45.56999588012695" width="67.49800109863281" x="1030.2799825561515" y="-52.526308223469755"/>
-          <y:Fill color="#CCCCFF" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:Fill style="#CCCCFF" transparent="false"/>
+          <y:BorderStyle style="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="31.749000549316406" y="49.56999588012695">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -527,8 +527,8 @@
       <data key="d6">
         <y:SVGNode>
           <y:Geometry height="56.231998443603516" width="35.095298767089844" x="1505.2313337219227" y="-57.857309505208036"/>
-          <y:Fill color="#CCCCFF" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:Fill style="#CCCCFF" transparent="false"/>
+          <y:BorderStyle style="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="15.547649383544922" y="60.231998443603516">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -549,8 +549,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1057.7329831054678" y="26.830556383260188"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.296000000000021">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -568,8 +568,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1516.4829831054676" y="26.830556383260188"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.296000000000021">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -588,8 +588,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="56.231998443603516" width="589.9348493835445" x="950.3917831054678" y="49.04255716145843"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#C0C0C0" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" underlinedText="true" verticalTextPosition="bottom" visible="true" width="23.79296875" x="4.0" xml:space="preserve" y="4.0">opt</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -600,8 +600,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1516.4829831054674" y="57.74655716145844"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -619,8 +619,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1057.7329831054676" y="57.74655716145844"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -638,8 +638,8 @@
       <data key="d6">
         <y:UMLNoteNode>
           <y:Geometry height="77.14666666666676" width="542.6399999999996" x="997.6866324890128" y="139.29044765624985"/>
-          <y:Fill color="#333333" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:Fill style="#333333" transparent="false"/>
+          <y:BorderStyle style="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_size" configuration="CroppingLabel" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="77.14666666666676" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#C0C0C0" verticalTextPosition="bottom" visible="true" width="542.6399999999996" x="-1.1368683772161603E-13" xml:space="preserve" y="0.0">Client asks the server to activate leader 1 or 2. Server asks the model to activate leader 1 or 2. If an error occurs (leader already active or already discarded or not enough resources to activate the leader), the client is notified with the error. Else the model sends the new dashboard state to all of the connected players.<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:UMLNoteNode>
       </data>
@@ -649,8 +649,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1516.4829831054676" y="85.01647503255208"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -668,8 +668,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1057.7329831054678" y="85.01647503255208"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -687,8 +687,8 @@
       <data key="d6">
         <y:SVGNode>
           <y:Geometry height="45.56999588012695" width="67.49800109863281" x="1030.2799825561515" y="350.744781882222"/>
-          <y:Fill color="#CCCCFF" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:Fill style="#CCCCFF" transparent="false"/>
+          <y:BorderStyle style="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="31.749000549316406" y="49.56999588012695">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -709,8 +709,8 @@
       <data key="d6">
         <y:SVGNode>
           <y:Geometry height="56.231998443603516" width="35.095298767089844" x="1505.2313337219227" y="345.41378060048373"/>
-          <y:Fill color="#CCCCFF" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:Fill style="#CCCCFF" transparent="false"/>
+          <y:BorderStyle style="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="15.547649383544922" y="60.231998443603516">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -731,8 +731,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1057.7329831054678" y="430.1016464889519"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.2960000000000065">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -750,8 +750,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1516.4829831054676" y="430.1016464889519"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.2960000000000065">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -769,8 +769,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1516.4829831054674" y="461.0176472671502"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.2960000000000065">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -788,8 +788,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1057.7329831054676" y="461.0176472671502"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.2960000000000065">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -807,8 +807,8 @@
       <data key="d6">
         <y:UMLNoteNode>
           <y:Geometry height="125.94666666666672" width="568.2399999999996" x="997.686632489013" y="695.1095186030067"/>
-          <y:Fill color="#333333" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:Fill style="#333333" transparent="false"/>
+          <y:BorderStyle style="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_size" configuration="CroppingLabel" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="125.94666666666672" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#C0C0C0" verticalTextPosition="bottom" visible="true" width="568.2399999999996" x="0.0" xml:space="preserve" y="0.0">Client asks the server to grab the specified row or column of the marble container. No errors can occur, so the model sends every player connected the new state of the marble container and of the active player dashboard. Then the player can move the marbles he obtained where he pleases, and the server tells him if it is possible (dashboard update) or not. At the end the player must discard the remaining marbles, so the faith points for red marbles are added and other players are moved ahead in the faith track by the same number of spaces as the non-red marbles discarded. Dashboards update is issued by the model to the clients.<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
         </y:UMLNoteNode>
       </data>
@@ -818,8 +818,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1057.7329831054676" y="491.93364804534855"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -837,8 +837,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1516.4829831054674" y="491.93364804534855"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -856,8 +856,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1516.4829831054672" y="522.8496488235469"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -875,8 +875,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1057.7329831054674" y="522.8496488235469"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -895,8 +895,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="56.231998443603516" width="589.9348493835445" x="950.3917831054675" y="545.0616496017452"/>
-          <y:Fill color="#C0C0C0" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#C0C0C0" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="internal" modelPosition="tl" textColor="#000000" underlinedText="true" verticalTextPosition="bottom" visible="true" width="23.79296875" x="4.0" xml:space="preserve" y="4.0">opt</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode>
@@ -907,8 +907,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1516.4829831054672" y="553.7656496017452"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.2960000000000065">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -926,8 +926,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1057.7329831054674" y="553.7656496017452"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.2960000000000065">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -945,8 +945,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1516.4829831054674" y="581.0355674728388"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -964,8 +964,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1057.7329831054676" y="581.0355674728388"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -983,8 +983,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1057.7329831054678" y="614.9976480453488"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -1002,8 +1002,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1516.4829831054676" y="614.9976480453488"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -1021,8 +1021,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1516.4829831054674" y="645.9136488235471"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -1040,8 +1040,8 @@
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="12.592000000000013" width="12.592000000000013" x="1057.7329831054676" y="645.9136488235471"/>
-          <y:Fill color="#FFFFFF" transparent="false"/>
-          <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
+          <y:Fill style="#FFFFFF" transparent="false"/>
+          <y:BorderStyle style="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="4.0" x="4.296000000000049" y="4.295999999999992">
             <y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -1059,8 +1059,8 @@
       <data key="d6">
         <y:UMLNoteNode>
           <y:Geometry height="129.11466666666675" width="531.388350616455" x="236.62609100341774" y="-23.8401110616048"/>
-          <y:Fill color="#333333" transparent="false"/>
-          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:Fill style="#333333" transparent="false"/>
+          <y:BorderStyle style="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="node_size" configuration="CroppingLabel" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="129.11466666666675" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#C0C0C0" verticalTextPosition="bottom" visible="true" width="531.388350616455" x="0.0" xml:space="preserve" y="0.0">Messages sent from the server to the client can be "model messages" or "controller messages". The former ones are an array of ints, representing the state of the dashboards. The latter ones are strings representing commands issued by the server. The type is represented by one byte in second place of the array sent.
 
 Both server and client messages contains their length in the first byte.<y:LabelModel><y:SmartNodeLabelModel distance="4.0"/></y:LabelModel><y:ModelParameter><y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/></y:ModelParameter></y:NodeLabel>
@@ -1072,7 +1072,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.390625" x="207.88369750976523" xml:space="preserve" y="-7.999985048421252">PING<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1084,7 +1084,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="135.953125" x="155.1024475097654" xml:space="preserve" y="-7.999988987223389">present(name, match)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1096,7 +1096,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#C0C0C0" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="96.3671875" x="-271.26260375976574" xml:space="preserve" y="-7.999992926025527">error(message)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1108,7 +1108,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="23.79296875" x="211.1825256347655" xml:space="preserve" y="-8.000003958130037">ACK<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1120,7 +1120,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="23.79296875" x="211.18252563476528" xml:space="preserve" y="-8.000007896932175">ACK<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1132,7 +1132,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="23.79296875" x="211.18252563476545" xml:space="preserve" y="-8.000011835734313">...<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1144,7 +1144,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#C0C0C0" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="109.5625" x="-277.8602600097656" xml:space="preserve" y="-8.000003033447513">message(confirm)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1156,7 +1156,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="83.171875" x="181.49307250976528" xml:space="preserve" y="-8.000012699890476">kick(player)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1168,7 +1168,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="23.79296875" x="211.18252563476545" xml:space="preserve" y="-8.000016638692614">...<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1180,7 +1180,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="50.18359375" x="197.9872131347655" xml:space="preserve" y="-8.000020577494752">start()<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1192,7 +1192,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="23.79296875" x="211.18252563476568" xml:space="preserve" y="-8.00002451629689">...<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1204,7 +1204,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="142.55078125" x="151.8036413085929" xml:space="preserve" y="-8.00000001322418">activateLeader(index)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1216,7 +1216,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#C0C0C0" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="155.74609375" x="-300.95209599609507" xml:space="preserve" y="-7.9999996012368655">update(dashboard state)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1228,7 +1228,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#C0C0C0" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="96.3671875" x="-271.2626428710946" xml:space="preserve" y="-8.00000207926432">error(message)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1240,7 +1240,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="195.33203125" x="125.41301630859289" xml:space="preserve" y="-7.999997554016829">marketplace(direction, index)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1252,7 +1252,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="155.74609375" x="-300.95209599609507" xml:space="preserve" y="-8.000012400818548">update(dashboard state)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1264,7 +1264,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="23.79296875" x="211.18254755859243" xml:space="preserve" y="-7.999996730042085">...<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1276,9 +1276,9 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
-          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="162.34375" x="-304.25092412109507" xml:space="preserve" y="-7.999981059265565">marbleMove(color, depot)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
+          <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="162.34375" x="-304.25092412109507" xml:space="preserve" y="-7.999981059265565">marbleMove(style, depot)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
@@ -1288,7 +1288,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#C0C0C0" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="155.74609375" x="-300.95209599609507" xml:space="preserve" y="-7.999995906067284">update(dashboard state)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1300,7 +1300,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#C0C0C0" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="96.3671875" x="-271.26264287109507" xml:space="preserve" y="-7.999975495911144">error(message)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1312,7 +1312,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="109.5625" x="168.2977819335929" xml:space="preserve" y="-7.999992091369904">discardMarbles()<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1324,7 +1324,7 @@ Both server and client messages contains their length in the first byte.<y:Label
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:LineStyle style="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:EdgeLabel alignment="center" backgroundColor="#FFFFFF" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Consolas" fontSize="12" fontStyle="plain" hasLineColor="false" height="16.0" horizontalTextPosition="center" iconTextGap="4" modelName="centered" modelPosition="center" preferredPlacement="center_on_edge" ratio="0.5" textColor="#000000" verticalTextPosition="bottom" visible="true" width="162.34375" x="-304.25092412109507" xml:space="preserve" y="-8.000006938171623">update(dashboards state)<y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" placement="center" side="on_edge" sideReference="relative_to_edge_flow"/></y:EdgeLabel>
           <y:BendStyle smoothed="false"/>
@@ -1342,8 +1342,8 @@ Both server and client messages contains their length in the first byte.<y:Label
 &lt;defs&gt;
 &lt;/defs&gt;
 &lt;radialGradient id="SVGID_1_" cx="478.8413" cy="1991.2729" r="21.6001" gradientTransform="matrix(1.15 0 0 1 -526.6598 -1982.4023)" gradientUnits="userSpaceOnUse"&gt;
-	&lt;stop  offset="0" style="stop-color:#F2F2F2"/&gt;
-	&lt;stop  offset="1" style="stop-color:#8D8D8D"/&gt;
+	&lt;stop  offset="0" style="stop-style:#F2F2F2"/&gt;
+	&lt;stop  offset="1" style="stop-style:#8D8D8D"/&gt;
 &lt;/radialGradient&gt;
 &lt;path fill="url(#SVGID_1_)" d="M10.263,1.903c0-0.987,0.807-1.794,1.794-1.794h43.279c0.986,0,1.795,0.807,1.795,1.794v26.978
 	c0,0.987-0.809,1.794-1.795,1.794h-43.28c-0.987,0-1.794-0.807-1.794-1.794L10.263,1.903L10.263,1.903z"/&gt;
@@ -1351,29 +1351,29 @@ Both server and client messages contains their length in the first byte.<y:Label
 	M10.263,1.903c0-0.987,0.807-1.794,1.794-1.794h43.279c0.986,0,1.795,0.807,1.795,1.794v26.978c0,0.987-0.809,1.794-1.795,1.794
 	h-43.28c-0.987,0-1.794-0.807-1.794-1.794L10.263,1.903L10.263,1.903z"/&gt;
 &lt;radialGradient id="SVGID_2_" cx="455.894" cy="1983.9624" r="47.8462" fx="493.5344" fy="1977.5143" gradientTransform="matrix(1.1935 0 0 1 -509.6731 -1982.4023)" gradientUnits="userSpaceOnUse"&gt;
-	&lt;stop  offset="0" style="stop-color:#4D4D4D"/&gt;
-	&lt;stop  offset="1" style="stop-color:#999999"/&gt;
+	&lt;stop  offset="0" style="stop-style:#4D4D4D"/&gt;
+	&lt;stop  offset="1" style="stop-style:#999999"/&gt;
 &lt;/radialGradient&gt;
 &lt;path fill="url(#SVGID_2_)" d="M11.18,2.819c0-0.987,0.807-1.794,1.794-1.794h41.649c0.986,0,1.795,0.807,1.795,1.794v24.943
 	c0,0.985-0.809,1.794-1.795,1.794H12.974c-0.987,0-1.794-0.809-1.794-1.794V2.819z"/&gt;
 &lt;radialGradient id="SVGID_3_" cx="456.8843" cy="1984.0386" r="30.6699" gradientTransform="matrix(1.1923 0 0 1 -510.1314 -1982.4023)" gradientUnits="userSpaceOnUse"&gt;
-	&lt;stop  offset="0" style="stop-color:#9CD7FF"/&gt;
-	&lt;stop  offset="1" style="stop-color:#3C89C9"/&gt;
+	&lt;stop  offset="0" style="stop-style:#9CD7FF"/&gt;
+	&lt;stop  offset="1" style="stop-style:#3C89C9"/&gt;
 &lt;/radialGradient&gt;
 &lt;path fill="url(#SVGID_3_)" d="M11.689,3.228c0-0.987,0.807-1.794,1.794-1.794h40.633c0.986,0,1.795,0.807,1.795,1.794v24.126
 	c0,0.986-0.809,1.794-1.795,1.794H13.483c-0.987,0-1.794-0.809-1.794-1.794V3.228z"/&gt;
 &lt;path opacity="0.24" fill="#F2F2F2" d="M11.689,21.472V3.228c0-0.987,0.807-1.794,1.794-1.794h40.633
 	c0.986,0,1.795,0.807,1.795,1.794v9.454c0,0.987-10.518,5.21-18.256,6.795C29.917,21.062,11.689,21.472,11.689,21.472z"/&gt;
 &lt;linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="131.3501" y1="-212.2612" x2="131.3501" y2="-170.6274" gradientTransform="matrix(1 0 0 -1 -97.6001 -165.0498)"&gt;
-	&lt;stop  offset="0" style="stop-color:#4D4D4D"/&gt;
-	&lt;stop  offset="0.0667" style="stop-color:#717171"/&gt;
-	&lt;stop  offset="0.069" style="stop-color:#757575"/&gt;
-	&lt;stop  offset="0.0831" style="stop-color:#8C8C8C"/&gt;
-	&lt;stop  offset="0.0996" style="stop-color:#9E9E9E"/&gt;
-	&lt;stop  offset="0.1196" style="stop-color:#AAAAAA"/&gt;
-	&lt;stop  offset="0.1466" style="stop-color:#B1B1B1"/&gt;
-	&lt;stop  offset="0.2121" style="stop-color:#B3B3B3"/&gt;
-	&lt;stop  offset="1" style="stop-color:#C5C5C5"/&gt;
+	&lt;stop  offset="0" style="stop-style:#4D4D4D"/&gt;
+	&lt;stop  offset="0.0667" style="stop-style:#717171"/&gt;
+	&lt;stop  offset="0.069" style="stop-style:#757575"/&gt;
+	&lt;stop  offset="0.0831" style="stop-style:#8C8C8C"/&gt;
+	&lt;stop  offset="0.0996" style="stop-style:#9E9E9E"/&gt;
+	&lt;stop  offset="0.1196" style="stop-style:#AAAAAA"/&gt;
+	&lt;stop  offset="0.1466" style="stop-style:#B1B1B1"/&gt;
+	&lt;stop  offset="0.2121" style="stop-style:#B3B3B3"/&gt;
+	&lt;stop  offset="1" style="stop-style:#C5C5C5"/&gt;
 &lt;/linearGradient&gt;
 &lt;path fill="url(#SVGID_4_)" d="M58.385,32.234c-0.689-0.856-2.154-1.559-3.254-1.559H12c-1.1,0-2.552,0.711-3.227,1.579
 	l-7.546,9.717C0,43.55,0.042,43.785,0,44.55v0.125c0.056,0.393,0.311,1.002,1.248,1.002h64.75c0.75,0.002,1.5-0.252,1.5-1.002V44.55
@@ -1394,20 +1394,20 @@ Both server and client messages contains their length in the first byte.<y:Label
 &lt;defs&gt;
 &lt;/defs&gt;
 &lt;linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="230.1768" y1="798.6021" x2="180.3346" y2="798.6021" gradientTransform="matrix(1 0 0 1 -195.2002 -770.8008)"&gt;
-	&lt;stop  offset="0" style="stop-color:#4D4D4D"/&gt;
-	&lt;stop  offset="1" style="stop-color:#8D8D8D"/&gt;
+	&lt;stop  offset="0" style="stop-style:#4D4D4D"/&gt;
+	&lt;stop  offset="1" style="stop-style:#8D8D8D"/&gt;
 &lt;/linearGradient&gt;
 &lt;rect y="0.943" fill="url(#SVGID_1_)" width="34.977" height="53.716"/&gt;
 &lt;linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="224.6807" y1="798.6021" x2="200.6973" y2="798.6021" gradientTransform="matrix(1 0 0 1 -195.2002 -770.8008)"&gt;
-	&lt;stop  offset="0.0319" style="stop-color:#848484"/&gt;
-	&lt;stop  offset="0.1202" style="stop-color:#8C8C8C"/&gt;
-	&lt;stop  offset="0.308" style="stop-color:#969696"/&gt;
-	&lt;stop  offset="0.5394" style="stop-color:#999999"/&gt;
-	&lt;stop  offset="0.5501" style="stop-color:#9C9C9C"/&gt;
-	&lt;stop  offset="0.6256" style="stop-color:#B0B0B0"/&gt;
-	&lt;stop  offset="0.7118" style="stop-color:#BEBEBE"/&gt;
-	&lt;stop  offset="0.8178" style="stop-color:#C7C7C7"/&gt;
-	&lt;stop  offset="1" style="stop-color:#C9C9C9"/&gt;
+	&lt;stop  offset="0.0319" style="stop-style:#848484"/&gt;
+	&lt;stop  offset="0.1202" style="stop-style:#8C8C8C"/&gt;
+	&lt;stop  offset="0.308" style="stop-style:#969696"/&gt;
+	&lt;stop  offset="0.5394" style="stop-style:#999999"/&gt;
+	&lt;stop  offset="0.5501" style="stop-style:#9C9C9C"/&gt;
+	&lt;stop  offset="0.6256" style="stop-style:#B0B0B0"/&gt;
+	&lt;stop  offset="0.7118" style="stop-style:#BEBEBE"/&gt;
+	&lt;stop  offset="0.8178" style="stop-style:#C7C7C7"/&gt;
+	&lt;stop  offset="1" style="stop-style:#C9C9C9"/&gt;
 &lt;/linearGradient&gt;
 &lt;path fill="url(#SVGID_2_)" d="M5.497,0.943c7.945-1.258,16.04-1.258,23.983,0c0,17.905,0,35.811,0,53.716
 	c-7.943,1.258-16.039,1.258-23.983,0C5.497,36.753,5.497,18.848,5.497,0.943z"/&gt;
@@ -1422,15 +1422,15 @@ Both server and client messages contains their length in the first byte.<y:Label
 &lt;rect x="31.307" y="2.517" fill="#E7ED00" stroke="#717171" stroke-width="0.1926" stroke-miterlimit="10" width="3.692" height="1.505"/&gt;
 &lt;rect x="31.307" y="5.8" fill="#C8FF00" stroke="#717171" stroke-width="0.1926" stroke-miterlimit="10" width="3.692" height="1.507"/&gt;
 &lt;linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="29.4414" y1="35.1235" x2="5.4995" y2="35.1235"&gt;
-	&lt;stop  offset="0" style="stop-color:#808080"/&gt;
-	&lt;stop  offset="0.1907" style="stop-color:#828282"/&gt;
-	&lt;stop  offset="0.2955" style="stop-color:#8A8A8A"/&gt;
-	&lt;stop  offset="0.3795" style="stop-color:#989898"/&gt;
-	&lt;stop  offset="0.4524" style="stop-color:#ACACAC"/&gt;
-	&lt;stop  offset="0.5175" style="stop-color:#C5C5C5"/&gt;
-	&lt;stop  offset="0.5273" style="stop-color:#C9C9C9"/&gt;
-	&lt;stop  offset="0.5914" style="stop-color:#C9C9C9"/&gt;
-	&lt;stop  offset="0.9681" style="stop-color:#C9C9C9"/&gt;
+	&lt;stop  offset="0" style="stop-style:#808080"/&gt;
+	&lt;stop  offset="0.1907" style="stop-style:#828282"/&gt;
+	&lt;stop  offset="0.2955" style="stop-style:#8A8A8A"/&gt;
+	&lt;stop  offset="0.3795" style="stop-style:#989898"/&gt;
+	&lt;stop  offset="0.4524" style="stop-style:#ACACAC"/&gt;
+	&lt;stop  offset="0.5175" style="stop-style:#C5C5C5"/&gt;
+	&lt;stop  offset="0.5273" style="stop-style:#C9C9C9"/&gt;
+	&lt;stop  offset="0.5914" style="stop-style:#C9C9C9"/&gt;
+	&lt;stop  offset="0.9681" style="stop-style:#C9C9C9"/&gt;
 &lt;/linearGradient&gt;
 &lt;path fill="url(#SVGID_3_)" d="M5.5,14.822c0,13.22,0,26.438,0,39.66c7.931,1.256,16.012,1.256,23.941,0c0-13.222,0-26.439,0-39.66
 	C21.461,14.822,13.48,14.822,5.5,14.822z M28.396,18.703c-0.74,0.01-1.482,0.02-2.225,0.029c0-0.951,0-1.901-0.001-2.85

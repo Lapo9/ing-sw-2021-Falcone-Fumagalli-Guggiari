@@ -5,6 +5,9 @@ import it.polimi.ingsw.view.cli.Viewable;
 
 import java.util.HashMap;
 
+import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
+import static it.polimi.ingsw.model.WarehouseObjectType.*;
+
 public class SupplyContainer implements Viewable {
 
     private HashMap<WarehouseObjectType, Integer> items = new HashMap<>();
@@ -30,7 +33,7 @@ public class SupplyContainer implements Viewable {
 
     @Override
     public String toString() {
-        return name + " --> COIN: " + items.get(WarehouseObjectType.COIN) + " SERVANT: " + items.get(WarehouseObjectType.SERVANT) + " SHIELD: " + items.get(WarehouseObjectType.SHIELD) + " STONE: " + items.get(WarehouseObjectType.STONE);
+        return FRAMED(name) + " " + BLACK(BACK_YELLOW(items.get(COIN).toString())) + BACK_BLUE(items.get(SERVANT).toString()) + BACK_MAGENTA(items.get(SHIELD).toString()) + BACK_WHITE(items.get(STONE).toString());
     }
 
 }
