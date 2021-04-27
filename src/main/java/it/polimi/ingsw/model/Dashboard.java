@@ -122,7 +122,7 @@ public class Dashboard implements WinPointsCountable, HasStatus{
      */
     public void moveSupply(DepotID from, DepotID to, WarehouseObjectType type) throws SupplyException, NoSuchMethodException, LeaderException {
         //remove supply from specified container
-        containers.get(from.getType()).removeSupply(to, type, from);
+        containers.get(from.getType()).removeSupply(from, type, to);
 
         //add supply to specified container, if you cannot, put supply back to original container and throw the exception
         try{
@@ -193,12 +193,13 @@ public class Dashboard implements WinPointsCountable, HasStatus{
         ArrayList<Integer> buyableLevels = developments.buyableLevels(); //get what levels you can buy
 
         //check if you can buy a card of that level in that space
-        if(buyableLevels.get(space-1) != developmentGrid.getLevel(column, row)){
+        if(buyableLevels.get(space) != developmentGrid.getLevel(column, row)){
             throw new DevelopmentException("Cannot buy a card of this level for the specified space");
         }
 
         //buy the card
         developments.addCardToSpace(space, developmentGrid.buyCard(column, row, paycheck, leadersSpace));
+        paycheck.clearSupplies();
     }
 
 
@@ -314,8 +315,10 @@ public class Dashboard implements WinPointsCountable, HasStatus{
         Pair<SupplyContainer, SupplyContainer> destination;
         destination = productionManager.clearSupplies();
 
-        coffer.sum(destination.second);
-        depotsManager.allocate(destination.first);
+        if(destination.second.getQuantity() != 0)
+            coffer.sum(destination.second);
+        if(destination.first.getQuantity() != 0)
+            depotsManager.allocate(destination.first);
     }
 
 
