@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
+import it.polimi.ingsw.view.cli.fancy_console.FancyConsole;
 
 import java.util.HashMap;
 import java.util.Scanner;

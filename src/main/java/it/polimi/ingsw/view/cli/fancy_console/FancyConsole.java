@@ -17,6 +17,15 @@ public class FancyConsole {
 
 
 
+    //FIXME it doesn't work
+    public static void clear() {
+        for(int i = 0; i < 1; ++i) {
+            System.out.print("\r");
+        }
+    }
+
+
+
 
 
     public static String BOLD(String s) {
