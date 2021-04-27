@@ -1,5 +1,8 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.ClientSocket;
+import it.polimi.ingsw.Pair;
+
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -11,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ServerSocket {
 
-    private Socket socket;
+    private ClientSocket socket;
     private ControllerInterpreter controllerInterpreter;
     private ModelInterpreter modelInterpreter;
     private boolean connected = false;
@@ -20,7 +23,9 @@ public class ServerSocket {
     /**
      * Creates an empty, non-connected socket
      */
-    public ServerSocket(){}
+    public ServerSocket(){
+        super();
+    }
 
 
 
@@ -39,22 +44,22 @@ public class ServerSocket {
             return;
         }
 
-        //connect
+
         try {
-            socket = new Socket(ip, port);
+            //connect
+            socket = new ClientSocket(ip, port);
+            //send player name
+            socket.send("name " + playerName + " " + matchId, ClientSocket.packUpStringWithLength());
         } catch (IOException ioe) {
-            controllerInterpreter.execute("error Server is full or we messed up (probably the second one...)");
+            terminate();
             return;
         }
 
-        //send player name
-        sendMessage("name " + playerName + " " + matchId);
+        connected = true;
 
         //start listening
         new Thread(this::socketListenRoutine).start();
         new Thread(this::keepConnectionAlive).start();
-
-        connected = true;
     }
 
 
@@ -83,41 +88,35 @@ public class ServerSocket {
 
 
     /**
-     * Sends a message to the server in the right format.
+     * Sends the specified message to the server.
      * @param message Message to send
      */
-    public synchronized void sendMessage(String message) {
-        //the format is the actual message, preceded by its length in bytes
-        byte[] stringByte = message.getBytes(StandardCharsets.UTF_8); //convert the message to bytes
-        byte[] stringWithLength = new byte[message.length()+1]; //create a new array where to save the length of the message + the message
-        stringWithLength[0] = (byte) message.length(); //add the length of the message as first element
-
-        //copy the message in the new array
-        for(int i=0; i<stringByte.length; ++i){
-            stringWithLength[i+1] = stringByte[i];
-        }
-
-        //send the new message
+    public void send(String message) {
         try {
-            DataOutputStream dataOut = new DataOutputStream(socket.getOutputStream());
-            dataOut.write(stringWithLength);
-        } catch (IOException ioe) {/*TODO terminate??*/}
-
+            socket.send(message, ClientSocket.packUpStringWithLength());
+        } catch (IOException ioe) {
+            terminate();
+        }
     }
+
 
 
     /*
     Send an ACK once every 4 seconds in order to keep the connection to the server alive
      */
     private void keepConnectionAlive() {
-        while (true) {
+        while (connected) {
             try {
-                TimeUnit.SECONDS.sleep(4);
+                TimeUnit.SECONDS.sleep(400);
             } catch (InterruptedException ie) {
                 ie.printStackTrace();
             }
 
-            sendMessage("ACK");
+            try {
+                socket.send("ACK", ClientSocket.packUpStringWithLength());
+            } catch (IOException ioe) {
+                terminate();
+            }
         }
     }
 
@@ -133,79 +132,39 @@ Structure of the packet
 */
     private void socketListenRoutine() {
         boolean exit = false;
-        while (!exit) {
+        while (connected) {
             try {
-                DataInputStream dataIn = new DataInputStream(socket.getInputStream());
-
-                int length = dataIn.readByte(); //get the length of the message tp be received (first byte)
-                int type = dataIn.readByte(); //get the type of message (0 = controller, 1 = model)
+                Pair<Byte, byte[]> tmp = socket.receiveWithType();
+                byte type = tmp.first;
+                byte[] message = tmp.second;
 
                 if (type == 0) {
-                    controllerInterpreter.execute(readControllerMessage(dataIn, length));
+                    controllerInterpreter.execute(ClientSocket.bytesToString(message));
                 }
                 else if (type == 1) {
-                    modelInterpreter.update(readModelMessage(dataIn, length));
+                    modelInterpreter.update(ClientSocket.bytesToInts(message));
                 }
                 else if (type == 2) {
-                    exit = true;
+                    terminate();
                 }
 
-            } catch (IOException ioe) {/*TODO terminate*/}
+            } catch (IOException ioe) {
+                terminate();
+            }
         }
     }
 
 
-    /*
-    Reads the message on the socket if it is a message from the controller
-     */
-    private String readControllerMessage(DataInputStream dataIn, int length){
-        StringBuilder message = new StringBuilder(); //string where to put the message
-
-        byte[] byteString = new byte[9700]; //TODO check max bytes for TCP packet
-        int byteReadTot = 0; //number of bytes read
-        boolean done = false; //we read all of the bytes?
-
-        while (!done){
-            int currentBytesRead = 0;
-            try{
-                currentBytesRead = dataIn.read(byteString); //read as many bytes as you can and store how many you read
-            } catch (IOException ioe){/*TODO terminate*/}
-            byteReadTot += currentBytesRead; //add the read bytes to the total
-
-            //if we read less bytes than the length of the message, put all of the just read bytes in the message string
-            if (byteReadTot <= length){
-                message.append(new String(byteString, 0, currentBytesRead, StandardCharsets.UTF_8));
-            }
-            //if we read too many bytes, store in the string only the necessary bytes, and discard what remains
-            else {
-                message.append(new String(byteString, 0, byteReadTot - length, StandardCharsets.UTF_8));
-            }
-
-            //if we read everything, exit the loop
-            if(message.length() == length){
-                done = true;
-            }
-        }
-
-        return message.toString();
-    }
 
 
-    /*
-    Reads the message on the socket if it is a message from the model
-     */
-    private int[] readModelMessage(DataInputStream dataIn, int length) {
-        length /= 4; //length is in bytes (8 bits), but we read ints (32 bit)
-
-        int[] intIn = new int[length]; //create array where to store what we read
-
+    private synchronized void terminate() {
+        connected = false;
         try {
-            for (int i = 0; i < intIn.length; ++i) {
-                intIn[i] = dataIn.readInt(); //read all ints
-            }
-        } catch (IOException ioe){/*TODO terminate*/}
-
-        return intIn;
+            socket.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        controllerInterpreter.execute("error Something went amazingly wrong :(");
     }
 
 }

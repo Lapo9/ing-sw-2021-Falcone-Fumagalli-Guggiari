@@ -1,6 +1,8 @@
 package it.polimi.ingsw.view.cli;
 
 
+import it.polimi.ingsw.ClientSocket;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -54,7 +56,7 @@ public class UserInterpreter {
             }
             //check if the server is required
             else if (commands.stream().filter(command -> command.toString().equals(tokens[0])).collect(Collectors.toList()).get(0).isServerOperation()) {
-                socket.sendMessage(userCommand); //TODO maybe we have to translate the message to something the server can understand
+                socket.send(userCommand); //TODO maybe we have to translate the message to something the server can understand
             }
             else {
                 controllerInterpreter.execute(userCommand); //since for this command the server isn't required (for example "show player2dashboard")

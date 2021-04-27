@@ -30,11 +30,66 @@ public class ClientSocket {
      * @throws IOException Couldn't create Socket.
      */
     public ClientSocket(String ip, int port) throws IOException {
+        connect(ip, port);
+    }
+
+    /**
+     * Creates an empty Socket.
+     */
+    public ClientSocket() {}
+
+    /**
+     * Creates a new Socket identical to the Socket passed as argument.
+     * @param socket Socket to copy.
+     * @throws IOException Couldn't create Socket.
+     */
+    public ClientSocket(Socket socket) throws IOException {
+        connect(socket);
+    }
+
+
+
+    /**
+     * Connects the Socket to the specified server.
+     * @param ip IP address of the server.
+     * @param port Port number of the server.
+     * @throws IOException Couldn't connect to the specified server.
+     */
+    public void connect(String ip, int port) throws IOException{
         socket = new Socket(ip, port);
 
         dataIn = new DataInputStream(socket.getInputStream());
         dataOut = new DataOutputStream(socket.getOutputStream());
     }
+
+
+    /**
+     * Connects the Socket to the same server as the Socket passed as argument is connected to.
+     * @param socket Socket to copy.
+     * @throws IOException Couldn't connect.
+     */
+    public void connect(Socket socket) throws IOException {
+        this.socket = socket;
+
+        dataIn = new DataInputStream(this.socket.getInputStream());
+        dataOut = new DataOutputStream(this.socket.getOutputStream());
+    }
+
+
+
+
+    /**
+     * Closes the socket and the associated input and output streams.
+     * @throws IOException Couldn't close the Socket properly.
+     */
+    public void close() throws IOException {
+        dataIn.close();
+        dataOut.close();
+        socket.close();
+    }
+
+
+
 
 
     /**
@@ -44,29 +99,93 @@ public class ClientSocket {
      * @param <InType> Type of message (i.e. String, int[], ...)
      * @throws IOException Couldn't send the message.
      */
-    public synchronized <InType> void send(InType message, Function<InType, byte[]> packUp) throws IOException {
-        byte[] byteMessage = packUp.apply(message);
-        dataOut.write(byteMessage);
-        dataOut.flush();
+    public <InType> void send(InType message, Function<InType, byte[]> packUp) throws IOException {
+        synchronized (dataOut) {
+            byte[] byteMessage = packUp.apply(message);
+            dataOut.write(byteMessage);
+            dataOut.flush();
+        }
+    }
+
+
+
+
+
+    /**
+     * Listens to the Socket until a message is received. Blocking operation. Assumes length is always the first byte of the message.
+     * @return Message as byte array.
+     * @throws IOException Couldn't read the message.
+     */
+    public byte[] receive() throws IOException {
+        synchronized (dataIn) {
+            int length = dataIn.readByte();
+            byte[] byteMessage = new byte[length];
+            dataIn.readFully(byteMessage);
+            return byteMessage;
+        }
     }
 
 
     /**
      * Listens to the Socket until a message is received. Blocking operation. Assumes length is always the first byte of the message and type the second one.
+     * @return Message as byte array.
+     * @throws IOException Couldn't read the message.
+     */
+    public Pair<Byte, byte[]> receiveWithType() throws IOException {
+        synchronized (dataIn) {
+            int length = dataIn.readByte();
+            byte type = dataIn.readByte();
+            byte[] byteMessage = new byte[length];
+            dataIn.readFully(byteMessage);
+
+            return new Pair<>(type, byteMessage);
+        }
+    }
+
+
+    /**
+     * Listens to the Socket until a message is received. Blocking operation. Assumes length is always the first byte of the message.
+     * @return Message as byte array.
+     * @throws IOException Couldn't read the message.
+     * @throws SocketTimeoutException No messages received in the specified time span.
+     */
+    public byte[] receive(int milliseconds) throws IOException, SocketTimeoutException {
+        synchronized (dataIn) {
+            socket.setSoTimeout(milliseconds);
+            byte[] res = receive();
+            socket.setSoTimeout(0); //disable timeout
+            return res;
+        }
+    }
+
+
+    /**
+     * Listens to the Socket until a message is received. Blocking operation. Assumes length is always the first byte of the message and type the second one.
+     * @return Message as byte array.
+     * @throws IOException Couldn't read the message.
+     * @throws SocketTimeoutException No messages received in the specified time span.
+     */
+    public Pair<Byte, byte[]> receiveWithType(int milliseconds) throws IOException, SocketTimeoutException {
+        synchronized (dataIn) {
+            socket.setSoTimeout(milliseconds);
+            Pair<Byte, byte[]> res = receiveWithType();
+            socket.setSoTimeout(0); //disable timeout
+            return res;
+        }
+    }
+
+
+
+    /**
+     * Listens to the Socket until a message is received. Blocking operation. Assumes length is always the first byte of the message.
      * @param transform Function to transform the byte array received to something the client can understand.
      * @param <ReturnType> Type of the message returned (after transformation).
      * @return Message.
      * @throws IOException Couldn't read the message.
      */
-    public synchronized <ReturnType> ReturnType receive(Function<byte[], ReturnType> transform) throws IOException, SocketTimeoutException {
-        int length = dataIn.readByte();
-        byte[] byteMessage = new byte[length];
-        dataIn.readFully(byteMessage);
-
-        return transform.apply(byteMessage);
+    public <ReturnType> ReturnType receiveAndTransform(Function<byte[], ReturnType> transform) throws IOException {
+        return transform.apply(receive());
     }
-
-
 
 
     /**
@@ -76,32 +195,23 @@ public class ClientSocket {
      * @return Type of message, message.
      * @throws IOException Couldn't read the message.
      */
-    public synchronized <ReturnType> Pair<Byte, ReturnType> receiveWithType(Function<byte[], ReturnType> transform) throws IOException, SocketTimeoutException {
-        int length = dataIn.readByte();
-        byte type = dataIn.readByte();
-        byte[] byteMessage = new byte[length];
-        dataIn.readFully(byteMessage);
-
-        return new Pair<>(type, transform.apply(byteMessage));
+    public <ReturnType> Pair<Byte, ReturnType> receiveAndTransformWithType(Function<byte[], ReturnType> transform) throws IOException {
+        Pair<Byte, byte[]> tmp = receiveWithType();
+        return new Pair<>(tmp.first, transform.apply(tmp.second));
     }
 
 
-
     /**
-     * Listens to the Socket until a message is received. Blocking operation. Assumes length is always the first byte of the message and type the second one.
+     * Listens to the Socket until a message is received. Blocking operation. Assumes length is always the first byte of the message.
      * @param transform Function to transform the byte array received to something the client can understand.
      * @param <ReturnType> Type of the message returned (after transformation).
      * @return Message.
      * @throws IOException Couldn't read the message.
      * @throws SocketTimeoutException No messages received in the specified time span.
      */
-    public synchronized <ReturnType> ReturnType receive(int milliseconds, Function<byte[], ReturnType> transform) throws IOException, SocketTimeoutException {
-        socket.setSoTimeout(milliseconds);
-        ReturnType res = receive(transform);
-        socket.setSoTimeout(0); //disable timeout
-        return res;
+    public <ReturnType> ReturnType receiveAndTransform(int milliseconds, Function<byte[], ReturnType> transform) throws IOException, SocketTimeoutException {
+        return transform.apply(receive(milliseconds));
     }
-
 
 
     /**
@@ -112,12 +222,14 @@ public class ClientSocket {
      * @throws IOException Couldn't read the message.
      * @throws SocketTimeoutException No messages received in the specified time span.
      */
-    public synchronized <ReturnType> Pair<Byte, ReturnType> receiveWithType(int milliseconds, Function<byte[], ReturnType> transform) throws IOException, SocketTimeoutException {
-        socket.setSoTimeout(milliseconds);
-        Pair<Byte, ReturnType> res = receiveWithType(transform);
-        socket.setSoTimeout(0); //disable timeout
-        return res;
+    public <ReturnType> Pair<Byte, ReturnType> receiveAndTransformWithType(int milliseconds, Function<byte[], ReturnType> transform) throws IOException, SocketTimeoutException {
+        Pair<Byte, byte[]> tmp = receiveWithType(milliseconds);
+        return new Pair<>(tmp.first, transform.apply(tmp.second));
     }
+
+
+
+
 
 
     /**
