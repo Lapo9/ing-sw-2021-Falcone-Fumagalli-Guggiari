@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
+
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.*;
 import it.polimi.ingsw.model.leader_abilities.Depot;
@@ -28,9 +30,9 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         SupplyContainer s2 = new SupplyContainer();
         SupplyContainer s3 = new SupplyContainer();
 
-        s1.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(1, s2, s3).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
-        s2.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(2, s1, s3).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
-        s3.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(3, s1, s2).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
+        s1.setAcceptCheck(maxOneTypeNotPresentIn(1, s2, s3).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
+        s2.setAcceptCheck(maxOneTypeNotPresentIn(2, s1, s3).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
+        s3.setAcceptCheck(maxOneTypeNotPresentIn(3, s1, s2).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
 
         depots.add(s1);
         depots.add(s2);

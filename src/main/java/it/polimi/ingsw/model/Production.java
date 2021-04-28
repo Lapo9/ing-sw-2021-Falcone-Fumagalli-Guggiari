@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
+
 import java.util.ArrayList;
 
 import it.polimi.ingsw.Pair;
@@ -16,9 +18,9 @@ public class Production implements AcceptsSupplies, HasStatus{
     protected final SupplyContainer output;
     //currentSupply is the temporary depot to store resources that will be used for production
     //can't accept FAITH_MARKER and can't accept from PAYCHECK
-    protected SupplyContainer currentSupply = new SupplyContainer(  SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.PAYCHECK).negate().
-                                                                        and(SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.FAITH_MARKER).negate()),
-                                                                    SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.PAYCHECK).negate());
+    protected SupplyContainer currentSupply = new SupplyContainer(  onlyFrom(DepotID.SourceType.PAYCHECK).negate().
+                                                                    and(specificType(WarehouseObjectType.FAITH_MARKER).negate()),
+                                                                    onlyFrom(DepotID.SourceType.PAYCHECK).negate());
     //TODO maybe add that you cannot add more than the max?
 
 

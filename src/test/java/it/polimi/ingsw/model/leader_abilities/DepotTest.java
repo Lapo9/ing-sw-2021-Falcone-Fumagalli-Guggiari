@@ -40,7 +40,7 @@ public class DepotTest {
         LeadersSpace ldrSpc = new LeadersSpace();
         boolean exc = false;
         try {
-            dpt.addMarble(MarbleColor.YELLOW, ldrSpc);
+            dpt.addMarble(MarbleColor.GREY, ldrSpc);
         } catch (MarbleException e){fail();}
         catch(SupplyException e) {
             exc = true;

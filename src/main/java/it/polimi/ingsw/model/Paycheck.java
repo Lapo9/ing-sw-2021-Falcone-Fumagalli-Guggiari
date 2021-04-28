@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model;
 
+import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
+
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.SupplyException;
 
@@ -11,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Paycheck implements AcceptsSupplies, HasStatus {
 
-    private SupplyContainer fromStrongbox = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX));
-    private SupplyContainer fromDepot = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT));
+    private SupplyContainer fromStrongbox = new SupplyContainer(onlyFrom(DepotID.SourceType.STRONGBOX), onlyFrom(DepotID.SourceType.STRONGBOX));
+    private SupplyContainer fromDepot = new SupplyContainer(onlyFrom(DepotID.SourceType.DEPOT), onlyFrom(DepotID.SourceType.DEPOT));
 
 
     public Paycheck(){}
