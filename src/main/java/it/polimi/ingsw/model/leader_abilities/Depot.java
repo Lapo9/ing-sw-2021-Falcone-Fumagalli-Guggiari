@@ -1,5 +1,8 @@
 package it.polimi.ingsw.model.leader_abilities;
 
+
+import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
+
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.MarbleException;
 import it.polimi.ingsw.exceptions.SupplyException;
@@ -21,7 +24,7 @@ public class Depot implements LeaderAbility {
      * @param type Type contained by the depot
      */
     public Depot(WarehouseObjectType type){
-        depot = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFromMaxSpecificType(type, 2, DepotID.SourceType.DEPOT));
+        depot = new SupplyContainer(onlyFrom(DepotID.SourceType.STRONGBOX).negate().and(maxSpecificType(type, 2)));
     }
 
 

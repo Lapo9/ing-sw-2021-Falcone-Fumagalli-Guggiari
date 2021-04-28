@@ -36,7 +36,7 @@ public class MainCLI {
 
 
 
-        new Thread(() -> {
+        /*new Thread(() -> {
             try {
                 Thread.sleep(5000);
                 int[] up1 = {0, 1, 3, 0, 1, 0};
@@ -45,7 +45,7 @@ public class MainCLI {
                 int[] up2 = {1, 5, 0, 0, 1, 0};
                 modelInterpreter.update(up2);
             } catch (InterruptedException ie){}
-        }).start();
+        }).start();*/
     }
 
 }
