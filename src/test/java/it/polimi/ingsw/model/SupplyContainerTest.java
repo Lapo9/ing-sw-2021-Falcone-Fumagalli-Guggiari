@@ -142,6 +142,18 @@ public class SupplyContainerTest {
     }
 
     @Test
+    public void addSupply_cofferTesting() {
+        SupplyContainer coffer = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).and(SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.FAITH_MARKER).negate()));
+        boolean exc = false;
+        try {
+            coffer.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
+        } catch (SupplyException e) {
+            exc = true;
+        }
+        assertTrue(exc);
+    }
+
+    @Test
     public void addSupply_oneNoEx() {
         SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0);
         try {

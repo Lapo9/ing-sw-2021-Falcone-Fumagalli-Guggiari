@@ -17,7 +17,7 @@ public class Dashboard implements WinPointsCountable, HasStatus{
     private final Marketplace marketplace;
     private final DevelopmentGrid developmentGrid;
     private final Warehouse warehouse = new Warehouse();
-    private final SupplyContainer coffer = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).and(SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.FAITH_MARKER)).negate());
+    private final SupplyContainer coffer = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).and(SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.FAITH_MARKER).negate()));
     private final MutableProduction baseProduction = new MutableProduction(2, 1);
     private final FaithTrack faithTrack = new FaithTrack();
     private final LeadersSpace leadersSpace = new LeadersSpace();
