@@ -40,6 +40,14 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
 
     }
 
+
+
+    public SupplyContainer getInput() {
+        return production.getInput();
+    }
+
+
+
     /**
      * This method activates the production of the card
      * @return A SupplyContainer containing the resource in output from the card production

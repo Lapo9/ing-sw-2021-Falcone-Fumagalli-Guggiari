@@ -185,13 +185,20 @@ public class ProductionManager implements AcceptsSupplies{
         }
 
 
+        return removeFromSourceContainers(removed); //remove the resources from the source containers (first try to remove from coffer, then from strongbox)
+    }
+
+
+
+    //remove the resources from the source containers (first try to remove from coffer, then from strongbox)
+    private Pair<SupplyContainer, SupplyContainer> removeFromSourceContainers(SupplyContainer toRemove) {
         //initially try to remove from the strongbox, if you can't try from the depots
         Pair<SupplyContainer, SupplyContainer> res = new Pair<>(new SupplyContainer(), new SupplyContainer());
         //for each type of supply FIXME
         for (WarehouseObjectType wot : WarehouseObjectType.values()) {
             //for each supply of the processed type removed previously
             if (wot != WarehouseObjectType.NO_TYPE) {
-                for (int i = 0; i < removed.getQuantity(wot); ++i) {
+                for (int i = 0; i < toRemove.getQuantity(wot); ++i) {
                     try {
                         containers.get(DepotID.SourceType.STRONGBOX).removeSupply(wot); //try to remove from strongbox
                         res.second.addSupply(wot); //add supply to return from strongbox
@@ -208,6 +215,9 @@ public class ProductionManager implements AcceptsSupplies{
         return res;
     }
 
+
+
+
     /**
      * Activates production in the specified production spaces
      * @param s1 Development space 1
@@ -221,25 +231,38 @@ public class ProductionManager implements AcceptsSupplies{
     public SupplyContainer produce(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base){
         //get productions outputs
         SupplyContainer developmentProduction = developments.produce(s1, s2, s3);
+        SupplyContainer developmentsInputs = developments.getInput(s1, s2, s3);
 
         SupplyContainer baseProduction = new SupplyContainer();
+        SupplyContainer baseInputs = new SupplyContainer();
         if(base) {
             baseProduction = this.baseProduction.produce();
+            baseInputs = this.baseProduction.getInput();
         }
 
         SupplyContainer leader1Production = new SupplyContainer();
+        SupplyContainer leader1Inputs = new SupplyContainer();
         if(l1) {
             try {
                 leader1Production = leadersSpace.getLeaderAbility(0).produce();
+                leader1Inputs = leadersSpace.getLeaderAbility(0).getInput();
             } catch (NoSuchMethodException | LeaderException e) {}
         }
 
         SupplyContainer leader2Production = new SupplyContainer();
+        SupplyContainer leader2Inputs = new SupplyContainer();
         if(l2) {
             try {
                 leader2Production = leadersSpace.getLeaderAbility(1).produce();
+                leader2Inputs = leadersSpace.getLeaderAbility(1).getInput();
             } catch (NoSuchMethodException | LeaderException e) {}
         }
+
+        //sum inputs in temporary container and remove them from the source containers
+        SupplyContainer tmp = new SupplyContainer();
+        tmp.sum(developmentsInputs).sum(baseInputs).sum(leader1Inputs).sum(leader2Inputs);
+        removeFromSourceContainers(tmp); //remove the resources from the source containers (first try to remove from coffer, then from strongbox)
+
 
         //sum output in temporary container
         SupplyContainer res = new SupplyContainer();

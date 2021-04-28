@@ -30,6 +30,11 @@ public class Producer implements LeaderAbility {
 
 
     @Override
+    public SupplyContainer getInput() throws NoSuchMethodException {
+        return production.getInput();
+    }
+
+    @Override
     public SupplyContainer produce() {
         return production.produce();
     }

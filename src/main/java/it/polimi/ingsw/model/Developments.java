@@ -26,6 +26,23 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
     }
 
 
+
+
+    public SupplyContainer getInput(boolean s1, boolean s2, boolean s3) {
+        SupplyContainer result = new SupplyContainer();
+        boolean[] activeProductions = {s1, s2, s3};
+
+        for(int i = 0; i<3; ++i){
+            if (activeProductions[i]) {
+                result.sum(spaces.get(i).getInput());
+            }
+        }
+        return result;
+    }
+
+
+
+
     /**
      * Activate the production on the specified development spaces.
      * @param s1 produce on space 1?

@@ -35,6 +35,13 @@ public class Production implements AcceptsSupplies, HasStatus{
 
 
 
+    public SupplyContainer getInput(){
+        return new SupplyContainer(input);
+    }
+
+
+
+
     /**
      * Activates the production. If the input equals the current supply store, then the current supply store is wiped and the output is returned.
      * If not a fatal error is produced and the program is terminated.

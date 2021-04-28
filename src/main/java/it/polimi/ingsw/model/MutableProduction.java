@@ -50,6 +50,19 @@ public class MutableProduction extends Production implements HasStatus{
     }
 
 
+    @Override
+    public SupplyContainer getInput() {
+        SupplyContainer tmp = new SupplyContainer();
+
+        tmp.sum(input);
+        mutableInput.forEach(warehouseObjectType -> {
+            try{
+                tmp.addSupply(warehouseObjectType);
+            } catch (SupplyException se){/*FIXME end program*/}
+        });
+
+        return tmp;
+    }
 
     /**
      * Activates the production. If the total input (fixed + mutable) equals the current supply store,

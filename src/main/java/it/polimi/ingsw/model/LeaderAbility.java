@@ -51,6 +51,15 @@ public interface LeaderAbility extends AcceptsSupplies, HasStatus{
     }
 
 
+
+
+    public default SupplyContainer getInput() throws NoSuchMethodException{
+        throw new NoSuchMethodException();
+    }
+
+
+
+
     /**
      * This method activates the leader card production
      * @return An extra SupplyContainer that contains the resource

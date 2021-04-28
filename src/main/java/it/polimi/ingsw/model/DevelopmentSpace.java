@@ -61,6 +61,12 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
 
 
 
+    public SupplyContainer getInput() {
+        return cards.get(cards.size()-1).produce();
+    }
+
+
+
 
     /**
      * Activates production of the last added card.
