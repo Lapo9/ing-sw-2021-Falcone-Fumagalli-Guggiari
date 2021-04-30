@@ -109,6 +109,41 @@ public class MarbleContainer implements HasStatus {
         }
     }
 
+
+    /**
+     * Transforms one of the white marbles to the specified color
+     * @param newColor Color to transform one white marble to
+     * @throws MarbleException No white marbles left or newColo == red
+     */
+    public void colorWhiteMarble(MarbleColor newColor) throws MarbleException{
+        if(getQuantity(MarbleColor.WHITE) == 0 || newColor == MarbleColor.RED){
+            throw new MarbleException("No white marbles in the container or trying to transform to red marble");
+        }
+
+        white--;
+
+        switch (newColor){
+            case WHITE:
+                white++;
+                return;
+            case GREY:
+                grey++;
+                return;
+            case BLUE:
+                blue++;
+                return;
+            case YELLOW:
+                yellow++;
+                return;
+            case VIOLET:
+                violet++;
+                return;
+        }
+
+    }
+
+
+
     /**
      * Empties the container
      */

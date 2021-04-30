@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.leader_abilities;
 
 import it.polimi.ingsw.model.LeaderAbility;
+import it.polimi.ingsw.model.MarbleColor;
 import it.polimi.ingsw.model.WarehouseObjectType;
 
 import java.util.ArrayList;
@@ -27,6 +28,22 @@ public class Market implements LeaderAbility {
         return transformTo;
     }
 
+
+    @Override
+    public MarbleColor colorWhiteMarble() throws NoSuchMethodException {
+        switch (transformTo) {
+            case COIN:
+                return MarbleColor.YELLOW;
+            case SERVANT:
+                return MarbleColor.VIOLET;
+            case SHIELD:
+                return MarbleColor.BLUE;
+            case STONE:
+                return MarbleColor.GREY;
+            default:
+                return MarbleColor.WHITE;
+        }
+    }
 
     @Override
     public ArrayList<Integer> getStatus() {

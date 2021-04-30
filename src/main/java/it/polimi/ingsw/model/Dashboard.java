@@ -5,6 +5,7 @@ import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -93,6 +94,31 @@ public class Dashboard implements WinPointsCountable, HasStatus{
         depotsManager.addMarble(to, color);
         unassignedSupplies.removeMarble(color);
     }
+
+
+    /**
+     * Transforms one of the white marbles in the unassignedSupplies container to the specified color.
+     * @param newColor Color to transform the white marble to.
+     * @throws MarbleException No white marbles left or there isn't an active leader to perform the conversion.
+     */
+    public void transformWhiteMarble(MarbleColor newColor) throws MarbleException {
+        //check if there is a white marble to transform
+        if (unassignedSupplies.getQuantity(MarbleColor.WHITE) == 0){
+            throw new MarbleException("No white marbles left");
+        }
+
+        for (int i = 0; i<2; ++i) {
+            try {
+                if (leadersSpace.getLeaderAbility(i).colorWhiteMarble() == newColor) {
+                    unassignedSupplies.colorWhiteMarble(newColor);
+                    return;
+                }
+            } catch (NoSuchMethodException | LeaderException e){}
+        }
+
+        throw new MarbleException("Cannot transform the white marble to a " + newColor.toString() + " marble");
+    }
+
 
 
     /**

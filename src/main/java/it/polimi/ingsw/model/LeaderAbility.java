@@ -29,6 +29,16 @@ public interface LeaderAbility extends AcceptsSupplies, HasStatus{
 
 
     /**
+     * Third ability: returns the color to what the white marble can be transformed
+     * @return the color to what the white marble can be transformed
+     * @throws NoSuchMethodException If the LeaderCard is not allowed to use that ability
+     */
+    public default MarbleColor colorWhiteMarble() throws NoSuchMethodException{
+        throw new NoSuchMethodException();
+    }
+
+
+    /**
      * Method that gives information about the quantity of every resource in that depot
      * @return The pair composed by the resource and its quantity
      * @throws NoSuchMethodException If the LeaderCard is not allowed to use that ability
