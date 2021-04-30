@@ -46,15 +46,19 @@ public class WarehouseTest {
         try {
             wrhs.swapRows(2, 3);
         } catch (SupplyException e) {fail();}
+        try {
+            wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
+            wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.COIN, DepotID.PAYCHECK);
+        } catch (SupplyException e) {fail();}
         SupplyContainer result3 = new SupplyContainer(wrhs.clearSupplies(DepotID.WAREHOUSE3).first);
-        int[] objectsExpected3 = {2, 0, 0, 0, 0};
+        int[] objectsExpected3 = {3, 0, 0, 0, 0};
         int[] objectsActual3 = { result3.getQuantity(WarehouseObjectType.COIN),
                                 result3.getQuantity(WarehouseObjectType.STONE),
                                 result3.getQuantity(WarehouseObjectType.SERVANT),
                                 result3.getQuantity(WarehouseObjectType.SHIELD),
                                 result3.getQuantity(WarehouseObjectType.FAITH_MARKER)};
         SupplyContainer result2 = new SupplyContainer(wrhs.clearSupplies(DepotID.WAREHOUSE2).first);
-        int[] objectsExpected2 = {0, 0, 0, 1, 0};
+        int[] objectsExpected2 = {0, 0, 0, 2, 0};
         int[] objectsActual2 = { result2.getQuantity(WarehouseObjectType.COIN),
                                 result2.getQuantity(WarehouseObjectType.STONE),
                                 result2.getQuantity(WarehouseObjectType.SERVANT),

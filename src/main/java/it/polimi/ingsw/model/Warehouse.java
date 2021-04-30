@@ -57,7 +57,7 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
     /**
      * Swaps the specified rows, if possible.
      * @param r1 first row (1<r1<3)
-     * @param r2 second row (1<r1<3)
+     * @param r2 second row (1<r2<3)
      * @throws SupplyException Swap isn't possible (one row has too many elements to fit the other row)
      */
     public void swapRows(int r1, int r2) throws SupplyException {
@@ -71,9 +71,12 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         //if the depot in min position (so with higher capacity) has less or equal elements than the elements in the depot in max position can contain, then the swap is possible
         //if(rMin.getQuantity() <= 4 - Math.max(r1, r2)){
         if(rMax.getQuantity() <= Math.min(r1, r2)){
+            int max = Math.max(r1, r2);
+            int min = Math.min(r1, r2);
+
             //swap the max accepted by the depots
-            rMin.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(4-Math.max(r1, r2), rMax, theThird).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
-            rMax.setAcceptCheck(SupplyContainer.AcceptStrategy.maxOneTypeNotPresentIn(4-Math.min(r1, r2), rMin, theThird).and(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
+            rMin.setAcceptCheck(maxOneTypeNotPresentIn(max == 2 ? 2 : 3, rMax, theThird).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
+            rMax.setAcceptCheck(maxOneTypeNotPresentIn(min == 1 ? 1 : 2, rMin, theThird).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
 
             //swap the order of the depots in the array list
             Collections.swap(depots, r1-1, r2-1);
