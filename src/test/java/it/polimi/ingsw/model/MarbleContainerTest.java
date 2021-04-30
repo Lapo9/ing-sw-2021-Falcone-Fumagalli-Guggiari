@@ -111,6 +111,46 @@ public class MarbleContainerTest {
     }
 
     @Test
+    public void colorWhiteMarble_turnBlueNoEx() {
+        MarbleContainer mc = new MarbleContainer(2, 3, 5, 1,6, 2);
+        try {
+            mc.colorWhiteMarble(MarbleColor.BLUE);
+        } catch (MarbleException e) {fail();}
+        int[] expectedObject = {2, 4, 5, 0, 6, 2};
+        int[] actualObject = {mc.getQuantity(MarbleColor.YELLOW),
+                              mc.getQuantity(MarbleColor.BLUE),
+                              mc.getQuantity(MarbleColor.GREY),
+                              mc.getQuantity(MarbleColor.WHITE),
+                              mc.getQuantity(MarbleColor.VIOLET),
+                              mc.getQuantity(MarbleColor.RED)};
+        assertArrayEquals(expectedObject, actualObject);
+    }
+
+    @Test
+    public void colorWhiteMarble_noWhiteMarblesEx() {
+        MarbleContainer mc = new MarbleContainer(2, 3, 5, 0,6, 2);
+        boolean exc = false;
+        try {
+            mc.colorWhiteMarble(MarbleColor.YELLOW);
+        } catch (MarbleException e) {
+            exc = true;
+        }
+        assertTrue(exc);
+    }
+
+    @Test
+    public void colorWhiteMarble_turnRedEx() {
+        MarbleContainer mc = new MarbleContainer(2, 3, 5, 1,6, 2);
+        boolean exc = false;
+        try {
+            mc.colorWhiteMarble(MarbleColor.RED);
+        } catch (MarbleException e) {
+            exc = true;
+        }
+        assertTrue(exc);
+    }
+
+    @Test
     public void clear() {
         MarbleContainer mc = new MarbleContainer(2, 3, 5, 1,0, 2);
         mc.clear();

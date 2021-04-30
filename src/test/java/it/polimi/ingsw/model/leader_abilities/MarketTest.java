@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.leader_abilities;
 
+import it.polimi.ingsw.model.MarbleColor;
 import it.polimi.ingsw.model.WarehouseObjectType;
 import org.junit.Test;
 
@@ -13,6 +14,50 @@ public class MarketTest {
     public void transformWhiteMarble() {
         Market mrkt = new Market(WarehouseObjectType.SERVANT);
         assertEquals(WarehouseObjectType.SERVANT, mrkt.transformWhiteMarble());
+    }
+
+    @Test
+    public void colorWhiteMarble_blue() {
+        Market mrkt = new Market(WarehouseObjectType.SHIELD);
+        boolean result = false;
+        try {
+            if(MarbleColor.BLUE == mrkt.colorWhiteMarble())
+                result = true;
+        } catch (NoSuchMethodException e) {fail();}
+        assertTrue(result);
+    }
+
+    @Test
+    public void colorWhiteMarble_yellow() {
+        Market mrkt = new Market(WarehouseObjectType.COIN);
+        boolean result = false;
+        try {
+            if(MarbleColor.YELLOW == mrkt.colorWhiteMarble())
+                result = true;
+        } catch (NoSuchMethodException e) {fail();}
+        assertTrue(result);
+    }
+
+    @Test
+    public void colorWhiteMarble_grey() {
+        Market mrkt = new Market(WarehouseObjectType.STONE);
+        boolean result = false;
+        try {
+            if(MarbleColor.GREY == mrkt.colorWhiteMarble())
+                result = true;
+        } catch (NoSuchMethodException e) {fail();}
+        assertTrue(result);
+    }
+
+    @Test
+    public void colorWhiteMarble_violet() {
+        Market mrkt = new Market(WarehouseObjectType.SERVANT);
+        boolean result = false;
+        try {
+            if(MarbleColor.VIOLET == mrkt.colorWhiteMarble())
+                result = true;
+        } catch (NoSuchMethodException e) {fail();}
+        assertTrue(result);
     }
 
     @Test
