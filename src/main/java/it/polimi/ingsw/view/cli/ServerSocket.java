@@ -50,6 +50,14 @@ public class ServerSocket {
             socket = new ClientSocket(ip, port);
             //send player name
             socket.send("name " + playerName + " " + matchId, ClientSocket.packUpStringWithLength());
+
+            //wait for server response (max 10 seconds)
+            String response = socket.receiveAndTransformWithType(10000, ClientSocket::bytesToString).second;
+            if (isError(response)){
+                terminate();
+                return;
+            }
+            controllerInterpreter.execute(response);
         } catch (IOException ioe) {
             terminate();
             return;
@@ -61,6 +69,17 @@ public class ServerSocket {
         new Thread(this::socketListenRoutine).start();
         new Thread(this::keepConnectionAlive).start();
     }
+
+
+
+    private boolean isError(String message){
+        String command = message.split(" ")[0];
+        if (command.equals("error")){
+            return true;
+        }
+        return false;
+    }
+
 
 
     /**
@@ -164,7 +183,7 @@ Structure of the packet
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-        controllerInterpreter.execute("error Something went amazingly wrong :(");
+        controllerInterpreter.execute("error Something went wrong :(");
     }
 
 }

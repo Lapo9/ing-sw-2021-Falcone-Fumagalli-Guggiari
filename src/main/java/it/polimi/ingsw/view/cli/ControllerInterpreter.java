@@ -35,7 +35,7 @@ public class ControllerInterpreter {
                 screen.show(tokens[1]);
             } catch (ViewException ve){/*TODO terminate*/}
         }
-        else if(tokens[0].equals("error")){
+        else if(tokens[0].equals("error") || tokens[0].equals("message")){
             StringBuilder errorMessage = new StringBuilder("");
             for (int i=1; i<tokens.length; ++i){
                 errorMessage.append(tokens[i]);

@@ -78,7 +78,7 @@ public class Match {
 
     //TODO this is only a test, we have to change this
     private void listPlayers(Player player) {
-        StringBuilder playersNames = new StringBuilder("error ");
+        StringBuilder playersNames = new StringBuilder("message ");
 
         for (Player p : players){
             playersNames.append(p.getName() + " ");

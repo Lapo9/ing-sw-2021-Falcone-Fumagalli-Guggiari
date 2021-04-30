@@ -59,6 +59,12 @@ public class Player {
     public void reconnect(Player replacingPlayer){
         isConnected = true;
         this.socket = replacingPlayer.socket; //no problems because old this.client is for sure closed if this method is called
+        try {
+            socket.send("message You are connected!", ClientSocket.packUpStringWithLengthAndType((byte) 0));
+        } catch (Exception e){
+            destroy();
+            return;
+        }
         new Thread(this::listenRoutine).start(); //old player re-start listening
     }
 
@@ -98,7 +104,9 @@ public class Player {
             //once the player asked to connect, he has 5 seconds to send its name and the match he wants to join
             message = socket.receiveAndTransform(5000, ClientSocket::bytesToString);
         } catch (Exception e) {
-            //TODO tell player he is out
+            try {
+                socket.send("error Timeout error", ClientSocket.packUpStringWithLengthAndType((byte) 0));
+            } catch (Exception e1){e1.printStackTrace();}
             destroy();
             return;
         }
@@ -109,7 +117,16 @@ public class Player {
         try {
             matchManager.addPlayer(this, tokens[2]); //add the player to the match, if you cannot throw
         } catch (MatchException me){
-            //TODO tell the player the error and delete him
+            try {
+                socket.send("error " + me.getMessage(), ClientSocket.packUpStringWithLengthAndType((byte) 0));
+            } catch (Exception e){e.printStackTrace();}
+            destroy();
+            return;
+        }
+
+        try {
+            socket.send("message You are connected!", ClientSocket.packUpStringWithLengthAndType((byte) 0));
+        } catch (Exception e){
             destroy();
             return;
         }
