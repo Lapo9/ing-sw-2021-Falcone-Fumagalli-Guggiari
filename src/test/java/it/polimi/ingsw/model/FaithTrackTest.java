@@ -25,7 +25,7 @@ public class FaithTrackTest {
     public void vaticanReport_triggeredByPlayer() {
         FaithTrack fTrack = new FaithTrack();
         fTrack.goAhead(8);
-        assertEquals(5, fTrack.getWinPoints());
+        assertEquals(4, fTrack.getWinPoints());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class FaithTrackTest {
         fTrack1.goAhead(8);
         fTrack2.vaticanReport();     //this method is called by the Dashboard when player 1 reaches the eighth tile
         fTrack2.goAhead(12);
-        assertEquals(13, fTrack2.getWinPoints());
+        assertEquals(6, fTrack2.getWinPoints());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class FaithTrackTest {
         fTrack1.goAhead(9);
         fTrack2.goAhead(8);     //player 2 triggers the second vatican report
         fTrack1.vaticanReport();     //this method is called by the Dashboard when player 2 reaches the sixteenth tile
-        assertEquals(18, fTrack1.getWinPoints());
+        assertEquals(11, fTrack1.getWinPoints());
     }
 
     @Test
@@ -75,21 +75,21 @@ public class FaithTrackTest {
         fTrack1.goAhead(8);
         fTrack2.vaticanReport();     //this method is called by the Dashboard when player 1 reaches the eighth tile
         fTrack2.goAhead(10);
-        assertEquals(7, fTrack2.getWinPoints());
+        assertEquals(4, fTrack2.getWinPoints());
     }
 
     @Test
     public void getWinPoints_withOnePopeFavorTile() {
         FaithTrack fTrack = new FaithTrack();
         fTrack.goAhead(10);
-        assertEquals(9, fTrack.getWinPoints());
+        assertEquals(6, fTrack.getWinPoints());
     }
 
     @Test
     public void getWinPoints_withTwoPopeFavorTiles() {
         FaithTrack fTrack = new FaithTrack();
         fTrack.goAhead(17);
-        assertEquals(27, fTrack.getWinPoints());
+        assertEquals(14, fTrack.getWinPoints());
     }
 
     @Test
@@ -99,7 +99,7 @@ public class FaithTrackTest {
         fTrack1.goAhead(8);
         fTrack2.vaticanReport();     //this method is called by the Dashboard when player 1 reaches the eighth tile
         fTrack2.goAhead(16);
-        assertEquals(25, fTrack2.getWinPoints());
+        assertEquals(12, fTrack2.getWinPoints());
     }
 
     @Test

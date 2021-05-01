@@ -114,7 +114,8 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
             vaticanReport();
             vr = true;
         }
-        winPoints += track.get(position).points;
+        if(track.get(position).points != 0)
+            winPoints = track.get(position).points;
         return vr;
     }
 
