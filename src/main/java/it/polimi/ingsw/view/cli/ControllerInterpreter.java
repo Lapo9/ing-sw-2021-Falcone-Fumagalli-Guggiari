@@ -64,6 +64,7 @@ public class ControllerInterpreter {
                 errorMessage.append(" ");
             }
 
+            execute("show welcome");
             screen.setErrorMessage(BACK_RED(errorMessage.toString()));
             screen.refresh();
         }

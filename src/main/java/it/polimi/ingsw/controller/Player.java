@@ -12,15 +12,18 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class Player {
 
-    ClientSocket socket;
-    Match match;
-    String name;
-    boolean isConnected = false;
-    Dashboard dashboard;
+    private ClientSocket socket;
+    private Match match;
+    private String name;
+    private boolean isConnected = false;
+    private Dashboard dashboard;
+    private int selectedItemsInPreMatch = 0;
 
 
 
@@ -36,27 +39,35 @@ public class Player {
     }
 
 
-    private void destroy() {
+    public synchronized int getSelectedItemsInPreMatch() {
+        return selectedItemsInPreMatch;
+    }
+
+    public synchronized void addSelectedItemsInPreMatch() {
+        selectedItemsInPreMatch++;
+    }
+
+    private synchronized void destroy() {
         isConnected = false;
         try {
-            TimeUnit.SECONDS.sleep(6); //give time to close connection
+            TimeUnit.SECONDS.sleep(15); //give time to close connection
         } catch (InterruptedException ie){ie.printStackTrace();}
     }
 
 
 
-    public String getName(){
+    public synchronized String getName(){
         return new String(name);
     }
 
 
 
-    public boolean isConnected(){
+    public synchronized boolean isConnected(){
         return isConnected;
     }
 
 
-    public void reconnect(Player replacingPlayer){
+    public synchronized void reconnect(Player replacingPlayer){
         isConnected = true;
         this.socket = replacingPlayer.socket; //no problems because old this.client is for sure closed if this method is called
         try {
@@ -138,15 +149,28 @@ public class Player {
 
     //routine performed by the socket to listen. It is performed at max once every 5 seconds
     private void listenRoutine() {
-        while (isConnected) {
+        while (isConnected()) {
             String message;
             try {
-                message = socket.receiveAndTransform(5000, ClientSocket::bytesToString); //the client must send an ACK once every 5 seconds, if not the server will consider that player disconnected
+                message = socket.receiveAndTransform(10000, ClientSocket::bytesToString); //the client must send an ACK once every 5 seconds, if not the server will consider that player disconnected
             } catch (Exception ioe){
                 destroy(); //if nothing arrived (not even the ACK), we assume the player has connection issues, so disconnect him
                 message = "dead";
             }
             match.update(message, this); //send the command to the match
+        }
+    }
+
+
+    //send an heartbeat to the player once every 8 seconds to tell him everything is ok
+    private void heartbeat(){
+        while(isConnected()) {
+            send((byte) 0, "ECG");
+            try {
+                TimeUnit.SECONDS.sleep(8);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

@@ -3,7 +3,8 @@ messages Match::update can receive:
 - start								LOBBY			only from leader, starts the match
 - listPlayers							ANY			lists the players and their connection state
 - dead								ANY			the player is disconnected
-- select		supply type				PRE_MATCH		player selected a starting supply
+- selectLeader		index1		index2			LEADER_SELECTION	player chose his leaders
+- select 		supply type				PRE_MATCH		player selected a starting supply
 - marketplace		direction	index			TURN_START		player bought marbles
 - moveMarble		color		depot			MARKETPLACE		player assigned a marble to a depot
 - colorMarble		color					MARKETPLACE		player coloured one white marble

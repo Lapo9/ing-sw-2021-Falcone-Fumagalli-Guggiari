@@ -5,6 +5,7 @@ import it.polimi.ingsw.Pair;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
@@ -80,6 +81,23 @@ public class ServerSocket {
         return false;
     }
 
+    private boolean isFatal(String message){
+        String command = message.split(" ")[0];
+        if (command.equals("fatal")){
+            return true;
+        }
+        return false;
+    }
+
+
+    private boolean isECG(String message){
+        String command = message.split(" ")[0];
+        if (command.equals("ECG")){
+            return true;
+        }
+        return false;
+    }
+
 
 
     /**
@@ -126,15 +144,16 @@ public class ServerSocket {
     private void keepConnectionAlive() {
         while (connected) {
             try {
-                TimeUnit.SECONDS.sleep(4);
-            } catch (InterruptedException ie) {
-                ie.printStackTrace();
-            }
-
-            try {
                 socket.send("ECG", ClientSocket.packUpStringWithLength());
             } catch (IOException ioe) {
                 terminate();
+                return;
+            }
+
+            try {
+                TimeUnit.SECONDS.sleep(8);
+            } catch (InterruptedException ie) {
+                ie.printStackTrace();
             }
         }
     }
@@ -150,21 +169,33 @@ Structure of the packet
     +--------+--------+--------+--------+------
 */
     private void socketListenRoutine() {
-        boolean exit = false;
         while (connected) {
             try {
-                Pair<Byte, byte[]> tmp = socket.receiveWithType();
+                Pair<Byte, byte[]> tmp;
+                try {
+                     tmp = socket.receiveWithType(10000); //cli expects to receive an ECG each 10 seconds
+                } catch (SocketTimeoutException ste){
+                    terminate(); //if you don't receive any message in 10 seconds
+                    return;
+                }
                 byte type = tmp.first;
                 byte[] message = tmp.second;
 
                 if (type == 0) {
-                    controllerInterpreter.execute(ClientSocket.bytesToString(message));
+                    String stringMessage = ClientSocket.bytesToString(message);
+                    if(isFatal(stringMessage)){
+                        terminate();
+                    }
+                    if(!isECG(stringMessage)) {
+                        controllerInterpreter.execute(ClientSocket.bytesToString(message));
+                    }
                 }
                 else if (type == 1) {
                     modelInterpreter.update(ClientSocket.bytesToInts(message));
                 }
                 else if (type == 2) {
                     terminate();
+                    connected = false;
                 }
 
             } catch (IOException ioe) {
@@ -183,7 +214,7 @@ Structure of the packet
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-        controllerInterpreter.execute("error Something went wrong :(");
+        controllerInterpreter.execute("fatal Something went wrong :(");
     }
 
 }

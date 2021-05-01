@@ -33,11 +33,11 @@ public class MainCLI {
         SupplyContainer yourTurnText = factory.buildSupplyContainer(1, ViewableId.YOUR_TURN_TEXT, "YOUR TURN");
         yourTurn.addViewable(yourTurnText);
 
-        screen.addView("home", welcome);
+        screen.addView("welcome", welcome);
         screen.addView("start", start);
         screen.addView("yourTurn", yourTurn);
 
-        screen.start("home");
+        screen.start("welcome");
 
 
 
