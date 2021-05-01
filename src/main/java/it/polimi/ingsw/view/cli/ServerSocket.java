@@ -74,7 +74,7 @@ public class ServerSocket {
 
     private boolean isError(String message){
         String command = message.split(" ")[0];
-        if (command.equals("error")){
+        if (command.equals("error") || command.equals("fatal")){
             return true;
         }
         return false;
@@ -132,7 +132,7 @@ public class ServerSocket {
             }
 
             try {
-                socket.send("ACK", ClientSocket.packUpStringWithLength());
+                socket.send("ECG", ClientSocket.packUpStringWithLength());
             } catch (IOException ioe) {
                 terminate();
             }

@@ -105,7 +105,7 @@ public class Player {
             message = socket.receiveAndTransform(5000, ClientSocket::bytesToString);
         } catch (Exception e) {
             try {
-                socket.send("error Timeout error", ClientSocket.packUpStringWithLengthAndType((byte) 0));
+                socket.send("fatal Timeout error", ClientSocket.packUpStringWithLengthAndType((byte) 0));
             } catch (Exception e1){e1.printStackTrace();}
             destroy();
             return;
@@ -118,7 +118,7 @@ public class Player {
             matchManager.addPlayer(this, tokens[2]); //add the player to the match, if you cannot throw
         } catch (MatchException me){
             try {
-                socket.send("error " + me.getMessage(), ClientSocket.packUpStringWithLengthAndType((byte) 0));
+                socket.send("fatal " + me.getMessage(), ClientSocket.packUpStringWithLengthAndType((byte) 0));
             } catch (Exception e){e.printStackTrace();}
             destroy();
             return;
@@ -139,12 +139,12 @@ public class Player {
     //routine performed by the socket to listen. It is performed at max once every 5 seconds
     private void listenRoutine() {
         while (isConnected) {
-            String message = "";
+            String message;
             try {
                 message = socket.receiveAndTransform(5000, ClientSocket::bytesToString); //the client must send an ACK once every 5 seconds, if not the server will consider that player disconnected
             } catch (Exception ioe){
                 destroy(); //if nothing arrived (not even the ACK), we assume the player has connection issues, so disconnect him
-                return;
+                message = "dead";
             }
             match.update(message, this); //send the command to the match
         }

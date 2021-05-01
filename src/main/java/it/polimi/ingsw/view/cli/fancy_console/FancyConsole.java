@@ -5,7 +5,7 @@ import static it.polimi.ingsw.view.cli.fancy_console.Style.*;
 public class FancyConsole {
 
 
-    private static String reset(){
+    public static String reset(){
         return "\033[0m";
     }
 

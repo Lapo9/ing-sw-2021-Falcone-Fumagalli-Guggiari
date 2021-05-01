@@ -1,0 +1,9 @@
+messages ControllerInterpreter can receive:
+
+- message	text		a normal message from the controller
+- error		text		an error message from the controller
+- fatal		text		a fatal error message from the controller
+- show		viewID		player asked to view something
+- start		play order	controller started the match (show appropriate view)
+- yourTurn			controller say it's your turn to play
+- win		winner		controller detected someone won the match

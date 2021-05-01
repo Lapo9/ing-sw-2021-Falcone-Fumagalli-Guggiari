@@ -1,5 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
+import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
+
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
 
 
@@ -35,18 +37,64 @@ public class ControllerInterpreter {
                 screen.show(tokens[1]);
             } catch (ViewException ve){/*TODO terminate*/}
         }
-        else if(tokens[0].equals("error") || tokens[0].equals("message")){
+        else if(tokens[0].equals("error")){
             StringBuilder errorMessage = new StringBuilder("");
             for (int i=1; i<tokens.length; ++i){
                 errorMessage.append(tokens[i]);
                 errorMessage.append(" ");
             }
 
-            screen.setErrorMessage(errorMessage.toString());
+            screen.setErrorMessage(RED(errorMessage.toString()));
+            screen.refresh();
+        }
+        else if(tokens[0].equals("message")){
+            StringBuilder errorMessage = new StringBuilder("");
+            for (int i=1; i<tokens.length; ++i){
+                errorMessage.append(tokens[i]);
+                errorMessage.append(" ");
+            }
+
+            screen.setErrorMessage(GREEN(errorMessage.toString()));
+            screen.refresh();
+        }
+        else if(tokens[0].equals("fatal")){
+            StringBuilder errorMessage = new StringBuilder("");
+            for (int i=1; i<tokens.length; ++i){
+                errorMessage.append(tokens[i]);
+                errorMessage.append(" ");
+            }
+
+            screen.setErrorMessage(BACK_RED(errorMessage.toString()));
             screen.refresh();
         }
         else if(tokens[0].equals("refresh")){
             screen.refresh();
+        }
+        else if(tokens[0].equals("start")){
+            try {
+                screen.show("start");
+            } catch (ViewException ve){
+                ve.printStackTrace();//TODO terminate
+                return;
+            }
+            execute("message You are player " + tokens[1] + "!");
+        }
+        else if(tokens[0].equals("win")){
+            try {
+                screen.show("win");
+            } catch (ViewException ve){
+                //TODO terminate
+                return;
+            }
+            execute("message " + tokens[1] + "won the match!!");
+        }
+        else if (tokens[0].equals("yourTurn")) {
+            try {
+                screen.show("yourTurn");
+            } catch (ViewException ve){
+                //TODO terminate
+                return;
+            }
         }
         else {
             //TODO terminate

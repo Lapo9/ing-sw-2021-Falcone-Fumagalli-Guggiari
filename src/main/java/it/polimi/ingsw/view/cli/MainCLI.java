@@ -21,18 +21,23 @@ public class MainCLI {
         serverSocket.attachInterpreter(modelInterpreter);
 
 
-        View viewTest1 = new View();
-        SupplyContainer cofferTest1 = factory.buildSupplyContainer(1, ViewableId.COFFER, "Coffer1Test");
-        viewTest1.addViewable(cofferTest1);
+        View welcome = new View();
+        SupplyContainer welcomeText = factory.buildSupplyContainer(1, ViewableId.WELCOME_TEXT, "WELCOME");
+        welcome.addViewable(welcomeText);
 
-        View viewTest2 = new View();
-        SupplyContainer cofferTest2 = factory.buildSupplyContainer(2, ViewableId.COFFER, "Coffer2Test");
-        viewTest2.addViewable(cofferTest2);
+        View start = new View();
+        SupplyContainer startText = factory.buildSupplyContainer(1, ViewableId.START_TEXT, "START");
+        start.addViewable(startText);
 
-        screen.addView("ViewTest1", viewTest1);
-        screen.addView("ViewTest2", viewTest2);
+        View yourTurn = new View();
+        SupplyContainer yourTurnText = factory.buildSupplyContainer(1, ViewableId.YOUR_TURN_TEXT, "YOUR TURN");
+        yourTurn.addViewable(yourTurnText);
 
-        screen.start("ViewTest1");
+        screen.addView("home", welcome);
+        screen.addView("start", start);
+        screen.addView("yourTurn", yourTurn);
+
+        screen.start("home");
 
 
 

@@ -103,6 +103,7 @@ public class UserInterpreter {
         commands.add(new UserCommand(false, "show", new ArrayList<>(Arrays.asList("ViewTest1", "ViewTest2")))); //TODO test to eliminate
         commands.add(new UserCommand(false, "connect", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
         commands.add(new UserCommand(true, "listPlayers"));
+        commands.add(new UserCommand(true, "start"));
         return commands;
     }
 
