@@ -33,7 +33,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -154,7 +154,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -196,7 +196,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -518,7 +518,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -537,7 +537,7 @@ public class DashboardTest {
     }
 
     @Test
-    public void transformWhiteMarble_twoDiffetentLeaderNoEx() {
+    public void transformWhiteMarble_twoDifferentLeaderNoEx() {
         ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
         mrblclrs.add(MarbleColor.YELLOW);
         mrblclrs.add(MarbleColor.YELLOW);
@@ -1009,7 +1009,7 @@ public class DashboardTest {
     }
 
     @Test
-    public void transfromWhiteMarble_noLeaderActiveEx() {
+    public void transformWhiteMarble_noLeaderActiveEx() {
         ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
         mrblclrs.add(MarbleColor.YELLOW);
         mrblclrs.add(MarbleColor.YELLOW);
@@ -1092,7 +1092,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -1126,7 +1126,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -1178,7 +1178,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -1224,7 +1224,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -1272,7 +1272,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -1313,7 +1313,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -1340,12 +1340,6 @@ public class DashboardTest {
     }
 
     @Test
-    public void moveSupply() {
-        //test all the possible movements
-        //remember to test move to Paycheck
-    }
-
-    @Test
     public void produce_baseProduction() {
         ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
         mrblclrs.add(MarbleColor.YELLOW);
@@ -1362,7 +1356,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -1410,7 +1404,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -1457,7 +1451,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
         try {
@@ -1620,7 +1614,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -1671,7 +1665,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
         try {
@@ -1781,11 +1775,6 @@ public class DashboardTest {
     }
 
     @Test
-    public void checkProduction() {
-        //Test a development production, a leader production and more than one production
-    }
-
-    @Test
     public void buyDevelopment_lvlOneNoEx() {
         ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
         mrblclrs.add(MarbleColor.YELLOW);
@@ -1802,7 +1791,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -1845,7 +1834,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -1948,7 +1937,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -2194,7 +2183,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -2297,7 +2286,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -2406,7 +2395,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -2451,7 +2440,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -2554,7 +2543,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -2707,7 +2696,7 @@ public class DashboardTest {
     @Test
     public void addLeader_noEx() {
         Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -2748,7 +2737,7 @@ public class DashboardTest {
     @Test
     public void discardLeader_noVaticanReport() {
         Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -2975,7 +2964,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
         try {
@@ -3378,7 +3367,7 @@ public class DashboardTest {
     @Test
     public void goAhead_noVaticanReport() {
         Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -3404,7 +3393,7 @@ public class DashboardTest {
     @Test
     public void vaticanReport_discardPopeFavorTile() {
         Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -3423,7 +3412,7 @@ public class DashboardTest {
     @Test
     public void vaticanReport_activatePopeFavorTile() {
         Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -3456,7 +3445,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
         cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
@@ -3612,7 +3601,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
         try {
@@ -3729,7 +3718,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
         try {
@@ -3847,7 +3836,7 @@ public class DashboardTest {
          mrblclrs.add(MarbleColor.VIOLET);
          Marketplace mrkt = new Marketplace(mrblclrs);
          Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-         ArrayList<CardsRequirement> cards = null;
+         ArrayList<CardsRequirement> cards = new ArrayList<>();
          ArrayList<CardsRequirement> cards2 = new ArrayList<>();
          cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
          try {
@@ -3881,7 +3870,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
-        ArrayList<CardsRequirement> cards = null;
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
         try {
@@ -3979,5 +3968,355 @@ public class DashboardTest {
     public void hasInkwell_false() {
         Dashboard dshbrd = new Dashboard(false, new Marketplace(), new DevelopmentGrid());
         assertFalse(dshbrd.hasInkwell());
+    }
+
+    @Test
+    public void isMatchEnded_faithTrack() {
+        ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.VIOLET);
+        mrblclrs.add(MarbleColor.VIOLET);
+        Marketplace mrkt = new Marketplace(mrblclrs);
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
+        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
+        cards2.add(new CardsRequirement(1, 1, CardCategory.GREEN));
+        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        try {
+            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
+            dshbrd.addLeader(new LeaderCard(2, new SupplyContainer(), cards2, new Discount(WarehouseObjectType.STONE), 5));
+        } catch (LeaderException e) {fail();}
+
+        for(int i = 0; i < 24; i++)
+            dshbrd.goAhead();
+        assertTrue(dshbrd.isMatchEnded());
+    }
+
+    @Test
+    public void isMatchEnded_sevenDevelopmentCards() {
+        ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.VIOLET);
+        mrblclrs.add(MarbleColor.VIOLET);
+        Marketplace mrkt = new Marketplace(mrblclrs);
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
+        cards.add(new CardsRequirement(2, 1, CardCategory.GREEN));
+        cards.add(new CardsRequirement(1, 1, CardCategory.VIOLET));
+        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
+        cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
+        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        try {
+            dshbrd.addLeader(new LeaderCard(10, new SupplyContainer(), cards, new Market(WarehouseObjectType.SHIELD), 3));
+            dshbrd.addLeader(new LeaderCard(9, new SupplyContainer(), cards2, new Market(WarehouseObjectType.SERVANT), 5));
+        } catch (LeaderException e) {fail();}
+
+        //buy supplies
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 1);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //buy lvl one yellow development card
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.STONE);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.STONE);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(2, 2, 0);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        //buy supplies
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+
+        //buy lvl one blue development card
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(1, 2, 1);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        //buy supplies
+        dshbrd.buySupplies(MarketDirection.VERTICAL, 0);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //buy lvl one yellow development card
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.PAYCHECK, WarehouseObjectType.STONE);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(2, 2, 2);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        //activate leader card
+        try {
+            dshbrd.playLeader(1);
+        } catch (SupplyException | LeaderException e) {fail();}
+
+        //buy supplies
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
+        try {
+            dshbrd.swapWarehouseRows(1, 3);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.BLUE);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.STONE);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.STONE);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.SHIELD);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.STONE);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.STONE);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //buy lvl two green development card
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.COFFER, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(0, 1, 0);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        //buy supplies
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 2);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //buy supplies
+        dshbrd.buySupplies(MarketDirection.VERTICAL, 2);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.COIN);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.STONE);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.SERVANT);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.BASE_PRODUCTION, WarehouseObjectType.STONE);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //buy lvl two violet development card
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.COFFER, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(3, 1, 1);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        //buy supplies
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //buy supplies
+        dshbrd.buySupplies(MarketDirection.VERTICAL, 2);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.VIOLET);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.COIN);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.COIN);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.SHIELD);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //buy supplies
+        dshbrd.buySupplies(MarketDirection.VERTICAL, 1);
+        try {
+            dshbrd.swapWarehouseRows(1, 3);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //buy lvl two green development card
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.COFFER, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(0, 1, 2);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        //buy supplies
+        dshbrd.buySupplies(MarketDirection.VERTICAL, 0);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.WHITE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.WHITE);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.COIN);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.SERVANT);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //buy supplies
+        dshbrd.buySupplies(MarketDirection.VERTICAL, 3);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.STONE);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.STONE);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.SERVANT);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.STONE);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.STONE);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //buy supplies
+        dshbrd.buySupplies(MarketDirection.VERTICAL, 2);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.COIN);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.SERVANT);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //buy a lvl three purple development card
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.COFFER, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.COFFER, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.COFFER, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(3, 0, 2);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        assertTrue(dshbrd.isMatchEnded());
+    }
+
+    @Test
+    public void isMatchEnded_false() {
+        ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.VIOLET);
+        mrblclrs.add(MarbleColor.VIOLET);
+        Marketplace mrkt = new Marketplace(mrblclrs);
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
+        cards.add(new CardsRequirement(2, 1, CardCategory.GREEN));
+        cards.add(new CardsRequirement(1, 1, CardCategory.VIOLET));
+        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
+        cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
+        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        try {
+            dshbrd.addLeader(new LeaderCard(10, new SupplyContainer(), cards, new Market(WarehouseObjectType.SHIELD), 3));
+            dshbrd.addLeader(new LeaderCard(9, new SupplyContainer(), cards2, new Market(WarehouseObjectType.SERVANT), 5));
+        } catch (LeaderException e) {fail();}
+
+        assertFalse(dshbrd.isMatchEnded());
     }
 }

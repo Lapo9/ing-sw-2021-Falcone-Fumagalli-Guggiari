@@ -127,6 +127,54 @@ public class MarbleContainerTest {
     }
 
     @Test
+    public void colorWhiteMarble_turnYellowNoEx() {
+        MarbleContainer mc = new MarbleContainer(2, 3, 5, 1,6, 2);
+        try {
+            mc.colorWhiteMarble(MarbleColor.YELLOW);
+        } catch (MarbleException e) {fail();}
+        int[] expectedObject = {3, 3, 5, 0, 6, 2};
+        int[] actualObject = {mc.getQuantity(MarbleColor.YELLOW),
+                              mc.getQuantity(MarbleColor.BLUE),
+                              mc.getQuantity(MarbleColor.GREY),
+                              mc.getQuantity(MarbleColor.WHITE),
+                              mc.getQuantity(MarbleColor.VIOLET),
+                              mc.getQuantity(MarbleColor.RED)};
+        assertArrayEquals(expectedObject, actualObject);
+    }
+
+    @Test
+    public void colorWhiteMarble_turnGreyNoEx() {
+        MarbleContainer mc = new MarbleContainer(2, 3, 5, 1,6, 2);
+        try {
+            mc.colorWhiteMarble(MarbleColor.GREY);
+        } catch (MarbleException e) {fail();}
+        int[] expectedObject = {2, 3, 6, 0, 6, 2};
+        int[] actualObject = {mc.getQuantity(MarbleColor.YELLOW),
+                              mc.getQuantity(MarbleColor.BLUE),
+                              mc.getQuantity(MarbleColor.GREY),
+                              mc.getQuantity(MarbleColor.WHITE),
+                              mc.getQuantity(MarbleColor.VIOLET),
+                              mc.getQuantity(MarbleColor.RED)};
+        assertArrayEquals(expectedObject, actualObject);
+    }
+
+    @Test
+    public void colorWhiteMarble_turnVioletNoEx() {
+        MarbleContainer mc = new MarbleContainer(2, 3, 5, 1,6, 2);
+        try {
+            mc.colorWhiteMarble(MarbleColor.VIOLET);
+        } catch (MarbleException e) {fail();}
+        int[] expectedObject = {2, 3, 5, 0, 7, 2};
+        int[] actualObject = {mc.getQuantity(MarbleColor.YELLOW),
+                              mc.getQuantity(MarbleColor.BLUE),
+                              mc.getQuantity(MarbleColor.GREY),
+                              mc.getQuantity(MarbleColor.WHITE),
+                              mc.getQuantity(MarbleColor.VIOLET),
+                              mc.getQuantity(MarbleColor.RED)};
+        assertArrayEquals(expectedObject, actualObject);
+    }
+
+    @Test
     public void colorWhiteMarble_noWhiteMarblesEx() {
         MarbleContainer mc = new MarbleContainer(2, 3, 5, 0,6, 2);
         boolean exc = false;
