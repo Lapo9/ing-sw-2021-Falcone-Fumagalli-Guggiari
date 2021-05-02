@@ -16,9 +16,13 @@ public class ActionTilesStack {
 
     public ActionTile extractTile() {
         Random r = new Random();
-        int i = r.nextInt(stack.size()+1);
+        int i = r.nextInt(stack.size());
         ActionTile at = stack.remove(i);
         return at;
+    }
+
+    public ActionTile extractTile(int index) {
+        return stack.remove(index);
     }
 
 

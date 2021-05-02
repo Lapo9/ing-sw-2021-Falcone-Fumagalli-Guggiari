@@ -4609,6 +4609,148 @@ public class DashboardTest {
     }
 
     @Test
+    public void extractActionTileWithIndex_checkRemoval() {
+        ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.VIOLET);
+        mrblclrs.add(MarbleColor.VIOLET);
+        Marketplace mrkt = new Marketplace(mrblclrs);
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
+        cards.add(new CardsRequirement(2, 1, CardCategory.GREEN));
+        cards.add(new CardsRequirement(1, 1, CardCategory.VIOLET));
+        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
+        cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
+        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        try {
+            dshbrd.addLeader(new LeaderCard(10, new SupplyContainer(), cards, new Market(WarehouseObjectType.SHIELD), 3));
+            dshbrd.addLeader(new LeaderCard(9, new SupplyContainer(), cards2, new Market(WarehouseObjectType.SERVANT), 5));
+        } catch (LeaderException e) {fail();}
+
+        //remove four yellow development cards
+        dshbrd.extractActionTileWithIndex(0);
+        dshbrd.extractActionTileWithIndex(4);
+        dshbrd.extractActionTileWithIndex(0);
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 1);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //buy a lvl 1 development card
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.STONE);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.STONE);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        boolean exc = false;
+        try {
+            dshbrd.buyDevelopment(2, 2, 1);
+        } catch (SupplyException e) {fail();} catch(DevelopmentException e) {fail();
+        } catch (NoSuchCardException e) {
+            exc = true;
+        }
+        assertTrue(exc);
+    }
+
+    @Test
+    public void extractActionTileWithIndex_removeAllTheCardsOfOneColor() {
+        ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.VIOLET);
+        mrblclrs.add(MarbleColor.VIOLET);
+        Marketplace mrkt = new Marketplace(mrblclrs);
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
+        cards.add(new CardsRequirement(2, 1, CardCategory.GREEN));
+        cards.add(new CardsRequirement(1, 1, CardCategory.VIOLET));
+        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
+        cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
+        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        try {
+            dshbrd.addLeader(new LeaderCard(10, new SupplyContainer(), cards, new Market(WarehouseObjectType.SHIELD), 3));
+            dshbrd.addLeader(new LeaderCard(9, new SupplyContainer(), cards2, new Market(WarehouseObjectType.SERVANT), 5));
+        } catch (LeaderException e) {fail();}
+
+        //remove all lvl 1 yellow development cards
+        dshbrd.extractActionTileWithIndex(0);
+        dshbrd.extractActionTileWithIndex(4);
+        dshbrd.extractActionTileWithIndex(0);
+        dshbrd.extractActionTileWithIndex(4);
+
+        //remove all lvl 2 yellow development cards
+        dshbrd.extractActionTileWithIndex(0);
+        dshbrd.extractActionTileWithIndex(4);
+        dshbrd.extractActionTileWithIndex(0);
+        dshbrd.extractActionTileWithIndex(4);
+
+        //remove all lvl 3 yellow development cards
+        dshbrd.extractActionTileWithIndex(0);
+        dshbrd.extractActionTileWithIndex(4);
+        boolean result = dshbrd.extractActionTileWithIndex(0);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void extractActionTileWithIndex_blackCrossEndsFaithTrack() {
+        ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.VIOLET);
+        mrblclrs.add(MarbleColor.VIOLET);
+        Marketplace mrkt = new Marketplace(mrblclrs);
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid());
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
+        cards.add(new CardsRequirement(2, 1, CardCategory.GREEN));
+        cards.add(new CardsRequirement(1, 1, CardCategory.VIOLET));
+        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
+        cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
+        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        try {
+            dshbrd.addLeader(new LeaderCard(10, new SupplyContainer(), cards, new Market(WarehouseObjectType.SHIELD), 3));
+            dshbrd.addLeader(new LeaderCard(9, new SupplyContainer(), cards2, new Market(WarehouseObjectType.SERVANT), 5));
+        } catch (LeaderException e) {fail();}
+
+        for(int i = 0; i<11; i++){
+            dshbrd.extractActionTileWithIndex(4);
+            dshbrd.extractActionTileWithIndex(4);
+        }
+        dshbrd.extractActionTileWithIndex(4);
+        boolean result = dshbrd.extractActionTileWithIndex(4);
+
+        assertTrue(result);
+    }
+
+    @Test
     public void getWinPoints() {
         ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
         mrblclrs.add(MarbleColor.YELLOW);

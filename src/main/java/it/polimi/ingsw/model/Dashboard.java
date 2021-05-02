@@ -432,12 +432,14 @@ public class Dashboard implements WinPointsCountable, HasStatus{
             case YELLOW:
                 try {
                     developmentGrid.removeCard(ActionTilesStack.ActionTile.YELLOW);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.YELLOW);
                 } catch (NoSuchCardException nsce){
                     return true;
                 }
                 break;
             case GREEN:
                 try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.GREEN);
                     developmentGrid.removeCard(ActionTilesStack.ActionTile.GREEN);
                 } catch (NoSuchCardException nsce){
                     return true;
@@ -446,12 +448,14 @@ public class Dashboard implements WinPointsCountable, HasStatus{
             case BLUE:
                 try {
                     developmentGrid.removeCard(ActionTilesStack.ActionTile.BLUE);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.BLUE);
                 } catch (NoSuchCardException nsce){
                     return true;
                 }
                 break;
             case VIOLET:
                 try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.VIOLET);
                     developmentGrid.removeCard(ActionTilesStack.ActionTile.VIOLET);
                 } catch (NoSuchCardException nsce){
                     return true;
@@ -474,6 +478,61 @@ public class Dashboard implements WinPointsCountable, HasStatus{
                 break;
         }
 
+        return blackCrossPosition >= 24;
+    }
+
+
+    public boolean extractActionTileWithIndex(int index){
+        ActionTilesStack.ActionTile at = actionTilesStack.extractTile(index);
+        switch (at){
+            case YELLOW:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.YELLOW);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.YELLOW);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case GREEN:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.GREEN);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.GREEN);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case BLUE:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.BLUE);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.BLUE);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case VIOLET:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.VIOLET);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.VIOLET);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case PLUS_2:
+                for(int i=0; i<2; ++i) {
+                    blackCrossPosition++;
+                    if (blackCrossPosition == 8 || blackCrossPosition == 16 || blackCrossPosition == 24) {
+                        vaticanReport();
+                    }
+                }
+                break;
+            case PLUS_1_SHUFFLE:
+                blackCrossPosition++;
+                if (blackCrossPosition == 8 || blackCrossPosition == 16 || blackCrossPosition == 24) {
+                    vaticanReport();
+                }
+                actionTilesStack.reinsertAll();
+                break;
+        }
         return blackCrossPosition >= 24;
     }
 
