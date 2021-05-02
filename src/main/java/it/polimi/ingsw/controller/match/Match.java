@@ -187,10 +187,10 @@ public class Match {
 
         //try to add to first row of warehouse, if you cannot (because 4th player before chose a different supply), then add to second row
         try {
-            player.getDashboard().moveSupply(DepotID.WAREHOUSE3, DepotID.WAREHOUSE1, WarehouseObjectType.stringToType(args[1]));
+            player.getDashboard().trustedAddSupply(DepotID.WAREHOUSE1, WarehouseObjectType.stringToType(args[1]));
         } catch (Exception e){
             try {
-                player.getDashboard().moveSupply(DepotID.WAREHOUSE3, DepotID.WAREHOUSE2, WarehouseObjectType.stringToType(args[1]));
+                player.getDashboard().trustedAddSupply(DepotID.WAREHOUSE2, WarehouseObjectType.stringToType(args[1]));
             } catch (Exception e1){
                 player.send((byte) 0, "error An unknown error occurred. Retry.");
                 return;
@@ -213,7 +213,8 @@ public class Match {
 
         if (done){
             phase = LEADER_SELECTION;
-            //TODO tell the players to select their leaders
+            broadcast("message Now select your leaders");
+            //TODO actually show the 4 leaders
         }
     }
 
@@ -231,5 +232,16 @@ public class Match {
         commands.put("ECG", (p, s) -> {});
         //TODO add all the commands
     }
+
+
+
+    //sends the message to every player in the match
+    private synchronized void broadcast(String message){
+        //avoid first turn for disconnected players
+        for(Player p : players) {
+            p.send((byte) 0, message);
+        }
+    }
+
 
 }

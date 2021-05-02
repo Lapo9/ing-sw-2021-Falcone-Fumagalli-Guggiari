@@ -104,6 +104,7 @@ public class UserInterpreter {
         commands.add(new UserCommand(false, "connect", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
         commands.add(new UserCommand(true, "listPlayers"));
         commands.add(new UserCommand(true, "start"));
+        commands.add(new UserCommand(true, "select", new ArrayList<>(Arrays.asList("coin", "servant", "shield", "stone"))));
         return commands;
     }
 

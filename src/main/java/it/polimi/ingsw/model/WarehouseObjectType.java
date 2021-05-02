@@ -27,7 +27,7 @@ public enum WarehouseObjectType {
         if(s.equals("stone")){
             return STONE;
         }
-        if(s.equals("faith marker")){
+        if(s.equals("faithMarker")){
             return FAITH_MARKER;
         }
         return null;

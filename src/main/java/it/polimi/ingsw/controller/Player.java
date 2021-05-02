@@ -77,6 +77,7 @@ public class Player {
             return;
         }
         new Thread(this::listenRoutine).start(); //old player re-start listening
+        new Thread(this::heartbeat).start();
     }
 
 
@@ -144,6 +145,7 @@ public class Player {
         isConnected = true;
 
         new Thread(this::listenRoutine).start();
+        new Thread(this::heartbeat).start();
     }
 
 
@@ -152,7 +154,7 @@ public class Player {
         while (isConnected()) {
             String message;
             try {
-                message = socket.receiveAndTransform(10000, ClientSocket::bytesToString); //the client must send an ACK once every 5 seconds, if not the server will consider that player disconnected
+                message = socket.receiveAndTransform(10000, ClientSocket::bytesToString); //the client must send an ACK once every 10 seconds, if not the server will consider that player disconnected
             } catch (Exception ioe){
                 destroy(); //if nothing arrived (not even the ACK), we assume the player has connection issues, so disconnect him
                 message = "dead";

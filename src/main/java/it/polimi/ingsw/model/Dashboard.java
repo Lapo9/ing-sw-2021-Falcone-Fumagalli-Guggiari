@@ -163,6 +163,22 @@ public class Dashboard implements WinPointsCountable, HasStatus{
 
 
     /**
+     * Adds a resource to a warehouse slot. Used at the beginning of the match to add the starting resources.
+     * @param warehouseSlot Where to add the supply
+     * @param type Type of the supply to add
+     * @throws SupplyException Couldn't add the supply to the specified slot
+     */
+    public void trustedAddSupply(DepotID warehouseSlot, WarehouseObjectType type) throws SupplyException {
+        if(warehouseSlot != DepotID.WAREHOUSE1 && warehouseSlot != DepotID.WAREHOUSE2 && warehouseSlot != DepotID.WAREHOUSE3) {
+            throw new SupplyException("You can add only to warehouse slots");
+        }
+
+        depotsManager.addSupply(warehouseSlot, type, DepotID.WAREHOUSE1);
+    }
+
+
+
+    /**
      * Activates production in the specified production spaces, and stores the output in the coffer.
      * @param s1 Development space 1
      * @param s2 Development space 2
