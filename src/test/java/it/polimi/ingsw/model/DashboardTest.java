@@ -5098,7 +5098,7 @@ public class DashboardTest {
                                 0, 1, 0,    //development card
                                 1, 1,       //leader card production
                                 1, 0,       //leader card depot
-                                //1,          //paycheck
+                                1,          //paycheck
                                 0};         //coffer
         int[] actualResult = {list.contains(DepotID.BASE_PRODUCTION) ? 1 : 0,
                               list.contains(DepotID.WAREHOUSE1) ? 1 : 0,
@@ -5111,7 +5111,7 @@ public class DashboardTest {
                               list.contains(DepotID.LEADER2_PRODUCTION) ? 1 : 0,
                               list.contains(DepotID.LEADER1_DEPOT) ? 1 : 0,
                               list.contains(DepotID.LEADER2_DEPOT) ? 1 : 0,
-                              //list.contains(DepotID.PAYCHECK) ? 1 : 0,
+                              list.contains(DepotID.PAYCHECK) ? 1 : 0,
                               list.contains(DepotID.COFFER) ? 1 : 0};
         assertArrayEquals(expectedResult, actualResult);
     }
