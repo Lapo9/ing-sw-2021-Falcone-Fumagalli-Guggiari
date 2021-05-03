@@ -34,6 +34,29 @@ public class ViewableFactory {
         return res;
     }
 
+    public Warehouse buildWarehouse(int player, ViewableId viewableId) {
+        Warehouse res = new Warehouse();
+        items.get(player-1).put(viewableId, res);
+        return res;
+    }
+
+    public MarbleContainer buildMarbleContainer(int player, ViewableId viewableId){
+        MarbleContainer res = new MarbleContainer();
+        items.get(player-1).put(viewableId, res);
+        return res;
+    }
+
+    public Production buildProduction (int player, ViewableId viewableId){
+        Production res = new Production();
+        items.get(player-1).put(viewableId, res);
+        return res;
+    }
+
+    public DevelopmentCard buildDevelopmentCard (int player, ViewableId viewableId) {
+        DevelopmentCard res = new DevelopmentCard();
+        items.get(player-1).put(viewableId, res);
+        return res;
+    }
 
     /**
      * Updates the specified viewable with the specified int array.

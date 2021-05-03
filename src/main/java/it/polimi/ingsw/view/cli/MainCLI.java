@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.view.cli.viewables.DevelopmentCard;
 import it.polimi.ingsw.view.cli.viewables.SupplyContainer;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
 
