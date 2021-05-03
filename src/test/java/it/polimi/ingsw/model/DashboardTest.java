@@ -12,8 +12,6 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-//check all getStatusIndex before run
-//remember to add leaderCard before doing anything che sennò non funziona nulla
 public class DashboardTest {
 
     @Test
@@ -1256,6 +1254,105 @@ public class DashboardTest {
     }
 
     @Test
+    public void moveSupply_fromWarehouseToLeaderDepotNoEx() {
+        ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.VIOLET);
+        mrblclrs.add(MarbleColor.VIOLET);
+        Marketplace mrkt = new Marketplace(mrblclrs);
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
+        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
+        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        try {
+            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
+            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+        } catch (LeaderException e) {fail();}
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.COIN);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.COIN);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //play leadercard
+        try {
+            dshbrd.playLeader(0);
+        } catch (SupplyException | LeaderException e) {fail();}
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 1);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //move supply
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.LEADER1_DEPOT, WarehouseObjectType.STONE);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+
+        ArrayList<Integer> status = new ArrayList<>(dshbrd.getStatus());
+        int[] expectedResult = {2, 0, 0, 0, 0,      //coffer
+                                0, 0, 0, 0, 0,      //Warehouse 1
+                                0, 0, 0, 1, 0,      //Warehouse 2
+                                3, 0, 0, 0, 0,      //Warehouse 3
+                                0, 0, 0, 1, 0};     //LeaderDepot
+        int[] actualResult = {status.get(0), status.get(1), status.get(2), status.get(3), status.get(4),
+                              status.get(5), status.get(6), status.get(7), status.get(8), status.get(9),
+                              status.get(10), status.get(11), status.get(12), status.get(13), status.get(14),
+                              status.get(15), status.get(16), status.get(17), status.get(18), status.get(19),
+                              status.get(116), status.get(117), status.get(118), status.get(119), status.get(120)};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void moveSupply_fromWarehouseToCofferEx() {
         ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
         mrblclrs.add(MarbleColor.YELLOW);
@@ -1388,7 +1485,7 @@ public class DashboardTest {
     }
 
     @Test
-    public void produce_develompentCard() {
+    public void produce_developmentCard() {
         ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
         mrblclrs.add(MarbleColor.YELLOW);
         mrblclrs.add(MarbleColor.YELLOW);
@@ -4609,6 +4706,417 @@ public class DashboardTest {
     }
 
     @Test
+    public void getAllowedDepots_fromWarehouse() {
+        ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.VIOLET);
+        mrblclrs.add(MarbleColor.VIOLET);
+        Marketplace mrkt = new Marketplace(mrblclrs);
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
+        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
+        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        try {
+            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
+            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+        } catch (LeaderException e) {fail();}
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.COIN);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.COIN);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //play leadercard
+        try {
+            dshbrd.playLeader(0);
+        } catch (SupplyException | LeaderException e) {fail();}
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 2);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.VIOLET);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.VIOLET);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //buy a developmentCard
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(3, 2, 1);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        //buy a developmentCard
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.COFFER, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(1, 1, 1);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        //play leadercard
+        try {
+            dshbrd.playLeader(1);
+        } catch (SupplyException | LeaderException e) {fail();}
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 1);
+        try {
+            dshbrd.assignMarble(DepotID.LEADER1_DEPOT, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        ArrayList<DepotID> list = new ArrayList<>(dshbrd.getAllowedDepots(DepotID.WAREHOUSE2, WarehouseObjectType.STONE));
+        int[] expectedResult = {1,          //base production
+                                0, 1, 0,    //warehouse
+                                0, 1, 0,    //development card
+                                1, 1,       //leader card production
+                                1, 0,       //leader card depot
+                                1,          //paycheck
+                                0};         //coffer
+        int[] actualResult = {list.contains(DepotID.BASE_PRODUCTION) ? 1 : 0,
+                              list.contains(DepotID.WAREHOUSE1) ? 1 : 0,
+                              list.contains(DepotID.WAREHOUSE2) ? 1 : 0,
+                              list.contains(DepotID.WAREHOUSE3) ? 1 : 0,
+                              list.contains(DepotID.DEVELOPMENT1) ? 1 : 0,
+                              list.contains(DepotID.DEVELOPMENT2) ? 1 : 0,
+                              list.contains(DepotID.DEVELOPMENT3) ? 1 : 0,
+                              list.contains(DepotID.LEADER1_PRODUCTION) ? 1 : 0,
+                              list.contains(DepotID.LEADER2_PRODUCTION) ? 1 : 0,
+                              list.contains(DepotID.LEADER1_DEPOT) ? 1 : 0,
+                              list.contains(DepotID.LEADER2_DEPOT) ? 1 : 0,
+                              list.contains(DepotID.PAYCHECK) ? 1 : 0,
+                              list.contains(DepotID.COFFER) ? 1 : 0};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void getAllowedDepots_fromCoffer() {
+        ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.VIOLET);
+        mrblclrs.add(MarbleColor.VIOLET);
+        Marketplace mrkt = new Marketplace(mrblclrs);
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
+        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
+        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        try {
+            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
+            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+        } catch (LeaderException e) {fail();}
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.COIN);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.COIN);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //play leadercard
+        try {
+            dshbrd.playLeader(0);
+        } catch (SupplyException | LeaderException e) {fail();}
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 2);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.VIOLET);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.VIOLET);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //buy a developmentCard
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(3, 2, 1);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        //buy a developmentCard
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.COFFER, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(1, 1, 1);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        //play leadercard
+        try {
+            dshbrd.playLeader(1);
+        } catch (SupplyException | LeaderException e) {fail();}
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 1);
+        try {
+            dshbrd.assignMarble(DepotID.LEADER1_DEPOT, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        ArrayList<DepotID> list = new ArrayList<>(dshbrd.getAllowedDepots(DepotID.COFFER, WarehouseObjectType.COIN));
+        int[] expectedResult = {1,          //base production
+                                0, 0, 0,    //warehouse
+                                0, 1, 0,    //development card
+                                0, 1,       //leader card production
+                                0, 0,       //leader card depot
+                                1,          //paycheck
+                                1};         //coffer
+        int[] actualResult = {list.contains(DepotID.BASE_PRODUCTION) ? 1 : 0,
+                              list.contains(DepotID.WAREHOUSE1) ? 1 : 0,
+                              list.contains(DepotID.WAREHOUSE2) ? 1 : 0,
+                              list.contains(DepotID.WAREHOUSE3) ? 1 : 0,
+                              list.contains(DepotID.DEVELOPMENT1) ? 1 : 0,
+                              list.contains(DepotID.DEVELOPMENT2) ? 1 : 0,
+                              list.contains(DepotID.DEVELOPMENT3) ? 1 : 0,
+                              list.contains(DepotID.LEADER1_PRODUCTION) ? 1 : 0,
+                              list.contains(DepotID.LEADER2_PRODUCTION) ? 1 : 0,
+                              list.contains(DepotID.LEADER1_DEPOT) ? 1 : 0,
+                              list.contains(DepotID.LEADER2_DEPOT) ? 1 : 0,
+                              list.contains(DepotID.PAYCHECK) ? 1 : 0,
+                              list.contains(DepotID.COFFER) ? 1 : 0};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void getAllowedDepots_fromLeaderDepot() {
+        ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.YELLOW);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.BLUE);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.GREY);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.WHITE);
+        mrblclrs.add(MarbleColor.VIOLET);
+        mrblclrs.add(MarbleColor.VIOLET);
+        Marketplace mrkt = new Marketplace(mrblclrs);
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true));
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
+        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
+        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        try {
+            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
+            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+        } catch (LeaderException e) {fail();}
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.COIN);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
+            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //activate a base production
+        try {
+            dshbrd.swapBaseProduction(0, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(1, WarehouseObjectType.SHIELD);
+            dshbrd.swapBaseProduction(2, WarehouseObjectType.COIN);
+        } catch (SupplyException e) {fail();}
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.produce(false, false, false, false, false, true);
+
+        //play leadercard
+        try {
+            dshbrd.playLeader(0);
+        } catch (SupplyException | LeaderException e) {fail();}
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 2);
+        try {
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.VIOLET);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.VIOLET);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        //buy a developmentCard
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(3, 2, 1);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        //buy a developmentCard
+        try {
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.COFFER, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        try {
+            dshbrd.buyDevelopment(1, 1, 1);
+        } catch (SupplyException | DevelopmentException | NoSuchCardException e) {fail();}
+
+        //play leadercard
+        try {
+            dshbrd.playLeader(1);
+        } catch (SupplyException | LeaderException e) {fail();}
+
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.HORIZONTAL, 1);
+        try {
+            dshbrd.assignMarble(DepotID.LEADER1_DEPOT, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
+        ArrayList<DepotID> list = new ArrayList<>(dshbrd.getAllowedDepots(DepotID.LEADER1_DEPOT, WarehouseObjectType.STONE));
+        int[] expectedResult = {1,          //base production
+                                0, 1, 0,    //warehouse
+                                0, 1, 0,    //development card
+                                1, 1,       //leader card production
+                                1, 0,       //leader card depot
+                                //1,          //paycheck
+                                0};         //coffer
+        int[] actualResult = {list.contains(DepotID.BASE_PRODUCTION) ? 1 : 0,
+                              list.contains(DepotID.WAREHOUSE1) ? 1 : 0,
+                              list.contains(DepotID.WAREHOUSE2) ? 1 : 0,
+                              list.contains(DepotID.WAREHOUSE3) ? 1 : 0,
+                              list.contains(DepotID.DEVELOPMENT1) ? 1 : 0,
+                              list.contains(DepotID.DEVELOPMENT2) ? 1 : 0,
+                              list.contains(DepotID.DEVELOPMENT3) ? 1 : 0,
+                              list.contains(DepotID.LEADER1_PRODUCTION) ? 1 : 0,
+                              list.contains(DepotID.LEADER2_PRODUCTION) ? 1 : 0,
+                              list.contains(DepotID.LEADER1_DEPOT) ? 1 : 0,
+                              list.contains(DepotID.LEADER2_DEPOT) ? 1 : 0,
+                              //list.contains(DepotID.PAYCHECK) ? 1 : 0,
+                              list.contains(DepotID.COFFER) ? 1 : 0};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void extractActionTileWithIndex_checkRemoval() {
         ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
         mrblclrs.add(MarbleColor.YELLOW);
@@ -4657,7 +5165,7 @@ public class DashboardTest {
         boolean exc = false;
         try {
             dshbrd.buyDevelopment(2, 2, 1);
-        } catch (SupplyException e) {fail();} catch(DevelopmentException e) {fail();
+        } catch (SupplyException | DevelopmentException e) {fail();
         } catch (NoSuchCardException e) {
             exc = true;
         }
@@ -4706,6 +5214,10 @@ public class DashboardTest {
 
         //remove all lvl 3 yellow development cards
         dshbrd.extractActionTileWithIndex(0);
+        dshbrd.extractActionTileWithIndex(4);
+        dshbrd.extractActionTileWithIndex(0);
+
+        //try to remove two more yellow cards
         dshbrd.extractActionTileWithIndex(4);
         boolean result = dshbrd.extractActionTileWithIndex(0);
 
