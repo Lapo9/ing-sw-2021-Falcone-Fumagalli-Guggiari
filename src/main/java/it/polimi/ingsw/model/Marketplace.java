@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 import java.util.ArrayList;
 
 /**
- * The market is a place where the player can buy resources. It is made by 12 marbles placed in a grid of three rows
+ * The marketplace is where the player can buy resources. It is made by 12 marbles placed in a grid of three rows
  * and four columns. There is another marble placed on the slide.
  */
 public class Marketplace implements HasStatus{

@@ -1,9 +1,8 @@
 package it.polimi.ingsw.model;
 
-/** enum containing every color of the marbles the player can pick
- * @author Marco Fumagalli
+/**
+ * Contains all the colors of the marble.
  */
-
 public enum MarbleColor {
 
     YELLOW, BLUE, GREY, WHITE, VIOLET, RED

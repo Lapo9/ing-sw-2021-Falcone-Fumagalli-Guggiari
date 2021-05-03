@@ -88,6 +88,10 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         return category;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
         production.addSupply(wot, from);
