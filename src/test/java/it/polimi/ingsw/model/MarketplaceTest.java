@@ -139,4 +139,33 @@ public class MarketplaceTest {
         };
         assertArrayEquals(expectedObject4, actualObject4);
     }
+
+    @Test
+    public void getStatus() {
+        ArrayList<MarbleColor> mcolor = new ArrayList<>();
+        mcolor.add(MarbleColor.YELLOW);
+        mcolor.add(MarbleColor.YELLOW);
+        mcolor.add(MarbleColor.BLUE);
+        mcolor.add(MarbleColor.BLUE);
+        mcolor.add(MarbleColor.GREY);
+        mcolor.add(MarbleColor.GREY);
+        mcolor.add(MarbleColor.WHITE);
+        mcolor.add(MarbleColor.WHITE);
+        mcolor.add(MarbleColor.WHITE);
+        mcolor.add(MarbleColor.WHITE);
+        mcolor.add(MarbleColor.VIOLET);
+        mcolor.add(MarbleColor.VIOLET);
+        Marketplace market = new Marketplace(mcolor);
+
+        ArrayList<Integer> status = new ArrayList<>(market.getStatus());
+        int[] expectedResult = {5, 5, 0, 0,
+                                1, 1, 4, 4,
+                                4, 4, 3, 3,
+                                2};
+        int[] actualResult= {status.get(0), status.get(1), status.get(2), status.get(3),
+                             status.get(4), status.get(5), status.get(6), status.get(7),
+                             status.get(8), status.get(9), status.get(10), status.get(11),
+                             status.get(12)};
+        assertArrayEquals(expectedResult, actualResult);
+    }
 }

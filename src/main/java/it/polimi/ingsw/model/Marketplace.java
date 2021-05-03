@@ -3,15 +3,19 @@ package it.polimi.ingsw.model;
 import java.util.ArrayList;
 
 /**
- * The MarketPlace class represents the place that contains marbles
+ * The market is a place where the player can buy resources. It is made by 12 marbles placed in a grid of three rows
+ * and four columns. There is another marble placed on the slide.
  */
-
 public class Marketplace implements HasStatus{
 
     private final ArrayList<MarbleColor> grid = new ArrayList<>();
-    private MarbleColor slide; //not final so i can shift
-    private boolean rand;
+    private MarbleColor slide;
 
+
+    /**
+     * Creates a marketplace given a list of 12 marble colors. The marble placed on the slide is fixed and it's red.
+     * @param mc is a list made by 12 marble colors
+     */
     public Marketplace(ArrayList<MarbleColor> mc){
         for(int i=0; i<12; i++){
             grid.add(i, mc.get(i));
@@ -19,8 +23,9 @@ public class Marketplace implements HasStatus{
         slide = MarbleColor.RED;
     }
 
+
     /**
-     * Class constructor: creates the Marketplace, places 12 random marbles and places the remaining marble in the 'slide'
+     * Creates a Marketplace, places 12 random marbles in the grid and places the remaining marble in the slide.
      */
     public Marketplace(){
 
@@ -48,17 +53,18 @@ public class Marketplace implements HasStatus{
     }
 
 
-    //returns the index of the array list given row and column
+    //Returns the index of the array list given row and column
     private int getPos(int r, int c){
         return r*4 + c;
     }
 
 
     /**
-     * Allows to obtain marbles from the Marketplace
-     * @param dir Parameter to select one row/column of the Marketplace
-     * @param index Index of desired row/column
-     * @return A temporary MarbleContainer that contains selected marbles
+     * Allows to obtain marbles from the marketplace.
+     * @param dir vertical or horizontal
+     * @param index column or row number
+     *              [pre: index must be between 0 and 2 if dir is vertical and must be between 0 and 3 if dir is horizontal]
+     * @return the marbles in the chosen line
      */
     public MarbleContainer obtain(MarketDirection dir, int index){
         //create a list of counters for every type of MarbleColor
@@ -93,11 +99,8 @@ public class Marketplace implements HasStatus{
         return mc;
     }
 
-    /**
-     * Allows to shift the market after one player get his marbles
-     * @param dir This method can shift in two ways: horizontal or vertical
-     * @param index This method positions the slide in the selected row/column and shift the rest
-     */
+
+    //Shifts marbles the given line
     private void shiftMarketplace(MarketDirection dir, int index){
 
         MarbleColor tmp;
@@ -124,10 +127,33 @@ public class Marketplace implements HasStatus{
     }
 
 
-    //TODO
-    @Override
-    public ArrayList<Integer> getStatus(){
-        return new ArrayList<>();
+    //Returns the color of the Marble on the slide
+    private MarbleColor getSlide(){
+        return slide;
     }
 
+
+    //In the status, 0: blue, 1: grey, 2: red, 3: violet, 4: white, 5: yellow
+    @Override
+    public ArrayList<Integer> getStatus(){
+        ArrayList<Integer> status = new ArrayList<>();
+        for(int i = 0; i<12; i++)
+        {
+            MarbleColor tmp = grid.get(i);
+            if(tmp == MarbleColor.BLUE)
+                status.add(0);
+            else if(tmp == MarbleColor.GREY)
+                status.add(1);
+            else if (tmp == MarbleColor.RED)
+                status.add(2);
+            else if(tmp == MarbleColor.VIOLET)
+                status.add(3);
+            else if(tmp == MarbleColor.WHITE)
+                status.add(4);
+            else if(tmp == MarbleColor.YELLOW)
+                status.add(5);
+        }
+        status.add(getSlide() == MarbleColor.BLUE ? 0 : getSlide() == MarbleColor.GREY ? 1 : getSlide() == MarbleColor.RED ? 2 : getSlide() == MarbleColor.VIOLET ? 3 : getSlide() == MarbleColor.WHITE ? 4 : 5);
+        return status;
+    }
 }
