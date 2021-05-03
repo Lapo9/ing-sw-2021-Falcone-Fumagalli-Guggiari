@@ -482,6 +482,11 @@ public class Dashboard implements WinPointsCountable, HasStatus{
     }
 
 
+    /**
+     * Extract one tile from the stack given an index, and performs the associated action.
+     * @param index the index of the tile to extract
+     * @return True if the match is ended, so if the black cross finished the faith track or if all the cards of one color are gone.
+     */
     public boolean extractActionTileWithIndex(int index){
         ActionTilesStack.ActionTile at = actionTilesStack.extractTile(index);
         switch (at){

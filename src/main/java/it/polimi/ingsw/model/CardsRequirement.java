@@ -3,18 +3,19 @@ package it.polimi.ingsw.model;
 import java.util.ArrayList;
 
 /**
- * The CardsRequirement class contains the SupplyCard features needed to activate a LeaderCard
+ * Contains the SupplyCard features needed to activate a LeaderCard.
  */
 public class CardsRequirement{
     private int number;
     private int level;
     private CardCategory category;
 
+
     /**
-     * Class constructor
-     * @param num is the number of SupplyCard needed to activate a LeaderCard
-     * @param lev is the minimum level of SupplyCard needed to activate a LeaderCard
-     * @param cat is the CardCategory of the SupplyCard needed to activate a LeaderCard
+     * Creates a list of requirements.
+     * @param num the number of SupplyCard needed to activate a LeaderCard
+     * @param lev the minimum level of SupplyCard needed to activate a LeaderCard
+     * @param cat the CardCategory of the SupplyCard needed to activate a LeaderCard
      */
     public CardsRequirement(int num, int lev, CardCategory cat) {
         number = num;
@@ -22,28 +23,30 @@ public class CardsRequirement{
         category = cat;
     }
 
+
     /**
-     * The getNumber method can be used to find the number of SupplyCard needed to activate a LeaderCard
+     * Finds the number of SupplyCard needed to activate a LeaderCard.
      * @return the number of SupplyCard needed to activate a LeaderCard
      */
     public int getNumber(){
         return number;
     }
 
+
     /**
-     * The minLevel method can be used to find the minimum level of SupplyCard needed to activate a LeaderCard
+     * Finds the minimum level of SupplyCard needed to activate a LeaderCard.
      * @return the minimum level of SupplyCard needed to activate a LeaderCard
      */
     public int minLevel(){
         return level;
     }
 
+
     /**
-     * The reqCard method can be used to find the CardCategory of the SupplyCard needed to activate a LeaderCard
-     * @return the CardCategory needed to activate a LeaderCard
+     * Finds the CardCategory of the SupplyCard needed to activate a LeaderCard.
+     * @return the CardCategory of the SupplyCard needed to activate a LeaderCard
      */
     public CardCategory reqCard(){
         return category;
     }
-
 }

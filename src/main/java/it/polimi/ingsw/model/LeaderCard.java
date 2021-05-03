@@ -20,10 +20,10 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
     private final int winPoints;
 
     /**
-     * Class constructor
-     * @param reqSC is a SupplyContainer which contains all the supplies needed to buy the LeaderCard
-     * @param reqCR is an ArrayList of CardRequirement which contains the details about the SupplyCards needed to buy the LeaderCard
-     * @param abil is the type of the LeaderCard's ability
+     * Creates a leader card.
+     * @param reqSC a SupplyContainer which contains all the supplies needed to buy the LeaderCard
+     * @param reqCR an ArrayList of CardRequirement which contains the details about the SupplyCards needed to buy the LeaderCard
+     * @param abil the type of the LeaderCard's ability
      * @param points win points given by this leader when active
      */
     public LeaderCard(int id, SupplyContainer reqSC, ArrayList<CardsRequirement> reqCR, LeaderAbility abil, int points){
@@ -34,7 +34,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
     }
 
     /**
-     * The getCost method returns a pair which contains all the requirements needed to buy the LeaderCard
+     * The getCost method returns a pair which contains all the requirements needed to buy the LeaderCard.
      * @return a pair which contains all the requirements needed to buy the LeaderCard
      */
     public Pair<SupplyContainer, ArrayList<CardsRequirement>> getCost(){
@@ -42,9 +42,9 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
     }
 
     /**
-     * The getAbility returns the ability of the LeaderCard
+     * The getAbility returns the ability of the LeaderCard.
      * @return the ability of the LeaderCard
-     * @throws LeaderException if the LeaderCard is not active yet or if it has been discard
+     * @throws LeaderException the LeaderCard is not active yet or if it has been discard
      */
     public LeaderAbility getAbility() throws LeaderException{
         if(!active || discarded)
@@ -53,7 +53,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
     }
 
     /**
-     * The activate method activates the LeaderCard
+     * The activate method activates the LeaderCard.
      * @throws LeaderException leader cannot be discarded, because it was already discarded or activated
      */
     public void activate() throws LeaderException{
@@ -66,7 +66,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
     }
 
     /**
-     * The setDiscard method discard the LeaderCard
+     * The setDiscard method discard the LeaderCard.
      * @throws LeaderException leader cannot be discarded, because it was already discarded or activated
      */
     public void discard() throws LeaderException{
@@ -78,7 +78,6 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
         }
     }
 
-    //TODO
     @Override
     public ArrayList<Integer> getStatus() {
         ArrayList<Integer> status = new ArrayList<>();

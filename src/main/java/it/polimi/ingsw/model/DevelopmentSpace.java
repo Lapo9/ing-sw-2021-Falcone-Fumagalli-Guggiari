@@ -59,8 +59,10 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
     }
 
 
-
-
+    /**
+     * Returns the input of the last development card contained in the development space.
+     * @return the input of the last development card contained in the development space
+     */
     public SupplyContainer getInput() {
         return cards.get(cards.size()-1).produce();
     }

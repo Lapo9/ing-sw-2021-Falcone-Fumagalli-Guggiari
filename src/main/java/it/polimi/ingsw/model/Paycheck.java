@@ -17,6 +17,9 @@ public class Paycheck implements AcceptsSupplies, HasStatus {
     private SupplyContainer fromDepot = new SupplyContainer(onlyFrom(DepotID.SourceType.DEPOT), onlyFrom(DepotID.SourceType.DEPOT));
 
 
+    /**
+     * Creates a paycheck.
+     */
     public Paycheck(){}
 
 

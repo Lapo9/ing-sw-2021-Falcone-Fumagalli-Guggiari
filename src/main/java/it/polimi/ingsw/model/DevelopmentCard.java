@@ -5,6 +5,10 @@ import it.polimi.ingsw.exceptions.SupplyException;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the development card of the game. Every card has its own unique id and has  level, win points,
+ * category, production and cost.
+ */
 public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSupplies{
 
     private int id;
@@ -14,15 +18,9 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
     private Production production;
     private SupplyContainer cost;
 
-    /**
-     * Class constructor
-     */
-    public DevelopmentCard(){
-
-    }
 
     /**
-     * Class constructor: initialize the card
+     * Class constructor: initialize the card.
      * @param level Card level
      * @param winPoints Card win points
      * @param category Card color
@@ -40,57 +38,63 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
 
     }
 
-
-
+    /**
+     * Returns the input of the production of the development card.
+     * @return the input of the production of the development card
+     */
     public SupplyContainer getInput() {
         return production.getInput();
     }
 
 
-
     /**
-     * This method activates the production of the card
-     * @return A SupplyContainer containing the resource in output from the card production
+     * Activates the production of the card.
+     * @return a SupplyContainer containing the resource in output from the card production
      */
     public SupplyContainer produce() {
         return production.produce();
     }
 
     /**
-     * This method checks if the input resources can produce the output
-     * @throws SupplyException If there isn't the right number of supplies to activate production
+     * Checks if the input resources can produce the output.
+     * @throws SupplyException there isn't the right number of supplies to activate production
      */
     public void check() throws SupplyException{
         production.check();
     }
 
     /**
-     * This method gets the cost of the card
-     * @return The cost of the card
+     * Returns the cost of the card.
+     * @return the cost of the card
      */
     public SupplyContainer getCost() {
         return cost;
     }
 
     /**
-     * This method gets the level of the card
-     * @return The card level
+     * Returns the level of the card.
+     * @return the level of the card
      */
     public int getLevel(){
         return level;
     }
 
     /**
-     * This method gets the color of the card
-     * @return The card color from the enum CardCategory
+     * Returns the color of the card.
+     * @return the color of the card
      */
     public CardCategory getCategory() {
         return category;
     }
 
+    /**
+     * Returns the id of the card.
+     * @return the id of the card
+     */
     public int getId() {
         return id;
     }
+
 
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
@@ -122,7 +126,6 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         return winPoints;
     }
 
-    //TODO
     @Override
     public ArrayList<Integer> getStatus(){
         ArrayList<Integer> status = new ArrayList<>();

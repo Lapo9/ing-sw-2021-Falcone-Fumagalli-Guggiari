@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 
 /**
- * enum containing every type of development card
+ * Contains the types of development card.
  */
 
 public enum CardCategory {

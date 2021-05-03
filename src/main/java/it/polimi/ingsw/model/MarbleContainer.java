@@ -16,7 +16,7 @@ public class MarbleContainer implements HasStatus {
     private int red;
 
     /**
-     * Class constructor
+     * Creates a marble container.
      * @param y number of yellow marbles
      * @param b number of blue marbles
      * @param g number of grey marbles
@@ -143,7 +143,6 @@ public class MarbleContainer implements HasStatus {
     }
 
 
-
     /**
      * Empties the container
      */
@@ -170,6 +169,7 @@ public class MarbleContainer implements HasStatus {
 
         return status;
     }
+
 
     /**
      * Turns the MarbleColor in input in the right WarehouseObjectType

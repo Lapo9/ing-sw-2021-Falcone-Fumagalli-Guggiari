@@ -10,14 +10,18 @@ import it.polimi.ingsw.model.leader_abilities.Producer;
 import java.util.ArrayList;
 
 /**
- * Manages all the depot that can contain resources from the market and the productions, namely warehouse and leader depots
+ * Manages all the depot that can contain resources from the market and the productions, namely warehouse and leader depots.
  */
 public class DepotsManager implements AcceptsSupplies {
 
     private Warehouse warehouse;
     private LeadersSpace leadersSpace;
 
-
+    /**
+     * Creates a depots manager given a warehouse and a leader space.
+     * @param warehouse the player's warehouse
+     * @param leadersSpace the player's leaders space
+     */
     public DepotsManager(Warehouse warehouse, LeadersSpace leadersSpace){
         this.warehouse = warehouse;
         this.leadersSpace = leadersSpace;
@@ -138,7 +142,7 @@ public class DepotsManager implements AcceptsSupplies {
 
 
     /**
-     * Returns the number of the given supplies contained in warehouse and in leader depots
+     * Returns the number of the given supplies contained in warehouse and in leader depots.
      * @param wots Type of resources
      * @return Number of the given resources
      */

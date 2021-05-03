@@ -12,7 +12,7 @@ public class PopeFavorTile implements HasStatus, WinPointsCountable{
 
     /**
      * Class constructor
-     * @param p are the points of the PopeFavorTile
+     * @param p the points of the PopeFavorTile
      */
     public PopeFavorTile(int p){
         points = p;
@@ -49,7 +49,7 @@ public class PopeFavorTile implements HasStatus, WinPointsCountable{
         return active ? points : 0;
     }
 
-    //TODO
+
     @Override
     public ArrayList<Integer> getStatus(){
         ArrayList<Integer> status = new ArrayList<>();

@@ -26,8 +26,13 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
     }
 
 
-
-
+    /**
+     * Returns the sum of the inputs needed by the last development cards contained in the development space indicated.
+     * @param s1 development space 1
+     * @param s2 development space 2
+     * @param s3 development space 3
+     * @return the sum of the inputs indicated
+     */
     public SupplyContainer getInput(boolean s1, boolean s2, boolean s3) {
         SupplyContainer result = new SupplyContainer();
         boolean[] activeProductions = {s1, s2, s3};
@@ -39,8 +44,6 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
         }
         return result;
     }
-
-
 
 
     /**

@@ -13,6 +13,9 @@ public enum DepotID {
     BASE_PRODUCTION(DepotType.BASE_PRODUCTION, SourceType.ANY, 1),
     ANY(DepotType.ANY, SourceType.ANY, 1);
 
+    /**
+     * Contains the depot types of the places where you can store resources.
+     */
     public enum DepotType {
         //don't you ever even try to change the order!
         WAREHOUSE(0), LEADER_DEPOT(0), LEADER_PRODUCTION(1), DEVELOPMENT(1), COFFER(2), PAYCHECK(3), BASE_PRODUCTION(4), ANY(5);
@@ -23,12 +26,18 @@ public enum DepotID {
             this.order = order;
         }
 
+        /**
+         * Returns the index of the depot type.
+         * @return the index of the depot type
+         */
         public int getOrder(){
             return order;
         }
     }
 
-
+    /**
+     * Contains the sources from which resources can came from.
+     */
     public enum SourceType {
         DEPOT, STRONGBOX, ANY, PAYCHECK;
     }
@@ -44,14 +53,26 @@ public enum DepotID {
         this.source = source;
     }
 
+    /**
+     * Returns the type of the depot.
+     * @return the type of the depot
+     */
     public DepotType getType(){
         return type;
     }
 
+    /**
+     * Returns the number of the depot
+     * @return the number of the depot
+     */
     public int getNum(){
         return typeOrder;
     }
 
+    /**
+     * Returns the source from which resources in the depot can came from.
+     * @return the source from which resources in the depot can came from.
+     */
     public SourceType getSource() {
         return source;
     }
