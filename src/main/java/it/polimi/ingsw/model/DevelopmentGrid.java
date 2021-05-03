@@ -5,27 +5,30 @@ import java.util.ArrayList;
 import it.polimi.ingsw.exceptions.*;
 
 /**
- * The DevelopmentGrid class is meant to contain the SupplyCard, divided by level and color in three rows and four columns,
- * every box of the DevelopmentGrid is made of four SupplyCard
+ * The DevelopmentGrid is meant to contain the SupplyCard, divided by level and color in three rows and four columns,
+ * every box of the DevelopmentGrid is made of four SupplyCard.
  * The first row is for level three SupplyCard, the second row is for level two SupplyCard and the third is for
  * level one SupplyCard.
  * The first column is for green SupplyCard, the second column is for blue SupplyCard, the third is for yellow SupplyCard
- * and the fourth is for purple SupplyCard
+ * and the fourth is for purple SupplyCard.
  */
 public class DevelopmentGrid implements HasStatus{
+
     private ArrayList<ArrayList<DevelopmentCard>> grid;
     private int boughtCards = 0;
 
+
     /**
-     * Class constructor
+     * Creates a DevelopmentGrid where cards are placed in a random order, according to rules.
      */
     public DevelopmentGrid() {
         grid = new ArrayList<ArrayList<DevelopmentCard>>();
         fill(false);
     }
 
+
     /**
-     * Class constructor used to create a fixed DevelopmentGrid
+     * Create a fixed DevelopmentGrid.
      * @param type needed to create a not-random DevelopmentGrid
      */
     public DevelopmentGrid(boolean type){
@@ -33,26 +36,23 @@ public class DevelopmentGrid implements HasStatus{
         fill(true);
     }
 
-    /*
-     * The getPlace method returns the index of the ArrayList given column and row number
-     * @param column is the column number
-     * @param row is the row number
-     * @return the index of the ArrayList that represents the grid
-     */
+
+    //Returns the index of the ArrayList given column and row number.
     private int getPlace(int column, int row){
         return 4 * row + column;
     }
 
+
     /**
-     * The buyCard method returns the last card in the row x column position in the DevelopmentGrid if the Paycheck
-     * contains all the supplies required to buy the SupplyCard
+     * Returns the first card in the row x column position in the DevelopmentGrid if the Paycheck contains all the
+     * supplies required to buy the SupplyCard.
      * @param column is the column number (between 0 and 3)
      * @param row is the row number (between 0 and 2)
-     * @param p is a type of SupplyContainer which contains resources to buy a SupplyCard
+     * @param p contains resources to buy a SupplyCard
      * @param leadersSpace is the LeaderCard container
      * @return the chosen SupplyCard if the Paycheck contains the right supplies
-     * @throws SupplyException if the Paycheck doesn't contain the right supplies to buy the chosen SupplyCard
-     * @throws NoSuchCardException if the row x column position is empty
+     * @throws SupplyException the Paycheck doesn't contain the right supplies to buy the chosen SupplyCard
+     * @throws NoSuchCardException the row x column position is empty
      */
     public DevelopmentCard buyCard(int column, int row, Paycheck p, LeadersSpace leadersSpace)throws SupplyException, NoSuchCardException{
         SupplyContainer container = p.getAll();
@@ -131,10 +131,11 @@ public class DevelopmentGrid implements HasStatus{
         }
     }
 
+
     /**
      * Removes a card of the specified color. It tries to remove first cards of level 1, then 2, then 3.
-     * @param color Style to remove
-     * @throws NoSuchCardException Cards of specified color are not present
+     * @param color style to remove
+     * @throws NoSuchCardException cards of specified color are not present
      */
     public void removeCard(ActionTilesStack.ActionTile color) throws NoSuchCardException{
         for(int i=0; i<3; ++i){
@@ -146,6 +147,7 @@ public class DevelopmentGrid implements HasStatus{
         throw new NoSuchCardException("There isn't a "+color.toString()+" card");
     }
 
+
     /**
      * Returns the number of cards that have been bought.
      * @return the number of cards that have been bought
@@ -154,12 +156,13 @@ public class DevelopmentGrid implements HasStatus{
         return boughtCards;
     }
 
+
     /**
-     * The getLevel function returns the level of the SupplyCard contained in row x column space in the DevelopmentGrid
+     * Returns the level of the SupplyCard contained in the given position.
      * @param column is the column number
      * @param row is the row number
      * @return the level of the SupplyCard in the given position
-     * @throws NoSuchCardException if the place is empty
+     * @throws NoSuchCardException the place is empty
      */
     public int getLevel(int column, int row) throws NoSuchCardException{
         int pos = getPlace(column, row);
@@ -169,12 +172,43 @@ public class DevelopmentGrid implements HasStatus{
             return 3 - row;
     }
 
-    //TODO
-    public ArrayList<Integer> getStatus(){
-        return null;
+
+    /*The status contains all the id's of the cards in the grid. 0 if the card has been removed.
+    *The status is made this way:
+    * lvl 3 cards   green
+    *               blue
+    *               yellow
+    *               violet
+    *lvl 2 cards   green
+    *              blue
+    *              yellow
+    *              violet
+    *lvl 1 cards   green
+    *              blue
+    *              yellow
+    *              blue
+    */
+    @Override
+    public ArrayList<Integer> getStatus() {
+        ArrayList<Integer> status = new ArrayList<>();
+        for(int i = 0; i<12; i++){
+            ArrayList<DevelopmentCard> list = grid.get(i);
+            int j = 0;
+            int size = list.size();
+            while(size < 4){
+                status.add(0);   //add zeros for removed cards
+                size++;
+            }
+            while(j < list.size()){
+                status.add(list.get(j).getId());
+                j++;
+            }
+        }
+        return status;
     }
 
 
+    //Puts the cards in the grid.
     private void fill(boolean type) {
         ArrayList<DevelopmentCard> greenLvlOne = new ArrayList<>();
         greenLvlOne.add(new DevelopmentCard(1, 1, 1, CardCategory.GREEN, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 1)), new SupplyContainer(0, 0, 0, 2, 0)));
