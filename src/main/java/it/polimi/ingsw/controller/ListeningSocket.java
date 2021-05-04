@@ -28,6 +28,7 @@ public class ListeningSocket {
             try {
                 Socket client = listeningSocket.accept();
                 new Player(client, matchManager);
+                System.out.print("\n One player connected");
             } catch (IOException ioe) {ioe.printStackTrace();}
         }
     }

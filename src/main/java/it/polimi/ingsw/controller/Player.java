@@ -22,8 +22,12 @@ public class Player {
     private Match match;
     private String name;
     private boolean isConnected = false;
+    private boolean destroy = false;
     private Dashboard dashboard;
     private int selectedItemsInPreMatch = 0;
+
+    private Thread listenRoutineThread;
+    private Thread heartbeatThread;
 
 
 
@@ -47,13 +51,6 @@ public class Player {
         selectedItemsInPreMatch++;
     }
 
-    private synchronized void destroy() {
-        isConnected = false;
-        try {
-            TimeUnit.SECONDS.sleep(15); //give time to close connection
-        } catch (InterruptedException ie){ie.printStackTrace();}
-    }
-
 
 
     public synchronized String getName(){
@@ -66,18 +63,43 @@ public class Player {
         return isConnected;
     }
 
+    private synchronized void setConnected(boolean isConnected){
+        this.isConnected = isConnected;
+    }
+
+
+    private synchronized boolean isDestroyed(){
+        return destroy;
+    }
+
+    private synchronized boolean setDestroy(boolean d){
+        boolean res = destroy != d;
+        destroy = d;
+        return res; //returns whether it was this thread to change the status
+    }
+
 
     public synchronized void reconnect(Player replacingPlayer){
-        isConnected = true;
-        this.socket = replacingPlayer.socket; //no problems because old this.client is for sure closed if this method is called
-        try {
-            socket.send("message You are connected!", ClientSocket.packUpStringWithLengthAndType((byte) 0));
-        } catch (Exception e){
-            destroy();
-            return;
+        if(!isConnected()) {
+            System.out.print("\n" + name + " reconnected");
+            setConnected(true);
+            setDestroy(false);
+            this.socket = replacingPlayer.socket; //no problems because old this.client is for sure closed if this method is called
+            try {
+                socket.send("message You are connected!", ClientSocket.packUpStringWithLengthAndType((byte) 0));
+            } catch (Exception e) {
+                destroy();
+                return;
+            }
+
+            listenRoutineThread = new Thread(this::listenRoutine);
+            heartbeatThread = new Thread(this::heartbeat);
+            listenRoutineThread.start();
+            heartbeatThread.start();
         }
-        new Thread(this::listenRoutine).start(); //old player re-start listening
-        new Thread(this::heartbeat).start();
+        else {
+            send((byte) 0, "fatal Wait a few seconds before reconnecting");
+        }
     }
 
 
@@ -100,7 +122,7 @@ public class Player {
     public synchronized boolean send(byte type, String message){
         try {
             socket.send(message, ClientSocket.packUpStringWithLengthAndType(type));
-        } catch (IOException ioe){
+        } catch (Exception e){
             destroy();
             return false;
         }
@@ -127,37 +149,44 @@ public class Player {
         this.name = tokens[1]; //set the name
 
         try {
-            matchManager.addPlayer(this, tokens[2]); //add the player to the match, if you cannot throw
+            matchManager.addPlayer(this, tokens[2]); //add the player to the match, if you cannot destroy
         } catch (MatchException me){
-            try {
-                socket.send("fatal " + me.getMessage(), ClientSocket.packUpStringWithLengthAndType((byte) 0));
-            } catch (Exception e){e.printStackTrace();}
+            send((byte) 0, "fatal " + me.getMessage());
+            destroy();
+            return;
+        }
+
+        //if it was a reconnect, then this player can be destroyed
+        if(dashboard == null){
             destroy();
             return;
         }
 
         try {
-            socket.send("message You are connected!", ClientSocket.packUpStringWithLengthAndType((byte) 0));
+            send((byte) 0, "message You are connected!");
         } catch (Exception e){
             destroy();
             return;
         }
-        isConnected = true;
+        setConnected(true);
+        System.out.print("\n" + name + " got accepted");
 
-        new Thread(this::listenRoutine).start();
-        new Thread(this::heartbeat).start();
+        listenRoutineThread = new Thread(this::listenRoutine);
+        heartbeatThread = new Thread(this::heartbeat);
+        listenRoutineThread.start();
+        heartbeatThread.start();
     }
 
 
     //routine performed by the socket to listen. It is performed at max once every 5 seconds
     private void listenRoutine() {
-        while (isConnected()) {
+        while (!isDestroyed()) {
             String message;
             try {
                 message = socket.receiveAndTransform(10000, ClientSocket::bytesToString); //the client must send an ACK once every 10 seconds, if not the server will consider that player disconnected
             } catch (Exception ioe){
                 destroy(); //if nothing arrived (not even the ACK), we assume the player has connection issues, so disconnect him
-                message = "dead";
+                return;
             }
             match.update(message, this); //send the command to the match
         }
@@ -166,7 +195,7 @@ public class Player {
 
     //send an heartbeat to the player once every 8 seconds to tell him everything is ok
     private void heartbeat(){
-        while(isConnected()) {
+        while(!isDestroyed()) {
             send((byte) 0, "ECG");
             try {
                 TimeUnit.SECONDS.sleep(8);
@@ -175,5 +204,28 @@ public class Player {
             }
         }
     }
+
+
+    private void destroy() {
+        System.out.print("\n" + name + " disconnected");
+        //if this thread called destroy first
+        if (setDestroy(true)) {
+            //a new thread wait for the listener an the heartbeat to end. It must be a new thread, if not it happens that the thread that called destroy waits for the join on himself, causing a deadlock.
+            new Thread(() -> {
+                try {
+                    match.update("dead", this);
+                    //wait for the threads to end
+                    listenRoutineThread.join();
+                    heartbeatThread.join();
+                } catch (NullPointerException npe) {
+                    //there wasn't a match
+                } catch (InterruptedException ie) {
+                    ie.printStackTrace();
+                }
+                setConnected(false);
+            }).start();
+        }
+    }
+
 
 }

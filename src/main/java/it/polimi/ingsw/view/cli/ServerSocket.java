@@ -4,9 +4,7 @@ import it.polimi.ingsw.ClientSocket;
 import it.polimi.ingsw.Pair;
 
 import java.io.*;
-import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
 
@@ -19,6 +17,10 @@ public class ServerSocket {
     private ControllerInterpreter controllerInterpreter;
     private ModelInterpreter modelInterpreter;
     private boolean connected = false;
+    private boolean destroy = false;
+
+    private Thread listenRoutineThread;
+    private Thread heartbeatThread;
 
 
     /**
@@ -36,39 +38,64 @@ public class ServerSocket {
      * @param port Port of the server
      * @param playerName Name of the player
      */
-    public void connect(String ip, int port, String playerName, String matchId){
+    public synchronized void connect(String ip, int port, String playerName, String matchId){
         if(controllerInterpreter == null || modelInterpreter == null){
             throw new IllegalThreadStateException("Cannot connect without an interpreter");
         }
-        else if(connected){
+        else if(isConnected()){
             controllerInterpreter.execute("error You are already connected!");
             return;
         }
 
+        setDestroy(false);
 
         try {
             //connect
             socket = new ClientSocket(ip, port);
-            //send player name
-            socket.send("name " + playerName + " " + matchId, ClientSocket.packUpStringWithLength());
+            //send player name, if the send fails, terminate
+            if(!send("name " + playerName + " " + matchId)){
+                return;
+            }
 
             //wait for server response (max 10 seconds)
             String response = socket.receiveAndTransformWithType(10000, ClientSocket::bytesToString).second;
             if (isError(response)){
-                terminate();
+                terminate(response);
                 return;
             }
             controllerInterpreter.execute(response);
-        } catch (IOException ioe) {
-            terminate();
+        } catch (Exception e) {
+            terminate("fatal Server is down :(");
             return;
         }
 
-        connected = true;
+        setConnected(true);
 
         //start listening
-        new Thread(this::socketListenRoutine).start();
-        new Thread(this::keepConnectionAlive).start();
+        listenRoutineThread = new Thread(this::socketListenRoutine);
+        heartbeatThread = new Thread(this::heartbeat);
+        listenRoutineThread.start();
+        heartbeatThread.start();
+    }
+
+
+    public synchronized boolean isConnected(){
+        return connected;
+    }
+
+    private synchronized void setConnected(boolean c){
+        connected = c;
+    }
+
+
+    private synchronized boolean isDestroyed(){
+        return destroy;
+    }
+
+    private synchronized boolean setDestroy(boolean d){
+        boolean res = d != destroy;
+        destroy = d;
+        return res; //whether it was this call to change the status or not
     }
 
 
@@ -89,7 +116,6 @@ public class ServerSocket {
         return false;
     }
 
-
     private boolean isECG(String message){
         String command = message.split(" ")[0];
         if (command.equals("ECG")){
@@ -105,7 +131,7 @@ public class ServerSocket {
      * @param interpreter the controller interpreter
      */
     public void attachInterpreter(ControllerInterpreter interpreter){
-        if(connected){
+        if(isConnected()){
             throw new IllegalThreadStateException("Cannot attach the interpreter after the connection is established");
         }
         controllerInterpreter = interpreter;
@@ -117,7 +143,7 @@ public class ServerSocket {
      * @param interpreter the model interpreter
      */
     public void attachInterpreter(ModelInterpreter interpreter){
-        if(connected){
+        if(isConnected()){
             throw new IllegalThreadStateException("Cannot attach the interpreter after the connection is established");
         }
         modelInterpreter = interpreter;
@@ -128,12 +154,14 @@ public class ServerSocket {
      * Sends the specified message to the server.
      * @param message Message to send
      */
-    public void send(String message) {
+    public boolean send(String message) {
         try {
             socket.send(message, ClientSocket.packUpStringWithLength());
         } catch (IOException ioe) {
-            terminate();
+            terminate("fatal Server is down :(");
+            return false;
         }
+        return true;
     }
 
 
@@ -141,12 +169,12 @@ public class ServerSocket {
     /*
     Send an ACK once every 4 seconds in order to keep the connection to the server alive
      */
-    private void keepConnectionAlive() {
-        while (connected) {
+    private void heartbeat() {
+        while (!isDestroyed()) {
             try {
                 socket.send("ECG", ClientSocket.packUpStringWithLength());
             } catch (IOException ioe) {
-                terminate();
+                terminate("fatal Something went wrong :(");
                 return;
             }
 
@@ -169,13 +197,13 @@ Structure of the packet
     +--------+--------+--------+--------+------
 */
     private void socketListenRoutine() {
-        while (connected) {
+        while (!isDestroyed()) {
             try {
                 Pair<Byte, byte[]> tmp;
                 try {
                      tmp = socket.receiveWithType(10000); //cli expects to receive an ECG each 10 seconds
                 } catch (SocketTimeoutException ste){
-                    terminate(); //if you don't receive any message in 10 seconds
+                    terminate("fatal Server doesn't respond"); //if you don't receive any message in 10 seconds
                     return;
                 }
                 byte type = tmp.first;
@@ -184,7 +212,7 @@ Structure of the packet
                 if (type == 0) {
                     String stringMessage = ClientSocket.bytesToString(message);
                     if(isFatal(stringMessage)){
-                        terminate();
+                        terminate(stringMessage);
                     }
                     if(!isECG(stringMessage)) {
                         controllerInterpreter.execute(ClientSocket.bytesToString(message));
@@ -194,12 +222,11 @@ Structure of the packet
                     modelInterpreter.update(ClientSocket.bytesToInts(message));
                 }
                 else if (type == 2) {
-                    terminate();
-                    connected = false;
+                    terminate("fatal Server closed connection");
                 }
 
             } catch (IOException ioe) {
-                terminate();
+                terminate("fatal Something went wrong :(");
             }
         }
     }
@@ -207,14 +234,22 @@ Structure of the packet
 
 
 
-    private synchronized void terminate() {
-        connected = false;
-        try {
-            socket.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+    private void terminate(String fatalMessage) {
+        if (setDestroy(true)) {
+            //a new thread must wait for the joins, in order not to create deadlocks
+            new Thread(() -> {
+                try {
+                    socket.close();
+                    //wait for the threads to join
+                    listenRoutineThread.join();
+                    heartbeatThread.join();
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                }
+                controllerInterpreter.execute(fatalMessage);
+                setConnected(false);
+            }).start();
         }
-        controllerInterpreter.execute("fatal Something went wrong :(");
     }
 
 }
