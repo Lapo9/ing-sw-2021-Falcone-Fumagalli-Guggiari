@@ -22,6 +22,26 @@ public class FaithTrackTest {
     }
 
     @Test
+    public void goAheadDontTrigger_true() {
+        FaithTrack fTrack = new FaithTrack();
+        for(int i = 0; i<7; i++)
+            fTrack.goAheadDontTrigger();
+        assertTrue(fTrack.goAheadDontTrigger());
+    }
+
+    @Test
+    public void goAheadDontTrigger_false() {
+        FaithTrack fTrack1 = new FaithTrack();
+        FaithTrack fTrack2 = new FaithTrack();
+        for(int i = 0; i<7; i++) {
+            fTrack1.goAheadDontTrigger();
+            fTrack2.goAheadDontTrigger();
+        }
+        fTrack2.goAheadDontTrigger();
+        assertTrue(fTrack1.goAheadDontTrigger());
+    }
+
+    @Test
     public void vaticanReport_triggeredByPlayer() {
         FaithTrack fTrack = new FaithTrack();
         fTrack.goAhead(8);

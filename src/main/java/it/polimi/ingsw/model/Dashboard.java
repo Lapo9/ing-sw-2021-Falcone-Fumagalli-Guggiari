@@ -313,6 +313,15 @@ public class Dashboard implements WinPointsCountable, HasStatus{
 
 
     /**
+     * Moves the player one tile ahead in the faith track.
+     * @return true a vatican report needs to be issued
+     */
+    public boolean goAheadDontTrigger(){
+        return faithTrack.goAheadDontTrigger();
+    }
+
+
+    /**
      * Triggers a vatican report.
      */
     public void vaticanReport(){

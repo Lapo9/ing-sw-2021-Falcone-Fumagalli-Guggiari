@@ -120,6 +120,23 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
     }
 
     /**
+     * Moves the player one position ahead in the FaithTrack.
+     * @return true if a vatican report needs to be issued
+     */
+    public boolean goAheadDontTrigger(){
+        boolean vr = false;
+        position++;
+        if(track.get(position).isPopeSpace &&
+                ((position == 8 && vaticanReportCounter == 0) ||(position == 16 && vaticanReportCounter == 1)||
+                        (position == 24 && vaticanReportCounter == 2))) {
+            vr = true;
+        }
+        if(track.get(position).points != 0)
+            winPoints = track.get(position).points;
+        return vr;
+    }
+
+    /**
      * Triggers a vatican report.
      */
     public void vaticanReport(){

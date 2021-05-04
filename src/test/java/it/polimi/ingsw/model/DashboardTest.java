@@ -3711,9 +3711,29 @@ public class DashboardTest {
     public void goAhead_vaticanReportTriggered() {
         Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid());
         boolean result = false;
-        for(int i = 0; i <= 8; i++)
+        for(int i = 0; i < 8; i++)
             result |= dshbrd.goAhead();
         assertTrue(result);
+    }
+
+    @Test
+    public void goAheadDontTrigger() {
+        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid());
+        ArrayList<CardsRequirement> cards = new ArrayList<>();
+        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
+        cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
+        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        try {
+            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
+            dshbrd.addLeader(new LeaderCard(9, new SupplyContainer(), cards2, new Market(WarehouseObjectType.SERVANT), 5));
+        } catch (LeaderException e) {fail();}
+
+        for(int i = 0; i<7; i++)
+            dshbrd.goAheadDontTrigger();
+        boolean result = dshbrd.goAheadDontTrigger();
+        int[] expectedResult = {8, 1};
+        int[] actualResult = {dshbrd.getStatus().get(102), result ? 1 : 0};
+        assertArrayEquals(expectedResult, actualResult);
     }
 
     @Test
