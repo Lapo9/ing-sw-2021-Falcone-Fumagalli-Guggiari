@@ -81,6 +81,16 @@ public class Dashboard implements WinPointsCountable, HasStatus{
 
 
     /**
+     * Returns how many non-red marbles are there in the unassigned supplies marble container.
+     * @return How many non-red marbles are there in the unassigned supplies marble container.
+     */
+    public int getUnassignedSuppliesQuantity(){
+        return unassignedSupplies.getQuantity(MarbleColor.WHITE, MarbleColor.VIOLET, MarbleColor.BLUE, MarbleColor.GREY, MarbleColor.YELLOW);
+    }
+
+
+
+    /**
      * Transforms a marble into the supply contained in the destination depot. If the transformation is not possible a MarbleException is thrown.
      * @param to destination depot
      * @param color the color of the marble

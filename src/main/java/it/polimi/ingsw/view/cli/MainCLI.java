@@ -26,6 +26,10 @@ public class MainCLI {
         SupplyContainer welcomeText = factory.buildSupplyContainer(1, ViewableId.WELCOME_TEXT, "WELCOME");
         welcome.addViewable(welcomeText);
 
+        View dashboard = new View();
+        SupplyContainer dashboardViewable = factory.buildSupplyContainer(1, ViewableId.DASHBOARD_VIEWABLE, "YOUR DASHBOARD");
+        dashboard.addViewable(dashboardViewable);
+
         View start = new View();
         SupplyContainer startText = factory.buildSupplyContainer(1, ViewableId.START_TEXT, "START");
         start.addViewable(startText);
@@ -37,6 +41,7 @@ public class MainCLI {
         screen.addView("welcome", welcome);
         screen.addView("start", start);
         screen.addView("yourTurn", yourTurn);
+        screen.addView("dashboard", dashboard);
 
         screen.start("welcome");
 

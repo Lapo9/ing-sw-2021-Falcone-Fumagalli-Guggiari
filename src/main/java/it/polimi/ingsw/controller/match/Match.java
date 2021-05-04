@@ -1,8 +1,8 @@
 package it.polimi.ingsw.controller.match;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.controller.Player;
 import it.polimi.ingsw.controller.exceptions.MatchException;
-import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.view.cli.fancy_console.FancyConsole;
 
@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import static it.polimi.ingsw.controller.match.MatchPhase.*;
@@ -92,23 +90,25 @@ public class Match {
 
 
     //actions
-    private void listPlayers(Player player, String... args) {
-        StringBuilder playersNames = new StringBuilder("message ");
+    private void info(Player player, String... args) {
+        StringBuilder infoBox = new StringBuilder("message ");
 
         for (Player p : players){
             //if the player is disconnected make him red
             if(p == activePlayer){
-                playersNames.append(FancyConsole.reset() + FancyConsole.FRAMED(FancyConsole.GREEN(" " + p.getName() + " ")) + " ");
+                infoBox.append(FancyConsole.reset() + FancyConsole.FRAMED(FancyConsole.GREEN(" " + p.getName() + " ")) + " ");
             }
             else if(p.isConnected()) {
-                playersNames.append(FancyConsole.reset() + FancyConsole.FRAMED(" " + p.getName() + " ") + " ");
+                infoBox.append(FancyConsole.reset() + FancyConsole.FRAMED(" " + p.getName() + " ") + " ");
             }
             else {
-                playersNames.append(FancyConsole.reset() + FancyConsole.FRAMED(FancyConsole.RED(" " + p.getName() + " ")) + " ");
+                infoBox.append(FancyConsole.reset() + FancyConsole.FRAMED(FancyConsole.RED(" " + p.getName() + " ")) + " ");
             }
         }
 
-        player.send((byte)0, playersNames.toString());
+        infoBox.append("\t\t" + FancyConsole.UNDERLINED(FancyConsole.MAGENTA(phase.toString())));
+
+        player.send((byte)0, infoBox.toString());
     }
 
     private void dead(Player player, String... args) {
@@ -134,10 +134,18 @@ public class Match {
                     update("select coin", player);
                 }
                 break;
+        }
 
+
+
+        if(player != activePlayer){
+            return;
+        }
+
+        switch (phase){
             case TURN_START:
             case TURN_END:
-                update("endTurn", player); //simply end turn
+                update("skipTurn", player); //simply end turn
                 break;
 
             case MARKETPLACE:
@@ -206,22 +214,189 @@ public class Match {
         boolean done = true;
         for(int i = 0; i < players.size(); ++i){
             Player p = players.get(i);
-            if((player.getSelectedItemsInPreMatch() != 0 && playerOrder(p) == 0) ||
-               (player.getSelectedItemsInPreMatch() != 1 && playerOrder(p) == 1) ||
-               (player.getSelectedItemsInPreMatch() != 1 && playerOrder(p) == 2) ||
-               (player.getSelectedItemsInPreMatch() != 2 && playerOrder(p) == 3)){
+            if((p.getSelectedItemsInPreMatch() != 0 && playerOrder(p) == 0) ||
+               (p.getSelectedItemsInPreMatch() != 1 && playerOrder(p) == 1) ||
+               (p.getSelectedItemsInPreMatch() != 1 && playerOrder(p) == 2) ||
+               (p.getSelectedItemsInPreMatch() != 2 && playerOrder(p) == 3)){
                 done = false;
             }
         }
 
         if (done){
-            phase = LEADER_SELECTION;
+            phase = TURN_START; //FIXME when we have leaders selection screen
             broadcast("message Now select your leaders");
             //TODO actually show the 4 leaders
         }
     }
 
+    private void marketplace(Player player, String... args) {
+        if(player != activePlayer){
+            player.send((byte) 0, "error It's not your turn!");
+            return;
+        }
+        if(phase != TURN_START){
+            player.send((byte) 0, "error You can't buy marbles now!");
+            return;
+        }
 
+        MarketDirection dir = args[1].equals("h") ? MarketDirection.HORIZONTAL : MarketDirection.VERTICAL;
+        int index = Integer.parseInt(args[2]);
+
+        //check boundaries
+        if(dir == MarketDirection.HORIZONTAL && index == 4){
+            player.send((byte) 0, "error If you choose horizontal, index must be between 1 and 3");
+            return;
+        }
+
+        player.getDashboard().buySupplies(dir, index-1);
+
+        phase = MARKETPLACE; //set new phase
+
+        player.send((byte) 0, "show dashboard"); //show the dashboard to the player
+    }
+
+    private void moveMarble(Player player, String... args) {
+        if(player != activePlayer){
+            player.send((byte) 0, "error It's not your turn!");
+            return;
+        }
+        if(phase != MARKETPLACE){
+            player.send((byte) 0, "error You can't move marbles now!");
+            return;
+        }
+
+        MarbleColor color = MarbleColor.stringToColor(args[1]);
+        DepotID id = DepotID.stringToId(args[2]);
+        try {
+            player.getDashboard().assignMarble(id, color);
+        } catch (Exception e){
+            player.send((byte) 0, "error " + e.toString());
+        }
+        if(player.getDashboard().getUnassignedSuppliesQuantity() == 0){
+            phase = TURN_END; //set next phase
+            player.send((byte) 0, "message You assigned all of your marbles!");
+        }
+    }
+
+    private void colorMarble(Player player, String... args) {
+        if(player != activePlayer){
+            player.send((byte) 0, "error It's not your turn!");
+            return;
+        }
+        if(phase != MARKETPLACE){
+            player.send((byte) 0, "error You can't color your marbles now!");
+            return;
+        }
+
+        MarbleColor color = MarbleColor.stringToColor(args[1]);
+        try {
+            player.getDashboard().transformWhiteMarble(color);
+        } catch (Exception e){
+            player.send((byte) 0, "error " + e.toString());
+        }
+    }
+
+    private void discard(Player player, String... args) {
+        if(player != activePlayer){
+            player.send((byte) 0, "error It's not your turn!");
+            return;
+        }
+        if(phase != MARKETPLACE){
+            player.send((byte) 0, "error You can't discard your marbles now!");
+            return;
+        }
+
+        Pair<Integer, Boolean> ret = player.getDashboard().discardSupplies();
+        int opponentsFaithSteps = ret.first;
+        boolean triggeredPope = ret.second;
+
+        //first, check if the active player triggered a vatican report
+        if(triggeredPope){
+            for (Player p : players){
+                p.getDashboard().vaticanReport();
+            }
+        }
+
+        //now move the opponents one step at a time
+        for (int i = 0; i < opponentsFaithSteps; ++i) {
+            boolean someoneTriggeredVaticanReport = false;
+            for (Player p : players.stream().filter(plr -> plr != player).collect(Collectors.toList())) {
+                //FIXME someoneTriggeredVaticanReport |= p.getDashboard().goAheadDontTrigger();
+            }
+            //if a vatican report has been triggered, then call the vatican report on everybody
+            if (someoneTriggeredVaticanReport){
+                for (Player p1 : players) {
+                    p1.getDashboard().vaticanReport();
+                }
+            }
+        }
+
+        phase = TURN_END;
+    }
+
+    private void move(Player player, String... args) {
+
+        if(player != activePlayer){
+            player.send((byte) 0, "error It's not your turn!");
+            return;
+        }
+        if(phase != TURN_START){
+            player.send((byte) 0, "error You can't move supplies now!");
+            return;
+        }
+
+        WarehouseObjectType supply = WarehouseObjectType.stringToType(args[1]);
+        DepotID from = DepotID.stringToId(args[2]);
+        DepotID to = DepotID.stringToId(args[3]);
+
+        try {
+            player.getDashboard().moveSupply(from, to, supply);
+        } catch (Exception e){
+            player.send((byte) 0, "error " + e.toString());
+        }
+    }
+
+    private void buy(Player player, String... args) {
+
+        if(player != activePlayer){
+            player.send((byte) 0, "error It's not your turn!");
+            return;
+        }
+        if(phase != TURN_START){
+            player.send((byte) 0, "error You can't buy cards now!");
+            return;
+        }
+
+        int row = Integer.parseInt(args[1]);
+        int col = Integer.parseInt(args[2]);
+        int space = Integer.parseInt(args[3]);
+
+        try {
+            player.getDashboard().buyDevelopment(col, row, space);
+        } catch (Exception e){
+            player.send((byte) 0, "error " + e.toString());
+        }
+    }
+
+    private void endTurn(Player player, String... args) {
+        if(player != activePlayer){
+            player.send((byte) 0, "error It's not your turn!");
+            return;
+        }
+        if(phase != TURN_END){
+            player.send((byte) 0, "error You must perform an action before ending your turn!");
+            return;
+        }
+
+        int index = players.indexOf(activePlayer) + 1;
+        index = index == players.size() ? 0 : index;
+
+        activePlayer = players.get(index);
+
+        phase = TURN_START;
+
+        activePlayer.send((byte) 0, "yourTurn");
+    }
 
 
 
@@ -229,10 +404,17 @@ public class Match {
     //sets the list of default commands and their respective actions
     private void setDefaultCommands() {
         commands.put("start", this::start);
-        commands.put("listPlayers", this::listPlayers);
+        commands.put("info", this::info);
         commands.put("dead", this::dead);
         commands.put("select", this::select);
         commands.put("ECG", (p, s) -> {});
+        commands.put("marketplace", this::marketplace);
+        commands.put("moveMarble", this::moveMarble);
+        commands.put("colorMarble", this::colorMarble);
+        commands.put("discard", this::discard);
+        commands.put("move", this::move);
+        commands.put("buy", this::buy);
+        commands.put("endTurn", this::endTurn);
         //TODO add all the commands
     }
 

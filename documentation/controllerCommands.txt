@@ -10,7 +10,7 @@ messages Match::update can receive:
 - colorMarble		color					MARKETPLACE		player coloured one white marble
 - discard							MARKETPLACE		player discarded remaining marbles
 - move			supply type	from	to		TURN_START		player moved one supply
-- buy			card ID		space			TURN_START		player bought one development card
+- buy			row		column	space		TURN_START		player bought one development card
 - activate		production ID				TURN_START		player set one production on active
 - switch		production ID	in/out	new supply type	TURN_START		player switched one production input or output
 - produce							TURN_START		player produced

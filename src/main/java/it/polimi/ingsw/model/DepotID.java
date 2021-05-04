@@ -77,4 +77,41 @@ public enum DepotID {
         return source;
     }
 
+
+
+    public static DepotID stringToId(String s){
+        if (s.equals("wh1")){
+            return WAREHOUSE1;
+        }
+        else if (s.equals("wh2")){
+            return WAREHOUSE2;
+        }
+        else if (s.equals("wh3")){
+            return WAREHOUSE3;
+        }
+        else if (s.equals("dev1")){
+            return DEVELOPMENT1;
+        }
+        else if (s.equals("dev2")){
+            return DEVELOPMENT2;
+        }
+        else if (s.equals("dev3")){
+            return DEVELOPMENT3;
+        }
+        else if (s.equals("coffer")){
+            return COFFER;
+        }
+        else if (s.equals("paycheck")){
+            return PAYCHECK;
+        }
+        else if (s.equals("base")){
+            return BASE_PRODUCTION;
+        }
+        //FIXME leaders
+
+        return null;
+
+    }
+
+
 }

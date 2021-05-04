@@ -102,9 +102,16 @@ public class UserInterpreter {
         //TODO add all of the commands!
         commands.add(new UserCommand(false, "show", new ArrayList<>(Arrays.asList("ViewTest1", "ViewTest2")))); //TODO test to eliminate
         commands.add(new UserCommand(false, "connect", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-        commands.add(new UserCommand(true, "listPlayers"));
+        commands.add(new UserCommand(true, "info"));
         commands.add(new UserCommand(true, "start"));
         commands.add(new UserCommand(true, "select", new ArrayList<>(Arrays.asList("coin", "servant", "shield", "stone"))));
+        commands.add(new UserCommand(true, "marketplace", new ArrayList<>(Arrays.asList("h", "v")), new ArrayList<>(Arrays.asList("1", "2", "3", "4"))));
+        commands.add(new UserCommand(true, "moveMarble", new ArrayList<>(Arrays.asList("yellow", "blue", "violet", "grey")), new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2"))));
+        commands.add(new UserCommand(true, "colorMarble", new ArrayList<>(Arrays.asList("yellow", "blue", "violet", "grey"))));
+        commands.add(new UserCommand(true, "discard"));
+        commands.add(new UserCommand(true, "move", new ArrayList<>(Arrays.asList("coin", "servant", "shield", "stone")),  new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2", "paycheck", "coffer")), new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2", "paycheck", "coffer"))));
+        commands.add(new UserCommand(true, "endTurn"));
+
         return commands;
     }
 
