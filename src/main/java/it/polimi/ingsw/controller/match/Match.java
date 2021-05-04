@@ -97,11 +97,14 @@ public class Match {
 
         for (Player p : players){
             //if the player is disconnected make him red
-            if(p.isConnected()) {
+            if(p == activePlayer){
+                playersNames.append(FancyConsole.reset() + FancyConsole.FRAMED(FancyConsole.GREEN(" " + p.getName() + " ")) + " ");
+            }
+            else if(p.isConnected()) {
                 playersNames.append(FancyConsole.reset() + FancyConsole.FRAMED(" " + p.getName() + " ") + " ");
             }
             else {
-                playersNames.append(FancyConsole.FRAMED(FancyConsole.RED(" " + p.getName() + " ")) + " ");
+                playersNames.append(FancyConsole.reset() + FancyConsole.FRAMED(FancyConsole.RED(" " + p.getName() + " ")) + " ");
             }
         }
 
@@ -112,7 +115,7 @@ public class Match {
         switch (phase) {
             case LOBBY:
                 //if the leader disconnected and there is another active player replace him
-                if(player.equals(activePlayer)) {
+                if(player == activePlayer) {
                     List<Player> activePlayers = players.stream().filter(p -> p.isConnected()).collect(Collectors.toList());
                     if (!activePlayers.isEmpty()) {
                         activePlayer = activePlayers.get(0);

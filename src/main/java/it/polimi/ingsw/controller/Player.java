@@ -213,19 +213,20 @@ public class Player {
             //a new thread wait for the listener an the heartbeat to end. It must be a new thread, if not it happens that the thread that called destroy waits for the join on himself, causing a deadlock.
             new Thread(() -> {
                 try {
-                    match.update("dead", this);
                     //wait for the threads to end
                     listenRoutineThread.join();
                     heartbeatThread.join();
-                } catch (NullPointerException npe) {
-                    //there wasn't a match
                 } catch (InterruptedException ie) {
                     ie.printStackTrace();
                 }
-                setConnected(false);
+                try {
+                    setConnected(false);
+                    match.update("dead", this);
+                } catch (NullPointerException npe) {
+                    //there wasn't a match
+                }
             }).start();
         }
     }
-
 
 }
