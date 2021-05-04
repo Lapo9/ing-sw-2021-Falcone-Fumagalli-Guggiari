@@ -270,7 +270,7 @@ public class Match {
         try {
             player.getDashboard().assignMarble(id, color);
         } catch (Exception e){
-            player.send((byte) 0, "error " + e.toString());
+            player.send((byte) 0, "error " + e.getMessage());
         }
         if(player.getDashboard().getUnassignedSuppliesQuantity() == 0){
             phase = TURN_END; //set next phase
@@ -292,7 +292,7 @@ public class Match {
         try {
             player.getDashboard().transformWhiteMarble(color);
         } catch (Exception e){
-            player.send((byte) 0, "error " + e.toString());
+            player.send((byte) 0, "error " + e.getMessage());
         }
     }
 
@@ -352,7 +352,7 @@ public class Match {
         try {
             player.getDashboard().moveSupply(from, to, supply);
         } catch (Exception e){
-            player.send((byte) 0, "error " + e.toString());
+            player.send((byte) 0, "error " + e.getMessage());
         }
     }
 
@@ -374,7 +374,7 @@ public class Match {
         try {
             player.getDashboard().buyDevelopment(col, row, space);
         } catch (Exception e){
-            player.send((byte) 0, "error " + e.toString());
+            player.send((byte) 0, "error " + e.getMessage());
         }
     }
 
