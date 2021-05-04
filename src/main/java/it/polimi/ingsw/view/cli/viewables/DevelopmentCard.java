@@ -33,8 +33,38 @@ public class DevelopmentCard implements Viewable {
 
     @Override
     public void update(int[] update) {
+        cost.put(WarehouseObjectType.COIN, update[0]);
+        cost.put(WarehouseObjectType.SERVANT, update[1]);
+        cost.put(WarehouseObjectType.SHIELD, update[2]);
+        cost.put(WarehouseObjectType.STONE, update[3]);
+
+        //array that allows us to update the production of the DevelopmentCard
+        int[] upProd = {update[4], update[5], update[6], update[7], update[8],
+                update[9], update[10], update[11], update[12]};
+        this.prod.update(upProd);
+        this.cat = intToCardCategory(update[13]);
+        LvWp.add(update[14]);
+        LvWp.add(update[15]);
+
 
     }
+
+    private CardCategory intToCardCategory(int i) {
+        if (i==0) {
+            return CardCategory.YELLOW;
+        }
+        else if (i==1) {
+            return CardCategory.GREEN;
+        }
+        else if (i==2){
+            return CardCategory.VIOLET;
+        }
+        else if (i==3){
+            return CardCategory.BLUE;
+        }
+        else return null;
+    }
+
 
     private String categoryToColor() {
         if (this.cat == CardCategory.YELLOW) {
@@ -49,7 +79,7 @@ public class DevelopmentCard implements Viewable {
         else if (this.cat == CardCategory.BLUE){
             return FRAMED(BLACK(BACK_BLUE(" " + LvWp.get(0).toString() + " ")));
         }
-        return null;
+        else return null;
     }
 
     @Override
@@ -70,7 +100,6 @@ public class DevelopmentCard implements Viewable {
                 "|                                    |" + "\n" +
                 "|                 " + FRAMED(" " + LvWp.get(1).toString() + " ") + "                |" + "\n" +
                 "|____________________________________|";
-
 
     }
 

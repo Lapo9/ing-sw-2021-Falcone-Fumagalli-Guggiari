@@ -51,6 +51,7 @@ public class Production implements Viewable {
         prod.put(1, output);
     }
 
+
     @Override
     public String toString() {
         return BLACK(BACK_YELLOW(" " + prod.get(0).get(COIN).toString() + " ")) +
