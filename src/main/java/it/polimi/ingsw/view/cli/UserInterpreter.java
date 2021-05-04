@@ -111,6 +111,7 @@ public class UserInterpreter {
         commands.add(new UserCommand(true, "discard"));
         commands.add(new UserCommand(true, "move", new ArrayList<>(Arrays.asList("coin", "servant", "shield", "stone")),  new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2", "paycheck", "coffer")), new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2", "paycheck", "coffer"))));
         commands.add(new UserCommand(true, "endTurn"));
+        //TODO add every command
 
         return commands;
     }

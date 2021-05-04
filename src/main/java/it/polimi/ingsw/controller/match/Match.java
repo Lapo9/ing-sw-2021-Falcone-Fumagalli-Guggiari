@@ -398,6 +398,101 @@ public class Match {
         activePlayer.send((byte) 0, "yourTurn");
     }
 
+    private void produce(Player player, String... args) {
+        if(player != activePlayer){
+            player.send((byte) 0, "error It's not your turn!");
+            return;
+        }
+        if(phase != TURN_START){
+            player.send((byte) 0, "error You can't produce now!");
+            return;
+        }
+
+        try {
+            player.getDashboard().checkProduction(Boolean.parseBoolean(args[1]), Boolean.parseBoolean(args[2]), Boolean.parseBoolean(args[3]), Boolean.parseBoolean(args[4]), Boolean.parseBoolean(args[5]), Boolean.parseBoolean(args[6]));
+        } catch (Exception e){
+            player.send((byte) 0, "error " + e.getMessage());
+            return;
+        }
+
+        player.getDashboard().produce(Boolean.parseBoolean(args[1]), Boolean.parseBoolean(args[2]), Boolean.parseBoolean(args[3]), Boolean.parseBoolean(args[4]), Boolean.parseBoolean(args[5]), Boolean.parseBoolean(args[6]));
+
+        phase = TURN_END;
+    }
+
+    private void swapBase(Player player, String... args) {
+        if (player != activePlayer) {
+            player.send((byte) 0, "error It's not your turn!");
+            return;
+        }
+        if (phase != TURN_START) {
+            player.send((byte) 0, "error You can't switch production input/output now!");
+            return;
+        }
+
+        int slot = Integer.parseInt(args[1]);
+        WarehouseObjectType newWot = WarehouseObjectType.stringToType(args[2]);
+
+        try {
+            player.getDashboard().swapBaseProduction(slot, newWot);
+        } catch (Exception e) {
+            player.send((byte) 0, "error " + e.getMessage());
+        }
+    }
+
+    private void swapLeader(Player player, String... args) {
+        if (player != activePlayer) {
+            player.send((byte) 0, "error It's not your turn!");
+            return;
+        }
+        if (phase != TURN_START) {
+            player.send((byte) 0, "error You can't switch production input/output now!");
+            return;
+        }
+
+        int slot = Integer.parseInt(args[1]);
+        WarehouseObjectType newWot = WarehouseObjectType.stringToType(args[2]);
+
+        try {
+            player.getDashboard().swapLeaderProduction(slot, newWot);
+        } catch (Exception e) {
+            player.send((byte) 0, "error " + e.getMessage());
+        }
+    }
+
+    private void activateLeader(Player player, String... args) {
+        if (player != activePlayer) {
+            player.send((byte) 0, "error It's not your turn!");
+            return;
+        }
+        if (phase != TURN_START && phase != TURN_END) {
+            player.send((byte) 0, "error You can't activate now!");
+            return;
+        }
+
+        try {
+            player.getDashboard().playLeader(Integer.parseInt(args[1]));
+        } catch (Exception e){
+            player.send((byte) 0, "error " + e.getMessage());
+        }
+    }
+
+    private void discardLeader(Player player, String... args) {
+        if (player != activePlayer) {
+            player.send((byte) 0, "error It's not your turn!");
+            return;
+        }
+        if (phase != TURN_START && phase != TURN_END) {
+            player.send((byte) 0, "error You can't activate now!");
+            return;
+        }
+
+        try {
+            player.getDashboard().discardLeader(Integer.parseInt(args[1]));
+        } catch (Exception e){
+            player.send((byte) 0, "error " + e.getMessage());
+        }
+    }
 
 
 
@@ -415,7 +510,11 @@ public class Match {
         commands.put("move", this::move);
         commands.put("buy", this::buy);
         commands.put("endTurn", this::endTurn);
-        //TODO add all the commands
+        commands.put("produce", this::produce);
+        commands.put("swapBase", this::swapBase);
+        commands.put("swapLeader", this::swapLeader);
+        commands.put("activateLeader", this::activateLeader);
+        commands.put("discardLeader", this::discardLeader);
     }
 
 
