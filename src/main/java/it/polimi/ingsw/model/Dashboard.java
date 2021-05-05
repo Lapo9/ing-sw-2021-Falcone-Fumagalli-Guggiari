@@ -15,7 +15,7 @@ import java.util.HashMap;
  * Generally, when the action performed goes well, nothing is returned, but if the action violates any of the game rule an exception is thrown.
  * TODO maybe there should be methods to check if an action is possible before performing it? It can be useful if you want to visualize only the actions that can be executed (for example if you don't have enough supplies to buy a card, then the card is grey and not clickable)
  */
-public class Dashboard implements WinPointsCountable, HasStatus{
+public class Dashboard implements HasStatus{
 
     private final Marketplace marketplace;
     private final DevelopmentGrid developmentGrid;
@@ -673,15 +673,19 @@ public class Dashboard implements WinPointsCountable, HasStatus{
     }
 
 
-    @Override
-    public int getWinPoints() {
+    /**
+     * Returns win points and the number of resources of the player.
+     * @return win points and number of resources of the player
+     */
+    public Pair<Integer, Integer> getWinPoints() {
         //place all "volatile" supplies to their depot
         clearProductions();
         clearPaycheck();
 
         int supplies = depotsManager.getResourceCount(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE)
                     + coffer.getQuantity(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE);
-        return developments.getWinPoints() + leadersSpace.getWinPoints() + faithTrack.getWinPoints() + supplies/5;
+        int winPoints = developments.getWinPoints() + leadersSpace.getWinPoints() + faithTrack.getWinPoints() + supplies/5;
+        return new Pair<>(winPoints, supplies);
     }
 
     /**
