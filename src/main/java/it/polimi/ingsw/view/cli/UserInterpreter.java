@@ -99,7 +99,7 @@ public class UserInterpreter {
     //inserts all known commands
     private static Set<UserCommand> allCommands() {
         Set<UserCommand> commands = new HashSet<>();
-        //TODO add all of the commands!
+
         commands.add(new UserCommand(false, "show", new ArrayList<>(Arrays.asList("ViewTest1", "ViewTest2")))); //TODO test to eliminate
         commands.add(new UserCommand(false, "connect", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
         commands.add(new UserCommand(true, "info"));
@@ -111,7 +111,13 @@ public class UserInterpreter {
         commands.add(new UserCommand(true, "discard"));
         commands.add(new UserCommand(true, "move", new ArrayList<>(Arrays.asList("coin", "servant", "shield", "stone")),  new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2", "paycheck", "coffer")), new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2", "paycheck", "coffer"))));
         commands.add(new UserCommand(true, "endTurn"));
-        //TODO add every command
+        commands.add(new UserCommand(true, "buy", new ArrayList<>(Arrays.asList("1", "2", "3")), new ArrayList<>(Arrays.asList("1", "2", "3", "4")), new ArrayList<>(Arrays.asList("1", "2", "3"))));
+        commands.add(new UserCommand(true, "swapBase", new ArrayList<>(Arrays.asList("1", "2", "3")), new ArrayList<>(Arrays.asList("coin", "servant", "shield", "stone"))));
+        commands.add(new UserCommand(true, "swapLeader", new ArrayList<>(Arrays.asList("1", "2")), new ArrayList<>(Arrays.asList("coin", "servant", "shield", "stone"))));
+        commands.add(new UserCommand(true, "activateLeader", new ArrayList<>(Arrays.asList("1", "2"))));
+        commands.add(new UserCommand(true, "discardLeader", new ArrayList<>(Arrays.asList("1", "2"))));
+        commands.add(new UserCommand(true, "pickLeaders", new ArrayList<>(Arrays.asList("1", "2", "3", "4")), new ArrayList<>(Arrays.asList("1", "2", "3", "4"))));
+        //TODO add produce and activateProd command
 
         return commands;
     }

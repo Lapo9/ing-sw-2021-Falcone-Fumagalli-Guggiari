@@ -134,24 +134,27 @@ public class Match {
                     update("select coin", player);
                 }
                 break;
+
+            case LEADER_SELECTION:
+                //pick the first 2 leaders
+                update("pickLeaders 1 2", player);
+                break;
         }
 
 
 
-        if(player != activePlayer){
-            return;
-        }
+        if(player == activePlayer) {
+            switch (phase) {
+                case TURN_START:
+                case TURN_END:
+                    update("skipTurn", player); //simply end turn
+                    break;
 
-        switch (phase){
-            case TURN_START:
-            case TURN_END:
-                update("skipTurn", player); //simply end turn
-                break;
-
-            case MARKETPLACE:
-                update("discard", player); //discard what remained
-                update("endTurn", player); //end turn
-                break;
+                case MARKETPLACE:
+                    update("discard", player); //discard what remained
+                    update("endTurn", player); //end turn
+                    break;
+            }
         }
     }
 
@@ -167,14 +170,8 @@ public class Match {
 
         Collections.shuffle(players); //randomize players order
         activePlayer = players.get(0); //set the first player to play
-        activePlayer.getDashboard().giveInkwell(); //gives the inkwell to the first player
 
-        //tell the players the match started
-        for (int i = 0; i < players.size(); ++i){
-            players.get(i).send((byte) 0, "start " + (i+1));
-        }
-
-        phase = PRE_MATCH;
+        activePlayer.getDashboard().giveInkwell(); //give the inkwell to the first player
 
         //put players 3 and 4 one step ahead in the faith track
         try {
@@ -183,6 +180,18 @@ public class Match {
         } catch (IndexOutOfBoundsException ioobe){
             //there wasn't player 3 or 4, no problem
         }
+
+        //draw 4 random cards for leader selection
+        for (Player p : players){
+            p.getDashboard().fillLeadersPicks();
+        }
+
+        //tell the players the match started
+        for (int i = 0; i < players.size(); ++i){
+            players.get(i).send((byte) 0, "start " + (i+1));
+        }
+
+        phase = PRE_MATCH;
 
         //avoid first turn for disconnected players
         for(Player p : players.stream().filter(p -> !p.isConnected()).collect(Collectors.toList())) {
@@ -230,9 +239,8 @@ public class Match {
         }
 
         if (done){
-            phase = TURN_START; //FIXME when we have leaders selection screen
-            broadcast("message Now select your leaders");
-            //TODO actually show the 4 leaders
+            phase = LEADER_SELECTION;
+            broadcast("show leadersPick");
         }
     }
 
@@ -402,7 +410,13 @@ public class Match {
 
         phase = TURN_START;
 
-        activePlayer.send((byte) 0, "yourTurn");
+        //if the player is alive, tell him it's his turn to play, if not perform auto action
+        if(activePlayer.isConnected()) {
+            activePlayer.send((byte) 0, "yourTurn");
+        }
+        else {
+            update("dead", activePlayer);
+        }
     }
 
     private void produce(Player player, String... args) {
@@ -473,7 +487,7 @@ public class Match {
             return;
         }
         if (phase != TURN_START && phase != TURN_END) {
-            player.send((byte) 0, "error You can't activate now!");
+            player.send((byte) 0, "error You can't activate your leader now!");
             return;
         }
 
@@ -490,7 +504,7 @@ public class Match {
             return;
         }
         if (phase != TURN_START && phase != TURN_END) {
-            player.send((byte) 0, "error You can't activate now!");
+            player.send((byte) 0, "error You can't discard your leader now!");
             return;
         }
 
@@ -499,6 +513,41 @@ public class Match {
         } catch (Exception e){
             player.send((byte) 0, "error " + e.getMessage());
         }
+    }
+
+    private void pickLeaders(Player player, String... args) {
+        if (phase != LEADER_SELECTION) {
+            player.send((byte) 0, "error You' ve already picked your leaders!");
+            return;
+        }
+
+        if(args[1].equals(args[2])){
+            player.send((byte) 0, "error Choose 2 different leaders!");
+            return;
+        }
+
+        try {
+            player.getDashboard().pickLeader(Integer.parseInt(args[1])-1);
+            player.getDashboard().pickLeader(Integer.parseInt(args[2])-1);
+        } catch (Exception e){
+            player.send((byte) 0, e.getMessage());
+            //TODO there should be a way to clear leaders, if not this state is forever
+            return;
+        }
+
+        boolean done = true;
+        for (Player p : players){
+            if(p.getSelectedLeadersInPreMatch() < 2){
+                done = false;
+                break;
+            }
+        }
+
+        if(done){
+            phase = TURN_START;
+            broadcast("show matchStart");
+        }
+
     }
 
 
@@ -522,6 +571,7 @@ public class Match {
         commands.put("swapLeader", this::swapLeader);
         commands.put("activateLeader", this::activateLeader);
         commands.put("discardLeader", this::discardLeader);
+        commands.put("pickLeaders", this::pickLeaders);
     }
 
 

@@ -25,6 +25,7 @@ public class Player {
     private boolean destroy = false;
     private Dashboard dashboard;
     private int selectedItemsInPreMatch = 0;
+    private int selectedLeadersInPreMatch = 0;
 
     private Thread listenRoutineThread;
     private Thread heartbeatThread;
@@ -51,6 +52,14 @@ public class Player {
         selectedItemsInPreMatch++;
     }
 
+
+    public int getSelectedLeadersInPreMatch() {
+        return selectedLeadersInPreMatch;
+    }
+
+    public void addSelectedLeaderInPreMatch() {
+        selectedLeadersInPreMatch++;
+    }
 
 
     public synchronized String getName(){
