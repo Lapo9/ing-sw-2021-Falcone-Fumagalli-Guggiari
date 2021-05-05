@@ -193,16 +193,10 @@ public class DevelopmentGrid implements HasStatus{
         ArrayList<Integer> status = new ArrayList<>();
         for(int i = 0; i<12; i++){
             ArrayList<DevelopmentCard> list = grid.get(i);
-            int j = 0;
-            int size = list.size();
-            while(size < 4){
-                status.add(0);   //add zeros for removed cards
-                size++;
-            }
-            while(j < list.size()){
-                status.add(list.get(j).getId());
-                j++;
-            }
+            if(list.isEmpty())
+                status.add(0);
+            else
+                status.add(list.get(0).getId());
         }
         return status;
     }
