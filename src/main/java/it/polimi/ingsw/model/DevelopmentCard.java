@@ -3,7 +3,10 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.SupplyException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * This class represents the development card of the game. Every card has its own unique id and has  level, win points,
@@ -38,6 +41,15 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
 
     }
 
+    public DevelopmentCard(int id){
+        this.id = id;
+        this.level = getLevel(id);
+        this.winPoints = getWinPoints(id);
+        this.category = getCategory(id);
+        this.production = new Production(getInput(id), getOutput(id));
+        this.cost = getCost(id);
+    }
+
     /**
      * Returns the input of the production of the development card.
      * @return the input of the production of the development card
@@ -45,7 +57,6 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
     public SupplyContainer getInput() {
         return production.getInput();
     }
-
 
     /**
      * Activates the production of the card.
@@ -93,6 +104,123 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      */
     public int getId() {
         return id;
+    }
+
+    public static int getLevel(int id) {
+        File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        return scan.nextInt();
+    }
+
+    public static int getWinPoints(int id) {
+        File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        scan.nextInt();    //lvl
+        return scan.nextInt();
+    }
+
+    public static CardCategory getCategory(int id) {
+        File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        scan.nextInt();         //lvl
+        scan.nextInt();         //winPoints
+        int color = scan.nextInt();
+        if(color == 1)
+            return CardCategory.GREEN;
+        else if(color == 2)
+            return CardCategory.BLUE;
+        else if(color == 3)
+            return CardCategory.YELLOW;
+        else
+            return CardCategory.VIOLET;
+    }
+
+    public static SupplyContainer getInput(int id) {
+        File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        scan.nextInt();
+        scan.nextInt();
+        scan.nextInt();
+        int c = scan.nextInt();
+        int st = scan.nextInt();
+        int se = scan.nextInt();
+        int sh = scan.nextInt();
+        int f = scan.nextInt();
+        return new SupplyContainer(c, st, se, sh, f);
+    }
+
+    public static SupplyContainer getOutput(int id) {
+        File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        for(int i = 0; i < 8; i++)
+            scan.nextInt();
+        int c = scan.nextInt();
+        int st = scan.nextInt();
+        int se = scan.nextInt();
+        int sh = scan.nextInt();
+        int f = scan.nextInt();
+        return new SupplyContainer(c, st, se, sh, f);
+    }
+
+    public static SupplyContainer getCost(int id) {
+        File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        for(int i = 0; i < 13; i++)
+            scan.nextInt();
+        int c = scan.nextInt();
+        int st = scan.nextInt();
+        int se = scan.nextInt();
+        int sh = scan.nextInt();
+        int f = scan.nextInt();
+        return new SupplyContainer(c, st, se, sh, f);
     }
 
 
