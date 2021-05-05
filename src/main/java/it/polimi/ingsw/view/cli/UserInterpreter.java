@@ -16,6 +16,7 @@ public class UserInterpreter {
     private ServerSocket socket;
     private Set<UserCommand> commands;
     private ControllerInterpreter controllerInterpreter;
+    private OfflineInfo offlineInfo;
 
 
     /**
@@ -53,6 +54,10 @@ public class UserInterpreter {
             //check if it is a connection request
             if (tokens[0].equals("connect")){
                 socket.connect(tokens[1], Integer.parseInt(tokens[2]), tokens[3], tokens[4]); //connect to the specified server
+            }
+            //produce is the only command that needs some elaboration
+            else if (tokens[0].equals("produce")){
+                socket.send(userCommand + offlineInfo.getProductionsAsArgs());
             }
             //check if the server is required
             else if (commands.stream().filter(command -> command.toString().equals(tokens[0])).collect(Collectors.toList()).get(0).isServerOperation()) {
@@ -117,7 +122,9 @@ public class UserInterpreter {
         commands.add(new UserCommand(true, "activateLeader", new ArrayList<>(Arrays.asList("1", "2"))));
         commands.add(new UserCommand(true, "discardLeader", new ArrayList<>(Arrays.asList("1", "2"))));
         commands.add(new UserCommand(true, "pickLeaders", new ArrayList<>(Arrays.asList("1", "2", "3", "4")), new ArrayList<>(Arrays.asList("1", "2", "3", "4"))));
-        //TODO add produce and activateProd command
+        commands.add(new UserCommand(false, "activateProduction", new ArrayList<>(Arrays.asList("dev1", "dev2", "dev3", "leader1", "leader2", "base"))));
+        commands.add(new UserCommand(false, "deactivateProduction", new ArrayList<>(Arrays.asList("dev1", "dev2", "dev3", "leader1", "leader2", "base"))));
+        commands.add(new UserCommand(true, "produce"));
 
         return commands;
     }

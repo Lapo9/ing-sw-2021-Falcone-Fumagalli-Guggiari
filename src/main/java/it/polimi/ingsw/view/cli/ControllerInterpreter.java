@@ -11,6 +11,7 @@ import it.polimi.ingsw.view.cli.exceptions.ViewException;
 public class ControllerInterpreter {
 
     private Screen screen;
+    private OfflineInfo offlineInfo;
 
 
     /**
@@ -96,6 +97,12 @@ public class ControllerInterpreter {
                 //TODO terminate
                 return;
             }
+        }
+        else if (tokens[0].equals("activateProduction")){
+            offlineInfo.setProduction(tokens[1], true);
+        }
+        else if (tokens[0].equals("deactivateProduction")){
+            offlineInfo.setProduction(tokens[1], false);
         }
         else {
             //TODO terminate

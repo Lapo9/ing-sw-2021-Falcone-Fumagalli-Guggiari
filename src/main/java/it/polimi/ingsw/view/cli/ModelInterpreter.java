@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.model.LeaderCard;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
 
 import java.util.Arrays;
@@ -11,6 +12,7 @@ public class ModelInterpreter {
 
     private ViewableFactory items;
     private ControllerInterpreter controllerInterpreter;
+    private OfflineInfo offlineInfo;
 
 
     /**
@@ -47,7 +49,7 @@ public class ModelInterpreter {
      */
     private void updatePlayer(int player, int[] status){
         items.update(player, ViewableId.COFFER, Arrays.copyOfRange(status, 1, 5));
-        /* TODO
+        /* TODO add when we have the viewables
         items.update(player, ViewableId.WAREHOUSE, Arrays.copyOfRange(status, 6, 20));
         items.update(player, DEV_SPACE1, Arrays.copyOfRange(status, 21, 38));
         items.update(player, DEV_SPACE2, Arrays.copyOfRange(status, 39, 56));
@@ -55,7 +57,11 @@ public class ModelInterpreter {
         items.update(player, PAYCHECK, Arrays.copyOfRange(status, 75, 84));
         items.update(player, BASE_PRODUCTION, Arrays.copyOfRange(status, 85, 103));
         */
-        //TODO ........
+
+        //check if the leaders are activated and are producers. This is needed for the offline info about active productions
+        //FIXME adding the missing functions to the LeaderCard class
+        offlineInfo.setLeaderProducer(1, LeaderCard.getAbility(status[106]) == LeaderCard.LeaderAbility.PRODUCER && status[107] == 1);
+        offlineInfo.setLeaderProducer(2, LeaderCard.getAbility(status[121]) == LeaderCard.LeaderAbility.PRODUCER && status[102] == 1);
 
         controllerInterpreter.execute("refresh");
     }
