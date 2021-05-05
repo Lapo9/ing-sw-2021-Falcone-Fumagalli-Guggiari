@@ -52,6 +52,16 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
         return ability;
     }
 
+
+    /**
+     * The getAbility returns the ability of the LeaderCard, whether the leader is active or not
+     * @return the ability of the LeaderCard
+     */
+    public LeaderAbility getAbilityTrusted() throws LeaderException{
+        return ability;
+    }
+
+
     /**
      * The activate method activates the LeaderCard.
      * @throws LeaderException leader cannot be discarded, because it was already discarded or activated

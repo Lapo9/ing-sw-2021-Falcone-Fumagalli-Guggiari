@@ -6,8 +6,7 @@ package it.polimi.ingsw.model;
 public enum DepotID {
     WAREHOUSE1(DepotType.WAREHOUSE, SourceType.DEPOT, 0), WAREHOUSE2(DepotType.WAREHOUSE, SourceType.DEPOT, 1), WAREHOUSE3(DepotType.WAREHOUSE, SourceType.DEPOT, 2),
     DEVELOPMENT1(DepotType.DEVELOPMENT, SourceType.ANY, 0), DEVELOPMENT2(DepotType.DEVELOPMENT, SourceType.ANY, 1), DEVELOPMENT3(DepotType.DEVELOPMENT, SourceType.ANY, 2),
-    LEADER1_DEPOT(DepotType.LEADER_DEPOT, SourceType.DEPOT, 0), LEADER2_DEPOT(DepotType.LEADER_DEPOT, SourceType.DEPOT, 1),
-    LEADER1_PRODUCTION(DepotType.LEADER_PRODUCTION, SourceType.ANY, 0), LEADER2_PRODUCTION(DepotType.LEADER_PRODUCTION, SourceType.ANY, 1),
+    LEADER1(null, null, 0), LEADER2(null, null, 1),
     COFFER(DepotType.COFFER, SourceType.STRONGBOX, 1),
     PAYCHECK(DepotType.PAYCHECK, SourceType.ANY, 1),
     BASE_PRODUCTION(DepotType.BASE_PRODUCTION, SourceType.ANY, 1),
@@ -18,7 +17,7 @@ public enum DepotID {
      */
     public enum DepotType {
         //don't you ever even try to change the order!
-        WAREHOUSE(0), LEADER_DEPOT(0), LEADER_PRODUCTION(1), DEVELOPMENT(1), COFFER(2), PAYCHECK(3), BASE_PRODUCTION(4), ANY(5);
+        WAREHOUSE(0), LEADER_DEPOT(0), LEADER_PRODUCTION(1), DEVELOPMENT(1), COFFER(2), PAYCHECK(3), BASE_PRODUCTION(4), ANY(5), NONE(6);
 
         private int order;
 
@@ -39,7 +38,7 @@ public enum DepotID {
      * Contains the sources from which resources can came from.
      */
     public enum SourceType {
-        DEPOT, STRONGBOX, ANY, PAYCHECK;
+        DEPOT, STRONGBOX, ANY, PAYCHECK, NONE;
     }
 
 
@@ -62,6 +61,14 @@ public enum DepotID {
     }
 
     /**
+     * Sets the type of the depot
+     * @param type depot type
+     */
+    public void setType(DepotType type) {
+        this.type = type;
+    }
+
+    /**
      * Returns the number of the depot
      * @return the number of the depot
      */
@@ -78,6 +85,13 @@ public enum DepotID {
     }
 
 
+    /**
+     * Sets the source of the depot
+     * @param source depot sourc
+     */
+    public void setSource(SourceType source) {
+        this.source = source;
+    }
 
     public static DepotID stringToId(String s){
         if (s.equals("wh1")){

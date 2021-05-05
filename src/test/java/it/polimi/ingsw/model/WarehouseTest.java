@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.model.DepotID.LEADER1;
 import static org.junit.Assert.*;
 
 public class WarehouseTest {
@@ -28,7 +29,9 @@ public class WarehouseTest {
         Warehouse wrhs =  new Warehouse();
         try {
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
-            wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.LEADER1_DEPOT);
+            LEADER1.setType(DepotID.DepotType.LEADER_PRODUCTION);
+            LEADER1.setSource(DepotID.SourceType.ANY);
+            wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, LEADER1);
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e) {fail();}
         assertEquals(3, wrhs.getResourceCount(WarehouseObjectType.COIN, WarehouseObjectType.SHIELD));
@@ -40,7 +43,9 @@ public class WarehouseTest {
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SERVANT, DepotID.PAYCHECK);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
-            wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.LEADER1_DEPOT);
+            LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
+            LEADER1.setSource(DepotID.SourceType.DEPOT);
+            wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.LEADER1);
             wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e) {fail();}
         try {
@@ -75,7 +80,9 @@ public class WarehouseTest {
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SERVANT, DepotID.PAYCHECK);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
-            wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.LEADER1_DEPOT);
+            LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
+            LEADER1.setSource(DepotID.SourceType.DEPOT);
+            wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.LEADER1);
             wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e) {fail();}
         try {
@@ -266,7 +273,9 @@ public class WarehouseTest {
     public void clearSupplies_checkAllSupplies() {
         Warehouse wrhs = new Warehouse();
         try {
-            wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.LEADER1_DEPOT);
+            LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
+            LEADER1.setSource(DepotID.SourceType.DEPOT);
+            wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.LEADER1);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.PAYCHECK);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e){fail();}
@@ -314,7 +323,9 @@ public class WarehouseTest {
         Warehouse wrhs = new Warehouse();
         try {
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
-            wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.COIN, DepotID.LEADER1_DEPOT);
+            LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
+            LEADER1.setSource(DepotID.SourceType.DEPOT);
+            wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.COIN, DepotID.LEADER1);
         } catch (SupplyException e) {fail();}
         ArrayList<DepotID> result= new ArrayList<DepotID>(wrhs.getAllowedDepots(DepotID.DEVELOPMENT2, WarehouseObjectType.SHIELD));
         int[] expectedResult = {0, 1, 0};

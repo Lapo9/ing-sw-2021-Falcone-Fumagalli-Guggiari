@@ -25,9 +25,11 @@ public class Dashboard implements WinPointsCountable, HasStatus{
     private final FaithTrack faithTrack = new FaithTrack();
     private final LeadersSpace leadersSpace = new LeadersSpace();
     private final Developments developments = new Developments();
+    private final LeadersList leadersList = new LeadersList();
+    private final LeadersPick leadersPick = new LeadersPick();
     private MarbleContainer unassignedSupplies;
     private final Paycheck paycheck = new Paycheck();
-    private final boolean inkwell;
+    private boolean inkwell;
     private final ProductionManager productionManager = new ProductionManager(developments, baseProduction, leadersSpace);
     private final DepotsManager depotsManager = new DepotsManager(warehouse, leadersSpace);
     private final ActionTilesStack actionTilesStack = new ActionTilesStack();
@@ -267,6 +269,25 @@ public class Dashboard implements WinPointsCountable, HasStatus{
 
 
     /**
+     * Fills the leaders pick object with 4 random leaders
+     */
+    public void fillLeadersPicks(){
+        leadersPick.fill(leadersList);
+    }
+
+
+    /**
+     * Pick the specified leader among the 4 leaders picks.
+     * @param index What leader to pick
+     * @throws LeaderException 2 Leaders added yet.
+     */
+    public void pickLeader(int index) throws LeaderException{
+        leadersPick.pick(index, leadersSpace);
+    }
+
+
+
+    /**
      * Adds the specified leader to the leader space
      * @param leader The leader to add
      * @throws LeaderException There is already the maximum number of leaders (2)
@@ -403,6 +424,14 @@ public class Dashboard implements WinPointsCountable, HasStatus{
      */
     public boolean hasInkwell(){
         return inkwell;
+    }
+
+
+    /**
+     * Assigns the inkwell to the player
+     */
+    public void giveInkwell(){
+        inkwell = true;
     }
 
 

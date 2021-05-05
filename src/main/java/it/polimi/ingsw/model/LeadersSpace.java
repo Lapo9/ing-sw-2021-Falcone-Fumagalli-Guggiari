@@ -3,6 +3,8 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.LeaderException;
 import it.polimi.ingsw.exceptions.SupplyException;
+import it.polimi.ingsw.model.leader_abilities.Depot;
+import it.polimi.ingsw.model.leader_abilities.Producer;
 
 import java.util.ArrayList;
 
@@ -17,6 +19,35 @@ public class LeadersSpace implements HasStatus, WinPointsCountable{
     public void addLeader(LeaderCard leader) throws LeaderException {
         if(leaders.size()<2) {
             leaders.add(leader);
+            //set the leader depot type and source
+            if (leaders.size() == 1) {
+                if (leader.getAbilityTrusted() instanceof Depot) {
+                    DepotID.LEADER1.setSource(DepotID.SourceType.DEPOT);
+                    DepotID.LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
+                }
+                else if (leader.getAbilityTrusted() instanceof Producer) {
+                    DepotID.LEADER1.setSource(DepotID.SourceType.ANY);
+                    DepotID.LEADER1.setType(DepotID.DepotType.LEADER_PRODUCTION);
+                }
+                else {
+                    DepotID.LEADER1.setSource(DepotID.SourceType.NONE);
+                    DepotID.LEADER1.setType(DepotID.DepotType.NONE);
+                }
+            }
+            else if (leaders.size() == 2) {
+                if (leader.getAbilityTrusted() instanceof Depot) {
+                    DepotID.LEADER2.setSource(DepotID.SourceType.DEPOT);
+                    DepotID.LEADER2.setType(DepotID.DepotType.LEADER_DEPOT);
+                }
+                else if (leader.getAbilityTrusted() instanceof Producer) {
+                    DepotID.LEADER2.setSource(DepotID.SourceType.ANY);
+                    DepotID.LEADER2.setType(DepotID.DepotType.LEADER_PRODUCTION);
+                }
+                else {
+                    DepotID.LEADER2.setSource(DepotID.SourceType.NONE);
+                    DepotID.LEADER2.setType(DepotID.DepotType.NONE);
+                }
+            }
         }
         else throw new LeaderException("Cannot add more than 2 leaders");
     }

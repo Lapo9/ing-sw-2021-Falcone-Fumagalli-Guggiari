@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.model.DepotID.LEADER1;
 import static org.junit.Assert.*;
 
 public class DashboardTest {
@@ -356,7 +357,7 @@ public class DashboardTest {
         //buy supplies from the market
         dshbrd.buySupplies(MarketDirection.VERTICAL, 0);
         try {
-            dshbrd.assignMarble(DepotID.LEADER1_DEPOT, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.LEADER1, MarbleColor.GREY);
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
@@ -492,7 +493,7 @@ public class DashboardTest {
         dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
         boolean exc = false;
         try {
-            dshbrd.assignMarble(DepotID.LEADER1_DEPOT, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.LEADER1, MarbleColor.YELLOW);
         } catch (LeaderException e) {
             exc = true;
         } catch (SupplyException | MarbleException | NoSuchMethodException e) {fail();}
@@ -527,7 +528,7 @@ public class DashboardTest {
         dshbrd.buySupplies(MarketDirection.HORIZONTAL, 1);
         boolean exc = false;
         try {
-            dshbrd.assignMarble(DepotID.LEADER1_DEPOT, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.LEADER1, MarbleColor.GREY);
         } catch (LeaderException e) {
             exc = true;
         } catch (SupplyException | MarbleException | NoSuchMethodException e) {fail();}
@@ -1335,7 +1336,7 @@ public class DashboardTest {
 
         //move supply
         try {
-            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.LEADER1_DEPOT, WarehouseObjectType.STONE);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.LEADER1, WarehouseObjectType.STONE);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
 
         ArrayList<Integer> status = new ArrayList<>(dshbrd.getStatus());
@@ -1645,7 +1646,7 @@ public class DashboardTest {
             dshbrd.swapLeaderProduction(1, WarehouseObjectType.FAITH_MARKER);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         try {
-            dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.LEADER2_PRODUCTION, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.LEADER2, WarehouseObjectType.SERVANT);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.produce(false, false, false, false, true, false);
 
@@ -1772,7 +1773,7 @@ public class DashboardTest {
             dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN);
             dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
             dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.DEVELOPMENT2, WarehouseObjectType.SHIELD);
-            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.LEADER2_PRODUCTION, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.LEADER2, WarehouseObjectType.SERVANT);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.produce(false, true, false, false, true, true);
 
@@ -2042,7 +2043,7 @@ public class DashboardTest {
             dshbrd.swapLeaderProduction(1, WarehouseObjectType.FAITH_MARKER);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         try {
-            dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.LEADER2_PRODUCTION, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.LEADER2, WarehouseObjectType.SERVANT);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         boolean exc = false;
         try {
@@ -4833,7 +4834,7 @@ public class DashboardTest {
         //buy supplies from the market
         dshbrd.buySupplies(MarketDirection.HORIZONTAL, 1);
         try {
-            dshbrd.assignMarble(DepotID.LEADER1_DEPOT, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.LEADER1, MarbleColor.GREY);
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
@@ -4842,8 +4843,7 @@ public class DashboardTest {
         int[] expectedResult = {1,          //base production
                                 0, 1, 0,    //warehouse
                                 0, 1, 0,    //development card
-                                1, 1,       //leader card production
-                                1, 0,       //leader card depot
+                                1, 1,       //leader cards
                                 1,          //paycheck
                                 0};         //coffer
         int[] actualResult = {list.contains(DepotID.BASE_PRODUCTION) ? 1 : 0,
@@ -4853,10 +4853,8 @@ public class DashboardTest {
                               list.contains(DepotID.DEVELOPMENT1) ? 1 : 0,
                               list.contains(DepotID.DEVELOPMENT2) ? 1 : 0,
                               list.contains(DepotID.DEVELOPMENT3) ? 1 : 0,
-                              list.contains(DepotID.LEADER1_PRODUCTION) ? 1 : 0,
-                              list.contains(DepotID.LEADER2_PRODUCTION) ? 1 : 0,
-                              list.contains(DepotID.LEADER1_DEPOT) ? 1 : 0,
-                              list.contains(DepotID.LEADER2_DEPOT) ? 1 : 0,
+                              list.contains(DepotID.LEADER1) ? 1 : 0,
+                              list.contains(DepotID.LEADER2) ? 1 : 0,
                               list.contains(DepotID.PAYCHECK) ? 1 : 0,
                               list.contains(DepotID.COFFER) ? 1 : 0};
         assertArrayEquals(expectedResult, actualResult);
@@ -4970,7 +4968,7 @@ public class DashboardTest {
         //buy supplies from the market
         dshbrd.buySupplies(MarketDirection.HORIZONTAL, 1);
         try {
-            dshbrd.assignMarble(DepotID.LEADER1_DEPOT, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.LEADER1, MarbleColor.GREY);
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
@@ -4979,8 +4977,7 @@ public class DashboardTest {
         int[] expectedResult = {1,          //base production
                                 0, 0, 0,    //warehouse
                                 0, 1, 0,    //development card
-                                0, 1,       //leader card production
-                                0, 0,       //leader card depot
+                                0, 1,       //leader card depot
                                 1,          //paycheck
                                 1};         //coffer
         int[] actualResult = {list.contains(DepotID.BASE_PRODUCTION) ? 1 : 0,
@@ -4990,10 +4987,8 @@ public class DashboardTest {
                               list.contains(DepotID.DEVELOPMENT1) ? 1 : 0,
                               list.contains(DepotID.DEVELOPMENT2) ? 1 : 0,
                               list.contains(DepotID.DEVELOPMENT3) ? 1 : 0,
-                              list.contains(DepotID.LEADER1_PRODUCTION) ? 1 : 0,
-                              list.contains(DepotID.LEADER2_PRODUCTION) ? 1 : 0,
-                              list.contains(DepotID.LEADER1_DEPOT) ? 1 : 0,
-                              list.contains(DepotID.LEADER2_DEPOT) ? 1 : 0,
+                              list.contains(DepotID.LEADER1) ? 1 : 0,
+                              list.contains(DepotID.LEADER2) ? 1 : 0,
                               list.contains(DepotID.PAYCHECK) ? 1 : 0,
                               list.contains(DepotID.COFFER) ? 1 : 0};
         assertArrayEquals(expectedResult, actualResult);
@@ -5107,17 +5102,16 @@ public class DashboardTest {
         //buy supplies from the market
         dshbrd.buySupplies(MarketDirection.HORIZONTAL, 1);
         try {
-            dshbrd.assignMarble(DepotID.LEADER1_DEPOT, MarbleColor.GREY);
+            dshbrd.assignMarble(DepotID.LEADER1, MarbleColor.GREY);
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
 
-        ArrayList<DepotID> list = new ArrayList<>(dshbrd.getAllowedDepots(DepotID.LEADER1_DEPOT, WarehouseObjectType.STONE));
+        ArrayList<DepotID> list = new ArrayList<>(dshbrd.getAllowedDepots(DepotID.LEADER1, WarehouseObjectType.STONE));
         int[] expectedResult = {1,          //base production
                                 0, 1, 0,    //warehouse
                                 0, 1, 0,    //development card
-                                1, 1,       //leader card production
-                                1, 0,       //leader card depot
+                                1, 1,       //leader cards
                                 1,          //paycheck
                                 0};         //coffer
         int[] actualResult = {list.contains(DepotID.BASE_PRODUCTION) ? 1 : 0,
@@ -5127,10 +5121,8 @@ public class DashboardTest {
                               list.contains(DepotID.DEVELOPMENT1) ? 1 : 0,
                               list.contains(DepotID.DEVELOPMENT2) ? 1 : 0,
                               list.contains(DepotID.DEVELOPMENT3) ? 1 : 0,
-                              list.contains(DepotID.LEADER1_PRODUCTION) ? 1 : 0,
-                              list.contains(DepotID.LEADER2_PRODUCTION) ? 1 : 0,
-                              list.contains(DepotID.LEADER1_DEPOT) ? 1 : 0,
-                              list.contains(DepotID.LEADER2_DEPOT) ? 1 : 0,
+                              list.contains(DepotID.LEADER1) ? 1 : 0,
+                              list.contains(DepotID.LEADER2) ? 1 : 0,
                               list.contains(DepotID.PAYCHECK) ? 1 : 0,
                               list.contains(DepotID.COFFER) ? 1 : 0};
         assertArrayEquals(expectedResult, actualResult);

@@ -58,9 +58,9 @@ public class DepotsManagerTest {
             ldrspc.playLeader(1, rschck);
         } catch (SupplyException | LeaderException e) {fail();}
         try {
-            dptmng.addSupply(DepotID.LEADER1_DEPOT, WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
+            dptmng.addSupply(DepotID.LEADER1, WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
         } catch (SupplyException e) {fail();}
-        Pair<SupplyContainer, SupplyContainer> dpt = new Pair<>(dptmng.clearSupplies(DepotID.LEADER1_DEPOT));
+        Pair<SupplyContainer, SupplyContainer> dpt = new Pair<>(dptmng.clearSupplies(DepotID.LEADER1));
         SupplyContainer result = new SupplyContainer(dpt.first.sum(dpt.second));
         int[] expectedResult = {0, 0, 0, 1, 0};
         int[] actualResult = {result.getQuantity(WarehouseObjectType.COIN),
@@ -107,13 +107,13 @@ public class DepotsManagerTest {
             ldrspc.playLeader(1, rschck);
         } catch (SupplyException | LeaderException e) {fail();}
         try {
-            dptmng.addSupply(DepotID.LEADER1_DEPOT, WarehouseObjectType.SERVANT, DepotID.WAREHOUSE2);
-            dptmng.addSupply(DepotID.LEADER1_DEPOT, WarehouseObjectType.SERVANT, DepotID.WAREHOUSE2);
+            dptmng.addSupply(DepotID.LEADER1, WarehouseObjectType.SERVANT, DepotID.WAREHOUSE2);
+            dptmng.addSupply(DepotID.LEADER1, WarehouseObjectType.SERVANT, DepotID.WAREHOUSE2);
         } catch (SupplyException e) {fail();}
         try {
-            dptmng.removeSupply(DepotID.LEADER1_DEPOT, WarehouseObjectType.SERVANT, DepotID.DEVELOPMENT3);
+            dptmng.removeSupply(DepotID.LEADER1, WarehouseObjectType.SERVANT, DepotID.DEVELOPMENT3);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
-        Pair<SupplyContainer, SupplyContainer> dpt = new Pair<>(dptmng.clearSupplies(DepotID.LEADER1_DEPOT));
+        Pair<SupplyContainer, SupplyContainer> dpt = new Pair<>(dptmng.clearSupplies(DepotID.LEADER1));
         SupplyContainer result = new SupplyContainer(dpt.first.sum(dpt.second));
         int[] expectedResult = {0, 2, 0, 0, 0};
         int[] actualResult = {result.getQuantity(WarehouseObjectType.COIN),
@@ -144,7 +144,7 @@ public class DepotsManagerTest {
             ldrspc.playLeader(0, rschck);
             ldrspc.playLeader(1, rschck);
         } catch (SupplyException | LeaderException e) {fail();}
-        assertTrue(dptmng.additionAllowed(DepotID.LEADER2_DEPOT, WarehouseObjectType.COIN, DepotID.WAREHOUSE3));
+        assertTrue(dptmng.additionAllowed(DepotID.LEADER2, WarehouseObjectType.COIN, DepotID.WAREHOUSE3));
     }
 
     @Test
@@ -177,9 +177,9 @@ public class DepotsManagerTest {
             ldrspc.playLeader(1, rschck);
         } catch (SupplyException | LeaderException e) {fail();}
         try {
-            dptmng.addSupply(DepotID.LEADER2_DEPOT, WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
+            dptmng.addSupply(DepotID.LEADER2, WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
         } catch (SupplyException e) {fail();}
-        assertTrue(dptmng.removalAllowed(DepotID.LEADER2_DEPOT, WarehouseObjectType.COIN, DepotID.DEVELOPMENT3));
+        assertTrue(dptmng.removalAllowed(DepotID.LEADER2, WarehouseObjectType.COIN, DepotID.DEVELOPMENT3));
     }
 
     @Test
@@ -207,8 +207,8 @@ public class DepotsManagerTest {
             dptmng.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.DEVELOPMENT2);
             dptmng.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.BASE_PRODUCTION);
             dptmng.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.SHIELD, DepotID.DEVELOPMENT3);
-            dptmng.addSupply(DepotID.LEADER1_DEPOT, WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
-            dptmng.addSupply(DepotID.LEADER2_DEPOT, WarehouseObjectType.COIN, DepotID.WAREHOUSE1);
+            dptmng.addSupply(DepotID.LEADER1, WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
+            dptmng.addSupply(DepotID.LEADER2, WarehouseObjectType.COIN, DepotID.WAREHOUSE1);
         } catch (SupplyException e) {fail();}
         Pair<SupplyContainer, SupplyContainer> dpt = new Pair<>(dptmng.clearSupplies());
         SupplyContainer result = new SupplyContainer(dpt.first.sum(dpt.second));
@@ -240,7 +240,7 @@ public class DepotsManagerTest {
             dptmng.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.DEVELOPMENT2);
             dptmng.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.BASE_PRODUCTION);
             dptmng.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.SHIELD, DepotID.DEVELOPMENT3);
-            dptmng.addSupply(DepotID.LEADER1_DEPOT, WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
+            dptmng.addSupply(DepotID.LEADER1, WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
         } catch (SupplyException e) {fail();}
         int[] expectedResult = {1, 2, 1, 1, 0};
         int[] actualResult = {dptmng.getResourceCount(WarehouseObjectType.COIN),
@@ -270,7 +270,7 @@ public class DepotsManagerTest {
             dptmng.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.DEVELOPMENT2);
             dptmng.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.BASE_PRODUCTION);
             dptmng.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.SHIELD, DepotID.DEVELOPMENT3);
-            dptmng.addSupply(DepotID.LEADER1_DEPOT, WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
+            dptmng.addSupply(DepotID.LEADER1, WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
         } catch (SupplyException e) {fail();}
         assertEquals(5, dptmng.getResourceCount(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE, WarehouseObjectType.FAITH_MARKER));
     }
@@ -293,15 +293,15 @@ public class DepotsManagerTest {
             dptmng.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.DEVELOPMENT2);
             dptmng.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.BASE_PRODUCTION);
             dptmng.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.SHIELD, DepotID.DEVELOPMENT3);
-            dptmng.addSupply(DepotID.LEADER1_DEPOT, WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
+            dptmng.addSupply(DepotID.LEADER1, WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
         } catch (SupplyException e) {fail();}
         ArrayList<DepotID> result= new ArrayList<DepotID>(dptmng.getAllowedDepots(DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN));
         int[] expectedResult = {1, 0, 0, 0, 0};
         int[] actualResult = {result.contains(DepotID.WAREHOUSE1) ? 1 : 0,
                               result.contains(DepotID.WAREHOUSE2) ? 1 : 0,
                               result.contains(DepotID.WAREHOUSE3) ? 1 : 0,
-                              result.contains(DepotID.LEADER1_DEPOT) ? 1 : 0,
-                              result.contains(DepotID.LEADER2_DEPOT) ? 1 : 0};
+                              result.contains(DepotID.LEADER1) ? 1 : 0,
+                              result.contains(DepotID.LEADER2) ? 1 : 0};
         assertArrayEquals(expectedResult, actualResult);
     }
 
@@ -379,7 +379,7 @@ public class DepotsManagerTest {
         } catch (SupplyException | LeaderException e) {fail();}
         try {
             dptmng.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
-            dptmng.addSupply(DepotID.LEADER2_DEPOT, WarehouseObjectType.COIN, DepotID.WAREHOUSE1);
+            dptmng.addSupply(DepotID.LEADER2, WarehouseObjectType.COIN, DepotID.WAREHOUSE1);
         } catch (SupplyException e) {fail();}
         dptmng.allocate(new SupplyContainer(2, 4, 0, 2, 0));
         ArrayList<Integer> result = wrhs.getStatus();

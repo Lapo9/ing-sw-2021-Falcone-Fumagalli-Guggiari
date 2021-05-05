@@ -179,19 +179,13 @@ public class DepotsManager implements AcceptsSupplies {
 
         try {
             if(leadersSpace.getLeaderAbility(0).additionAllowed(type, from) && leadersSpace.getLeaderAbility(0) instanceof Depot) {
-                res.add(DepotID.LEADER1_DEPOT);
-            }
-            else if(leadersSpace.getLeaderAbility(0).additionAllowed(type, from) && leadersSpace.getLeaderAbility(0) instanceof Producer) {
-                res.add(DepotID.LEADER1_PRODUCTION);
+                res.add(DepotID.LEADER1);
             }
         } catch (Exception e){}
 
         try {
             if(leadersSpace.getLeaderAbility(1).additionAllowed(type, from) && leadersSpace.getLeaderAbility(1) instanceof Depot) {
-                res.add(DepotID.LEADER2_DEPOT);
-            }
-            else if(leadersSpace.getLeaderAbility(1).additionAllowed(type, from) && leadersSpace.getLeaderAbility(1) instanceof Producer) {
-                res.add(DepotID.LEADER2_PRODUCTION);
+                res.add(DepotID.LEADER2);
             }
         } catch (Exception e){}
 

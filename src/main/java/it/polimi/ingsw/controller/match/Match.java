@@ -167,7 +167,8 @@ public class Match {
 
         Collections.shuffle(players); //randomize players order
         activePlayer = players.get(0); //set the first player to play
-        //TODO give inkwell to player 1
+        activePlayer.getDashboard().giveInkwell(); //gives the inkwell to the first player
+
         //tell the players the match started
         for (int i = 0; i < players.size(); ++i){
             players.get(i).send((byte) 0, "start " + (i+1));
@@ -175,7 +176,13 @@ public class Match {
 
         phase = PRE_MATCH;
 
-        //TODO put players 3 and 4 one step ahead in the faith track
+        //put players 3 and 4 one step ahead in the faith track
+        try {
+            players.get(2).getDashboard().goAhead();
+            players.get(3).getDashboard().goAhead();
+        } catch (IndexOutOfBoundsException ioobe){
+            //there wasn't player 3 or 4, no problem
+        }
 
         //avoid first turn for disconnected players
         for(Player p : players.stream().filter(p -> !p.isConnected()).collect(Collectors.toList())) {
@@ -321,7 +328,7 @@ public class Match {
         for (int i = 0; i < opponentsFaithSteps; ++i) {
             boolean someoneTriggeredVaticanReport = false;
             for (Player p : players.stream().filter(plr -> plr != player).collect(Collectors.toList())) {
-                //FIXME someoneTriggeredVaticanReport |= p.getDashboard().goAheadDontTrigger();
+                someoneTriggeredVaticanReport |= p.getDashboard().goAheadDontTrigger();
             }
             //if a vatican report has been triggered, then call the vatican report on everybody
             if (someoneTriggeredVaticanReport){

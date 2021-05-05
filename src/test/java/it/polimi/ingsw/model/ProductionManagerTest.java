@@ -13,6 +13,7 @@ import java.sql.Array;
 import java.sql.DriverPropertyInfo;
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.model.DepotID.LEADER1;
 import static org.junit.Assert.*;
 
 public class ProductionManagerTest {
@@ -72,7 +73,7 @@ public class ProductionManagerTest {
         ProductionManager prdmng = new ProductionManager(dvlpmts, new MutableProduction(2, 1), ldrspc);
         boolean exc = false;
         try {
-            prdmng.addSupply(DepotID.LEADER1_PRODUCTION, WarehouseObjectType.COIN, DepotID.LEADER1_DEPOT);
+            prdmng.addSupply(DepotID.LEADER1, WarehouseObjectType.COIN, DepotID.LEADER1);
         } catch (SupplyException e) {
             exc = true;
         }
@@ -112,10 +113,10 @@ public class ProductionManagerTest {
         ProductionManager prdmng = new ProductionManager(new Developments(), new MutableProduction(2, 1), new LeadersSpace());
         boolean exc = false;
         try {
-            prdmng.addSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN, DepotID.LEADER1_DEPOT);
+            prdmng.addSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN, DepotID.LEADER1);
         } catch (SupplyException e) {fail();}
         try {
-            prdmng.removeSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN, DepotID.LEADER1_DEPOT);
+            prdmng.removeSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN, DepotID.LEADER1);
         } catch (SupplyException e) {
             exc = true;
         }
@@ -140,10 +141,10 @@ public class ProductionManagerTest {
         ProductionManager prdmng = new ProductionManager(dvlpmts, new MutableProduction(2, 1), ldrspc);
         boolean exc = false;
         try {
-            prdmng.addSupply(DepotID.LEADER1_PRODUCTION, WarehouseObjectType.COIN, DepotID.WAREHOUSE2);
+            prdmng.addSupply(DepotID.LEADER1, WarehouseObjectType.COIN, DepotID.WAREHOUSE2);
         } catch (SupplyException e) {fail();}
         try {
-            prdmng.removeSupply(DepotID.LEADER1_PRODUCTION, WarehouseObjectType.COIN, DepotID.WAREHOUSE2);
+            prdmng.removeSupply(DepotID.LEADER1, WarehouseObjectType.COIN, DepotID.WAREHOUSE2);
         } catch (SupplyException e) {
             exc = true;
         }
@@ -196,7 +197,7 @@ public class ProductionManagerTest {
             ldrspc.playLeader(0, new ResourceChecker(new DepotsManager(wrhs, ldrspc), new SupplyContainer(2, 2, 0, 0, 0), dvlpmts));
         } catch (SupplyException | LeaderException e) {fail();}
         ProductionManager prdmng = new ProductionManager(dvlpmts, new MutableProduction(2, 1), ldrspc);
-        assertTrue(prdmng.additionAllowed(DepotID.LEADER1_PRODUCTION, WarehouseObjectType.COIN, DepotID.WAREHOUSE1));
+        assertTrue(prdmng.additionAllowed(DepotID.LEADER1, WarehouseObjectType.COIN, DepotID.WAREHOUSE1));
     }
 
     @Test
@@ -236,7 +237,7 @@ public class ProductionManagerTest {
             prdmng.baseProduction.swapOutput(0, WarehouseObjectType.STONE);
             prdmng.baseProduction.currentSupply.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
         } catch (SupplyException e) {fail();}
-        assertTrue(prdmng.removalAllowed(DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD, DepotID.LEADER1_DEPOT));
+        assertTrue(prdmng.removalAllowed(DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD, DepotID.LEADER1));
     }
 
     @Test
@@ -256,15 +257,17 @@ public class ProductionManagerTest {
         } catch (SupplyException | LeaderException e) {fail();}
         ProductionManager prdmng = new ProductionManager(dvlpmts, new MutableProduction(2, 1), ldrspc);
         try {
-            prdmng.addSupply(DepotID.LEADER1_PRODUCTION, WarehouseObjectType.COIN, DepotID.WAREHOUSE2);
+            prdmng.addSupply(DepotID.LEADER1, WarehouseObjectType.COIN, DepotID.WAREHOUSE2);
         } catch (SupplyException e) {fail();}
-        assertTrue(prdmng.removalAllowed(DepotID.LEADER1_PRODUCTION, WarehouseObjectType.COIN, DepotID.LEADER2_PRODUCTION));
+        assertTrue(prdmng.removalAllowed(DepotID.LEADER1, WarehouseObjectType.COIN, DepotID.LEADER2));
     }
 
     @Test
     public void removalAllowed_wrongIDFalse() {
         ProductionManager prdmng = new ProductionManager(new Developments(), new MutableProduction(2, 1), new LeadersSpace());
-        assertFalse(prdmng.removalAllowed(DepotID.LEADER1_DEPOT, WarehouseObjectType.COIN, DepotID.COFFER));
+        LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
+        LEADER1.setSource(DepotID.SourceType.DEPOT);
+        assertFalse(prdmng.removalAllowed(DepotID.LEADER1, WarehouseObjectType.COIN, DepotID.COFFER));
     }
 
     @Test
@@ -360,11 +363,11 @@ public class ProductionManagerTest {
             prdmng.swapLeaderProduction(0, WarehouseObjectType.SHIELD);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         try {
-            prdmng.addSupply(DepotID.LEADER1_PRODUCTION, WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
+            prdmng.addSupply(DepotID.LEADER1, WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
         } catch (SupplyException e) {fail();}
         Pair<SupplyContainer, SupplyContainer> result = null;
         try {
-            result = new Pair<>(prdmng.clearSupplies(DepotID.LEADER1_PRODUCTION));
+            result = new Pair<>(prdmng.clearSupplies(DepotID.LEADER1));
         } catch (NoSuchMethodException e) {fail();}
         SupplyContainer totalResources = new SupplyContainer(result.first.sum(result.second));
         int[] expectedResult = {0, 1, 0, 0, 0};
@@ -403,7 +406,7 @@ public class ProductionManagerTest {
             prdmng.addSupply(DepotID.DEVELOPMENT1, WarehouseObjectType.STONE, DepotID.COFFER);
             prdmng.addSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD, DepotID.WAREHOUSE3);
             prdmng.addSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD, DepotID.WAREHOUSE3);
-            prdmng.addSupply(DepotID.LEADER1_PRODUCTION, WarehouseObjectType.SERVANT, DepotID.COFFER);
+            prdmng.addSupply(DepotID.LEADER1, WarehouseObjectType.SERVANT, DepotID.COFFER);
         } catch (SupplyException e) {fail();}
         Pair<SupplyContainer, SupplyContainer> result = new Pair<>(prdmng.clearSupplies());
         SupplyContainer totalResources = new SupplyContainer(result.first.sum(result.second));
@@ -466,7 +469,7 @@ public class ProductionManagerTest {
             //add resources to developments
             prdmng.addSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD, DepotID.WAREHOUSE3);
             prdmng.addSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.STONE, DepotID.WAREHOUSE2);
-            prdmng.addSupply(DepotID.LEADER1_PRODUCTION, WarehouseObjectType.SERVANT, DepotID.WAREHOUSE1);
+            prdmng.addSupply(DepotID.LEADER1, WarehouseObjectType.SERVANT, DepotID.WAREHOUSE1);
         } catch (SupplyException e) {fail();}
         SupplyContainer result = new SupplyContainer(prdmng.produce(false, false, false, true, false, true));
         int[] expectedResult = {1, 0, 1, 0, 1};
@@ -527,7 +530,7 @@ public class ProductionManagerTest {
             //add resources to developments
             prdmng.addSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD, DepotID.WAREHOUSE3);
             prdmng.addSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.STONE, DepotID.WAREHOUSE2);
-            prdmng.addSupply(DepotID.LEADER1_PRODUCTION, WarehouseObjectType.COIN, DepotID.WAREHOUSE1);
+            prdmng.addSupply(DepotID.LEADER1, WarehouseObjectType.COIN, DepotID.WAREHOUSE1);
         } catch (SupplyException e) {fail();}
         try {
             prdmng.checkProduction(false, false, false, true, false, true);
@@ -604,8 +607,8 @@ public class ProductionManagerTest {
                               result.contains(DepotID.DEVELOPMENT2) ? 1 : 0,
                               result.contains(DepotID.DEVELOPMENT3) ? 1 : 0,
                               result.contains(DepotID.BASE_PRODUCTION) ? 1 : 0,
-                              result.contains(DepotID.LEADER1_PRODUCTION) ? 1 : 0,
-                              result.contains(DepotID.LEADER2_PRODUCTION) ? 1 : 0};
+                              result.contains(DepotID.LEADER1) ? 1 : 0,
+                              result.contains(DepotID.LEADER2) ? 1 : 0};
         assertArrayEquals(expectedResult, actualResult);
     }
 }
