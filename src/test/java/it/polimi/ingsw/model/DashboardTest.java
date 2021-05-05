@@ -5579,6 +5579,8 @@ public class DashboardTest {
         dshbrd.goAhead();
         dshbrd.goAhead();
 
-        assertEquals(39, dshbrd.getWinPoints());
+        int[] expectedResult = {39, 6};
+        int[] actualResult = {dshbrd.getWinPoints().first, dshbrd.getWinPoints().second};
+        assertArrayEquals(expectedResult, actualResult);
     }
 }
