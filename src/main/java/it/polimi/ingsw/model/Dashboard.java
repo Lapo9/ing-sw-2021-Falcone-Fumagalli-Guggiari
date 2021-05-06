@@ -3,9 +3,9 @@ package it.polimi.ingsw.model;
 import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
 
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.controller.ModelObserver;
 import it.polimi.ingsw.exceptions.*;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,6 +17,7 @@ import java.util.HashMap;
  */
 public class Dashboard implements HasStatus{
 
+    private final String name;
     private final Marketplace marketplace;
     private final DevelopmentGrid developmentGrid;
     private final Warehouse warehouse = new Warehouse();
@@ -34,7 +35,7 @@ public class Dashboard implements HasStatus{
     private final DepotsManager depotsManager = new DepotsManager(warehouse, leadersSpace);
     private final ActionTilesStack actionTilesStack = new ActionTilesStack();
     private int blackCrossPosition = 0;
-    //private ArrayList<ModelObserver> observers = new ArrayList<ModelObserver>();
+    private ArrayList<ModelObserver> observers = new ArrayList<ModelObserver>();
 
     private final HashMap<DepotID.DepotType, AcceptsSupplies> containers = new HashMap<>();
 
@@ -44,8 +45,9 @@ public class Dashboard implements HasStatus{
      * @param inkwell is the player the first one to play?
      * @param marketplace match marketplace, to collect the supplies from
      * @param developmentGrid match development grid, to buy the development cards from
+     * @param name
      */
-    public Dashboard(boolean inkwell, Marketplace marketplace, DevelopmentGrid developmentGrid){
+    public Dashboard(boolean inkwell, Marketplace marketplace, DevelopmentGrid developmentGrid, String name){
         this.inkwell = inkwell;
         this.marketplace = marketplace;
         this.developmentGrid = developmentGrid;
@@ -661,15 +663,26 @@ public class Dashboard implements HasStatus{
         return status;
     }
 
+
+    /**
+     * Registers an observer to send the updates to.
+     * @param observer observer
+     */
+    public void attach(ModelObserver observer){
+        observers.add(observer);
+    }
+
+
+
     /*Gets the status of the dashboard and send it to all of the observers.*/
     private void notifyViews(){
         //get the status of the dashboard
         ArrayList<Integer> status = new ArrayList<>(getStatus());
 
         //send the status to the observers
-//        for (ModelObserver mo : modelObservers) {
-//            mo.updateStatus(status);
-//        }
+        for (ModelObserver mo : observers) {
+            mo.update(name, status);
+        }
     }
 
 

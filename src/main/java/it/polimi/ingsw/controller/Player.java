@@ -1,7 +1,6 @@
 package it.polimi.ingsw.controller;
 
 import it.polimi.ingsw.ClientSocket;
-import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.controller.exceptions.MatchException;
 import it.polimi.ingsw.controller.match.Match;
 import it.polimi.ingsw.controller.match.MatchManager;
@@ -9,12 +8,8 @@ import it.polimi.ingsw.model.Dashboard;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 public class Player {
 
@@ -26,6 +21,7 @@ public class Player {
     private Dashboard dashboard;
     private int selectedItemsInPreMatch = 0;
     private int selectedLeadersInPreMatch = 0;
+    private int order = -1;
 
     private Thread listenRoutineThread;
     private Thread heartbeatThread;
@@ -53,12 +49,21 @@ public class Player {
     }
 
 
-    public int getSelectedLeadersInPreMatch() {
+    public synchronized int getSelectedLeadersInPreMatch() {
         return selectedLeadersInPreMatch;
     }
 
-    public void addSelectedLeaderInPreMatch() {
+    public synchronized void addSelectedLeaderInPreMatch() {
         selectedLeadersInPreMatch++;
+    }
+
+
+    public synchronized int getOrder() {
+        return order;
+    }
+
+    public synchronized void setOrder(int order){
+        this.order = order;
     }
 
 
@@ -107,7 +112,7 @@ public class Player {
             heartbeatThread.start();
         }
         else {
-            send((byte) 0, "fatal Wait a few seconds before reconnecting");
+            sendController("fatal Wait a few seconds before reconnecting");
         }
     }
 
@@ -128,9 +133,22 @@ public class Player {
 
 
 
-    public synchronized boolean send(byte type, String message){
+    public synchronized boolean sendController(String message){
         try {
-            socket.send(message, ClientSocket.packUpStringWithLengthAndType(type));
+            socket.send(message, ClientSocket.packUpStringWithLengthAndType((byte) 0));
+        } catch (Exception e){
+            destroy();
+            return false;
+        }
+        return true;
+    }
+
+
+
+    public synchronized boolean sendModel(ArrayList<Integer> update){
+        int[] updateArr = update.stream().mapToInt(i -> i).toArray();
+        try {
+            socket.send(updateArr, ClientSocket.packUpIntsWithLengthAndType((byte) 1));
         } catch (Exception e){
             destroy();
             return false;
@@ -160,7 +178,7 @@ public class Player {
         try {
             matchManager.addPlayer(this, tokens[2]); //add the player to the match, if you cannot destroy
         } catch (MatchException me){
-            send((byte) 0, "fatal " + me.getMessage());
+            sendController("fatal " + me.getMessage());
             destroy();
             return;
         }
@@ -172,7 +190,7 @@ public class Player {
         }
 
         try {
-            send((byte) 0, "message You are connected!");
+            sendController("message You are connected!");
         } catch (Exception e){
             destroy();
             return;
@@ -205,7 +223,7 @@ public class Player {
     //send an heartbeat to the player once every 8 seconds to tell him everything is ok
     private void heartbeat(){
         while(!isDestroyed()) {
-            send((byte) 0, "ECG");
+            sendController("ECG");
             try {
                 TimeUnit.SECONDS.sleep(8);
             } catch (Exception e){

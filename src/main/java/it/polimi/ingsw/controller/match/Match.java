@@ -30,7 +30,7 @@ public class Match {
         activePlayer = leader;
         setDefaultCommands();
 
-        leader.attachDashboard(new Dashboard(false, marketplace, developmentGrid));
+        leader.attachDashboard(new Dashboard(false, marketplace, developmentGrid, leader.getName());
     }
 
 
@@ -53,7 +53,7 @@ public class Match {
         else {
             //simply add the new player
             players.add(p);
-            p.attachDashboard(new Dashboard(false, marketplace, developmentGrid));
+            p.attachDashboard(new Dashboard(false, marketplace, developmentGrid, p.getName()));
         }
     }
 
@@ -83,7 +83,7 @@ public class Match {
             commands.get(tokens[0]).accept(player, tokens);
         } catch (NullPointerException npe){
             //command not recognized
-            player.send((byte) 0, "error " + tokens[0] + " is not a recognized command");
+            player.sendController("error " + tokens[0] + " is not a recognized command");
         }
     }
 
@@ -108,7 +108,7 @@ public class Match {
 
         infoBox.append("\t\t" + FancyConsole.UNDERLINED(FancyConsole.MAGENTA(phase.toString())));
 
-        player.send((byte)0, infoBox.toString());
+        player.sendController(infoBox.toString());
     }
 
     private void dead(Player player, String... args) {
@@ -160,16 +160,21 @@ public class Match {
 
     private void start(Player player, String... args) {
         if(!player.equals(activePlayer)){
-            player.send((byte) 0, "error You are not the leader");
+            player.sendController("error You are not the leader");
             return;
         }
         if (phase != LOBBY) {
-            player.send((byte) 0, "error Match already started");
+            player.sendController("error Match already started");
             return;
         }
 
         Collections.shuffle(players); //randomize players order
         activePlayer = players.get(0); //set the first player to play
+
+        //tell each player his number
+        for (int i = 0; i < players.size(); ++i){
+            players.get(i).setOrder(i);
+        }
 
         activePlayer.getDashboard().giveInkwell(); //give the inkwell to the first player
 
@@ -188,7 +193,7 @@ public class Match {
 
         //tell the players the match started
         for (int i = 0; i < players.size(); ++i){
-            players.get(i).send((byte) 0, "start " + (i+1));
+            players.get(i).sendController("start " + (i+1));
         }
 
         phase = PRE_MATCH;
@@ -201,14 +206,14 @@ public class Match {
 
     private void select(Player player, String... args)  {
         if(phase != PRE_MATCH){
-            player.send((byte) 0, "error You can't use this command now");
+            player.sendController("error You can't use this command now");
             return;
         }
         if((player.getSelectedItemsInPreMatch() >= 0 && playerOrder(player) == 0) ||
            (player.getSelectedItemsInPreMatch() >= 1 && playerOrder(player) == 1) ||
            (player.getSelectedItemsInPreMatch() >= 1 && playerOrder(player) == 2) ||
            (player.getSelectedItemsInPreMatch() >= 2 && playerOrder(player) == 3)){
-            player.send((byte) 0, "error You've already selected all the items");
+            player.sendController("error You've already selected all the items");
             return;
         }
 
@@ -219,7 +224,7 @@ public class Match {
             try {
                 player.getDashboard().trustedAddSupply(DepotID.WAREHOUSE2, WarehouseObjectType.stringToType(args[1]));
             } catch (Exception e1){
-                player.send((byte) 0, "error An unknown error occurred. Retry.");
+                player.sendController("error An unknown error occurred. Retry.");
                 return;
             }
         }
@@ -246,11 +251,11 @@ public class Match {
 
     private void marketplace(Player player, String... args) {
         if(player != activePlayer){
-            player.send((byte) 0, "error It's not your turn!");
+            player.sendController("error It's not your turn!");
             return;
         }
         if(phase != TURN_START){
-            player.send((byte) 0, "error You can't buy marbles now!");
+            player.sendController("error You can't buy marbles now!");
             return;
         }
 
@@ -259,7 +264,7 @@ public class Match {
 
         //check boundaries
         if(dir == MarketDirection.HORIZONTAL && index == 4){
-            player.send((byte) 0, "error If you choose horizontal, index must be between 1 and 3");
+            player.sendController("error If you choose horizontal, index must be between 1 and 3");
             return;
         }
 
@@ -267,16 +272,16 @@ public class Match {
 
         phase = MARKETPLACE; //set new phase
 
-        player.send((byte) 0, "show dashboard"); //show the dashboard to the player
+        player.sendController("show dashboard"); //show the dashboard to the player
     }
 
     private void moveMarble(Player player, String... args) {
         if(player != activePlayer){
-            player.send((byte) 0, "error It's not your turn!");
+            player.sendController("error It's not your turn!");
             return;
         }
         if(phase != MARKETPLACE){
-            player.send((byte) 0, "error You can't move marbles now!");
+            player.sendController("error You can't move marbles now!");
             return;
         }
 
@@ -285,21 +290,21 @@ public class Match {
         try {
             player.getDashboard().assignMarble(id, color);
         } catch (Exception e){
-            player.send((byte) 0, "error " + e.getMessage());
+            player.sendController("error " + e.getMessage());
         }
         if(player.getDashboard().getUnassignedSuppliesQuantity() == 0){
             phase = TURN_END; //set next phase
-            player.send((byte) 0, "message You assigned all of your marbles!");
+            player.sendController("message You assigned all of your marbles!");
         }
     }
 
     private void colorMarble(Player player, String... args) {
         if(player != activePlayer){
-            player.send((byte) 0, "error It's not your turn!");
+            player.sendController("error It's not your turn!");
             return;
         }
         if(phase != MARKETPLACE){
-            player.send((byte) 0, "error You can't color your marbles now!");
+            player.sendController("error You can't color your marbles now!");
             return;
         }
 
@@ -307,17 +312,17 @@ public class Match {
         try {
             player.getDashboard().transformWhiteMarble(color);
         } catch (Exception e){
-            player.send((byte) 0, "error " + e.getMessage());
+            player.sendController("error " + e.getMessage());
         }
     }
 
     private void discard(Player player, String... args) {
         if(player != activePlayer){
-            player.send((byte) 0, "error It's not your turn!");
+            player.sendController("error It's not your turn!");
             return;
         }
         if(phase != MARKETPLACE){
-            player.send((byte) 0, "error You can't discard your marbles now!");
+            player.sendController("error You can't discard your marbles now!");
             return;
         }
 
@@ -352,11 +357,11 @@ public class Match {
     private void move(Player player, String... args) {
 
         if(player != activePlayer){
-            player.send((byte) 0, "error It's not your turn!");
+            player.sendController("error It's not your turn!");
             return;
         }
         if(phase != TURN_START){
-            player.send((byte) 0, "error You can't move supplies now!");
+            player.sendController("error You can't move supplies now!");
             return;
         }
 
@@ -367,18 +372,18 @@ public class Match {
         try {
             player.getDashboard().moveSupply(from, to, supply);
         } catch (Exception e){
-            player.send((byte) 0, "error " + e.getMessage());
+            player.sendController("error " + e.getMessage());
         }
     }
 
     private void buy(Player player, String... args) {
 
         if(player != activePlayer){
-            player.send((byte) 0, "error It's not your turn!");
+            player.sendController("error It's not your turn!");
             return;
         }
         if(phase != TURN_START){
-            player.send((byte) 0, "error You can't buy cards now!");
+            player.sendController("error You can't buy cards now!");
             return;
         }
 
@@ -389,17 +394,17 @@ public class Match {
         try {
             player.getDashboard().buyDevelopment(col, row, space);
         } catch (Exception e){
-            player.send((byte) 0, "error " + e.getMessage());
+            player.sendController("error " + e.getMessage());
         }
     }
 
     private void endTurn(Player player, String... args) {
         if(player != activePlayer){
-            player.send((byte) 0, "error It's not your turn!");
+            player.sendController("error It's not your turn!");
             return;
         }
         if(phase != TURN_END){
-            player.send((byte) 0, "error You must perform an action before ending your turn!");
+            player.sendController("error You must perform an action before ending your turn!");
             return;
         }
 
@@ -412,7 +417,7 @@ public class Match {
 
         //if the player is alive, tell him it's his turn to play, if not perform auto action
         if(activePlayer.isConnected()) {
-            activePlayer.send((byte) 0, "yourTurn");
+            activePlayer.sendController("yourTurn");
         }
         else {
             update("dead", activePlayer);
@@ -421,18 +426,18 @@ public class Match {
 
     private void produce(Player player, String... args) {
         if(player != activePlayer){
-            player.send((byte) 0, "error It's not your turn!");
+            player.sendController("error It's not your turn!");
             return;
         }
         if(phase != TURN_START){
-            player.send((byte) 0, "error You can't produce now!");
+            player.sendController("error You can't produce now!");
             return;
         }
 
         try {
             player.getDashboard().checkProduction(Boolean.parseBoolean(args[1]), Boolean.parseBoolean(args[2]), Boolean.parseBoolean(args[3]), Boolean.parseBoolean(args[4]), Boolean.parseBoolean(args[5]), Boolean.parseBoolean(args[6]));
         } catch (Exception e){
-            player.send((byte) 0, "error " + e.getMessage());
+            player.sendController("error " + e.getMessage());
             return;
         }
 
@@ -443,11 +448,11 @@ public class Match {
 
     private void swapBase(Player player, String... args) {
         if (player != activePlayer) {
-            player.send((byte) 0, "error It's not your turn!");
+            player.sendController("error It's not your turn!");
             return;
         }
         if (phase != TURN_START) {
-            player.send((byte) 0, "error You can't switch production input/output now!");
+            player.sendController("error You can't switch production input/output now!");
             return;
         }
 
@@ -457,17 +462,17 @@ public class Match {
         try {
             player.getDashboard().swapBaseProduction(slot, newWot);
         } catch (Exception e) {
-            player.send((byte) 0, "error " + e.getMessage());
+            player.sendController("error " + e.getMessage());
         }
     }
 
     private void swapLeader(Player player, String... args) {
         if (player != activePlayer) {
-            player.send((byte) 0, "error It's not your turn!");
+            player.sendController("error It's not your turn!");
             return;
         }
         if (phase != TURN_START) {
-            player.send((byte) 0, "error You can't switch production input/output now!");
+            player.sendController("error You can't switch production input/output now!");
             return;
         }
 
@@ -477,52 +482,52 @@ public class Match {
         try {
             player.getDashboard().swapLeaderProduction(slot, newWot);
         } catch (Exception e) {
-            player.send((byte) 0, "error " + e.getMessage());
+            player.sendController("error " + e.getMessage());
         }
     }
 
     private void activateLeader(Player player, String... args) {
         if (player != activePlayer) {
-            player.send((byte) 0, "error It's not your turn!");
+            player.sendController("error It's not your turn!");
             return;
         }
         if (phase != TURN_START && phase != TURN_END) {
-            player.send((byte) 0, "error You can't activate your leader now!");
+            player.sendController("error You can't activate your leader now!");
             return;
         }
 
         try {
             player.getDashboard().playLeader(Integer.parseInt(args[1]));
         } catch (Exception e){
-            player.send((byte) 0, "error " + e.getMessage());
+            player.sendController("error " + e.getMessage());
         }
     }
 
     private void discardLeader(Player player, String... args) {
         if (player != activePlayer) {
-            player.send((byte) 0, "error It's not your turn!");
+            player.sendController("error It's not your turn!");
             return;
         }
         if (phase != TURN_START && phase != TURN_END) {
-            player.send((byte) 0, "error You can't discard your leader now!");
+            player.sendController("error You can't discard your leader now!");
             return;
         }
 
         try {
             player.getDashboard().discardLeader(Integer.parseInt(args[1]));
         } catch (Exception e){
-            player.send((byte) 0, "error " + e.getMessage());
+            player.sendController("error " + e.getMessage());
         }
     }
 
     private void pickLeaders(Player player, String... args) {
         if (phase != LEADER_SELECTION) {
-            player.send((byte) 0, "error You' ve already picked your leaders!");
+            player.sendController("error You' ve already picked your leaders!");
             return;
         }
 
         if(args[1].equals(args[2])){
-            player.send((byte) 0, "error Choose 2 different leaders!");
+            player.sendController("error Choose 2 different leaders!");
             return;
         }
 
@@ -530,7 +535,7 @@ public class Match {
             player.getDashboard().pickLeader(Integer.parseInt(args[1])-1);
             player.getDashboard().pickLeader(Integer.parseInt(args[2])-1);
         } catch (Exception e){
-            player.send((byte) 0, e.getMessage());
+            player.sendController(e.getMessage());
             //TODO there should be a way to clear leaders, if not this state is forever
             return;
         }
@@ -580,7 +585,7 @@ public class Match {
     private synchronized void broadcast(String message){
         //avoid first turn for disconnected players
         for(Player p : players) {
-            p.send((byte) 0, message);
+            p.sendController(message);
         }
     }
 
