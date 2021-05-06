@@ -45,12 +45,14 @@ public class Dashboard implements HasStatus{
      * @param inkwell is the player the first one to play?
      * @param marketplace match marketplace, to collect the supplies from
      * @param developmentGrid match development grid, to buy the development cards from
-     * @param name
+     * @param name player nickname
      */
     public Dashboard(boolean inkwell, Marketplace marketplace, DevelopmentGrid developmentGrid, String name){
         this.inkwell = inkwell;
         this.marketplace = marketplace;
         this.developmentGrid = developmentGrid;
+
+        this.name = name;
 
         containers.put(DepotID.DepotType.WAREHOUSE, depotsManager);
         containers.put(DepotID.DepotType.LEADER_DEPOT, depotsManager);

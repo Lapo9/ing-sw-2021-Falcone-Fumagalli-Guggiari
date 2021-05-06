@@ -1,6 +1,7 @@
 package it.polimi.ingsw.controller.match;
 
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.controller.ModelObserver;
 import it.polimi.ingsw.controller.Player;
 import it.polimi.ingsw.controller.exceptions.MatchException;
 import it.polimi.ingsw.model.*;
@@ -23,6 +24,7 @@ public class Match {
     private Marketplace marketplace = new Marketplace();
     private MatchPhase phase = LOBBY;
     private HashMap<String, BiConsumer<Player, String[]>> commands = new HashMap<>();
+    private ModelObserver modelObserver = new ModelObserver();
 
 
     Match(Player leader){
@@ -30,7 +32,8 @@ public class Match {
         activePlayer = leader;
         setDefaultCommands();
 
-        leader.attachDashboard(new Dashboard(false, marketplace, developmentGrid, leader.getName());
+        leader.attachDashboard(new Dashboard(false, marketplace, developmentGrid, leader.getName()));
+        modelObserver.attachTo(leader); //attach the model observer to the dashboard of this player
     }
 
 
@@ -54,19 +57,8 @@ public class Match {
             //simply add the new player
             players.add(p);
             p.attachDashboard(new Dashboard(false, marketplace, developmentGrid, p.getName()));
+            modelObserver.attachTo(p); //attach the model observer to the dashboard of this player
         }
-    }
-
-
-    //given a player it tells you his order in the match
-    private synchronized int playerOrder(Player p) {
-        for(int i = 0; i < players.size(); ++i){
-            if(p.equals(players.get(i))){
-                return i;
-            }
-        }
-
-        return -1;
     }
 
 
@@ -125,7 +117,7 @@ public class Match {
 
             case PRE_MATCH:
                 //fill the depot with coins
-                int order = playerOrder(player);
+                int order = player.getOrder();
                 if (order == 1 || order == 2){
                     update("select coin", player);
                 }
@@ -209,10 +201,10 @@ public class Match {
             player.sendController("error You can't use this command now");
             return;
         }
-        if((player.getSelectedItemsInPreMatch() >= 0 && playerOrder(player) == 0) ||
-           (player.getSelectedItemsInPreMatch() >= 1 && playerOrder(player) == 1) ||
-           (player.getSelectedItemsInPreMatch() >= 1 && playerOrder(player) == 2) ||
-           (player.getSelectedItemsInPreMatch() >= 2 && playerOrder(player) == 3)){
+        if((player.getSelectedItemsInPreMatch() >= 0 && player.getOrder() == 0) ||
+           (player.getSelectedItemsInPreMatch() >= 1 && player.getOrder() == 1) ||
+           (player.getSelectedItemsInPreMatch() >= 1 && player.getOrder() == 2) ||
+           (player.getSelectedItemsInPreMatch() >= 2 && player.getOrder() == 3)){
             player.sendController("error You've already selected all the items");
             return;
         }
@@ -235,10 +227,10 @@ public class Match {
         boolean done = true;
         for(int i = 0; i < players.size(); ++i){
             Player p = players.get(i);
-            if((p.getSelectedItemsInPreMatch() != 0 && playerOrder(p) == 0) ||
-               (p.getSelectedItemsInPreMatch() != 1 && playerOrder(p) == 1) ||
-               (p.getSelectedItemsInPreMatch() != 1 && playerOrder(p) == 2) ||
-               (p.getSelectedItemsInPreMatch() != 2 && playerOrder(p) == 3)){
+            if((p.getSelectedItemsInPreMatch() != 0 && p.getOrder() == 0) ||
+               (p.getSelectedItemsInPreMatch() != 1 && p.getOrder() == 1) ||
+               (p.getSelectedItemsInPreMatch() != 1 && p.getOrder() == 2) ||
+               (p.getSelectedItemsInPreMatch() != 2 && p.getOrder() == 3)){
                 done = false;
             }
         }
