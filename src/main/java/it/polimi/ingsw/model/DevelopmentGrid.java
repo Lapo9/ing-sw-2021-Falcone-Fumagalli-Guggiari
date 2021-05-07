@@ -205,76 +205,76 @@ public class DevelopmentGrid implements HasStatus{
     //Puts the cards in the grid.
     private void fill(boolean type) {
         ArrayList<DevelopmentCard> greenLvlOne = new ArrayList<>();
-        greenLvlOne.add(new DevelopmentCard(1, 1, 1, CardCategory.GREEN, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 1)), new SupplyContainer(0, 0, 0, 2, 0)));
-        greenLvlOne.add(new DevelopmentCard(2, 1, 2, CardCategory.GREEN, new Production(new SupplyContainer(0, 1, 0, 0, 0), new SupplyContainer(0, 0, 1, 0, 0)), new SupplyContainer(0, 1, 1, 1, 0)));
-        greenLvlOne.add(new DevelopmentCard(3, 1, 3, CardCategory.GREEN, new Production(new SupplyContainer(0, 0, 2, 0, 0), new SupplyContainer(1, 1, 0, 1, 0)), new SupplyContainer(0, 0, 0, 3, 0)));
-        greenLvlOne.add(new DevelopmentCard(4, 1, 4, CardCategory.GREEN, new Production(new SupplyContainer(0, 1, 1, 0, 0), new SupplyContainer(2, 0, 0, 0, 1)), new SupplyContainer(2, 0, 0, 2, 0)));
+        greenLvlOne.add(new DevelopmentCard(1));
+        greenLvlOne.add(new DevelopmentCard(2));
+        greenLvlOne.add(new DevelopmentCard(3));
+        greenLvlOne.add(new DevelopmentCard(4));
 
         ArrayList<DevelopmentCard> blueLvlOne = new ArrayList<>();
-        blueLvlOne.add(new DevelopmentCard(5, 1, 1, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 0, 1, 0), new SupplyContainer(0, 0, 0, 0, 1)), new SupplyContainer(2, 0, 0, 0, 0)));
-        blueLvlOne.add(new DevelopmentCard(6, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
-        blueLvlOne.add(new DevelopmentCard(7, 1, 3, CardCategory.BLUE, new Production(new SupplyContainer(0, 2, 0, 0, 0), new SupplyContainer(1, 0, 1, 1, 0)), new SupplyContainer(3, 0, 0, 0, 0)));
-        blueLvlOne.add(new DevelopmentCard(8, 1, 4, CardCategory.BLUE, new Production(new SupplyContainer(0, 1, 0, 1, 0), new SupplyContainer(0, 2, 0, 0, 1)), new SupplyContainer(2, 0, 2, 0, 0)));
+        blueLvlOne.add(new DevelopmentCard(5));
+        blueLvlOne.add(new DevelopmentCard(6));
+        blueLvlOne.add(new DevelopmentCard(7));
+        blueLvlOne.add(new DevelopmentCard(8));
 
         ArrayList<DevelopmentCard> yellowLvlOne = new ArrayList<>();
-        yellowLvlOne.add(new DevelopmentCard(9, 1, 1, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 0, 0, 0, 1)), new SupplyContainer(0, 2, 0, 0, 0)));
-        yellowLvlOne.add(new DevelopmentCard(10, 1, 2, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 1, 0), new SupplyContainer(1, 0, 0, 0, 0)), new SupplyContainer(1, 1, 0, 1, 0)));
-        yellowLvlOne.add(new DevelopmentCard(11, 1, 3, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 2, 0), new SupplyContainer(1, 1, 1, 0, 0)), new SupplyContainer(0, 3, 0, 0, 0)));
-        yellowLvlOne.add(new DevelopmentCard(12, 1, 4, CardCategory.YELLOW, new Production(new SupplyContainer(1, 0, 1, 0, 0), new SupplyContainer(0, 0, 0, 2, 1)), new SupplyContainer(0, 2, 0, 2, 0)));
+        yellowLvlOne.add(new DevelopmentCard(9));
+        yellowLvlOne.add(new DevelopmentCard(10));
+        yellowLvlOne.add(new DevelopmentCard(11));
+        yellowLvlOne.add(new DevelopmentCard(12));
 
         ArrayList<DevelopmentCard> violetLvlOne = new ArrayList<>();
-        violetLvlOne.add(new DevelopmentCard(13, 1, 1, CardCategory.VIOLET, new Production(new SupplyContainer(0, 1, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 1)), new SupplyContainer(0, 0, 2, 0, 0)));
-        violetLvlOne.add(new DevelopmentCard(14, 1, 2, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 1, 0)), new SupplyContainer(1, 0, 1, 1, 0)));
-        violetLvlOne.add(new DevelopmentCard(15, 1, 3, CardCategory.VIOLET, new Production(new SupplyContainer(2, 0, 0, 0, 0), new SupplyContainer(0, 1, 1, 1, 0)), new SupplyContainer(0, 0, 3, 0, 0)));
-        violetLvlOne.add(new DevelopmentCard(16, 1, 4, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 1, 0), new SupplyContainer(0, 2, 0, 0, 1)), new SupplyContainer(0, 2, 2, 0, 0)));
+        violetLvlOne.add(new DevelopmentCard(13));
+        violetLvlOne.add(new DevelopmentCard(14));
+        violetLvlOne.add(new DevelopmentCard(15));
+        violetLvlOne.add(new DevelopmentCard(16));
 
         ArrayList<DevelopmentCard> greenLvlTwo = new ArrayList<>();
-        greenLvlTwo.add(new DevelopmentCard(17, 2, 5, CardCategory.GREEN, new Production(new SupplyContainer(0, 1, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(0, 0, 0, 4, 0)));
-        greenLvlTwo.add(new DevelopmentCard(18, 2, 6, CardCategory.GREEN, new Production(new SupplyContainer(0, 0, 1, 1, 0), new SupplyContainer(0, 3, 0, 0, 0)), new SupplyContainer(0, 0, 2, 3, 0)));
-        greenLvlTwo.add(new DevelopmentCard(19, 2, 7, CardCategory.GREEN, new Production(new SupplyContainer(2, 0, 0, 0, 0), new SupplyContainer(0, 2, 0, 0, 2)), new SupplyContainer(0, 0, 0, 5, 0)));
-        greenLvlTwo.add(new DevelopmentCard(20, 2, 8, CardCategory.GREEN, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 2, 1)), new SupplyContainer(3, 0, 0, 3, 0)));
+        greenLvlTwo.add(new DevelopmentCard(17));
+        greenLvlTwo.add(new DevelopmentCard(18));
+        greenLvlTwo.add(new DevelopmentCard(19));
+        greenLvlTwo.add(new DevelopmentCard(20));
 
         ArrayList<DevelopmentCard> blueLvlTwo = new ArrayList<>();
-        blueLvlTwo.add(new DevelopmentCard(21, 2, 5, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(4, 0, 0, 0, 0)));
-        blueLvlTwo.add(new DevelopmentCard(22, 2, 6, CardCategory.BLUE, new Production(new SupplyContainer(1, 1, 0, 0, 0), new SupplyContainer(0, 0, 3, 0, 0)), new SupplyContainer(3, 2, 0, 0, 0)));
-        blueLvlTwo.add(new DevelopmentCard(23, 2, 7, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 2, 0, 0), new SupplyContainer(0, 0, 0, 2, 2)), new SupplyContainer(5, 0, 0, 0, 0)));
-        blueLvlTwo.add(new DevelopmentCard(24, 2, 8, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 2, 0, 0, 1)), new SupplyContainer(3, 3, 0, 0, 0)));
+        blueLvlTwo.add(new DevelopmentCard(21));
+        blueLvlTwo.add(new DevelopmentCard(22));
+        blueLvlTwo.add(new DevelopmentCard(23));
+        blueLvlTwo.add(new DevelopmentCard(24));
 
         ArrayList<DevelopmentCard> yellowLvlTwo = new ArrayList<>();
-        yellowLvlTwo.add(new DevelopmentCard(25, 2, 5, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 1, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(0, 4, 0, 0, 0)));
-        yellowLvlTwo.add(new DevelopmentCard(26, 2, 6, CardCategory.YELLOW, new Production(new SupplyContainer(0, 1, 0, 1, 0), new SupplyContainer(3, 0, 0, 0, 0)), new SupplyContainer(0, 3, 0, 2, 0)));
-        yellowLvlTwo.add(new DevelopmentCard(27, 2, 7, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 2, 0), new SupplyContainer(0, 0, 2, 0, 2)), new SupplyContainer(0, 5, 0, 0, 0)));
-        yellowLvlTwo.add(new DevelopmentCard(28, 2, 8, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 1, 0), new SupplyContainer(2, 0, 0, 0, 1)), new SupplyContainer(0, 3, 3, 0, 0)));
+        yellowLvlTwo.add(new DevelopmentCard(25));
+        yellowLvlTwo.add(new DevelopmentCard(26));
+        yellowLvlTwo.add(new DevelopmentCard(27));
+        yellowLvlTwo.add(new DevelopmentCard(28));
 
         ArrayList<DevelopmentCard> violetLvlTwo = new ArrayList<>();
-        violetLvlTwo.add(new DevelopmentCard(29, 2, 5, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 0, 0, 0, 2)), new SupplyContainer(0, 0, 4, 0, 0)));
-        violetLvlTwo.add(new DevelopmentCard(30, 2, 6, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 1, 0, 0), new SupplyContainer(0, 0, 0, 3, 0)), new SupplyContainer(2, 0, 3, 0, 0)));
-        violetLvlTwo.add(new DevelopmentCard(31, 2, 7, CardCategory.VIOLET, new Production(new SupplyContainer(0, 2, 0, 0, 0), new SupplyContainer(2, 0, 0, 0, 2)), new SupplyContainer(0, 0, 5, 0, 0)));
-        violetLvlTwo.add(new DevelopmentCard(32, 2, 8, CardCategory.VIOLET, new Production(new SupplyContainer(0, 1, 0, 0, 0), new SupplyContainer(0, 0, 2, 0, 1)), new SupplyContainer(0, 0, 3, 3, 0)));
+        violetLvlTwo.add(new DevelopmentCard(29));
+        violetLvlTwo.add(new DevelopmentCard(30));
+        violetLvlTwo.add(new DevelopmentCard(31));
+        violetLvlTwo.add(new DevelopmentCard(32));
 
         ArrayList<DevelopmentCard> greenLvlThree = new ArrayList<>();
-        greenLvlThree.add(new DevelopmentCard(33, 3, 9, CardCategory.GREEN, new Production(new SupplyContainer(2, 0, 0, 0, 0), new SupplyContainer(0, 3, 0, 0, 2)), new SupplyContainer(0, 0, 0, 6, 0)));
-        greenLvlThree.add(new DevelopmentCard(34, 3, 10, CardCategory.GREEN, new Production(new SupplyContainer(1, 0, 1, 0, 0), new SupplyContainer(0, 2, 0, 2, 1)), new SupplyContainer(0, 0, 2, 5, 0)));
-        greenLvlThree.add(new DevelopmentCard(35, 3, 11, CardCategory.GREEN, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(1, 0, 0, 0, 3)), new SupplyContainer(0, 0, 0, 7, 0)));
-        greenLvlThree.add(new DevelopmentCard(36, 3, 12, CardCategory.GREEN, new Production(new SupplyContainer(0, 1, 0, 0, 0), new SupplyContainer(3, 0, 0, 1, 0)), new SupplyContainer(4, 0, 0, 4, 0)));
+        greenLvlThree.add(new DevelopmentCard(33));
+        greenLvlThree.add(new DevelopmentCard(34));
+        greenLvlThree.add(new DevelopmentCard(35));
+        greenLvlThree.add(new DevelopmentCard(36));
 
         ArrayList<DevelopmentCard> blueLvlThree = new ArrayList<>();
-        blueLvlThree.add(new DevelopmentCard(37, 3, 9, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 2, 0, 0), new SupplyContainer(0, 0, 0, 3, 2)), new SupplyContainer(6, 0, 0, 0, 0)));
-        blueLvlThree.add(new DevelopmentCard(38, 3, 10, CardCategory.BLUE, new Production(new SupplyContainer(1, 0, 0, 1, 0), new SupplyContainer(0, 2, 2, 0, 1)), new SupplyContainer(5, 2, 0, 0, 0)));
-        blueLvlThree.add(new DevelopmentCard(39, 3, 11, CardCategory.BLUE, new Production(new SupplyContainer(0, 1, 0, 0, 0), new SupplyContainer(0, 0, 0, 1, 3)), new SupplyContainer(7, 0, 0, 0, 0)));
-        blueLvlThree.add(new DevelopmentCard(40, 3, 12, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(1, 0, 0, 3, 0)), new SupplyContainer(4, 4, 0, 0, 0)));
+        blueLvlThree.add(new DevelopmentCard(37));
+        blueLvlThree.add(new DevelopmentCard(38));
+        blueLvlThree.add(new DevelopmentCard(39));
+        blueLvlThree.add(new DevelopmentCard(40));
 
         ArrayList<DevelopmentCard> yellowLvlThree = new ArrayList<>();
-        yellowLvlThree.add(new DevelopmentCard(41, 3, 9, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 2, 0), new SupplyContainer(0, 0, 3, 0, 2)), new SupplyContainer(0, 6, 0, 0, 0)));
-        yellowLvlThree.add(new DevelopmentCard(42, 3, 10, CardCategory.YELLOW, new Production(new SupplyContainer(0, 1, 1, 0, 0), new SupplyContainer(2, 0, 0, 2, 1)), new SupplyContainer(0, 5, 2, 0, 0)));
-        yellowLvlThree.add(new DevelopmentCard(43, 3, 11, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 1, 0), new SupplyContainer(0, 0, 1, 0, 3)), new SupplyContainer(0, 7, 0, 0, 0)));
-        yellowLvlThree.add(new DevelopmentCard(44, 3, 12, CardCategory.YELLOW, new Production(new SupplyContainer(0, 0, 0, 1, 0), new SupplyContainer(0, 1, 3, 0, 0)), new SupplyContainer(0, 4, 4, 0, 0)));
+        yellowLvlThree.add(new DevelopmentCard(41));
+        yellowLvlThree.add(new DevelopmentCard(42));
+        yellowLvlThree.add(new DevelopmentCard(43));
+        yellowLvlThree.add(new DevelopmentCard(44));
 
         ArrayList<DevelopmentCard> violetLvlThree = new ArrayList<>();
-        violetLvlThree.add(new DevelopmentCard(45, 3, 9, CardCategory.VIOLET, new Production(new SupplyContainer(0, 2, 0, 0, 0), new SupplyContainer(3, 0, 0, 0, 2)), new SupplyContainer(0, 0, 6, 0, 0)));
-        violetLvlThree.add(new DevelopmentCard(46, 3, 10, CardCategory.VIOLET, new Production(new SupplyContainer(0, 1, 0, 1, 0), new SupplyContainer(2, 0, 2, 0, 1)), new SupplyContainer(2, 0, 5, 0, 0)));
-        violetLvlThree.add(new DevelopmentCard(47, 3, 11, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 1, 0, 0, 3)), new SupplyContainer(0, 0, 7, 0, 0)));
-        violetLvlThree.add(new DevelopmentCard(48, 3, 12, CardCategory.VIOLET, new Production(new SupplyContainer(1, 0, 0, 0, 0), new SupplyContainer(0, 3, 1, 0, 0)), new SupplyContainer(0, 0, 4, 4, 0)));
+        violetLvlThree.add(new DevelopmentCard(45));
+        violetLvlThree.add(new DevelopmentCard(46));
+        violetLvlThree.add(new DevelopmentCard(47));
+        violetLvlThree.add(new DevelopmentCard(48));
 
         if(type){
             //fill the grid with cards in a fixed order
