@@ -1,9 +1,17 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Pair;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import it.polimi.ingsw.exceptions.LeaderException;
+import it.polimi.ingsw.model.leader_abilities.Depot;
+import it.polimi.ingsw.model.leader_abilities.Discount;
+import it.polimi.ingsw.model.leader_abilities.Market;
+import it.polimi.ingsw.model.leader_abilities.Producer;
 
 /**
  * The LeaderCard class represents a leader card of the game, each card has its own ability, winPoints and requirements
@@ -21,6 +29,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
 
     /**
      * Creates a leader card.
+     * @param id card id
      * @param reqSC a SupplyContainer which contains all the supplies needed to buy the LeaderCard
      * @param reqCR an ArrayList of CardRequirement which contains the details about the SupplyCards needed to buy the LeaderCard
      * @param abil the type of the LeaderCard's ability
@@ -31,6 +40,17 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
         requirements = new Pair<SupplyContainer, ArrayList<CardsRequirement>>(reqSC, reqCR);
         ability = abil;
         winPoints = points;
+    }
+
+    /**
+     * Creates a leader card.
+     * @param id card id
+     */
+    public LeaderCard(int id) {
+        this.id = id;
+        winPoints = getWinPoints(id);
+        ability = getAbility(id);
+        requirements = new Pair<SupplyContainer, ArrayList<CardsRequirement>>(getSuppliesRequirement(id), getCardsRequirements(id));
     }
 
     /**
@@ -86,6 +106,194 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
         else {
             throw new LeaderException("Cannot discard the leader (already discarded or active)");
         }
+    }
+
+    /**
+     * Returns the card win points.
+     * @param id card id
+     * @return the card win points
+     */
+    public static int getWinPoints(int id) {
+        File file = new File("src/main/java/it/polimi/ingsw/resources/LeaderCards.txt");
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        return scan.nextInt();
+    }
+
+    /**
+     * Returns the card ability.
+     * @param id card id
+     * @return the card ability
+     */
+    public static LeaderAbility getAbility(int id) {
+        File file = new File("src/main/java/it/polimi/ingsw/resources/LeaderCards.txt");
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        scan.nextInt();    //points
+        int abil = scan.nextInt();
+        if(abil == 1)
+            return new Market(getAbilityWOT(id));
+        else if(abil == 2)
+            return new Depot(getAbilityWOT(id));
+        else if(abil == 3)
+            return new Producer(getAbilitySC(id));
+        else
+            return new Discount(getAbilityWOT(id));
+    }
+
+    /**
+     * Returns the supply container that contains the details of the leader ability.
+     * @param id card id
+     * @return the supply container that contains the details of the leader abilty.
+     */
+    public static SupplyContainer getAbilitySC(int id) {
+        File file = new File("src/main/java/it/polimi/ingsw/resources/LeaderCards.txt");
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        scan.nextInt();   //points
+        scan.nextInt();   //ability
+        int c = scan.nextInt();
+        int st = scan.nextInt();
+        int se = scan.nextInt();
+        int sh = scan.nextInt();
+        int f = scan.nextInt();
+        return new SupplyContainer(c, st, se, sh, f);
+    }
+
+    /**
+     * Returns the warehouse object type of the ability.
+     * @param id card id
+     * @return the warehouse object type of the ability
+     */
+    public static WarehouseObjectType getAbilityWOT(int id) {
+        File file = new File("src/main/java/it/polimi/ingsw/resources/LeaderCards.txt");
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        scan.nextInt();   //points
+        scan.nextInt();   //ability
+        int count = 0;
+        while(scan.hasNextInt(0)){
+            scan.nextInt();
+            count++;
+        }
+        switch(count){
+            case 0:
+                return WarehouseObjectType.COIN;
+            case 1:
+                return WarehouseObjectType.STONE;
+            case 2:
+                return WarehouseObjectType.SERVANT;
+            case 3:
+                return WarehouseObjectType.SHIELD;
+            default:
+                return WarehouseObjectType.NO_TYPE;
+        }
+    }
+
+    /**
+     * Returns the supplies requirements to buy the card.
+     * @param id card id
+     * @return the supplies requirements to buy the card
+     */
+    public static SupplyContainer getSuppliesRequirement(int id) {
+        File file = new File("src/main/java/it/polimi/ingsw/resources/LeaderCards.txt");
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        for(int i = 0; i < 7; i++)
+            scan.nextInt();
+        int c = scan.nextInt();
+        int st = scan.nextInt();
+        int se = scan.nextInt();
+        int sh = scan.nextInt();
+        int f = scan.nextInt();
+        return new SupplyContainer(c, st, se, sh, f);
+    }
+
+    /**
+     * Returns the cards requirements to buy the card.
+     * @param id card id
+     * @return the cards requirements to buy the card
+     */
+    public static ArrayList<CardsRequirement> getCardsRequirements(int id) {
+        File file = new File("src/main/java/it/polimi/ingsw/resources/LeaderCards.txt");
+        ArrayList<CardsRequirement> list = new ArrayList<>();
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        for(int i = 0; i < 12; i++)
+            scan.nextInt();
+        int num1 = scan.nextInt();
+        int lvl1 = scan.nextInt();
+        int color = scan.nextInt();
+        CardCategory color1;
+        switch(color){
+            case(1):
+               color1 = CardCategory.GREEN;
+            case(2):
+                color1 = CardCategory.BLUE;
+            case(3):
+                color1 = CardCategory.YELLOW;
+            default:
+                color1 = CardCategory.VIOLET;
+        }
+        list.add(new CardsRequirement(num1, lvl1, color1));
+        int num2 = scan.nextInt();
+        int lvl2 = scan.nextInt();
+        int colors = scan.nextInt();
+        CardCategory color2;
+        switch(colors){
+            case(1):
+                color2 = CardCategory.GREEN;
+            case(2):
+                color2 = CardCategory.BLUE;
+            case(3):
+                color2 = CardCategory.YELLOW;
+            default:
+                color2 = CardCategory.VIOLET;
+        }
+        list.add(new CardsRequirement(num2, lvl2, color2));
+        return list;
     }
 
     @Override

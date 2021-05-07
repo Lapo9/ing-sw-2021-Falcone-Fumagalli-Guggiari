@@ -1,0 +1,19 @@
+1, 5, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 1, 3, 1, 1, 2, x   market servant cost 2 yellow and 1 blue development cards
+2, 5, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 1, 1, 1, 1, 4, x   market shield cost 2 green and 1 violet development cards
+3, 5, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 1, 1, 3, x   market stone cost 2 blue and 1 yellow development cards
+4, 5, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 4, 1, 1, 1, x   market coin cost 2 violet and 1 green development cards
+5, 3, 2, 0, 1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, x   depot stone cost 5 coins
+6, 3, 2, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, x   depot servant cost 5 stones
+7, 3, 2, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, x   depot shield cost 5 servants
+8, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, x   depot coin cost 5 shields
+9, 4, 3, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 2, 3, 0, 0, 0, x   production shield cost lvl 2 yellow development card
+10, 4, 3, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 0, 0, 0, x  production servant cost lvl 2 blue development card
+11, 4, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 4, 0, 0, 0, x  production stone cost lvl 2 violet development card
+12, 4, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, x  production coin cost lvl 2 green development card
+13, 2, 4, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 3, 1, 1, 1, x  discount servant cost 1 yellow and 1 green development card
+14, 2, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 2, 1, 1, 4, x  discount shield cost 1 blue and 1 violet development card
+15, 2, 4, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, x  discount stone cost 1 green and 1 blue development card
+16, 2, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 3, 1, 1, 4, x  discount coin cost 1 yellow and 1 violet development card
+
+id, winPoints, ability (1 = market, 2 = depot, 3 = production, 4 = discount), sc ability, sc requirements, cards requirement 1,
+cards requirement 2 (resources in sc are C, ST, SE, SH, F and cards requirements are number, lvl and color 1=green, 2=blue, 3=yellow, 4=violet)
