@@ -24,6 +24,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
 
     /**
      * Class constructor: initialize the card.
+     * @param id Card id
      * @param level Card level
      * @param winPoints Card win points
      * @param category Card color
@@ -41,6 +42,10 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
 
     }
 
+    /**
+     * Class constructor: initizialize the card.
+     * @param id Card id
+     */
     public DevelopmentCard(int id){
         this.id = id;
         this.level = getLevel(id);
@@ -106,6 +111,11 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         return id;
     }
 
+    /**
+     * Returns the level of the card.
+     * @param id card id
+     * @return the level of the card
+     */
     public static int getLevel(int id) {
         File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
         Scanner scan = null;
@@ -120,6 +130,11 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         return scan.nextInt();
     }
 
+    /**
+     * Returns the win points of the card.
+     * @param id card id
+     * @return the win points of the card
+     */
     public static int getWinPoints(int id) {
         File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
         Scanner scan = null;
@@ -135,6 +150,11 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         return scan.nextInt();
     }
 
+    /**
+     * Returns the card category.
+     * @param id card id
+     * @return the card category
+     */
     public static CardCategory getCategory(int id) {
         File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
         Scanner scan = null;
@@ -159,6 +179,11 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
             return CardCategory.VIOLET;
     }
 
+    /**
+     * Returns the input of the card production.
+     * @param id card id
+     * @return the input of the card production
+     */
     public static SupplyContainer getInput(int id) {
         File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
         Scanner scan = null;
@@ -181,6 +206,11 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         return new SupplyContainer(c, st, se, sh, f);
     }
 
+    /**
+     * Returns the output of the card production.
+     * @param id card id
+     * @return the output of the card production
+     */
     public static SupplyContainer getOutput(int id) {
         File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
         Scanner scan = null;
@@ -202,6 +232,11 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         return new SupplyContainer(c, st, se, sh, f);
     }
 
+    /**
+     * Returns the card cost.
+     * @param id card id
+     * @return the card cost
+     */
     public static SupplyContainer getCost(int id) {
         File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
         Scanner scan = null;

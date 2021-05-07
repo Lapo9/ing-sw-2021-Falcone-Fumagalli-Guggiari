@@ -12,6 +12,42 @@ import static org.junit.Assert.*;
 public class DevelopmentCardTest {
 
     @Test
+    public void developmentCard_classConstructor() {
+        DevelopmentCard dc = new DevelopmentCard(43);
+        int[] expectedResult = {3,
+                                11,
+                                3,
+                                0, 0, 1, 0, 0,
+                                0, 1, 0, 0, 3,
+                                0, 0, 0, 7, 0};
+        int[] actualResult = {dc.getLevel(),
+                              dc.getWinPoints(),
+                              dc.getCategory() == CardCategory.GREEN ? 1 : dc.getCategory() == CardCategory.BLUE ? 2 : dc.getCategory() == CardCategory.YELLOW ? 3 :4,
+                              dc.getStatus().get(1), dc.getStatus().get(2), dc.getStatus().get(3), dc.getStatus().get(4), dc.getStatus().get(5),
+                              dc.getStatus().get(6), dc.getStatus().get(7), dc.getStatus().get(8), dc.getStatus().get(9), dc.getStatus().get(10),
+                              dc.getCost().getQuantity(WarehouseObjectType.COIN), dc.getCost().getQuantity(WarehouseObjectType.SERVANT), dc.getCost().getQuantity(WarehouseObjectType.SHIELD), dc.getCost().getQuantity(WarehouseObjectType.STONE), dc.getCost().getQuantity(WarehouseObjectType.FAITH_MARKER)};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void developmentCard_classConstructorLastCard() {
+        DevelopmentCard dc = new DevelopmentCard(48);
+        int[] expectedResult = {3,
+                                12,
+                                4,
+                                1, 0, 0, 0, 0,
+                                0, 1, 0, 3, 0,
+                                0, 4, 4, 0, 0};
+        int[] actualResult = {dc.getLevel(),
+                              dc.getWinPoints(),
+                              dc.getCategory() == CardCategory.GREEN ? 1 : dc.getCategory() == CardCategory.BLUE ? 2 : dc.getCategory() == CardCategory.YELLOW ? 3 :4,
+                              dc.getStatus().get(1), dc.getStatus().get(2), dc.getStatus().get(3), dc.getStatus().get(4), dc.getStatus().get(5),
+                              dc.getStatus().get(6), dc.getStatus().get(7), dc.getStatus().get(8), dc.getStatus().get(9), dc.getStatus().get(10),
+                              dc.getCost().getQuantity(WarehouseObjectType.COIN), dc.getCost().getQuantity(WarehouseObjectType.SERVANT), dc.getCost().getQuantity(WarehouseObjectType.SHIELD), dc.getCost().getQuantity(WarehouseObjectType.STONE), dc.getCost().getQuantity(WarehouseObjectType.FAITH_MARKER)};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void produce_no_exc() {
         //creation of the test card
         SupplyContainer cost = new SupplyContainer(0, 4, 0, 0,0);
