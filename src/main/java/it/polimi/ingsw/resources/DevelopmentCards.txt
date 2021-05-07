@@ -47,4 +47,4 @@
 47, 3, 11, 4, 1, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0, 7, 0, 0, x
 48, 3, 12, 4, 1, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0, 4, 4, 0, x
 
-id, lvl, winPoints, color(1=green, 2=blue, 3=yellow, 4=violet), sc input, sc output, sc cost
+id, lvl, winPoints, color(1=green, 2=blue, 3=yellow, 4=violet), sc input, sc output, sc cost (resources in sc are C, ST, SE, SH, F)
