@@ -493,9 +493,9 @@ public class DashboardTest {
         boolean exc = false;
         try {
             dshbrd.assignMarble(DepotID.LEADER1, MarbleColor.YELLOW);
-        } catch (LeaderException e) {
+        } catch (MarbleException e) {
             exc = true;
-        } catch (SupplyException | MarbleException | NoSuchMethodException e) {fail();}
+        } catch (SupplyException | LeaderException | NoSuchMethodException e) {fail();}
         assertTrue(exc);
     }
 
