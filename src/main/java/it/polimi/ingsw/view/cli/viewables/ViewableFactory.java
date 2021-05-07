@@ -34,6 +34,15 @@ public class ViewableFactory {
         return res;
     }
 
+
+    //TODO remove test
+    public TestViewable buildTestViewable(int player, ViewableId viewableId){
+        TestViewable res = new TestViewable();
+        items.get(player-1).put(viewableId, res);
+        return res;
+    }
+
+
     public Warehouse buildWarehouse(int player, ViewableId viewableId) {
         Warehouse res = new Warehouse();
         items.get(player-1).put(viewableId, res);

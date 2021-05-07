@@ -703,12 +703,4 @@ public class Dashboard implements HasStatus{
         return new Pair<>(winPoints, supplies);
     }
 
-    /**
-     * Attach an observer.
-     * @param mo Observer to notify
-     */
-    /*public void observe(ModelObserver mo){
-        //TODO
-    }*/
-
 }

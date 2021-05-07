@@ -95,7 +95,7 @@ public class Screen {
         }
 
         //TODO clear console
-        System.out.print(errorMessage + activeView.toString());
+        System.out.print(errorMessage + activeView);
     }
 
 
@@ -108,7 +108,7 @@ public class Screen {
         }
 
         //TODO clear console
-        System.out.print(errorMessage + activeView.toString());
+        System.out.print(errorMessage + activeView);
     }
 
 

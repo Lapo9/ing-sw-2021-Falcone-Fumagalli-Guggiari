@@ -20,9 +20,10 @@ public class ModelInterpreter {
      * @param viewableFactory Place where the model interpreter can find all of the existing viewables, in order to be able to updated their values
      * @param controllerInterpreter Object responsible to manage to screen
      */
-    public ModelInterpreter(ViewableFactory viewableFactory, ControllerInterpreter controllerInterpreter) {
+    public ModelInterpreter(ViewableFactory viewableFactory, ControllerInterpreter controllerInterpreter, OfflineInfo offlineInfo) {
         this.items = viewableFactory;
         this.controllerInterpreter = controllerInterpreter;
+        this.offlineInfo = offlineInfo;
     }
 
 
@@ -60,10 +61,14 @@ public class ModelInterpreter {
 
         //check if the leaders are activated and are producers. This is needed for the offline info about active productions
         //FIXME adding the missing functions to the LeaderCard class
-        offlineInfo.setLeaderProducer(1, LeaderCard.getAbility(status[106]) == LeaderCard.LeaderAbility.PRODUCER && status[107] == 1);
-        offlineInfo.setLeaderProducer(2, LeaderCard.getAbility(status[121]) == LeaderCard.LeaderAbility.PRODUCER && status[102] == 1);
+        //offlineInfo.setLeaderProducer(1, LeaderCard.getAbility(status[106]) == LeaderCard.LeaderAbility.PRODUCER && status[107] == 1);
+        //offlineInfo.setLeaderProducer(2, LeaderCard.getAbility(status[121]) == LeaderCard.LeaderAbility.PRODUCER && status[102] == 1);
 
-        controllerInterpreter.execute("refresh");
+        items.update(player, ViewableId.TEST, status); //TODO test
+        //if user has auto-refresh on, then update his screen
+        if(offlineInfo.isAutoRefresh()) {
+            controllerInterpreter.execute("refresh");
+        }
     }
 
 

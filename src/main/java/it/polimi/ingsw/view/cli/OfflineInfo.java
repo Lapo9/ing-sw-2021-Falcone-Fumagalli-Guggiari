@@ -1,11 +1,15 @@
 package it.polimi.ingsw.view.cli;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class OfflineInfo {
     private HashMap<String, Boolean> activeProductions = new HashMap<>();
     private boolean isLeader1Producer = false;
     private boolean isLeader2Producer = false;
+    private ArrayList<String> playersNamesInOrder = new ArrayList<>();
+    private boolean autoRefresh = true;
 
 
     public OfflineInfo(){
@@ -69,4 +73,28 @@ public class OfflineInfo {
     }
 
 
+
+    public int getPlayerOrder(String playerName){
+        return playersNamesInOrder.indexOf(playerName) +1;
+    }
+
+
+    public int getPlayersNum(){
+        return playersNamesInOrder.size();
+    }
+
+
+    public void setPlayers(String... playersNamesInOrder){
+        this.playersNamesInOrder.addAll(Arrays.asList(playersNamesInOrder));
+    }
+
+
+    public void setAutoRefresh(boolean autoRefresh) {
+        this.autoRefresh = autoRefresh;
+    }
+
+
+    public boolean isAutoRefresh() {
+        return autoRefresh;
+    }
 }

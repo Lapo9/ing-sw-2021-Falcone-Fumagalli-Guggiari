@@ -2,7 +2,10 @@ package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.view.cli.viewables.DevelopmentCard;
 import it.polimi.ingsw.view.cli.viewables.SupplyContainer;
+import it.polimi.ingsw.view.cli.viewables.TestViewable;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
+
+import static it.polimi.ingsw.view.cli.ViewableId.TEST;
 
 public class MainCLI {
 
@@ -13,9 +16,11 @@ public class MainCLI {
 
         ViewableFactory factory = new ViewableFactory();
 
-        ControllerInterpreter controllerInterpreter = new ControllerInterpreter(screen);
-        UserInterpreter userInterpreter = new UserInterpreter(controllerInterpreter, serverSocket);
-        ModelInterpreter modelInterpreter = new ModelInterpreter(factory, controllerInterpreter);
+        OfflineInfo offlineInfo = new OfflineInfo();
+
+        ControllerInterpreter controllerInterpreter = new ControllerInterpreter(screen, offlineInfo);
+        UserInterpreter userInterpreter = new UserInterpreter(controllerInterpreter, serverSocket, offlineInfo);
+        ModelInterpreter modelInterpreter = new ModelInterpreter(factory, controllerInterpreter, offlineInfo);
 
         screen.attachUserInterpreter(userInterpreter);
         serverSocket.attachInterpreter(controllerInterpreter);
@@ -38,10 +43,30 @@ public class MainCLI {
         SupplyContainer yourTurnText = factory.buildSupplyContainer(1, ViewableId.YOUR_TURN_TEXT, "YOUR TURN");
         yourTurn.addViewable(yourTurnText);
 
+
+
+        View player1 = new View();
+        player1.addViewable(factory.buildTestViewable(1, TEST));
+
+        View player2 = new View();
+        player2.addViewable(factory.buildTestViewable(2, TEST));
+
+        View player3 = new View();
+        player3.addViewable(factory.buildTestViewable(3, TEST));
+
+        View player4 = new View();
+        player4.addViewable(factory.buildTestViewable(4, TEST));
+
+
+
         screen.addView("welcome", welcome);
         screen.addView("start", start);
         screen.addView("yourTurn", yourTurn);
         screen.addView("dashboard", dashboard);
+        screen.addView("player1", player1);
+        screen.addView("player2", player2);
+        screen.addView("player3", player3);
+        screen.addView("player4", player4);
 
         screen.start("welcome");
 

@@ -178,14 +178,16 @@ public class Match {
             //there wasn't player 3 or 4, no problem
         }
 
-        //draw 4 random cards for leader selection
+        //draw 4 random cards for leader selection and prepare player order string to send to the views
+        StringBuilder playersNamesInOrder = new StringBuilder();
         for (Player p : players){
             p.getDashboard().fillLeadersPicks();
+            playersNamesInOrder.append(p.getName() + " ");
         }
 
         //tell the players the match started
         for (int i = 0; i < players.size(); ++i){
-            players.get(i).sendController("start " + (i+1));
+            players.get(i).sendController("start " + (i+1) + " " + playersNamesInOrder);
         }
 
         phase = PRE_MATCH;
@@ -525,9 +527,11 @@ public class Match {
 
         try {
             player.getDashboard().pickLeader(Integer.parseInt(args[1])-1);
+            player.addSelectedLeaderInPreMatch();
             player.getDashboard().pickLeader(Integer.parseInt(args[2])-1);
+            player.addSelectedLeaderInPreMatch();
         } catch (Exception e){
-            player.sendController(e.getMessage());
+            player.sendController("error " + e.getMessage());
             //TODO there should be a way to clear leaders, if not this state is forever
             return;
         }

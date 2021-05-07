@@ -23,10 +23,11 @@ public class UserInterpreter {
      * Creates an interpreter and adds a standard set of known user commands.
      * @param controllerInterpreter Where to send short circuit commands (commands which don't need the server to be executed)
      */
-    public UserInterpreter(ControllerInterpreter controllerInterpreter, ServerSocket socket) {
+    public UserInterpreter(ControllerInterpreter controllerInterpreter, ServerSocket socket, OfflineInfo offlineInfo) {
         this.socket = socket;
         this.controllerInterpreter = controllerInterpreter;
         this.commands = allCommands();
+        this.offlineInfo = offlineInfo;
     }
 
 
@@ -90,6 +91,18 @@ public class UserInterpreter {
                 return "OK";
             }
 
+            if (actualCommand.toString().equals("spy")){
+                if (offlineInfo.getPlayersNum() == 0){
+                    return "Wait the start of the match to spy other players!";
+                }
+                else if (offlineInfo.getPlayerOrder(tokens[1]) == -1){
+                    return "\"" + tokens[1] + "\" is not a player";
+                }
+                else {
+                    return "OK";
+                }
+            }
+
             for (int i=0; i<actualCommand.getArgsCount(); ++i) {
                 //check if the arguments are appropriate for the command
                 if(!actualCommand.getArg(i).contains(tokens[i+1])){
@@ -105,6 +118,7 @@ public class UserInterpreter {
     private static Set<UserCommand> allCommands() {
         Set<UserCommand> commands = new HashSet<>();
 
+        commands.add(new UserCommand(false, "spy", new ArrayList<>()));
         commands.add(new UserCommand(false, "show", new ArrayList<>(Arrays.asList("ViewTest1", "ViewTest2")))); //TODO test to eliminate
         commands.add(new UserCommand(false, "connect", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
         commands.add(new UserCommand(true, "info"));
@@ -125,6 +139,7 @@ public class UserInterpreter {
         commands.add(new UserCommand(false, "activateProduction", new ArrayList<>(Arrays.asList("dev1", "dev2", "dev3", "leader1", "leader2", "base"))));
         commands.add(new UserCommand(false, "deactivateProduction", new ArrayList<>(Arrays.asList("dev1", "dev2", "dev3", "leader1", "leader2", "base"))));
         commands.add(new UserCommand(true, "produce"));
+        commands.add(new UserCommand(false, "autoRefresh", new ArrayList<>(Arrays.asList("on", "off"))));
 
         return commands;
     }
