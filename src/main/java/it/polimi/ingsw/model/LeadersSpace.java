@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.leader_abilities.Depot;
 import it.polimi.ingsw.model.leader_abilities.Producer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * The class that manages tho operations on the 2 leaders.
@@ -101,8 +102,17 @@ public class LeadersSpace implements HasStatus, WinPointsCountable{
     public ArrayList<Integer> getStatus() {
         ArrayList<Integer> status = new ArrayList<>();
 
-        status.addAll(leaders.get(0).getStatus());
-        status.addAll(leaders.get(1).getStatus());
+        //if leaders aren't still present, add all 0
+        try {
+            status.addAll(leaders.get(0).getStatus());
+        } catch (IndexOutOfBoundsException ioobe){
+            status.addAll(Arrays.asList(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0));
+        }
+        try {
+            status.addAll(leaders.get(1).getStatus());
+        } catch (IndexOutOfBoundsException ioobe){
+            status.addAll(Arrays.asList(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0));
+        }
 
         return status;
     }

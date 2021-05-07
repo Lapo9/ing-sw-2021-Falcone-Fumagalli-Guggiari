@@ -73,6 +73,7 @@ public class Dashboard implements HasStatus{
      */
     public void swapWarehouseRows(int r1, int r2) throws SupplyException {
         warehouse.swapRows(r1, r2);
+        notifyViews();
     }
 
 
@@ -83,6 +84,7 @@ public class Dashboard implements HasStatus{
      */
     public void buySupplies(MarketDirection dir, int index) {
         unassignedSupplies = marketplace.obtain(dir, index);
+        notifyViews();
     }
 
 
@@ -109,6 +111,8 @@ public class Dashboard implements HasStatus{
 
         depotsManager.addMarble(to, color);
         unassignedSupplies.removeMarble(color);
+
+        notifyViews();
     }
 
 
@@ -127,6 +131,7 @@ public class Dashboard implements HasStatus{
             try {
                 if (leadersSpace.getLeaderAbility(i).colorWhiteMarble() == newColor) {
                     unassignedSupplies.colorWhiteMarble(newColor);
+                    notifyViews();
                     return;
                 }
             } catch (NoSuchMethodException | LeaderException e){}
@@ -150,6 +155,9 @@ public class Dashboard implements HasStatus{
         vaticanReport = faithTrack.goAhead(unassignedSupplies.getQuantity(MarbleColor.RED));
 
         unassignedSupplies.clear();
+
+        notifyViews();
+
         return new Pair<>(totalDiscarded, vaticanReport);
     }
 
@@ -175,6 +183,8 @@ public class Dashboard implements HasStatus{
             containers.get(from.getType()).addSupply(from, type, from);
             throw e;
         }
+
+        notifyViews();
     }
 
 
@@ -190,6 +200,8 @@ public class Dashboard implements HasStatus{
         }
 
         depotsManager.addSupply(warehouseSlot, type, DepotID.WAREHOUSE1);
+
+        notifyViews();
     }
 
 
@@ -221,7 +233,9 @@ public class Dashboard implements HasStatus{
         coffer.sum(tmp);
 
         //go ahead in faith track
-        return faithTrack.goAhead(faithPoints);
+        boolean res = faithTrack.goAhead(faithPoints);
+        notifyViews();
+        return res;
     }
 
 
@@ -260,6 +274,8 @@ public class Dashboard implements HasStatus{
         //buy the card
         developments.addCardToSpace(space, developmentGrid.buyCard(column, row, paycheck, leadersSpace));
         paycheck.clearSupplies();
+
+        notifyViews();
     }
 
 
@@ -277,6 +293,7 @@ public class Dashboard implements HasStatus{
      */
     public void fillLeadersPicks(){
         leadersPick.fill(leadersList);
+        notifyViews();
     }
 
 
@@ -287,6 +304,7 @@ public class Dashboard implements HasStatus{
      */
     public void pickLeader(int index) throws LeaderException{
         leadersPick.pick(index, leadersSpace);
+        notifyViews();
     }
 
 
@@ -296,6 +314,7 @@ public class Dashboard implements HasStatus{
      * @param leader The leader to add
      * @throws LeaderException There is already the maximum number of leaders (2)
      */
+    @Deprecated
     public void addLeader(LeaderCard leader) throws LeaderException{
         leadersSpace.addLeader(leader);
     }
@@ -309,7 +328,9 @@ public class Dashboard implements HasStatus{
      */
     public boolean discardLeader(int i) throws LeaderException {
         leadersSpace.discardLeader(i);
-        return faithTrack.goAhead(1);
+        boolean res = faithTrack.goAhead(1);
+        notifyViews();
+        return res;
     }
 
 
@@ -325,6 +346,8 @@ public class Dashboard implements HasStatus{
         clearPaycheck();
 
         leadersSpace.playLeader(i, new ResourceChecker(depotsManager, coffer, developments));
+
+        notifyViews();
     }
 
 
@@ -333,7 +356,9 @@ public class Dashboard implements HasStatus{
      * @return Returns if a vatican report has been issued
      */
     public boolean goAhead(){
-        return faithTrack.goAhead(1);
+        boolean res = faithTrack.goAhead(1);
+        notifyViews();
+        return res;
     }
 
 
@@ -342,7 +367,9 @@ public class Dashboard implements HasStatus{
      * @return true a vatican report needs to be issued
      */
     public boolean goAheadDontTrigger(){
-        return faithTrack.goAheadDontTrigger();
+        boolean res = faithTrack.goAheadDontTrigger();
+        notifyViews();
+        return res;
     }
 
 
@@ -351,6 +378,7 @@ public class Dashboard implements HasStatus{
      */
     public void vaticanReport(){
         faithTrack.vaticanReport();
+        notifyViews();
     }
 
 
@@ -366,6 +394,7 @@ public class Dashboard implements HasStatus{
         }
 
         productionManager.swapBaseProduction(i, wot);
+        notifyViews();
     }
 
 
@@ -379,6 +408,7 @@ public class Dashboard implements HasStatus{
      */
     public void swapLeaderProduction(int i, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException, LeaderException{
         productionManager.swapLeaderProduction(i, wot);
+        notifyViews();
     }
 
 
@@ -393,6 +423,8 @@ public class Dashboard implements HasStatus{
 
         coffer.sum(destination.second);
         depotsManager.allocate(destination.first);
+
+        notifyViews();
     }
 
 
@@ -403,10 +435,14 @@ public class Dashboard implements HasStatus{
         Pair<SupplyContainer, SupplyContainer> destination;
         destination = productionManager.clearSupplies();
 
-        if(destination.second.getQuantity() != 0)
+        if(destination.second.getQuantity() != 0){
             coffer.sum(destination.second);
-        if(destination.first.getQuantity() != 0)
+        }
+        if(destination.first.getQuantity() != 0) {
             depotsManager.allocate(destination.first);
+        }
+
+        notifyViews();
     }
 
 
@@ -419,6 +455,8 @@ public class Dashboard implements HasStatus{
 
         coffer.sum(destination.second);
         depotsManager.allocate(destination.first);
+
+        notifyViews();
     }
 
 
@@ -530,6 +568,8 @@ public class Dashboard implements HasStatus{
                 break;
         }
 
+        notifyViews();
+
         return blackCrossPosition >= 24;
     }
 
@@ -590,6 +630,9 @@ public class Dashboard implements HasStatus{
                 actionTilesStack.reinsertAll();
                 break;
         }
+
+        notifyViews();
+
         return blackCrossPosition >= 24;
     }
 

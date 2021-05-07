@@ -214,7 +214,7 @@ Structure of the packet
                     if(isFatal(stringMessage)){
                         terminate(stringMessage);
                     }
-                    if(!isECG(stringMessage)) {
+                    else if(!isECG(stringMessage)) {
                         controllerInterpreter.execute(ClientSocket.bytesToString(message));
                     }
                 }

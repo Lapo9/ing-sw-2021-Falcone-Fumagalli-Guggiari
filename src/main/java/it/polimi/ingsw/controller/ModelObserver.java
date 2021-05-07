@@ -3,6 +3,7 @@ package it.polimi.ingsw.controller;
 import it.polimi.ingsw.model.Dashboard;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -50,6 +51,7 @@ public class ModelObserver {
             Player toUpdate = players.get(updatedItem);
             ArrayList<Integer> updateToSend = new ArrayList<>();
             updateToSend.add(toUpdate.getOrder());
+            updateToSend.addAll(update);
             broadcast(updateToSend);
         }
     }

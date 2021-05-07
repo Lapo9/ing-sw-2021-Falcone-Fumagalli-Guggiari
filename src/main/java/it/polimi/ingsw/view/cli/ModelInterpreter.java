@@ -49,7 +49,7 @@ public class ModelInterpreter {
     Updates the viewables related to the specified player.
      */
     private void updatePlayer(int player, int[] status){
-        items.update(player, ViewableId.COFFER, Arrays.copyOfRange(status, 1, 5));
+        //items.update(player, ViewableId.COFFER, Arrays.copyOfRange(status, 1, 5));
         /* TODO add when we have the viewables
         items.update(player, ViewableId.WAREHOUSE, Arrays.copyOfRange(status, 6, 20));
         items.update(player, DEV_SPACE1, Arrays.copyOfRange(status, 21, 38));

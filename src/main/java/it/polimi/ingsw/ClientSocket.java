@@ -118,7 +118,7 @@ public class ClientSocket {
      */
     public byte[] receive() throws IOException {
         synchronized (dataIn) {
-            int length = dataIn.readByte();
+            int length = dataIn.readInt();
             byte[] byteMessage = new byte[length];
             dataIn.readFully(byteMessage);
             return byteMessage;
@@ -133,7 +133,7 @@ public class ClientSocket {
      */
     public Pair<Byte, byte[]> receiveWithType() throws IOException {
         synchronized (dataIn) {
-            int length = dataIn.readByte();
+            int length = dataIn.readInt();
             byte type = dataIn.readByte();
             byte[] byteMessage = new byte[length];
             dataIn.readFully(byteMessage);
@@ -262,12 +262,16 @@ public class ClientSocket {
      */
     public static Function<String, byte[]> packUpStringWithLengthAndType(byte type) {
         return in -> {
-            int length = in.length(); //byte = char
-            byte[] res = new byte[length + 2]; //length, type, payload
-            res[0] = (byte) length;
-            res[1] = type;
+            int length = in.length(); //byte = char;
+            byte[] res = new byte[length + 5]; //length (4 bytes), type, payload
+
+            //put length into the array to send
+            ByteBuffer intToBytes = ByteBuffer.allocate(4).putInt(length);
+            System.arraycopy(intToBytes.array(), 0,res,0,4);
+
+            res[4] = type;
             //String to byte[]
-            System.arraycopy(in.getBytes(StandardCharsets.UTF_8), 0, res, 2, length);
+            System.arraycopy(in.getBytes(StandardCharsets.UTF_8), 0, res, 5, length);
             return res;
         };
     }
@@ -281,10 +285,14 @@ public class ClientSocket {
     public static Function<String, byte[]> packUpStringWithLength() {
         return in -> {
             int length = in.length(); //byte = char
-            byte[] res = new byte[length + 1]; //length, payload
-            res[0] = (byte) length;
+            byte[] res = new byte[length + 4]; //length (4 bytes), payload
+
+            //put length into the array to send
+            ByteBuffer intToBytes = ByteBuffer.allocate(4).putInt(length);
+            System.arraycopy(intToBytes.array(), 0,res,0,4);
+
             //String to byte[]
-            System.arraycopy(in.getBytes(StandardCharsets.UTF_8), 0, res, 1, length);
+            System.arraycopy(in.getBytes(StandardCharsets.UTF_8), 0, res, 4, length);
             return res;
         };
     }
@@ -299,13 +307,17 @@ public class ClientSocket {
     public static Function<int[], byte[]> packUpIntsWithLengthAndType(byte type) {
         return in -> {
             int length = in.length * 4; //int = 4 bytes
-            byte[] res = new byte[length + 2]; //length, type, payload
-            res[0] = (byte) length;
-            res[1] = type;
+            byte[] res = new byte[length + 5]; //length (4 bytes), type, payload
+
+            //put length into the array to send
+            ByteBuffer intToBytes = ByteBuffer.allocate(4).putInt(length);
+            System.arraycopy(intToBytes.array(), 0,res,0,4);
+
+            res[4] = type;
             //int[] to byte[]
             ByteBuffer byteBuffer = ByteBuffer.allocate(length);
             byteBuffer.asIntBuffer().put(in);
-            System.arraycopy(byteBuffer.array(), 0, res, 2, length);
+            System.arraycopy(byteBuffer.array(), 0, res, 5, length);
             return res;
         };
     }
@@ -319,12 +331,16 @@ public class ClientSocket {
     public static Function<int[], byte[]> packUpIntsWithLength() {
         return in -> {
             int length = in.length * 4; //int = 4 bytes
-            byte[] res = new byte[length + 1]; //length, payload
-            res[0] = (byte) length;
+            byte[] res = new byte[length + 4]; //length, payload
+
+            //put length into the array to send
+            ByteBuffer intToBytes = ByteBuffer.allocate(4).putInt(length);
+            System.arraycopy(intToBytes.array(), 0,res,0,4);
+
             //int[] to byte[]
             ByteBuffer byteBuffer = ByteBuffer.allocate(length);
             byteBuffer.asIntBuffer().put(in);
-            System.arraycopy(byteBuffer.array(), 0, res, 1, length);
+            System.arraycopy(byteBuffer.array(), 0, res, 4, length);
             return res;
         };
     }
