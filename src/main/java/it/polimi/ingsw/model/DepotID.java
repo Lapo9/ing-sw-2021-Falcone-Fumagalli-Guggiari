@@ -4,19 +4,20 @@ package it.polimi.ingsw.model;
  * Contains the numerical IDs of the places where you can store resources.
  */
 public enum DepotID {
-    WAREHOUSE1(DepotType.WAREHOUSE, DepotType.WAREHOUSE, 1), WAREHOUSE2(DepotType.WAREHOUSE, DepotType.WAREHOUSE, 2), WAREHOUSE3(DepotType.WAREHOUSE, DepotType.WAREHOUSE, 3),
-    DEVELOPMENT1_DEPOT(DepotType.DEVELOPMENT, DepotType.WAREHOUSE, 1), DEVELOPMENT2_DEPOT(DepotType.DEVELOPMENT, DepotType.WAREHOUSE, 2), DEVELOPMENT3_DEPOT(DepotType.DEVELOPMENT, DepotType.WAREHOUSE, 3),
-    DEVELOPMENT1_COFFER(DepotType.DEVELOPMENT, DepotType.COFFER, 1), DEVELOPMENT2_COFFER(DepotType.DEVELOPMENT, DepotType.COFFER, 2), DEVELOPMENT3_COFFER(DepotType.DEVELOPMENT, DepotType.COFFER, 3),
-    LEADER1_DEPOT(DepotType.LEADER, DepotType.WAREHOUSE, 1), LEADER2_DEPOT(DepotType.LEADER, DepotType.WAREHOUSE, 2),
-    LEADER1_COFFER(DepotType.LEADER, DepotType.COFFER, 1), LEADER2_COFFER(DepotType.LEADER, DepotType.COFFER, 2),
-    COFFER(DepotType.COFFER, DepotType.COFFER, 1),
-    PAYCHECK_DEPOT(DepotType.PAYCHECK, DepotType.WAREHOUSE, 1), PAYCHECK_COFFER(DepotType.PAYCHECK, DepotType.COFFER, 2),
-    BASE_PRODUCTION_DEPOT(DepotType.BASE_PRODUCTION, DepotType.WAREHOUSE, 1),
-    BASE_PRODUCTION_COFFER(DepotType.BASE_PRODUCTION, DepotType.COFFER, 1);
+    WAREHOUSE1(DepotType.WAREHOUSE, SourceType.DEPOT, 0), WAREHOUSE2(DepotType.WAREHOUSE, SourceType.DEPOT, 1), WAREHOUSE3(DepotType.WAREHOUSE, SourceType.DEPOT, 2),
+    DEVELOPMENT1(DepotType.DEVELOPMENT, SourceType.ANY, 0), DEVELOPMENT2(DepotType.DEVELOPMENT, SourceType.ANY, 1), DEVELOPMENT3(DepotType.DEVELOPMENT, SourceType.ANY, 2),
+    LEADER1(null, null, 0), LEADER2(null, null, 1),
+    COFFER(DepotType.COFFER, SourceType.STRONGBOX, 1),
+    PAYCHECK(DepotType.PAYCHECK, SourceType.ANY, 1),
+    BASE_PRODUCTION(DepotType.BASE_PRODUCTION, SourceType.ANY, 1),
+    ANY(DepotType.ANY, SourceType.ANY, 1);
 
+    /**
+     * Contains the depot types of the places where you can store resources.
+     */
     public enum DepotType {
         //don't you ever even try to change the order!
-        WAREHOUSE(0), LEADER(0), DEVELOPMENT(1), COFFER(2), PAYCHECK(3), BASE_PRODUCTION(4), OTHER(5);
+        WAREHOUSE(0), LEADER_DEPOT(0), LEADER_PRODUCTION(1), DEVELOPMENT(1), COFFER(2), PAYCHECK(3), BASE_PRODUCTION(4), ANY(5), NONE(6);
 
         private int order;
 
@@ -24,31 +25,107 @@ public enum DepotID {
             this.order = order;
         }
 
+        /**
+         * Returns the index of the depot type.
+         * @return the index of the depot type
+         */
         public int getOrder(){
             return order;
         }
     }
 
+    /**
+     * Contains the sources from which resources can came from.
+     */
+    public enum SourceType {
+        DEPOT, STRONGBOX, ANY, PAYCHECK, NONE;
+    }
+
+
     private DepotType type;
     private int typeOrder;
-    private DepotType source;
+    private SourceType source;
 
-    private DepotID(DepotType depotType, DepotType source, int typeOrder){
+    private DepotID(DepotType depotType, SourceType source, int typeOrder){
         this.type = depotType;
         this.typeOrder = typeOrder;
         this.source = source;
     }
 
+    /**
+     * Returns the type of the depot.
+     * @return the type of the depot
+     */
     public DepotType getType(){
         return type;
     }
 
+    /**
+     * Sets the type of the depot
+     * @param type depot type
+     */
+    public void setType(DepotType type) {
+        this.type = type;
+    }
+
+    /**
+     * Returns the number of the depot
+     * @return the number of the depot
+     */
     public int getNum(){
         return typeOrder;
     }
 
-    public DepotType getSource() {
+    /**
+     * Returns the source from which resources in the depot can came from.
+     * @return the source from which resources in the depot can came from.
+     */
+    public SourceType getSource() {
         return source;
     }
+
+
+    /**
+     * Sets the source of the depot
+     * @param source depot sourc
+     */
+    public void setSource(SourceType source) {
+        this.source = source;
+    }
+
+    public static DepotID stringToId(String s){
+        if (s.equals("wh1")){
+            return WAREHOUSE1;
+        }
+        else if (s.equals("wh2")){
+            return WAREHOUSE2;
+        }
+        else if (s.equals("wh3")){
+            return WAREHOUSE3;
+        }
+        else if (s.equals("dev1")){
+            return DEVELOPMENT1;
+        }
+        else if (s.equals("dev2")){
+            return DEVELOPMENT2;
+        }
+        else if (s.equals("dev3")){
+            return DEVELOPMENT3;
+        }
+        else if (s.equals("coffer")){
+            return COFFER;
+        }
+        else if (s.equals("paycheck")){
+            return PAYCHECK;
+        }
+        else if (s.equals("base")){
+            return BASE_PRODUCTION;
+        }
+        //FIXME leaders
+
+        return null;
+
+    }
+
 
 }

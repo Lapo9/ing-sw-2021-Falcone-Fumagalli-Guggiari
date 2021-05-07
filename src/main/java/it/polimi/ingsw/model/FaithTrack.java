@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.model.PopeFavorTile;
 
 /**
- * The FaithTrack class represents the faith track on the player's personal board
+ * The FaithTrack class represents the faith track on the player's personal board.
  */
 
 public class FaithTrack implements WinPointsCountable, HasStatus{
@@ -24,8 +24,8 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
         private boolean isPopeSpace;
 
         /**
-         * Class constructor
-         * @param num is the tiles number
+         * Creates a faith track tiles.
+         * @param num the tiles number
          */
         public FaithTrackTiles(int num){
             number = num;
@@ -75,7 +75,7 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
     }
 
     /**
-     * Class constructor
+     * Creates a faith track.
      */
     public FaithTrack(){
         popeFavors = new ArrayList<PopeFavorTile>();
@@ -88,8 +88,8 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
     }
 
     /**
-     * The goAhead method moves the player position ahead of num tiles in the FaithTrack
-     * @param num is the number of steps taken by the player
+     * Moves the player position ahead of num tiles in the FaithTrack.
+     * @param num the number of steps taken by the player
      * @return true if a vaticanReport has been issued
      */
     public boolean goAhead(int num){
@@ -101,7 +101,7 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
     }
 
     /*
-     * The goAhead method moves the player one tile ahead in the FaithTrack
+     * Moves the player one tile ahead in the FaithTrack
      * @return true is a vaticanReport has been issued
      */
     private boolean goAhead(){
@@ -114,12 +114,30 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
             vaticanReport();
             vr = true;
         }
-        winPoints += track.get(position).points;
+        if(track.get(position).points != 0)
+            winPoints = track.get(position).points;
         return vr;
     }
 
     /**
-     * The vaticanReport method triggers a vatican report
+     * Moves the player one position ahead in the FaithTrack.
+     * @return true if a vatican report needs to be issued
+     */
+    public boolean goAheadDontTrigger(){
+        boolean vr = false;
+        position++;
+        if(track.get(position).isPopeSpace &&
+                ((position == 8 && vaticanReportCounter == 0) ||(position == 16 && vaticanReportCounter == 1)||
+                        (position == 24 && vaticanReportCounter == 2))) {
+            vr = true;
+        }
+        if(track.get(position).points != 0)
+            winPoints = track.get(position).points;
+        return vr;
+    }
+
+    /**
+     * Triggers a vatican report.
      */
     public void vaticanReport(){
         //Check if the player who called the vaticanReport method is the one who activated it
@@ -184,9 +202,25 @@ public class FaithTrack implements WinPointsCountable, HasStatus{
         return winPoints + pftPoints;
     }
 
-    //TODO
+    /**
+     * Returns the position.
+     * @return the position
+     */
+    public int getPosition(){
+        return position;
+    }
+
+
     @Override
     public ArrayList<Integer> getStatus() {
-        return null;
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.add(position);
+
+        for (int i = 0; i<popeFavors.size(); ++i){
+            status.addAll(popeFavors.get(i).getStatus());
+        }
+
+        return status;
     }
 }

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.exceptions;
 
 public class DevelopmentException extends Exception{
-    //TODO
+    public DevelopmentException(String message){
+        super(message);
+    }
 }

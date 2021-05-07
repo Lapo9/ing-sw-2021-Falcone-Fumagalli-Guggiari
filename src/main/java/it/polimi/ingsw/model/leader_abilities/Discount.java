@@ -1,8 +1,11 @@
 package it.polimi.ingsw.model.leader_abilities;
 
+import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.LeaderAbility;
 import it.polimi.ingsw.model.SupplyContainer;
 import it.polimi.ingsw.model.WarehouseObjectType;
+
+import java.util.ArrayList;
 
 
 /**
@@ -10,13 +13,16 @@ import it.polimi.ingsw.model.WarehouseObjectType;
  */
 public class Discount implements LeaderAbility {
 
-    private final SupplyContainer discount = new SupplyContainer();
+    private final SupplyContainer discount = new SupplyContainer(SupplyContainer.AcceptStrategy.max(1));
 
-
-    public Discount(WarehouseObjectType... wots){
-        for (WarehouseObjectType wot : wots){
+    /**
+     * Creates a new discount leader.
+     * @param wot Value of the discount
+     */
+    public Discount(WarehouseObjectType wot){
+        try {
             discount.addSupply(wot);
-        }
+        } catch (SupplyException se){/*TODO terminate program*/}
     }
 
 
@@ -24,4 +30,18 @@ public class Discount implements LeaderAbility {
     public SupplyContainer getDiscount() {
         return discount;
     }
+
+
+    @Override
+    public ArrayList<Integer> getStatus() {
+        ArrayList<Integer> status = new ArrayList<>();
+
+        //fixed input, fixed output, mutable output, production depot (COIN, SERVANT, SHIELD, STONE, FAITH_MARKER), "warehouse depot" (COIN, SERVANT, SHIELD, STONE, FAITH_MARKER)
+        for(int i=0; i<13; ++i){
+            status.add(0);
+        }
+
+        return status;
+    }
+
 }

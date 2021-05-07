@@ -41,4 +41,27 @@ public class PopeFavorTileTest {
         PopeFavorTile pft = new PopeFavorTile(2);
         assertEquals(pft.getWinPoints(), 0);
     }
+
+    @Test
+    public void getStatus_inactive(){
+        PopeFavorTile pft = new PopeFavorTile(2);
+        int result = pft.getStatus().get(0);
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void getStatus_active(){
+        PopeFavorTile pft = new PopeFavorTile(2);
+        pft.activate();
+        int result = pft.getStatus().get(0);
+        assertEquals(1, result);
+    }
+
+    @Test
+    public void getStatus_discard(){
+        PopeFavorTile pft = new PopeFavorTile(2);
+        pft.discard();
+        int result = pft.getStatus().get(0);
+        assertEquals(2, result);
+    }
 }

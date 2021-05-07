@@ -1,107 +1,107 @@
 package it.polimi.ingsw.model;
 
+import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
+
 import java.util.ArrayList;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.*;
 
 /**
- * The Production class represents the production mechanism of the game
+ * The Production class represents the production mechanism of the game.
+ * It has an input and an output, and can store supplies.
+ * When the production is triggered, if the input equals the current supply store, then the current supply store is wiped and the output is returned.
  */
 public class Production implements AcceptsSupplies, HasStatus{
+
     protected final SupplyContainer input;
     protected final SupplyContainer output;
-    protected SupplyContainer currentSupplyCoffer = new SupplyContainer();
-    protected SupplyContainer currentSupplyDepot = new SupplyContainer();
+    //currentSupply is the temporary depot to store resources that will be used for production
+    //can't accept FAITH_MARKER and can't accept from PAYCHECK
+    protected SupplyContainer currentSupply = new SupplyContainer(  onlyFrom(DepotID.SourceType.PAYCHECK).negate().
+                                                                    and(specificType(WarehouseObjectType.FAITH_MARKER).negate()),
+                                                                    onlyFrom(DepotID.SourceType.PAYCHECK).negate());
+    //TODO maybe add that you cannot add more than the max?
 
 
     /**
      * Class constructor
-     * @param in is a SupplyContainer which contains the supplies needed as input
-     * @param out is a SupplyContainer which contains the supplies produces by output when the production is triggered
+     * @param in SupplyContainer which contains the supplies needed as input
+     * @param out SupplyContainer which contains the supplies produces by output when the production is triggered
      */
     public Production(SupplyContainer in, SupplyContainer out){
         input = in;
         output = out;
     }
 
-    /**
-     * The getInput method returns the input SupplyContainer
-     * @return the input SupplyContainer
-     */
-    protected SupplyContainer getInput() {
-        return input;
+
+
+
+    public SupplyContainer getInput(){
+        return new SupplyContainer(input);
     }
 
-    /**
-     * The getOutput method returns the output SupplyContainer
-     * @return the output SupplyContainer
-     */
-    protected SupplyContainer getOutput(){
-        return output;
-    }
+
+
 
     /**
-     * The getCurrentSupply method returns the currentSupply
-     * @return the currentSupply
-     */
-    protected SupplyContainer getCurrentSupply(){
-        return currentSupplyCoffer.sum(currentSupplyDepot);
-    }
-
-    /**
-     * The produce method activates the production only if the supplies in the currentSupply are equal to the one in the
-     * input SupplyContainer
-     * @return a SupplyContainer which container the output resources
+     * Activates the production. If the input equals the current supply store, then the current supply store is wiped and the output is returned.
+     * If not a fatal error is produced and the program is terminated.
+     * @return A SupplyContainer containing the output
      */
     public SupplyContainer produce(){
         try {
             check();
-        } catch (SupplyException e) {
-            //FIXME
-            //Idk what to put in here
-        }
+        } catch (SupplyException e) {/*TODO terminate program*/ }
+        clearSupplies();
         return new SupplyContainer(output);
     }
 
     /**
-     * The check method verifies if the supplies contained in the currentSupply are right to start a production
-     * @throws SupplyException if the currentSupply doesn't contain the right supplies
+     * Verifies if the current supplies present in the production depot are the same as the input supplies.
+     * @throws SupplyException The current supplies present in the production depot are not the same as the input supplies.
      */
     public void check() throws SupplyException{
-        if(!input.confront(getCurrentSupply()))
-            throw new SupplyException();
+        if(!input.equals(currentSupply))
+            throw new SupplyException("There isn't the correct number of supplies to produce");
     }
+
 
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException{
-        if(from.getSource() == DepotID.DepotType.COFFER){
-            currentSupplyCoffer.addSupply(wot);
-        }
-        else {
-            currentSupplyDepot.addSupply(wot);
-        }
+        currentSupply.addSupply(wot, from);
     }
 
     @Override
-    public void removeSupply(DepotID from, WarehouseObjectType wot) throws SupplyException{
-        if (from.getSource() == DepotID.DepotType.COFFER){
-            currentSupplyCoffer.removeSupply(wot);
-        }
-        else {
-            currentSupplyDepot.removeSupply(wot);
-        }
-
+    public void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException{
+        currentSupply.removeSupply(wot);
     }
 
     @Override
-    public SupplyContainer clearSupplies(){
-        return new SupplyContainer(currentSupply.clearSupplies());
+    public boolean additionAllowed(WarehouseObjectType wot, DepotID from) {
+        return currentSupply.additionAllowed(wot, from);
+    }
+
+    @Override
+    public boolean removalAllowed(WarehouseObjectType wot, DepotID to) {
+        return currentSupply.removalAllowed(wot, to);
     }
 
 
-    //TODO
     @Override
-    public ArrayList<Integer> getStatus() {
-        return null;
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies(){
+        return currentSupply.clearSupplies();
+    }
+
+
+    @Override
+    public ArrayList<Integer> getStatus(){
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.addAll(input.getStatus());
+        status.addAll(output.getStatus());
+        status.addAll(currentSupply.getStatus());
+
+        return status;
     }
 }

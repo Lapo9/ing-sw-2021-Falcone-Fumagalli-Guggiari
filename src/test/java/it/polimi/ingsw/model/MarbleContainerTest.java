@@ -3,6 +3,8 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.MarbleException;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class MarbleContainerTest {
@@ -109,6 +111,94 @@ public class MarbleContainerTest {
     }
 
     @Test
+    public void colorWhiteMarble_turnBlueNoEx() {
+        MarbleContainer mc = new MarbleContainer(2, 3, 5, 1,6, 2);
+        try {
+            mc.colorWhiteMarble(MarbleColor.BLUE);
+        } catch (MarbleException e) {fail();}
+        int[] expectedObject = {2, 4, 5, 0, 6, 2};
+        int[] actualObject = {mc.getQuantity(MarbleColor.YELLOW),
+                              mc.getQuantity(MarbleColor.BLUE),
+                              mc.getQuantity(MarbleColor.GREY),
+                              mc.getQuantity(MarbleColor.WHITE),
+                              mc.getQuantity(MarbleColor.VIOLET),
+                              mc.getQuantity(MarbleColor.RED)};
+        assertArrayEquals(expectedObject, actualObject);
+    }
+
+    @Test
+    public void colorWhiteMarble_turnYellowNoEx() {
+        MarbleContainer mc = new MarbleContainer(2, 3, 5, 1,6, 2);
+        try {
+            mc.colorWhiteMarble(MarbleColor.YELLOW);
+        } catch (MarbleException e) {fail();}
+        int[] expectedObject = {3, 3, 5, 0, 6, 2};
+        int[] actualObject = {mc.getQuantity(MarbleColor.YELLOW),
+                              mc.getQuantity(MarbleColor.BLUE),
+                              mc.getQuantity(MarbleColor.GREY),
+                              mc.getQuantity(MarbleColor.WHITE),
+                              mc.getQuantity(MarbleColor.VIOLET),
+                              mc.getQuantity(MarbleColor.RED)};
+        assertArrayEquals(expectedObject, actualObject);
+    }
+
+    @Test
+    public void colorWhiteMarble_turnGreyNoEx() {
+        MarbleContainer mc = new MarbleContainer(2, 3, 5, 1,6, 2);
+        try {
+            mc.colorWhiteMarble(MarbleColor.GREY);
+        } catch (MarbleException e) {fail();}
+        int[] expectedObject = {2, 3, 6, 0, 6, 2};
+        int[] actualObject = {mc.getQuantity(MarbleColor.YELLOW),
+                              mc.getQuantity(MarbleColor.BLUE),
+                              mc.getQuantity(MarbleColor.GREY),
+                              mc.getQuantity(MarbleColor.WHITE),
+                              mc.getQuantity(MarbleColor.VIOLET),
+                              mc.getQuantity(MarbleColor.RED)};
+        assertArrayEquals(expectedObject, actualObject);
+    }
+
+    @Test
+    public void colorWhiteMarble_turnVioletNoEx() {
+        MarbleContainer mc = new MarbleContainer(2, 3, 5, 1,6, 2);
+        try {
+            mc.colorWhiteMarble(MarbleColor.VIOLET);
+        } catch (MarbleException e) {fail();}
+        int[] expectedObject = {2, 3, 5, 0, 7, 2};
+        int[] actualObject = {mc.getQuantity(MarbleColor.YELLOW),
+                              mc.getQuantity(MarbleColor.BLUE),
+                              mc.getQuantity(MarbleColor.GREY),
+                              mc.getQuantity(MarbleColor.WHITE),
+                              mc.getQuantity(MarbleColor.VIOLET),
+                              mc.getQuantity(MarbleColor.RED)};
+        assertArrayEquals(expectedObject, actualObject);
+    }
+
+    @Test
+    public void colorWhiteMarble_noWhiteMarblesEx() {
+        MarbleContainer mc = new MarbleContainer(2, 3, 5, 0,6, 2);
+        boolean exc = false;
+        try {
+            mc.colorWhiteMarble(MarbleColor.YELLOW);
+        } catch (MarbleException e) {
+            exc = true;
+        }
+        assertTrue(exc);
+    }
+
+    @Test
+    public void colorWhiteMarble_turnRedEx() {
+        MarbleContainer mc = new MarbleContainer(2, 3, 5, 1,6, 2);
+        boolean exc = false;
+        try {
+            mc.colorWhiteMarble(MarbleColor.RED);
+        } catch (MarbleException e) {
+            exc = true;
+        }
+        assertTrue(exc);
+    }
+
+    @Test
     public void clear() {
         MarbleContainer mc = new MarbleContainer(2, 3, 5, 1,0, 2);
         mc.clear();
@@ -127,36 +217,45 @@ public class MarbleContainerTest {
     @Test
     public void colorToSupply_yellow(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
-        assertEquals(WarehouseObjectType.COIN, mc.colorToSupply(MarbleColor.YELLOW));
+        assertEquals(WarehouseObjectType.COIN, MarbleContainer.colorToSupply(MarbleColor.YELLOW));
     }
 
     @Test
     public void colorToSupply_blue(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
-        assertEquals(WarehouseObjectType.SHIELD, mc.colorToSupply(MarbleColor.BLUE));
+        assertEquals(WarehouseObjectType.SHIELD, MarbleContainer.colorToSupply(MarbleColor.BLUE));
     }
 
     @Test
     public void colorToSupply_grey(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
-        assertEquals(WarehouseObjectType.STONE, mc.colorToSupply(MarbleColor.GREY));
+        assertEquals(WarehouseObjectType.STONE, MarbleContainer.colorToSupply(MarbleColor.GREY));
     }
 
     @Test
     public void colorToSupply_violet(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
-        assertEquals(WarehouseObjectType.SERVANT, mc.colorToSupply(MarbleColor.VIOLET));
+        assertEquals(WarehouseObjectType.SERVANT, MarbleContainer.colorToSupply(MarbleColor.VIOLET));
     }
 
     @Test
     public void colorToSupply_red(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
-        assertEquals(WarehouseObjectType.FAITH_MARKER, mc.colorToSupply(MarbleColor.RED));
+        assertEquals(WarehouseObjectType.FAITH_MARKER, MarbleContainer.colorToSupply(MarbleColor.RED));
     }
 
     @Test
     public void colorToSupply_whiteEqualsNull(){
         MarbleContainer mc = new MarbleContainer(0, 0, 0, 0,0, 0);
-        assertNull(mc.colorToSupply(MarbleColor.WHITE));
+        assertNull(MarbleContainer.colorToSupply(MarbleColor.WHITE));
+    }
+
+    @Test
+    public void getStatus(){
+        MarbleContainer mc = new MarbleContainer(2, 4, 0, 1, 3, 2);
+        ArrayList<Integer> result = new ArrayList<>(mc.getStatus());
+        int[] expectedResult = {4, 0, 2, 3, 1, 2};
+        int[] actualResult = {result.get(0), result.get(1), result.get(2), result.get(3), result.get(4), result.get(5)};
+        assertArrayEquals(expectedResult, actualResult);
     }
 }

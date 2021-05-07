@@ -6,7 +6,7 @@ import it.polimi.ingsw.exceptions.*;
 /**
  * Interface that manages the ability of Leader Cards
  */
-public interface LeaderAbility extends AcceptsSupplies{
+public interface LeaderAbility extends AcceptsSupplies, HasStatus{
 
     /**
      * First ability: when the player buys a SupplyCard, he can do it using less resources
@@ -26,6 +26,16 @@ public interface LeaderAbility extends AcceptsSupplies{
     public default WarehouseObjectType transformWhiteMarble() throws NoSuchMethodException{
         throw new NoSuchMethodException();
     };
+
+
+    /**
+     * Third ability: returns the color to what the white marble can be transformed
+     * @return the color to what the white marble can be transformed
+     * @throws NoSuchMethodException If the LeaderCard is not allowed to use that ability
+     */
+    public default MarbleColor colorWhiteMarble() throws NoSuchMethodException{
+        throw new NoSuchMethodException();
+    }
 
 
     /**
@@ -51,6 +61,15 @@ public interface LeaderAbility extends AcceptsSupplies{
     }
 
 
+
+
+    public default SupplyContainer getInput() throws NoSuchMethodException{
+        throw new NoSuchMethodException();
+    }
+
+
+
+
     /**
      * This method activates the leader card production
      * @return An extra SupplyContainer that contains the resource
@@ -70,19 +89,24 @@ public interface LeaderAbility extends AcceptsSupplies{
     };
 
 
+    public default void swapProduction(WarehouseObjectType wot) throws SupplyException, NoSuchMethodException{
+        throw new NoSuchMethodException();
+    }
+
+
     /**
      * Method that set the desired resource in addition to the FAITH_MARKER that player will get from the LeaderCard
      * @param wot Is one of the five types of resources in the game
-     * @throws BoundsException If you want to add more than one resource
+     * @throws SupplyException If you want to add more than one resource
      * @throws NoSuchMethodException If the LeaderCard is not allowed to use that ability
      */
-    public default void changeOutput(WarehouseObjectType wot) throws NoSuchMethodException{
+    public default void changeOutput(WarehouseObjectType wot) throws SupplyException, NoSuchMethodException{
         throw new NoSuchMethodException();
     };
 
 
     @Override
-    public default SupplyContainer clearSupplies() throws NoSuchMethodException{
+    public default Pair<SupplyContainer, SupplyContainer> clearSupplies() throws NoSuchMethodException{
         throw new NoSuchMethodException();
     }
 

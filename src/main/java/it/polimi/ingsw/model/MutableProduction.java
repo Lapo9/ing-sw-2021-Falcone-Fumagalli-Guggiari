@@ -5,130 +5,158 @@ import it.polimi.ingsw.exceptions.*;
 import java.util.ArrayList;
 
 /**
- * The MutableProduction class represent the mutable production mechanism of the game, where the player can choose
- * the input and the output of the production
+ * The MutableProduction class represents the mutable production mechanism of the game,
+ * where the player can choose the input and the output of the production.
  */
 public class MutableProduction extends Production implements HasStatus{
-    private SupplyContainer mutableInput;
-    private SupplyContainer mutableOutput;
-    private final int maxInput;
-    private final int maxOutput;
+
+    private ArrayList<WarehouseObjectType> mutableInput = new ArrayList<>();
+    private ArrayList<WarehouseObjectType> mutableOutput = new ArrayList<>();
+
 
     /**
-     * Class constructor
-     * @param in  is a SupplyContainer which contains the supplies needed as input
-     * @param out is a SupplyContainer which contains the supplies produces by output when the production is triggered
-     * @param dimInput is the max dimension of the input
-     * @param dimOutput is the max dimension of the output
-     * @param id depot ID of this production
+     * Class constructor.
+     * @param in  is a SupplyContainer which contains the supplies needed as fixed input
+     * @param out is a SupplyContainer which contains the supplies produced as fixed output when the production is triggered
+     * @param dimInput is the maximum size of the input (fixed + mutable)
+     * @param dimOutput is the maximum dimension of the output (fixed + mutable)
      */
     public MutableProduction(SupplyContainer in, SupplyContainer out, int dimInput, int dimOutput){
         super(in, out);
-        maxInput = dimInput - in.getQuantity();         //maxInput is the dimension of the mutableInput
-        maxOutput = dimOutput - out.getQuantity();      //maxOutput is the dimension of the mutableOutput
-        mutableInput = new SupplyContainer();
-        mutableOutput = new SupplyContainer();
+        int maxMutableInput = dimInput - in.getQuantity();         //maxMutableInput is the dimension of the mutableInput
+        int maxMutableOutput = dimOutput - out.getQuantity();      //maxMutableOutput is the dimension of the mutableOutput
+
+        for (int i = 0; i < maxMutableInput; ++i) {
+            mutableInput.add(WarehouseObjectType.COIN);
+        }
+        for (int i = 0; i < maxMutableOutput; ++i) {
+            mutableOutput.add(WarehouseObjectType.COIN);
+        }
     }
 
-
-
     /**
-     * Creates an object without any fixed input or output
-     * @param dimInput is the max dimension of the input
-     * @param dimOutput is the max dimension of the output
-     * @param id depot ID of this production
+     * Creates an object without any fixed input and output.
+     * @param dimInput is the maximum size of the input (mutable)
+     * @param dimOutput is the maximum dimension of the output (mutable)
      */
     public MutableProduction(int dimInput, int dimOutput){
-        super(new SupplyContainer(), new SupplyContainer()); //0 resources in fixed input/output
-        maxInput = dimInput;         //maxInput is the dimension of the mutableInput
-        maxOutput = dimOutput;      //maxOutput is the dimension of the mutableOutput
-        mutableInput = new SupplyContainer();
-        mutableOutput = new SupplyContainer();
+        super(new SupplyContainer(SupplyContainer.AcceptStrategy.none()), new SupplyContainer(SupplyContainer.AcceptStrategy.none())); //0 resources in fixed input/output
+        for (int i = 0; i < dimInput; ++i) {
+            mutableInput.add(WarehouseObjectType.COIN);
+        }
+        for (int i = 0; i < dimOutput; ++i) {
+            mutableOutput.add(WarehouseObjectType.COIN);
+        }
     }
 
 
+    @Override
+    public SupplyContainer getInput() {
+        SupplyContainer tmp = new SupplyContainer();
+
+        tmp.sum(input);
+        mutableInput.forEach(warehouseObjectType -> {
+            try{
+                tmp.addSupply(warehouseObjectType);
+            } catch (SupplyException se){/*FIXME end program*/}
+        });
+
+        return tmp;
+    }
 
     /**
-     * The produce method activates the production is the isActive parameter is true
-     * @return a SupplyContainer containing the output + mutableOutput
+     * Activates the production. If the total input (fixed + mutable) equals the current supply store,
+     * then the current supply store is wiped and the total output (fixed + mutable) is returned.
+     * If not a fatal error is produced and the program is terminated.
+     * @return A SupplyContainer containing the total output (fixed + mutable)
      */
     @Override
     public SupplyContainer produce(){
         try{
             check();
         } catch (SupplyException se){/*FIXME end program*/}
-        return new SupplyContainer(mutableOutput.sum(getOutput()));
+
+        SupplyContainer res = new SupplyContainer();
+        res.sum(output);
+        mutableOutput.forEach(warehouseObjectType -> {
+            try{
+                res.addSupply(warehouseObjectType);
+            } catch (SupplyException se){/*FIXME end program*/}
+        });
+
+        currentSupply.clearSupplies();
+
+        return res;
     }
 
     /**
-     * The check method verifies if the supplies contained in the currentSupply are right to start a production
+     * Verifies if the current supplies present in the production depot are the same as the total input (fixed + mutable) supplies.
+     * @throws SupplyException The current supplies present in the production depot are not the same as the total input (fixed + mutable) supplies.
      */
     @Override
     public void check() throws SupplyException{
-        SupplyContainer temp = getInput().sum(mutableInput);
-        if(temp.confront(getCurrentSupply()))
-            throw new SupplyException();
+        SupplyContainer tmp = new SupplyContainer();
+
+        tmp.sum(input);
+        mutableInput.forEach(warehouseObjectType -> {
+            try{
+                tmp.addSupply(warehouseObjectType);
+            } catch (SupplyException se){/*FIXME end program*/}
+        });
+
+        if(!tmp.equals(currentSupply))
+            throw new SupplyException("There isn't the correct number of supplies to produce");
     }
 
 
     /**
-     * The addInput method adds a WarehouseObjectType to the mutableInput
-     * @param wot is the type of supply that the player wants to add to the mutableInput SupplyContainer
-     * @throws BoundsException if the mutableInput is already full
+     * Substitutes the current supply present in the specified input slot with the supply given as argument.
+     * @param num Slot
+     * @param newInput New supply type to add (cannot be FAITH_MARKER or NO_TYPE)
      */
-    public void addInput(WarehouseObjectType wot)throws BoundsException {
-        int temp = mutableInput.getQuantity();
-        if (temp >= maxInput)
-            throw new BoundsException();
-
-        mutableInput.addSupply(wot);
-
-    }
-
-    /**
-     * The addOutput method adds a WarehouseObjectType to the mutableOuput
-     * @param wot is the type of supply that the player wants to add to the mutableOutput SupplyContainer
-     * @throws BoundsException if the mutableOutput is already full
-     */
-    public void addOutput(WarehouseObjectType wot) throws BoundsException{
-        int temp = mutableOutput.getQuantity();
-        if (temp >= maxOutput)
-            throw new BoundsException();
-
-        mutableOutput.addSupply(wot);
-    }
-
-    /**
-     * The removeInput method removes a WarehouseObjectType from the mutableInput
-     * @param wot is the type of supply that the player wants to remove from the mutableInput SupplyContainer
-     * @throws BoundsException if the mutableInput is already empty
-     */
-    public void removeInput(WarehouseObjectType wot) throws BoundsException{
-        int temp = mutableInput.getQuantity();
-        if (temp == 0)
-            throw new BoundsException();
-        try {
-            mutableInput.removeSupply(wot);
-        } catch (SupplyException e) {
-            //FIXME
+    public void swapInput(int num, WarehouseObjectType newInput) throws SupplyException{
+        if(newInput == WarehouseObjectType.FAITH_MARKER || newInput == WarehouseObjectType.NO_TYPE){
+            throw new SupplyException("Cannot use NO_TYPE as input in a MutableProduction");
         }
+        mutableInput.set(num, newInput);
     }
 
     /**
-     * The removeOutput method removes a WarehouseObjectType from the mutableOutput
-     * @param wot is the type of supply that the player wants to remove from the mutableOutput SupplyContainer
-     * @throws BoundsException if the mutableOutput is already empty
+     * Substitutes the current supply present in the specified output slot with the supply given as argument.
+     * @param num Slot
+     * @param newOutput New supply type to add (cannot be FAITH_MARKER or NO_TYPE)
      */
-    public void removeOutput(WarehouseObjectType wot) throws BoundsException{
-        int temp = mutableOutput.getQuantity();
-        if (temp == 0)
-            throw new BoundsException();
-
-        mutableOutput.addSupply(wot);
+    public void swapOutput(int num, WarehouseObjectType newOutput) throws SupplyException{
+        if(newOutput == WarehouseObjectType.NO_TYPE){
+            throw new SupplyException("Cannot use NO_TYPE as output in a MutableProduction");
+        }
+        mutableOutput.set(num, newOutput);
     }
+
 
     @Override
     public ArrayList<Integer> getStatus(){
+        ArrayList<Integer> status = new ArrayList<>();
 
+        status.addAll(input.getStatus());
+
+        //0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER
+        for(int i = 0; i<mutableInput.size(); ++i) {
+            status.add(mutableInput.get(i).ordinal());
+        }
+
+        if(mutableInput.size() == 0)
+            status.add(0);
+
+        status.addAll(output.getStatus());
+
+        //0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER
+        for(int i = 0; i<mutableOutput.size(); ++i) {
+            status.add(mutableOutput.get(i).ordinal());
+        }
+
+        status.addAll(currentSupply.getStatus());
+
+        return status;
     }
 }

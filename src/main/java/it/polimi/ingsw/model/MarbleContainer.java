@@ -16,7 +16,7 @@ public class MarbleContainer implements HasStatus {
     private int red;
 
     /**
-     * Class constructor
+     * Creates a marble container.
      * @param y number of yellow marbles
      * @param b number of blue marbles
      * @param g number of grey marbles
@@ -34,9 +34,9 @@ public class MarbleContainer implements HasStatus {
     }
 
     /**
-     * The getQuantity method returns the quantity of the marble type passed as input that currently is in the MarbleContainer
+     * Returns the quantity of the marbles color passed as input that currently are in the MarbleContainer
      * @param mcs colors to return the sum of the quantity
-     * @return is the marble quantity of the given type present in the MarbleContainer
+     * @return the marble quantity of the given type present in the MarbleContainer
      */
     public int getQuantity(MarbleColor... mcs){
 
@@ -60,7 +60,7 @@ public class MarbleContainer implements HasStatus {
 
 
     /**
-     * Removes a marble of the specified color.
+     * Removes a marble of the specified color
      * @param mc color to remove
      * @throws MarbleException There isn't a marble of the specified color
      */
@@ -68,46 +68,80 @@ public class MarbleContainer implements HasStatus {
         if(mc == MarbleColor.YELLOW)
         {
             if(yellow <= 0)
-                throw new MarbleException();
+                throw new MarbleException("There are no "+mc.toString()+" marbles");
             else
                 yellow--;
         }
         else if(mc == MarbleColor.BLUE)
         {
             if(blue <= 0)
-                throw new MarbleException();
+                throw new MarbleException("There are no "+mc.toString()+" marbles");
             else
                 blue--;
         }
         else if(mc == MarbleColor.GREY)
         {
             if(grey <= 0)
-                throw new MarbleException();
+                throw new MarbleException("There are no "+mc.toString()+" marbles");
             else
                 grey--;
         }
         else if(mc == MarbleColor.WHITE)
         {
             if(white <= 0)
-                throw new MarbleException();
+                throw new MarbleException("There are no "+mc.toString()+" marbles");
             else
                 white--;
         }
         else if(mc == MarbleColor.VIOLET)
         {
             if(violet <= 0)
-                throw new MarbleException();
+                throw new MarbleException("There are no "+mc.toString()+" marbles");
             else
                 violet--;
         }
         else if(mc == MarbleColor.RED)
         {
             if(red <= 0)
-                throw new MarbleException();
+                throw new MarbleException("There are no "+mc.toString()+" marbles");
             else
                 red--;
         }
     }
+
+
+    /**
+     * Transforms one of the white marbles to the specified color
+     * @param newColor Color to transform one white marble to
+     * @throws MarbleException No white marbles left or newColo == red
+     */
+    public void colorWhiteMarble(MarbleColor newColor) throws MarbleException{
+        if(getQuantity(MarbleColor.WHITE) == 0 || newColor == MarbleColor.RED){
+            throw new MarbleException("No white marbles in the container or trying to transform to red marble");
+        }
+
+        white--;
+
+        switch (newColor){
+            case WHITE:
+                white++;
+                return;
+            case GREY:
+                grey++;
+                return;
+            case BLUE:
+                blue++;
+                return;
+            case YELLOW:
+                yellow++;
+                return;
+            case VIOLET:
+                violet++;
+                return;
+        }
+
+    }
+
 
     /**
      * Empties the container
@@ -121,13 +155,24 @@ public class MarbleContainer implements HasStatus {
         red = 0;
     }
 
-    //TODO
+    @Override
     public ArrayList<Integer> getStatus(){
-        return null;
+        ArrayList<Integer> status = new ArrayList<>();
+
+        //The getStatus array contains the number of the blue, gray, red, violet, white and yellow marbles contained in the MarbleContainer
+        status.add(blue);
+        status.add(grey);
+        status.add(red);
+        status.add(violet);
+        status.add(white);
+        status.add(yellow);
+
+        return status;
     }
 
+
     /**
-     * The colorToSupply method can turn the MarbleColor in input in the right WareHouseObjectType
+     * Turns the MarbleColor in input in the right WarehouseObjectType
      * @param mc is a MarbleColor
      * @return the WarehouseObjectType of the MarbleColor in input
      */

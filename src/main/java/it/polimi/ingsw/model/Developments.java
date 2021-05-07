@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Developments implements HasStatus, WinPointsCountable, AcceptsSupplies{
 
-    private ArrayList<DevelopmentSpace> spaces;
+    private ArrayList<DevelopmentSpace> spaces = new ArrayList<>();
 
 
     /**
@@ -23,6 +23,26 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
         spaces.add(new DevelopmentSpace());
         spaces.add(new DevelopmentSpace());
         spaces.add(new DevelopmentSpace());
+    }
+
+
+    /**
+     * Returns the sum of the inputs needed by the last development cards contained in the development space indicated.
+     * @param s1 development space 1
+     * @param s2 development space 2
+     * @param s3 development space 3
+     * @return the sum of the inputs indicated
+     */
+    public SupplyContainer getInput(boolean s1, boolean s2, boolean s3) {
+        SupplyContainer result = new SupplyContainer();
+        boolean[] activeProductions = {s1, s2, s3};
+
+        for(int i = 0; i<3; ++i){
+            if (activeProductions[i]) {
+                result.sum(spaces.get(i).getInput());
+            }
+        }
+        return result;
     }
 
 
@@ -82,24 +102,41 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
      * @throws SupplyException There isn't the specified type of supply on the specified space.
      */
     @Override
-    public void removeSupply(DepotID space, WarehouseObjectType wot) throws SupplyException {
-        spaces.get(space.getNum()).removeSupply(space, wot);
+    public void removeSupply(DepotID space, WarehouseObjectType wot, DepotID to) throws SupplyException {
+        spaces.get(space.getNum()).removeSupply(wot, to);
     }
 
 
-    /**
-     * Clear all of the supplies in the spaces.
-     * @return Supplies removed
-     */
     @Override
-    public SupplyContainer clearSupplies(){
-        SupplyContainer result = new SupplyContainer();
-
-        for (int i = 0; i<3; ++i){
-            result.sum(spaces.get(i).clearSupplies());
-        }
-        return result;
+    public boolean additionAllowed(DepotID space, WarehouseObjectType wot, DepotID from) {
+        return spaces.get(space.getNum()).additionAllowed(wot, from);
     }
+
+
+    @Override
+    public boolean removalAllowed(DepotID space, WarehouseObjectType wot, DepotID to) {
+        return spaces.get(space.getNum()).removalAllowed(wot, to);
+    }
+
+
+
+    @Override
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies(){
+        for (int i = 0; i<3; ++i){
+            spaces.get(i).clearSupplies();
+        }
+        return null;
+    }
+
+
+    @Override
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot){
+        return spaces.get(slot.getNum()).clearSupplies();
+    }
+
+
+
+
 
 
     /**
@@ -107,8 +144,9 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
      * @param space where to add the card to
      * @param card card to add
      * @throws DevelopmentException Card level doesn't match required level, or the space is full (max is 3 cards).
+     * [pre: space is between 0 and 2]
      */
-    public void addCardToSpace(int space, SupplyCard card) throws DevelopmentException {
+    public void addCardToSpace(int space, DevelopmentCard card) throws DevelopmentException {
         spaces.get(space).addCard(card);
     }
 
@@ -144,7 +182,13 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
 
     @Override
     public ArrayList<Integer> getStatus(){
-        //TODO
+        ArrayList<Integer> status = new ArrayList<>();
+
+        for (int i = 0; i<spaces.size(); ++i){
+            status.addAll(spaces.get(i).getStatus());
+        }
+
+        return status;
     }
 
 

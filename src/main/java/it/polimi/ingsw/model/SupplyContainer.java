@@ -1,174 +1,459 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.TriPredicate;
 import it.polimi.ingsw.exceptions.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * The SupplyContainer class can store resources
+ * The SupplyContainer class can store supplies given a policy that decides what supplies are acceptable/removable based on the current state of the container, the type of the object to be added and the source of the object to be added.
  */
 public class SupplyContainer implements AcceptsSupplies, HasStatus{
-    private int coin = 0;
-    private int stone = 0;
-    private int servant = 0;
-    private int shield = 0;
-    private int faithMarker = 0;
+
+    private HashMap<WarehouseObjectType, Integer> supplies = new HashMap<>();
+    private TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> tryAdd = AcceptStrategy.any();
+    private TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> tryRemove = AcceptStrategy.any();
 
 
     /**
-     * Class constructor
+     * Creates a new empty container that can accept and remove any supply.
      */
-    public SupplyContainer() {}
-
+    public SupplyContainer() {
+        supplies.put(WarehouseObjectType.COIN, 0);
+        supplies.put(WarehouseObjectType.SERVANT, 0);
+        supplies.put(WarehouseObjectType.SHIELD, 0);
+        supplies.put(WarehouseObjectType.STONE, 0);
+        supplies.put(WarehouseObjectType.FAITH_MARKER, 0);
+    }
 
     /**
-     * Create a supply container and fills it with the passed parameters.
-     * @param coin coins
-     * @param stone stones
-     * @param servant servants
-     * @param shield shields
-     * @param faithMarker faith markers
+     * Creates a new empty container that can remove any supply and can accept supplies based on the given policy.
+     * @param acceptCheck Predicate that decides what supplies can be accepted based on the current state of the container, the type of the object to be added and the source of the object to be added
+     */
+    public SupplyContainer(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck) {
+        supplies.put(WarehouseObjectType.COIN, 0);
+        supplies.put(WarehouseObjectType.SERVANT, 0);
+        supplies.put(WarehouseObjectType.SHIELD, 0);
+        supplies.put(WarehouseObjectType.STONE, 0);
+        supplies.put(WarehouseObjectType.FAITH_MARKER, 0);
+
+        this.tryAdd = acceptCheck;
+    }
+
+    /**
+     * Creates a new empty container that can accept/remove supplies based on the given policies.
+     * @param acceptCheck Predicate that decides what supplies can be accepted based on the current state of the container, the type of the object to be added and the source of the object to be added
+     * @param removeCheck Predicate that decides what supplies can be removed from the container based on the current state of the container, the type of the object to be added and the source of the object to be added
+     */
+    public SupplyContainer(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> removeCheck) {
+        supplies.put(WarehouseObjectType.COIN, 0);
+        supplies.put(WarehouseObjectType.SERVANT, 0);
+        supplies.put(WarehouseObjectType.SHIELD, 0);
+        supplies.put(WarehouseObjectType.STONE, 0);
+        supplies.put(WarehouseObjectType.FAITH_MARKER, 0);
+
+        this.tryAdd = acceptCheck;
+        this.tryRemove = removeCheck;
+    }
+
+    /**
+     * Creates a new container with the specified initial content, that can accept and remove any supply.
+     * @param coin Coins
+     * @param stone Stones
+     * @param servant Servants
+     * @param shield Shields
+     * @param faithMarker Faith markers
      */
     public SupplyContainer(int coin, int stone, int servant, int shield, int faithMarker) {
-        this.coin = coin;
-        this.stone = stone;
-        this.servant = servant;
-        this.shield = shield;
-        this.faithMarker = faithMarker;
+        supplies.put(WarehouseObjectType.COIN, coin);
+        supplies.put(WarehouseObjectType.SERVANT, servant);
+        supplies.put(WarehouseObjectType.SHIELD, shield);
+        supplies.put(WarehouseObjectType.STONE, stone);
+        supplies.put(WarehouseObjectType.FAITH_MARKER, faithMarker);
+    }
+
+    /**
+     * Creates a new empty container that can remove any supply and can accept supplies based on the given policy.
+     * @param coin Coins
+     * @param stone Stones
+     * @param servant Servants
+     * @param shield Shields
+     * @param faithMarker Faith markers
+     * @param acceptCheck Predicate that decides what supplies can be accepted based on the current state of the container, the type of the object to be added and the source of the object to be added
+     */
+    public SupplyContainer(int coin, int stone, int servant, int shield, int faithMarker, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck) {
+        supplies.put(WarehouseObjectType.COIN, coin);
+        supplies.put(WarehouseObjectType.SERVANT, servant);
+        supplies.put(WarehouseObjectType.SHIELD, shield);
+        supplies.put(WarehouseObjectType.STONE, stone);
+        supplies.put(WarehouseObjectType.FAITH_MARKER, faithMarker);
+
+        this.tryAdd = acceptCheck;
+    }
+
+    /**
+     * Creates a new empty container that can accept/remove supplies based on the given policies
+     * @param coin Coins
+     * @param stone Stones
+     * @param servant Servants
+     * @param shield Shields
+     * @param faithMarker Faith markers
+     * @param acceptCheck Predicate that decides what supplies can be accepted based on the current state of the container, the type of the object to be added and the source of the object to be added
+     * @param removeCheck Predicate that decides what supplies can be removed from the container based on the current state of the container, the type of the object to be added and the source of the object to be added
+     */
+    public SupplyContainer(int coin, int stone, int servant, int shield, int faithMarker, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> removeCheck) {
+        supplies.put(WarehouseObjectType.COIN, coin);
+        supplies.put(WarehouseObjectType.SERVANT, servant);
+        supplies.put(WarehouseObjectType.SHIELD, shield);
+        supplies.put(WarehouseObjectType.STONE, stone);
+        supplies.put(WarehouseObjectType.FAITH_MARKER, faithMarker);
+
+        this.tryAdd = acceptCheck;
+        this.tryRemove = removeCheck;
     }
 
     /**
      * Copy constructor.
-     * @param sc object to copy
+     * @param sc Container to copy
      */
     public SupplyContainer(SupplyContainer sc){
-        this.coin = sc.coin;
-        this.servant = sc.servant;
-        this.stone = sc.stone;
-        this.shield = sc.shield;
-        this.faithMarker = sc.faithMarker;
+        supplies.put(WarehouseObjectType.COIN, sc.getQuantity(WarehouseObjectType.COIN));
+        supplies.put(WarehouseObjectType.SERVANT, sc.getQuantity(WarehouseObjectType.SERVANT));
+        supplies.put(WarehouseObjectType.SHIELD, sc.getQuantity(WarehouseObjectType.SHIELD));
+        supplies.put(WarehouseObjectType.STONE, sc.getQuantity(WarehouseObjectType.STONE));
+        supplies.put(WarehouseObjectType.FAITH_MARKER, sc.getQuantity(WarehouseObjectType.FAITH_MARKER));
+
+        tryAdd = sc.tryAdd;
+        tryRemove = sc.tryRemove;
     }
 
     /**
-     * The getQuantity method returns the quantity of the supply type passed as input that currently is in the SupplyContainer
-     * @param wots resources to return the sum of the quantity
-     * @return is the sum supply quantity of the given type present in the SupplyContainer
+     * Copy constructor, but the accept policy is changed.
+     * @param sc Container to copy
+     * @param acceptCheck Predicate that decides what supplies can be accepted based on the current state of the container, the type of the object to be added and the source of the object to be added
+     */
+    public SupplyContainer(SupplyContainer sc, TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck){
+        supplies.put(WarehouseObjectType.COIN, sc.getQuantity(WarehouseObjectType.COIN));
+        supplies.put(WarehouseObjectType.SERVANT, sc.getQuantity(WarehouseObjectType.SERVANT));
+        supplies.put(WarehouseObjectType.SHIELD, sc.getQuantity(WarehouseObjectType.SHIELD));
+        supplies.put(WarehouseObjectType.STONE, sc.getQuantity(WarehouseObjectType.STONE));
+        supplies.put(WarehouseObjectType.FAITH_MARKER, sc.getQuantity(WarehouseObjectType.FAITH_MARKER));
+
+        this.tryAdd = acceptCheck;
+        tryRemove = sc.tryRemove;
+    }
+
+
+
+
+    /**
+     * Returns the amount of the supply types passed as arguments currently stored in the container.
+     * @param wots Supplies to return the sum of the quantity
+     * @return The amount of the supply types passed as arguments currently stored in the container
      */
     public int getQuantity(WarehouseObjectType... wots){
         int temp = 0;
 
         for(WarehouseObjectType wot : wots) {
-            if (wot == WarehouseObjectType.COIN)
-                temp += coin;
-            else if (wot == WarehouseObjectType.STONE)
-                temp += stone;
-            else if (wot == WarehouseObjectType.SERVANT)
-                temp += servant;
-            else if (wot == WarehouseObjectType.SHIELD)
-                temp += shield;
-            else if (wot == WarehouseObjectType.FAITH_MARKER)
-                temp += faithMarker;
+            temp += supplies.get(wot);
         }
         return temp;
     }
 
     /**
-     * The add method is used when you have two different SupplyContainer, sc1 and sc2, and you want to add all the
-     * elements of the second container in the first one
-     * @param sc is the SupplyContainer that you want to add to your SupplyContainer
-     * @return this object, to enable chain calls.
+     * Returns the amount of all of the supplies currently stored in the container.
+     * @return The amount of all of the supplies currently stored in the container
+     */
+    public int getQuantity(){
+        int tot = 0;
+        for (Map.Entry<WarehouseObjectType, Integer> type : supplies.entrySet()){
+            tot += type.getValue();
+        }
+        return tot;
+    }
+
+
+    /**
+     * Returns the type of the container if only one type of supply is present.
+     * @return The type of the object present in the container, if no objects are present NO_TYPE is returned
+     * @throws SupplyException If more than one object type is present
+     */
+    public WarehouseObjectType getType() throws SupplyException {
+        ArrayList<WarehouseObjectType> presentTypes = new ArrayList<>();
+        supplies.forEach((type, qty) -> {if(qty != 0) {
+                                            presentTypes.add(type);
+                                        }});
+
+        if (presentTypes.size() > 1){
+            throw new SupplyException("This SupplyContainer contains more than one single type");
+        }
+        else if (presentTypes.size() == 1){
+            return presentTypes.get(0);
+        }
+        else {
+            return WarehouseObjectType.NO_TYPE;
+        }
+    }
+
+
+    /**
+     * Modifies the accept policy.
+     * @param acceptCheck New accept policy
+     */
+    public void setAcceptCheck(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> acceptCheck) {
+        this.tryAdd = acceptCheck;
+    }
+
+    /**
+     * Modifies the remove policy.
+     * @param removeCheck New remove policy
+     */
+    public void setRemoveCheck(TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> removeCheck) {
+        this.tryRemove = removeCheck;
+    }
+
+
+    /**
+     * Adds to this container the container passed ad argument.
+     * @param sc The container that you want to add to this container
+     * @return This container, to enable chain calls.
      */
     public SupplyContainer sum(SupplyContainer sc){
-        this.coin = sc.coin + this.coin;
-        this.stone = sc.stone + this.stone;
-        this.servant = sc.servant + this.servant;
-        this.shield = sc.shield + this.shield;
-        this.faithMarker = sc.faithMarker + this.faithMarker;
+        supplies.forEach((type, qty) -> supplies.put(type, qty += sc.getQuantity(type)));
         return this;
     }
 
     /**
-     * The confront method returns true if this.SupplyContainer is equal to sc
-     * @param sc is a SupplyContainer
-     * @return true if this.SupplyContainer is equal to sc
+     * Compare the content of this container with the content of the container passed as argument.
+     * @param sc Container to confront to this
+     * @return True if the content of this container is the same as the content of the container passed as argument
      */
-    public boolean confront(SupplyContainer sc){
-        return this.coin == sc.coin && this.faithMarker == sc.faithMarker && this.servant == sc.servant &&
-                this.shield == sc.shield && this.stone == sc.stone;
+    public boolean equals(SupplyContainer sc){
+        boolean equals = true;
+        for (Map.Entry<WarehouseObjectType, Integer> type : supplies.entrySet()){
+            equals &= type.getValue() == sc.getQuantity(type.getKey());
+        }
+        return equals;
     }
+
 
 
 
     @Override
-    public void addSupply(WarehouseObjectType wot){
-        if(wot == null)
-            return;
-        if(wot == WarehouseObjectType.COIN)
-            coin++;
-        else if(wot == WarehouseObjectType.STONE)
-            stone++;
-        else if(wot == WarehouseObjectType.SERVANT)
-            servant++;
-        else if(wot == WarehouseObjectType.SHIELD)
-            shield++;
-        else if(wot == WarehouseObjectType.FAITH_MARKER)
-            faithMarker++;
+    public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
+        if (additionAllowed(wot, from)){
+            supplies.put(wot, supplies.get(wot)+1);
+        }
+        else {
+            throw new SupplyException("Cannot add "+wot.toString()+" to "+this.toString()+" from "+from.toString());
+        }
     }
+
+    @Override
+    public void addSupply(WarehouseObjectType wot) throws SupplyException{
+        if (additionAllowed(wot)){
+            supplies.put(wot, supplies.get(wot)+1);
+        }
+        else {
+            throw new SupplyException("Cannot add "+wot.toString()+" to "+this.toString());
+        }
+    }
+
 
     @Override
     public void removeSupply(WarehouseObjectType wot) throws SupplyException{
-        if(wot == WarehouseObjectType.COIN)
-        {
-            if(coin <= 0)
-                throw new SupplyException();
-            else
-                coin--;
+        if (removalAllowed(wot)) {
+            supplies.put(wot, supplies.get(wot)-1);
         }
-        else if(wot == WarehouseObjectType.STONE)
-        {
-            if(stone <= 0)
-                throw new SupplyException();
-            else
-                stone--;
+        else {
+            throw new SupplyException("Cannot remove "+wot.toString()+" from "+this.toString());
         }
-        else if(wot == WarehouseObjectType.SERVANT)
-        {
-            if(servant <= 0)
-                throw new SupplyException();
-            else
-                servant--;
+    }
+
+    @Override
+    public void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException{
+        if (removalAllowed(wot, to)) {
+            supplies.put(wot, supplies.get(wot)-1);
         }
-        else if(wot == WarehouseObjectType.SHIELD)
-        {
-            if(shield <= 0)
-                throw new SupplyException();
-            else
-                shield--;
-        }
-        else if(wot == WarehouseObjectType.FAITH_MARKER)
-        {
-            if(faithMarker <= 0)
-                throw new SupplyException();
-            else
-                faithMarker--;
+        else {
+            throw new SupplyException("Cannot remove "+wot.toString()+" from "+this.toString()+" to "+to.toString());
         }
     }
 
 
     @Override
-    public SupplyContainer clearSupplies(){
-        SupplyContainer tmp = new SupplyContainer(this);
-        this.coin = 0;
-        this.faithMarker = 0;
-        this.servant = 0;
-        this.shield = 0;
-        this.stone = 0;
-        return tmp;
+    public boolean additionAllowed(WarehouseObjectType wot){
+        return tryAdd.test(this, wot, DepotID.ANY);
     }
 
-    //TODO
+    @Override
+    public boolean additionAllowed(WarehouseObjectType wot, DepotID from){
+        return tryAdd.test(this, wot, from);
+    }
+
+
+    @Override
+    public boolean removalAllowed(WarehouseObjectType wot){
+        return supplies.get(wot) > 0 && tryRemove.test(this, wot, DepotID.ANY);
+    }
+
+    @Override
+    public boolean removalAllowed(WarehouseObjectType wot, DepotID to){
+        return supplies.get(wot) > 0 && tryRemove.test(this, wot, to);
+    }
+
+
+    @Override
+    public Pair<SupplyContainer, SupplyContainer> clearSupplies(){
+        SupplyContainer tmp = new SupplyContainer(this);
+        supplies.forEach((type, qty) -> {supplies.put(type, 0);});
+        return new Pair<>(tmp, new SupplyContainer());
+    }
+
+
+
+    /**
+     * Tries to add the marble to the container.
+     * @param color color of the marble to add
+     * @param ls where to look for white marble transformations
+     * @throws SupplyException Transformation succeeded but cannot add
+     * @throws MarbleException Cannot transform marble
+     */
+    public void addMarble(MarbleColor color, LeadersSpace ls) throws SupplyException, MarbleException{
+
+        WarehouseObjectType newType = MarbleContainer.colorToSupply(color);
+
+        if (newType == null) {
+            boolean cannotAdd = false;
+            for(int i = 0; i<2; ++i) {
+                try {
+                    addSupply(ls.getLeaderAbility(i).transformWhiteMarble());
+                    return; //if added, we are done
+                }   catch (LeaderException | NoSuchMethodException e){/*couldn't transform, try next*/}
+                    catch (SupplyException se){cannotAdd = true;}
+            }
+            if (cannotAdd){throw new SupplyException("Cannot add this color ("+color.toString()+") of marble to the specified SupplyContainer (" + this.toString() + ")");}
+            else {throw new MarbleException("Cannot add this color ("+color.toString()+") of marble to the specified SupplyContainer (" + this.toString() + ")");}
+        }
+        else {
+            addSupply(newType);
+        }
+
+    }
+
+
+
+
     @Override
     public ArrayList<Integer> getStatus(){
-        return new ArrayList<>();
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.add(supplies.get(WarehouseObjectType.COIN));
+        status.add(supplies.get(WarehouseObjectType.SERVANT));
+        status.add(supplies.get(WarehouseObjectType.SHIELD));
+        status.add(supplies.get(WarehouseObjectType.STONE));
+        status.add(supplies.get(WarehouseObjectType.FAITH_MARKER));
+
+        return status;
     }
+
+
+    /**
+     * A list of static functions that return common TriPredicate that can be used as accept/remove policy for a SupplyContainer.
+     */
+    public static class AcceptStrategy {
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> any(){
+            return (supplyContainer, warehouseObjectType, depotID) -> true;
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> none(){
+            return (supplyContainer, warehouseObjectType, depotID) -> false;
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> max(int max){
+            return (supplyContainer, warehouseObjectType, depotID) -> {
+                return supplyContainer.getQuantity() < max;
+            };
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> min(int min){
+            return (supplyContainer, warehouseObjectType, depotID) -> {
+                return supplyContainer.getQuantity() > min;
+            };
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> oneType(){
+            return (container, type, depot) -> {
+                boolean res = false;
+                try {
+                    res = container.getType() == type || container.getType() == WarehouseObjectType.NO_TYPE;
+                } catch (SupplyException se) {/*TODO end program?*/}
+                return res;
+            };
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> specificType(WarehouseObjectType type){
+            return (container, wot, depot) -> {
+                return wot == type;
+            };
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxOneType(int max){
+            return (container, type, depot) -> {
+                return oneType().test(container, type, depot) && container.getQuantity() < max;
+            };
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxOneTypeNotPresentIn(int max, SupplyContainer... scs){
+            return (container, type, depot) -> {
+                boolean isPresent = false;
+                try {
+                    for (SupplyContainer sc : scs){
+                        isPresent |= sc.getType()==type;
+                    }
+                } catch (SupplyException se){/*TODO terminate*/}
+                return maxOneType(max).test(container, type, depot) && !isPresent;
+            };
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxSpecificType(WarehouseObjectType type, int max){
+            return (container, wot, depot) -> {
+                return container.getQuantity() < max && specificType(type).test(container, wot, depot);
+            };
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> onlyFrom(DepotID.SourceType source){
+            return (container, type, depot) -> {
+                return depot.getSource() == source;
+            };
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> onlyFromMaxOneType(int max, DepotID.SourceType source){
+            return (container, type, depot) -> {
+                return onlyFrom(source).test(container, type, depot) && maxOneType(max).test(container, type, depot);
+            };
+        }
+
+
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> onlyFromMaxSpecificType(WarehouseObjectType type, int max, DepotID.SourceType source){
+            return (container, wot, depot) -> {
+                return onlyFrom(source).test(container, wot, depot) && maxSpecificType(type, max).test(container, wot, depot);
+            };
+        }
+    }
+
 }

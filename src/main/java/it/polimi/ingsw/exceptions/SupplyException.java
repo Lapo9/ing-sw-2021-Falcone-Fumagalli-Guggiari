@@ -1,5 +1,7 @@
 package it.polimi.ingsw.exceptions;
 
 public class SupplyException extends Exception{
-    //TODO
+    public SupplyException(String message){
+        super(message);
+    }
 }

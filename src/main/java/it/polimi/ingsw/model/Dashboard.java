@@ -1,38 +1,43 @@
 package it.polimi.ingsw.model;
 
+import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
+
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.controller.ModelObserver;
 import it.polimi.ingsw.exceptions.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The dashboard is the access point of the controller to the model.
  * It exposes a function for all of the possible actions a player can perform during a match.
- * Generally, when an action performed goes well, nothing is returned, but if the action violates any of the game rule an exception is thrown.
+ * Generally, when the action performed goes well, nothing is returned, but if the action violates any of the game rule an exception is thrown.
  * TODO maybe there should be methods to check if an action is possible before performing it? It can be useful if you want to visualize only the actions that can be executed (for example if you don't have enough supplies to buy a card, then the card is grey and not clickable)
  */
-public class Dashboard implements HasStatus, WinPointsCountable{
+public class Dashboard implements HasStatus{
 
+    private final String name;
     private final Marketplace marketplace;
     private final DevelopmentGrid developmentGrid;
-    private final Warehouse warehouse;
-    private final SupplyContainer coffer = new SupplyContainer() {@Override
-                                                            public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
-                                                                //check if the resource comes from an acceptable source
-                                                                if(from.getType() == DepotID.DepotType.WAREHOUSE || from.getType() == DepotID.DepotType.LEADER || from.getType() == DepotID.DepotType.DEVELOPMENT || from == DepotID.PAYCHECK_DEPOT){
-                                                                    throw new SupplyException();
-                                                                }
-                                                                addSupply(wot);
-                                                            }};
-
+    private final Warehouse warehouse = new Warehouse();
+    private final SupplyContainer coffer = new SupplyContainer(onlyFrom(DepotID.SourceType.STRONGBOX).and(specificType(WarehouseObjectType.FAITH_MARKER).negate()));
     private final MutableProduction baseProduction = new MutableProduction(2, 1);
     private final FaithTrack faithTrack = new FaithTrack();
     private final LeadersSpace leadersSpace = new LeadersSpace();
     private final Developments developments = new Developments();
+    private final LeadersList leadersList = new LeadersList();
+    private final LeadersPick leadersPick = new LeadersPick();
     private MarbleContainer unassignedSupplies;
     private final Paycheck paycheck = new Paycheck();
-    private final boolean inkwell;
-    private final ArrayList<AcceptsSupplies> containers = new ArrayList<>();
+    private boolean inkwell;
+    private final ProductionManager productionManager = new ProductionManager(developments, baseProduction, leadersSpace);
+    private final DepotsManager depotsManager = new DepotsManager(warehouse, leadersSpace);
+    private final ActionTilesStack actionTilesStack = new ActionTilesStack();
+    private int blackCrossPosition = 0;
+    private ArrayList<ModelObserver> observers = new ArrayList<ModelObserver>();
+
+    private final HashMap<DepotID.DepotType, AcceptsSupplies> containers = new HashMap<>();
 
 
     /**
@@ -40,31 +45,35 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @param inkwell is the player the first one to play?
      * @param marketplace match marketplace, to collect the supplies from
      * @param developmentGrid match development grid, to buy the development cards from
+     * @param name player nickname
      */
-    public Dashboard(boolean inkwell, Marketplace marketplace, DevelopmentGrid developmentGrid){
+    public Dashboard(boolean inkwell, Marketplace marketplace, DevelopmentGrid developmentGrid, String name){
         this.inkwell = inkwell;
         this.marketplace = marketplace;
         this.developmentGrid = developmentGrid;
 
-        warehouse = new Warehouse(leadersSpace);
+        this.name = name;
 
-        containers.add(warehouse);
-        containers.add(developments);
-        containers.add(coffer);
-        containers.add(paycheck);
-        containers.add(baseProduction);
+        containers.put(DepotID.DepotType.WAREHOUSE, depotsManager);
+        containers.put(DepotID.DepotType.LEADER_DEPOT, depotsManager);
+        containers.put(DepotID.DepotType.DEVELOPMENT, productionManager);
+        containers.put(DepotID.DepotType.LEADER_PRODUCTION, productionManager);
+        containers.put(DepotID.DepotType.COFFER, coffer);
+        containers.put(DepotID.DepotType.PAYCHECK, paycheck);
+        containers.put(DepotID.DepotType.BASE_PRODUCTION, productionManager);
     }
 
 
 
     /**
-     * Swaps 2 rows of the Warehouse. Row 1 is the bottom one. If it is not possible a SupplyException is thrown.
+     * Swaps 2 rows of the Warehouse. If it is not possible a SupplyException is thrown.
      * @param r1 row 1
      * @param r2 row 2
      * @throws SupplyException Cannot swap the 2 rows
      */
     public void swapWarehouseRows(int r1, int r2) throws SupplyException {
         warehouse.swapRows(r1, r2);
+        notifyViews();
     }
 
 
@@ -75,23 +84,62 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      */
     public void buySupplies(MarketDirection dir, int index) {
         unassignedSupplies = marketplace.obtain(dir, index);
+        notifyViews();
     }
 
 
     /**
+     * Returns how many non-red marbles are there in the unassigned supplies marble container.
+     * @return How many non-red marbles are there in the unassigned supplies marble container.
+     */
+    public int getUnassignedSuppliesQuantity(){
+        return unassignedSupplies.getQuantity(MarbleColor.WHITE, MarbleColor.VIOLET, MarbleColor.BLUE, MarbleColor.GREY, MarbleColor.YELLOW);
+    }
+
+
+
+    /**
      * Transforms a marble into the supply contained in the destination depot. If the transformation is not possible a MarbleException is thrown.
-     * @param to destination depot (a BoundedSupplyContainer)
+     * @param to destination depot
      * @param color the color of the marble
      * @throws SupplyException Destination is full
      * @throws MarbleException Destination cannot accept this color of marble
      * @throws NoSuchMethodException Leader hasn't a depot ability
      */
     public void assignMarble(DepotID to, MarbleColor color) throws SupplyException, MarbleException, NoSuchMethodException, LeaderException{
-        if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException();}
+        if(unassignedSupplies.getQuantity(color) == 0) {throw new SupplyException(color.toString() + " marbles are finished :(");}
 
-        warehouse.addMarble(to, color);
+        depotsManager.addMarble(to, color);
         unassignedSupplies.removeMarble(color);
+
+        notifyViews();
     }
+
+
+    /**
+     * Transforms one of the white marbles in the unassignedSupplies container to the specified color.
+     * @param newColor Color to transform the white marble to.
+     * @throws MarbleException No white marbles left or there isn't an active leader to perform the conversion.
+     */
+    public void transformWhiteMarble(MarbleColor newColor) throws MarbleException {
+        //check if there is a white marble to transform
+        if (unassignedSupplies.getQuantity(MarbleColor.WHITE) == 0){
+            throw new MarbleException("No white marbles left");
+        }
+
+        for (int i = 0; i<2; ++i) {
+            try {
+                if (leadersSpace.getLeaderAbility(i).colorWhiteMarble() == newColor) {
+                    unassignedSupplies.colorWhiteMarble(newColor);
+                    notifyViews();
+                    return;
+                }
+            } catch (NoSuchMethodException | LeaderException e){}
+        }
+
+        throw new MarbleException("Cannot transform the white marble to a " + newColor.toString() + " marble");
+    }
+
 
 
     /**
@@ -104,11 +152,12 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         int totalDiscarded = unassignedSupplies.getQuantity(MarbleColor.BLUE, MarbleColor.GREY, MarbleColor.VIOLET, MarbleColor.YELLOW);
 
         boolean vaticanReport = false;
-        for(int i = 0; i < unassignedSupplies.getQuantity(MarbleColor.RED); ++i){
-            vaticanReport |= goAhead();
-        }
+        vaticanReport = faithTrack.goAhead(unassignedSupplies.getQuantity(MarbleColor.RED));
 
         unassignedSupplies.clear();
+
+        notifyViews();
+
         return new Pair<>(totalDiscarded, vaticanReport);
     }
 
@@ -125,16 +174,36 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      */
     public void moveSupply(DepotID from, DepotID to, WarehouseObjectType type) throws SupplyException, NoSuchMethodException, LeaderException {
         //remove supply from specified container
-        containers.get(from.getType().getOrder()).removeSupply(from, type);
+        containers.get(from.getType()).removeSupply(from, type, to);
 
         //add supply to specified container, if you cannot, put supply back to original container and throw the exception
         try{
-            containers.get(to.getType().getOrder()).addSupply(to, type, from);
+            containers.get(to.getType()).addSupply(to, type, from);
         } catch (SupplyException | LeaderException | NoSuchMethodException e) {
-            containers.get(from.getType().getOrder()).addSupply(from, type, from);
+            containers.get(from.getType()).addSupply(from, type, from);
             throw e;
         }
+
+        notifyViews();
     }
+
+
+    /**
+     * Adds a resource to a warehouse slot. Used at the beginning of the match to add the starting resources.
+     * @param warehouseSlot Where to add the supply
+     * @param type Type of the supply to add
+     * @throws SupplyException Couldn't add the supply to the specified slot
+     */
+    public void trustedAddSupply(DepotID warehouseSlot, WarehouseObjectType type) throws SupplyException {
+        if(warehouseSlot != DepotID.WAREHOUSE1 && warehouseSlot != DepotID.WAREHOUSE2 && warehouseSlot != DepotID.WAREHOUSE3) {
+            throw new SupplyException("You can add only to warehouse slots");
+        }
+
+        depotsManager.addSupply(warehouseSlot, type, DepotID.WAREHOUSE1);
+
+        notifyViews();
+    }
+
 
 
     /**
@@ -148,33 +217,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @return Returns if a vatican report has been issued as a result of the production of faith markers
      */
     public boolean produce(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base){
-        //get productions outputs
-        SupplyContainer developmentProduction = developments.produce(s1, s2, s3);
-
-        SupplyContainer baseProduction = new SupplyContainer();
-        if(base) {
-            baseProduction = this.baseProduction.produce();
-        }
-
-        SupplyContainer leader1Production = new SupplyContainer();
-        if(l1) {
-            try {
-                leader1Production = leadersSpace.getLeaderAbility(0).produce();
-            } catch (NoSuchMethodException | LeaderException e) {
-            }
-        }
-
-            SupplyContainer leader2Production = new SupplyContainer();
-        if(l2) {
-            try {
-                leader2Production = leadersSpace.getLeaderAbility(1).produce();
-            } catch (NoSuchMethodException | LeaderException e) {
-            }
-        }
-
-        //sum output in temporary container
-        SupplyContainer tmp = new SupplyContainer();
-        tmp.sum(developmentProduction).sum(baseProduction).sum(leader1Production).sum(leader2Production);
+        SupplyContainer tmp = productionManager.produce(s1, s2, s3, l1, l2, base);
 
         //count faith markers
         int faithPoints = tmp.getQuantity(WarehouseObjectType.FAITH_MARKER);
@@ -190,7 +233,9 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         coffer.sum(tmp);
 
         //go ahead in faith track
-        return faithTrack.goAhead(faithPoints);
+        boolean res = faithTrack.goAhead(faithPoints);
+        notifyViews();
+        return res;
     }
 
 
@@ -205,20 +250,7 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @throws SupplyException Thrown if in at least one supply space there isn't the correct amount of resources
      */
     public void checkProduction(boolean s1, boolean s2, boolean s3, boolean l1, boolean l2, boolean base) throws SupplyException {
-        developments.checkProduction(s1, s2, s3);
-
-        if(base) {
-            baseProduction.check();
-        }
-
-        try {
-            leadersSpace.getLeaderAbility(0).checkProduction();
-        }
-        catch(NoSuchMethodException | LeaderException e){}
-        try {
-            leadersSpace.getLeaderAbility(1).checkProduction();
-        }
-    catch(NoSuchMethodException | LeaderException e){}
+        productionManager.checkProduction(s1, s2, s3, l1, l2, base);
     }
 
 
@@ -235,12 +267,56 @@ public class Dashboard implements HasStatus, WinPointsCountable{
         ArrayList<Integer> buyableLevels = developments.buyableLevels(); //get what levels you can buy
 
         //check if you can buy a card of that level in that space
-        if(buyableLevels.get(space-1) != developmentGrid.getLevel(column, row)){
-            throw new DevelopmentException();
+        if(buyableLevels.get(space) != developmentGrid.getLevel(column, row)){
+            throw new DevelopmentException("Cannot buy a card of this level for the specified space");
         }
 
         //buy the card
         developments.addCardToSpace(space, developmentGrid.buyCard(column, row, paycheck, leadersSpace));
+        paycheck.clearSupplies();
+
+        notifyViews();
+    }
+
+
+    /**
+     * Returns the levels of the development card the player can buy
+     * @return the levels of the development card the player can buy
+     */
+    public ArrayList<Integer> buyableDevelopmentLevels() {
+        return developments.buyableLevels();
+    }
+
+
+    /**
+     * Fills the leaders pick object with 4 random leaders
+     */
+    public void fillLeadersPicks(){
+        leadersPick.fill(leadersList);
+        notifyViews();
+    }
+
+
+    /**
+     * Pick the specified leader among the 4 leaders picks.
+     * @param index What leader to pick
+     * @throws LeaderException 2 Leaders added yet.
+     */
+    public void pickLeader(int index) throws LeaderException{
+        leadersPick.pick(index, leadersSpace);
+        notifyViews();
+    }
+
+
+
+    /**
+     * Adds the specified leader to the leader space
+     * @param leader The leader to add
+     * @throws LeaderException There is already the maximum number of leaders (2)
+     */
+    @Deprecated
+    public void addLeader(LeaderCard leader) throws LeaderException{
+        leadersSpace.addLeader(leader);
     }
 
 
@@ -252,7 +328,9 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      */
     public boolean discardLeader(int i) throws LeaderException {
         leadersSpace.discardLeader(i);
-        return faithTrack.goAhead(1);
+        boolean res = faithTrack.goAhead(1);
+        notifyViews();
+        return res;
     }
 
 
@@ -263,7 +341,13 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @throws LeaderException The specified leader cannot be played (already discarded or active)
      */
     public void playLeader(int i) throws SupplyException, LeaderException {
-        leadersSpace.playLeader(i, new ResourceChecker(warehouse, coffer, leadersSpace));
+        //put all the cards to their place
+        clearProductions();
+        clearPaycheck();
+
+        leadersSpace.playLeader(i, new ResourceChecker(depotsManager, coffer, developments));
+
+        notifyViews();
     }
 
 
@@ -272,7 +356,20 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      * @return Returns if a vatican report has been issued
      */
     public boolean goAhead(){
-        return faithTrack.goAhead(1);
+        boolean res = faithTrack.goAhead(1);
+        notifyViews();
+        return res;
+    }
+
+
+    /**
+     * Moves the player one tile ahead in the faith track.
+     * @return true a vatican report needs to be issued
+     */
+    public boolean goAheadDontTrigger(){
+        boolean res = faithTrack.goAheadDontTrigger();
+        notifyViews();
+        return res;
     }
 
 
@@ -281,6 +378,85 @@ public class Dashboard implements HasStatus, WinPointsCountable{
      */
     public void vaticanReport(){
         faithTrack.vaticanReport();
+        notifyViews();
+    }
+
+
+    /**
+     * Swaps one of the mutable inputs/outputs of the base production.
+     * @param i 0 = first input, 1 = second input, 2 = output
+     * @param wot new supply to insert
+     * @throws SupplyException A faith marker or no type supply type was added
+     */
+    public void swapBaseProduction(int i, WarehouseObjectType wot) throws SupplyException{
+        if(wot == WarehouseObjectType.FAITH_MARKER){
+            throw new SupplyException("Cannot add FAITH_MARKER base production input or output");
+        }
+
+        productionManager.swapBaseProduction(i, wot);
+        notifyViews();
+    }
+
+
+    /**
+     * Swaps the only mutable output in the specified leader
+     * @param i number of leader
+     * @param wot new supply to insert
+     * @throws SupplyException A no type supply type was added
+     * @throws NoSuchMethodException Specified leader is not a Producer
+     * @throws LeaderException Specified leader is not active or is discarded
+     */
+    public void swapLeaderProduction(int i, WarehouseObjectType wot) throws SupplyException, NoSuchMethodException, LeaderException{
+        productionManager.swapLeaderProduction(i, wot);
+        notifyViews();
+    }
+
+
+    /**
+     * Clears the specified depot, and reinsert the cleared supplies to their source.
+     * @param id depot to clear
+     * @throws NoSuchMethodException tried to clear a non Depot or Producer leader
+     */
+    public void clearDepot(DepotID id) throws NoSuchMethodException{
+        Pair<SupplyContainer, SupplyContainer> destination;
+        destination = containers.get(id.getType()).clearSupplies(id);
+
+        coffer.sum(destination.second);
+        depotsManager.allocate(destination.first);
+
+        notifyViews();
+    }
+
+
+    /**
+     * Clears all of the production depots, and reinsert the cleared supplies to their source.
+     */
+    public void clearProductions(){
+        Pair<SupplyContainer, SupplyContainer> destination;
+        destination = productionManager.clearSupplies();
+
+        if(destination.second.getQuantity() != 0){
+            coffer.sum(destination.second);
+        }
+        if(destination.first.getQuantity() != 0) {
+            depotsManager.allocate(destination.first);
+        }
+
+        notifyViews();
+    }
+
+
+    /**
+     * Clears the paycheck, and reinsert the cleared supplies to their source.
+     */
+    public void clearPaycheck(){
+        Pair<SupplyContainer, SupplyContainer> destination;
+        destination = paycheck.clearSupplies();
+
+        coffer.sum(destination.second);
+        depotsManager.allocate(destination.first);
+
+        notifyViews();
     }
 
 
@@ -293,29 +469,281 @@ public class Dashboard implements HasStatus, WinPointsCountable{
     }
 
 
+    /**
+     * Assigns the inkwell to the player
+     */
+    public void giveInkwell(){
+        inkwell = true;
+    }
+
 
     /**
-     * The status of the dashboard.
-     * @return the current status of the dashboard, expressed in a concise way.
+     * Checks if the match ended, so if the player got to the last tile in the faith track or id he bought at least 7 development cards.
+     * @return If the player triggered an end match condition.
+     */
+    public boolean isMatchEnded(){
+        return developmentGrid.getBoughtCards() >= 7 || faithTrack.getPosition() >= 24;
+    }
+
+
+    /**
+     * Returns the depots that can receive the specified supply.
+     * @param from Source of the supply
+     * @param type Type of the supply
+     * @return The depots that can receive the specified supply
+     */
+    public ArrayList<DepotID> getAllowedDepots(DepotID from, WarehouseObjectType type) {
+        ArrayList<DepotID> res = new ArrayList<>();
+
+        res.addAll(depotsManager.getAllowedDepots(from, type));
+
+        res.addAll(productionManager.getAllowedDepots(from, type));
+
+        if (paycheck.additionAllowed(type, from)){
+            res.add(DepotID.PAYCHECK);
+        }
+
+        if (coffer.additionAllowed(type, from)){
+            res.add(DepotID.COFFER);
+        }
+
+        return res;
+    }
+
+
+    //SINGLE PLAYER METHOD
+    /**
+     * Extracts one tile from the stack, and performs the associated action.
+     * @return True if the match is ended, so if the black cross finished the faith track or if all the cards of one color are gone.
+     */
+    public boolean extractActionTile(){
+        ActionTilesStack.ActionTile at = actionTilesStack.extractTile();
+        switch (at){
+            case YELLOW:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.YELLOW);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.YELLOW);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case GREEN:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.GREEN);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.GREEN);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case BLUE:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.BLUE);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.BLUE);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case VIOLET:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.VIOLET);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.VIOLET);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case PLUS_2:
+                for(int i=0; i<2; ++i) {
+                    blackCrossPosition++;
+                    if (blackCrossPosition == 8 || blackCrossPosition == 16 || blackCrossPosition == 24) {
+                        vaticanReport();
+                    }
+                }
+                break;
+            case PLUS_1_SHUFFLE:
+                blackCrossPosition++;
+                if (blackCrossPosition == 8 || blackCrossPosition == 16 || blackCrossPosition == 24) {
+                    vaticanReport();
+                }
+                actionTilesStack.reinsertAll();
+                break;
+        }
+
+        notifyViews();
+
+        return blackCrossPosition >= 24;
+    }
+
+
+    /**
+     * Extract one tile from the stack given an index, and performs the associated action.
+     * @param index the index of the tile to extract
+     * @return True if the match is ended, so if the black cross finished the faith track or if all the cards of one color are gone.
+     */
+    public boolean extractActionTileWithIndex(int index){
+        ActionTilesStack.ActionTile at = actionTilesStack.extractTile(index);
+        switch (at){
+            case YELLOW:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.YELLOW);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.YELLOW);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case GREEN:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.GREEN);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.GREEN);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case BLUE:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.BLUE);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.BLUE);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case VIOLET:
+                try {
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.VIOLET);
+                    developmentGrid.removeCard(ActionTilesStack.ActionTile.VIOLET);
+                } catch (NoSuchCardException nsce){
+                    return true;
+                }
+                break;
+            case PLUS_2:
+                for(int i=0; i<2; ++i) {
+                    blackCrossPosition++;
+                    if (blackCrossPosition == 8 || blackCrossPosition == 16 || blackCrossPosition == 24) {
+                        vaticanReport();
+                    }
+                }
+                break;
+            case PLUS_1_SHUFFLE:
+                blackCrossPosition++;
+                if (blackCrossPosition == 8 || blackCrossPosition == 16 || blackCrossPosition == 24) {
+                    vaticanReport();
+                }
+                actionTilesStack.reinsertAll();
+                break;
+        }
+
+        notifyViews();
+
+        return blackCrossPosition >= 24;
+    }
+
+
+
+    /**
+     * The status is made this way:
+     *
+     * coffer (SupplyContainer style)
+     * wh1 (SupplyContainer style)
+     * wh2 (SupplyContainer style)
+     * wh3 (SupplyContainer style)
+     * devSpace1card1 (ID)
+     * devSpace1card2 (ID)
+     * devSpace1card3 (ID)
+     * devSpace1in (SupplyContainer style)
+     * devSpace1out (SupplyContainer style)
+     * devSpace1curr (SupplyContainer style)
+     * devSpace2card1 (ID)
+     * devSpace2card2 (ID)
+     * devSpace2card3 (ID)
+     * devSpace2in (SupplyContainer style)
+     * devSpace2out (SupplyContainer style)
+     * devSpace2curr (SupplyContainer style)
+     * devSpace3card3 (ID)
+     * devSpace3card2 (ID)
+     * devSpace3card1 (ID)
+     * devSpace3in (SupplyContainer style)
+     * devSpace3out (SupplyContainer style)
+     * devSpace3curr (SupplyContainer style)
+     * paycheckFromStrongbox (SupplyContainer style)
+     * paycheckFromDepots (SupplyContainer style)
+     * baseProdInFixed (always 00000)
+     * baseProdInMutable1 (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * baseProdInMutable2 (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * baseProdOutFixed (always 00000)
+     * baseProdOutMutable1 (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * baseProdOutMutable2 (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * baseProdCurr (SupplyContainer style)
+     * faithTrackPos
+     * popeTile1 (0 = inactive, 1 = active, 2 = discarded)
+     * popeTile2 (0 = inactive, 1 = active, 2 = discarded)
+     * popeTile3 (0 = inactive, 1 = active, 2 = discarded)
+     * leader1id (ID)
+     * leader1state (0 = inactive, 1 = active, 2 = discarded)
+     * leader1inFixed (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * leader1outFixed (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * leader1outMutable (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * leader1curr (SupplyContainer style)
+     * leader1depot (SupplyContainer style)
+     * leader2id (ID)
+     * leader2state (0 = inactive, 1 = active, 2 = discarded)
+     * leader2inFixed (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * leader2outFixed (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * leader2outMutable (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
+     * leader2curr (SupplyContainer style)
+     * leader2depot (SupplyContainer style)
+     *
+     * SupplyContainer style means that there are 5 integers which represents, in this specific order, the number of: COIN, SERVANT, SHIELD, STONE, FAITH_MARKER
      */
     @Override
     public ArrayList<Integer> getStatus(){
-        return null; //TODO
+        ArrayList<Integer> status = new ArrayList<>();
+
+        status.addAll(coffer.getStatus());
+        status.addAll(warehouse.getStatus());
+        status.addAll(developments.getStatus());
+        status.addAll(paycheck.getStatus());
+        status.addAll(baseProduction.getStatus());
+        status.addAll(faithTrack.getStatus());
+        status.addAll(leadersSpace.getStatus());
+
+        return status;
     }
 
-
-    @Override
-    public int getWinPoints() {
-        int supplies = warehouse.getResourceCount(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE) + coffer.getQuantity(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE);
-        return developments.getWinPoints() + leadersSpace.getWinPoints() + faithTrack.getWinPoints() + supplies/5;
-    }
 
     /**
-     * Attach an observer.
-     * @param mo Observer to notify
+     * Registers an observer to send the updates to.
+     * @param observer observer
      */
-    public void observe(ModelObserver mo){
-        //TODO
+    public void attach(ModelObserver observer){
+        observers.add(observer);
+    }
+
+
+
+    /*Gets the status of the dashboard and send it to all of the observers.*/
+    private void notifyViews(){
+        //get the status of the dashboard
+        ArrayList<Integer> status = new ArrayList<>(getStatus());
+
+        //send the status to the observers
+        for (ModelObserver mo : observers) {
+            mo.update(name, status);
+        }
+    }
+
+
+    /**
+     * Returns win points and the number of resources of the player.
+     * @return win points and number of resources of the player
+     */
+    public Pair<Integer, Integer> getWinPoints() {
+        //place all "volatile" supplies to their depot
+        clearProductions();
+        clearPaycheck();
+
+        int supplies = depotsManager.getResourceCount(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE)
+                    + coffer.getQuantity(WarehouseObjectType.COIN, WarehouseObjectType.SERVANT, WarehouseObjectType.SHIELD, WarehouseObjectType.STONE);
+        int winPoints = developments.getWinPoints() + leadersSpace.getWinPoints() + faithTrack.getWinPoints() + supplies/5;
+        return new Pair<>(winPoints, supplies);
     }
 
 }
