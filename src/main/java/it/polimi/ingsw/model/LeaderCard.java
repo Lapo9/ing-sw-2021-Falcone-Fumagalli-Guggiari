@@ -84,7 +84,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
 
     /**
      * The activate method activates the LeaderCard.
-     * @throws LeaderException leader cannot be discarded, because it was already discarded or activated
+     * @throws LeaderException leader cannot be activated, because it was already discarded or activated
      */
     public void activate() throws LeaderException{
         if(!discarded && !active) {
@@ -200,7 +200,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
         scan.nextInt();   //points
         scan.nextInt();   //ability
         int count = 0;
-        while(scan.hasNextInt(0)){
+        while(scan.hasNext("0")){
             scan.nextInt();
             count++;
         }
@@ -270,12 +270,18 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
         switch(color){
             case(1):
                color1 = CardCategory.GREEN;
+               break;
             case(2):
                 color1 = CardCategory.BLUE;
+                break;
             case(3):
                 color1 = CardCategory.YELLOW;
-            default:
+                break;
+            case(4):
                 color1 = CardCategory.VIOLET;
+                break;
+            default:
+                color1 = null;
         }
         list.add(new CardsRequirement(num1, lvl1, color1));
         int num2 = scan.nextInt();
@@ -285,12 +291,18 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
         switch(colors){
             case(1):
                 color2 = CardCategory.GREEN;
+                break;
             case(2):
                 color2 = CardCategory.BLUE;
+                break;
             case(3):
                 color2 = CardCategory.YELLOW;
-            default:
+                break;
+            case(4):
                 color2 = CardCategory.VIOLET;
+                break;
+            default:
+                color2 = null;
         }
         list.add(new CardsRequirement(num2, lvl2, color2));
         return list;

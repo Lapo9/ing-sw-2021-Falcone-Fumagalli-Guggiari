@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.exceptions.LeaderException;
 import it.polimi.ingsw.exceptions.SupplyException;
 import it.polimi.ingsw.model.leader_abilities.Discount;
@@ -11,6 +12,118 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class LeaderCardTest {
+
+    @Test
+    public void leaderCard_classConstructorDiscountAbility() {
+        LeaderCard lc = new LeaderCard(13);
+        try {
+            lc.activate();
+        } catch (LeaderException e) {fail();}
+        LeaderAbility ability = null;
+        try {
+            ability = lc.getAbility();
+        } catch (LeaderException e) {fail();}
+        SupplyContainer sc = null;
+        try {
+            sc = ability.getDiscount();
+        } catch (NoSuchMethodException e) {fail();}
+        Pair<SupplyContainer, ArrayList<CardsRequirement>> list = lc.getCost();
+        int[] expectedResult = {2,                //winPoints
+                                0, 0, 1, 0, 0,    //depot of the ability
+                                0, 0, 0, 0, 0,    //supply requirement
+                                1, 1, 3,          //card requirement 1
+                                1, 1, 1};         //card requirement 2
+        int[] actualResult = {lc.getWinPoints(),
+                              sc.getQuantity(WarehouseObjectType.COIN), sc.getQuantity(WarehouseObjectType.STONE), sc.getQuantity(WarehouseObjectType.SERVANT), sc.getQuantity(WarehouseObjectType.SHIELD), sc.getQuantity(WarehouseObjectType.FAITH_MARKER),
+                              list.first.getQuantity(WarehouseObjectType.COIN), list.first.getQuantity(WarehouseObjectType.STONE), list.first.getQuantity(WarehouseObjectType.SERVANT), list.first.getQuantity(WarehouseObjectType.SHIELD), list.first.getQuantity(WarehouseObjectType.FAITH_MARKER),
+                              list.second.get(0).minLevel(), list.second.get(0).getNumber(), list.second.get(0).reqCard() == CardCategory.GREEN ? 1 : list.second.get(0).reqCard() == CardCategory.BLUE ? 2 : list.second.get(0).reqCard() == CardCategory.YELLOW ? 3 :4,
+                              list.second.get(1).minLevel(), list.second.get(1).getNumber(), list.second.get(1).reqCard() == CardCategory.GREEN ? 1 : list.second.get(1).reqCard() == CardCategory.BLUE ? 2 : list.second.get(1).reqCard() == CardCategory.YELLOW ? 3 :4};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void leaderCard_classConstructorMarketAbility() {
+        LeaderCard lc = new LeaderCard(1);
+        try {
+            lc.activate();
+        } catch (LeaderException e) {fail();}
+        LeaderAbility ability = null;
+        try {
+            ability = lc.getAbility();
+        } catch (LeaderException e) {fail();}
+        WarehouseObjectType wot = null;
+        try {
+            wot = ability.transformWhiteMarble();
+        } catch (NoSuchMethodException e) {fail();}
+        Pair<SupplyContainer, ArrayList<CardsRequirement>> list = lc.getCost();
+        int[] expectedResult = {5,                //winPoints
+                                3,                //depot of the ability
+                                0, 0, 0, 0, 0,    //supply requirement
+                                1, 2, 3,          //card requirement 1
+                                1, 1, 2};         //card requirement 2
+        int[] actualResult = {lc.getWinPoints(),
+                              wot == WarehouseObjectType.COIN ? 0 : wot == WarehouseObjectType.STONE ? 2 : wot == WarehouseObjectType.SERVANT ? 3 : wot ==WarehouseObjectType.SHIELD ? 4 : 5,
+                              list.first.getQuantity(WarehouseObjectType.COIN), list.first.getQuantity(WarehouseObjectType.STONE), list.first.getQuantity(WarehouseObjectType.SERVANT), list.first.getQuantity(WarehouseObjectType.SHIELD), list.first.getQuantity(WarehouseObjectType.FAITH_MARKER),
+                              list.second.get(0).minLevel(), list.second.get(0).getNumber(), list.second.get(0).reqCard() == CardCategory.GREEN ? 1 : list.second.get(0).reqCard() == CardCategory.BLUE ? 2 : list.second.get(0).reqCard() == CardCategory.YELLOW ? 3 :4,
+                              list.second.get(1).minLevel(), list.second.get(1).getNumber(), list.second.get(1).reqCard() == CardCategory.GREEN ? 1 : list.second.get(1).reqCard() == CardCategory.BLUE ? 2 : list.second.get(1).reqCard() == CardCategory.YELLOW ? 3 :4};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void leaderCard_classConstructorDepotAbility() {
+        LeaderCard lc = new LeaderCard(8);
+        try {
+            lc.activate();
+        } catch (LeaderException e) {fail();}
+        LeaderAbility ability = null;
+        try {
+            ability = lc.getAbility();
+        } catch (LeaderException e) {fail();}
+        try {
+            ability.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
+        } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
+        Pair<WarehouseObjectType, Integer> pair = null;
+        try {
+            pair = ability.getDepotInfo();
+        } catch (NoSuchMethodException e) {fail();}
+        Pair<SupplyContainer, ArrayList<CardsRequirement>> list = lc.getCost();
+        int[] expectedResult = {3,                //winPoints
+                                0, 1,             //depot of the ability
+                                0, 0, 0, 5, 0,    //supply requirement
+                                0, 0, 5,          //card requirement 1
+                                0, 0, 5};         //card requirement 2
+        int[] actualResult = {lc.getWinPoints(),
+                              pair.first == WarehouseObjectType.COIN ? 0 : pair.first == WarehouseObjectType.STONE ? 2 : pair.first == WarehouseObjectType.SERVANT ? 3 : pair.first ==WarehouseObjectType.SHIELD ? 4 : 5, pair.second,
+                              list.first.getQuantity(WarehouseObjectType.COIN), list.first.getQuantity(WarehouseObjectType.STONE), list.first.getQuantity(WarehouseObjectType.SERVANT), list.first.getQuantity(WarehouseObjectType.SHIELD), list.first.getQuantity(WarehouseObjectType.FAITH_MARKER),
+                              list.second.get(0).minLevel(), list.second.get(0).getNumber(), list.second.get(0).reqCard() == CardCategory.GREEN ? 1 : list.second.get(0).reqCard() == CardCategory.BLUE ? 2 : list.second.get(0).reqCard() == CardCategory.YELLOW ? 3 : list.second.get(0).reqCard() == CardCategory.VIOLET ? 4 : 5,
+                              list.second.get(1).minLevel(), list.second.get(1).getNumber(), list.second.get(1).reqCard() == CardCategory.GREEN ? 1 : list.second.get(1).reqCard() == CardCategory.BLUE ? 2 : list.second.get(1).reqCard() == CardCategory.YELLOW ? 3 : list.second.get(1).reqCard() == CardCategory.VIOLET ? 4 : 5};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void leaderCard_classConstructorProducerAbility() {
+        LeaderCard lc = new LeaderCard(10);
+        try {
+            lc.activate();
+        } catch (LeaderException e) {fail();}
+        LeaderAbility ability = null;
+        try {
+            ability = lc.getAbility();
+        } catch (LeaderException e) {fail();}
+        ArrayList<Integer> status = lc.getStatus();
+        Pair<SupplyContainer, ArrayList<CardsRequirement>> list = lc.getCost();
+        int[] expectedResult = {4,                //winPoints
+                                1,                //depot of the ability
+                                0, 0, 0, 0, 0,    //supply requirement
+                                2, 1, 2,          //card requirement 1
+                                0, 0, 5};         //card requirement 2
+        int[] actualResult = {lc.getWinPoints(),
+                              status.get(2),
+                              list.first.getQuantity(WarehouseObjectType.COIN), list.first.getQuantity(WarehouseObjectType.STONE), list.first.getQuantity(WarehouseObjectType.SERVANT), list.first.getQuantity(WarehouseObjectType.SHIELD), list.first.getQuantity(WarehouseObjectType.FAITH_MARKER),
+                              list.second.get(0).minLevel(), list.second.get(0).getNumber(), list.second.get(0).reqCard() == CardCategory.GREEN ? 1 : list.second.get(0).reqCard() == CardCategory.BLUE ? 2 : list.second.get(0).reqCard() == CardCategory.YELLOW ? 3 : list.second.get(0).reqCard() == CardCategory.VIOLET ? 4 : 5,
+                              list.second.get(1).minLevel(), list.second.get(1).getNumber(), list.second.get(1).reqCard() == CardCategory.GREEN ? 1 : list.second.get(1).reqCard() == CardCategory.BLUE ? 2 : list.second.get(1).reqCard() == CardCategory.YELLOW ? 3 : list.second.get(1).reqCard() == CardCategory.VIOLET ? 4 : 5};
+        assertArrayEquals(expectedResult, actualResult);
+    }
 
     @Test
     public void activate_no_exc() {
