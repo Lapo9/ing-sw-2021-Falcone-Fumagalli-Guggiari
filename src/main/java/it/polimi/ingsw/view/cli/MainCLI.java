@@ -1,9 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.view.cli.viewables.DevelopmentCard;
-import it.polimi.ingsw.view.cli.viewables.SupplyContainer;
-import it.polimi.ingsw.view.cli.viewables.TestViewable;
-import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
+import it.polimi.ingsw.view.cli.viewables.*;
 
 import static it.polimi.ingsw.view.cli.ViewableId.TEST;
 
@@ -28,7 +25,7 @@ public class MainCLI {
 
 
         View welcome = new View();
-        SupplyContainer welcomeText = factory.buildSupplyContainer(1, ViewableId.WELCOME_TEXT, "WELCOME");
+        Warehouse welcomeText = factory.buildWarehouse(1, ViewableId.WELCOME_TEXT);
         welcome.addViewable(welcomeText);
 
         View dashboard = new View();

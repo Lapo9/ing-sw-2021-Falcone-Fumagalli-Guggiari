@@ -15,13 +15,13 @@ public class Warehouse implements Viewable {
 
     Warehouse () {
         ArrayList<WarehouseObjectType> top = new ArrayList<>();
-        top.add(WarehouseObjectType.COIN);
+        top.add(WarehouseObjectType.NO_TYPE);
         ArrayList<WarehouseObjectType> mid = new ArrayList<>();
-        mid.add(WarehouseObjectType.SERVANT);
-        mid.add(WarehouseObjectType.SHIELD);
+        mid.add(WarehouseObjectType.NO_TYPE);
+        mid.add(WarehouseObjectType.NO_TYPE);
         ArrayList<WarehouseObjectType> bot = new ArrayList<>();
-        bot.add(WarehouseObjectType.STONE);
-        bot.add(WarehouseObjectType.FAITH_MARKER);
+        bot.add(WarehouseObjectType.NO_TYPE);
+        bot.add(WarehouseObjectType.NO_TYPE);
         bot.add(WarehouseObjectType.NO_TYPE);
 
         level.put(0, top);
@@ -31,15 +31,25 @@ public class Warehouse implements Viewable {
 
     @Override
     public void update(int[] update) {
+        //the array received is composed by 15 numbers representing if the level of the warehouse contains
+        //COIN, SERVANT, SHIELD, STONE or FAITH_MARKER (and how many?)
         ArrayList<WarehouseObjectType> top = new ArrayList<>();
-        top.add(intToResource(update[0]));
+        for (int i=0; i<5; i++)
+            if (update[i] > 0)
+                top.add(intToResource(i));
         ArrayList<WarehouseObjectType> mid = new ArrayList<>();
-        mid.add(intToResource(update[1]));
-        mid.add(intToResource(update[2]));
+        for (int i=5; i<10; i++)
+            if (update[i] > 0){
+                mid.add(intToResource((i%5)));
+                mid.add(intToResource((i%5)));
+            }
         ArrayList<WarehouseObjectType> bot = new ArrayList<>();
-        bot.add(intToResource(update[3]));
-        bot.add(intToResource(update[4]));
-        bot.add(intToResource(update[5]));
+        for (int i=10; i<15; i++)
+            if (update[i] > 0){
+                bot.add(intToResource((i%5)));
+                bot.add(intToResource((i%5)));
+                bot.add(intToResource((i%5)));
+            }
 
         level.put(0, top);
         level.put(1, mid);
