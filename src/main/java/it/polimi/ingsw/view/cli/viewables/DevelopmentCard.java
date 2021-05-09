@@ -6,6 +6,7 @@ import it.polimi.ingsw.view.cli.Viewable;
 
 import java.util.HashMap;
 
+import static it.polimi.ingsw.model.DevelopmentCard.*;
 import static it.polimi.ingsw.model.WarehouseObjectType.*;
 import static it.polimi.ingsw.model.WarehouseObjectType.STONE;
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
@@ -42,11 +43,11 @@ public class DevelopmentCard implements Viewable {
         //production
         input.put(WarehouseObjectType.COIN, 0);
         input.put(WarehouseObjectType.SERVANT, 0);
-        input.put(WarehouseObjectType.SHIELD, 1);
-        input.put(WarehouseObjectType.STONE, 1);
+        input.put(WarehouseObjectType.SHIELD, 0);
+        input.put(WarehouseObjectType.STONE, 0);
         input.put(WarehouseObjectType.FAITH_MARKER, 0);
-        output.put(WarehouseObjectType.COIN, 1);
-        output.put(WarehouseObjectType.SERVANT, 1);
+        output.put(WarehouseObjectType.COIN, 0);
+        output.put(WarehouseObjectType.SERVANT, 0);
         output.put(WarehouseObjectType.SHIELD, 0);
         output.put(WarehouseObjectType.STONE, 0);
         output.put(WarehouseObjectType.FAITH_MARKER, 0);
@@ -67,41 +68,38 @@ public class DevelopmentCard implements Viewable {
 
     @Override
     public void update(int[] update) {
-        //getting cost, category, level and win points from the id
+        //the card will receive its id (to update cost, category, level and wp) and its three supplyContainer to update its production
 
-        //update cost
-        cost.put(WarehouseObjectType.COIN, update[0]);
-        cost.put(WarehouseObjectType.SERVANT, update[1]);
-        cost.put(WarehouseObjectType.SHIELD, update[2]);
-        cost.put(WarehouseObjectType.STONE, update[3]);
+        //getting cost, category, level and win points from the id
+        id = update[0];
+
+        cost.put(WarehouseObjectType.COIN, getCost(id).getQuantity(COIN));
+        cost.put(WarehouseObjectType.SERVANT, getCost(id).getQuantity(SERVANT));
+        cost.put(WarehouseObjectType.SHIELD, getCost(id).getQuantity(SHIELD));
+        cost.put(WarehouseObjectType.STONE, getCost(id).getQuantity(STONE));
+        cat = getCategory(id);
+        lv = getLevel(id);
+        wp = getWinPoints(id);
 
         //update production
+        input.put(WarehouseObjectType.COIN, update[1]);
+        input.put(WarehouseObjectType.SERVANT, update[2]);
+        input.put(WarehouseObjectType.SHIELD, update[3]);
+        input.put(WarehouseObjectType.STONE, update[4]);
+        input.put(WarehouseObjectType.FAITH_MARKER, update[5]);
 
-        //update category
-        this.cat = intToCardCategory(update[13]);
-        //update level
+        output.put(WarehouseObjectType.COIN, update[6]);
+        output.put(WarehouseObjectType.SERVANT, update[7]);
+        output.put(WarehouseObjectType.SHIELD, update[8]);
+        output.put(WarehouseObjectType.STONE, update[9]);
+        output.put(WarehouseObjectType.FAITH_MARKER, update[10]);
 
-        //update win points
-
-
+        currentSupply.put(WarehouseObjectType.COIN, update[11]);
+        currentSupply.put(WarehouseObjectType.SERVANT, update[12]);
+        currentSupply.put(WarehouseObjectType.SHIELD, update[13]);
+        currentSupply.put(WarehouseObjectType.STONE, update[14]);
+        currentSupply.put(WarehouseObjectType.FAITH_MARKER, update[15]);
     }
-
-    private CardCategory intToCardCategory(int i) {
-        if (i==0) {
-            return CardCategory.YELLOW;
-        }
-        else if (i==1) {
-            return CardCategory.GREEN;
-        }
-        else if (i==2){
-            return CardCategory.VIOLET;
-        }
-        else if (i==3){
-            return CardCategory.BLUE;
-        }
-        else return null;
-    }
-
 
     private String categoryToColor() {
         if (this.cat == CardCategory.YELLOW) {
@@ -189,6 +187,5 @@ public class DevelopmentCard implements Viewable {
         }
         else return "";
     }
-
 
 }
