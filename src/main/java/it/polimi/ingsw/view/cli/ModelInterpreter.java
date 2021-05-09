@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.model.LeaderCard;
+import it.polimi.ingsw.model.leader_abilities.Producer;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
 
 import java.util.Arrays;
@@ -60,9 +61,8 @@ public class ModelInterpreter {
         */
 
         //check if the leaders are activated and are producers. This is needed for the offline info about active productions
-        //FIXME adding the missing functions to the LeaderCard class
-        //offlineInfo.setLeaderProducer(1, LeaderCard.getAbility(status[106]) == LeaderCard.LeaderAbility.PRODUCER && status[107] == 1);
-        //offlineInfo.setLeaderProducer(2, LeaderCard.getAbility(status[121]) == LeaderCard.LeaderAbility.PRODUCER && status[102] == 1);
+        offlineInfo.setLeaderProducer(1, LeaderCard.getAbility(status[106]) instanceof Producer && status[107] == 1);
+        offlineInfo.setLeaderProducer(2, LeaderCard.getAbility(status[121]) instanceof Producer && status[102] == 1);
 
         items.update(player, ViewableId.TEST, status); //TODO test
         //if user has auto-refresh on, then update his screen
