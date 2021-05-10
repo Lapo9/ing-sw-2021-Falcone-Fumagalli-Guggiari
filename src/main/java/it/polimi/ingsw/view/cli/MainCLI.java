@@ -1,8 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.view.cli.viewables.DevelopmentCard;
 import it.polimi.ingsw.view.cli.viewables.SupplyContainer;
-import it.polimi.ingsw.view.cli.viewables.TestViewable;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
 
 import static it.polimi.ingsw.view.cli.ViewableId.TEST;
@@ -10,7 +8,7 @@ import static it.polimi.ingsw.view.cli.ViewableId.TEST;
 public class MainCLI {
 
     public static void main(String[] args) {
-        Screen screen = new Screen();
+        ScreenCLI screen = new ScreenCLI();
 
         ServerSocket serverSocket = new ServerSocket();
 

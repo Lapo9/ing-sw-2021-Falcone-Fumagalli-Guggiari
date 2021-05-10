@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.view.Screen;
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
 import it.polimi.ingsw.view.cli.fancy_console.FancyConsole;
 
@@ -8,9 +9,9 @@ import java.util.Scanner;
 
 
 /**
- * A Screen is responsible for showing to the user the right information, and for receiving from the user the commands.
+ * A ScreenCLI is responsible for showing to the user the right information, and for receiving from the user the commands.
  */
-public class Screen {
+public class ScreenCLI implements Screen {
 
     private HashMap<String, View> views = new HashMap<String, View>();
     private View activeView;
@@ -30,7 +31,7 @@ public class Screen {
     /**
      * Constructor
      */
-    public Screen() {}
+    public ScreenCLI() {}
 
 
     /**
@@ -73,7 +74,8 @@ public class Screen {
      * Sets the error to show on screen.
      * @param message Brief description of the error that occurred. For example "yjasfgdiu is not a recognized command".
      */
-    public void setErrorMessage(String message) {
+    @Override
+    public void setMessage(String message) {
         errorMessage = message + "\n\n";
     }
 
@@ -82,6 +84,7 @@ public class Screen {
      * Shows the specified view. Cannot be called before the screen is started.
      * @param view ID of the view to show
      */
+    @Override
     public void show(String view) throws ViewException {
         if(!started){
             throw new IllegalThreadStateException("Cannot show anything until the screen has been started");
@@ -102,6 +105,7 @@ public class Screen {
     /**
      * Refreshes the current view. Useful when there is an update from the model. Cannot be called before the screen is started.
      */
+    @Override
     public void refresh() {
         if(!started){
             throw new IllegalThreadStateException("Cannot show anything until the screen has been started");

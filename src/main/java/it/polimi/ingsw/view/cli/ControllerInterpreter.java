@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.cli;
 
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
+import it.polimi.ingsw.view.Screen;
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
 
 import java.util.Arrays;
@@ -68,7 +69,7 @@ public class ControllerInterpreter {
             errorMessage.append(" ");
         }
 
-        screen.setErrorMessage(RED(errorMessage.toString()));
+        screen.setMessage(RED(errorMessage.toString()));
         screen.refresh();
     }
 
@@ -79,7 +80,7 @@ public class ControllerInterpreter {
             errorMessage.append(" ");
         }
 
-        screen.setErrorMessage(GREEN(errorMessage.toString()));
+        screen.setMessage(GREEN(errorMessage.toString()));
         screen.refresh();
     }
 
@@ -91,7 +92,7 @@ public class ControllerInterpreter {
         }
 
         execute("show welcome");
-        screen.setErrorMessage(BACK_RED(errorMessage.toString()));
+        screen.setMessage(BACK_RED(errorMessage.toString()));
         screen.refresh();
     }
 
