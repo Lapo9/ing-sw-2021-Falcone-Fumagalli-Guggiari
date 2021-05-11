@@ -1,13 +1,15 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.view.cli.exceptions.ViewException;
 import it.polimi.ingsw.view.cli.viewables.SupplyContainer;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
+import it.polimi.ingsw.view.cli.viewables.Warehouse;
 
 import static it.polimi.ingsw.view.cli.ViewableId.TEST;
 
 public class MainCLI {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ViewException {
         ScreenCLI screen = new ScreenCLI();
 
         ServerSocket serverSocket = new ServerSocket();
@@ -41,6 +43,10 @@ public class MainCLI {
         SupplyContainer yourTurnText = factory.buildSupplyContainer(1, ViewableId.YOUR_TURN_TEXT, "YOUR TURN");
         yourTurn.addViewable(yourTurnText);
 
+        View warehouse = new View();
+        Warehouse warehouseViewable = factory.buildWarehouse(1, ViewableId.WAREHOUSE);
+        warehouse.addViewable(warehouseViewable);
+
 
 
         View player1 = new View();
@@ -65,10 +71,13 @@ public class MainCLI {
         screen.addView("player2", player2);
         screen.addView("player3", player3);
         screen.addView("player4", player4);
+        screen.addView("warehouse",warehouse);
+
 
         screen.start("welcome");
+        //screen.show("warehouse");
 
-
+        showWarehouseTest(warehouse, warehouseViewable);
 
         /*new Thread(() -> {
             try {
@@ -80,6 +89,24 @@ public class MainCLI {
                 modelInterpreter.update(up2);
             } catch (InterruptedException ie){}
         }).start();*/
+    }
+
+    private static void showWarehouseTest(View warehouse, Warehouse warehouseViewable) throws ViewException {
+        ScreenCLI screen = new ScreenCLI();
+        screen.addView("warehouse", warehouse);
+        screen.start("warehouse");
+
+        int [] updWarehouse = {1, 0, 0, 0, 0,
+                                0, 2, 0, 0, 0,
+                                0, 0, 3, 0, 0};
+        warehouseViewable.update(updWarehouse);
+        screen.show("warehouse");
+
+        int [] updWarehouse1 = {0, 0, 1, 0, 0,
+                                0, 0, 0, 0, 1,
+                                0, 2, 0, 0, 0};
+        warehouseViewable.update(updWarehouse1);
+        screen.show("warehouse");
     }
 
 }
