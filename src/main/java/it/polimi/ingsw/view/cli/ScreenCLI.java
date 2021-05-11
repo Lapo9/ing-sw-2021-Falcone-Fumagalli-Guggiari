@@ -116,4 +116,25 @@ public class ScreenCLI implements Screen {
     }
 
 
+    /**
+     * Shows the players and their status as a message.
+     * @param players Players' names and their status
+     */
+    @Override
+    public void setPlayers(String players) {
+        String[] namesAndStatus = players.split(" ");
+        StringBuilder toPrint = new StringBuilder();
+
+        for (int i = 0; i < namesAndStatus.length-1; i+=2){
+            toPrint.append(namesAndStatus[i].equals("curr") ? FancyConsole.FRAMED(" " + FancyConsole.GREEN(" " + namesAndStatus[i+1] + " "))
+                                                            : namesAndStatus[i].equals("on")
+                                                                ? FancyConsole.FRAMED(" " + namesAndStatus[i+1] + " ")
+                                                                : FancyConsole.FRAMED(FancyConsole.RED(" " + namesAndStatus[i+1] + " ")));
+        }
+
+        toPrint.append("\t\t" + FancyConsole.UNDERLINED(FancyConsole.CYAN(" " + namesAndStatus[namesAndStatus.length-1] + " ")));
+
+        setMessage(toPrint.toString());
+        refresh();
+    }
 }

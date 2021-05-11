@@ -140,6 +140,16 @@ public class ControllerInterpreter {
         offlineInfo.setAutoRefresh(tokens[1].equals("on"));
     }
 
+    private void setPlayers(String... tokens){
+        StringBuilder toSend = new StringBuilder();
+
+        for (int i = 1; i < tokens.length; ++i){
+            toSend.append(tokens[i] + " ");
+        }
+
+        screen.setPlayers(toSend.toString());
+    }
+
 
 
     //sets the standard commands the server can send to the view
@@ -156,6 +166,7 @@ public class ControllerInterpreter {
         knownCommands.put("activateProduction", this::activateProduction);
         knownCommands.put("deactivateProduction", this::deactivateProduction);
         knownCommands.put("autoRefresh", this::autoRefresh);
+        knownCommands.put("setPlayers", this::setPlayers);
     }
 
 }

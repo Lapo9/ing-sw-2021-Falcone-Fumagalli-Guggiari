@@ -11,4 +11,6 @@ public interface Screen {
 
     public void refresh();
 
+    public void setPlayers(String players);
+
 }

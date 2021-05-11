@@ -49,6 +49,11 @@ public class Match {
             //in this case there is a player with the same name who disconnected, so you can replace him
             Player replacingPlayer = players.stream().filter(player -> player.getName().equals(p.getName()) && !player.isConnected()).collect(Collectors.toList()).get(0);
             replacingPlayer.reconnect(p);
+
+            //tell each player a new player connected
+            for (Player plr : players){
+                info(plr, null);
+            }
         }
         else if(players.size() >= 4){
             throw new MatchException("The match is full already");
@@ -58,6 +63,11 @@ public class Match {
             players.add(p);
             p.attachDashboard(new Dashboard(false, marketplace, developmentGrid, p.getName()));
             modelObserver.attachTo(p); //attach the model observer to the dashboard of this player
+
+            //tell each player a new player connected
+            for (Player plr : players){
+                info(plr, null);
+            }
         }
     }
 
@@ -83,22 +93,22 @@ public class Match {
 
     //actions
     private void info(Player player, String... args) {
-        StringBuilder infoBox = new StringBuilder("message ");
+        StringBuilder infoBox = new StringBuilder("setPlayers");
 
         for (Player p : players){
-            //if the player is disconnected make him red
+            //if the player is disconnected make him red, if he is the current player make him green
             if(p == activePlayer){
-                infoBox.append(FancyConsole.reset() + FancyConsole.FRAMED(FancyConsole.GREEN(" " + p.getName() + " ")) + " ");
+                infoBox.append(" curr " + p.getName());
             }
             else if(p.isConnected()) {
-                infoBox.append(FancyConsole.reset() + FancyConsole.FRAMED(" " + p.getName() + " ") + " ");
+                infoBox.append(" on " + p.getName());
             }
             else {
-                infoBox.append(FancyConsole.reset() + FancyConsole.FRAMED(FancyConsole.RED(" " + p.getName() + " ")) + " ");
+                infoBox.append(" off " + p.getName());
             }
         }
 
-        infoBox.append("\t\t" + FancyConsole.UNDERLINED(FancyConsole.MAGENTA(phase.toString())));
+        infoBox.append(" " + phase.toString());
 
         player.sendController(infoBox.toString());
     }
@@ -412,6 +422,7 @@ public class Match {
         //if the player is alive, tell him it's his turn to play, if not perform auto action
         if(activePlayer.isConnected()) {
             activePlayer.sendController("yourTurn");
+            info(player, null);
         }
         else {
             update("dead", activePlayer);

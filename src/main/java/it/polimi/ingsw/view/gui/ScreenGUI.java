@@ -43,6 +43,10 @@ public class ScreenGUI extends Application implements Screen {
     }
 
 
+    @Override
+    public void setPlayers(String players) {
+        activeScene.second.setPlayers(players);
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -68,7 +72,7 @@ public class ScreenGUI extends Application implements Screen {
             try {
                 TimeUnit.SECONDS.sleep(5);
             } catch (Exception e){}
-            activeScene.second.setPlayers("Lapo online Marco offline");
+            activeScene.second.setPlayers("on Lapo off Marco");
         });
     }
 

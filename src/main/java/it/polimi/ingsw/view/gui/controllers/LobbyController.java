@@ -52,9 +52,9 @@ public class LobbyController extends SceneController {
 
         String[] playersAndStatus = players.split(" ");
 
-        for (int i = 0; i < playersAndStatus.length / 2; ++i){
-            this.players.get(i).first.setText(playersAndStatus[i*2]);
-            this.players.get(i).second.setImage(new Image(playersAndStatus[i*2+1].equals("online") ? "/pictures/online.png" : "/pictures/offline.png"));
+        for (int i = 0; i < playersAndStatus.length-1; i+=2){
+            this.players.get(i/2).first.setText(playersAndStatus[i+1]);
+            this.players.get(i/2).second.setImage(new Image(playersAndStatus[i].equals("on") ? "/pictures/online.png" : "/pictures/offline.png"));
         }
     }
 
