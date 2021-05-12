@@ -160,6 +160,8 @@ public class Player {
 
     //function to accept the player and add it to the specified match
     private void handshake(MatchManager matchManager){
+        setConnected(true);
+
         String message = "";
         try {
             //once the player asked to connect, he has 5 seconds to send its name and the match he wants to join
@@ -195,8 +197,7 @@ public class Player {
             destroy();
             return;
         }
-        setConnected(true);
-        System.out.print("\n" + name + " got accepted");
+        System.out.print("\n" + name + " got accepted in match " + tokens[2]);
 
         listenRoutineThread = new Thread(this::listenRoutine);
         heartbeatThread = new Thread(this::heartbeat);

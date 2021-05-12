@@ -61,7 +61,9 @@ public class LobbyController extends SceneController {
 
 
     @FXML
-    private void startClicked(){}
+    private void startClicked(){
+        userInterpreter.execute("start");
+    }
 
 
 

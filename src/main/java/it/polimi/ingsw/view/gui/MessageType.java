@@ -3,7 +3,7 @@ package it.polimi.ingsw.view.gui;
 import javafx.scene.paint.Color;
 
 public enum MessageType {
-    MESSAGE(Color.GREEN), ERROR(Color.YELLOW), FATAL(Color.RED);
+    MESSAGE(Color.GREEN), ERROR(Color.YELLOW), FATAL(Color.RED), NEUTRAL(Color.WHITE);
 
 
     private Color color;

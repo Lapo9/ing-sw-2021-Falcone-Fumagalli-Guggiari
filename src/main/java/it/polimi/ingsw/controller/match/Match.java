@@ -27,9 +27,8 @@ public class Match {
     private ModelObserver modelObserver = new ModelObserver();
 
 
-    Match(Player leader){
-        players.add(leader);
-        activePlayer = leader;
+    Match(Player leader) throws MatchException {
+        addPlayer(leader);
         setDefaultCommands();
 
         leader.attachDashboard(new Dashboard(false, marketplace, developmentGrid, leader.getName()));
@@ -54,6 +53,8 @@ public class Match {
             for (Player plr : players){
                 info(plr, null);
             }
+
+            p.sendController("show lobby"); //tell the player to show the lobby screen
         }
         else if(players.size() >= 4){
             throw new MatchException("The match is full already");
@@ -68,6 +69,8 @@ public class Match {
             for (Player plr : players){
                 info(plr, null);
             }
+
+            p.sendController("show lobby"); //tell the player to show the lobby screen
         }
     }
 

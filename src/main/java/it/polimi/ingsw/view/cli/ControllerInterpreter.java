@@ -4,6 +4,7 @@ import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
 import it.polimi.ingsw.view.Screen;
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
+import it.polimi.ingsw.view.gui.MessageType;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -69,7 +70,7 @@ public class ControllerInterpreter {
             errorMessage.append(" ");
         }
 
-        screen.setMessage(RED(errorMessage.toString()));
+        screen.setMessage(errorMessage.toString(), MessageType.ERROR);
         screen.refresh();
     }
 
@@ -80,7 +81,7 @@ public class ControllerInterpreter {
             errorMessage.append(" ");
         }
 
-        screen.setMessage(GREEN(errorMessage.toString()));
+        screen.setMessage(errorMessage.toString(), MessageType.MESSAGE);
         screen.refresh();
     }
 
@@ -92,7 +93,7 @@ public class ControllerInterpreter {
         }
 
         execute("show welcome");
-        screen.setMessage(BACK_RED(errorMessage.toString()));
+        screen.setMessage(errorMessage.toString(), MessageType.FATAL);
         screen.refresh();
     }
 

@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.cli;
 import it.polimi.ingsw.view.Screen;
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
 import it.polimi.ingsw.view.cli.fancy_console.FancyConsole;
+import it.polimi.ingsw.view.gui.MessageType;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -75,8 +76,22 @@ public class ScreenCLI implements Screen {
      * @param message Brief description of the error that occurred. For example "yjasfgdiu is not a recognized command".
      */
     @Override
-    public void setMessage(String message) {
-        errorMessage = message + "\n\n";
+    public void setMessage(String message, MessageType type) {
+
+        switch (type){
+            case MESSAGE:
+                this.errorMessage = FancyConsole.GREEN(message) + "\n\n";
+                break;
+            case ERROR:
+                this.errorMessage = FancyConsole.RED(message) + "\n\n";
+                break;
+            case FATAL:
+                this.errorMessage = FancyConsole.BACK_RED(message) + "\n\n";
+                break;
+            case NEUTRAL:
+                this.errorMessage = message + "\n\n";
+                break;
+        }
     }
 
 
@@ -134,7 +149,7 @@ public class ScreenCLI implements Screen {
 
         toPrint.append("\t\t" + FancyConsole.UNDERLINED(FancyConsole.CYAN(" " + namesAndStatus[namesAndStatus.length-1] + " ")));
 
-        setMessage(toPrint.toString());
+        setMessage(toPrint.toString(), MessageType.NEUTRAL);
         refresh();
     }
 }

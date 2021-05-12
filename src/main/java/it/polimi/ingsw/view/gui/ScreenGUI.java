@@ -2,10 +2,7 @@ package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.view.Screen;
-import it.polimi.ingsw.view.cli.ControllerInterpreter;
-import it.polimi.ingsw.view.cli.OfflineInfo;
-import it.polimi.ingsw.view.cli.ServerSocket;
-import it.polimi.ingsw.view.cli.UserInterpreter;
+import it.polimi.ingsw.view.cli.*;
 import it.polimi.ingsw.view.gui.controllers.SceneController;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -26,14 +23,17 @@ public class ScreenGUI extends Application implements Screen {
 
     @Override
     public void show(String scene){
-        stage.setScene(scenes.get(scene).first);
-        stage.show();
+        activeScene = scenes.get(scene);
+        Platform.runLater(() -> {
+            stage.setScene(activeScene.first);
+            stage.show();
+        });
     }
 
 
     @Override
-    public void setMessage(String message) {
-
+    public void setMessage(String message, MessageType type) {
+        activeScene.second.setMessage(message, type);
     }
 
 
@@ -45,7 +45,7 @@ public class ScreenGUI extends Application implements Screen {
 
     @Override
     public void setPlayers(String players) {
-        activeScene.second.setPlayers(players);
+        scenes.forEach((id, scene) -> Platform.runLater(() -> scene.second.setPlayers(players)));
     }
 
     @Override
@@ -55,13 +55,17 @@ public class ScreenGUI extends Application implements Screen {
 
         OfflineInfo oi = new OfflineInfo();
         ControllerInterpreter ci = new ControllerInterpreter(this, oi);
-        UserInterpreter ui = new UserInterpreter(ci, new ServerSocket(), oi);
+        ModelInterpreter mi = new ModelInterpreter(null, null, null);
+        ServerSocket socket = new ServerSocket();
+        socket.attachInterpreter(mi);
+        socket.attachInterpreter(ci);
+        UserInterpreter ui = new UserInterpreter(ci, socket, oi);
 
         loadView("welcomeScreen", "/fxml/WelcomeScreen.fxml", ci, ui, oi);
-        loadView("lobby", "/fxml/Lobby.fxml", ci,ui, oi);
+        loadView("lobby", "/fxml/Lobby.fxml", ci, ui, oi);
         //TODO load all the scenes
 
-        activeScene = scenes.get("lobby");
+        activeScene = scenes.get("welcomeScreen");
 
         stage.setScene(activeScene.first);
         stage.show();
@@ -70,7 +74,7 @@ public class ScreenGUI extends Application implements Screen {
         //TODO eliminate this test
         Platform.runLater(() -> {
             try {
-                TimeUnit.SECONDS.sleep(5);
+                TimeUnit.SECONDS.sleep(1);
             } catch (Exception e){}
             activeScene.second.setPlayers("on Lapo off Marco");
         });

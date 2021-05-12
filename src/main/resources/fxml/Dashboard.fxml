@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1200.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/board.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" layoutX="35.0" layoutY="547.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="35.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="119.0" layoutY="547.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text fill="WHITE" layoutX="119.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="262.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="262.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="262.0" layoutY="394.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="262.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="258.0" layoutY="476.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/shield.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="303.0" layoutY="476.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/shield.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="277.0" layoutY="562.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/shield.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="262.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+         <image>
+            <Image url="@../pictures/arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="263.0" layoutY="517.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="307.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+         <image>
+            <Image url="@../pictures/arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="308.0" layoutY="517.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="254.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+         <image>
+            <Image url="@../pictures/arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="314.0" layoutY="566.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+         <image>
+            <Image url="@../pictures/arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="305.0" fitWidth="160.0" layoutX="1006.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Pictures/mastersOfReinassance/new%20leaders/leader16.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="305.0" fitWidth="160.0" layoutX="1006.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Pictures/mastersOfReinassance/new%20leaders/leader16.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="20.0" layoutX="1083.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="20.0" layoutX="1083.0" layoutY="492.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+         <image>
+            <Image url="@../pictures/arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="20.0" layoutX="1085.0" layoutY="512.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/shield.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="20.0" layoutX="1083.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="20.0" layoutX="1083.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+         <image>
+            <Image url="@../pictures/arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="20.0" layoutX="1085.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/shield.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="944.0" layoutY="440.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="944.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="944.0" layoutY="517.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="944.0" layoutY="553.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="944.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="944.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="944.0" layoutY="183.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text layoutX="944.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
