@@ -141,8 +141,8 @@ public class DevelopmentCard implements Viewable {
 
     @Override
     public String toString() {
-        return BOLD("Development Card") + "\n" +
-                " ____________________________________" + "\n" +
+        return BOLD("Development Card: " + id) + "\n" +
+                "+-------------------------------------+" + "\n" +
                 "|   " + categoryToColor() + "         " + FRAMED(" Cost: ") + "        " + categoryToColor() + "   |" + "\n" +
                 "|                                    |" + "\n" +
 
@@ -177,7 +177,7 @@ public class DevelopmentCard implements Viewable {
                 "|                                    |" + "\n" +
                 "|                                    |" + "\n" +
                 "|          " + FRAMED(" Win Points: " + wp + " ") + "           |" + "\n" +
-                "|____________________________________|";
+                "+------------------------------------+";
 
     }
 

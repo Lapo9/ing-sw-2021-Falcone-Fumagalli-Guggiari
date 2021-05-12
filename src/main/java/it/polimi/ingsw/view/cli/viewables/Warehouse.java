@@ -34,18 +34,49 @@ public class Warehouse implements Viewable {
         //the array received is composed by 15 numbers representing if the level of the warehouse contains
         //COIN, SERVANT, SHIELD, STONE or FAITH_MARKER (and how many?)
         ArrayList<WarehouseObjectType> top = new ArrayList<>();
-        for (int i=0; i<5; i++)
-            if (update[i] > 0)
+        top.add(WarehouseObjectType.NO_TYPE);
+        for (int i=0; i<5; i++) {
+            if (update[i] == 1) {
+                top.remove(0);
                 top.add(intToResource(i));
-        ArrayList<WarehouseObjectType> mid = new ArrayList<>();
-        for (int i=5; i<10; i++)
-            if (update[i] > 0){
-                mid.add(intToResource((i%5)));
-                mid.add(intToResource((i%5)));
             }
+        }
+
+        ArrayList<WarehouseObjectType> mid = new ArrayList<>();
+        mid.add(WarehouseObjectType.NO_TYPE);
+        mid.add(WarehouseObjectType.NO_TYPE);
+        for (int i=5; i<10; i++) {
+            if (update[i] == 1) {
+                mid.remove(0);
+                mid.add(0, intToResource((i % 5)));
+            }
+            else if (update[i] == 2) {
+                mid.remove(0);
+                mid.remove(0);
+                mid.add(intToResource((i % 5)));
+                mid.add(intToResource((i % 5)));
+            }
+        }
+
         ArrayList<WarehouseObjectType> bot = new ArrayList<>();
+        bot.add(WarehouseObjectType.NO_TYPE);
+        bot.add(WarehouseObjectType.NO_TYPE);
+        bot.add(WarehouseObjectType.NO_TYPE);
         for (int i=10; i<15; i++)
-            if (update[i] > 0){
+            if (update[i] == 1) {
+                bot.remove(0);
+                bot.add(0, intToResource((i%5)));
+            }
+            else if (update[i] == 2){
+                bot.remove(0);
+                bot.remove(0);
+                bot.add(0, intToResource((i%5)));
+                bot.add(1, intToResource((i%5)));
+            }
+            else if (update[i] == 3){
+                bot.remove(0);
+                bot.remove(0);
+                bot.remove(0);
                 bot.add(intToResource((i%5)));
                 bot.add(intToResource((i%5)));
                 bot.add(intToResource((i%5)));

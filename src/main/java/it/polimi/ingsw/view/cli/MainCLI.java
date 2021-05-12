@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
+import it.polimi.ingsw.view.cli.viewables.DevelopmentCard;
 import it.polimi.ingsw.view.cli.viewables.SupplyContainer;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
 import it.polimi.ingsw.view.cli.viewables.Warehouse;
@@ -43,9 +44,7 @@ public class MainCLI {
         SupplyContainer yourTurnText = factory.buildSupplyContainer(1, ViewableId.YOUR_TURN_TEXT, "YOUR TURN");
         yourTurn.addViewable(yourTurnText);
 
-        View warehouse = new View();
-        Warehouse warehouseViewable = factory.buildWarehouse(1, ViewableId.WAREHOUSE);
-        warehouse.addViewable(warehouseViewable);
+
 
 
 
@@ -71,13 +70,14 @@ public class MainCLI {
         screen.addView("player2", player2);
         screen.addView("player3", player3);
         screen.addView("player4", player4);
-        screen.addView("warehouse",warehouse);
 
 
-        screen.start("welcome");
-        //screen.show("warehouse");
 
-        showWarehouseTest(warehouse, warehouseViewable);
+        //screen.start("welcome");
+
+        //showWarehouseTest(screen, factory);
+        showDevelopmentCardTest(screen, factory);
+
 
         /*new Thread(() -> {
             try {
@@ -91,22 +91,59 @@ public class MainCLI {
         }).start();*/
     }
 
-    private static void showWarehouseTest(View warehouse, Warehouse warehouseViewable) throws ViewException {
-        ScreenCLI screen = new ScreenCLI();
-        screen.addView("warehouse", warehouse);
-        screen.start("warehouse");
+    private static void showWarehouseTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
+        View warehouse = new View();
+        Warehouse warehouseViewable = factory.buildWarehouse(1, ViewableId.WAREHOUSE);
+        warehouse.addViewable(warehouseViewable);
 
-        int [] updWarehouse = {1, 0, 0, 0, 0,
-                                0, 2, 0, 0, 0,
-                                0, 0, 3, 0, 0};
+        screenCLI.addView("warehouse", warehouse);
+        screenCLI.start("warehouse");
+
+        //updating the warehouse
+        int [] updWarehouse = {1, 0, 0, 0, 0, //first level
+                                0, 1, 0, 0, 0, //second level
+                                0, 0, 3, 0, 0}; //third level
         warehouseViewable.update(updWarehouse);
-        screen.show("warehouse");
+        screenCLI.show("warehouse");
 
-        int [] updWarehouse1 = {0, 0, 1, 0, 0,
+        //another update test
+        int [] updWarehouse1 = {0, 0, 0, 0, 0,
                                 0, 0, 0, 0, 1,
                                 0, 2, 0, 0, 0};
         warehouseViewable.update(updWarehouse1);
-        screen.show("warehouse");
+        screenCLI.show("warehouse");
     }
+
+
+
+    private static void showDevelopmentCardTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
+        View developmentCard = new View();
+        DevelopmentCard developmentCardViewable = factory.buildDevelopmentCard(1, ViewableId.WELCOME_TEXT);
+        developmentCard.addViewable(developmentCardViewable);
+
+        screenCLI.addView("developmentCard", developmentCard);
+        screenCLI.start("developmentCard");
+
+        //updating the developmentCard
+        int [] updWarehouse = {
+                1, //id
+                1, 2, 0, 0, 0, //input
+                0, 0, 1, 0, 1, //output
+                1, 0, 0, 0, 0 //currentSupply
+        };
+        developmentCardViewable.update(updWarehouse);
+        screenCLI.show("developmentCard");
+
+        //another update test
+        int [] updWarehouse1 = {
+                5, //id
+                1, 2, 0, 0, 0, //input
+                0, 0, 1, 0, 1, //output
+                1, 0, 0, 0, 0 //currentSupply
+        };
+        developmentCardViewable.update(updWarehouse1);
+        screenCLI.show("developmentCard");
+    }
+
 
 }
