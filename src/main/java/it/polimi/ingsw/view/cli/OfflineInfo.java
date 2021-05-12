@@ -83,6 +83,10 @@ public class OfflineInfo {
         return playersNamesInOrder.size();
     }
 
+    public String getPlayerName(int index) {
+        return playersNamesInOrder.get(index);
+    }
+
 
     public void setPlayers(String... playersNamesInOrder){
         this.playersNamesInOrder.addAll(Arrays.asList(playersNamesInOrder));

@@ -23,6 +23,7 @@ public class ViewableFactory {
         items.add(new HashMap<>()); //player 2
         items.add(new HashMap<>()); //player 3
         items.add(new HashMap<>()); //player 4
+        items.add(new HashMap<>()); //faith track
         items.add(new HashMap<>()); //marketplace
         items.add(new HashMap<>()); //development grid
     }
@@ -64,6 +65,12 @@ public class ViewableFactory {
     public DevelopmentCard buildDevelopmentCard (int player, ViewableId viewableId) {
         DevelopmentCard res = new DevelopmentCard();
         items.get(player-1).put(viewableId, res);
+        return res;
+    }
+
+    public FaithTrack buildFaithTrack (ViewableId viewableId) {
+        FaithTrack res = new FaithTrack();
+        items.get(4).put(viewableId, res);
         return res;
     }
 
