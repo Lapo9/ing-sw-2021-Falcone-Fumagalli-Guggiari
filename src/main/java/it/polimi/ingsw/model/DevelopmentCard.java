@@ -21,6 +21,8 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
     private Production production;
     private SupplyContainer cost;
 
+    private static final String path  = "src/main/resources/cards_info/DevelopmentCards.txt";
+
 
     /**
      * Class constructor: initialize the card.
@@ -117,7 +119,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the level of the card
      */
     public static int getLevel(int id) {
-        File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
+        File file = new File(path);
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -136,7 +138,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the win points of the card
      */
     public static int getWinPoints(int id) {
-        File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
+        File file = new File(path);
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -156,7 +158,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the card category
      */
     public static CardCategory getCategory(int id) {
-        File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
+        File file = new File(path);
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -185,7 +187,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the input of the card production
      */
     public static SupplyContainer getInput(int id) {
-        File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
+        File file = new File(path);
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -212,7 +214,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the output of the card production
      */
     public static SupplyContainer getOutput(int id) {
-        File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
+        File file = new File(path);
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -238,7 +240,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the card cost
      */
     public static SupplyContainer getCost(int id) {
-        File file = new File("src/main/java/it/polimi/ingsw/resources/DevelopmentCards.txt");
+        File file = new File(path);
         Scanner scan = null;
         try {
             scan = new Scanner(file);

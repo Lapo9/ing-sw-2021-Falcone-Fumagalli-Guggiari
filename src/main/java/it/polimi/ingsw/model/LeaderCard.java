@@ -27,6 +27,8 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
     private boolean discarded = false;
     private final int winPoints;
 
+    private static final String path = "src/main/resources/cards_info/LeaderCards.txt";
+
     /**
      * Creates a leader card.
      * @param id card id
@@ -114,7 +116,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
      * @return the card win points
      */
     public static int getWinPoints(int id) {
-        File file = new File("src/main/java/it/polimi/ingsw/resources/LeaderCards.txt");
+        File file = new File(path);
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -133,7 +135,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
      * @return the card ability
      */
     public static LeaderAbility getAbility(int id) {
-        File file = new File("src/main/java/it/polimi/ingsw/resources/LeaderCards.txt");
+        File file = new File(path);
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -161,7 +163,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
      * @return the supply container that contains the details of the leader abilty.
      */
     public static SupplyContainer getAbilitySC(int id) {
-        File file = new File("src/main/java/it/polimi/ingsw/resources/LeaderCards.txt");
+        File file = new File(path);
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -187,7 +189,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
      * @return the warehouse object type of the ability
      */
     public static WarehouseObjectType getAbilityWOT(int id) {
-        File file = new File("src/main/java/it/polimi/ingsw/resources/LeaderCards.txt");
+        File file = new File(path);
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -224,7 +226,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
      * @return the supplies requirements to buy the card
      */
     public static SupplyContainer getSuppliesRequirement(int id) {
-        File file = new File("src/main/java/it/polimi/ingsw/resources/LeaderCards.txt");
+        File file = new File(path);
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -250,7 +252,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus{
      * @return the cards requirements to buy the card
      */
     public static ArrayList<CardsRequirement> getCardsRequirements(int id) {
-        File file = new File("src/main/java/it/polimi/ingsw/resources/LeaderCards.txt");
+        File file = new File(path);
         ArrayList<CardsRequirement> list = new ArrayList<>();
         Scanner scan = null;
         try {
