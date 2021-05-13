@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.leaders;
 
 import it.polimi.ingsw.Pair;
 
@@ -7,15 +7,16 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.exceptions.LeaderException;
-import it.polimi.ingsw.model.leader_abilities.*;
+import it.polimi.ingsw.model.leaders.leader_abilities.*;
 
 /**
  * The LeaderCard class represents a leader card of the game, each card has its own ability, winPoints and requirements
  * needed to buy it. It can be activated if the player has the right quantity of requirements, and it can be discard by
  * the player in exchange for a faith point.
  */
-public class LeaderCard implements WinPointsCountable, HasStatus{
+public class LeaderCard implements WinPointsCountable, HasStatus {
 
     private int id;
     private Pair<SupplyContainer, ArrayList<CardsRequirement>> requirements;

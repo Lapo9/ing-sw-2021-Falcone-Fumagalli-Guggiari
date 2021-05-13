@@ -1,11 +1,15 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.leaders;
 
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.model.CardCategory;
+import it.polimi.ingsw.model.DepotID;
+import it.polimi.ingsw.model.SupplyContainer;
+import it.polimi.ingsw.model.WarehouseObjectType;
 import it.polimi.ingsw.model.exceptions.LeaderException;
 import it.polimi.ingsw.model.exceptions.SupplyException;
-import it.polimi.ingsw.model.leader_abilities.Discount;
-import it.polimi.ingsw.model.leader_abilities.LeaderAbility;
-import it.polimi.ingsw.model.leader_abilities.Producer;
+import it.polimi.ingsw.model.leaders.leader_abilities.Discount;
+import it.polimi.ingsw.model.leaders.leader_abilities.LeaderAbility;
+import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
 import org.junit.Test;
 
 import java.util.ArrayList;

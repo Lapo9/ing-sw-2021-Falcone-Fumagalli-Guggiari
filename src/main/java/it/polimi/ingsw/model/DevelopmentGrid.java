@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import it.polimi.ingsw.model.development.DevelopmentCard;
 import it.polimi.ingsw.model.development.Paycheck;
 import it.polimi.ingsw.model.exceptions.*;
-import it.polimi.ingsw.model.leader_abilities.LeaderAbility;
+import it.polimi.ingsw.model.leaders.leader_abilities.LeaderAbility;
+import it.polimi.ingsw.model.leaders.LeadersSpace;
 
 /**
  * The DevelopmentGrid is meant to contain the SupplyCard, divided by level and color in three rows and four columns,

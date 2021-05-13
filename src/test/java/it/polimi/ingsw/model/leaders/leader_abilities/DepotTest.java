@@ -1,9 +1,11 @@
-package it.polimi.ingsw.model.leader_abilities;
+package it.polimi.ingsw.model.leaders.leader_abilities;
 
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.model.development.Developments;
 import it.polimi.ingsw.model.exceptions.*;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.leaders.LeaderCard;
+import it.polimi.ingsw.model.leaders.LeadersSpace;
 import org.junit.Test;
 
 import java.util.ArrayList;

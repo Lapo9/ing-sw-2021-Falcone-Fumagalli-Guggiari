@@ -4,7 +4,8 @@ import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.exceptions.LeaderException;
 import it.polimi.ingsw.model.exceptions.SupplyException;
-import it.polimi.ingsw.model.leader_abilities.Producer;
+import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
+import it.polimi.ingsw.model.leaders.LeadersSpace;
 
 import java.util.ArrayList;
 import java.util.HashMap;

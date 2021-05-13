@@ -2,10 +2,12 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.model.exceptions.*;
-import it.polimi.ingsw.model.leader_abilities.Depot;
-import it.polimi.ingsw.model.leader_abilities.Discount;
-import it.polimi.ingsw.model.leader_abilities.Market;
-import it.polimi.ingsw.model.leader_abilities.Producer;
+import it.polimi.ingsw.model.leaders.leader_abilities.Depot;
+import it.polimi.ingsw.model.leaders.leader_abilities.Discount;
+import it.polimi.ingsw.model.leaders.leader_abilities.Market;
+import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
+import it.polimi.ingsw.model.leaders.CardsRequirement;
+import it.polimi.ingsw.model.leaders.LeaderCard;
 import org.junit.Test;
 
 import java.util.ArrayList;

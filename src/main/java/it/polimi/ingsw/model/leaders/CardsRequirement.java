@@ -1,4 +1,6 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.leaders;
+
+import it.polimi.ingsw.model.CardCategory;
 
 import java.util.ArrayList;
 

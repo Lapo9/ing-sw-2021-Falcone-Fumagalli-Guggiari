@@ -3,6 +3,7 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.TriPredicate;
 import it.polimi.ingsw.model.exceptions.*;
+import it.polimi.ingsw.model.leaders.LeadersSpace;
 
 import java.util.ArrayList;
 import java.util.HashMap;

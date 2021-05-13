@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.leader_abilities;
+package it.polimi.ingsw.model.leaders.leader_abilities;
 
 
 import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
@@ -7,6 +7,7 @@ import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.model.exceptions.MarbleException;
 import it.polimi.ingsw.model.exceptions.SupplyException;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.leaders.LeadersSpace;
 
 import java.util.ArrayList;
 

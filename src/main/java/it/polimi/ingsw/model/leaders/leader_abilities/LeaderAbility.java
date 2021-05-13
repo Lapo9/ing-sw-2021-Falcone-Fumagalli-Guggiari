@@ -1,8 +1,9 @@
-package it.polimi.ingsw.model.leader_abilities;
+package it.polimi.ingsw.model.leaders.leader_abilities;
 
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.exceptions.*;
+import it.polimi.ingsw.model.leaders.LeadersSpace;
 
 /**
  * Interface that manages the ability of Leader Cards

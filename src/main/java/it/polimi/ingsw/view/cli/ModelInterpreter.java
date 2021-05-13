@@ -1,10 +1,8 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.model.LeaderCard;
-import it.polimi.ingsw.model.leader_abilities.Producer;
+import it.polimi.ingsw.model.leaders.LeaderCard;
+import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
-
-import java.util.Arrays;
 
 /**
  * Class responsible for the application of the updates to the viewables sent by the model.

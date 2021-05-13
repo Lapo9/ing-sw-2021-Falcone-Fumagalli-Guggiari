@@ -5,8 +5,11 @@ import it.polimi.ingsw.model.development.Developments;
 import it.polimi.ingsw.model.development.Production;
 import it.polimi.ingsw.model.exceptions.DevelopmentException;
 import it.polimi.ingsw.model.exceptions.LeaderException;
-import it.polimi.ingsw.model.leader_abilities.Depot;
-import it.polimi.ingsw.model.leader_abilities.LeaderAbility;
+import it.polimi.ingsw.model.leaders.leader_abilities.Depot;
+import it.polimi.ingsw.model.leaders.leader_abilities.LeaderAbility;
+import it.polimi.ingsw.model.leaders.CardsRequirement;
+import it.polimi.ingsw.model.leaders.LeaderCard;
+import it.polimi.ingsw.model.leaders.LeadersSpace;
 import org.junit.Test;
 
 import java.util.ArrayList;

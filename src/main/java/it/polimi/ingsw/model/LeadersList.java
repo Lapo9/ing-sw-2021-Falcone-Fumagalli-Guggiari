@@ -1,10 +1,10 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.leader_abilities.Producer;
+import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
+import it.polimi.ingsw.model.leaders.CardsRequirement;
+import it.polimi.ingsw.model.leaders.LeaderCard;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 
 public class LeadersList {

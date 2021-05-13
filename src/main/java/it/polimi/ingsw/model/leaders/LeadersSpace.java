@@ -1,11 +1,12 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.leaders;
 
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.exceptions.LeaderException;
 import it.polimi.ingsw.model.exceptions.SupplyException;
-import it.polimi.ingsw.model.leader_abilities.Depot;
-import it.polimi.ingsw.model.leader_abilities.LeaderAbility;
-import it.polimi.ingsw.model.leader_abilities.Producer;
+import it.polimi.ingsw.model.leaders.leader_abilities.Depot;
+import it.polimi.ingsw.model.leaders.leader_abilities.LeaderAbility;
+import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +14,7 @@ import java.util.Arrays;
 /**
  * The class that manages tho operations on the 2 leaders.
  */
-public class LeadersSpace implements HasStatus, WinPointsCountable{
+public class LeadersSpace implements HasStatus, WinPointsCountable {
 
     private ArrayList<LeaderCard> leaders = new ArrayList<>();
 

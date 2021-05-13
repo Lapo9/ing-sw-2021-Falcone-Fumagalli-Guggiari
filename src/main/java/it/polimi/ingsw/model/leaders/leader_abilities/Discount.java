@@ -1,4 +1,4 @@
-package it.polimi.ingsw.model.leader_abilities;
+package it.polimi.ingsw.model.leaders.leader_abilities;
 
 import it.polimi.ingsw.model.exceptions.SupplyException;
 import it.polimi.ingsw.model.SupplyContainer;
