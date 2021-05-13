@@ -16,13 +16,6 @@ public class FaithTrack implements Viewable {
     int max = 0;
 
     FaithTrack() {
-        /*for(int i = 0; i<players; i++){
-            data.put("Player " + i+1, new ArrayList<>());    //creates a new arrayList for every player
-            data.get("Player " + i+1).add(0);                //faith track position
-            data.get("Player " + i+1).add(0);                //pope tile 1
-            data.get("Player " + i+1).add(0);                //pope tile 2
-            data.get("Player " + i+1).add(0);                //pope tile 3
-        }*/
     }
 
     //@Override
@@ -125,28 +118,30 @@ public class FaithTrack implements Viewable {
     }
 
     private String findSpacePopeTilePre(int num) {
-        if(num == 0 | num ==2)
+        /*if(num == 0 | num ==2)
             return new String("    ");
         else
-            return new String("     ");
+            return new String("     ");*/
+        return new String("         ");
     }
 
     private String findSpacePopeTilePost(int num) {
-        if(num == 0)
+        /*if(num == 0)
             return new String("     ");
         else if(num == 1)
             return new String("      ");
         else
-            return new String("    ");
+            return new String("    ");*/
+        return new String("         ");
     }
 
     private String rightColor(int number) {
         if(number == 0)   //inactive
-            return FRAMED(BACK_WHITE(" Inactive "));
+            return "☐"; //Inactive "));
         else if(number == 1)   //active
-            return FRAMED(BACK_GREEN(" Active "));
+            return "\033[0;32m☑\033[0m"; //Active "));
         else             //discarded
-            return FRAMED(BACK_MAGENTA(" Discarded "));
+            return "\033[0;31m☒\033[0m";  //Discarded "));
     }
 }
 
