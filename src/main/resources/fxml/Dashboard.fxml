@@ -23,22 +23,22 @@
             </ImageView>
             <Group layoutY="62.462890625">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
                      <font>
                         <Font name="Vivaldi Italic" size="36.0" />
                      </font>
                   </Text>
-                  <Text layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+                  <Text layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
                      <font>
                         <Font name="Vivaldi Italic" size="36.0" />
                      </font>
                   </Text>
-                  <Text layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+                  <Text layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
                      <font>
                         <Font name="Vivaldi Italic" size="36.0" />
                      </font>
                   </Text>
-                  <Text layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+                  <Text layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
                      <font>
                         <Font name="Vivaldi Italic" size="36.0" />
                      </font>
@@ -171,22 +171,22 @@
       </Group>
       <Group layoutX="34.0" layoutY="509.0">
          <children>
-            <Text fill="WHITE" layoutX="85.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+            <Text fill="WHITE" layoutX="85.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="85.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+            <Text fill="WHITE" layoutX="85.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="3.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+            <Text fill="WHITE" layoutX="3.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="3.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+            <Text fill="WHITE" layoutX="3.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
@@ -195,22 +195,22 @@
       </Group>
       <Group layoutX="253.0" layoutY="271.0">
          <children>
-            <Text layoutX="8.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+            <Text layoutX="8.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text layoutX="8.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+            <Text layoutX="8.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text layoutX="8.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+            <Text layoutX="8.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text layoutX="8.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+            <Text layoutX="8.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
@@ -226,22 +226,22 @@
             </ImageView>
             <Group layoutY="62.462890625">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
                      <font>
                         <Font name="Vivaldi Italic" size="36.0" />
                      </font>
                   </Text>
-                  <Text layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+                  <Text layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
                      <font>
                         <Font name="Vivaldi Italic" size="36.0" />
                      </font>
                   </Text>
-                  <Text layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+                  <Text layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
                      <font>
                         <Font name="Vivaldi Italic" size="36.0" />
                      </font>
                   </Text>
-                  <Text layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT">
+                  <Text layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
                      <font>
                         <Font name="Vivaldi Italic" size="36.0" />
                      </font>
@@ -333,6 +333,189 @@
             <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="77.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/greenDot.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="374.0" layoutY="279.0">
+         <children>
+            <ImageView fitHeight="223.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../Downloads/Masters%20of%20Renaissance_Cards_FRONT_3mmBleed_1-58-1.png" />
+               </image>
+            </ImageView>
+            <Group layoutY="250.0">
+               <children>
+                  <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/yellowDot.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
+                     <font>
+                        <Font name="Vivaldi Italic" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+            <Group layoutX="86.0" layoutY="250.0">
+               <children>
+                  <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/yellowDot.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
+                     <font>
+                        <Font name="Vivaldi Italic" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Group layoutX="551.0" layoutY="279.0">
+         <children>
+            <ImageView fitHeight="223.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../Downloads/Masters%20of%20Renaissance_Cards_FRONT_3mmBleed_1-58-1.png" />
+               </image>
+            </ImageView>
+            <Group layoutY="250.0">
+               <children>
+                  <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/yellowDot.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
+                     <font>
+                        <Font name="Vivaldi Italic" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+            <Group layoutX="86.0" layoutY="250.0">
+               <children>
+                  <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/yellowDot.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
+                     <font>
+                        <Font name="Vivaldi Italic" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Group layoutX="735.0" layoutY="279.0">
+         <children>
+            <ImageView fitHeight="223.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../Downloads/Masters%20of%20Renaissance_Cards_FRONT_3mmBleed_1-58-1.png" />
+               </image>
+            </ImageView>
+            <Group layoutY="250.0">
+               <children>
+                  <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/yellowDot.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
+                     <font>
+                        <Font name="Vivaldi Italic" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+            <Group layoutX="86.0" layoutY="250.0">
+               <children>
+                  <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/yellowDot.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
+                     <font>
+                        <Font name="Vivaldi Italic" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Group layoutX="244.0" layoutY="101.0">
+         <children>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/redSquare.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/greenSquare.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/orangeSquare.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/blueSquare.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="470.0" layoutY="56.0">
+         <children>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/redSquare.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/greenSquare.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/orangeSquare.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/blueSquare.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="744.0" layoutY="106.0">
+         <children>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/redSquare.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/greenSquare.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/orangeSquare.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/blueSquare.png" />
                </image>
             </ImageView>
          </children>
