@@ -1,47 +1,40 @@
 package it.polimi.ingsw.view.cli.viewables;
 
+import it.polimi.ingsw.model.CardCategory;
+import it.polimi.ingsw.model.WarehouseObjectType;
 import it.polimi.ingsw.view.cli.Viewable;
-import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
 import java.util.HashMap;
 
-import it.polimi.ingsw.model.CardCategory;
-import it.polimi.ingsw.model.WarehouseObjectType;
-import static it.polimi.ingsw.model.development.DevelopmentCard.*;
 import static it.polimi.ingsw.model.WarehouseObjectType.*;
-import static it.polimi.ingsw.model.WarehouseObjectType.STONE;
+import static it.polimi.ingsw.model.development.DevelopmentCard.*;
+import static it.polimi.ingsw.model.development.DevelopmentCard.getWinPoints;
+import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
+public class DevelopmentGridCard implements Viewable {
 
-
-public class DevelopmentCard implements Viewable {
-
-    //card id
     private Integer id;
+    private CardCategory cat;
+    private Integer lv;
+    private Integer wp;
 
-    //cost in resources of the card
     private HashMap<WarehouseObjectType, Integer> cost = new HashMap<>();
 
-    //production provided by the card
     private HashMap<Integer, HashMap<WarehouseObjectType, Integer>> prod = new HashMap<>();
     private HashMap<WarehouseObjectType, Integer> input = new HashMap<>();
     private HashMap<WarehouseObjectType, Integer> output = new HashMap<>();
-    private HashMap<WarehouseObjectType, Integer> currentSupply = new HashMap<>();
 
-    //category of the card
-    private CardCategory cat;
-    //level of the card
-    private Integer lv;
-    //win points of the card
-    private Integer wp;
-
-    DevelopmentCard() {
+    DevelopmentGridCard() {
         id = 0; //not visible
+        cat = CardCategory.YELLOW;
+        lv = 0;
+        wp = 0;
+
         cost.put(WarehouseObjectType.COIN, 0);
         cost.put(WarehouseObjectType.SERVANT, 0);
         cost.put(WarehouseObjectType.SHIELD, 0);
         cost.put(WarehouseObjectType.STONE, 0);
 
-        //production
         input.put(WarehouseObjectType.COIN, 0);
         input.put(WarehouseObjectType.SERVANT, 0);
         input.put(WarehouseObjectType.SHIELD, 0);
@@ -52,25 +45,13 @@ public class DevelopmentCard implements Viewable {
         output.put(WarehouseObjectType.SHIELD, 0);
         output.put(WarehouseObjectType.STONE, 0);
         output.put(WarehouseObjectType.FAITH_MARKER, 0);
-        currentSupply.put(WarehouseObjectType.COIN, 0);
-        currentSupply.put(WarehouseObjectType.SERVANT, 0);
-        currentSupply.put(WarehouseObjectType.SHIELD, 0);
-        currentSupply.put(WarehouseObjectType.STONE, 0);
-        currentSupply.put(WarehouseObjectType.FAITH_MARKER, 0);
         prod.put(0, input);
         prod.put(1, output);
-        prod.put(2, currentSupply);
-
-        cat = CardCategory.YELLOW;
-        lv = 0;
-        wp = 0;
     }
 
     @Override
     public void update(int[] update) {
-        //the card will receive its id (to update cost, category, level and wp) and its three supplyContainer to update its production
-
-        //getting cost, category, level and win points from the id
+        //getting everything from the id
         id = update[0];
 
         cost.put(WarehouseObjectType.COIN, getCost(id).getQuantity(COIN));
@@ -81,24 +62,16 @@ public class DevelopmentCard implements Viewable {
         lv = getLevel(id);
         wp = getWinPoints(id);
 
-        //update production
-        input.put(WarehouseObjectType.COIN, update[1]);
-        input.put(WarehouseObjectType.SERVANT, update[2]);
-        input.put(WarehouseObjectType.SHIELD, update[3]);
-        input.put(WarehouseObjectType.STONE, update[4]);
-        input.put(WarehouseObjectType.FAITH_MARKER, update[5]);
-
-        output.put(WarehouseObjectType.COIN, update[6]);
-        output.put(WarehouseObjectType.SERVANT, update[7]);
-        output.put(WarehouseObjectType.SHIELD, update[8]);
-        output.put(WarehouseObjectType.STONE, update[9]);
-        output.put(WarehouseObjectType.FAITH_MARKER, update[10]);
-
-        currentSupply.put(WarehouseObjectType.COIN, update[11]);
-        currentSupply.put(WarehouseObjectType.SERVANT, update[12]);
-        currentSupply.put(WarehouseObjectType.SHIELD, update[13]);
-        currentSupply.put(WarehouseObjectType.STONE, update[14]);
-        currentSupply.put(WarehouseObjectType.FAITH_MARKER, update[15]);
+        input.put(WarehouseObjectType.COIN, getInput(update[0]).getQuantity(COIN));
+        input.put(WarehouseObjectType.SERVANT, getInput(update[0]).getQuantity(SERVANT));
+        input.put(WarehouseObjectType.SHIELD, getInput(update[0]).getQuantity(SHIELD));
+        input.put(WarehouseObjectType.STONE, getInput(update[0]).getQuantity(STONE));
+        input.put(WarehouseObjectType.FAITH_MARKER, getInput(update[0]).getQuantity(FAITH_MARKER));
+        output.put(WarehouseObjectType.COIN, getOutput(update[0]).getQuantity(COIN));
+        output.put(WarehouseObjectType.SERVANT, getOutput(update[0]).getQuantity(SERVANT));
+        output.put(WarehouseObjectType.SHIELD, getOutput(update[0]).getQuantity(SHIELD));
+        output.put(WarehouseObjectType.STONE, getOutput(update[0]).getQuantity(STONE));
+        output.put(WarehouseObjectType.FAITH_MARKER, getOutput(update[0]).getQuantity(FAITH_MARKER));
     }
 
     private String categoryToColor() {
@@ -151,7 +124,9 @@ public class DevelopmentCard implements Viewable {
         else return "";
     }
 
+
     private String printOnlyNotNull () {
+
         if (id == 0) {
             return "+--------------------------------+" + "\n" +
                     "|                                |" + "\n" +
@@ -194,6 +169,7 @@ public class DevelopmentCard implements Viewable {
                     "|                                |" + "\n" +
                     "|        " + FRAMED(" Win Points: " + wp + " ") + "         |" + "\n" +
                     "+--------------------------------+";
+
         }
     }
 

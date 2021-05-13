@@ -13,18 +13,20 @@ public class DevelopmentSpace implements Viewable {
 
     private int num = 0; //for the number of the DevelopmentSpace (there are three fo them)
     private HashMap<Integer, DevelopmentCard> devSpace = new HashMap<>();
-    private Integer wp0, wp1, wp2;
+    private Integer wp0, wp1;
 
 
     DevelopmentSpace () {
-        devSpace.put(0, new DevelopmentCard());
-        devSpace.put(1, new DevelopmentCard());
-        devSpace.put(2, new DevelopmentCard());
+        wp0 = 0;
+        wp1 = 0;
     }
-
 
     @Override
     public void update(int[] update) {
+        //reinitialize every time the DevelopmentSpace
+        devSpace.put(0, new DevelopmentCard());
+        devSpace.put(1, new DevelopmentCard());
+        devSpace.put(2, new DevelopmentCard());
 
         if (update[0] == 0 && update[1] == 0 && update[2] == 0) {
             //empty
@@ -88,41 +90,47 @@ public class DevelopmentSpace implements Viewable {
             devSpace.get(1).update(production2);
             wp0 = getWinPoints(update[0]);
             wp1 = getWinPoints(update[1]);
-
             //just one card to update, the first
             devSpace.get(2).update(production3);
-
-
         }
     }
 
     @Override
     public String toString() {
-        return BOLD("DevelopmentSpace") + printOnlyNotNull();
+        return BOLD("DevelopmentSpace") + "\n" + printOnlyNotNull();
     }
 
-
     private String printOnlyNotNull () {
-
         if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) != null) {
             //i have to print ONLY THE WIN POINTS of the first and second card
-            return "\n" + devSpace.get(2).toString() + "\n" +
-                    "|          " + FRAMED(" Win Points: " + wp1.toString() + " ") + "           |" + "\n" +
-                    "+------------------------------------+" + "\n" +
-                    "|          " + FRAMED(" Win Points: " + wp0.toString() + " ") + "           |" + "\n" +
-                    "+------------------------------------+";
+            return devSpace.get(2).toString() + "\n" +
+                    "|        " + FRAMED(" Win Points: " + wp1.toString() + " ") + "         |" + "\n" +
+                    "+--------------------------------+" + "\n" +
+                    "|        " + FRAMED(" Win Points: " + wp0.toString() + " ") + "         |" + "\n" +
+                    "+--------------------------------+";
         }
         else if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) == null) {
             //i have to print ONLY THE WIN POINTS of the first card
-            return "\n" + devSpace.get(1).toString() + "\n" +
-                    "|          " + FRAMED(" Win Points: " + wp0.toString() + " ") + "           |" + "\n" +
-                    "+------------------------------------+";
-
+            return devSpace.get(1).toString() + "\n" +
+                    "|        " + FRAMED(" Win Points: " + wp0.toString() + " ") + "         |" + "\n" +
+                    "+--------------------------------+";
         }
         else if (devSpace.get(0) != null && devSpace.get(1) == null && devSpace.get(2) == null) {
             return devSpace.get(0).toString();
         }
+        else if (devSpace.get(0) == null && devSpace.get(1) == null && devSpace.get(2) == null){
+            return "+--------------------------------+" + "\n" +
+                    "|                                |" + "\n" +
+                    "|                                |" + "\n" +
+                    "|                                |" + "\n" +
+                    "|                                |" + "\n" +
+                    "|                                |" + "\n" +
+                    "|                                |" + "\n" +
+                    "|                                |" + "\n" +
+                    "|                                |" + "\n" +
+                    "|                                |" + "\n" +
+                    "+--------------------------------+";
+        }
         return null;
     }
-
 }

@@ -1,11 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
-import it.polimi.ingsw.view.cli.viewables.DevelopmentCard;
-import it.polimi.ingsw.view.cli.viewables.SupplyContainer;
-import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
-import it.polimi.ingsw.view.cli.viewables.Warehouse;
-import it.polimi.ingsw.view.cli.viewables.DevelopmentSpace;
+import it.polimi.ingsw.view.cli.viewables.*;
 
 import static it.polimi.ingsw.view.cli.ViewableId.TEST;
 
@@ -80,7 +76,7 @@ public class MainCLI {
         //showWarehouseTest(screen, factory);
         //showDevelopmentCardTest(screen, factory);
         //showDevelopmentSpaceTest(screen, factory);
-
+        //showDevelopmentGridCardTest(screen, factory);
 
 
 
@@ -120,7 +116,6 @@ public class MainCLI {
         screenCLI.show("warehouse");
     }
 
-
     private static void showDevelopmentCardTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View developmentCard = new View();
         DevelopmentCard developmentCardViewable = factory.buildDevelopmentCard(1, ViewableId.WELCOME_TEXT);
@@ -150,16 +145,39 @@ public class MainCLI {
         screenCLI.show("developmentCard");
     }
 
-
     private static void showDevelopmentSpaceTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View developmentSpace = new View();
         DevelopmentSpace developmentSpaceViewable = factory.buildDevelopmentSpace(1, ViewableId.WELCOME_TEXT);
         developmentSpace.addViewable(developmentSpaceViewable);
 
         screenCLI.addView("developmentSpace", developmentSpace);
-        //screenCLI.start("developmentSpace");
+        screenCLI.start("developmentSpace");
 
-        int [] updDevSpace = {
+        int [] updDevSpace2 = {
+                1, //id1
+                2, //id2
+                0, //id3
+                1, 2, 0, 0, 0, //input
+                0, 0, 1, 0, 1, //output
+                1, 0, 0, 0, 0 //currentSupply
+        };
+        developmentSpaceViewable.update(updDevSpace2);
+        screenCLI.show("developmentSpace");
+
+        int [] updDevSpace1 = {
+                1, //id1
+                0, //id2
+                0, //id3
+                1, 2, 0, 0, 0, //input
+                0, 0, 1, 0, 1, //output
+                1, 0, 0, 0, 0 //currentSupply
+        };
+        developmentSpaceViewable.update(updDevSpace1);
+        screenCLI.show("developmentSpace");
+
+
+
+        int [] updDevSpace3 = {
                 1, //id1
                 2, //id2
                 3, //id3
@@ -167,9 +185,38 @@ public class MainCLI {
                 0, 0, 1, 0, 1, //output
                 1, 0, 0, 0, 0 //currentSupply
         };
-        developmentSpaceViewable.update(updDevSpace);
-        screenCLI.start("developmentSpace");
+        developmentSpaceViewable.update(updDevSpace3);
+        screenCLI.show("developmentSpace");
+
+        int [] updDevSpace4 = {
+                0, //id1
+                0, //id2
+                0, //id3
+                1, 2, 0, 0, 0, //input
+                0, 0, 1, 0, 1, //output
+                1, 0, 0, 0, 0 //currentSupply
+        };
+        developmentSpaceViewable.update(updDevSpace4);
+        screenCLI.show("developmentSpace");
+    }
+
+    private static void showDevelopmentGridCardTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
+        View developmentGridCard = new View();
+        DevelopmentGridCard developmentGridCardViewable = factory.buildDevelopmentGridCard(1, ViewableId.WELCOME_TEXT);
+        developmentGridCard.addViewable(developmentGridCardViewable);
+
+        screenCLI.addView("developmentGridCard", developmentGridCard);
+        screenCLI.start("developmentGridCard");
+
+        int [] updateDevGridCard = {1}; //this type of card gets updated only using the id
+        developmentGridCardViewable.update(updateDevGridCard);
+        screenCLI.show("developmentGridCard");
 
     }
 
+    private static void showDevelopmentGridTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
+
+
+
+    }
 }
