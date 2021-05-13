@@ -1,9 +1,10 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.development;
 
 import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
 
 import it.polimi.ingsw.Pair;
-import it.polimi.ingsw.exceptions.SupplyException;
+import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.exceptions.SupplyException;
 
 import java.util.ArrayList;
 

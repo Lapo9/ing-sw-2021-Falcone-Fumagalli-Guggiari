@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.LeaderException;
+import it.polimi.ingsw.model.exceptions.LeaderException;
 
 import java.util.ArrayList;
 

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Pair;
-import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.model.exceptions.*;
 
 /**
  * The interface describes an object that can store supplies.

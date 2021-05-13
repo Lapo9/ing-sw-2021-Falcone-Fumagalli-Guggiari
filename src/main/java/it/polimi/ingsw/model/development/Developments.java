@@ -1,8 +1,9 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.development;
 
 import it.polimi.ingsw.Pair;
-import it.polimi.ingsw.exceptions.DevelopmentException;
-import it.polimi.ingsw.exceptions.SupplyException;
+import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.exceptions.DevelopmentException;
+import it.polimi.ingsw.model.exceptions.SupplyException;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
  * You can add a card to a specified development space, and you can activate the production on the specified spaces.
  * The class also has functions to get information about the cards in the 3 development spaces.
  */
-public class Developments implements HasStatus, WinPointsCountable, AcceptsSupplies{
+public class Developments implements HasStatus, WinPointsCountable, AcceptsSupplies {
 
     private ArrayList<DevelopmentSpace> spaces = new ArrayList<>();
 

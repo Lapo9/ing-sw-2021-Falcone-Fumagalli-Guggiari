@@ -1,6 +1,5 @@
 package it.polimi.ingsw.model.leader_abilities;
 
-import it.polimi.ingsw.model.LeaderAbility;
 import it.polimi.ingsw.model.MarbleColor;
 import it.polimi.ingsw.model.WarehouseObjectType;
 

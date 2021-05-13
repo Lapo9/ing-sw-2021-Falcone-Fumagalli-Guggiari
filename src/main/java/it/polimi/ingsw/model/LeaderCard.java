@@ -7,11 +7,8 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import it.polimi.ingsw.exceptions.LeaderException;
-import it.polimi.ingsw.model.leader_abilities.Depot;
-import it.polimi.ingsw.model.leader_abilities.Discount;
-import it.polimi.ingsw.model.leader_abilities.Market;
-import it.polimi.ingsw.model.leader_abilities.Producer;
+import it.polimi.ingsw.model.exceptions.LeaderException;
+import it.polimi.ingsw.model.leader_abilities.*;
 
 /**
  * The LeaderCard class represents a leader card of the game, each card has its own ability, winPoints and requirements

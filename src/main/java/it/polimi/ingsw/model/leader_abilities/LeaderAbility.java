@@ -1,12 +1,13 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.leader_abilities;
 
 import it.polimi.ingsw.Pair;
-import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.exceptions.*;
 
 /**
  * Interface that manages the ability of Leader Cards
  */
-public interface LeaderAbility extends AcceptsSupplies, HasStatus{
+public interface LeaderAbility extends AcceptsSupplies, HasStatus {
 
     /**
      * First ability: when the player buys a SupplyCard, he can do it using less resources

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.exceptions;
+package it.polimi.ingsw.model.exceptions;
 
 public class MarbleException extends Exception{
     public MarbleException(String message){

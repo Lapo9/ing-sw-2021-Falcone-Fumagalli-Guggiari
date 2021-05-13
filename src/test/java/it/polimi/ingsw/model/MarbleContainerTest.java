@@ -1,6 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.exceptions.MarbleException;
+import it.polimi.ingsw.model.exceptions.MarbleException;
 import org.junit.Test;
 
 import java.util.ArrayList;

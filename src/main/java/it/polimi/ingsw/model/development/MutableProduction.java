@@ -1,6 +1,9 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.development;
 
-import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.model.HasStatus;
+import it.polimi.ingsw.model.SupplyContainer;
+import it.polimi.ingsw.model.WarehouseObjectType;
+import it.polimi.ingsw.model.exceptions.*;
 
 import java.util.ArrayList;
 
@@ -8,7 +11,7 @@ import java.util.ArrayList;
  * The MutableProduction class represents the mutable production mechanism of the game,
  * where the player can choose the input and the output of the production.
  */
-public class MutableProduction extends Production implements HasStatus{
+public class MutableProduction extends Production implements HasStatus {
 
     private ArrayList<WarehouseObjectType> mutableInput = new ArrayList<>();
     private ArrayList<WarehouseObjectType> mutableOutput = new ArrayList<>();

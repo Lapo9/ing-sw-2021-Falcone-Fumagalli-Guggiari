@@ -1,7 +1,8 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.development;
 
 import it.polimi.ingsw.Pair;
-import it.polimi.ingsw.exceptions.SupplyException;
+import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.exceptions.SupplyException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +13,7 @@ import java.util.Scanner;
  * This class represents the development card of the game. Every card has its own unique id and has  level, win points,
  * category, production and cost.
  */
-public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSupplies{
+public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSupplies {
 
     private int id;
     private int level = 0;

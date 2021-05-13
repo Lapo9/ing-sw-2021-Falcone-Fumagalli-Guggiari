@@ -3,11 +3,10 @@ package it.polimi.ingsw.model;
 import static org.junit.Assert.*;
 
 import it.polimi.ingsw.Pair;
-import it.polimi.ingsw.exceptions.*;
-import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.development.Paycheck;
+import it.polimi.ingsw.model.exceptions.*;
 import org.junit.Test;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 public class PaycheckTest {

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model.leader_abilities;
 
-import it.polimi.ingsw.exceptions.SupplyException;
-import it.polimi.ingsw.model.LeaderAbility;
+import it.polimi.ingsw.model.exceptions.SupplyException;
 import it.polimi.ingsw.model.SupplyContainer;
 import it.polimi.ingsw.model.WarehouseObjectType;
 

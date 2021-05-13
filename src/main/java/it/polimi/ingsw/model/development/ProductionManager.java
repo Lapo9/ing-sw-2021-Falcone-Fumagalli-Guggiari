@@ -1,9 +1,9 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.development;
 
 import it.polimi.ingsw.Pair;
-import it.polimi.ingsw.exceptions.LeaderException;
-import it.polimi.ingsw.exceptions.SupplyException;
-import it.polimi.ingsw.model.leader_abilities.Depot;
+import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.exceptions.LeaderException;
+import it.polimi.ingsw.model.exceptions.SupplyException;
 import it.polimi.ingsw.model.leader_abilities.Producer;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.HashMap;
 /**
  * Manages all of those depots that can contain resources both from the strongbox and the depots, namely production depots, leader production depots and paycheck
  */
-public class ProductionManager implements AcceptsSupplies{
+public class ProductionManager implements AcceptsSupplies {
 
     HashMap<DepotID.SourceType, SupplyContainer> containers = new HashMap<>(); //place where we store a copy of each resource in real depots
 

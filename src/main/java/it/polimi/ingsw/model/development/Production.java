@@ -1,18 +1,19 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.development;
 
 import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
 
 import java.util.ArrayList;
 
 import it.polimi.ingsw.Pair;
-import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.exceptions.*;
 
 /**
  * The Production class represents the production mechanism of the game.
  * It has an input and an output, and can store supplies.
  * When the production is triggered, if the input equals the current supply store, then the current supply store is wiped and the output is returned.
  */
-public class Production implements AcceptsSupplies, HasStatus{
+public class Production implements AcceptsSupplies, HasStatus {
 
     protected final SupplyContainer input;
     protected final SupplyContainer output;

@@ -6,7 +6,7 @@ import it.polimi.ingsw.view.cli.Viewable;
 
 import java.util.HashMap;
 
-import static it.polimi.ingsw.model.DevelopmentCard.*;
+import static it.polimi.ingsw.model.development.DevelopmentCard.*;
 import static it.polimi.ingsw.model.WarehouseObjectType.*;
 import static it.polimi.ingsw.model.WarehouseObjectType.STONE;
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;

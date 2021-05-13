@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.Pair;
-import it.polimi.ingsw.exceptions.*;
+import it.polimi.ingsw.model.exceptions.*;
 import it.polimi.ingsw.model.leader_abilities.Depot;
 import it.polimi.ingsw.model.leader_abilities.Discount;
 import it.polimi.ingsw.model.leader_abilities.Market;
