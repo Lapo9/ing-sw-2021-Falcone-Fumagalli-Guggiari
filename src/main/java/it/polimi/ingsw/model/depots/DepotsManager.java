@@ -1,6 +1,7 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.depots;
 
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.exceptions.LeaderException;
 import it.polimi.ingsw.model.exceptions.MarbleException;
 import it.polimi.ingsw.model.exceptions.SupplyException;

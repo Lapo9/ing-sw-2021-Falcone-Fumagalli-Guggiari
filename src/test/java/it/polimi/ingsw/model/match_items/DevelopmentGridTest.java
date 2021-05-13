@@ -1,5 +1,8 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.match_items;
 
+import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.depots.DepotsManager;
+import it.polimi.ingsw.model.depots.Warehouse;
 import it.polimi.ingsw.model.development.DevelopmentCard;
 import it.polimi.ingsw.model.development.Developments;
 import it.polimi.ingsw.model.development.Paycheck;
@@ -11,6 +14,7 @@ import it.polimi.ingsw.model.leaders.leader_abilities.Discount;
 import it.polimi.ingsw.model.leaders.leader_abilities.Market;
 import it.polimi.ingsw.model.leaders.LeaderCard;
 import it.polimi.ingsw.model.leaders.LeadersSpace;
+import it.polimi.ingsw.model.match_items.DevelopmentGrid;
 import org.junit.Test;
 
 import java.util.ArrayList;

@@ -8,6 +8,9 @@ import it.polimi.ingsw.model.leaders.leader_abilities.Market;
 import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
 import it.polimi.ingsw.model.leaders.CardsRequirement;
 import it.polimi.ingsw.model.leaders.LeaderCard;
+import it.polimi.ingsw.model.match_items.DevelopmentGrid;
+import it.polimi.ingsw.model.match_items.MarketDirection;
+import it.polimi.ingsw.model.match_items.Marketplace;
 import org.junit.Test;
 
 import java.util.ArrayList;

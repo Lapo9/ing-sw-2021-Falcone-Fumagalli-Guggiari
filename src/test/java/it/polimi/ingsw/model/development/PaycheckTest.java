@@ -1,8 +1,11 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.development;
 
 import static org.junit.Assert.*;
 
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.model.DepotID;
+import it.polimi.ingsw.model.SupplyContainer;
+import it.polimi.ingsw.model.WarehouseObjectType;
 import it.polimi.ingsw.model.development.Paycheck;
 import it.polimi.ingsw.model.exceptions.*;
 import org.junit.Test;

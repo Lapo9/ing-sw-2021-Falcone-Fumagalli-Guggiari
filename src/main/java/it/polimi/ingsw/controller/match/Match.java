@@ -5,7 +5,9 @@ import it.polimi.ingsw.controller.ModelObserver;
 import it.polimi.ingsw.controller.Player;
 import it.polimi.ingsw.controller.exceptions.MatchException;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.view.cli.fancy_console.FancyConsole;
+import it.polimi.ingsw.model.match_items.DevelopmentGrid;
+import it.polimi.ingsw.model.match_items.MarketDirection;
+import it.polimi.ingsw.model.match_items.Marketplace;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,5 +1,7 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.match_items;
 
+import it.polimi.ingsw.model.CardCategory;
+import it.polimi.ingsw.model.SupplyContainer;
 import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
 import it.polimi.ingsw.model.leaders.CardsRequirement;
 import it.polimi.ingsw.model.leaders.LeaderCard;

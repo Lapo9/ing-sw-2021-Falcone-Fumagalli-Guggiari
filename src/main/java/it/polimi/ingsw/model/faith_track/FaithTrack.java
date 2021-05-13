@@ -1,13 +1,15 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.faith_track;
 
 import java.util.ArrayList;
-import it.polimi.ingsw.model.PopeFavorTile;
+
+import it.polimi.ingsw.model.HasStatus;
+import it.polimi.ingsw.model.WinPointsCountable;
 
 /**
  * The FaithTrack class represents the faith track on the player's personal board.
  */
 
-public class FaithTrack implements WinPointsCountable, HasStatus{
+public class FaithTrack implements WinPointsCountable, HasStatus {
 
     private int position = 0;
     private int winPoints = 0;

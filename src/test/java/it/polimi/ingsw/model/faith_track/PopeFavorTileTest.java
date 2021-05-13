@@ -1,5 +1,6 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.faith_track;
 
+import it.polimi.ingsw.model.faith_track.PopeFavorTile;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

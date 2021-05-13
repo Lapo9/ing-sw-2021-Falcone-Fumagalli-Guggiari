@@ -1,4 +1,8 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.match_items;
+
+import it.polimi.ingsw.model.HasStatus;
+import it.polimi.ingsw.model.MarbleColor;
+import it.polimi.ingsw.model.MarbleContainer;
 
 import java.util.ArrayList;
 
@@ -6,7 +10,7 @@ import java.util.ArrayList;
  * The marketplace is where the player can buy resources. It is made by 12 marbles placed in a grid of three rows
  * and four columns. There is another marble placed on the slide.
  */
-public class Marketplace implements HasStatus{
+public class Marketplace implements HasStatus {
 
     private final ArrayList<MarbleColor> grid = new ArrayList<>();
     private MarbleColor slide;

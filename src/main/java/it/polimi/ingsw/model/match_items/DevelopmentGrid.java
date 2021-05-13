@@ -1,7 +1,11 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.match_items;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.model.ActionTilesStack;
+import it.polimi.ingsw.model.HasStatus;
+import it.polimi.ingsw.model.SupplyContainer;
+import it.polimi.ingsw.model.WarehouseObjectType;
 import it.polimi.ingsw.model.development.DevelopmentCard;
 import it.polimi.ingsw.model.development.Paycheck;
 import it.polimi.ingsw.model.exceptions.*;
@@ -16,7 +20,7 @@ import it.polimi.ingsw.model.leaders.LeadersSpace;
  * The first column is for green SupplyCard, the second column is for blue SupplyCard, the third is for yellow SupplyCard
  * and the fourth is for purple SupplyCard.
  */
-public class DevelopmentGrid implements HasStatus{
+public class DevelopmentGrid implements HasStatus {
 
     private ArrayList<ArrayList<DevelopmentCard>> grid;
     private int boughtCards = 0;

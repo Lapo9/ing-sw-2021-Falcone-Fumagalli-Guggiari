@@ -1,8 +1,9 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.depots;
 
 import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
 
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.exceptions.*;
 import it.polimi.ingsw.model.leaders.LeadersSpace;
 

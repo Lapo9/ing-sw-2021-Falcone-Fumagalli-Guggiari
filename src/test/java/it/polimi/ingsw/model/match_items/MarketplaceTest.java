@@ -1,5 +1,9 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.match_items;
 
+import it.polimi.ingsw.model.MarbleColor;
+import it.polimi.ingsw.model.MarbleContainer;
+import it.polimi.ingsw.model.match_items.MarketDirection;
+import it.polimi.ingsw.model.match_items.Marketplace;
 import org.junit.Test;
 
 import java.util.ArrayList;

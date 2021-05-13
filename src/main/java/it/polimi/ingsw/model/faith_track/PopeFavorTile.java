@@ -1,11 +1,14 @@
-package it.polimi.ingsw.model;
+package it.polimi.ingsw.model.faith_track;
+
+import it.polimi.ingsw.model.HasStatus;
+import it.polimi.ingsw.model.WinPointsCountable;
 
 import java.util.ArrayList;
 
 /**
  * A PopeFavorTile represent one Pope's Favor tile of the player's personal board
  */
-public class PopeFavorTile implements HasStatus, WinPointsCountable{
+public class PopeFavorTile implements HasStatus, WinPointsCountable {
     private int points;
     private boolean active = false;
     private boolean discarded = false;

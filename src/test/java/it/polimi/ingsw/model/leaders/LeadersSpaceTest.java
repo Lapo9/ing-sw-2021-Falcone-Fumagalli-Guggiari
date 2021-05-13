@@ -1,6 +1,8 @@
 package it.polimi.ingsw.model.leaders;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.depots.DepotsManager;
+import it.polimi.ingsw.model.depots.Warehouse;
 import it.polimi.ingsw.model.development.DevelopmentCard;
 import it.polimi.ingsw.model.development.Developments;
 import it.polimi.ingsw.model.development.Production;
