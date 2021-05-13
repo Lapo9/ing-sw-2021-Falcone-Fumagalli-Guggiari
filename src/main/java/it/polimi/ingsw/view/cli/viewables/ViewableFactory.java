@@ -74,6 +74,12 @@ public class ViewableFactory {
         return res;
     }
 
+    public MarketPlace buildMarketPlace (ViewableId viewableId) {
+        MarketPlace res = new MarketPlace();
+        items.get(5).put(viewableId, res);
+        return res;
+    }
+
     public DevelopmentSpace buildDevelopmentSpace (int player, ViewableId viewableId) {
         DevelopmentSpace res = new DevelopmentSpace();
         items.get(player-1).put(viewableId, res);
