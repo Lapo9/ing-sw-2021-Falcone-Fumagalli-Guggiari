@@ -74,6 +74,12 @@ public class ViewableFactory {
         return res;
     }
 
+    public DevelopmentSpace buildDevelopmentSpace (int player, ViewableId viewableId) {
+        DevelopmentSpace res = new DevelopmentSpace();
+        items.get(player-1).put(viewableId, res);
+        return res;
+    }
+
     /**
      * Updates the specified viewable with the specified int array.
      * @param player Player who owns the viewable

@@ -5,6 +5,7 @@ import it.polimi.ingsw.view.cli.viewables.DevelopmentCard;
 import it.polimi.ingsw.view.cli.viewables.SupplyContainer;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
 import it.polimi.ingsw.view.cli.viewables.Warehouse;
+import it.polimi.ingsw.view.cli.viewables.DevelopmentSpace;
 
 import static it.polimi.ingsw.view.cli.ViewableId.TEST;
 
@@ -75,8 +76,13 @@ public class MainCLI {
 
         //screen.start("welcome");
 
+        //methods to test the viewable objects
         //showWarehouseTest(screen, factory);
-        showDevelopmentCardTest(screen, factory);
+        //showDevelopmentCardTest(screen, factory);
+        //showDevelopmentSpaceTest(screen, factory);
+
+
+
 
 
         /*new Thread(() -> {
@@ -115,7 +121,6 @@ public class MainCLI {
     }
 
 
-
     private static void showDevelopmentCardTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View developmentCard = new View();
         DevelopmentCard developmentCardViewable = factory.buildDevelopmentCard(1, ViewableId.WELCOME_TEXT);
@@ -145,5 +150,26 @@ public class MainCLI {
         screenCLI.show("developmentCard");
     }
 
+
+    private static void showDevelopmentSpaceTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
+        View developmentSpace = new View();
+        DevelopmentSpace developmentSpaceViewable = factory.buildDevelopmentSpace(1, ViewableId.WELCOME_TEXT);
+        developmentSpace.addViewable(developmentSpaceViewable);
+
+        screenCLI.addView("developmentSpace", developmentSpace);
+        //screenCLI.start("developmentSpace");
+
+        int [] updDevSpace = {
+                1, //id1
+                2, //id2
+                3, //id3
+                1, 2, 0, 0, 0, //input
+                0, 0, 1, 0, 1, //output
+                1, 0, 0, 0, 0 //currentSupply
+        };
+        developmentSpaceViewable.update(updDevSpace);
+        screenCLI.start("developmentSpace");
+
+    }
 
 }

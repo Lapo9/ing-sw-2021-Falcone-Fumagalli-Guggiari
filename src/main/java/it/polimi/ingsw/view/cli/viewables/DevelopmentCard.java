@@ -1,15 +1,16 @@
 package it.polimi.ingsw.view.cli.viewables;
 
-import it.polimi.ingsw.model.CardCategory;
-import it.polimi.ingsw.model.WarehouseObjectType;
 import it.polimi.ingsw.view.cli.Viewable;
+import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
 import java.util.HashMap;
 
+import it.polimi.ingsw.model.CardCategory;
+import it.polimi.ingsw.model.WarehouseObjectType;
 import static it.polimi.ingsw.model.development.DevelopmentCard.*;
 import static it.polimi.ingsw.model.WarehouseObjectType.*;
 import static it.polimi.ingsw.model.WarehouseObjectType.STONE;
-import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
+
 
 
 public class DevelopmentCard implements Viewable {
@@ -142,7 +143,7 @@ public class DevelopmentCard implements Viewable {
     @Override
     public String toString() {
         return BOLD("Development Card: " + id) + "\n" +
-                "+-------------------------------------+" + "\n" +
+                "+------------------------------------+" + "\n" +
                 "|   " + categoryToColor() + "         " + FRAMED(" Cost: ") + "        " + categoryToColor() + "   |" + "\n" +
                 "|                                    |" + "\n" +
 
