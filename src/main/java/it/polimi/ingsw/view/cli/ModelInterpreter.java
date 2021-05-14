@@ -1,6 +1,8 @@
 package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.model.leaders.LeaderCard;
+import it.polimi.ingsw.model.leaders.leader_abilities.Depot;
+import it.polimi.ingsw.model.leaders.leader_abilities.LeaderAbility;
 import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
 
@@ -59,8 +61,8 @@ public class ModelInterpreter {
         */
 
         //check if the leaders are activated and are producers. This is needed for the offline info about active productions
-        offlineInfo.setLeaderProducer(1, LeaderCard.getAbility(status[106]) instanceof Producer && status[107] == 1);
-        offlineInfo.setLeaderProducer(2, LeaderCard.getAbility(status[121]) instanceof Producer && status[102] == 1);
+        offlineInfo.setLeaderStatus(1, dataToStatus(status[106], status[107]));
+        offlineInfo.setLeaderStatus(2, dataToStatus(status[121], status[122]));
 
         items.update(player, ViewableId.TEST, status); //TODO test
         //if user has auto-refresh on, then update his screen
@@ -68,6 +70,27 @@ public class ModelInterpreter {
             controllerInterpreter.execute("refresh");
         }
     }
+
+
+
+    private static OfflineInfo.LeaderStatus dataToStatus(int id, int status){
+        LeaderAbility la = LeaderCard.getAbility(id);
+
+        if(status == 0){
+            return OfflineInfo.LeaderStatus.INACTIVE;
+        }
+        if (status == 2){
+            return OfflineInfo.LeaderStatus.DISCARDED;
+        }
+        if (LeaderCard.getAbility(id) instanceof Producer){
+            return OfflineInfo.LeaderStatus.PRODUCER;
+        }
+        if (LeaderCard.getAbility(id) instanceof Depot){
+            return OfflineInfo.LeaderStatus.DEPOT;
+        }
+        return OfflineInfo.LeaderStatus.OTHER;
+    }
+
 
 
     /*

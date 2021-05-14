@@ -5,11 +5,19 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class OfflineInfo {
+
+
+    public enum LeaderStatus{
+        INACTIVE, DISCARDED, PRODUCER, DEPOT, OTHER;
+    }
+
+
     private HashMap<String, Boolean> activeProductions = new HashMap<>();
-    private boolean isLeader1Producer = false;
-    private boolean isLeader2Producer = false;
+    private LeaderStatus leader1Status = LeaderStatus.INACTIVE;
+    private LeaderStatus leader2Status = LeaderStatus.INACTIVE;
     private ArrayList<String> playersNamesInOrder = new ArrayList<>();
     private boolean autoRefresh = true;
+    private String selectedItem = "";
 
 
     public OfflineInfo(){
@@ -25,19 +33,33 @@ public class OfflineInfo {
         activeProductions.put("leader2", false);
         activeProductions.put("base", false);
 
-        isLeader1Producer = false;
-        isLeader2Producer = false;
+        leader1Status = LeaderStatus.INACTIVE;
+        leader2Status = LeaderStatus.INACTIVE;
+
+        selectedItem = "";
     }
 
 
 
-    public synchronized void setLeaderProducer(int leader, boolean isProducer){
+    public synchronized void setLeaderStatus(int leader, LeaderStatus status){
         if (leader == 1){
-            isLeader1Producer = isProducer;
+            leader1Status = status;
         }
         else if (leader == 2){
-            isLeader2Producer = isProducer;
+            leader2Status = status;
         }
+    }
+
+
+
+    public synchronized LeaderStatus getLeaderStatus(int leader){
+        if (leader == 1){
+            return leader1Status;
+        }
+        else if (leader == 2){
+            return leader2Status;
+        }
+        return null;
     }
 
 
@@ -52,8 +74,8 @@ public class OfflineInfo {
         args.append(activeProductions.get("dev1"))
             .append(activeProductions.get("dev2"))
             .append(activeProductions.get("dev3"))
-            .append(isLeader1Producer ? activeProductions.get("leader1") : false)
-            .append(isLeader2Producer ? activeProductions.get("leader2") : false)
+            .append(leader1Status==LeaderStatus.PRODUCER ? activeProductions.get("leader1") : false)
+            .append(leader2Status==LeaderStatus.PRODUCER ? activeProductions.get("leader2") : false)
             .append(activeProductions.get("base"));
         return args.toString();
     }
@@ -65,8 +87,8 @@ public class OfflineInfo {
         res[0] = activeProductions.get("dev1") ? 1 : 0;
         res[1] = activeProductions.get("dev2") ? 1 : 0;
         res[2] = activeProductions.get("dev3") ? 1 : 0;
-        res[3] = isLeader1Producer ? (activeProductions.get("leader1") ? 1 : 0) : 0;
-        res[4] = isLeader2Producer ? (activeProductions.get("leader2") ? 1 : 0) : 0;
+        res[3] = leader1Status==LeaderStatus.PRODUCER ? (activeProductions.get("leader1") ? 1 : 0) : 2;
+        res[4] = leader2Status==LeaderStatus.PRODUCER ? (activeProductions.get("leader2") ? 1 : 0) : 2;
         res[5] = activeProductions.get("base") ? 1 : 0;
 
         return res;
@@ -100,5 +122,15 @@ public class OfflineInfo {
 
     public boolean isAutoRefresh() {
         return autoRefresh;
+    }
+
+
+    public String getSelectedItem(){
+        return selectedItem;
+    }
+
+
+    public void setSelectedItem(String item){
+        selectedItem = item;
     }
 }

@@ -10,14 +10,12 @@ import javafx.scene.control.Label;
 import javafx.util.Duration;
 
 
-public abstract class SceneController {
+public abstract class SubSceneController {
 
+    protected String id;
     protected UserInterpreter userInterpreter;
     protected ControllerInterpreter controllerInterpreter;
     protected OfflineInfo offlineInfo;
-    @FXML private Label message;
-    FadeTransition fadeIn = new FadeTransition(Duration.millis(1000));
-    FadeTransition fadeOut = new FadeTransition(Duration.millis(5000));
 
 
     public abstract void update(int[] completeUpdate);
@@ -40,38 +38,13 @@ public abstract class SceneController {
         offlineInfo = oi;
     }
 
+    public void setId(String id){
+        this.id = id;
+    }
 
     public void initialize(){
-        //set values for message animation
-        fadeOut.setNode(message);
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.0);
-        fadeOut.setCycleCount(1);
-        fadeOut.setAutoReverse(false);
 
-        fadeIn.setNode(message);
-        fadeIn.setFromValue(0.0);
-        fadeIn.setToValue(1.0);
-        fadeIn.setCycleCount(1);
-        fadeIn.setAutoReverse(false);
-        fadeIn.setOnFinished(actionEvent -> fadeOut.playFromStart());
     }
-
-
-    /**
-     * Show the specified message.
-     * @param message Message
-     * @param type message, error or fatal
-     */
-    public void setMessage(String message, MessageType type) {
-        this.message.setText(message);
-        this.message.setTextFill(type.getColor());
-
-        fadeIn.playFromStart();
-    }
-
-
-    public abstract void setPlayers(String players);
 
 
 }

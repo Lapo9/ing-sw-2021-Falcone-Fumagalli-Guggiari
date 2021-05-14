@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Group xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LeaderController">
+   <children>
+      <ImageView fx:id="leader" fitHeight="305.0" fitWidth="160.0" layoutX="68.0" onMouseClicked="#leaderClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/leaders/leader7.png" />
+         </image>
+      </ImageView>
+      <Group fx:id="producerPane" layoutY="18.462890625">
+         <children>
+            <Group layoutY="79.0">
+               <children>
+                  <Text fx:id="coin" onMouseClicked="#coinClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
+                     <font>
+                        <Font name="Vivaldi Italic" size="36.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="servant" layoutY="37.0" onMouseClicked="#servantClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
+                     <font>
+                        <Font name="Vivaldi Italic" size="36.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="shield" layoutY="73.0" onMouseClicked="#shieldClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
+                     <font>
+                        <Font name="Vivaldi Italic" size="36.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="stone" layoutY="111.0" onMouseClicked="#stoneClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
+                     <font>
+                        <Font name="Vivaldi Italic" size="36.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="33.0" layoutY="-27.462890625" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/coin.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="34.0" layoutY="9.537109375" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/servant.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="37.0" layoutY="45.537109375" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/shield.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="35.0" layoutY="83.537109375" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/stone.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="checkBox" fitHeight="33.0" fitWidth="33.0" layoutX="19.0" layoutY="-77.0" onMouseClicked="#checkBoxClicked" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/box.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="produce" fitHeight="38.0" fitWidth="40.0" layoutX="16.0" layoutY="-76.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/tick.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="146.0" layoutY="134.537109375">
+               <children>
+                  <ImageView fx:id="arrowDown" fitHeight="26.0" fitWidth="20.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/arrow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="arrowUp" fitHeight="26.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/arrow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="mutableProduction" fitHeight="26.0" fitWidth="20.0" layoutX="2.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/no_type.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Group fx:id="depotPane" layoutX="109.0" layoutY="170.0">
+         <children>
+            <ImageView fx:id="depot2" fitHeight="29.0" fitWidth="38.0" layoutX="46.0" onMouseClicked="#depot2Clicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/coin.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="depot1" fitHeight="29.0" fitWidth="38.0" onMouseClicked="#depot1Clicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/no_type.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <ImageView fx:id="leaderActive" fitHeight="301.0" fitWidth="154.0" layoutX="69.0" onMouseClicked="#leaderActiveClicked" pickOnBounds="true">
+         <image>
+            <Image url="@../pictures/leaders/leaderClickable.png" />
+         </image>
+      </ImageView>
+      <Group fx:id="menu" layoutX="81.0" layoutY="39.0">
+         <children>
+            <ImageView fx:id="activate" fitHeight="69.0" fitWidth="129.0" layoutX="2.0" onMouseClicked="#activateClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/activateLeader.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="discard" fitHeight="69.0" fitWidth="129.0" layoutY="65.0" onMouseClicked="#discardClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/discardLeader.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+   </children>
+</Group>
