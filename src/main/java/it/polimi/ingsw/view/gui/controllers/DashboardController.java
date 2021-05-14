@@ -6,7 +6,7 @@ public class DashboardController {
 
     @FXML private LeaderController leader1Controller;
     @FXML private LeaderController leader2Controller;
-    @FXML private WarehoseController warehouseController;
+    @FXML private WarehouseController warehouseController;
     @FXML private CofferController cofferController;
     @FXML private BaseProductionController baseProductionController;
     @FXML private DevelopmentSpaceController developmentSpace1Controller;
