@@ -73,11 +73,12 @@ public class MainCLI {
         //screen.start("welcome");
 
         //methods to test the viewable objects
+
         //showWarehouseTest(screen, factory);
-        //showDevelopmentCardTest(screen, factory);
+        showDevelopmentCardTest(screen, factory);
         //showDevelopmentSpaceTest(screen, factory);
         //showDevelopmentGridCardTest(screen, factory);
-
+        //showDevelopmentGridTest(screen, factory);
 
 
 
@@ -142,6 +143,16 @@ public class MainCLI {
                 1, 0, 0, 0, 0 //currentSupply
         };
         developmentCardViewable.update(updWarehouse1);
+        screenCLI.show("developmentCard");
+
+        //empty card
+        int [] updWarehouse2 = {
+                0, //id
+                1, 2, 0, 0, 0, //input
+                0, 0, 1, 0, 1, //output
+                1, 0, 0, 0, 0 //currentSupply
+        };
+        developmentCardViewable.update(updWarehouse2);
         screenCLI.show("developmentCard");
     }
 
@@ -211,6 +222,11 @@ public class MainCLI {
         int [] updateDevGridCard = {1}; //this type of card gets updated only using the id
         developmentGridCardViewable.update(updateDevGridCard);
         screenCLI.show("developmentGridCard");
+
+        int [] updateDevGridCard1 = {0}; //this type of card gets updated only using the id
+        developmentGridCardViewable.update(updateDevGridCard1);
+        screenCLI.show("developmentGridCard");
+
 
     }
 

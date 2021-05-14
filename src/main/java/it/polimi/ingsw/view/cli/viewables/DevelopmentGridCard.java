@@ -54,24 +54,52 @@ public class DevelopmentGridCard implements Viewable {
         //getting everything from the id
         id = update[0];
 
-        cost.put(WarehouseObjectType.COIN, getCost(id).getQuantity(COIN));
-        cost.put(WarehouseObjectType.SERVANT, getCost(id).getQuantity(SERVANT));
-        cost.put(WarehouseObjectType.SHIELD, getCost(id).getQuantity(SHIELD));
-        cost.put(WarehouseObjectType.STONE, getCost(id).getQuantity(STONE));
-        cat = getCategory(id);
-        lv = getLevel(id);
-        wp = getWinPoints(id);
+        //if the id card is zero, i have to empty the space that it occupies
+        if (id == 0) {
+            cat = CardCategory.YELLOW;
+            lv = 0;
+            wp = 0;
 
-        input.put(WarehouseObjectType.COIN, getInput(update[0]).getQuantity(COIN));
-        input.put(WarehouseObjectType.SERVANT, getInput(update[0]).getQuantity(SERVANT));
-        input.put(WarehouseObjectType.SHIELD, getInput(update[0]).getQuantity(SHIELD));
-        input.put(WarehouseObjectType.STONE, getInput(update[0]).getQuantity(STONE));
-        input.put(WarehouseObjectType.FAITH_MARKER, getInput(update[0]).getQuantity(FAITH_MARKER));
-        output.put(WarehouseObjectType.COIN, getOutput(update[0]).getQuantity(COIN));
-        output.put(WarehouseObjectType.SERVANT, getOutput(update[0]).getQuantity(SERVANT));
-        output.put(WarehouseObjectType.SHIELD, getOutput(update[0]).getQuantity(SHIELD));
-        output.put(WarehouseObjectType.STONE, getOutput(update[0]).getQuantity(STONE));
-        output.put(WarehouseObjectType.FAITH_MARKER, getOutput(update[0]).getQuantity(FAITH_MARKER));
+            cost.put(WarehouseObjectType.COIN, 0);
+            cost.put(WarehouseObjectType.SERVANT, 0);
+            cost.put(WarehouseObjectType.SHIELD, 0);
+            cost.put(WarehouseObjectType.STONE, 0);
+
+            input.put(WarehouseObjectType.COIN, 0);
+            input.put(WarehouseObjectType.SERVANT, 0);
+            input.put(WarehouseObjectType.SHIELD, 0);
+            input.put(WarehouseObjectType.STONE, 0);
+            input.put(WarehouseObjectType.FAITH_MARKER, 0);
+            output.put(WarehouseObjectType.COIN, 0);
+            output.put(WarehouseObjectType.SERVANT, 0);
+            output.put(WarehouseObjectType.SHIELD, 0);
+            output.put(WarehouseObjectType.STONE, 0);
+            output.put(WarehouseObjectType.FAITH_MARKER, 0);
+            prod.put(0, input);
+            prod.put(1, output);
+
+        }
+        else {
+            //card with id != 0
+            cost.put(WarehouseObjectType.COIN, getCost(id).getQuantity(COIN));
+            cost.put(WarehouseObjectType.SERVANT, getCost(id).getQuantity(SERVANT));
+            cost.put(WarehouseObjectType.SHIELD, getCost(id).getQuantity(SHIELD));
+            cost.put(WarehouseObjectType.STONE, getCost(id).getQuantity(STONE));
+            cat = getCategory(id);
+            lv = getLevel(id);
+            wp = getWinPoints(id);
+
+            input.put(WarehouseObjectType.COIN, getInput(update[0]).getQuantity(COIN));
+            input.put(WarehouseObjectType.SERVANT, getInput(update[0]).getQuantity(SERVANT));
+            input.put(WarehouseObjectType.SHIELD, getInput(update[0]).getQuantity(SHIELD));
+            input.put(WarehouseObjectType.STONE, getInput(update[0]).getQuantity(STONE));
+            input.put(WarehouseObjectType.FAITH_MARKER, getInput(update[0]).getQuantity(FAITH_MARKER));
+            output.put(WarehouseObjectType.COIN, getOutput(update[0]).getQuantity(COIN));
+            output.put(WarehouseObjectType.SERVANT, getOutput(update[0]).getQuantity(SERVANT));
+            output.put(WarehouseObjectType.SHIELD, getOutput(update[0]).getQuantity(SHIELD));
+            output.put(WarehouseObjectType.STONE, getOutput(update[0]).getQuantity(STONE));
+            output.put(WarehouseObjectType.FAITH_MARKER, getOutput(update[0]).getQuantity(FAITH_MARKER));
+        }
     }
 
     private String categoryToColor() {
@@ -123,7 +151,6 @@ public class DevelopmentGridCard implements Viewable {
         }
         else return "";
     }
-
 
     private String printOnlyNotNull () {
 

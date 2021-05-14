@@ -73,32 +73,64 @@ public class DevelopmentCard implements Viewable {
         //getting cost, category, level and win points from the id
         id = update[0];
 
-        cost.put(WarehouseObjectType.COIN, getCost(id).getQuantity(COIN));
-        cost.put(WarehouseObjectType.SERVANT, getCost(id).getQuantity(SERVANT));
-        cost.put(WarehouseObjectType.SHIELD, getCost(id).getQuantity(SHIELD));
-        cost.put(WarehouseObjectType.STONE, getCost(id).getQuantity(STONE));
-        cat = getCategory(id);
-        lv = getLevel(id);
-        wp = getWinPoints(id);
+        if (id == 0) {
+            cost.put(WarehouseObjectType.COIN, 0);
+            cost.put(WarehouseObjectType.SERVANT, 0);
+            cost.put(WarehouseObjectType.SHIELD, 0);
+            cost.put(WarehouseObjectType.STONE, 0);
 
-        //update production
-        input.put(WarehouseObjectType.COIN, update[1]);
-        input.put(WarehouseObjectType.SERVANT, update[2]);
-        input.put(WarehouseObjectType.SHIELD, update[3]);
-        input.put(WarehouseObjectType.STONE, update[4]);
-        input.put(WarehouseObjectType.FAITH_MARKER, update[5]);
+            //production
+            input.put(WarehouseObjectType.COIN, 0);
+            input.put(WarehouseObjectType.SERVANT, 0);
+            input.put(WarehouseObjectType.SHIELD, 0);
+            input.put(WarehouseObjectType.STONE, 0);
+            input.put(WarehouseObjectType.FAITH_MARKER, 0);
+            output.put(WarehouseObjectType.COIN, 0);
+            output.put(WarehouseObjectType.SERVANT, 0);
+            output.put(WarehouseObjectType.SHIELD, 0);
+            output.put(WarehouseObjectType.STONE, 0);
+            output.put(WarehouseObjectType.FAITH_MARKER, 0);
+            currentSupply.put(WarehouseObjectType.COIN, 0);
+            currentSupply.put(WarehouseObjectType.SERVANT, 0);
+            currentSupply.put(WarehouseObjectType.SHIELD, 0);
+            currentSupply.put(WarehouseObjectType.STONE, 0);
+            currentSupply.put(WarehouseObjectType.FAITH_MARKER, 0);
+            prod.put(0, input);
+            prod.put(1, output);
+            prod.put(2, currentSupply);
 
-        output.put(WarehouseObjectType.COIN, update[6]);
-        output.put(WarehouseObjectType.SERVANT, update[7]);
-        output.put(WarehouseObjectType.SHIELD, update[8]);
-        output.put(WarehouseObjectType.STONE, update[9]);
-        output.put(WarehouseObjectType.FAITH_MARKER, update[10]);
+            cat = CardCategory.YELLOW;
+            lv = 0;
+            wp = 0;
+        }
+        else {
+            cost.put(WarehouseObjectType.COIN, getCost(id).getQuantity(COIN));
+            cost.put(WarehouseObjectType.SERVANT, getCost(id).getQuantity(SERVANT));
+            cost.put(WarehouseObjectType.SHIELD, getCost(id).getQuantity(SHIELD));
+            cost.put(WarehouseObjectType.STONE, getCost(id).getQuantity(STONE));
+            cat = getCategory(id);
+            lv = getLevel(id);
+            wp = getWinPoints(id);
 
-        currentSupply.put(WarehouseObjectType.COIN, update[11]);
-        currentSupply.put(WarehouseObjectType.SERVANT, update[12]);
-        currentSupply.put(WarehouseObjectType.SHIELD, update[13]);
-        currentSupply.put(WarehouseObjectType.STONE, update[14]);
-        currentSupply.put(WarehouseObjectType.FAITH_MARKER, update[15]);
+            //update production
+            input.put(WarehouseObjectType.COIN, update[1]);
+            input.put(WarehouseObjectType.SERVANT, update[2]);
+            input.put(WarehouseObjectType.SHIELD, update[3]);
+            input.put(WarehouseObjectType.STONE, update[4]);
+            input.put(WarehouseObjectType.FAITH_MARKER, update[5]);
+
+            output.put(WarehouseObjectType.COIN, update[6]);
+            output.put(WarehouseObjectType.SERVANT, update[7]);
+            output.put(WarehouseObjectType.SHIELD, update[8]);
+            output.put(WarehouseObjectType.STONE, update[9]);
+            output.put(WarehouseObjectType.FAITH_MARKER, update[10]);
+
+            currentSupply.put(WarehouseObjectType.COIN, update[11]);
+            currentSupply.put(WarehouseObjectType.SERVANT, update[12]);
+            currentSupply.put(WarehouseObjectType.SHIELD, update[13]);
+            currentSupply.put(WarehouseObjectType.STONE, update[14]);
+            currentSupply.put(WarehouseObjectType.FAITH_MARKER, update[15]);
+        }
     }
 
     private String categoryToColor() {
