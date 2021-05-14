@@ -63,9 +63,10 @@ public class ScreenGUI extends Application implements Screen {
 
         loadView("welcomeScreen", "/fxml/WelcomeScreen.fxml", ci, ui, oi);
         loadView("lobby", "/fxml/Lobby.fxml", ci, ui, oi);
+        loadView("dashboard", "/fxml/Dashboard.fxml", ci, ui, oi);
         //TODO load all the scenes
 
-        activeScene = scenes.get("welcomeScreen");
+        activeScene = scenes.get("dashboard");
 
         stage.setScene(activeScene.first);
         stage.show();

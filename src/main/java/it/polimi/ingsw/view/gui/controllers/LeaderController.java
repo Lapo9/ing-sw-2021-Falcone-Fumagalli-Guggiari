@@ -38,7 +38,7 @@ public class LeaderController extends SubSceneController {
     @Override
     public void initialize() {
         super.initialize();
-        number = Integer.parseInt(id.substring(id.length() - 1)); //assuming the ID is in the form of leaderX
+        number = 1;// Integer.parseInt(id.substring(id.length() - 1)); //assuming the ID is in the form of leaderX
     }
 
     @Override

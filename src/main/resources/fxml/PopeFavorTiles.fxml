@@ -4,7 +4,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<fx:root type="Group" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PopeFavorTilesController">
+<Group xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.PopeFavorTilesController">
    <children>
       <ImageView fx:id="player1" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -27,4 +27,4 @@
          </image>
       </ImageView>
    </children>
-</fx:root>
+</Group>

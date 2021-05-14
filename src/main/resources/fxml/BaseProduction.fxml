@@ -5,7 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<fx:root type="Group" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BaseProductionController">
+<Group xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.BaseProductionController">
    <children>
       <ImageView fx:id="out" fitHeight="43.0" fitWidth="38.0" layoutX="31.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -26,31 +26,49 @@
          <image>
             <Image url="@../pictures/miscellaneous/arrow.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="outDown" fitHeight="26.0" fitWidth="38.0" layoutX="70.0" layoutY="117.0" onMouseClicked="#outDownClicked" pickOnBounds="true" preserveRatio="true" rotate="270.0">
          <image>
             <Image url="@../pictures/miscellaneous/arrow.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="in2up" fitHeight="26.0" fitWidth="38.0" layoutX="63.0" layoutY="1.0" onContextMenuRequested="#in2upClicked" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@../pictures/miscellaneous/arrow.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="in1up" fitHeight="26.0" fitWidth="38.0" layoutX="11.0" layoutY="1.0" onMouseClicked="#in1upClicked" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@../pictures/miscellaneous/arrow.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="in2down" fitHeight="26.0" fitWidth="38.0" layoutX="63.0" layoutY="69.0" onMouseClicked="#in2downClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/miscellaneous/arrow.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="in1down" fitHeight="26.0" fitWidth="38.0" layoutX="11.0" layoutY="69.0" onMouseClicked="#in1downClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/miscellaneous/arrow.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fx:id="checkBoc" fitHeight="33.0" fitWidth="33.0" layoutX="32.0" layoutY="163.0" onMouseClicked="#checkBoxClicked" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -66,4 +84,4 @@
          </image>
       </ImageView>
    </children>
-</fx:root>
+</Group>

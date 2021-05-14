@@ -4,7 +4,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<fx:root type="Group" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PlayersController">
+<Group xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.PlayersController">
    <children>
       <ImageView fx:id="player3" fitHeight="40.0" fitWidth="40.0" layoutX="-28.0" layoutY="23.0" onMouseEntered="#player3mouseEntered" onMouseExited="#player3mouseExited" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -27,4 +27,4 @@
          </image>
       </ImageView>
    </children>
-</fx:root>
+</Group>
