@@ -330,6 +330,29 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
         return list;
     }
 
+    /**
+     * Returns the url to the card image.
+     * @param id card id
+     * @return the url to the card image
+     */
+    public static String getUrl(int id) {
+        File file = new File(path);
+        ArrayList<CardsRequirement> list = new ArrayList<>();
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        for(int i = 0; i < 18; i++)
+            scan.nextInt();
+        String tmp = scan.next();
+        return tmp;
+    }
+
     @Override
     public ArrayList<Integer> getStatus() {
         ArrayList<Integer> status = new ArrayList<>();

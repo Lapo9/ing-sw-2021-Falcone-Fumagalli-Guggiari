@@ -94,14 +94,10 @@ public class LeaderCardTest {
         Pair<SupplyContainer, ArrayList<CardsRequirement>> list = lc.getCost();
         int[] expectedResult = {3,                //winPoints
                                 0, 1,             //depot of the ability
-                                0, 0, 0, 5, 0,    //supply requirement
-                                0, 0, 5,          //card requirement 1
-                                0, 0, 5};         //card requirement 2
+                                0, 0, 0, 5, 0};   //supply requirement
         int[] actualResult = {lc.getWinPoints(),
                               pair.first == WarehouseObjectType.COIN ? 0 : pair.first == WarehouseObjectType.STONE ? 2 : pair.first == WarehouseObjectType.SERVANT ? 3 : pair.first ==WarehouseObjectType.SHIELD ? 4 : 5, pair.second,
-                              list.first.getQuantity(WarehouseObjectType.COIN), list.first.getQuantity(WarehouseObjectType.STONE), list.first.getQuantity(WarehouseObjectType.SERVANT), list.first.getQuantity(WarehouseObjectType.SHIELD), list.first.getQuantity(WarehouseObjectType.FAITH_MARKER),
-                              list.second.get(0).minLevel(), list.second.get(0).getNumber(), list.second.get(0).reqCard() == CardCategory.GREEN ? 1 : list.second.get(0).reqCard() == CardCategory.BLUE ? 2 : list.second.get(0).reqCard() == CardCategory.YELLOW ? 3 : list.second.get(0).reqCard() == CardCategory.VIOLET ? 4 : 5,
-                              list.second.get(1).minLevel(), list.second.get(1).getNumber(), list.second.get(1).reqCard() == CardCategory.GREEN ? 1 : list.second.get(1).reqCard() == CardCategory.BLUE ? 2 : list.second.get(1).reqCard() == CardCategory.YELLOW ? 3 : list.second.get(1).reqCard() == CardCategory.VIOLET ? 4 : 5};
+                              list.first.getQuantity(WarehouseObjectType.COIN), list.first.getQuantity(WarehouseObjectType.STONE), list.first.getQuantity(WarehouseObjectType.SERVANT), list.first.getQuantity(WarehouseObjectType.SHIELD), list.first.getQuantity(WarehouseObjectType.FAITH_MARKER)};
         assertArrayEquals(expectedResult, actualResult);
     }
 
@@ -120,13 +116,11 @@ public class LeaderCardTest {
         int[] expectedResult = {4,                //winPoints
                                 1,                //depot of the ability
                                 0, 0, 0, 0, 0,    //supply requirement
-                                2, 1, 2,          //card requirement 1
-                                0, 0, 5};         //card requirement 2
+                                2, 1, 2};         //card requirement 1
         int[] actualResult = {lc.getWinPoints(),
                               status.get(2),
                               list.first.getQuantity(WarehouseObjectType.COIN), list.first.getQuantity(WarehouseObjectType.STONE), list.first.getQuantity(WarehouseObjectType.SERVANT), list.first.getQuantity(WarehouseObjectType.SHIELD), list.first.getQuantity(WarehouseObjectType.FAITH_MARKER),
-                              list.second.get(0).minLevel(), list.second.get(0).getNumber(), list.second.get(0).reqCard() == CardCategory.GREEN ? 1 : list.second.get(0).reqCard() == CardCategory.BLUE ? 2 : list.second.get(0).reqCard() == CardCategory.YELLOW ? 3 : list.second.get(0).reqCard() == CardCategory.VIOLET ? 4 : 5,
-                              list.second.get(1).minLevel(), list.second.get(1).getNumber(), list.second.get(1).reqCard() == CardCategory.GREEN ? 1 : list.second.get(1).reqCard() == CardCategory.BLUE ? 2 : list.second.get(1).reqCard() == CardCategory.YELLOW ? 3 : list.second.get(1).reqCard() == CardCategory.VIOLET ? 4 : 5};
+                              list.second.get(0).minLevel(), list.second.get(0).getNumber(), list.second.get(0).reqCard() == CardCategory.GREEN ? 1 : list.second.get(0).reqCard() == CardCategory.BLUE ? 2 : list.second.get(0).reqCard() == CardCategory.YELLOW ? 3 : list.second.get(0).reqCard() == CardCategory.VIOLET ? 4 : 5};
         assertArrayEquals(expectedResult, actualResult);
     }
 
