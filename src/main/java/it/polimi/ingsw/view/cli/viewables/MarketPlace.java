@@ -56,7 +56,7 @@ public class MarketPlace implements Viewable {
 
     private String marbleColor(int num) {
         if(num == 0)  //blue
-            return "\033[0;34m⏺\033[0m";
+            return "\033[0;36m⏺\033[0m";
         else if(num == 1)  //grey
             return "\033[0;37m⏺\033[0m";
         else if(num == 2)   //red
