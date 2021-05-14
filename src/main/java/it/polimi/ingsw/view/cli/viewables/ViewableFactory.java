@@ -44,7 +44,7 @@ public class ViewableFactory {
     }
 
 
-    public Warehouse buildWarehouse(int player, ViewableId viewableId) {
+    public Warehouse buildWarehouse(int player, ViewableId viewableId){
         Warehouse res = new Warehouse();
         items.get(player-1).put(viewableId, res);
         return res;
@@ -89,6 +89,12 @@ public class ViewableFactory {
     public DevelopmentGridCard buildDevelopmentGridCard (int player, ViewableId viewableId) {
         DevelopmentGridCard res = new DevelopmentGridCard();
         items.get(player-1).put(viewableId, res);
+        return res;
+    }
+
+    public DevelopmentGrid buildDevelopmentGrid (ViewableId viewableId){
+        DevelopmentGrid res = new DevelopmentGrid();
+        items.get(5).put(viewableId, res);
         return res;
     }
 

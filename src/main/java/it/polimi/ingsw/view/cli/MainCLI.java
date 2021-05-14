@@ -75,10 +75,10 @@ public class MainCLI {
         //methods to test the viewable objects
 
         //showWarehouseTest(screen, factory);
-        showDevelopmentCardTest(screen, factory);
+        //showDevelopmentCardTest(screen, factory);
         //showDevelopmentSpaceTest(screen, factory);
         //showDevelopmentGridCardTest(screen, factory);
-        //showDevelopmentGridTest(screen, factory);
+        showDevelopmentGridTest(screen, factory);
 
 
 
@@ -119,7 +119,7 @@ public class MainCLI {
 
     private static void showDevelopmentCardTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View developmentCard = new View();
-        DevelopmentCard developmentCardViewable = factory.buildDevelopmentCard(1, ViewableId.WELCOME_TEXT);
+        DevelopmentCard developmentCardViewable = factory.buildDevelopmentCard(1, ViewableId.DEVELOPMENTCARD);
         developmentCard.addViewable(developmentCardViewable);
 
         screenCLI.addView("developmentCard", developmentCard);
@@ -158,7 +158,7 @@ public class MainCLI {
 
     private static void showDevelopmentSpaceTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View developmentSpace = new View();
-        DevelopmentSpace developmentSpaceViewable = factory.buildDevelopmentSpace(1, ViewableId.WELCOME_TEXT);
+        DevelopmentSpace developmentSpaceViewable = factory.buildDevelopmentSpace(1, ViewableId.DEVELOPMENTSPACE);
         developmentSpace.addViewable(developmentSpaceViewable);
 
         screenCLI.addView("developmentSpace", developmentSpace);
@@ -213,7 +213,7 @@ public class MainCLI {
 
     private static void showDevelopmentGridCardTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
         View developmentGridCard = new View();
-        DevelopmentGridCard developmentGridCardViewable = factory.buildDevelopmentGridCard(1, ViewableId.WELCOME_TEXT);
+        DevelopmentGridCard developmentGridCardViewable = factory.buildDevelopmentGridCard(1, ViewableId.DEVELOPMENTGRIDCARD);
         developmentGridCard.addViewable(developmentGridCardViewable);
 
         screenCLI.addView("developmentGridCard", developmentGridCard);
@@ -231,7 +231,12 @@ public class MainCLI {
     }
 
     private static void showDevelopmentGridTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
+        View developmentGrid = new View();
+        DevelopmentGrid developmentGridViewable = factory.buildDevelopmentGrid(ViewableId.DEVELOPMENTGRID);
+        developmentGrid.addViewable(developmentGridViewable);
 
+        screenCLI.addView("developmentGrid", developmentGrid);
+        screenCLI.start("developmentGrid");
 
 
     }
