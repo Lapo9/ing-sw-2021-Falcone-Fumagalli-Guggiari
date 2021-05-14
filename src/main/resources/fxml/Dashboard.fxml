@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -11,17 +13,17 @@
    <children>
       <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pictures/board.png" />
+            <Image url="@../pictures/backgrounds/board.png" />
          </image>
       </ImageView>
-      <Group layoutX="938.0" layoutY="14.0">
+      <Group layoutX="13.0" layoutY="16.0">
          <children>
             <ImageView fitHeight="305.0" fitWidth="160.0" layoutX="68.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Pictures/mastersOfReinassance/new%20leaders/leader16.png" />
+                  <Image url="@../pictures/leaders/leader7.png" />
                </image>
             </ImageView>
-            <Group layoutY="62.462890625">
+            <Group layoutY="95.462890625">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
                      <font>
@@ -45,131 +47,158 @@
                   </Text>
                   <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="33.0" layoutY="-27.462890625" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/coin.png" />
+                        <Image url="@../pictures/miscellaneous/coin.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="34.0" layoutY="9.537109375" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/servant.png" />
+                        <Image url="@../pictures/miscellaneous/servant.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="37.0" layoutY="45.537109375" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/shield.png" />
+                        <Image url="@../pictures/miscellaneous/shield.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="35.0" layoutY="83.537109375" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/stone.png" />
+                        <Image url="@../pictures/miscellaneous/stone.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="19.0" layoutY="-77.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/box.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="16.0" layoutY="-76.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/tick.png" />
                      </image>
                   </ImageView>
                </children>
             </Group>
-            <Group layoutX="146.0" layoutY="129.0">
+            <Group layoutX="146.0" layoutY="153.0" visible="false">
                <children>
                   <ImageView fitHeight="26.0" fitWidth="20.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/arrow.png" />
+                        <Image url="@../pictures/miscellaneous/arrow.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="26.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                      <image>
-                        <Image url="@../pictures/arrow.png" />
+                        <Image url="@../pictures/miscellaneous/arrow.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="26.0" fitWidth="20.0" layoutX="2.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/shield.png" />
+                        <Image url="@../pictures/miscellaneous/no_type.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Group>
+            <Group layoutX="109.0" layoutY="170.0">
+               <children>
+                  <ImageView fitHeight="29.0" fitWidth="38.0" layoutX="47.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/no_type.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/no_type.png" />
                      </image>
                   </ImageView>
                </children>
             </Group>
          </children>
       </Group>
-      <Group layoutX="251.0" layoutY="454.0">
+      <Group layoutX="506.0" layoutY="458.0">
          <children>
             <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="31.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/shield.png" />
+                  <Image url="@../pictures/miscellaneous/no_type.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="43.0" fitWidth="38.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="5.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/shield.png" />
+                  <Image url="@../pictures/miscellaneous/no_type.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="57.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/shield.png" />
+                  <Image url="@../pictures/miscellaneous/no_type.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="3.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
-                  <Image url="@../pictures/arrow.png" />
+                  <Image url="@../pictures/miscellaneous/arrow.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="70.0" layoutY="117.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                <image>
-                  <Image url="@../pictures/arrow.png" />
+                  <Image url="@../pictures/miscellaneous/arrow.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="63.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                <image>
-                  <Image url="@../pictures/arrow.png" />
+                  <Image url="@../pictures/miscellaneous/arrow.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="6.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+            <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="11.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                <image>
-                  <Image url="@../pictures/arrow.png" />
+                  <Image url="@../pictures/miscellaneous/arrow.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="63.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/arrow.png" />
+                  <Image url="@../pictures/miscellaneous/arrow.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="6.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="26.0" fitWidth="38.0" layoutX="11.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/arrow.png" />
+                  <Image url="@../pictures/miscellaneous/arrow.png" />
                </image>
             </ImageView>
          </children>
       </Group>
-      <Group layoutX="34.0" layoutY="261.0">
+      <Group layoutX="289.0" layoutY="265.0">
          <children>
             <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="123.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/shield.png" />
+                  <Image url="@../pictures/miscellaneous/no_type.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="77.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/shield.png" />
+                  <Image url="@../pictures/miscellaneous/no_type.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="31.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/shield.png" />
+                  <Image url="@../pictures/miscellaneous/no_type.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="100.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/shield.png" />
+                  <Image url="@../pictures/miscellaneous/no_type.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="53.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/shield.png" />
+                  <Image url="@../pictures/miscellaneous/no_type.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="43.0" fitWidth="38.0" layoutX="81.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/shield.png" />
+                  <Image url="@../pictures/miscellaneous/no_type.png" />
                </image>
             </ImageView>
          </children>
       </Group>
-      <Group layoutX="34.0" layoutY="509.0">
+      <Group layoutX="289.0" layoutY="513.0">
          <children>
             <Text fill="WHITE" layoutX="85.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
@@ -193,38 +222,38 @@
             </Text>
          </children>
       </Group>
-      <Group layoutX="253.0" layoutY="271.0">
+      <Group layoutX="508.0" layoutY="275.0">
          <children>
-            <Text layoutX="8.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
+            <Text layoutX="9.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text layoutX="8.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
+            <Text layoutX="9.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text layoutX="8.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
+            <Text layoutX="9.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text layoutX="8.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
+            <Text layoutX="9.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
          </children>
       </Group>
-      <Group layoutX="938.0" layoutY="377.0">
+      <Group layoutX="13.0" layoutY="347.0">
          <children>
             <ImageView fitHeight="305.0" fitWidth="160.0" layoutX="68.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../Pictures/mastersOfReinassance/new%20leaders/leader16.png" />
+                  <Image url="@../pictures/leaders/leader7.png" />
                </image>
             </ImageView>
-            <Group layoutY="62.462890625">
+            <Group layoutY="98.462890625">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
                      <font>
@@ -248,107 +277,138 @@
                   </Text>
                   <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="33.0" layoutY="-27.462890625" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/coin.png" />
+                        <Image url="@../pictures/miscellaneous/coin.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="34.0" layoutY="9.537109375" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/servant.png" />
+                        <Image url="@../pictures/miscellaneous/servant.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="37.0" layoutY="45.537109375" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/shield.png" />
+                        <Image url="@../pictures/miscellaneous/shield.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="35.0" layoutY="83.537109375" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/stone.png" />
+                        <Image url="@../pictures/miscellaneous/stone.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="19.0" layoutY="-77.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/box.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="16.0" layoutY="-76.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/tick.png" />
                      </image>
                   </ImageView>
                </children>
             </Group>
-            <Group layoutX="146.0" layoutY="129.0">
+            <Group layoutX="146.0" layoutY="153.0" visible="false">
                <children>
                   <ImageView fitHeight="26.0" fitWidth="20.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/arrow.png" />
+                        <Image url="@../pictures/miscellaneous/arrow.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="26.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                      <image>
-                        <Image url="@../pictures/arrow.png" />
+                        <Image url="@../pictures/miscellaneous/arrow.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="26.0" fitWidth="20.0" layoutX="2.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/shield.png" />
+                        <Image url="@../pictures/miscellaneous/no_type.png" />
                      </image>
                   </ImageView>
                </children>
             </Group>
+            <Group layoutX="109.0" layoutY="170.0">
+               <children>
+                  <Pane>
+                     <children>
+                        <ImageView fitHeight="29.0" fitWidth="38.0" layoutX="47.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../pictures/miscellaneous/no_type.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../pictures/miscellaneous/no_type.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </Group>
          </children>
       </Group>
-      <Group layoutX="42.0" layoutY="130.0">
+      <Group layoutX="298.0" layoutY="131.0">
          <children>
-            <ImageView fitHeight="21.0" fitWidth="20.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="-1.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/orangeDot.png" />
+                  <Image url="@../pictures/miscellaneous/orangeDot.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="21.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/redDot.png" />
+                  <Image url="@../pictures/miscellaneous/redDot.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="23.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="22.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/blueDot.png" />
+                  <Image url="@../pictures/miscellaneous/blueDot.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="23.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="21.0" fitWidth="20.0" layoutX="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/greenDot.png" />
+                  <Image url="@../pictures/miscellaneous/lightGreenDot.png" />
                </image>
             </ImageView>
          </children>
       </Group>
-      <Group layoutX="-3.0" layoutY="-3.0">
+      <Group layoutX="253.0" layoutY="-2.0">
          <children>
             <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="30.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/orangeDot.png" />
+                  <Image url="@../pictures/miscellaneous/orangeDot.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="30.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/redDot.png" />
+                  <Image url="@../pictures/miscellaneous/redDot.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="77.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/blueDot.png" />
+                  <Image url="@../pictures/miscellaneous/blueDot.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="37.0" fitWidth="37.0" layoutX="77.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/greenDot.png" />
+                  <Image url="@../pictures/miscellaneous/lightGreenDot.png" />
                </image>
             </ImageView>
          </children>
       </Group>
-      <Group layoutX="374.0" layoutY="279.0">
+      <Group layoutX="629.0" layoutY="283.0">
          <children>
-            <ImageView fitHeight="223.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="223.0" fitWidth="228.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../Downloads/Masters%20of%20Renaissance_Cards_FRONT_3mmBleed_1-58-1.png" />
+                  <Image url="@../../../../../../../Pictures/mastersOfReinassance/leaders/Masters%20of%20Renaissance_Cards_FRONT_3mmBleed_1-59-1.png" />
                </image>
             </ImageView>
             <Group layoutY="250.0">
                <children>
                   <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/yellowDot.png" />
+                        <Image url="@../pictures/miscellaneous/yellowDot.png" />
                      </image>
                   </ImageView>
                   <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
@@ -362,7 +422,7 @@
                <children>
                   <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/yellowDot.png" />
+                        <Image url="@../pictures/miscellaneous/yellowDot.png" />
                      </image>
                   </ImageView>
                   <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
@@ -372,20 +432,33 @@
                   </Text>
                </children>
             </Group>
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="55.0" layoutY="-36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/box.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="52.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/tick.png" />
+               </image>
+            </ImageView>
          </children>
       </Group>
-      <Group layoutX="551.0" layoutY="279.0">
+      <Group layoutX="810.0" layoutY="283.0">
          <children>
-            <ImageView fitHeight="223.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="223.0" fitWidth="228.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../Downloads/Masters%20of%20Renaissance_Cards_FRONT_3mmBleed_1-58-1.png" />
+                  <Image url="@../../../../../../../Pictures/mastersOfReinassance/leaders/Masters%20of%20Renaissance_Cards_FRONT_3mmBleed_1-59-1.png" />
                </image>
             </ImageView>
             <Group layoutY="250.0">
                <children>
                   <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/yellowDot.png" />
+                        <Image url="@../pictures/miscellaneous/yellowDot.png" />
                      </image>
                   </ImageView>
                   <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
@@ -399,7 +472,7 @@
                <children>
                   <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/yellowDot.png" />
+                        <Image url="@../pictures/miscellaneous/yellowDot.png" />
                      </image>
                   </ImageView>
                   <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
@@ -409,20 +482,33 @@
                   </Text>
                </children>
             </Group>
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="56.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/box.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="53.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/tick.png" />
+               </image>
+            </ImageView>
          </children>
       </Group>
-      <Group layoutX="735.0" layoutY="279.0">
+      <Group layoutX="994.0" layoutY="283.0">
          <children>
-            <ImageView fitHeight="223.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="223.0" fitWidth="228.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../Downloads/Masters%20of%20Renaissance_Cards_FRONT_3mmBleed_1-58-1.png" />
+                  <Image url="@../../../../../../../Pictures/mastersOfReinassance/leaders/Masters%20of%20Renaissance_Cards_FRONT_3mmBleed_1-59-1.png" />
                </image>
             </ImageView>
             <Group layoutY="250.0">
                <children>
                   <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/yellowDot.png" />
+                        <Image url="@../pictures/miscellaneous/yellowDot.png" />
                      </image>
                   </ImageView>
                   <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
@@ -436,7 +522,7 @@
                <children>
                   <ImageView fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../pictures/yellowDot.png" />
+                        <Image url="@../pictures/miscellaneous/yellowDot.png" />
                      </image>
                   </ImageView>
                   <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
@@ -446,76 +532,89 @@
                   </Text>
                </children>
             </Group>
-         </children>
-      </Group>
-      <Group layoutX="244.0" layoutY="101.0">
-         <children>
-            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="61.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/redSquare.png" />
+                  <Image url="@../pictures/miscellaneous/box.png" />
                </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="38.0" fitWidth="40.0" layoutX="58.0" layoutY="-33.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/greenSquare.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../pictures/orangeSquare.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../pictures/blueSquare.png" />
+                  <Image url="@../pictures/miscellaneous/tick.png" />
                </image>
             </ImageView>
          </children>
       </Group>
-      <Group layoutX="470.0" layoutY="56.0">
+      <Group layoutX="500.0" layoutY="104.0">
          <children>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/redSquare.png" />
+                  <Image url="@../pictures/miscellaneous/redSquare.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/greenSquare.png" />
+                  <Image url="@../pictures/miscellaneous/greenSquare.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="25.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/orangeSquare.png" />
+                  <Image url="@../pictures/miscellaneous/orangeSquare.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/blueSquare.png" />
+                  <Image url="@../pictures/miscellaneous/blueSquare.png" />
                </image>
             </ImageView>
          </children>
       </Group>
-      <Group layoutX="744.0" layoutY="106.0">
+      <Group layoutX="730.0" layoutY="56.0">
          <children>
             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/redSquare.png" />
+                  <Image url="@../pictures/miscellaneous/redSquare.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/greenSquare.png" />
+                  <Image url="@../pictures/miscellaneous/greenSquare.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="25.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/orangeSquare.png" />
+                  <Image url="@../pictures/miscellaneous/orangeSquare.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../pictures/blueSquare.png" />
+                  <Image url="@../pictures/miscellaneous/blueSquare.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group layoutX="1004.0" layoutY="106.0">
+         <children>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/redSquare.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/greenSquare.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/orangeSquare.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="26.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/blueSquare.png" />
                </image>
             </ImageView>
          </children>
