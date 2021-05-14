@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root type="Group" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DevelopmentSpaceController">
+   <children>
+      <ImageView fx:id="card" fitHeight="223.0" fitWidth="228.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../Downloads/Masters%20of%20Renaissance_Cards_FRONT_3mmBleed_1-12-1.png" />
+         </image>
+      </ImageView>
+      <Group layoutY="309.0">
+         <children>
+            <ImageView fx:id="oldCard1" fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/yellowDot.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="winPointsOldCard1" fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
+               <font>
+                  <Font name="Vivaldi Italic" size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
+      <Group layoutX="86.0" layoutY="309.0">
+         <children>
+            <ImageView fx:id="oldCard2" fitHeight="63.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/yellowDot.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="winPointsOldCard2" fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="CENTER">
+               <font>
+                  <Font name="Vivaldi Italic" size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </Group>
+      <ImageView fx:id="checkBox" fitHeight="33.0" fitWidth="33.0" layoutX="55.0" layoutY="-36.0" onMouseClicked="#checkboxClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/box.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="produce" fitHeight="38.0" fitWidth="40.0" layoutX="52.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/tick.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="37.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/coin.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="109.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/shield.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="38.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/servant.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="110.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/stone.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="coin" layoutX="2.0" layoutY="254.0" onMouseClicked="#coinClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="shield" layoutX="74.0" layoutY="254.0" onMouseClicked="#shieldClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="servant" layoutX="3.0" layoutY="297.0" onMouseClicked="#servantClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="stone" layoutX="75.0" layoutY="297.0" onMouseClicked="#stoneClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="activeSquare" fitHeight="94.0" fitWidth="148.0" layoutY="220.0" onMouseClicked="#activeSquareClicked" pickOnBounds="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/rectangularActive.png" />
+         </image>
+      </ImageView>
+   </children>
+</fx:root>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<fx:root type="Group" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PaycheckController">
+   <children>
+      <Text fx:id="stone" layoutX="9.0" layoutY="165.0" onMouseClicked="#stoneClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="shield" layoutX="9.0" layoutY="122.0" onMouseClicked="#shieldClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="servant" layoutX="9.0" layoutY="79.0" onMouseClicked="#servantClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <Text fx:id="coin" layoutX="9.0" layoutY="36.0" onMouseClicked="#coinClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="90.0" fitWidth="196.0" layoutX="-52.0" layoutY="45.0" pickOnBounds="true" rotate="90.0">
+         <image>
+            <Image url="@../pictures/miscellaneous/rectangularActive.png" />
+         </image>
+      </ImageView>
+   </children>
+</fx:root>
