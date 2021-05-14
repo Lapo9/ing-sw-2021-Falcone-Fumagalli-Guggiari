@@ -156,6 +156,27 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
     }
 
     /**
+     * Returns an integer which represents the type of leader ability (1 = market, 2 = depot, 3 = production, 4 = discount).
+     * @param id card id
+     * @return the type of leader ability
+     */
+    public static Integer getAbilityNumber(int id) {
+        File file = new File(path);
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        scan.nextInt();    //points
+        int abil = scan.nextInt();
+        return abil;
+    }
+
+    /**
      * Returns the supply container that contains the details of the leader ability.
      * @param id card id
      * @return the supply container that contains the details of the leader abilty.
@@ -304,7 +325,8 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
             default:
                 color2 = null;
         }
-        list.add(new CardsRequirement(num2, lvl2, color2));
+        if(num2 != 0)
+            list.add(new CardsRequirement(num2, lvl2, color2));
         return list;
     }
 
