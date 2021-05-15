@@ -74,11 +74,13 @@ public class MainCLI {
 
         //methods to test the viewable objects
 
+        //showMarketplace (screen, factory);
+        showMarbleContainer(screen, factory);
         //showWarehouseTest(screen, factory);
         //showDevelopmentCardTest(screen, factory);
         //showDevelopmentSpaceTest(screen, factory);
         //showDevelopmentGridCardTest(screen, factory);
-        showDevelopmentGridTest(screen, factory);
+        //showDevelopmentGridTest(screen, factory);
 
 
 
@@ -94,6 +96,27 @@ public class MainCLI {
         }).start();*/
     }
 
+    private static void showMarketplace (ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
+        View MarketPlace = new View();
+        MarketPlace MarketPlaceViewable = factory.buildMarketPlace(ViewableId.WAREHOUSE);
+        MarketPlace.addViewable(MarketPlaceViewable);
+
+        screenCLI.addView("MarketPlace", MarketPlace);
+        screenCLI.start("MarketPlace");
+    }
+
+    private static void showMarbleContainer (ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
+        View marbleContainer = new View();
+        MarbleContainer marbleContainerViewable = factory.buildMarbleContainer(1, ViewableId.WAREHOUSE);
+        marbleContainer.addViewable(marbleContainerViewable);
+
+        screenCLI.addView("marbleContainer", marbleContainer);
+        screenCLI.start("marbleContainer");
+
+        int [] updMarbleContainer = {2, 1, 0, 1, 0, 0};
+        marbleContainerViewable.update(updMarbleContainer);
+        screenCLI.show("marbleContainer");
+    }
     private static void showWarehouseTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View warehouse = new View();
         Warehouse warehouseViewable = factory.buildWarehouse(1, ViewableId.WAREHOUSE);

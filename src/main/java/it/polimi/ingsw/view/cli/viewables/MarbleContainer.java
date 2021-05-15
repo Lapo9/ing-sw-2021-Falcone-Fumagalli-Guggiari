@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.cli.viewables;
 import it.polimi.ingsw.model.MarbleColor;
 import it.polimi.ingsw.view.cli.Viewable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static it.polimi.ingsw.model.MarbleColor.*;
@@ -11,35 +12,81 @@ import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
 public class MarbleContainer implements Viewable {
 
-    private HashMap<MarbleColor, Integer> marbles = new HashMap<>();
-
+    private ArrayList<Integer> marbles = new ArrayList<>();
 
     MarbleContainer () {
-        marbles.put(MarbleColor.YELLOW, 0);
-        marbles.put(MarbleColor.BLUE, 0);
-        marbles.put(MarbleColor.GREY, 0);
-        marbles.put(MarbleColor.WHITE, 0);
-        marbles.put(MarbleColor.VIOLET, 0);
-        marbles.put(MarbleColor.RED, 0);
+        marbles.add(0, 0); //blue
+        marbles.add(1, 0); //grey
+        marbles.add(2, 0); //red
+        marbles.add(3, 0); //violet
+        marbles.add(4, 0); //white
+        marbles.add(5, 0); //yellow
     }
 
     @Override
     public void update(int[] update) {
-        marbles.put(MarbleColor.YELLOW, update[0]);
-        marbles.put(MarbleColor.BLUE, update[1]);
-        marbles.put(MarbleColor.GREY, update[2]);
-        marbles.put(MarbleColor.WHITE, update[3]);
-        marbles.put(MarbleColor.VIOLET, update[4]);
-        marbles.put(MarbleColor.RED, update[5]);
+        marbles.add(0, update[0]); //blue
+        marbles.add(1, update[1]); //grey
+        marbles.add(2, update[2]); //red
+        marbles.add(3, update[3]); //violet
+        marbles.add(4, update[4]); //white
+        marbles.add(5, update[5]); //yellow
     }
 
     @Override
     public String toString() {
-        return FRAMED(" MarbleContainer ") + " " + BLACK(BACK_YELLOW(" " + marbles.get(YELLOW).toString() + " ")) +
-                                                        BACK_BLUE(" " + marbles.get(BLUE).toString() + " ") +
-                                                        WHITE(" " + marbles.get(GREY).toString() + " ") +
-                                                        BACK_WHITE( " " + marbles.get(WHITE).toString() + " ") +
-                                                        BACK_MAGENTA( " " + marbles.get(VIOLET).toString() + " ") +
-                                                        BACK_RED(" " + marbles.get(RED).toString() + " ");
+        return FRAMED(" MarbleContainer: ") + "\n" + marbleContainer();
+
     }
+
+    private String marbleContainer() {
+        if (marbles.get(0) == 0 && marbles.get(1) == 0 && marbles.get(2) == 0 && marbles.get(3) == 0 && marbles.get(4) == 0 && marbles.get(5) == 0) {
+            return "╔════╦════╦════╦════╗\n" +
+                    "║  " + ((char)8196) + ((char)8196) + " ║  " + ((char)8196) + ((char)8196) + " ║  " + ((char)8196) + ((char)8196) + " ║  " + ((char)8196) + ((char)8196) + " ║" +
+                    "\n╚════╩════╩════╩════╝";
+        }
+        else {
+            return "╔════╦════╦════╦════╗\n" +
+                    "║ " + ((char)8201) + putMarbles(0, marbles.get(0)) +
+                    putMarbles(1, marbles.get(1)) +
+                    putMarbles(2, marbles.get(2)) +
+                    putMarbles(3, marbles.get(3)) +
+                    putMarbles(4, marbles.get(4)) +
+                    putMarbles(5, marbles.get(5)) + "\n" +
+                    "╚════╩════╩════╩════╝";
+        }
+    }
+
+    private String putMarbles(int marbleIndex, Integer i){
+        if (i == 2) {
+            return (intToBall(marbleIndex) + ((char)8201) + " ║ " + ((char)8201) + intToBall(marbleIndex) + ((char)8201) + " ║ " + ((char)8201));
+        }
+        else if (i == 1) {
+            return (intToBall(marbleIndex) + ((char)8201) + " ║ " + ((char)8201));
+        }
+        else return "";
+    }
+
+    private String intToBall (Integer i) {
+        if (i == 0) {
+            return "\033[0;36m⏺\033[0m";
+        }
+        else if (i == 1) {
+            return "\033[0;37m⏺\033[0m";
+        }
+        else if (i == 2) {
+            return "\033[0;31m⏺\033[0m";
+        }
+        else if (i == 3) {
+            return "\033[0;35m⏺\033[0m";
+        }
+        else if (i == 4) {
+            return "⏺";
+        }
+        else if (i == 5) {
+            return "\033[0;33m⏺\033[0m";
+        }
+        else return null;
+    }
+
 }
