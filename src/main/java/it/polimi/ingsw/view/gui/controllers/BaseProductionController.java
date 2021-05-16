@@ -48,52 +48,50 @@ public class BaseProductionController extends SubSceneController {
 
     @FXML
     void in1downClicked() {
-        controllerInterpreter.execute("swapBase");
-        next(input1);
+        controllerInterpreter.execute("reset");
+        input1 = next(input1);
         in1.setImage(new Image(input1.getUrl()));
+        userInterpreter.execute("swapBase 1");
     }
 
     @FXML
     void in1upClicked() {
-        controllerInterpreter.execute("swapBase");
-        prev(input1);
+        controllerInterpreter.execute("reset");
+        input1 = prev(input1);
         in1.setImage(new Image(input1.getUrl()));
+        userInterpreter.execute("swapBase 1");
     }
 
     @FXML
     void in2downClicked() {
-        controllerInterpreter.execute("swapBase");
-        input2++;
-        if(input2 == 4)
-            input2 = 0;
-        in2.setImage(new Image(getUrl(input2)));
+        controllerInterpreter.execute("reset");
+        input2 = next(input2);
+        in2.setImage(new Image(input2.getUrl()));
+        userInterpreter.execute("swapBase 2");
     }
 
     @FXML
     void in2upClicked() {
-        controllerInterpreter.execute("swapBase");
-        input2--;
-        if(input2 == -1)
-            input2 = 3;
-        in2.setImage(new Image(getUrl(input2)));
+        controllerInterpreter.execute("reset");
+        input2 = prev(input2);
+        in2.setImage(new Image(input2.getUrl()));
+        userInterpreter.execute("swapBase 2");
     }
 
     @FXML
     void outDownClicked() {
-        controllerInterpreter.execute("swapBase");
-        output++;
-        if(output == 4)
-            output = 0;
-        out.setImage(new Image(getUrl(output)));
+        controllerInterpreter.execute("reset");
+        output = next(output);
+        out.setImage(new Image(output.getUrl()));
+        userInterpreter.execute("swapBase 3");
     }
 
     @FXML
     void outUpClicked() {
-        controllerInterpreter.execute("swapBase");
-        output--;
-        if(output == -1)
-            output = 3;
-        out.setImage(new Image(getUrl(output)));
+        controllerInterpreter.execute("reset");
+        output = prev(output);
+        out.setImage(new Image(output.getUrl()));
+        controllerInterpreter.execute("swapBase 3");
     }
 
 }
