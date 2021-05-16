@@ -100,6 +100,8 @@ public class ScreenGUI extends Application implements Screen {
         tmpController.attachUserInterpreter(ui);
         tmpController.attachOfflineInfo(oi);
 
+        tmpController.initializeSubScenes();
+
         scenes.put(id, new Pair<>(tmpScene, tmpController));
     }
 

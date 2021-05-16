@@ -58,6 +58,11 @@ public abstract class SceneController {
     }
 
 
+
+    public abstract void initializeSubScenes();
+
+
+
     /**
      * Show the specified message.
      * @param message Message

@@ -24,7 +24,7 @@ public class WelcomeScreenController extends SceneController {
     RotateTransition A3 = new RotateTransition(Duration.millis(9060));
 
 
-
+    @Override
     public void initialize(){
         super.initialize();
 
@@ -46,6 +46,10 @@ public class WelcomeScreenController extends SceneController {
         A2.play();
         A3.play();
     }
+
+
+    @Override
+    public void initializeSubScenes() {}
 
 
     @Override

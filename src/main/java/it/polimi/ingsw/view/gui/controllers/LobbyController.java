@@ -37,6 +37,9 @@ public class LobbyController extends SceneController {
 
 
     @Override
+    public void initializeSubScenes() {}
+
+    @Override
     public void update(int[] completeUpdate) {
 
     }

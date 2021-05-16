@@ -22,7 +22,11 @@ public class DashboardController extends SceneController {
     @Override
     public void initialize() {
         super.initialize();
+    }
 
+
+    @Override
+    public void initializeSubScenes() {
         leader1Controller.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
         leader2Controller.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
         warehouseController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
@@ -36,7 +40,6 @@ public class DashboardController extends SceneController {
         popeFavorTiles2Controller.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
         popeFavorTiles3Controller.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
         faithTrackPlayersController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
-        
     }
 
     @Override

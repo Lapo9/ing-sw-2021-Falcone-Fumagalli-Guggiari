@@ -111,7 +111,11 @@ public class ViewableFactory {
      * @param update New values to insert to the viewable
      */
     public void update(int player, ViewableId id, int[] update){
-        items.get(player).get(id).update(update);
+        try {
+            items.get(player).get(id).update(update);
+        } catch (NoSuchMethodException nsme){
+            nsme.printStackTrace();
+        }
     }
 
 }
