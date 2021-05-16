@@ -1,10 +1,11 @@
 package it.polimi.ingsw.view.gui.controllers;
 
+import it.polimi.ingsw.view.gui.WarehouseObjectTypeController;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getUrl;
+import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.*;
 
 public class BaseProductionController extends SubSceneController {
 
@@ -20,17 +21,17 @@ public class BaseProductionController extends SubSceneController {
     @FXML private ImageView checkBoc;
     @FXML private ImageView produce;
 
-    private int input1 = 0;
-    private int input2 = 0;
-    private int output = 0;
+    private WarehouseObjectTypeController input1 = COIN;
+    private WarehouseObjectTypeController input2 = COIN;
+    private WarehouseObjectTypeController output = COIN;
 
     @Override
     public void initialize() {
         super.initialize();
 
-        in1.setImage(new Image(getUrl(input1)));
-        in2.setImage(new Image(getUrl(input2)));
-        out.setImage(new Image(getUrl(output)));
+        in1.setImage(new Image(input1.getUrl()));
+        in2.setImage(new Image(input2.getUrl()));
+        out.setImage(new Image(output.getUrl()));
     }
 
     @Override
@@ -48,19 +49,15 @@ public class BaseProductionController extends SubSceneController {
     @FXML
     void in1downClicked() {
         controllerInterpreter.execute("swapBase");
-        input1++;
-        if(input1 == 4)
-            input1 = 0;
-        in1.setImage(new Image(getUrl(input1)));
+        next(input1);
+        in1.setImage(new Image(input1.getUrl()));
     }
 
     @FXML
     void in1upClicked() {
         controllerInterpreter.execute("swapBase");
-        input1--;
-        if(input1 == -1)
-            input1 = 3;
-        in1.setImage(new Image(getUrl(input1)));
+        prev(input1);
+        in1.setImage(new Image(input1.getUrl()));
     }
 
     @FXML
