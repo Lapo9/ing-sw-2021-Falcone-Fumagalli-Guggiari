@@ -142,7 +142,19 @@ public class DevelopmentGridCard implements Viewable {
 
     @Override
     public String toString() {
-        return BOLD("Development Card: ") + id + "\n" + printOnlyNotNull();
+        return BOLD("Development Card: ") + id + "\n" +
+                rowToString(0) + "\n" + rowToString(1) + "\n" +
+                rowToString(2) + "\n" + rowToString(3) + "\n" +
+                rowToString(4) + "\n" + rowToString(5) + "\n" +
+                rowToString(6) + "\n" + rowToString(7) + "\n" +
+                rowToString(8) + "\n" + rowToString(9) + "\n" +
+                rowToString(10) + "\n"
+                ;
+    }
+
+    public String rowToString(int row) {
+        String[] rows = printOnlyNotNull().split("\n");
+        return rows[row];
     }
 
     private String calculateSpaces (int i, WarehouseObjectType wot) {

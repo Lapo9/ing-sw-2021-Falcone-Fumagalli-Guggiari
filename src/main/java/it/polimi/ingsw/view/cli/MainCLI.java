@@ -75,12 +75,12 @@ public class MainCLI {
         //methods to test the viewable objects
 
         //showMarketplace (screen, factory);
-        showMarbleContainer(screen, factory);
+        //showMarbleContainer(screen, factory);
         //showWarehouseTest(screen, factory);
         //showDevelopmentCardTest(screen, factory);
         //showDevelopmentSpaceTest(screen, factory);
         //showDevelopmentGridCardTest(screen, factory);
-        //showDevelopmentGridTest(screen, factory);
+        showDevelopmentGridTest(screen, factory);
 
 
 
@@ -117,6 +117,7 @@ public class MainCLI {
         marbleContainerViewable.update(updMarbleContainer);
         screenCLI.show("marbleContainer");
     }
+
     private static void showWarehouseTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View warehouse = new View();
         Warehouse warehouseViewable = factory.buildWarehouse(1, ViewableId.WAREHOUSE);
@@ -261,6 +262,12 @@ public class MainCLI {
         screenCLI.addView("developmentGrid", developmentGrid);
         screenCLI.start("developmentGrid");
 
+        int [] updateDevGrid = {
+                0, 1, 2, 3,
+                4, 5, 6, 7,
+                8, 9, 10, 11};
+        developmentGridViewable.update(updateDevGrid);
+        screenCLI.show("developmentGrid");
 
     }
 }
