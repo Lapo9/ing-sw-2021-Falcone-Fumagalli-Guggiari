@@ -50,14 +50,15 @@ public class LobbyController extends SceneController {
         //clear the table
         for (int i = 0; i < 4; ++i){
             this.players.get(i).first.setText("");
-            this.players.get(i).second.setImage(new Image("/pictures/void.png"));
+            this.players.get(i).second.setVisible(false);
         }
 
         String[] playersAndStatus = players.split(" ");
 
         for (int i = 0; i < playersAndStatus.length-1; i+=2){
+            this.players.get(i/2).second.setVisible(true);
             this.players.get(i/2).first.setText(playersAndStatus[i+1]);
-            this.players.get(i/2).second.setImage(new Image(playersAndStatus[i].equals("on") ? "/pictures/online.png" : "/pictures/offline.png"));
+            this.players.get(i/2).second.setImage(new Image(playersAndStatus[i].equals("on") ? "/pictures/miscellaneous/online.png" : "/pictures/miscellaneous/offline.png"));
         }
     }
 

@@ -2,8 +2,10 @@ package it.polimi.ingsw.view.gui.controllers;
 
 import it.polimi.ingsw.model.leaders.LeaderCard;
 import it.polimi.ingsw.view.cli.OfflineInfo;
+import it.polimi.ingsw.view.gui.WarehouseObjectTypeController;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
@@ -33,6 +35,7 @@ public class LeaderController extends SubSceneController {
 
     private int number;
     private int leaderCardId;
+    private WarehouseObjectTypeController producerInput = WarehouseObjectTypeController.COIN;
 
 
     @Override
@@ -143,6 +146,25 @@ public class LeaderController extends SubSceneController {
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("stone " + id);
         controllerInterpreter.execute("selected " + offlineInfo.getSelectedItem());
+    }
+
+
+    @FXML
+    void arrowUpClicked(){
+        controllerInterpreter.execute("reset");
+        producerInput = WarehouseObjectTypeController.next(producerInput);
+        mutableProduction.setImage(new Image(producerInput.getUrl()));
+        userInterpreter.execute("swapLeader " + number + " " + WarehouseObjectTypeController.getTypeByUrl(producerInput.getUrl()).toString().toLowerCase(Locale.ROOT));
+    }
+
+
+
+    @FXML
+    void arrowDownClicked(){
+        controllerInterpreter.execute("reset");
+        producerInput = WarehouseObjectTypeController.prev(producerInput);
+        mutableProduction.setImage(new Image(producerInput.getUrl()));
+        userInterpreter.execute("swapLeader " + number + " " + WarehouseObjectTypeController.getTypeByUrl(producerInput.getUrl()).toString().toLowerCase(Locale.ROOT));
     }
 
 }

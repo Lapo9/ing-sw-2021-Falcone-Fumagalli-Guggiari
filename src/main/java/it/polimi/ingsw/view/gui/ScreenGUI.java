@@ -33,7 +33,7 @@ public class ScreenGUI extends Application implements Screen {
 
     @Override
     public void setMessage(String message, MessageType type) {
-        activeScene.second.setMessage(message, type);
+        Platform.runLater(() -> activeScene.second.setMessage(message, type));
     }
 
 
@@ -53,32 +53,23 @@ public class ScreenGUI extends Application implements Screen {
         this.stage = stage;
         stage.setResizable(false);
 
+        ServerSocket socket = new ServerSocket();
         OfflineInfo oi = new OfflineInfo();
         ControllerInterpreter ci = new ControllerInterpreter(this, oi);
-        ModelInterpreter mi = new ModelInterpreter(null, null, null);
-        ServerSocket socket = new ServerSocket();
+        ModelInterpreter mi = new ModelInterpreter(null, null, null); //TODO this is different for the gui
         socket.attachInterpreter(mi);
         socket.attachInterpreter(ci);
         UserInterpreter ui = new UserInterpreter(ci, socket, oi);
 
-        loadView("welcomeScreen", "/fxml/WelcomeScreen.fxml", ci, ui, oi);
+        loadView("welcome", "/fxml/WelcomeScreen.fxml", ci, ui, oi);
         loadView("lobby", "/fxml/Lobby.fxml", ci, ui, oi);
         loadView("dashboard", "/fxml/Dashboard.fxml", ci, ui, oi);
         //TODO load all the scenes
 
-        activeScene = scenes.get("dashboard");
+        activeScene = scenes.get("welcome");
 
         stage.setScene(activeScene.first);
         stage.show();
-
-
-        //TODO eliminate this test
-        Platform.runLater(() -> {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (Exception e){}
-            activeScene.second.setPlayers("on Lapo off Marco");
-        });
     }
 
 
