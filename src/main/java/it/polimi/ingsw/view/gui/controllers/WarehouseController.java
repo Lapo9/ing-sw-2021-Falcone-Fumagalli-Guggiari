@@ -49,18 +49,26 @@ public class WarehouseController extends SubSceneController {
     }
 
     @FXML
+    void b1Clicked() {
+        controllerInterpreter.execute("reset");
+        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh1");
+        userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
+    }
+
+    @FXML
+    void c1Clicked() {
+        controllerInterpreter.execute("reset");
+        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh1");
+        userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
+    }
+
+    @FXML
     void a2Clicked() {
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh2");
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
-    @FXML
-    void a3Clicked() {
-        controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh3");
-        userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
-    }
 
     @FXML
     void b2Clicked() {
@@ -69,19 +77,15 @@ public class WarehouseController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+
+
     @FXML
-    void b3Clicked() {
+    void a3Clicked() {
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh3");
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
-    @FXML
-    void c3Clicked() {
-        controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh3");
-        userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
-    }
 
     @FXML
     void active1Clicked() {

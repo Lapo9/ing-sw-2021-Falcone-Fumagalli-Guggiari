@@ -151,6 +151,10 @@ public class ControllerInterpreter {
         screen.setPlayers(toSend.toString());
     }
 
+    private void reset(String... tokens){
+        //TODO important
+    }
+
 
 
     //sets the standard commands the server can send to the view
@@ -168,6 +172,7 @@ public class ControllerInterpreter {
         knownCommands.put("deactivateProduction", this::deactivateProduction);
         knownCommands.put("autoRefresh", this::autoRefresh);
         knownCommands.put("setPlayers", this::setPlayers);
+        knownCommands.put("reset", this::reset);
     }
 
 }
