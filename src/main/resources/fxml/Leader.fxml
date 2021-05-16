@@ -58,6 +58,11 @@
                         <Image url="@../pictures/miscellaneous/stone.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="produce" fitHeight="38.0" fitWidth="40.0" layoutX="16.0" layoutY="-76.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/tick.png" />
+                     </image>
+                  </ImageView>
                   <ImageView fx:id="checkBox" fitHeight="33.0" fitWidth="33.0" layoutX="19.0" layoutY="-77.0" onMouseClicked="#checkBoxClicked" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../pictures/miscellaneous/box.png" />
@@ -65,11 +70,6 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </ImageView>
-                  <ImageView fx:id="produce" fitHeight="38.0" fitWidth="40.0" layoutX="16.0" layoutY="-76.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../pictures/miscellaneous/tick.png" />
-                     </image>
                   </ImageView>
                </children>
             </Group>

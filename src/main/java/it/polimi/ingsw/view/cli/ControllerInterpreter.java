@@ -55,6 +55,10 @@ public class ControllerInterpreter {
         }
     }
 
+    private void hide(String... tokens){
+        screen.hide(tokens[1]);
+    }
+
     private void spy(String... tokens){
         try {
             screen.show("player" + offlineInfo.getPlayerOrder(tokens[1]));
@@ -160,6 +164,7 @@ public class ControllerInterpreter {
     //sets the standard commands the server can send to the view
     private void fillStandardKnownCommands(){
         knownCommands.put("show", this::show);
+        knownCommands.put("hide", this::hide);
         knownCommands.put("spy", this::spy);
         knownCommands.put("error", this::error);
         knownCommands.put("message", this::message);

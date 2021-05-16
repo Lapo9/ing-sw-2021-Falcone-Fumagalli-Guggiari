@@ -1,30 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
 <Group xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.PlayersController">
    <children>
-      <ImageView fx:id="player3" fitHeight="40.0" fitWidth="40.0" layoutX="-28.0" layoutY="23.0" onMouseEntered="#player3mouseEntered" onMouseExited="#player3mouseExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player3" fitHeight="20.0" fitWidth="20.0" layoutX="-3.0" layoutY="23.0" onMouseEntered="#player3mouseEntered" onMouseExited="#player3mouseExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/miscellaneous/orangeDot.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fx:id="player1" fitHeight="40.0" fitWidth="40.0" layoutX="-28.0" layoutY="-23.0" onMouseEntered="#player1mouseEntered" onMouseExited="#player1mouseExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player1" fitHeight="20.0" fitWidth="20.0" layoutX="-3.0" onMouseEntered="#player1mouseEntered" onMouseExited="#player1mouseExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/miscellaneous/redDot.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fx:id="player4" fitHeight="40.0" fitWidth="40.0" layoutX="22.0" layoutY="23.0" onMouseEntered="#player4mouseEntered" onMouseExited="#player4mouseExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player4" fitHeight="20.0" fitWidth="20.0" layoutX="22.0" layoutY="23.0" onMouseEntered="#player4mouseEntered" onMouseExited="#player4mouseExited" pickOnBounds="false" preserveRatio="true">
          <image>
             <Image url="@../pictures/miscellaneous/blueDot.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fx:id="player2" fitHeight="40.0" fitWidth="40.0" layoutX="22.0" layoutY="-23.0" onMouseEntered="#player2mouseEntered" onMouseExited="#player2mouseExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="player2" fitHeight="20.0" fitWidth="20.0" layoutX="22.0" onMouseEntered="#player2mouseEntered" onMouseExited="#player2mouseExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/miscellaneous/lightGreenDot.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
       </ImageView>
    </children>
 </Group>

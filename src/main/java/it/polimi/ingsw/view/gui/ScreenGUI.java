@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.gui;
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.view.Screen;
 import it.polimi.ingsw.view.cli.*;
+import it.polimi.ingsw.view.gui.controllers.DashboardController;
 import it.polimi.ingsw.view.gui.controllers.SceneController;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -23,11 +24,31 @@ public class ScreenGUI extends Application implements Screen {
 
     @Override
     public void show(String scene){
-        activeScene = scenes.get(scene);
-        Platform.runLater(() -> {
-            stage.setScene(activeScene.first);
-            stage.show();
-        });
+        //if the argument is one of the opponents, then it happens a special show, since in the GUI opponents are not stan alone scenes
+        if (scene.contains("opponent")){
+            if (activeScene.second instanceof DashboardController){
+                ((DashboardController) activeScene.second).showOpponent(Integer.parseInt(scene.substring(scene.length() - 1)));
+            }
+        }
+
+        else {
+            activeScene = scenes.get(scene);
+            Platform.runLater(() -> {
+                stage.setScene(activeScene.first);
+                stage.show();
+            });
+        }
+    }
+
+
+    @Override
+    public void hide(String scene) {
+        //this works only if the argument is an opponent
+        if (scene.contains("opponent")){
+            if (activeScene.second instanceof DashboardController){
+                ((DashboardController) activeScene.second).hideOpponent(Integer.parseInt(scene.substring(scene.length() - 1)));
+            }
+        }
     }
 
 
@@ -36,11 +57,6 @@ public class ScreenGUI extends Application implements Screen {
         Platform.runLater(() -> activeScene.second.setMessage(message, type));
     }
 
-
-    @Override
-    public void refresh() {
-
-    }
 
 
     @Override
@@ -66,7 +82,7 @@ public class ScreenGUI extends Application implements Screen {
         loadView("dashboard", "/fxml/Dashboard.fxml", ci, ui, oi);
         //TODO load all the scenes
 
-        activeScene = scenes.get("welcome");
+        activeScene = scenes.get("dashboard");
 
         stage.setScene(activeScene.first);
         stage.show();

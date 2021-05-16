@@ -8,9 +8,15 @@ public interface Screen {
 
     public void show(String sceneID) throws ViewException;
 
+    public default void hide(String sceneID) {
+
+    }
+
     public void setMessage(String message, MessageType type);
 
-    public void refresh();
+    public default void refresh() {
+
+    }
 
     public void setPlayers(String players);
 

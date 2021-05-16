@@ -25,7 +25,11 @@
       <fx:include fx:id="popeFavorTiles1" layoutX="501.0" layoutY="106.0" source="PopeFavorTiles.fxml" />
       <fx:include fx:id="popeFavorTiles2" layoutX="730.0" layoutY="58.0" source="PopeFavorTiles.fxml" />
       <fx:include fx:id="popeFavorTiles3" layoutX="1005.0" layoutY="106.0" source="PopeFavorTiles.fxml" />
-      <fx:include fx:id="faithTrackPlayers" layoutX="303.0" layoutY="134.0" scaleX="0.5" scaleY="0.5" source="Players.fxml" />
+      <fx:include fx:id="opponent1" source="Opponent.fxml" />
+      <fx:include fx:id="opponent2" source="Opponent.fxml" />
+      <fx:include fx:id="opponent3" source="Opponent.fxml" />
+      <fx:include fx:id="opponent4" source="Opponent.fxml" />
+      <fx:include fx:id="faithTrackPlayers" layoutX="303.0" layoutY="134.0" source="Players.fxml" />
       <Label fx:id="message" layoutX="21.0" layoutY="639.0" prefHeight="22.0" prefWidth="489.0" text="Label">
          <font>
             <Font name="Consolas Bold" size="18.0" />
