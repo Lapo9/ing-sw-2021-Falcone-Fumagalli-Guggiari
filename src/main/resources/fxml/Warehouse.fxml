@@ -6,17 +6,17 @@
 
 <Group xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.WarehouseController">
    <children>
-      <ImageView fx:id="c3Clicked" fitHeight="43.0" fitWidth="38.0" layoutX="169.0" layoutY="118.0" onMouseClicked="#c3Clicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="c1" fitHeight="43.0" fitWidth="38.0" layoutX="169.0" layoutY="118.0" onMouseClicked="#c1Clicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/miscellaneous/no_type.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="b3" fitHeight="43.0" fitWidth="38.0" layoutX="123.0" layoutY="118.0" onMouseClicked="#b3Clicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="b1" fitHeight="43.0" fitWidth="38.0" layoutX="123.0" layoutY="118.0" onMouseClicked="#b1Clicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/miscellaneous/no_type.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="a3" fitHeight="43.0" fitWidth="38.0" layoutX="77.0" layoutY="118.0" onMouseClicked="#a3Clicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="a1" fitHeight="43.0" fitWidth="38.0" layoutX="77.0" layoutY="118.0" onMouseClicked="#a1Clicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/miscellaneous/no_type.png" />
          </image>
@@ -31,7 +31,7 @@
             <Image url="@../pictures/miscellaneous/no_type.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="a1" fitHeight="43.0" fitWidth="38.0" layoutX="127.0" layoutY="-3.0" onMouseClicked="#a1Clicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="a3" fitHeight="43.0" fitWidth="38.0" layoutX="127.0" layoutY="-3.0" onMouseClicked="#a3Clicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/miscellaneous/no_type.png" />
          </image>

@@ -18,6 +18,7 @@ public class OfflineInfo {
     private ArrayList<String> playersNamesInOrder = new ArrayList<>();
     private boolean autoRefresh = true;
     private String selectedItem = "";
+    private String selectedWarehouseRow = "";
 
 
     public OfflineInfo(){
@@ -132,5 +133,15 @@ public class OfflineInfo {
 
     public void setSelectedItem(String item){
         selectedItem = item;
+    }
+
+
+    public String getSelectedWarehouseRow() {
+        return selectedWarehouseRow;
+    }
+
+
+    public void setSelectedWarehouseRow(String selectedWarehouseRow) {
+        this.selectedWarehouseRow = selectedWarehouseRow;
     }
 }

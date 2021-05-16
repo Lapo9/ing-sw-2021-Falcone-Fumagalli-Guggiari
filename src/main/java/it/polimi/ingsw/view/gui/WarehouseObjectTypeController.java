@@ -15,39 +15,50 @@ public enum WarehouseObjectTypeController {
     }
 
 
-    public static void next(WarehouseObjectTypeController wotc){
+    public static WarehouseObjectTypeController next(WarehouseObjectTypeController wotc){
         switch (wotc){
             case COIN:
-                wotc = SERVANT;
-                break;
+                return SERVANT;
             case SERVANT:
-                wotc = SHIELD;
-                break;
+                return SHIELD;
             case SHIELD:
-                wotc = STONE;
-                break;
+                return STONE;
             case STONE:
-                wotc = COIN;
-                break;
+                return COIN;
         }
+        return null;
     }
 
 
-    public static void prev(WarehouseObjectTypeController wotc){
+    public static WarehouseObjectTypeController prev(WarehouseObjectTypeController wotc){
         switch (wotc){
             case COIN:
-                wotc = STONE;
-                break;
+                return STONE;
             case SERVANT:
-                wotc = COIN;
-                break;
+                return COIN;
             case SHIELD:
-                wotc = SERVANT;
-                break;
+                return SERVANT;
             case STONE:
-                wotc = SHIELD;
-                break;
+                return SHIELD;
         }
+        return null;
+    }
+
+
+    public static WarehouseObjectTypeController getTypeByUrl(String url){
+        if (url.equals(COIN.getUrl())){
+            return COIN;
+        }
+        if (url.equals(SERVANT.getUrl())){
+            return SERVANT;
+        }
+        if (url.equals(SHIELD.getUrl())){
+            return SHIELD;
+        }
+        if (url.equals(STONE.getUrl())){
+            return STONE;
+        }
+        return null;
     }
 
 }

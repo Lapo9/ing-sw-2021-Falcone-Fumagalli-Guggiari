@@ -18,3 +18,5 @@ messages Match::update can receive:
 - discardLeader		index							TURN_START, TURN_END	player discarded one leader
 - endTurn									TURN_END		player ended his turn
 - pickLeaders		index1		index2					LEADER_SELECTION	player chose his leaders
+- swapRows		index1		index2					TURN_START		player swapped 2 warehouse rows
+- selected		supply type	from					TURN_START		player selected an item

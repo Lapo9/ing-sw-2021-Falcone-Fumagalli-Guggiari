@@ -63,7 +63,7 @@ public class LeaderController extends SubSceneController {
     void depot1Clicked() {
         //if there are no supplies, it shouldn't be possible to click
         controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(LeaderCard.getAbilityWOT(leaderCardId).toString().toLowerCase(Locale.ROOT) + id);
+        offlineInfo.setSelectedItem(LeaderCard.getAbilityWOT(leaderCardId).toString().toLowerCase(Locale.ROOT) + " " + id);
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
@@ -71,7 +71,7 @@ public class LeaderController extends SubSceneController {
     void depot2Clicked() {
         //if there are no supplies, it shouldn't be possible to click
         controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(LeaderCard.getAbilityWOT(leaderCardId).toString().toLowerCase(Locale.ROOT) + id);
+        offlineInfo.setSelectedItem(LeaderCard.getAbilityWOT(leaderCardId).toString().toLowerCase(Locale.ROOT) + " " + id);
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
