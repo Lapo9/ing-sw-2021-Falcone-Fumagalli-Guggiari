@@ -18,15 +18,14 @@
       <fx:include fx:id="leader2" layoutX="15.0" layoutY="350.0" source="Leader.fxml" />
       <fx:include fx:id="warehouse" layoutX="240.0" layoutY="290.0" source="Warehouse.fxml" />
       <fx:include fx:id="coffer" layoutX="289.0" layoutY="515.0" source="Coffer.fxml" />
-      <fx:include fx:id="baseProduction" layoutX="505.0" layoutY="460.0" source="BaseProduction.fxml" />
-      <fx:include fx:id="developmentSpace1" layoutX="630.0" layoutY="280.0" source="DevelopmentSpace.fxml" />
+      <fx:include fx:id="baseProduction" layoutX="510.0" layoutY="290.0" source="BaseProduction.fxml" />
+      <fx:include fx:id="developmentSpace1" layoutX="632.0" layoutY="280.0" source="DevelopmentSpace.fxml" />
       <fx:include fx:id="developmentSpace2" layoutX="810.0" layoutY="280.0" source="DevelopmentSpace.fxml" />
-      <fx:include fx:id="developmentSpace3" layoutX="995.0" layoutY="280.0" source="DevelopmentSpace.fxml" />
-      <fx:include fx:id="paycheck" layoutX="510.0" layoutY="274.0" source="Paycheck.fxml" />
-      <fx:include fx:id="popeFavorTiles1" layoutX="499.0" layoutY="104.0" source="PopeFavorTiles.fxml" />
-      <fx:include fx:id="popeFavorTiles2" layoutX="728.0" layoutY="60.0" source="PopeFavorTiles.fxml" />
-      <fx:include fx:id="popeFavorTiles3" layoutX="1004.0" layoutY="104.0" source="PopeFavorTiles.fxml" />
-      <fx:include fx:id="faithTrackPlayers" layoutX="301.0" layoutY="132.0" scaleX="0.5" scaleY="0.5" source="Players.fxml" />
+      <fx:include fx:id="developmentSpace3" layoutX="997.0" layoutY="280.0" source="DevelopmentSpace.fxml" />
+      <fx:include fx:id="popeFavorTiles1" layoutX="501.0" layoutY="106.0" source="PopeFavorTiles.fxml" />
+      <fx:include fx:id="popeFavorTiles2" layoutX="730.0" layoutY="58.0" source="PopeFavorTiles.fxml" />
+      <fx:include fx:id="popeFavorTiles3" layoutX="1005.0" layoutY="106.0" source="PopeFavorTiles.fxml" />
+      <fx:include fx:id="faithTrackPlayers" layoutX="303.0" layoutY="134.0" scaleX="0.5" scaleY="0.5" source="Players.fxml" />
       <Label fx:id="message" layoutX="21.0" layoutY="639.0" prefHeight="22.0" prefWidth="489.0" text="Label">
          <font>
             <Font name="Consolas Bold" size="18.0" />
