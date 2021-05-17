@@ -33,6 +33,15 @@ public class CofferController extends SubSceneController{
     }
 
 
+    public void reset(){
+        activeSquare.setVisible(false);
+    }
+
+
+    public void setActive(){
+        activeSquare.setVisible(true);
+    }
+
 
     @FXML
     void activeSquareClicked() {

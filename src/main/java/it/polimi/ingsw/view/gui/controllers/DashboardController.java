@@ -8,8 +8,9 @@ import javafx.scene.Group;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class DashboardController extends SceneController {
+public class DashboardController extends SceneController implements ResettableScene {
 
     @FXML private LeaderController leader1Controller;
     @FXML private LeaderController leader2Controller;
@@ -58,6 +59,8 @@ public class DashboardController extends SceneController {
         popeFavorTiles2Controller.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
         popeFavorTiles3Controller.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
         faithTrackPlayersController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
+
+        controllerInterpreter.attachToResetScene(this);
     }
 
 
@@ -96,6 +99,54 @@ public class DashboardController extends SceneController {
     }
 
 
+    @Override
+    public void reset() {
+        leader1Controller.reset();
+        leader2Controller.reset();
+        warehouseController.reset();
+        cofferController.reset();
+        /*baseProductionController.reset();
+        developmentSpace1Controller.reset();
+        developmentSpace2Controller.reset();
+        developmentSpace3Controller.reset();*/
+    }
+
+
+    @Override
+    public void setActive(String... depots) {
+        List<String> toActivate = Arrays.asList(depots);
+        if (toActivate.contains("leader1")){
+            leader1Controller.setActive();
+        }
+        if (toActivate.contains("leader2")){
+            leader2Controller.setActive();
+        }
+        if (toActivate.contains("wh1")){
+            warehouseController.setActive(1);
+        }
+        if (toActivate.contains("wh2")){
+            warehouseController.setActive(2);
+        }
+        if (toActivate.contains("wh3")){
+            warehouseController.setActive(3);
+        }
+        if (toActivate.contains("coffer")){
+            cofferController.setActive();
+        }
+        /*if (toActivate.contains("baseProd")){
+            baseProductionController.setActive();
+        }
+        if (toActivate.contains("dev1")){
+            developmentSpace1Controller.setActive();
+        }
+        if (toActivate.contains("dev2")){
+            developmentSpace2Controller.setActive();
+        }
+        if (toActivate.contains("dev3")){
+            developmentSpace3Controller.setActive();
+        }*/
+    }
+
     public void showOpponent(int i) {
         opponents.get(i-1).show();
     }
@@ -103,6 +154,13 @@ public class DashboardController extends SceneController {
 
     public void hideOpponent(int i) {
         opponents.get(i-1).hide();
+    }
+
+
+
+    @FXML
+    void backgroundClicked(){
+        controllerInterpreter.execute("reset");
     }
 
 

@@ -86,6 +86,29 @@ public class WarehouseController extends SubSceneController {
 
 
 
+    public void reset(){
+        active1.setVisible(false);
+        active2.setVisible(false);
+        active3.setVisible(false);
+    }
+
+
+    public void setActive(int i){
+        switch (i){
+            case 1:
+                active1.setVisible(true);
+                break;
+            case 2:
+                active2.setVisible(true);
+                break;
+            case 3:
+                active3.setVisible(true);
+                break;
+        }
+    }
+
+
+
     @FXML
     void a1Clicked() {
         controllerInterpreter.execute("reset");

@@ -110,6 +110,17 @@ public class LeaderController extends SubSceneController {
     }
 
 
+    public void reset(){
+        menu.setVisible(false);
+        leaderActive.setVisible(false);
+    }
+
+
+    public void setActive(){
+        leaderActive.setVisible(true);
+    }
+
+
 
     @FXML
     void activateClicked() {
@@ -210,7 +221,6 @@ public class LeaderController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
-
     @FXML
     void arrowUpClicked(){
         controllerInterpreter.execute("reset");
@@ -218,8 +228,6 @@ public class LeaderController extends SubSceneController {
         mutableProduction.setImage(new Image(producerInput.getUrl()));
         userInterpreter.execute("swapLeader " + number + " " + WarehouseObjectTypeController.getTypeByUrl(producerInput.getUrl()).toString().toLowerCase(Locale.ROOT));
     }
-
-
 
     @FXML
     void arrowDownClicked(){

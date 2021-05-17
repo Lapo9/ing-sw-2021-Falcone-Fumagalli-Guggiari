@@ -5,7 +5,9 @@ import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 import it.polimi.ingsw.view.Screen;
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
 import it.polimi.ingsw.view.gui.MessageType;
+import it.polimi.ingsw.view.gui.controllers.ResettableScene;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.function.Consumer;
@@ -19,6 +21,7 @@ public class ControllerInterpreter {
     private Screen screen;
     private HashMap<String, Consumer<String[]>> knownCommands = new HashMap<>();
     private OfflineInfo offlineInfo;
+    private ArrayList<ResettableScene> toReset = new ArrayList<>();
 
 
     /**
@@ -156,7 +159,11 @@ public class ControllerInterpreter {
     }
 
     private void reset(String... tokens){
-        //TODO important
+        offlineInfo.setSelectedWarehouseRow("");
+        offlineInfo.setSelectedItem("");
+        for (ResettableScene rs : toReset){
+            rs.reset();
+        }
     }
 
 
@@ -178,6 +185,12 @@ public class ControllerInterpreter {
         knownCommands.put("autoRefresh", this::autoRefresh);
         knownCommands.put("setPlayers", this::setPlayers);
         knownCommands.put("reset", this::reset);
+    }
+
+
+
+    public void attachToResetScene(ResettableScene rs){
+        toReset.add(rs);
     }
 
 }
