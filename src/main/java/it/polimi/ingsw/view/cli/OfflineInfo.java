@@ -12,6 +12,7 @@ public class OfflineInfo {
     }
 
 
+    private String yourName;
     private HashMap<String, Boolean> activeProductions = new HashMap<>();
     private LeaderStatus leader1Status = LeaderStatus.INACTIVE;
     private LeaderStatus leader2Status = LeaderStatus.INACTIVE;
@@ -97,51 +98,61 @@ public class OfflineInfo {
 
 
 
-    public int getPlayerOrder(String playerName){
+    public synchronized int getPlayerOrder(String playerName){
         return playersNamesInOrder.indexOf(playerName) +1;
     }
 
 
-    public int getPlayersNum(){
+    public synchronized int getPlayersNum(){
         return playersNamesInOrder.size();
     }
 
-    public String getPlayerName(int index) {
+    public synchronized String getPlayerName(int index) {
         return playersNamesInOrder.get(index);
     }
 
 
-    public void setPlayers(String... playersNamesInOrder){
+    public synchronized void setPlayers(String... playersNamesInOrder){
         this.playersNamesInOrder.addAll(Arrays.asList(playersNamesInOrder));
     }
 
 
-    public void setAutoRefresh(boolean autoRefresh) {
+    public synchronized void setAutoRefresh(boolean autoRefresh) {
         this.autoRefresh = autoRefresh;
     }
 
 
-    public boolean isAutoRefresh() {
+    public synchronized boolean isAutoRefresh() {
         return autoRefresh;
     }
 
 
-    public String getSelectedItem(){
+    public synchronized String getSelectedItem(){
         return selectedItem;
     }
 
 
-    public void setSelectedItem(String item){
+    public synchronized void setSelectedItem(String item){
         selectedItem = item;
     }
 
 
-    public String getSelectedWarehouseRow() {
+    public synchronized String getSelectedWarehouseRow() {
         return selectedWarehouseRow;
     }
 
 
-    public void setSelectedWarehouseRow(String selectedWarehouseRow) {
+    public synchronized void setSelectedWarehouseRow(String selectedWarehouseRow) {
         this.selectedWarehouseRow = selectedWarehouseRow;
+    }
+
+
+    public synchronized void setYourName(String name){
+        yourName = name;
+    }
+
+
+    public synchronized String getYourName(){
+        return yourName;
     }
 }

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.view.gui.controllers;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 
@@ -67,7 +69,30 @@ public class DashboardController extends SceneController {
 
     @Override
     public void update(int[] completeUpdate) {
+        Platform.runLater( () -> {
+            //if it is an update of one player
+            if(completeUpdate[0] < 4) {
+                faithTrackPlayersController.update(new int[]{completeUpdate[0], completeUpdate[103]});
+                popeFavorTiles1Controller.update(new int[]{completeUpdate[0], completeUpdate[104]});
+                popeFavorTiles2Controller.update(new int[]{completeUpdate[0], completeUpdate[105]});
+                popeFavorTiles3Controller.update(new int[]{completeUpdate[0], completeUpdate[106]});
 
+                //if it is an update of the owner of this GUI
+                if (offlineInfo.getYourName().equals(offlineInfo.getPlayerName(completeUpdate[0]))) {
+                    cofferController.update(Arrays.copyOfRange(completeUpdate, 1, 6));
+                    warehouseController.update(Arrays.copyOfRange(completeUpdate, 6, 21));
+                    developmentSpace1Controller.update(Arrays.copyOfRange(completeUpdate, 21, 39));
+                    developmentSpace2Controller.update(Arrays.copyOfRange(completeUpdate, 39, 57));
+                    developmentSpace3Controller.update(Arrays.copyOfRange(completeUpdate, 57, 75));
+                    baseProductionController.update(Arrays.copyOfRange(completeUpdate, 85, 103));
+                    leader1Controller.update(Arrays.copyOfRange(completeUpdate, 107, 122));
+                    leader2Controller.update(Arrays.copyOfRange(completeUpdate, 122, 137));
+                }
+                else {
+                    opponents.get(completeUpdate[0]).update(completeUpdate);
+                }
+            }
+        });
     }
 
 

@@ -18,7 +18,7 @@ public class MainCLI {
 
         ControllerInterpreter controllerInterpreter = new ControllerInterpreter(screen, offlineInfo);
         UserInterpreter userInterpreter = new UserInterpreter(controllerInterpreter, serverSocket, offlineInfo);
-        ModelInterpreter modelInterpreter = new ModelInterpreter(factory, controllerInterpreter, offlineInfo);
+        ModelInterpreterCLI modelInterpreter = new ModelInterpreterCLI(factory, controllerInterpreter, offlineInfo);
 
         screen.attachUserInterpreter(userInterpreter);
         serverSocket.attachInterpreter(controllerInterpreter);

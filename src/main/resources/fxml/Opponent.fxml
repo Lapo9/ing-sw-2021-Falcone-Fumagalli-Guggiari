@@ -6,15 +6,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<Group fx:id="pane" visible="false" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.OpponentController">
+<Group fx:id="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.OpponentController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/backgrounds/opponentBackground.png" />
          </image>
       </ImageView>
-      <Group layoutX="14.0" layoutY="14.0">
+      <Group fx:id="leader1group" layoutX="14.0" layoutY="14.0">
          <children>
             <ImageView fx:id="leader1" fitHeight="305.0" fitWidth="160.0" layoutX="68.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -74,7 +73,7 @@
                   </Group>
                </children>
             </Group>
-            <Group fx:id="depotPane" layoutX="109.0" layoutY="170.0" visible="false">
+            <Group fx:id="depotPane1" layoutX="109.0" layoutY="170.0" visible="false">
                <children>
                   <ImageView fx:id="depot12" fitHeight="29.0" fitWidth="38.0" layoutX="46.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -90,7 +89,7 @@
             </Group>
          </children>
       </Group>
-      <Group layoutX="14.0" layoutY="338.0">
+      <Group fx:id="leader2group" layoutX="14.0" layoutY="338.0">
          <children>
             <ImageView fx:id="leader2" fitHeight="305.0" fitWidth="160.0" layoutX="68.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -243,22 +242,22 @@
             </ImageView>
             <Group layoutX="4.0" layoutY="206.0">
                <children>
-                  <Text fx:id="stone" fill="WHITE" layoutX="9.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
+                  <Text fx:id="stoneBase" fill="WHITE" layoutX="9.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                      <font>
                         <Font name="Vivaldi Italic" size="36.0" />
                      </font>
                   </Text>
-                  <Text fx:id="shield" fill="WHITE" layoutX="9.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
+                  <Text fx:id="shieldBase" fill="WHITE" layoutX="9.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                      <font>
                         <Font name="Vivaldi Italic" size="36.0" />
                      </font>
                   </Text>
-                  <Text fx:id="servant" fill="WHITE" layoutX="9.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
+                  <Text fx:id="servantBase" fill="WHITE" layoutX="9.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                      <font>
                         <Font name="Vivaldi Italic" size="36.0" />
                      </font>
                   </Text>
-                  <Text fx:id="coin" fill="WHITE" layoutX="9.0" layoutY="-19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
+                  <Text fx:id="coinBase" fill="WHITE" layoutX="9.0" layoutY="-19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
                      <font>
                         <Font name="Vivaldi Italic" size="36.0" />
                      </font>

@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 public class ScreenGUI extends Application implements Screen {
 
@@ -27,7 +26,9 @@ public class ScreenGUI extends Application implements Screen {
         //if the argument is one of the opponents, then it happens a special show, since in the GUI opponents are not stan alone scenes
         if (scene.contains("opponent")){
             if (activeScene.second instanceof DashboardController){
-                ((DashboardController) activeScene.second).showOpponent(Integer.parseInt(scene.substring(scene.length() - 1)));
+                Platform.runLater( () -> {
+                    ((DashboardController) activeScene.second).showOpponent(Integer.parseInt(scene.substring(scene.length() - 1)));
+                });
             }
         }
 
@@ -46,7 +47,9 @@ public class ScreenGUI extends Application implements Screen {
         //this works only if the argument is an opponent
         if (scene.contains("opponent")){
             if (activeScene.second instanceof DashboardController){
-                ((DashboardController) activeScene.second).hideOpponent(Integer.parseInt(scene.substring(scene.length() - 1)));
+                Platform.runLater( () -> {
+                    ((DashboardController) activeScene.second).hideOpponent(Integer.parseInt(scene.substring(scene.length() - 1)));
+                });
             }
         }
     }
@@ -72,14 +75,14 @@ public class ScreenGUI extends Application implements Screen {
         ServerSocket socket = new ServerSocket();
         OfflineInfo oi = new OfflineInfo();
         ControllerInterpreter ci = new ControllerInterpreter(this, oi);
-        ModelInterpreter mi = new ModelInterpreter(null, null, null); //TODO this is different for the gui
+        ModelInterpreterGUI mi = new ModelInterpreterGUI(oi);
         socket.attachInterpreter(mi);
         socket.attachInterpreter(ci);
         UserInterpreter ui = new UserInterpreter(ci, socket, oi);
 
         loadView("welcome", "/fxml/WelcomeScreen.fxml", ci, ui, oi);
         loadView("lobby", "/fxml/Lobby.fxml", ci, ui, oi);
-        loadView("dashboard", "/fxml/Dashboard.fxml", ci, ui, oi);
+        loadView("dashboard", "/fxml/Dashboard.fxml", ci, ui, oi, mi);
         //TODO load all the scenes
 
         activeScene = scenes.get("dashboard");
@@ -93,6 +96,26 @@ public class ScreenGUI extends Application implements Screen {
         launch(args);
     }
 
+
+
+    private void loadView(String id, String fxml, ControllerInterpreter ci, UserInterpreter ui, OfflineInfo oi, ModelInterpreterGUI mi) throws Exception{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource(fxml)); //tell the loader where is the .fxml file of the scene
+        Parent root = loader.load();
+
+        Scene tmpScene = new Scene(root);
+
+        SceneController tmpController = loader.getController();
+        tmpController.attachControllerInterpreter(ci);
+        tmpController.attachUserInterpreter(ui);
+        tmpController.attachOfflineInfo(oi);
+
+        tmpController.initializeSubScenes();
+
+        mi.attach(tmpController); //attach the controller to the model interpreter so that it can receive updates
+
+        scenes.put(id, new Pair<>(tmpScene, tmpController));
+    }
 
 
     private void loadView(String id, String fxml, ControllerInterpreter ci, UserInterpreter ui, OfflineInfo oi) throws Exception{
@@ -111,6 +134,5 @@ public class ScreenGUI extends Application implements Screen {
 
         scenes.put(id, new Pair<>(tmpScene, tmpController));
     }
-
 
 }

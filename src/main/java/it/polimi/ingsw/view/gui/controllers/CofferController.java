@@ -26,7 +26,10 @@ public class CofferController extends SubSceneController{
 
     @Override
     public void update(int[] completeUpdate) {
-
+        coin.setText(String.valueOf(completeUpdate[0]));
+        servant.setText(String.valueOf(completeUpdate[1]));
+        shield.setText(String.valueOf(completeUpdate[2]));
+        stone.setText(String.valueOf(completeUpdate[3]));
     }
 
 

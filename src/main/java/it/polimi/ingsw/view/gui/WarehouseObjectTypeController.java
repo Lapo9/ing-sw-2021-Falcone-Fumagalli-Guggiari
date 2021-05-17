@@ -1,5 +1,7 @@
 package it.polimi.ingsw.view.gui;
 
+import it.polimi.ingsw.Pair;
+
 public enum WarehouseObjectTypeController {
     COIN("pictures/miscellaneous/coin.png"), SERVANT("pictures/miscellaneous/servant.png"), SHIELD("pictures/miscellaneous/shield.png"), STONE("pictures/miscellaneous/stone.png");
 
@@ -59,6 +61,34 @@ public enum WarehouseObjectTypeController {
             return STONE;
         }
         return null;
+    }
+
+
+
+    //returns the supply contained in a warehouse row, and its quantity
+    public static Pair<WarehouseObjectTypeController, Integer> getContainedSupplies(int[] arr){
+        int i;
+        for(i = 0; i < 4; ++i){
+            if(arr[i] != 0){
+                break;
+            }
+        }
+
+        //nothing is contained (since it is impossible that faith markers are contained
+        if (i > 3){
+            return new Pair<>(null, 0);
+        }
+
+        if (i == 0){
+            return new Pair<>(WarehouseObjectTypeController.COIN, arr[i]);
+        }
+        if (i == 1){
+            return new Pair<>(WarehouseObjectTypeController.SERVANT, arr[i]);
+        }
+        if (i == 2){
+            return new Pair<>(WarehouseObjectTypeController.SHIELD, arr[i]);
+        }
+        return new Pair<>(WarehouseObjectTypeController.STONE, arr[i]);
     }
 
 }

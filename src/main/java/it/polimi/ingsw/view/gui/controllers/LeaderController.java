@@ -1,19 +1,27 @@
 package it.polimi.ingsw.view.gui.controllers;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.model.leaders.LeaderCard;
+import it.polimi.ingsw.model.leaders.leader_abilities.Depot;
+import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
 import it.polimi.ingsw.view.cli.OfflineInfo;
 import it.polimi.ingsw.view.gui.WarehouseObjectTypeController;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
+import java.util.Arrays;
 import java.util.Locale;
+
+import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getContainedSupplies;
 
 
 public class LeaderController extends SubSceneController {
 
+    @FXML private Group leaderGroup;
     @FXML private ImageView leader;
     @FXML private Group producerPane;
     @FXML private Text coin;
@@ -46,8 +54,62 @@ public class LeaderController extends SubSceneController {
 
     @Override
     public void update(int[] completeUpdate) {
+        leaderCardId = completeUpdate[0];
+        leader.setImage(new Image(LeaderCard.getUrl(leaderCardId)));
 
+        //if the leader is inactive, make him black and white. If it is discarded hide him. If it is producer or depot show the correct panes.
+        if (offlineInfo.getLeaderStatus(number) == OfflineInfo.LeaderStatus.INACTIVE){
+            ColorAdjust tmp = new ColorAdjust();
+            tmp.setSaturation(0.0); //black and white
+            leader.setEffect(tmp);
+            leaderGroup.setVisible(true);
+        }
+        else if (offlineInfo.getLeaderStatus(number) == OfflineInfo.LeaderStatus.DISCARDED){
+            leaderGroup.setVisible(false);
+        }
+        else if (offlineInfo.getLeaderStatus(number) == OfflineInfo.LeaderStatus.PRODUCER){
+            leader.setEffect(null); //remove any possible effect
+            producerPane.setVisible(true);
+            depotPane.setVisible(false);
+            leaderGroup.setVisible(true);
+        }
+        else if (offlineInfo.getLeaderStatus(number) == OfflineInfo.LeaderStatus.DEPOT){
+            leader.setEffect(null); //remove any possible effect
+            depotPane.setVisible(true);
+            producerPane.setVisible(false);
+            leaderGroup.setVisible(true);
+        }
+        else if (offlineInfo.getLeaderStatus(number) == OfflineInfo.LeaderStatus.OTHER){
+            leader.setEffect(null); //remove any possible effect
+            producerPane.setVisible(false);
+            depotPane.setVisible(false);
+            leaderGroup.setVisible(true);
+        }
+
+
+        //set producer pane
+        coin.setText(String.valueOf(completeUpdate[5]));
+        servant.setText(String.valueOf(completeUpdate[6]));
+        shield.setText(String.valueOf(completeUpdate[7]));
+        stone.setText(String.valueOf(completeUpdate[8]));
+
+
+        //set depot pane
+        depot1.setVisible(false);
+        depot2.setVisible(false);
+
+        Pair<WarehouseObjectTypeController, Integer> contained = getContainedSupplies(Arrays.copyOfRange(completeUpdate, 10, 14));
+        if (contained.second >= 1){
+            depot1.setImage(new Image(contained.first.getUrl()));
+            depot1.setVisible(true);
+        }
+        if (contained.second >= 2){
+            depot2.setImage(new Image(contained.first.getUrl()));
+            depot2.setVisible(true);
+        }
     }
+
+
 
     @FXML
     void activateClicked() {
@@ -112,7 +174,7 @@ public class LeaderController extends SubSceneController {
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("coin " + id);
-        controllerInterpreter.execute("selected " + offlineInfo.getSelectedItem());
+        userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
     @FXML
@@ -123,7 +185,7 @@ public class LeaderController extends SubSceneController {
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("servant " + id);
-        controllerInterpreter.execute("selected " + offlineInfo.getSelectedItem());
+        userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
     @FXML
@@ -134,7 +196,7 @@ public class LeaderController extends SubSceneController {
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("shield " + id);
-        controllerInterpreter.execute("selected " + offlineInfo.getSelectedItem());
+        userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
     @FXML
@@ -145,7 +207,7 @@ public class LeaderController extends SubSceneController {
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("stone " + id);
-        controllerInterpreter.execute("selected " + offlineInfo.getSelectedItem());
+        userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
 

@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.ClientSocket;
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.view.ModelInterpreter;
 
 import java.io.*;
 import java.net.SocketTimeoutException;

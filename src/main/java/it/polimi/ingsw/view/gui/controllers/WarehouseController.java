@@ -1,10 +1,16 @@
 package it.polimi.ingsw.view.gui.controllers;
 
+import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.view.gui.WarehouseObjectTypeController;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
+
+import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getContainedSupplies;
 
 
 /*
@@ -37,8 +43,47 @@ public class WarehouseController extends SubSceneController {
 
     @Override
     public void update(int[] completeUpdate) {
+        //put images in arrays to make it easier to iterate through them
+        ArrayList<ImageView> first = new ArrayList<>(Arrays.asList(a1, b1, c1));
+        ArrayList<ImageView> second = new ArrayList<>(Arrays.asList(a2, b2));
+        ArrayList<ImageView> third = new ArrayList<>(Arrays.asList(a3));
 
+        //get the supply and quantity contained in each row
+        Pair<WarehouseObjectTypeController, Integer> firstSupplies = getContainedSupplies(Arrays.copyOfRange(completeUpdate, 0, 4));
+        Pair<WarehouseObjectTypeController, Integer> secondSupplies = getContainedSupplies(Arrays.copyOfRange(completeUpdate, 5, 9));
+        Pair<WarehouseObjectTypeController, Integer> thirdSupplies = getContainedSupplies(Arrays.copyOfRange(completeUpdate, 10, 14));
+
+        clearWarehouse(); //make everything invisible
+
+        //fill the rows (assumed the model doesn't fail)
+        for (int i = 0; i < firstSupplies.second; ++i){
+            first.get(i).setImage(new Image(firstSupplies.first.getUrl()));
+            first.get(i).setVisible(true);
+        }
+
+        for (int i = 0; i < secondSupplies.second; ++i){
+            second.get(i).setImage(new Image(secondSupplies.first.getUrl()));
+            second.get(i).setVisible(true);
+        }
+
+        for (int i = 0; i < thirdSupplies.second; ++i){
+            third.get(i).setImage(new Image(thirdSupplies.first.getUrl()));
+            third.get(i).setVisible(true);
+        }
     }
+
+
+
+    //makes all of the objects invisible
+    private void clearWarehouse() {
+        a1.setVisible(false);
+        a2.setVisible(false);
+        a3.setVisible(false);
+        b1.setVisible(false);
+        b2.setVisible(false);
+        c1.setVisible(false);
+    }
+
 
 
     @FXML
@@ -51,21 +96,21 @@ public class WarehouseController extends SubSceneController {
     @FXML
     void b1Clicked() {
         controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh1");
+        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(b1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh1");
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
     @FXML
     void c1Clicked() {
         controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh1");
+        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(c1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh1");
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
     @FXML
     void a2Clicked() {
         controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh2");
+        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a2.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh2");
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
@@ -73,7 +118,7 @@ public class WarehouseController extends SubSceneController {
     @FXML
     void b2Clicked() {
         controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh2");
+        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(b2.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh2");
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
@@ -82,7 +127,7 @@ public class WarehouseController extends SubSceneController {
     @FXML
     void a3Clicked() {
         controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh3");
+        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a3.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh3");
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
