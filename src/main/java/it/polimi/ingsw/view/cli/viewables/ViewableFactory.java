@@ -104,6 +104,12 @@ public class ViewableFactory {
         return res;
     }
 
+    public ActiveProductions buildActiveProductions (int player, ViewableId viewableId) {
+        ActiveProductions res = new ActiveProductions();
+        items.get(player-1).put(viewableId, res);
+        return res;
+    }
+
     /**
      * Updates the specified viewable with the specified int array.
      * @param player Player who owns the viewable

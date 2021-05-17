@@ -80,8 +80,8 @@ public class MainCLI {
         //showDevelopmentCardTest(screen, factory);
         //showDevelopmentSpaceTest(screen, factory);
         //showDevelopmentGridCardTest(screen, factory);
-        showDevelopmentGridTest(screen, factory);
-
+        //showDevelopmentGridTest(screen, factory);
+        showActiveProductions(screen, factory);
 
 
         /*new Thread(() -> {
@@ -268,6 +268,27 @@ public class MainCLI {
                 8, 9, 10, 11};
         developmentGridViewable.update(updateDevGrid);
         screenCLI.show("developmentGrid");
+
+    }
+
+    private static void showActiveProductions(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
+        View activeProductions = new View();
+        ActiveProductions activeProductionsViewable = factory.buildActiveProductions(1, ViewableId.ACTIVEPRODUCTIONS);
+        activeProductions.addViewable(activeProductionsViewable);
+
+        screenCLI.addView("activeProductions", activeProductions);
+        screenCLI.start("activeProductions");
+
+        int [] updateActiveProd = {
+                0, //dev 1
+                1, //dev 2
+                1, //dev 3
+                2, //leader 1
+                1, //leader 2
+                0}; //base prod
+        activeProductionsViewable.update(updateActiveProd);
+        screenCLI.show("activeProductions");
+
 
     }
 }
