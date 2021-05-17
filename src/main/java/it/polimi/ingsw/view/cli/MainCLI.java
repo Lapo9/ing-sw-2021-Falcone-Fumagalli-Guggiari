@@ -81,7 +81,7 @@ public class MainCLI {
         //showDevelopmentSpaceTest(screen, factory);
         //showDevelopmentGridCardTest(screen, factory);
         //showDevelopmentGridTest(screen, factory);
-        showActiveProductions(screen, factory);
+        //showActiveProductions(screen, factory);
 
 
         /*new Thread(() -> {

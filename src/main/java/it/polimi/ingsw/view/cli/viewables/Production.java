@@ -68,7 +68,7 @@ public class Production implements Viewable {
 
     @Override
     public String toString() {
-        return deleteZeros(0, COIN) + 
+        return deleteZeros(0, COIN) +
                 deleteZeros(0, SERVANT) +
                 deleteZeros(0, SHIELD) +
                 deleteZeros(0, STONE) +
