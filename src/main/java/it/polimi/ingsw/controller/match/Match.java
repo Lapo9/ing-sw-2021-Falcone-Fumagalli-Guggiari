@@ -31,6 +31,7 @@ public class Match {
 
     Match(Player leader) throws MatchException {
         addPlayer(leader);
+        activePlayer = leader;
         setDefaultCommands();
 
         leader.attachDashboard(new Dashboard(false, marketplace, developmentGrid, leader.getName()));
@@ -240,21 +241,8 @@ public class Match {
 
         player.addSelectedItemsInPreMatch(); //report that the player chose one supply to start
 
-        //if all the players chose all of their supplies, make them choose their leaders.
-        boolean done = true;
-        for(int i = 0; i < players.size(); ++i){
-            Player p = players.get(i);
-            if((p.getSelectedItemsInPreMatch() != 0 && p.getOrder() == 0) ||
-               (p.getSelectedItemsInPreMatch() != 1 && p.getOrder() == 1) ||
-               (p.getSelectedItemsInPreMatch() != 1 && p.getOrder() == 2) ||
-               (p.getSelectedItemsInPreMatch() != 2 && p.getOrder() == 3)){
-                done = false;
-            }
-        }
-
-        if (done){
-            phase = LEADER_SELECTION;
-            broadcast("show leadersPick");
+        if (checkPreMatchDone()){
+            phase = TURN_START;
         }
     }
 
@@ -531,7 +519,7 @@ public class Match {
     }
 
     private void pickLeaders(Player player, String... args) {
-        if (phase != LEADER_SELECTION) {
+        if (phase != PRE_MATCH) {
             player.sendController("error You' ve already picked your leaders!");
             return;
         }
@@ -552,15 +540,7 @@ public class Match {
             return;
         }
 
-        boolean done = true;
-        for (Player p : players){
-            if(p.getSelectedLeadersInPreMatch() < 2){
-                done = false;
-                break;
-            }
-        }
-
-        if(done){
+        if(checkPreMatchDone()){
             phase = TURN_START;
             broadcast("show matchStart");
         }
@@ -601,5 +581,28 @@ public class Match {
         }
     }
 
+
+    private synchronized boolean checkPreMatchDone(){
+        boolean doneItems = true;
+        for(int i = 0; i < players.size(); ++i){
+            Player p = players.get(i);
+            if((p.getSelectedItemsInPreMatch() != 0 && p.getOrder() == 0) ||
+                    (p.getSelectedItemsInPreMatch() != 1 && p.getOrder() == 1) ||
+                    (p.getSelectedItemsInPreMatch() != 1 && p.getOrder() == 2) ||
+                    (p.getSelectedItemsInPreMatch() != 2 && p.getOrder() == 3)){
+                doneItems = false;
+            }
+        }
+
+        boolean doneLeaders = true;
+        for (Player p : players){
+            if(p.getSelectedLeadersInPreMatch() < 2){
+                doneLeaders = false;
+                break;
+            }
+        }
+
+        return doneItems && doneLeaders;
+    }
 
 }

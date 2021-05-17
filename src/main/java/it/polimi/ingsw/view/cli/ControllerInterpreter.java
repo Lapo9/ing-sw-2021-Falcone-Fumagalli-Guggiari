@@ -54,7 +54,7 @@ public class ControllerInterpreter {
         try {
             screen.show(tokens[1]);
         } catch (ViewException ve){
-            execute("fatal Sorry, we had a problem, please retry, and if the problem keep happening try to disconnect and reconnect");
+            execute("fatal Sorry, we had a problem, please retry, and if the problem keeps happening try to disconnect and reconnect");
         }
     }
 
@@ -166,6 +166,12 @@ public class ControllerInterpreter {
         }
     }
 
+    private void setActive(String... tokens){
+        for(ResettableScene rs : toReset){
+            rs.setActive(Arrays.copyOfRange(tokens, 1, tokens.length));
+        }
+    }
+
 
 
     //sets the standard commands the server can send to the view
@@ -185,6 +191,7 @@ public class ControllerInterpreter {
         knownCommands.put("autoRefresh", this::autoRefresh);
         knownCommands.put("setPlayers", this::setPlayers);
         knownCommands.put("reset", this::reset);
+        knownCommands.put("setActive", this::setActive);
     }
 
 

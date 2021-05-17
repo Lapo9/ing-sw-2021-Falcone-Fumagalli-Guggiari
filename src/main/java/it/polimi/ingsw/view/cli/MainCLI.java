@@ -70,7 +70,7 @@ public class MainCLI {
 
 
 
-        //screen.start("welcome");
+        screen.start("welcome");
 
         //methods to test the viewable objects
 

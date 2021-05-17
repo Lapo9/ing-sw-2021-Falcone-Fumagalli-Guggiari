@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.PreMatchController">
+   <children>
+      <ImageView fitHeight="913.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/backgrounds/preMatchBackground.png" />
+         </image>
+      </ImageView>
+      <Group layoutX="75.0" layoutY="273.0">
+         <children>
+            <ImageView fx:id="pick1" fitHeight="429.0" fitWidth="218.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/leaders/leader9.png" />
+               </image>
+            </ImageView>
+            <Group layoutX="89.0" layoutY="429.0">
+               <children>
+                  <ImageView fx:id="tick1" fitHeight="38.0" fitWidth="40.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/tick.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="3.0" onMouseClicked="#checkBox1Clicked" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/box.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Group layoutX="353.0" layoutY="273.0">
+         <children>
+            <ImageView fx:id="pick2" fitHeight="429.0" fitWidth="218.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/leaders/leader9.png" />
+               </image>
+            </ImageView>
+            <Group layoutX="89.0" layoutY="428.0">
+               <children>
+                  <ImageView fx:id="tick2" fitHeight="38.0" fitWidth="40.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/tick.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="3.0" onMouseClicked="#checkBox2Clicked" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/box.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Group layoutX="626.0" layoutY="273.0">
+         <children>
+            <ImageView fx:id="pick3" fitHeight="429.0" fitWidth="218.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/leaders/leader9.png" />
+               </image>
+            </ImageView>
+            <Group layoutX="89.0" layoutY="427.0">
+               <children>
+                  <ImageView fx:id="tick3" fitHeight="38.0" fitWidth="40.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/tick.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="3.0" onMouseClicked="#checkBox3Clicked" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/box.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Group layoutX="904.0" layoutY="273.0">
+         <children>
+            <ImageView fx:id="pick4" fitHeight="429.0" fitWidth="218.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/leaders/leader9.png" />
+               </image>
+            </ImageView>
+            <Group layoutX="89.0" layoutY="426.0">
+               <children>
+                  <ImageView fx:id="tick4" fitHeight="38.0" fitWidth="40.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/tick.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="3.0" onMouseClicked="#checkBox4Clicked" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../pictures/miscellaneous/box.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </Group>
+         </children>
+      </Group>
+      <Group fx:id="selection1" layoutX="239.0" layoutY="63.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="-81.0" layoutY="38.0" onMouseClicked="#arrowDown1Clicked" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pictures/miscellaneous/arrow.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="99.0" layoutY="39.0" onMouseClicked="#arrowUp1Clicked" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pictures/miscellaneous/arrow.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="supply1" fitHeight="100.0" fitWidth="100.0" layoutX="-22.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/coin.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="selection2" layoutX="606.0" layoutY="63.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="-81.0" layoutY="38.0" onMouseClicked="#arrowDown2Clicked" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pictures/miscellaneous/arrow.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="99.0" layoutY="39.0" onMouseClicked="#arrowUp2Clicked" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pictures/miscellaneous/arrow.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="supply2" fitHeight="100.0" fitWidth="100.0" layoutX="-22.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/coin.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <ImageView fx:id="go" fitHeight="172.0" fitWidth="273.0" layoutX="904.0" layoutY="46.0" onMouseClicked="#goClicked" onMouseEntered="#goEntered" onMouseExited="#goExited" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/goArrow.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label fx:id="message" layoutX="35.0" layoutY="14.0" prefHeight="22.0" prefWidth="489.0" text="Label">
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+         <effect>
+            <Bloom threshold="0.0" />
+         </effect>
+      </Label>
+   </children>
+</AnchorPane>
