@@ -128,7 +128,7 @@ public class UserInterpreter {
         commands.add(new UserCommand(true, "moveMarble", new ArrayList<>(Arrays.asList("yellow", "blue", "violet", "grey")), new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2"))));
         commands.add(new UserCommand(true, "colorMarble", new ArrayList<>(Arrays.asList("yellow", "blue", "violet", "grey"))));
         commands.add(new UserCommand(true, "discard"));
-        commands.add(new UserCommand(true, "move", new ArrayList<>(Arrays.asList("coin", "servant", "shield", "stone")),  new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2", "paycheck", "coffer")), new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2", "paycheck", "coffer"))));
+        commands.add(new UserCommand(true, "move", new ArrayList<>(Arrays.asList("coin", "servant", "shield", "stone")),  new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2", "paycheck", "coffer", "base")), new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2", "paycheck", "coffer", "base"))));
         commands.add(new UserCommand(true, "endTurn"));
         commands.add(new UserCommand(true, "buy", new ArrayList<>(Arrays.asList("1", "2", "3")), new ArrayList<>(Arrays.asList("1", "2", "3", "4")), new ArrayList<>(Arrays.asList("1", "2", "3"))));
         commands.add(new UserCommand(true, "swapBase", new ArrayList<>(Arrays.asList("1", "2", "3")), new ArrayList<>(Arrays.asList("coin", "servant", "shield", "stone"))));
