@@ -91,4 +91,17 @@ public enum WarehouseObjectTypeController {
         return new Pair<>(WarehouseObjectTypeController.STONE, arr[i]);
     }
 
+
+    public static WarehouseObjectTypeController getTypeByNumber(int number) {
+        if(number == 0)
+            return COIN;
+        else if(number == 1)
+            return SERVANT;
+        else if(number == 2)
+            return SHIELD;
+        else if(number == 3)
+            return STONE;
+        else
+            return null;
+    }
 }

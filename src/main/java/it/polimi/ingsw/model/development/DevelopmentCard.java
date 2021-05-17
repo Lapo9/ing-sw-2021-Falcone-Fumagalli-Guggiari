@@ -3,6 +3,7 @@ package it.polimi.ingsw.model.development;
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.exceptions.SupplyException;
+import it.polimi.ingsw.model.leaders.CardsRequirement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -120,6 +121,8 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the level of the card
      */
     public static int getLevel(int id) {
+        if(id == 0)
+            return 0;
         File file = new File(path);
         Scanner scan = null;
         try {
@@ -139,6 +142,8 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the win points of the card
      */
     public static int getWinPoints(int id) {
+        if(id == 0)
+            return 0;
         File file = new File(path);
         Scanner scan = null;
         try {
@@ -159,6 +164,8 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the card category
      */
     public static CardCategory getCategory(int id) {
+        if(id == 0)
+            return null;
         File file = new File(path);
         Scanner scan = null;
         try {
@@ -188,6 +195,8 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the input of the card production
      */
     public static SupplyContainer getInput(int id) {
+        if(id == 0)
+            return null;
         File file = new File(path);
         Scanner scan = null;
         try {
@@ -215,6 +224,8 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the output of the card production
      */
     public static SupplyContainer getOutput(int id) {
+        if(id == 0)
+            return null;
         File file = new File(path);
         Scanner scan = null;
         try {
@@ -241,6 +252,8 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the card cost
      */
     public static SupplyContainer getCost(int id) {
+        if(id == 0)
+            return null;
         File file = new File(path);
         Scanner scan = null;
         try {
@@ -261,6 +274,29 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         return new SupplyContainer(c, st, se, sh, f);
     }
 
+    /**
+     * Returns the url to the card image.
+     * @param id card id
+     * @return the url to the card image
+     */
+    public static String getUrl(int id) {
+        if(id == 0)
+            return null;
+        File file = new File(path);
+        Scanner scan = null;
+        try {
+            scan = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            //TODO end the program
+        }
+        scan.useDelimiter(", ");
+        while(scan.nextInt() != id)
+            scan.nextLine();
+        for(int i = 0; i < 18; i++)
+            scan.nextInt();
+        String tmp = scan.next();
+        return tmp;
+    }
 
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {

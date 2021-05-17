@@ -1,8 +1,12 @@
 package it.polimi.ingsw.view.gui.controllers;
 
+import it.polimi.ingsw.model.CardCategory;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+
+import static it.polimi.ingsw.model.development.DevelopmentCard.*;
 
 public class DevelopmentSpaceController extends SubSceneController {
 
@@ -23,15 +27,51 @@ public class DevelopmentSpaceController extends SubSceneController {
     @Override
     public void initialize() {
         super.initialize();
+
+        coin.setText("0");
+        servant.setText("0");
+        shield.setText("0");
+        stone.setText("0");
+        oldCard1.setImage(new Image("pictures/miscellaneous/void.png"));
+        winPointsOldCard1.setText("");
+        oldCard2.setImage(new Image("pictures/miscellaneous/void.png"));
+        winPointsOldCard2.setText("");
     }
 
 
     @Override
     public void update(int[] completeUpdate) {
-        
+        if(completeUpdate[3] != 0) {
+            card.setImage(new Image(getUrl(completeUpdate[3])));
+            oldCard1.setImage(new Image(getDot(getCategory(completeUpdate[1]))));
+            winPointsOldCard1.setText(String.valueOf(getWinPoints(completeUpdate[1])));
+            oldCard2.setImage(new Image(getDot(getCategory(completeUpdate[2]))));
+            winPointsOldCard2.setText(String.valueOf(getWinPoints(completeUpdate[2])));
+        } else if(completeUpdate[2] != 0) {
+            card.setImage(new Image(getUrl(completeUpdate[2])));
+            oldCard1.setImage(new Image(getDot(getCategory(completeUpdate[1]))));
+            winPointsOldCard1.setText(String.valueOf(getWinPoints(completeUpdate[1])));
+        } else if(completeUpdate[1] != 0){
+            card.setImage(new Image(getUrl(completeUpdate[1])));
+        }
+        coin.setText(String.valueOf(completeUpdate[14]));
+        servant.setText(String.valueOf(completeUpdate[15]));
+        shield.setText(String.valueOf(completeUpdate[16]));
+        stone.setText(String.valueOf(completeUpdate[17]));
     }
     
-    
+    private String getDot(CardCategory cat) {
+        if(cat == CardCategory.GREEN)
+            return "pictures/miscellaneous/greenDot.png";
+        else if(cat == CardCategory.VIOLET)
+            return "pictures/miscellaneous/violetDot.png";
+        else if(cat == CardCategory.BLUE)
+            return "pictures/miscellaneous/cyanDot.png";
+        else if(cat == CardCategory.YELLOW)
+            return "pictures/miscellaneous/yellowDot.png";
+        else
+            return null;
+    }
 
     @FXML
     void activeSquareClicked() {

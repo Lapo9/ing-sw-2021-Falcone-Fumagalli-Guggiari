@@ -47,7 +47,14 @@ public class BaseProductionController extends SubSceneController {
 
     @Override
     public void update(int[] completeUpdate) {
+        input1 = WarehouseObjectTypeController.getTypeByNumber(completeUpdate[6]);
+        input2 = WarehouseObjectTypeController.getTypeByNumber(completeUpdate[7]);
+        output = WarehouseObjectTypeController.getTypeByNumber(completeUpdate[13]);
 
+        coin.setText(String.valueOf(completeUpdate[14]));
+        servant.setText(String.valueOf(completeUpdate[15]));
+        shield.setText(String.valueOf(completeUpdate[16]));
+        stone.setText(String.valueOf(completeUpdate[17]));
     }
 
     @FXML
@@ -107,6 +114,9 @@ public class BaseProductionController extends SubSceneController {
 
     @FXML
     void coinClicked() {
+        if(coin.getText().equals("0")){
+            return;
+        }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("coin base");
         userInterpreter.execute("select coin");
@@ -114,6 +124,9 @@ public class BaseProductionController extends SubSceneController {
 
     @FXML
     void servantClicked() {
+        if(servant.getText().equals("0")){
+            return;
+        }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("servant base");
         userInterpreter.execute("select servant");
@@ -121,6 +134,9 @@ public class BaseProductionController extends SubSceneController {
 
     @FXML
     void shieldClicked() {
+        if(shield.getText().equals("0")){
+            return;
+        }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("shield base");
         userInterpreter.execute("select shield");
@@ -128,6 +144,9 @@ public class BaseProductionController extends SubSceneController {
 
     @FXML
     void stoneClicked() {
+        if(stone.getText().equals("0")){
+            return;
+        }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("stone base");
         userInterpreter.execute("select stone");

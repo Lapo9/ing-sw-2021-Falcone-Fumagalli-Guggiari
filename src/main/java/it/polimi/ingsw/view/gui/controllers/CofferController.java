@@ -55,6 +55,9 @@ public class CofferController extends SubSceneController{
 
     @FXML
     void coinClicked() {
+        if(coin.getText().equals("0")){
+            return;
+        }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("coin coffer");
         userInterpreter.execute("select coin");
@@ -62,6 +65,9 @@ public class CofferController extends SubSceneController{
 
     @FXML
     void servantClicked() {
+        if(servant.getText().equals("0")){
+            return;
+        }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("servant coffer");
         userInterpreter.execute("select servant");
@@ -69,6 +75,9 @@ public class CofferController extends SubSceneController{
 
     @FXML
     void shieldClicked() {
+        if(shield.getText().equals("0")){
+            return;
+        }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("shield coffer");
         userInterpreter.execute("select shield");
@@ -76,6 +85,9 @@ public class CofferController extends SubSceneController{
 
     @FXML
     void stoneClicked() {
+        if(stone.getText().equals("0")){
+            return;
+        }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("stone coffer");
         userInterpreter.execute("select stone");
