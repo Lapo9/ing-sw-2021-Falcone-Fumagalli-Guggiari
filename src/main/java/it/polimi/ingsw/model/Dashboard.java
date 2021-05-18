@@ -1,15 +1,15 @@
 package it.polimi.ingsw.model;
 
 import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
+import static it.polimi.ingsw.model.WarehouseObjectType.*;
+import static it.polimi.ingsw.model.leaders.LeaderCard.getAbility;
+import static it.polimi.ingsw.model.leaders.LeaderCard.getAbilityNumber;
 
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.controller.ModelObserver;
 import it.polimi.ingsw.model.depots.DepotsManager;
 import it.polimi.ingsw.model.depots.Warehouse;
-import it.polimi.ingsw.model.development.Developments;
-import it.polimi.ingsw.model.development.MutableProduction;
-import it.polimi.ingsw.model.development.Paycheck;
-import it.polimi.ingsw.model.development.ProductionManager;
+import it.polimi.ingsw.model.development.*;
 import it.polimi.ingsw.model.exceptions.*;
 import it.polimi.ingsw.model.faith_track.FaithTrack;
 import it.polimi.ingsw.model.leaders.LeaderCard;
@@ -21,6 +21,7 @@ import it.polimi.ingsw.model.match_items.MarketDirection;
 import it.polimi.ingsw.model.match_items.Marketplace;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -32,8 +33,8 @@ import java.util.HashMap;
 public class Dashboard implements HasStatus{
 
     private final String name;
-    private final Marketplace marketplace;
-    private final DevelopmentGrid developmentGrid;
+    private Marketplace marketplace;
+    private DevelopmentGrid developmentGrid;
     private final Warehouse warehouse = new Warehouse();
     private final SupplyContainer coffer = new SupplyContainer(onlyFrom(DepotID.SourceType.STRONGBOX).and(specificType(WarehouseObjectType.FAITH_MARKER).negate()));
     private final MutableProduction baseProduction = new MutableProduction(2, 1);
@@ -77,6 +78,173 @@ public class Dashboard implements HasStatus{
         containers.put(DepotID.DepotType.BASE_PRODUCTION, productionManager);
     }
 
+
+    /**
+     * Creates a dashboard given its status.
+     * @param status of the dashboard
+     * @param name player nickname
+     * @throws SupplyException
+     * @throws DevelopmentException
+     * @throws LeaderException
+     * @throws NoSuchMethodException
+     */
+    public Dashboard(int[] status, String name) throws SupplyException, DevelopmentException, LeaderException, NoSuchMethodException {
+        this.name = name;
+
+        coffer.sum(new SupplyContainer(status[1], status[2], status[3], status[4], status[5]));
+
+        Pair<WarehouseObjectType, Integer> tmp = getContainedSupplies(Arrays.copyOfRange(status, 6, 10));
+        if(tmp.first != null)
+            trustedAddSupply(DepotID.WAREHOUSE3, tmp.first);
+        tmp = getContainedSupplies(Arrays.copyOfRange(status, 11, 15));
+        if(tmp.first != null) {
+            trustedAddSupply(DepotID.WAREHOUSE3, tmp.first);
+            if(tmp.second == 2)
+                trustedAddSupply(DepotID.WAREHOUSE3, tmp.first);
+        }
+        tmp = getContainedSupplies(Arrays.copyOfRange(status, 16, 20));
+        if(tmp.first != null) {
+            trustedAddSupply(DepotID.WAREHOUSE3, tmp.first);
+            if(tmp.second != 1) {
+                trustedAddSupply(DepotID.WAREHOUSE3, tmp.first);
+                if(tmp.second == 2)
+                    trustedAddSupply(DepotID.WAREHOUSE3, tmp.first);
+            }
+        }
+
+        ArrayList<WarehouseObjectType> container;
+        if(status[21] != 0)
+            developments.addCardToSpace(0, new DevelopmentCard(status[21]));
+        if(status[22] != 0)
+            developments.addCardToSpace(0, new DevelopmentCard(status[22]));
+        if(status[23] != 0)
+            developments.addCardToSpace(0, new DevelopmentCard(status[23]));
+        container = getSupplies(Arrays.copyOfRange(status, 34, 38));
+        while(!container.isEmpty()) {
+            developments.addSupply(DepotID.DEVELOPMENT1, container.get(0), DepotID.BASE_PRODUCTION);
+            container.remove(0);
+        }
+        if(status[39] != 0)
+            developments.addCardToSpace(1, new DevelopmentCard(status[39]));
+        if(status[40] != 0)
+            developments.addCardToSpace(1, new DevelopmentCard(status[40]));
+        if(status[41] != 0)
+            developments.addCardToSpace(1, new DevelopmentCard(status[41]));
+        container = getSupplies(Arrays.copyOfRange(status, 52, 56));
+        while(!container.isEmpty()) {
+            developments.addSupply(DepotID.DEVELOPMENT2, container.get(0), DepotID.BASE_PRODUCTION);
+            container.remove(0);
+        }
+        if(status[57] != 0)
+            developments.addCardToSpace(2, new DevelopmentCard(status[57]));
+        if(status[58] != 0)
+            developments.addCardToSpace(2, new DevelopmentCard(status[58]));
+        if(status[59] != 0)
+            developments.addCardToSpace(2, new DevelopmentCard(status[59]));
+        container = getSupplies(Arrays.copyOfRange(status, 70, 74));
+        while(!container.isEmpty()) {
+            developments.addSupply(DepotID.DEVELOPMENT3, container.get(0), DepotID.BASE_PRODUCTION);
+            container.remove(0);
+        }
+
+        container = getSupplies(Arrays.copyOfRange(status, 75, 79));
+        while(!container.isEmpty()) {
+            paycheck.addSupply(container.get(0), DepotID.COFFER);
+            container.remove(0);
+        }
+        container = getSupplies(Arrays.copyOfRange(status, 80, 85));
+        while(!container.isEmpty()) {
+            paycheck.addSupply(container.get(0), DepotID.DEVELOPMENT2);
+            container.remove(0);
+        }
+
+        swapBaseProduction(0, numberToType(status[90]));
+        swapBaseProduction(1, numberToType(status[91]));
+        swapBaseProduction(2, numberToType(status[97]));
+        container = getSupplies(Arrays.copyOfRange(status, 98, 102));
+        while(!container.isEmpty()) {
+            baseProduction.addSupply(container.get(0), DepotID.DEVELOPMENT2);
+            container.remove(0);
+        }
+
+        for(int i = 0; i<status[103]; i++)
+            goAheadDontTrigger();
+        if(status[104] != 0) {
+            if (status[104] == 1)
+                faithTrack.activatePopeFavorTileTrusted(0);
+            else
+                faithTrack.discardPopeFavorTileTrusted(0);
+
+            if(status[105] != 0) {
+                if (status[105] == 1)
+                    faithTrack.activatePopeFavorTileTrusted(1);
+                else
+                    faithTrack.discardPopeFavorTileTrusted(1);
+
+                if(status[106] != 0) {
+                    if (status[106] == 1)
+                        faithTrack.activatePopeFavorTileTrusted(2);
+                    else
+                        faithTrack.discardPopeFavorTileTrusted(2);
+                }
+            }
+        }
+
+        leadersSpace.addLeader(new LeaderCard(status[107]));
+        if(getAbilityNumber(status[107]) == 2) {
+            DepotID.LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
+        }
+        if(getAbilityNumber(status[107]) == 3) {
+            DepotID.LEADER1.setType(DepotID.DepotType.LEADER_PRODUCTION);
+            DepotID.LEADER1.setSource(DepotID.SourceType.ANY);
+        }
+        if(status[108] != 0) {
+            if(status[108] == 1)
+                leadersSpace.activateLeaderCardTrusted(0);
+            else
+                leadersSpace.discardLeaderCardTrusted(0);
+        }
+        if(status[110] != 0)
+            swapLeaderProduction(0, numberToType(status[110]));
+        container = getSupplies(Arrays.copyOfRange(status, 112, 116));
+        while(!container.isEmpty()) {
+            productionManager.addSupply(DepotID.LEADER1, container.get(0), DepotID.BASE_PRODUCTION);
+            container.remove(0);
+        }
+        container = getSupplies(Arrays.copyOfRange(status, 117, 121));
+        while(!container.isEmpty()) {
+            productionManager.addSupply(DepotID.LEADER1, container.get(0), DepotID.BASE_PRODUCTION);
+            container.remove(0);
+        }
+        leadersSpace.addLeader(new LeaderCard(status[122]));
+        if(getAbilityNumber(status[122]) == 2) {
+            DepotID.LEADER2.setType(DepotID.DepotType.LEADER_DEPOT);
+        }
+        if(getAbilityNumber(status[122]) == 3) {
+            DepotID.LEADER2.setType(DepotID.DepotType.LEADER_PRODUCTION);
+            DepotID.LEADER2.setSource(DepotID.SourceType.ANY);
+        }
+        if(status[123] != 0) {
+            if(status[123] == 1)
+                leadersSpace.activateLeaderCardTrusted(1);
+            else
+                leadersSpace.discardLeaderCardTrusted(1);
+        }
+        if(status[126] != 0)
+            swapLeaderProduction(0, numberToType(status[126]));
+        container = getSupplies(Arrays.copyOfRange(status, 127, 130));
+        while(!container.isEmpty()) {
+            productionManager.addSupply(DepotID.LEADER2, container.get(0), DepotID.BASE_PRODUCTION);
+            container.remove(0);
+        }
+        container = getSupplies(Arrays.copyOfRange(status, 131, 136));
+        while(!container.isEmpty()) {
+            productionManager.addSupply(DepotID.LEADER2, container.get(0), DepotID.BASE_PRODUCTION);
+            container.remove(0);
+        }
+
+        unassignedSupplies.sum(new MarbleContainer(status[136], status[137], status[138], status[139], status[140], status[141]));
+    }
 
 
     /**
@@ -684,7 +852,6 @@ public class Dashboard implements HasStatus{
      * baseProdInMutable2 (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
      * baseProdOutFixed (always 00000)
      * baseProdOutMutable1 (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
-     * baseProdOutMutable2 (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
      * baseProdCurr (SupplyContainer style)
      * faithTrackPos
      * popeTile1 (0 = inactive, 1 = active, 2 = discarded)

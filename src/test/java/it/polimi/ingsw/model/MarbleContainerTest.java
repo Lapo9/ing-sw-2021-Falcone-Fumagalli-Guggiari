@@ -251,6 +251,21 @@ public class MarbleContainerTest {
     }
 
     @Test
+    public void sum() {
+        MarbleContainer mc = new MarbleContainer(1, 2, 0, 5,0, 7);
+        MarbleContainer mc2 = new MarbleContainer(0, 2, 0, 1,2, 0);
+        mc.sum(mc2);
+        int[] expectedObject = {1, 4, 0, 6, 2, 7};
+        int[] actualObject = {mc.getQuantity(MarbleColor.YELLOW),
+                              mc.getQuantity(MarbleColor.BLUE),
+                              mc.getQuantity(MarbleColor.GREY),
+                              mc.getQuantity(MarbleColor.WHITE),
+                              mc.getQuantity(MarbleColor.VIOLET),
+                              mc.getQuantity(MarbleColor.RED)};
+        assertArrayEquals(expectedObject, actualObject);
+    }
+
+    @Test
     public void getStatus(){
         MarbleContainer mc = new MarbleContainer(2, 4, 0, 1, 3, 2);
         ArrayList<Integer> result = new ArrayList<>(mc.getStatus());

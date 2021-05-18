@@ -212,6 +212,23 @@ public class FaithTrack implements WinPointsCountable, HasStatus {
         return position;
     }
 
+    /**
+     * Activates the popeFavorTile of the given index.
+     * @param index of a pope favor tile
+     */
+    public void activatePopeFavorTileTrusted(int index) {
+        popeFavors.get(index).activate();
+        vaticanReportCounter++;
+    }
+
+    /**
+     * Discards the popeFavorTile of the given index.
+     * @param index of a pope favor tile
+     */
+    public void discardPopeFavorTileTrusted(int index) {
+        popeFavors.get(index).discard();
+        vaticanReportCounter++;
+    }
 
     @Override
     public ArrayList<Integer> getStatus() {

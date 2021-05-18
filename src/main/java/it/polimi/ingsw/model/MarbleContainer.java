@@ -155,6 +155,20 @@ public class MarbleContainer implements HasStatus {
         red = 0;
     }
 
+
+    /**
+     * Adds to this container the container passed ad argument.
+     * @param mc The container that you want to add to this container
+     */
+    public void sum(MarbleContainer mc) {
+        this.blue = this.blue + mc.blue;
+        this.grey = this.grey + mc.grey;
+        this.red = this.red + mc.red;
+        this.violet = this.violet + mc.violet;
+        this.yellow = this.yellow + mc.yellow;
+        this.white = this.white + mc.white;
+    }
+
     @Override
     public ArrayList<Integer> getStatus(){
         ArrayList<Integer> status = new ArrayList<>();

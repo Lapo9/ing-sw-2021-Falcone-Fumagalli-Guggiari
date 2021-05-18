@@ -95,6 +95,25 @@ public class LeadersSpace implements HasStatus, WinPointsCountable {
         }
     }
 
+
+    /**
+     * Activates a leaderCard, given its index.
+     * @param index of a leaderCard in the leaderSpace
+     * @throws LeaderException if the leaderCard is already discarded or activated
+     */
+    public void activateLeaderCardTrusted(int index) throws LeaderException {
+        leaders.get(index).activate();
+    }
+
+    /**
+     * Discards a leaderCard, given its index.
+     * @param index of a leaderCard in the leaderSpace
+     * @throws LeaderException if the leaderCard is already discarded or activated
+     */
+    public void discardLeaderCardTrusted(int index) throws LeaderException {
+        leaders.get(index).discard();
+    }
+
     @Override
     public int getWinPoints() {
         return leaders.get(0).getWinPoints() + leaders.get(1).getWinPoints();
