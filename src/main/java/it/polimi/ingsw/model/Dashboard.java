@@ -91,7 +91,7 @@ public class Dashboard implements HasStatus{
     public Dashboard(int[] status, String name) throws SupplyException, DevelopmentException, LeaderException, NoSuchMethodException {
         this.name = name;
 
-        coffer.sum(new SupplyContainer(status[1], status[2], status[3], status[4], status[5]));
+        coffer.sum(new SupplyContainer(status[1], status[4], status[2], status[3], status[5]));
 
         Pair<WarehouseObjectType, Integer> tmp = getContainedSupplies(Arrays.copyOfRange(status, 6, 10));
         if(tmp.first != null)
@@ -243,7 +243,7 @@ public class Dashboard implements HasStatus{
             container.remove(0);
         }
 
-        unassignedSupplies.sum(new MarbleContainer(status[136], status[137], status[138], status[139], status[140], status[141]));
+        unassignedSupplies.sum(new MarbleContainer(status[141], status[136], status[137], status[140], status[139], status[138]));
     }
 
 
