@@ -59,7 +59,7 @@ public class ModelInterpreterCLI implements ModelInterpreter {
 
         //check if the leaders are activated and are producers. This is needed for the offline info about active productions
         offlineInfo.setLeaderStatus(1, dataToStatus(status[107], status[108]));
-        offlineInfo.setLeaderStatus(2, dataToStatus(status[123], status[124]));
+        offlineInfo.setLeaderStatus(2, dataToStatus(status[122], status[123]));
 
         items.update(player, ViewableId.COFFER, Arrays.copyOfRange(status, 1, 5));
         // TODO add when we have the viewables
@@ -70,13 +70,13 @@ public class ModelInterpreterCLI implements ModelInterpreter {
         items.update(player, PAYCHECK, Arrays.copyOfRange(status, 75, 85));
         //items.update(player, BASE_PRODUCTION, Arrays.copyOfRange(status, 85, 103));
         items.update(4, FAITH_TRACK, new int[] {status[0], status[103], status[104], status[105], status[106]});
-
-        items.update(player, ViewableId.LEADER_PICK1, new int[]{1, 0, 0,0,0,0,0,0,0,0,0,0,0,0});
-        items.update(player, ViewableId.LEADER_PICK2, new int[]{2, 1, 0,0,0,0,0,0,0,0,0,0,0,0});
-        items.update(player, ViewableId.LEADER_PICK3, new int[]{3, 2, 0,0,0,0,0,0,0,0,0,0,0,0});
-        items.update(player, ViewableId.LEADER_PICK4, new int[]{4, 0, 0,0,0,0,0,0,0,0,0,0,0,0});
-        items.update(player, ViewableId.LEADER1, new int[]{4, 0, 0,0,0,0,0,0,0,0,0,0,0,0});
-        items.update(player, ViewableId.LEADER2, new int[]{4, 0, 0,0,0,0,0,0,0,0,0,0,0,0});
+        items.update(player, UNASSIGNED_MARBLES, Arrays.copyOfRange(status, 137, 143));
+        items.update(player, LEADER1, Arrays.copyOfRange(status, 107, 122));
+        items.update(player, LEADER1, Arrays.copyOfRange(status, 122, 137));
+        items.update(player, LEADER_PICK1, Arrays.copyOfRange(status, 143, 158));
+        items.update(player, LEADER_PICK2, Arrays.copyOfRange(status, 158, 173));
+        items.update(player, LEADER_PICK3, Arrays.copyOfRange(status, 173, 188));
+        items.update(player, LEADER_PICK4, Arrays.copyOfRange(status, 188, 203));
 
         //if user has auto-refresh on, then update his screen
         if(offlineInfo.isAutoRefresh()) {
@@ -110,7 +110,7 @@ public class ModelInterpreterCLI implements ModelInterpreter {
     Updates the marketplace viewable.
      */
     private void updateMarketplace(int[] status){
-        //TODO
+        items.update(4, MARKETPLACE, Arrays.copyOfRange(status, 1, status.length));
     }
 
 
@@ -118,7 +118,7 @@ public class ModelInterpreterCLI implements ModelInterpreter {
     Updates the development grid viewable.
      */
     private void updateDevelopmentGrid(int[] status){
-        //TODO
+        items.update(4, DEVELOPMENT_GRID, Arrays.copyOfRange(status, 1, status.length));
     }
 
 }

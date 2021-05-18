@@ -42,7 +42,7 @@ public class Dashboard implements HasStatus{
     private final Developments developments = new Developments();
     private final LeadersList leadersList = new LeadersList();
     private final LeadersPick leadersPick = new LeadersPick();
-    private MarbleContainer unassignedSupplies;
+    private MarbleContainer unassignedSupplies = new MarbleContainer(0,0,0,0,0,0);
     private final Paycheck paycheck = new Paycheck();
     private boolean inkwell;
     private final ProductionManager productionManager = new ProductionManager(developments, baseProduction, leadersSpace);
