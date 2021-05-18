@@ -88,7 +88,10 @@ public class UserInterpreter {
             UserCommand actualCommand = tmp.get(0);
             //connect is the only command that doesn't have a proper list of arguments (we cannot list all of the possible IPs or names obviously)
             if (actualCommand.toString().equals("connect")){
-                return "OK";
+                if(!tokens[3].equals("developmentGrid") && !tokens[3].equals("marketplace")) {
+                    return "OK";
+                }
+                return "error Come on, choose a better name!";
             }
 
             if (actualCommand.toString().equals("spy")){
@@ -119,7 +122,7 @@ public class UserInterpreter {
         Set<UserCommand> commands = new HashSet<>();
 
         commands.add(new UserCommand(false, "spy", new ArrayList<>()));
-        commands.add(new UserCommand(false, "show", new ArrayList<>(Arrays.asList("dashboard")))); //todo
+        commands.add(new UserCommand(false, "show", new ArrayList<>(Arrays.asList("dashboard", "faithTrack", "marketplace", "developmentGrid"))));
         commands.add(new UserCommand(false, "connect", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
         commands.add(new UserCommand(true, "info"));
         commands.add(new UserCommand(true, "start"));

@@ -129,7 +129,7 @@ public class ViewableFactory {
         }
 
         try {
-            items.get(player).get(id).update(update);
+            items.get(player).get(id).update(update, offlineInfo);
         } catch (NoSuchMethodException nsme){
 
             nsme.printStackTrace();

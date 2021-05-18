@@ -64,47 +64,45 @@ public class MainCLI {
                 factory.buildLeaderCard(1, LEADER_PICK3),
                 factory.buildLeaderCard(1, LEADER_PICK4));
 
+        createView("faithTrack", screen,
+                factory.buildFaithTrack(FAITH_TRACK));
+
         createView("welcome", screen);
 
         createView("yourTurn", screen);
 
+        createView("opponent1", screen,
+                factory.buildSupplyContainer(2, COFFER, "Coffer"),
+                factory.buildWarehouse(2, WAREHOUSE),
+                factory.buildSupplyContainer(2, PAYCHECK, "Paycheck"),
+                //factory.buildLeaderCard(2, LEADER1),
+                //factory.buildLeaderCard(2, LEADER2),
+                factory.buildDevelopmentSpace(2, DEVELOPMENT_SPACE1),
+                factory.buildDevelopmentSpace(2, DEVELOPMENT_SPACE2),
+                factory.buildDevelopmentSpace(2, DEVELOPMENT_SPACE3));
+
+        createView("opponent2", screen,
+                factory.buildSupplyContainer(3, COFFER, "Coffer"),
+                factory.buildWarehouse(3, WAREHOUSE),
+                factory.buildSupplyContainer(3, PAYCHECK, "Paycheck"),
+                //factory.buildLeaderCard(3, LEADER1),
+                //factory.buildLeaderCard(3, LEADER2),
+                factory.buildDevelopmentSpace(3, DEVELOPMENT_SPACE1),
+                factory.buildDevelopmentSpace(3, DEVELOPMENT_SPACE2),
+                factory.buildDevelopmentSpace(3, DEVELOPMENT_SPACE3));
+
+        createView("opponent3", screen,
+                factory.buildSupplyContainer(4, COFFER, "Coffer"),
+                factory.buildWarehouse(4, WAREHOUSE),
+                factory.buildSupplyContainer(4, PAYCHECK, "Paycheck"),
+                //factory.buildLeaderCard(4, LEADER1),
+                //factory.buildLeaderCard(4, LEADER2),
+                factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE1),
+                factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE2),
+                factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE3));
 
 
 
-
-
-
-        View welcome = new View();
-        SupplyContainer welcomeText = factory.buildSupplyContainer(1, ViewableId.WELCOME_TEXT, "WELCOME");
-        welcome.addViewable(welcomeText);
-
-        View dashboard = new View();
-        SupplyContainer dashboardViewable = factory.buildSupplyContainer(1, ViewableId.DASHBOARD_VIEWABLE, "YOUR DASHBOARD");
-        dashboard.addViewable(dashboardViewable);
-
-        View start = new View();
-        SupplyContainer startText = factory.buildSupplyContainer(1, ViewableId.START_TEXT, "START");
-        start.addViewable(startText);
-
-        View yourTurn = new View();
-        SupplyContainer yourTurnText = factory.buildSupplyContainer(1, ViewableId.YOUR_TURN_TEXT, "YOUR TURN");
-        yourTurn.addViewable(yourTurnText);
-
-
-
-
-
-        View player1 = new View();
-        player1.addViewable(factory.buildTestViewable(1, TEST));
-
-        View player2 = new View();
-        player2.addViewable(factory.buildTestViewable(2, TEST));
-
-        View player3 = new View();
-        player3.addViewable(factory.buildTestViewable(3, TEST));
-
-        View player4 = new View();
-        player4.addViewable(factory.buildTestViewable(4, TEST));
 
 
 /*

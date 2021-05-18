@@ -34,6 +34,9 @@ public class Match {
         activePlayer = leader;
         setDefaultCommands();
 
+        marketplace.attach(modelObserver);
+        developmentGrid.attach(modelObserver);
+
         leader.attachDashboard(new Dashboard(false, marketplace, developmentGrid, leader.getName()));
         modelObserver.attachTo(leader); //attach the model observer to the dashboard of this player
     }

@@ -1,11 +1,12 @@
 package it.polimi.ingsw.model.leaders;
 
+import it.polimi.ingsw.model.HasStatus;
 import it.polimi.ingsw.model.match_items.LeadersList;
 import it.polimi.ingsw.model.exceptions.LeaderException;
 
 import java.util.ArrayList;
 
-public class LeadersPick {
+public class LeadersPick implements HasStatus {
 
     private ArrayList<LeaderCard> leaders = new ArrayList<>();
 
@@ -24,4 +25,13 @@ public class LeadersPick {
         leadersSpace.addLeader(leaders.get(index));
     }
 
+
+    @Override
+    public ArrayList<Integer> getStatus() {
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 0; i < 4; ++i){
+            res.addAll(leaders.get(i).getStatus());
+        }
+        return res;
+    }
 }

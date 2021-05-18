@@ -2,6 +2,7 @@ package it.polimi.ingsw.model.match_items;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.controller.ModelObserver;
 import it.polimi.ingsw.model.ActionTilesStack;
 import it.polimi.ingsw.model.HasStatus;
 import it.polimi.ingsw.model.SupplyContainer;
@@ -24,6 +25,7 @@ public class DevelopmentGrid implements HasStatus {
 
     private ArrayList<ArrayList<DevelopmentCard>> grid;
     private int boughtCards = 0;
+    private ArrayList<ModelObserver> observers = new ArrayList<>();
 
 
     /**
@@ -132,7 +134,9 @@ public class DevelopmentGrid implements HasStatus {
         }
         if(container.equals(priceContainer)) {
             boughtCards++;
-            return grid.get(pos).remove(0);
+            DevelopmentCard res = grid.get(pos).remove(0);
+            notifyViews();
+            return res;
         }
         else {
             throw new SupplyException("Cannot buy this card because of supplies if paycheck");
@@ -149,6 +153,7 @@ public class DevelopmentGrid implements HasStatus {
         for(int i=0; i<3; ++i){
             if (!grid.get(getPlace(color.ordinal(), 2-i)).isEmpty()){
                 grid.get(getPlace(color.ordinal(), 2-i)).remove(0);
+                notifyViews();
                 return;
             }
         }
@@ -207,6 +212,20 @@ public class DevelopmentGrid implements HasStatus {
                 status.add(list.get(0).getId());
         }
         return status;
+    }
+
+
+    public void notifyViews(){
+        ArrayList<Integer> status = getStatus();
+
+        for (ModelObserver mo : observers){
+            mo.update("developmentGrid", status);
+        }
+    }
+
+
+    public void attach(ModelObserver mo){
+        observers.add(mo);
     }
 
 

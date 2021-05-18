@@ -704,6 +704,11 @@ public class Dashboard implements HasStatus{
      * leader2outMutable (0 = COIN, 1 = SERVANT, 2 = SHIELD, 3 = STONE, 4 = FAITH_MARKER)
      * leader2curr (SupplyContainer style)
      * leader2depot (SupplyContainer style)
+     * unassignedMarbles (BLUE, GREY, RED, VIOLET, WHITE, YELLOW)
+     * leaderPick1 (same as leader)
+     * leaderPick2 (same as leader)
+     * leaderPick3 (same as leader)
+     * leaderPick4 (same as leader)
      *
      * SupplyContainer style means that there are 5 integers which represents, in this specific order, the number of: COIN, SERVANT, SHIELD, STONE, FAITH_MARKER
      */
@@ -718,6 +723,8 @@ public class Dashboard implements HasStatus{
         status.addAll(baseProduction.getStatus());
         status.addAll(faithTrack.getStatus());
         status.addAll(leadersSpace.getStatus());
+        status.addAll(unassignedSupplies.getStatus());
+        status.addAll(leadersPick.getStatus());
 
         return status;
     }

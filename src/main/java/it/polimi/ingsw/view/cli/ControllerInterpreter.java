@@ -63,8 +63,14 @@ public class ControllerInterpreter {
     }
 
     private void spy(String... tokens){
+        if(tokens[1].equals(offlineInfo.getYourName())){
+            show("dashboard");
+            return;
+        }
         try {
-            screen.show("player" + offlineInfo.getPlayerOrder(tokens[1]));
+            int you = offlineInfo.getPlayerOrder(offlineInfo.getYourName());
+            int opponent = offlineInfo.getPlayerOrder(tokens[1]);
+            screen.show("opponent" + (opponent > you ? opponent+1 : opponent));
         } catch (ViewException ve){
             execute("fatal Sorry, we had a problem, please retry, and if the problem keeps happening try to disconnect and reconnect");
         }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model.match_items;
 
+import it.polimi.ingsw.controller.ModelObserver;
 import it.polimi.ingsw.model.HasStatus;
 import it.polimi.ingsw.model.MarbleColor;
 import it.polimi.ingsw.model.MarbleContainer;
@@ -14,6 +15,7 @@ public class Marketplace implements HasStatus {
 
     private final ArrayList<MarbleColor> grid = new ArrayList<>();
     private MarbleColor slide;
+    ArrayList<ModelObserver> observers = new ArrayList<>();
 
 
     /**
@@ -100,6 +102,8 @@ public class Marketplace implements HasStatus {
         MarbleContainer mc = new MarbleContainer(marbleCounters.get(0), marbleCounters.get(1), marbleCounters.get(2), marbleCounters.get(3), marbleCounters.get(4), marbleCounters.get(5));
         shiftMarketplace(dir, index);
 
+        notifyViews();
+
         return mc;
     }
 
@@ -159,5 +163,19 @@ public class Marketplace implements HasStatus {
         }
         status.add(getSlide() == MarbleColor.BLUE ? 0 : getSlide() == MarbleColor.GREY ? 1 : getSlide() == MarbleColor.RED ? 2 : getSlide() == MarbleColor.VIOLET ? 3 : getSlide() == MarbleColor.WHITE ? 4 : 5);
         return status;
+    }
+
+
+    public void notifyViews(){
+        ArrayList<Integer> status = getStatus();
+
+        for (ModelObserver mo : observers){
+            mo.update("marketplace", status);
+        }
+    }
+
+
+    public void attach(ModelObserver mo){
+        observers.add(mo);
     }
 }
