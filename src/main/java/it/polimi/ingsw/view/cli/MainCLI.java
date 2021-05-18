@@ -1,9 +1,10 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.view.Screen;
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
 import it.polimi.ingsw.view.cli.viewables.*;
 
-import static it.polimi.ingsw.view.cli.ViewableId.TEST;
+import static it.polimi.ingsw.view.cli.ViewableId.*;
 
 public class MainCLI {
 
@@ -12,9 +13,9 @@ public class MainCLI {
 
         ServerSocket serverSocket = new ServerSocket();
 
-        ViewableFactory factory = new ViewableFactory();
-
         OfflineInfo offlineInfo = new OfflineInfo();
+
+        ViewableFactory factory = new ViewableFactory(offlineInfo);
 
         ControllerInterpreter controllerInterpreter = new ControllerInterpreter(screen, offlineInfo);
         UserInterpreter userInterpreter = new UserInterpreter(controllerInterpreter, serverSocket, offlineInfo);
@@ -23,6 +24,54 @@ public class MainCLI {
         screen.attachUserInterpreter(userInterpreter);
         serverSocket.attachInterpreter(controllerInterpreter);
         serverSocket.attachInterpreter(modelInterpreter);
+
+
+
+        //create viewavbles that are shared among different views
+        SupplyContainer coffer1 = factory.buildSupplyContainer(1, COFFER, "Coffer"); //dashboard, development grid
+        Warehouse warehouse1 = factory.buildWarehouse(1, WAREHOUSE); //dashboard, development grid, marketplace
+        LeaderCard leader11 = factory.buildLeaderCard(1, LEADER1); //dashboard, development grid, marketplace
+        LeaderCard leader21 = factory.buildLeaderCard(1, LEADER2); //dashboard, development grid, marketplace
+
+        createView("dashboard", screen,
+                coffer1,
+                warehouse1,
+                leader11,
+                leader21,
+                factory.buildDevelopmentSpace(1, DEVELOPMENT_SPACE1),
+                factory.buildDevelopmentSpace(1, DEVELOPMENT_SPACE2),
+                factory.buildDevelopmentSpace(1, DEVELOPMENT_SPACE3),
+                factory.buildMarbleContainer(1, UNASSIGNED_MARBLES),
+                factory.buildActiveProductions(1, ACTIVE_PRODUCTIONS));
+
+        createView("developmentGrid", screen,
+                coffer1,
+                warehouse1,
+                factory.buildSupplyContainer(1, PAYCHECK, "Paycheck"),
+                leader11,
+                leader21,
+                factory.buildDevelopmentGrid(DEVELOPMENT_GRID));
+
+        createView("marketplace", screen,
+                warehouse1,
+                leader11,
+                leader21,
+                factory.buildMarketPlace(MARKETPLACE));
+
+        createView("preMatch", screen,
+                factory.buildLeaderCard(1, LEADER_PICK1),
+                factory.buildLeaderCard(1, LEADER_PICK2),
+                factory.buildLeaderCard(1, LEADER_PICK3),
+                factory.buildLeaderCard(1, LEADER_PICK4));
+
+        createView("welcome", screen);
+
+        createView("yourTurn", screen);
+
+
+
+
+
 
 
         View welcome = new View();
@@ -58,7 +107,7 @@ public class MainCLI {
         player4.addViewable(factory.buildTestViewable(4, TEST));
 
 
-
+/*
         screen.addView("welcome", welcome);
         screen.addView("start", start);
         screen.addView("yourTurn", yourTurn);
@@ -67,7 +116,7 @@ public class MainCLI {
         screen.addView("player2", player2);
         screen.addView("player3", player3);
         screen.addView("player4", player4);
-
+*/
 
 
         screen.start("welcome");
@@ -96,6 +145,30 @@ public class MainCLI {
         }).start();*/
     }
 
+
+
+
+    private static void createView(String name, ScreenCLI screen, Viewable... viewables){
+        View tmp = new View();
+
+        for (Viewable v : viewables){
+            tmp.addViewable(v);
+        }
+
+        screen.addView(name, tmp);
+    }
+
+
+
+
+
+
+
+
+
+
+
+/*
     private static void showMarketplace (ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
         View MarketPlace = new View();
         MarketPlace MarketPlaceViewable = factory.buildMarketPlace(ViewableId.WAREHOUSE);
@@ -291,4 +364,6 @@ public class MainCLI {
 
 
     }
+
+ */
 }

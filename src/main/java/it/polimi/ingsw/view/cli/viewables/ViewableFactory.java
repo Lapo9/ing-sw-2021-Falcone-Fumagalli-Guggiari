@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.cli.viewables;
 
+import it.polimi.ingsw.view.cli.OfflineInfo;
 import it.polimi.ingsw.view.cli.Viewable;
 import it.polimi.ingsw.view.cli.ViewableId;
 import it.polimi.ingsw.view.cli.viewables.SupplyContainer;
@@ -14,18 +15,19 @@ import java.util.HashMap;
 public class ViewableFactory {
 
     private ArrayList<HashMap<ViewableId, Viewable>> items = new ArrayList<>();
+    private OfflineInfo offlineInfo;
 
     /**
      * Constructor
      */
-    public ViewableFactory() {
+    public ViewableFactory(OfflineInfo offlineInfo) {
+        this.offlineInfo = offlineInfo;
+
         items.add(new HashMap<>()); //player 1
         items.add(new HashMap<>()); //player 2
         items.add(new HashMap<>()); //player 3
         items.add(new HashMap<>()); //player 4
-        items.add(new HashMap<>()); //faith track
-        items.add(new HashMap<>()); //marketplace
-        items.add(new HashMap<>()); //development grid
+        items.add(new HashMap<>()); //others
     }
 
     //TODO create method to build all of the implementations of Viewable, and when build one, add it to the items map
@@ -76,7 +78,7 @@ public class ViewableFactory {
 
     public MarketPlace buildMarketPlace (ViewableId viewableId) {
         MarketPlace res = new MarketPlace();
-        items.get(5).put(viewableId, res);
+        items.get(4).put(viewableId, res);
         return res;
     }
 
@@ -100,7 +102,7 @@ public class ViewableFactory {
 
     public DevelopmentGrid buildDevelopmentGrid (ViewableId viewableId){
         DevelopmentGrid res = new DevelopmentGrid();
-        items.get(5).put(viewableId, res);
+        items.get(4).put(viewableId, res);
         return res;
     }
 
@@ -117,10 +119,22 @@ public class ViewableFactory {
      * @param update New values to insert to the viewable
      */
     public void update(int player, ViewableId id, int[] update){
+        //the first item element is the owner of this cli. If the owner is not actually the first player, we have to shift
+        int you = offlineInfo.getPlayerOrder(offlineInfo.getYourName());
+        if(player == you){
+            player = 0;
+        }
+        else if(player < you){
+            player++;
+        }
+
         try {
             items.get(player).get(id).update(update);
         } catch (NoSuchMethodException nsme){
+
             nsme.printStackTrace();
+        } catch (NullPointerException e) {
+            System.out.print("\n don't worry"); //FIXME to remove
         }
     }
 

@@ -66,7 +66,7 @@ public class ControllerInterpreter {
         try {
             screen.show("player" + offlineInfo.getPlayerOrder(tokens[1]));
         } catch (ViewException ve){
-            execute("fatal Sorry, we had a problem, please retry, and if the problem keep happening try to disconnect and reconnect");
+            execute("fatal Sorry, we had a problem, please retry, and if the problem keeps happening try to disconnect and reconnect");
         }
     }
 
@@ -110,11 +110,6 @@ public class ControllerInterpreter {
 
     private void start(String... tokens){
         offlineInfo.setPlayers(Arrays.copyOfRange(tokens, 2, tokens.length));
-        try {
-            screen.show("start");
-        } catch (ViewException ve){
-            execute("message Match started");
-        }
         execute("message You are player " + tokens[1] + "!");
     }
 

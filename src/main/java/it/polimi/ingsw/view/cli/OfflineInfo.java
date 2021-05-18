@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.cli;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.stream.Collectors;
 
 public class OfflineInfo {
 
@@ -94,6 +95,12 @@ public class OfflineInfo {
         res[5] = activeProductions.get("base") ? 1 : 0;
 
         return res;
+    }
+
+
+
+    public synchronized int getOpponentOrder(String playerName){
+        return playersNamesInOrder.stream().filter(player -> !player.equals(yourName)).collect(Collectors.toList()).indexOf(playerName);
     }
 
 

@@ -113,7 +113,7 @@ public class ScreenCLI implements Screen {
         }
 
         //TODO clear console
-        System.out.print(errorMessage + activeView);
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + errorMessage + activeView);
     }
 
 
@@ -127,7 +127,7 @@ public class ScreenCLI implements Screen {
         }
 
         //TODO clear console
-        System.out.print(errorMessage + activeView);
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + errorMessage + activeView);
     }
 
 

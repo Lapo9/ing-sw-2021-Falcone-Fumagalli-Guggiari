@@ -7,6 +7,10 @@ import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
 import it.polimi.ingsw.view.ModelInterpreter;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
 
+import java.util.Arrays;
+
+import static it.polimi.ingsw.view.cli.ViewableId.*;
+
 /**
  * Class responsible for the application of the updates to the viewables sent by the model.
  */
@@ -57,17 +61,22 @@ public class ModelInterpreterCLI implements ModelInterpreter {
         offlineInfo.setLeaderStatus(1, dataToStatus(status[107], status[108]));
         offlineInfo.setLeaderStatus(2, dataToStatus(status[123], status[124]));
 
-        //items.update(player, ViewableId.COFFER, Arrays.copyOfRange(status, 1, 5));
-        /* TODO add when we have the viewables
-        items.update(player, ViewableId.WAREHOUSE, Arrays.copyOfRange(status, 6, 20));
-        items.update(player, DEV_SPACE1, Arrays.copyOfRange(status, 21, 38));
-        items.update(player, DEV_SPACE2, Arrays.copyOfRange(status, 39, 56));
-        items.update(player, DEV_SPACE3, Arrays.copyOfRange(status, 57, 74));
-        items.update(player, PAYCHECK, Arrays.copyOfRange(status, 75, 84));
-        items.update(player, BASE_PRODUCTION, Arrays.copyOfRange(status, 85, 103));
-        */
+        items.update(player, ViewableId.COFFER, Arrays.copyOfRange(status, 1, 5));
+        // TODO add when we have the viewables
+        items.update(player, ViewableId.WAREHOUSE, Arrays.copyOfRange(status, 6, 21));
+        items.update(player, DEVELOPMENT_SPACE1, Arrays.copyOfRange(status, 21, 39));
+        items.update(player, DEVELOPMENT_SPACE2, Arrays.copyOfRange(status, 39, 57));
+        items.update(player, DEVELOPMENT_SPACE3, Arrays.copyOfRange(status, 57, 75));
+        items.update(player, PAYCHECK, Arrays.copyOfRange(status, 75, 85));
+        //items.update(player, BASE_PRODUCTION, Arrays.copyOfRange(status, 85, 103));
 
-        items.update(player, ViewableId.TEST, status); //TODO test
+        items.update(player, ViewableId.LEADER_PICK1, new int[]{1, 0, 0,0,0,0,0,0,0,0,0,0,0,0});
+        items.update(player, ViewableId.LEADER_PICK2, new int[]{2, 1, 0,0,0,0,0,0,0,0,0,0,0,0});
+        items.update(player, ViewableId.LEADER_PICK3, new int[]{3, 2, 0,0,0,0,0,0,0,0,0,0,0,0});
+        items.update(player, ViewableId.LEADER_PICK4, new int[]{4, 0, 0,0,0,0,0,0,0,0,0,0,0,0});
+        items.update(player, ViewableId.LEADER1, new int[]{4, 0, 0,0,0,0,0,0,0,0,0,0,0,0});
+        items.update(player, ViewableId.LEADER2, new int[]{4, 0, 0,0,0,0,0,0,0,0,0,0,0,0});
+
         //if user has auto-refresh on, then update his screen
         if(offlineInfo.isAutoRefresh()) {
             controllerInterpreter.execute("refresh");

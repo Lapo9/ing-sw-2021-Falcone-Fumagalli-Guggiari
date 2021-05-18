@@ -119,7 +119,7 @@ public class UserInterpreter {
         Set<UserCommand> commands = new HashSet<>();
 
         commands.add(new UserCommand(false, "spy", new ArrayList<>()));
-        commands.add(new UserCommand(false, "show", new ArrayList<>(Arrays.asList("ViewTest1", "ViewTest2")))); //TODO test to eliminate
+        commands.add(new UserCommand(false, "show", new ArrayList<>(Arrays.asList("dashboard")))); //todo
         commands.add(new UserCommand(false, "connect", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
         commands.add(new UserCommand(true, "info"));
         commands.add(new UserCommand(true, "start"));

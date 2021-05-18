@@ -184,6 +184,16 @@ public class Match {
             players.get(i).setOrder(i);
         }
 
+        //prepare player order string to send to the views
+        StringBuilder playersNamesInOrder = new StringBuilder();
+        for (Player p : players){
+            playersNamesInOrder.append(p.getName() + " ");
+        }
+        //tell the players the match started
+        for (int i = 0; i < players.size(); ++i){
+            players.get(i).sendController("start " + (i+1) + " " + playersNamesInOrder);
+        }
+
         activePlayer.getDashboard().giveInkwell(); //give the inkwell to the first player
 
         //put players 3 and 4 one step ahead in the faith track
@@ -194,19 +204,16 @@ public class Match {
             //there wasn't player 3 or 4, no problem
         }
 
-        //draw 4 random cards for leader selection and prepare player order string to send to the views
-        StringBuilder playersNamesInOrder = new StringBuilder();
+        //draw 4 random cards for leader selection
         for (Player p : players){
             p.getDashboard().fillLeadersPicks();
-            playersNamesInOrder.append(p.getName() + " ");
-        }
-
-        //tell the players the match started
-        for (int i = 0; i < players.size(); ++i){
-            players.get(i).sendController("start " + (i+1) + " " + playersNamesInOrder);
         }
 
         phase = PRE_MATCH;
+        //make the view show the leaders/supplies pick
+        for (Player p : players){
+            p.sendController("show preMatch");
+        }
 
         //avoid first turn for disconnected players
         for(Player p : players.stream().filter(p -> !p.isConnected()).collect(Collectors.toList())) {

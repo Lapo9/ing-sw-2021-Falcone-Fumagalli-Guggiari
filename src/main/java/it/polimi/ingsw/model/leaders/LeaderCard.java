@@ -133,6 +133,9 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the card ability
      */
     public static LeaderAbility getAbility(int id) {
+        if(id == 0){
+            return null;
+        }
         File file = new File(path);
         Scanner scan = null;
         try {
