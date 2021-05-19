@@ -76,8 +76,8 @@ public class ViewableFactory {
         return res;
     }
 
-    public MarketPlace buildMarketPlace (ViewableId viewableId) {
-        MarketPlace res = new MarketPlace();
+    public Marketplace buildMarketplace (ViewableId viewableId) {
+        Marketplace res = new Marketplace();
         items.get(4).put(viewableId, res);
         return res;
     }

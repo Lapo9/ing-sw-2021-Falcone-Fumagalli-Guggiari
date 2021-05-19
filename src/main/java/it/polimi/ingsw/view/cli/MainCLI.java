@@ -56,7 +56,7 @@ public class MainCLI {
                 warehouse1,
                 leader11,
                 leader21,
-                factory.buildMarketPlace(MARKETPLACE));
+                factory.buildMarketplace(MARKETPLACE));
 
         createView("preMatch", screen,
                 factory.buildLeaderCard(1, LEADER_PICK1),
@@ -117,7 +117,7 @@ public class MainCLI {
 */
 
 
-        screen.start("welcome");
+        //screen.start("welcome");
 
         //methods to test the viewable objects
 
@@ -166,14 +166,14 @@ public class MainCLI {
 
 
 
-/*
-    private static void showMarketplace (ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
-        View MarketPlace = new View();
-        MarketPlace MarketPlaceViewable = factory.buildMarketPlace(ViewableId.WAREHOUSE);
-        MarketPlace.addViewable(MarketPlaceViewable);
 
-        screenCLI.addView("MarketPlace", MarketPlace);
-        screenCLI.start("MarketPlace");
+    private static void showMarketplace (ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
+        View Marketplace = new View();
+        Marketplace MarketplaceViewable = factory.buildMarketplace(ViewableId.WAREHOUSE);
+        Marketplace.addViewable(MarketplaceViewable);
+
+        screenCLI.addView("Marketplace", Marketplace);
+        screenCLI.start("Marketplace");
     }
 
     private static void showMarbleContainer (ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
@@ -214,7 +214,7 @@ public class MainCLI {
 
     private static void showDevelopmentCardTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View developmentCard = new View();
-        DevelopmentCard developmentCardViewable = factory.buildDevelopmentCard(1, ViewableId.DEVELOPMENTCARD);
+        DevelopmentCard developmentCardViewable = factory.buildDevelopmentCard(1, ViewableId.DEVELOPMENT_CARD);
         developmentCard.addViewable(developmentCardViewable);
 
         screenCLI.addView("developmentCard", developmentCard);
@@ -242,7 +242,7 @@ public class MainCLI {
 
         //empty card
         int [] updWarehouse2 = {
-                0, //id
+                48, //id
                 1, 2, 0, 0, 0, //input
                 0, 0, 1, 0, 1, //output
                 1, 0, 0, 0, 0 //currentSupply
@@ -253,7 +253,7 @@ public class MainCLI {
 
     private static void showDevelopmentSpaceTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View developmentSpace = new View();
-        DevelopmentSpace developmentSpaceViewable = factory.buildDevelopmentSpace(1, ViewableId.DEVELOPMENTSPACE);
+        DevelopmentSpace developmentSpaceViewable = factory.buildDevelopmentSpace(1, ViewableId.DEVELOPMENT_SPACE1);
         developmentSpace.addViewable(developmentSpaceViewable);
 
         screenCLI.addView("developmentSpace", developmentSpace);
@@ -308,7 +308,7 @@ public class MainCLI {
 
     private static void showDevelopmentGridCardTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
         View developmentGridCard = new View();
-        DevelopmentGridCard developmentGridCardViewable = factory.buildDevelopmentGridCard(1, ViewableId.DEVELOPMENTGRIDCARD);
+        DevelopmentGridCard developmentGridCardViewable = factory.buildDevelopmentGridCard(1, ViewableId.DEVELOPMENT_CARD);
         developmentGridCard.addViewable(developmentGridCardViewable);
 
         screenCLI.addView("developmentGridCard", developmentGridCard);
@@ -318,7 +318,7 @@ public class MainCLI {
         developmentGridCardViewable.update(updateDevGridCard);
         screenCLI.show("developmentGridCard");
 
-        int [] updateDevGridCard1 = {0}; //this type of card gets updated only using the id
+        int [] updateDevGridCard1 = {48}; //this type of card gets updated only using the id
         developmentGridCardViewable.update(updateDevGridCard1);
         screenCLI.show("developmentGridCard");
 
@@ -327,7 +327,7 @@ public class MainCLI {
 
     private static void showDevelopmentGridTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View developmentGrid = new View();
-        DevelopmentGrid developmentGridViewable = factory.buildDevelopmentGrid(ViewableId.DEVELOPMENTGRID);
+        DevelopmentGrid developmentGridViewable = factory.buildDevelopmentGrid(ViewableId.DEVELOPMENT_GRID);
         developmentGrid.addViewable(developmentGridViewable);
 
         screenCLI.addView("developmentGrid", developmentGrid);
@@ -344,7 +344,7 @@ public class MainCLI {
 
     private static void showActiveProductions(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View activeProductions = new View();
-        ActiveProductions activeProductionsViewable = factory.buildActiveProductions(1, ViewableId.ACTIVEPRODUCTIONS);
+        ActiveProductions activeProductionsViewable = factory.buildActiveProductions(1, ViewableId.ACTIVE_PRODUCTIONS);
         activeProductions.addViewable(activeProductionsViewable);
 
         screenCLI.addView("activeProductions", activeProductions);
@@ -363,5 +363,5 @@ public class MainCLI {
 
     }
 
- */
+
 }

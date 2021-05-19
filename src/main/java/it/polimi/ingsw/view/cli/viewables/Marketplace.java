@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.BOLD;
 
-public class MarketPlace implements Viewable {
+public class Marketplace implements Viewable {
 
     private ArrayList<Integer> grid = new ArrayList<>();
 
-    MarketPlace() {
+    Marketplace() {
         for(int i = 0; i < 13; i++)
             grid.add(0);
     }
@@ -31,7 +31,7 @@ public class MarketPlace implements Viewable {
     }
 
     private String marbleGrid() {
-        String tmp = BOLD("Market Place: \n");
+        String tmp = BOLD("Marketplace: \n");
         int i = 0;
         int index = 1;
 

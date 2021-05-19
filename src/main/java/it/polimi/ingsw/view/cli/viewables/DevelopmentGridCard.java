@@ -206,9 +206,17 @@ public class DevelopmentGridCard implements Viewable {
                     deleteZeros(1, FAITH_MARKER) +
                     calculateSpaces(1, COIN)+ calculateSpaces(1, SERVANT) + calculateSpaces(1, SHIELD) + calculateSpaces(1, STONE) + calculateSpaces(1, FAITH_MARKER) +" |" + "\n" +
                     "|                                |" + "\n" +
-                    "|        " + FRAMED(" Win Points: " + wp + " ") + "         |" + "\n" +
+                    printWinPoints() +
                     "+--------------------------------+";
 
+        }
+    }
+    private String printWinPoints() {
+        if (wp < 9) {
+            return "|        " + FRAMED(" Win Points: " + wp + " ") + "         |" + "\n";
+        }
+        else {
+            return "|        " + FRAMED(" Win Points: " + wp + " ") + "        |" + "\n";
         }
     }
 
