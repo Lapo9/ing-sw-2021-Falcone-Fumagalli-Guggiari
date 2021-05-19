@@ -106,46 +106,10 @@ public class MainCLI {
                 factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE2),
                 factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE3));
 
+        createView("lobby", screen);
 
+        screen.start("welcome");
 
-
-
-/*
-        screen.addView("welcome", welcome);
-        screen.addView("start", start);
-        screen.addView("yourTurn", yourTurn);
-        screen.addView("dashboard", dashboard);
-        screen.addView("player1", player1);
-        screen.addView("player2", player2);
-        screen.addView("player3", player3);
-        screen.addView("player4", player4);
-*/
-
-
-        //screen.start("welcome");
-
-        //methods to test the viewable objects
-
-        //showMarketplace (screen, factory);
-        //showMarbleContainer(screen, factory);
-        //showWarehouseTest(screen, factory);
-        //showDevelopmentCardTest(screen, factory);
-        //showDevelopmentSpaceTest(screen, factory);
-        //showDevelopmentGridCardTest(screen, factory);
-        //showDevelopmentGridTest(screen, factory);
-        //showActiveProductions(screen, factory);
-
-
-        /*new Thread(() -> {
-            try {
-                Thread.sleep(5000);
-                int[] up1 = {0, 1, 3, 0, 1, 0};
-                modelInterpreter.update(up1);
-                Thread.sleep(10000);
-                int[] up2 = {1, 5, 0, 0, 1, 0};
-                modelInterpreter.update(up2);
-            } catch (InterruptedException ie){}
-        }).start();*/
     }
 
 
