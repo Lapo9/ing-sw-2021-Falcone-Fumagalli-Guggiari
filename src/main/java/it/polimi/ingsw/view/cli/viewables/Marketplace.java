@@ -40,7 +40,7 @@ public class Marketplace implements Viewable {
         tmp = tmp.concat("   ╔════╦════╦════╦════╗\n");
 
         while(i<12){
-            tmp = tmp.concat(" ").concat(String.valueOf(index)).concat(" ").concat("║ ").concat(String.valueOf((char)8201)).concat(marbleColor(grid.get(i))).concat(String.valueOf((char)8201)).concat(" ║ ").concat(String.valueOf((char)8201)).concat(marbleColor(grid.get(i+1))).concat(String.valueOf((char)8201)).concat(" ║ ").concat(String.valueOf((char)8201)).concat(marbleColor(grid.get(i+2))).concat(String.valueOf((char)8201)).concat(" ║ ").concat(String.valueOf((char)8201)).concat(marbleColor(grid.get(i+3))).concat(String.valueOf((char)8201)).concat(" ║").concat("\n");
+            tmp = tmp.concat(" ").concat(String.valueOf(index)).concat(" ").concat("║ ").concat(String.valueOf((char)8201)).concat(marbleColor(grid.get(i))).concat(String.valueOf((char)8201)).concat(" ║ ").concat(String.valueOf((char)8201)).concat(marbleColor(grid.get(i+1))).concat(String.valueOf((char)8201)).concat(" ║ ").concat(String.valueOf((char)8201)).concat(marbleColor(grid.get(i+2))).concat(String.valueOf((char)8201)).concat(" ║ ").concat(String.valueOf((char)8201)).concat(marbleColor(grid.get(i+3))).concat(String.valueOf((char)8201)).concat(" ║  ←").concat("\n");
             if(i<8)
                 tmp = tmp.concat("   ╠════╬════╬════╬════╣ \n");
             i = i + 4;
@@ -48,6 +48,8 @@ public class Marketplace implements Viewable {
         }
 
         tmp = tmp.concat("   ╚════╩════╩════╩════╝\n");
+
+        tmp = tmp.concat("     ").concat(String.valueOf((char)8201)).concat(" ↑ ").concat(String.valueOf((char)8201)).concat(" ").concat(String.valueOf((char)8201)).concat(" ↑ ").concat(String.valueOf((char)8201)).concat(" ").concat(String.valueOf((char)8201)).concat(" ↑ ").concat(String.valueOf((char)8201)).concat(" ").concat(String.valueOf((char)8201)).concat(" ↑ ").concat(String.valueOf((char)8201)).concat(" ").concat("\n");
 
         tmp = tmp.concat("   Slide: ").concat(marbleColor(grid.get(12)));
 
