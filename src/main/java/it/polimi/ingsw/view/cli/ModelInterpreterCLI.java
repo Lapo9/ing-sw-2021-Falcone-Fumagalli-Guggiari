@@ -62,17 +62,17 @@ public class ModelInterpreterCLI implements ModelInterpreter {
         offlineInfo.setLeaderStatus(2, dataToStatus(status[122], status[123]));
 
         items.update(player, ViewableId.COFFER, Arrays.copyOfRange(status, 1, 5));
-        // TODO add when we have the viewables
         items.update(player, ViewableId.WAREHOUSE, Arrays.copyOfRange(status, 6, 21));
         items.update(player, DEVELOPMENT_SPACE1, Arrays.copyOfRange(status, 21, 39));
         items.update(player, DEVELOPMENT_SPACE2, Arrays.copyOfRange(status, 39, 57));
         items.update(player, DEVELOPMENT_SPACE3, Arrays.copyOfRange(status, 57, 75));
-        items.update(player, PAYCHECK, Arrays.copyOfRange(status, 75, 85));
+        items.update(player, PAYCHECK_STRONGBOX, Arrays.copyOfRange(status, 75, 80));
+        items.update(player, PAYCHECK_DEPOTS, Arrays.copyOfRange(status, 80, 85));
         //items.update(player, BASE_PRODUCTION, Arrays.copyOfRange(status, 85, 103));
         items.update(4, FAITH_TRACK, new int[] {status[0], status[103], status[104], status[105], status[106]});
         items.update(player, UNASSIGNED_MARBLES, Arrays.copyOfRange(status, 137, 143));
         items.update(player, LEADER1, Arrays.copyOfRange(status, 107, 122));
-        items.update(player, LEADER1, Arrays.copyOfRange(status, 122, 137));
+        items.update(player, LEADER2, Arrays.copyOfRange(status, 122, 137));
         items.update(player, LEADER_PICK1, Arrays.copyOfRange(status, 143, 158));
         items.update(player, LEADER_PICK2, Arrays.copyOfRange(status, 158, 173));
         items.update(player, LEADER_PICK3, Arrays.copyOfRange(status, 173, 188));

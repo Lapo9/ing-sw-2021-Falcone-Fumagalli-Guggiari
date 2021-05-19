@@ -120,7 +120,7 @@ public class ViewableFactory {
      */
     public void update(int player, ViewableId id, int[] update){
         //the first item element is the owner of this cli. If the owner is not actually the first player, we have to shift
-        int you = offlineInfo.getPlayerOrder(offlineInfo.getYourName());
+        int you = offlineInfo.getPlayerOrder(offlineInfo.getYourName())-1;
         if(player == you){
             player = 0;
         }

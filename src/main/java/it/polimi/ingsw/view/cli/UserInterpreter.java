@@ -55,6 +55,7 @@ public class UserInterpreter {
             //check if it is a connection request
             if (tokens[0].equals("connect")){
                 socket.connect(tokens[1], Integer.parseInt(tokens[2]), tokens[3], tokens[4]); //connect to the specified server
+                offlineInfo.setYourName(tokens[3]);
             }
             //produce is the only command that needs some elaboration
             else if (tokens[0].equals("produce")){
@@ -88,7 +89,7 @@ public class UserInterpreter {
             UserCommand actualCommand = tmp.get(0);
             //connect is the only command that doesn't have a proper list of arguments (we cannot list all of the possible IPs or names obviously)
             if (actualCommand.toString().equals("connect")){
-                if(!tokens[3].equals("developmentGrid") && !tokens[3].equals("marketplace")) {
+                if(!tokens[3].equals("developmentGrid") && !tokens[3].equals("marketplace") && !tokens[3].toLowerCase(Locale.ROOT).contains("fuma")) {
                     return "OK";
                 }
                 return "error Come on, choose a better name!";

@@ -47,7 +47,8 @@ public class MainCLI {
         createView("developmentGrid", screen,
                 coffer1,
                 warehouse1,
-                factory.buildSupplyContainer(1, PAYCHECK, "Paycheck"),
+                factory.buildSupplyContainer(1, PAYCHECK_STRONGBOX, "Paycheck strongbox"),
+                factory.buildSupplyContainer(1, PAYCHECK_DEPOTS, "Paycheck depots"),
                 leader11,
                 leader21,
                 factory.buildDevelopmentGrid(DEVELOPMENT_GRID));
@@ -71,10 +72,12 @@ public class MainCLI {
 
         createView("yourTurn", screen);
 
+
         createView("opponent1", screen,
                 factory.buildSupplyContainer(2, COFFER, "Coffer"),
                 factory.buildWarehouse(2, WAREHOUSE),
-                factory.buildSupplyContainer(2, PAYCHECK, "Paycheck"),
+                factory.buildSupplyContainer(2, PAYCHECK_STRONGBOX, "Paycheck strongbox"),
+                factory.buildSupplyContainer(2, PAYCHECK_DEPOTS, "Paycheck depots"),
                 //factory.buildLeaderCard(2, LEADER1),
                 //factory.buildLeaderCard(2, LEADER2),
                 factory.buildDevelopmentSpace(2, DEVELOPMENT_SPACE1),
@@ -84,7 +87,8 @@ public class MainCLI {
         createView("opponent2", screen,
                 factory.buildSupplyContainer(3, COFFER, "Coffer"),
                 factory.buildWarehouse(3, WAREHOUSE),
-                factory.buildSupplyContainer(3, PAYCHECK, "Paycheck"),
+                factory.buildSupplyContainer(3, PAYCHECK_STRONGBOX, "Paycheck strongbox"),
+                factory.buildSupplyContainer(3, PAYCHECK_DEPOTS, "Paycheck depots"),
                 //factory.buildLeaderCard(3, LEADER1),
                 //factory.buildLeaderCard(3, LEADER2),
                 factory.buildDevelopmentSpace(3, DEVELOPMENT_SPACE1),
@@ -94,7 +98,8 @@ public class MainCLI {
         createView("opponent3", screen,
                 factory.buildSupplyContainer(4, COFFER, "Coffer"),
                 factory.buildWarehouse(4, WAREHOUSE),
-                factory.buildSupplyContainer(4, PAYCHECK, "Paycheck"),
+                factory.buildSupplyContainer(4, PAYCHECK_STRONGBOX, "Paycheck strongbox"),
+                factory.buildSupplyContainer(4, PAYCHECK_DEPOTS, "Paycheck depots"),
                 //factory.buildLeaderCard(4, LEADER1),
                 //factory.buildLeaderCard(4, LEADER2),
                 factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE1),

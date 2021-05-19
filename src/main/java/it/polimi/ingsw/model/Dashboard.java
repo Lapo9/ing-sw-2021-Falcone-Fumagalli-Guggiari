@@ -265,6 +265,8 @@ public class Dashboard implements HasStatus{
      * @param index column or row number
      */
     public void buySupplies(MarketDirection dir, int index) {
+        clearProductions();
+        clearPaycheck();
         unassignedSupplies = marketplace.obtain(dir, index);
         notifyViews();
     }
@@ -908,7 +910,7 @@ public class Dashboard implements HasStatus{
 
 
     /*Gets the status of the dashboard and send it to all of the observers.*/
-    private void notifyViews(){
+    public void notifyViews(){
         //get the status of the dashboard
         ArrayList<Integer> status = new ArrayList<>(getStatus());
 

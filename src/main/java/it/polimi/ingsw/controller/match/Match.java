@@ -187,6 +187,10 @@ public class Match {
             players.get(i).setOrder(i);
         }
 
+        //send the first update for the marketplace and the development grid
+        marketplace.notifyViews();
+        developmentGrid.notifyViews();
+
         //prepare player order string to send to the views
         StringBuilder playersNamesInOrder = new StringBuilder();
         for (Player p : players){
@@ -208,9 +212,7 @@ public class Match {
         }
 
         //draw 4 random cards for leader selection
-        for (Player p : players){
-            p.getDashboard().fillLeadersPicks();
-        }
+        players.forEach(p -> p.getDashboard().fillLeadersPicks());
 
         phase = PRE_MATCH;
         //make the view show the leaders/supplies pick
@@ -300,8 +302,7 @@ public class Match {
             player.sendController("error " + e.getMessage());
         }
         if(player.getDashboard().getUnassignedSuppliesQuantity() == 0){
-            phase = TURN_END; //set next phase
-            player.sendController("message You assigned all of your marbles!");
+            player.sendController("message You assigned all of your marbles. Discard the remaining red marbles to go ahead on the faith track!");
         }
     }
 
@@ -394,9 +395,9 @@ public class Match {
             return;
         }
 
-        int row = Integer.parseInt(args[1]);
-        int col = Integer.parseInt(args[2]);
-        int space = Integer.parseInt(args[3]);
+        int row = Integer.parseInt(args[1])-1;
+        int col = Integer.parseInt(args[2])-1;
+        int space = Integer.parseInt(args[3])-1;
 
         try {
             player.getDashboard().buyDevelopment(col, row, space);

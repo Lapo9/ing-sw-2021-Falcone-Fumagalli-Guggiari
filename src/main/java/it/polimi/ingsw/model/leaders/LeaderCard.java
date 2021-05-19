@@ -113,9 +113,10 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @param id card id
      * @return the card win points
      */
-    public static int getWinPoints(int id) {
-        if(id == 0)
-            return 0;
+    public static Integer getWinPoints(int id) {
+        if(id == 0){
+            return null;
+        }
         File file = new File(path);
         Scanner scan = null;
         try {
@@ -168,8 +169,9 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the type of leader ability
      */
     public static Integer getAbilityNumber(int id) {
-        if(id == 0)
+        if(id == 0){
             return null;
+        }
         File file = new File(path);
         Scanner scan = null;
         try {
@@ -191,8 +193,9 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the supply container that contains the details of the leader abilty.
      */
     public static SupplyContainer getAbilitySC(int id) {
-        if(id == 0)
+        if(id == 0){
             return null;
+        }
         File file = new File(path);
         Scanner scan = null;
         try {
@@ -219,8 +222,9 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the warehouse object type of the ability
      */
     public static WarehouseObjectType getAbilityWOT(int id) {
-        if(id == 0)
+        if(id == 0){
             return null;
+        }
         File file = new File(path);
         Scanner scan = null;
         try {
@@ -258,8 +262,9 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the supplies requirements to buy the card
      */
     public static SupplyContainer getSuppliesRequirement(int id) {
-        if(id == 0)
+        if(id == 0){
             return null;
+        }
         File file = new File(path);
         Scanner scan = null;
         try {
@@ -286,8 +291,9 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the cards requirements to buy the card
      */
     public static ArrayList<CardsRequirement> getCardsRequirements(int id) {
-        if(id == 0)
+        if(id == 0){
             return null;
+        }
         File file = new File(path);
         ArrayList<CardsRequirement> list = new ArrayList<>();
         Scanner scan = null;
@@ -353,8 +359,9 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the url to the card image
      */
     public static String getUrl(int id) {
-        if(id == 0)
+        if(id == 0){
             return null;
+        }
         File file = new File(path);
         ArrayList<CardsRequirement> list = new ArrayList<>();
         Scanner scan = null;
