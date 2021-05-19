@@ -99,7 +99,7 @@ public class UserInterpreter {
                 if (offlineInfo.getPlayersNum() == 0){
                     return "Wait the start of the match to spy other players!";
                 }
-                else if (offlineInfo.getPlayerOrder(tokens[1]) == -1){
+                else if (offlineInfo.getPlayerOrder(tokens[1]) == 0){
                     return "\"" + tokens[1] + "\" is not a player";
                 }
                 else {

@@ -198,7 +198,7 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         listOfSc = listOfSc.stream().filter(pair -> pair.second > 0).collect(Collectors.toList());
 
         //order the list
-        listOfSc = listOfSc.stream().sorted((pair1, pair2) -> pair1.second>pair2.second ? 1 : (pair1.second==pair2.second ? 0 : -1)).collect(Collectors.toList());
+        listOfSc = listOfSc.stream().sorted((pair1, pair2) -> pair1.second<pair2.second ? 1 : (pair1.second==pair2.second ? 0 : -1)).collect(Collectors.toList());
 
         //if we have more than 3 items, we're fucked
         if(listOfSc.size() > 3){
@@ -208,10 +208,9 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         //add to the depots
         for(int i=0; i<listOfSc.size(); ++i){
             for (int j = 0; j < listOfSc.get(i).second; ++j) {
-                int k = listOfSc.get(i).second;
                 try {
-                    depots.get(k-1).addSupply(listOfSc.get(i).first);
-                } catch (SupplyException se) {/*TODO terminate*/}
+                    depots.get(2-i).addSupply(listOfSc.get(i).first);
+                } catch (SupplyException se) {se.printStackTrace();}
             }
         }
 

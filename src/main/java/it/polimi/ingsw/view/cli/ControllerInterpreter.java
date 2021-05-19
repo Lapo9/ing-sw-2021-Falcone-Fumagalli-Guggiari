@@ -62,18 +62,14 @@ public class ControllerInterpreter {
         screen.hide(tokens[1]);
     }
 
-    private void spy(String... tokens){
-        if(tokens[1].equals(offlineInfo.getYourName())){
-            show("dashboard");
+    private void spy(String... tokens) {
+        if (tokens[1].equals(offlineInfo.getYourName())) {
+            execute("show dashboard");
             return;
         }
-        try {
-            int you = offlineInfo.getPlayerOrder(offlineInfo.getYourName());
-            int opponent = offlineInfo.getPlayerOrder(tokens[1]);
-            screen.show("opponent" + (opponent > you ? opponent+1 : opponent));
-        } catch (ViewException ve){
-            execute("fatal Sorry, we had a problem, please retry, and if the problem keeps happening try to disconnect and reconnect");
-        }
+        int you = offlineInfo.getPlayerOrder(offlineInfo.getYourName());
+        int opponent = offlineInfo.getPlayerOrder(tokens[1]);
+        execute("show opponent" + (opponent > you ? opponent - 1 : opponent));
     }
 
     private void error(String... tokens){

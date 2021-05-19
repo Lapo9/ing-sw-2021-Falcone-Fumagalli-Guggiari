@@ -44,24 +44,25 @@ public class Match {
 
 
     synchronized void addPlayer(Player p) throws MatchException {
-        if(phase != LOBBY){
-            throw new MatchException("Match already started");
-        }
-        else if(players.stream().anyMatch(player -> player.getName().equals(p.getName()) && player.isConnected())){
-            throw new MatchException("There is already a player named \"" + p.getName() + "\" in this match");
-        }
-        else if(players.stream().anyMatch(player -> player.getName().equals(p.getName()) && !player.isConnected())){
+        if(players.stream().anyMatch(player -> player.getName().equals(p.getName()) && !player.isConnected())){
             //in this case there is a player with the same name who disconnected, so you can replace him
             Player replacingPlayer = players.stream().filter(player -> player.getName().equals(p.getName()) && !player.isConnected()).collect(Collectors.toList()).get(0);
             replacingPlayer.reconnect(p);
 
             //tell each player a new player connected
             for (Player plr : players){
-                info(plr, null);
+                info(plr);
             }
 
-            p.sendController("show lobby"); //tell the player to show the lobby screen
+            reintroduceReconnectedPlayer(replacingPlayer);
         }
+        else if(phase != LOBBY){
+            throw new MatchException("Match already started");
+        }
+        else if(players.stream().anyMatch(player -> player.getName().equals(p.getName()) && player.isConnected())){
+            throw new MatchException("There is already a player named \"" + p.getName() + "\" in this match");
+        }
+
         else if(players.size() >= 4){
             throw new MatchException("The match is full already");
         }
@@ -73,12 +74,28 @@ public class Match {
 
             //tell each player a new player connected
             for (Player plr : players){
-                info(plr, null);
+                info(plr);
             }
 
             p.sendController("show lobby"); //tell the player to show the lobby screen
         }
     }
+
+
+
+    synchronized void reintroduceReconnectedPlayer(Player reconnected){
+        //prepare player order string to send to the reconnected view
+        StringBuilder playersNamesInOrder = new StringBuilder();
+        for (Player p : players){
+            playersNamesInOrder.append(p.getName() + " ");
+        }
+        reconnected.sendController("start " + (reconnected.getOrder()+1) + " " + playersNamesInOrder);
+
+        marketplace.notifyViews();
+        developmentGrid.notifyViews();
+        reconnected.getDashboard().notifyViews();
+    }
+
 
 
     public void update(String message, Player player) {
@@ -144,9 +161,7 @@ public class Match {
                     update("select coin", player);
                     update("select coin", player);
                 }
-                break;
 
-            case LEADER_SELECTION:
                 //pick the first 2 leaders
                 update("pickLeaders 1 2", player);
                 break;
@@ -241,7 +256,7 @@ public class Match {
 
         //try to add to first row of warehouse, if you cannot (because 4th player before chose a different supply), then add to second row
         try {
-            player.getDashboard().trustedAddSupply(DepotID.WAREHOUSE1, WarehouseObjectType.stringToType(args[1]));
+            player.getDashboard().trustedAddSupply(DepotID.WAREHOUSE3, WarehouseObjectType.stringToType(args[1]));
         } catch (Exception e){
             try {
                 player.getDashboard().trustedAddSupply(DepotID.WAREHOUSE2, WarehouseObjectType.stringToType(args[1]));
@@ -253,9 +268,7 @@ public class Match {
 
         player.addSelectedItemsInPreMatch(); //report that the player chose one supply to start
 
-        if (checkPreMatchDone()){
-            phase = TURN_START;
-        }
+        checkPreMatchDone();
     }
 
     private void marketplace(Player player, String... args) {
@@ -426,7 +439,6 @@ public class Match {
         //if the player is alive, tell him it's his turn to play, if not perform auto action
         if(activePlayer.isConnected()) {
             activePlayer.sendController("yourTurn");
-            info(player, null);
         }
         else {
             update("dead", activePlayer);
@@ -551,11 +563,7 @@ public class Match {
             return;
         }
 
-        if(checkPreMatchDone()){
-            phase = TURN_START;
-            broadcast("show matchStart");
-        }
-
+        checkPreMatchDone();
     }
 
 
@@ -593,7 +601,7 @@ public class Match {
     }
 
 
-    private synchronized boolean checkPreMatchDone(){
+    private synchronized void checkPreMatchDone(){
         boolean doneItems = true;
         for(int i = 0; i < players.size(); ++i){
             Player p = players.get(i);
@@ -613,7 +621,18 @@ public class Match {
             }
         }
 
-        return doneItems && doneLeaders;
+        if(doneItems && doneLeaders) {
+            phase = TURN_START;
+            broadcast("show matchStart");
+
+            //if the player is alive, tell him it's his turn to play, if not perform auto action
+            if (activePlayer.isConnected()) {
+                activePlayer.sendController("yourTurn");
+            }
+            else {
+                update("dead", activePlayer);
+            }
+        }
     }
 
 }
