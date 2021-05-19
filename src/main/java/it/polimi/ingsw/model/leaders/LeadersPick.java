@@ -21,6 +21,11 @@ public class LeadersPick implements HasStatus {
     }
 
 
+    public void fillWithList(ArrayList<LeaderCard> list) {
+        leaders.addAll(list);
+    }
+
+
     public void pick(int index, LeadersSpace leadersSpace) throws LeaderException {
         leadersSpace.addLeader(leaders.get(index));
     }

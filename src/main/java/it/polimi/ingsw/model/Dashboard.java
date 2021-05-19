@@ -89,6 +89,8 @@ public class Dashboard implements HasStatus{
      * @throws NoSuchMethodException
      */
     public Dashboard(int[] status, String name) throws SupplyException, DevelopmentException, LeaderException, NoSuchMethodException {
+        if(status[0] == 1)
+            inkwell = true;
         this.name = name;
 
         coffer.sum(new SupplyContainer(status[1], status[4], status[2], status[3], status[5]));
@@ -191,13 +193,6 @@ public class Dashboard implements HasStatus{
         }
 
         leadersSpace.addLeader(new LeaderCard(status[107]));
-        if(getAbilityNumber(status[107]) == 2) {
-            DepotID.LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
-        }
-        if(getAbilityNumber(status[107]) == 3) {
-            DepotID.LEADER1.setType(DepotID.DepotType.LEADER_PRODUCTION);
-            DepotID.LEADER1.setSource(DepotID.SourceType.ANY);
-        }
         if(status[108] != 0) {
             if(status[108] == 1)
                 leadersSpace.activateLeaderCardTrusted(0);
@@ -217,13 +212,6 @@ public class Dashboard implements HasStatus{
             container.remove(0);
         }
         leadersSpace.addLeader(new LeaderCard(status[122]));
-        if(getAbilityNumber(status[122]) == 2) {
-            DepotID.LEADER2.setType(DepotID.DepotType.LEADER_DEPOT);
-        }
-        if(getAbilityNumber(status[122]) == 3) {
-            DepotID.LEADER2.setType(DepotID.DepotType.LEADER_PRODUCTION);
-            DepotID.LEADER2.setSource(DepotID.SourceType.ANY);
-        }
         if(status[123] != 0) {
             if(status[123] == 1)
                 leadersSpace.activateLeaderCardTrusted(1);
@@ -244,6 +232,13 @@ public class Dashboard implements HasStatus{
         }
 
         unassignedSupplies.sum(new MarbleContainer(status[141], status[136], status[137], status[140], status[139], status[138]));
+
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(status[142]));
+        leaderCards.add(new LeaderCard(status[157]));
+        leaderCards.add(new LeaderCard(status[172]));
+        leaderCards.add(new LeaderCard(status[187]));
+        leadersPick.fillWithList(leaderCards);
     }
 
 
