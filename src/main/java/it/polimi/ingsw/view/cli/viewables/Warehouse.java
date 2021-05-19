@@ -24,35 +24,21 @@ public class Warehouse implements Viewable {
         bot.add(WarehouseObjectType.NO_TYPE);
         bot.add(WarehouseObjectType.NO_TYPE);
 
-        level.put(0, bot);
+        level.put(0, top);
         level.put(1, mid);
-        level.put(2, top);
+        level.put(2, bot);
     }
 
     @Override
     public void update(int[] update) {
         //the array received is composed by 15 numbers representing if the level of the warehouse contains
         //COIN, SERVANT, SHIELD, STONE or FAITH_MARKER (and how many?)
-        ArrayList<WarehouseObjectType> bot = new ArrayList<>();
-        bot.add(WarehouseObjectType.NO_TYPE);
-        bot.add(WarehouseObjectType.NO_TYPE);
-        bot.add(WarehouseObjectType.NO_TYPE);
+        ArrayList<WarehouseObjectType> top = new ArrayList<>();
+        top.add(WarehouseObjectType.NO_TYPE);
         for (int i=0; i<5; i++) {
             if (update[i] == 1) {
-                bot.remove(0);
-                bot.add(0, intToResource((i % 5)));
-            } else if (update[i] == 2) {
-                bot.remove(0);
-                bot.remove(0);
-                bot.add(0, intToResource((i % 5)));
-                bot.add(1, intToResource((i % 5)));
-            } else if (update[i] == 3) {
-                bot.remove(0);
-                bot.remove(0);
-                bot.remove(0);
-                bot.add(intToResource((i % 5)));
-                bot.add(intToResource((i % 5)));
-                bot.add(intToResource((i % 5)));
+                top.remove(0);
+                top.add(intToResource((i % 5)));
             }
         }
 
@@ -72,18 +58,33 @@ public class Warehouse implements Viewable {
             }
         }
 
-        ArrayList<WarehouseObjectType> top = new ArrayList<>();
-        top.add(WarehouseObjectType.NO_TYPE);
-        for (int i=10; i<15; i++) {
+        ArrayList<WarehouseObjectType> bot = new ArrayList<>();
+        bot.add(WarehouseObjectType.NO_TYPE);
+        bot.add(WarehouseObjectType.NO_TYPE);
+        bot.add(WarehouseObjectType.NO_TYPE);
+        for (int i=10; i<15; i++)
             if (update[i] == 1) {
-                top.remove(0);
-                top.add(intToResource((i % 5)));
+                bot.remove(0);
+                bot.add(0, intToResource((i%5)));
             }
-        }
+            else if (update[i] == 2){
+                bot.remove(0);
+                bot.remove(0);
+                bot.add(0, intToResource((i%5)));
+                bot.add(1, intToResource((i%5)));
+            }
+            else if (update[i] == 3){
+                bot.remove(0);
+                bot.remove(0);
+                bot.remove(0);
+                bot.add(intToResource((i%5)));
+                bot.add(intToResource((i%5)));
+                bot.add(intToResource((i%5)));
+            }
 
-        level.put(0, bot);
+        level.put(0, top);
         level.put(1, mid);
-        level.put(2, top);
+        level.put(2, bot);
     }
 
     private WarehouseObjectType intToResource(int i) {
@@ -102,17 +103,14 @@ public class Warehouse implements Viewable {
         else if (i == 4){
             return WarehouseObjectType.FAITH_MARKER;
         }
-        else if (i == 5){
-            return WarehouseObjectType.NO_TYPE;
-        }
-        else return null;
+        else return WarehouseObjectType.NO_TYPE;
     }
 
     @Override
     public String toString() {
-        return BOLD(" Warehouse: ") + "\n\n" + "     " + resourceToColor(2, 0) + "\n" +
-                    "   " +  resourceToColor(1, 0) + " " + resourceToColor(1, 1) + "\n" +
-                    " " + resourceToColor(0, 0) + " " + resourceToColor(0, 1) + " " + resourceToColor(0, 2);
+        return BOLD(" Warehouse: ") + "\n\n" + "     " + resourceToColor(0, 0) + "\n" +
+                "   " +  resourceToColor(1, 0) + " " + resourceToColor(1, 1) + "\n" +
+                " " + resourceToColor(2, 0) + " " + resourceToColor(2, 1) + " " + resourceToColor(2, 2);
     }
 
     private String resourceToColor (int lvl, int i) {
