@@ -101,12 +101,36 @@ public class DevelopmentSpace implements Viewable {
     }
 
     private String printOnlyNotNull () {
-        if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) != null) {
+        if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) != null && wp0 < 10 && wp1 < 10) {
             //i have to print ONLY THE WIN POINTS of the first and second card
             return devSpace.get(2).toString() + "\n" +
                     "|        " + FRAMED(" Win Points: " + wp1.toString() + " ") + "         |" + "\n" +
                     "+--------------------------------+" + "\n" +
                     "|        " + FRAMED(" Win Points: " + wp0.toString() + " ") + "         |" + "\n" +
+                    "+--------------------------------+";
+        }
+        else if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) != null && wp0 < 10 && wp1 > 9) {
+            //i have to print ONLY THE WIN POINTS of the first and second card
+            return devSpace.get(2).toString() + "\n" +
+                    "|        " + FRAMED(" Win Points: " + wp1.toString() + " ") + "        |" + "\n" +
+                    "+--------------------------------+" + "\n" +
+                    "|        " + FRAMED(" Win Points: " + wp0.toString() + " ") + "         |" + "\n" +
+                    "+--------------------------------+";
+        }
+        else if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) != null && wp0 >9 && wp1 < 10) {
+            //i have to print ONLY THE WIN POINTS of the first and second card
+            return devSpace.get(2).toString() + "\n" +
+                    "|        " + FRAMED(" Win Points: " + wp1.toString() + " ") + "         |" + "\n" +
+                    "+--------------------------------+" + "\n" +
+                    "|        " + FRAMED(" Win Points: " + wp0.toString() + " ") + "        |" + "\n" +
+                    "+--------------------------------+";
+        }
+        else if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) != null && wp0 >9 && wp1 > 9) {
+            //i have to print ONLY THE WIN POINTS of the first and second card
+            return devSpace.get(2).toString() + "\n" +
+                    "|        " + FRAMED(" Win Points: " + wp1.toString() + " ") + "        |" + "\n" +
+                    "+--------------------------------+" + "\n" +
+                    "|        " + FRAMED(" Win Points: " + wp0.toString() + " ") + "        |" + "\n" +
                     "+--------------------------------+";
         }
         else if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) == null) {

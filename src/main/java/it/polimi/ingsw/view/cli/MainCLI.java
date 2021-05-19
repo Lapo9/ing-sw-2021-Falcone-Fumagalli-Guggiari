@@ -25,7 +25,7 @@ public class MainCLI {
         serverSocket.attachInterpreter(controllerInterpreter);
         serverSocket.attachInterpreter(modelInterpreter);
 
-
+/*
 
         //create viewables that are shared among different views
         SupplyContainer coffer1 = factory.buildSupplyContainer(1, COFFER, "Coffer"); //dashboard, development grid
@@ -107,7 +107,7 @@ public class MainCLI {
                 factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE3));
 
 
-
+*/
 
 
 /*
@@ -130,7 +130,7 @@ public class MainCLI {
         //showMarbleContainer(screen, factory);
         //showWarehouseTest(screen, factory);
         //showDevelopmentCardTest(screen, factory);
-        //showDevelopmentSpaceTest(screen, factory);
+        showDevelopmentSpaceTest(screen, factory);
         //showDevelopmentGridCardTest(screen, factory);
         //showDevelopmentGridTest(screen, factory);
         //showActiveProductions(screen, factory);
@@ -264,20 +264,9 @@ public class MainCLI {
         screenCLI.addView("developmentSpace", developmentSpace);
         screenCLI.start("developmentSpace");
 
-        int [] updDevSpace2 = {
-                1, //id1
-                2, //id2
-                0, //id3
-                1, 2, 0, 0, 0, //input
-                0, 0, 1, 0, 1, //output
-                1, 0, 0, 0, 0 //currentSupply
-        };
-        developmentSpaceViewable.update(updDevSpace2);
-        screenCLI.show("developmentSpace");
-
         int [] updDevSpace1 = {
                 1, //id1
-                0, //id2
+                48, //id2
                 0, //id3
                 1, 2, 0, 0, 0, //input
                 0, 0, 1, 0, 1, //output
@@ -286,7 +275,16 @@ public class MainCLI {
         developmentSpaceViewable.update(updDevSpace1);
         screenCLI.show("developmentSpace");
 
-
+        int [] updDevSpace2 = {
+                3, //id1
+                0, //id2
+                0, //id3
+                1, 2, 0, 0, 0, //input
+                0, 0, 1, 0, 1, //output
+                1, 0, 0, 0, 0 //currentSupply
+        };
+        developmentSpaceViewable.update(updDevSpace2);
+        screenCLI.show("developmentSpace");
 
         int [] updDevSpace3 = {
                 1, //id1
@@ -308,6 +306,17 @@ public class MainCLI {
                 1, 0, 0, 0, 0 //currentSupply
         };
         developmentSpaceViewable.update(updDevSpace4);
+        screenCLI.show("developmentSpace");
+
+        int [] updDevSpace5 = {
+                46, //id1
+                5, //id2
+                48, //id3
+                1, 2, 0, 0, 0, //input
+                0, 0, 1, 0, 1, //output
+                1, 0, 0, 0, 0 //currentSupply
+        };
+        developmentSpaceViewable.update(updDevSpace5);
         screenCLI.show("developmentSpace");
     }
 
