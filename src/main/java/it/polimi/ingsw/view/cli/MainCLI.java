@@ -25,9 +25,9 @@ public class MainCLI {
         serverSocket.attachInterpreter(controllerInterpreter);
         serverSocket.attachInterpreter(modelInterpreter);
 
+/*
 
-
-        //create viewavbles that are shared among different views
+        //create viewables that are shared among different views
         SupplyContainer coffer1 = factory.buildSupplyContainer(1, COFFER, "Coffer"); //dashboard, development grid
         Warehouse warehouse1 = factory.buildWarehouse(1, WAREHOUSE); //dashboard, development grid, marketplace
         LeaderCard leader11 = factory.buildLeaderCard(1, LEADER1); //dashboard, development grid, marketplace
@@ -102,7 +102,7 @@ public class MainCLI {
                 factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE3));
 
 
-
+*/
 
 
 /*
@@ -123,7 +123,7 @@ public class MainCLI {
 
         //showMarketplace (screen, factory);
         //showMarbleContainer(screen, factory);
-        //showWarehouseTest(screen, factory);
+        showWarehouseTest(screen, factory);
         //showDevelopmentCardTest(screen, factory);
         //showDevelopmentSpaceTest(screen, factory);
         //showDevelopmentGridCardTest(screen, factory);
@@ -161,15 +161,9 @@ public class MainCLI {
 
 
 
-
-
-
-
-
-
     private static void showMarketplace (ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
         View Marketplace = new View();
-        Marketplace MarketplaceViewable = factory.buildMarketplace(ViewableId.WAREHOUSE);
+        Marketplace MarketplaceViewable = factory.buildMarketplace(MARKETPLACE);
         Marketplace.addViewable(MarketplaceViewable);
 
         screenCLI.addView("Marketplace", Marketplace);
@@ -198,17 +192,23 @@ public class MainCLI {
         screenCLI.start("warehouse");
 
         //updating the warehouse
-        int [] updWarehouse = {1, 0, 0, 0, 0, //first level
-                                0, 1, 0, 0, 0, //second level
-                                0, 0, 3, 0, 0}; //third level
+        int [] updWarehouse = {2, 0, 0, 0, 0, //bot
+                                0, 2, 0, 0, 0, //mid
+                                0, 0, 1, 0, 0}; //top
         warehouseViewable.update(updWarehouse);
         screenCLI.show("warehouse");
 
         //another update test
-        int [] updWarehouse1 = {0, 0, 0, 0, 0,
+        int [] updWarehouse1 = {0, 0, 3, 0, 0,
                                 0, 0, 0, 0, 1,
-                                0, 2, 0, 0, 0};
+                                0, 0, 0, 0, 0};
         warehouseViewable.update(updWarehouse1);
+        screenCLI.show("warehouse");
+
+        int [] updWarehouse2 = {0, 0, 1, 0, 0,
+                                1, 0, 0, 0, 0,
+                                0, 0, 0, 0, 1};
+        warehouseViewable.update(updWarehouse2);
         screenCLI.show("warehouse");
     }
 
