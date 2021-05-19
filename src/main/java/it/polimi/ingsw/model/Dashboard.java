@@ -477,6 +477,14 @@ public class Dashboard implements HasStatus{
 
 
     /**
+     * Fills the leaders pick object with 4 given leaders.
+     */
+    public void fillLeadersPicksWithList(ArrayList<LeaderCard> list){
+        leadersPick.fillWithList(list);
+    }
+
+
+    /**
      * Pick the specified leader among the 4 leaders picks.
      * @param index What leader to pick
      * @throws LeaderException 2 Leaders added yet.
