@@ -185,6 +185,10 @@ public class OpponentController extends SubSceneController{
 
     private void updateLeader1(int[] arr){
         int leaderCardId = arr[0];
+        if(leaderCardId == 0){
+            return;
+        }
+
         leader1.setImage(new Image(LeaderCard.getUrl(leaderCardId)));
 
         //if the leader is inactive, make him black and white. If it is discarded hide him. If it is producer or depot show the correct panes.
@@ -239,6 +243,10 @@ public class OpponentController extends SubSceneController{
 
     private void updateLeader2(int[] arr){
         int leaderCardId = arr[0];
+        if(leaderCardId == 0){
+            return;
+        }
+
         leader2.setImage(new Image(LeaderCard.getUrl(leaderCardId)));
 
         //if the leader is inactive, make him black and white. If it is discarded hide him. If it is producer or depot show the correct panes.

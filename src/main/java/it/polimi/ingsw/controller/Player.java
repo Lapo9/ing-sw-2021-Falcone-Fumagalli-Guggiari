@@ -235,9 +235,9 @@ public class Player {
 
 
     private void destroy() {
-        System.out.print("\n" + name + " disconnected");
         //if this thread called destroy first
         if (setDestroy(true)) {
+            System.out.print("\n" + name + " disconnected");
             //a new thread wait for the listener an the heartbeat to end. It must be a new thread, if not it happens that the thread that called destroy waits for the join on himself, causing a deadlock.
             new Thread(() -> {
                 try {

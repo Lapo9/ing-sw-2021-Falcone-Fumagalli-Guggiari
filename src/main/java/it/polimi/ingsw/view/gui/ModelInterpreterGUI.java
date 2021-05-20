@@ -26,8 +26,10 @@ public class ModelInterpreterGUI implements ModelInterpreter {
     @Override
     public synchronized void update(int[] update) {
         //update offline info for the leaders
-        offlineInfo.setLeaderStatus(1, dataToStatus(update[107], update[108]));
-        offlineInfo.setLeaderStatus(2, dataToStatus(update[122], update[123]));
+        if(update[0] == offlineInfo.getPlayerOrder(offlineInfo.getYourName()) - 1) {
+            offlineInfo.setLeaderStatus(1, dataToStatus(update[107], update[108]));
+            offlineInfo.setLeaderStatus(2, dataToStatus(update[122], update[123]));
+        }
 
         for (SceneController sc : toNotify){
             sc.update(update);

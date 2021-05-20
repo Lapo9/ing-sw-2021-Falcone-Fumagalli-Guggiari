@@ -92,7 +92,7 @@ public class UserInterpreter {
                 if(!tokens[3].equals("developmentGrid") && !tokens[3].equals("marketplace") && !tokens[3].toLowerCase(Locale.ROOT).contains("fuma")) {
                     return "OK";
                 }
-                return "error Come on, choose a better name!";
+                return "Come on, choose a better name!";
             }
 
             if (actualCommand.toString().equals("spy")){

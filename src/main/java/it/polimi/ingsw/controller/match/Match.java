@@ -92,9 +92,21 @@ public class Match {
         }
         reconnected.sendController("start " + (reconnected.getOrder()+1) + " " + playersNamesInOrder);
 
-        marketplace.notifyViews();
-        developmentGrid.notifyViews();
-        reconnected.getDashboard().notifyViews();
+        if (phase != LOBBY) {
+            marketplace.notifyViews();
+            developmentGrid.notifyViews();
+            reconnected.getDashboard().notifyViews();
+        }
+
+        if(phase == LOBBY){
+            reconnected.sendController("show lobby");
+        }
+        else if(phase == PRE_MATCH){
+            reconnected.sendController("show preMatch");
+        }
+        else {
+            reconnected.sendController("show dashboard");
+        }
     }
 
 
@@ -194,6 +206,8 @@ public class Match {
             player.sendController("error Match already started");
             return;
         }
+
+        System.out.print("\nMatch started");
 
         Collections.shuffle(players); //randomize players order
         activePlayer = players.get(0); //set the first player to play
@@ -644,7 +658,7 @@ public class Match {
 
         if(doneItems && doneLeaders) {
             phase = TURN_START;
-            broadcast("show matchStart");
+            broadcast("show dashboard");
 
             //if the player is alive, tell him it's his turn to play, if not perform auto action
             if (activePlayer.isConnected()) {

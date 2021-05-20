@@ -55,6 +55,10 @@ public class LeaderController extends SubSceneController {
     @Override
     public void update(int[] completeUpdate) {
         leaderCardId = completeUpdate[0];
+        if(leaderCardId == 0){
+            return;
+        }
+
         leader.setImage(new Image(LeaderCard.getUrl(leaderCardId)));
 
         //if the leader is inactive, make him black and white. If it is discarded hide him. If it is producer or depot show the correct panes.
