@@ -67,9 +67,7 @@ public class ControllerInterpreter {
             execute("show dashboard");
             return;
         }
-        int you = offlineInfo.getPlayerOrder(offlineInfo.getYourName());
-        int opponent = offlineInfo.getPlayerOrder(tokens[1]);
-        execute("show opponent" + (opponent > you ? opponent - 1 : opponent));
+        execute("show opponent" + offlineInfo.getOpponentOrder(tokens[1]));
     }
 
     private void error(String... tokens){
@@ -141,10 +139,6 @@ public class ControllerInterpreter {
         offlineInfo.setProduction(tokens[1], false);
     }
 
-    private void autoRefresh(String... tokens){
-        offlineInfo.setAutoRefresh(tokens[1].equals("on"));
-    }
-
     private void setPlayers(String... tokens){
         StringBuilder toSend = new StringBuilder();
 
@@ -180,12 +174,12 @@ public class ControllerInterpreter {
         knownCommands.put("message", this::message);
         knownCommands.put("fatal", this::fatal);
         knownCommands.put("refresh", this::refresh);
+        knownCommands.put("u", this::refresh);
         knownCommands.put("start", this::start);
         knownCommands.put("win", this::win);
         knownCommands.put("yourTurn", this::yourTurn);
         knownCommands.put("activateProduction", this::activateProduction);
         knownCommands.put("deactivateProduction", this::deactivateProduction);
-        knownCommands.put("autoRefresh", this::autoRefresh);
         knownCommands.put("setPlayers", this::setPlayers);
         knownCommands.put("reset", this::reset);
         knownCommands.put("setActive", this::setActive);

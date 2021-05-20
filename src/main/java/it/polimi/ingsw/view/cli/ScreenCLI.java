@@ -111,9 +111,6 @@ public class ScreenCLI implements Screen {
         if(activeView == null){
             throw new ViewException(view.toString() + " is not a known view");
         }
-
-        //TODO clear console
-        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + errorMessage + activeView);
     }
 
 

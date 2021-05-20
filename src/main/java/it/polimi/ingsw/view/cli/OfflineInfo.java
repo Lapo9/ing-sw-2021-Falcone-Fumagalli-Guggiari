@@ -1,5 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,9 +20,9 @@ public class OfflineInfo {
     private LeaderStatus leader1Status = LeaderStatus.INACTIVE;
     private LeaderStatus leader2Status = LeaderStatus.INACTIVE;
     private ArrayList<String> playersNamesInOrder = new ArrayList<>();
-    private boolean autoRefresh = true;
     private String selectedItem = "";
     private String selectedWarehouseRow = "";
+    private ViewableFactory factory;
 
 
     public OfflineInfo(){
@@ -40,6 +42,11 @@ public class OfflineInfo {
         leader2Status = LeaderStatus.INACTIVE;
 
         selectedItem = "";
+    }
+
+
+    public synchronized void attachFactory(ViewableFactory factory){
+        this.factory = factory;
     }
 
 
@@ -69,6 +76,9 @@ public class OfflineInfo {
 
     public synchronized void setProduction(String production, boolean isActive){
         activeProductions.put(production, isActive);
+        if(factory != null){
+            factory.update(1, ViewableId.ACTIVE_PRODUCTIONS, getProductionsAsArray());
+        }
     }
 
 
@@ -85,7 +95,7 @@ public class OfflineInfo {
 
 
 
-    public synchronized int[] getProductionsAsArray() {
+    private synchronized int[] getProductionsAsArray() {
         int[] res = new int[6];
         res[0] = activeProductions.get("dev1") ? 1 : 0;
         res[1] = activeProductions.get("dev2") ? 1 : 0;
@@ -100,7 +110,7 @@ public class OfflineInfo {
 
 
     public synchronized int getOpponentOrder(String playerName){
-        return playersNamesInOrder.stream().filter(player -> !player.equals(yourName)).collect(Collectors.toList()).indexOf(playerName);
+        return playersNamesInOrder.stream().filter(player -> !player.equals(yourName)).collect(Collectors.toList()).indexOf(playerName) + 1;
     }
 
 
@@ -123,15 +133,6 @@ public class OfflineInfo {
         this.playersNamesInOrder.addAll(Arrays.asList(playersNamesInOrder));
     }
 
-
-    public synchronized void setAutoRefresh(boolean autoRefresh) {
-        this.autoRefresh = autoRefresh;
-    }
-
-
-    public synchronized boolean isAutoRefresh() {
-        return autoRefresh;
-    }
 
 
     public synchronized String getSelectedItem(){

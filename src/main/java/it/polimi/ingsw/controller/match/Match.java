@@ -5,6 +5,7 @@ import it.polimi.ingsw.controller.ModelObserver;
 import it.polimi.ingsw.controller.Player;
 import it.polimi.ingsw.controller.exceptions.MatchException;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.exceptions.SupplyException;
 import it.polimi.ingsw.model.match_items.DevelopmentGrid;
 import it.polimi.ingsw.model.match_items.MarketDirection;
 import it.polimi.ingsw.model.match_items.Marketplace;
@@ -295,6 +296,7 @@ public class Match {
         phase = MARKETPLACE; //set new phase
 
         player.sendController("show dashboard"); //show the dashboard to the player
+        player.sendController("refresh");
     }
 
     private void moveMarble(Player player, String... args) {
@@ -381,7 +383,7 @@ public class Match {
             player.sendController("error It's not your turn!");
             return;
         }
-        if(phase != TURN_START){
+        if(phase != TURN_START && phase != TURN_END){
             player.sendController("error You can't move supplies now!");
             return;
         }
@@ -566,6 +568,24 @@ public class Match {
         checkPreMatchDone();
     }
 
+    private void swapWarehouse(Player player, String... args) {
+        if (player != activePlayer) {
+            player.sendController("error It's not your turn!");
+            return;
+        }
+        if (phase != TURN_START && phase != TURN_END && phase != MARKETPLACE) {
+            player.sendController("error You can't do this now!");
+            return;
+        }
+
+        try {
+            player.getDashboard().swapWarehouseRows(Integer.parseInt(args[1]), Integer.parseInt(args[2]));
+        } catch (SupplyException se){
+            player.sendController("error " + se.getMessage());
+        }
+
+    }
+
 
 
     //sets the list of default commands and their respective actions
@@ -588,6 +608,7 @@ public class Match {
         commands.put("activateLeader", this::activateLeader);
         commands.put("discardLeader", this::discardLeader);
         commands.put("pickLeaders", this::pickLeaders);
+        commands.put("swapRows", this::swapWarehouse);
     }
 
 

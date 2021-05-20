@@ -16,6 +16,7 @@ public class MainCLI {
         OfflineInfo offlineInfo = new OfflineInfo();
 
         ViewableFactory factory = new ViewableFactory(offlineInfo);
+        offlineInfo.attachFactory(factory);
 
         ControllerInterpreter controllerInterpreter = new ControllerInterpreter(screen, offlineInfo);
         UserInterpreter userInterpreter = new UserInterpreter(controllerInterpreter, serverSocket, offlineInfo);

@@ -78,10 +78,6 @@ public class ModelInterpreterCLI implements ModelInterpreter {
         items.update(player, LEADER_PICK3, Arrays.copyOfRange(status, 173, 188));
         items.update(player, LEADER_PICK4, Arrays.copyOfRange(status, 188, 203));
 
-        //if user has auto-refresh on, then update his screen
-        if(offlineInfo.isAutoRefresh()) {
-            controllerInterpreter.execute("refresh");
-        }
     }
 
 
