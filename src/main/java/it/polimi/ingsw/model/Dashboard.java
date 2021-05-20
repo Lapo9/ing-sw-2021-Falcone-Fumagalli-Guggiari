@@ -93,23 +93,50 @@ public class Dashboard implements HasStatus{
             inkwell = true;
         this.name = name;
 
-        coffer.sum(new SupplyContainer(status[1], status[4], status[2], status[3], status[5]));
-
-        Pair<WarehouseObjectType, Integer> tmp = getContainedSupplies(Arrays.copyOfRange(status, 6, 10));
-        if(tmp.first != null)
-            trustedAddSupply(DepotID.WAREHOUSE3, tmp.first);
-        tmp = getContainedSupplies(Arrays.copyOfRange(status, 11, 15));
-        if(tmp.first != null) {
-            trustedAddSupply(DepotID.WAREHOUSE3, tmp.first);
-            if(tmp.second == 2)
-                trustedAddSupply(DepotID.WAREHOUSE3, tmp.first);
+        int count = 0;
+        count = status[1];
+        while(count > 0) {
+            coffer.addSupply(COIN, DepotID.COFFER);
+            count--;
         }
-        tmp = getContainedSupplies(Arrays.copyOfRange(status, 16, 20));
+        count = status[2];
+        while(count > 0) {
+            coffer.addSupply(SERVANT, DepotID.COFFER);
+            count--;
+        }
+        count = status[3];
+        while(count > 0) {
+            coffer.addSupply(SHIELD, DepotID.COFFER);
+            count--;
+        }
+        count = status[4];
+        while(count > 0) {
+            coffer.addSupply(STONE, DepotID.COFFER);
+            count--;
+        }
+
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(status[143]));
+        leaderCards.add(new LeaderCard(status[158]));
+        leaderCards.add(new LeaderCard(status[173]));
+        leaderCards.add(new LeaderCard(status[188]));
+        leadersPick.fillWithList(leaderCards);
+
+        Pair<WarehouseObjectType, Integer> tmp = getContainedSupplies(Arrays.copyOfRange(status, 6, 11));
+        if(tmp.first != null)
+            trustedAddSupply(DepotID.WAREHOUSE1, tmp.first);
+        tmp = getContainedSupplies(Arrays.copyOfRange(status, 11, 16));
+        if(tmp.first != null) {
+            trustedAddSupply(DepotID.WAREHOUSE2, tmp.first);
+            if(tmp.second == 2)
+                trustedAddSupply(DepotID.WAREHOUSE2, tmp.first);
+        }
+        tmp = getContainedSupplies(Arrays.copyOfRange(status, 16, 21));
         if(tmp.first != null) {
             trustedAddSupply(DepotID.WAREHOUSE3, tmp.first);
             if(tmp.second != 1) {
                 trustedAddSupply(DepotID.WAREHOUSE3, tmp.first);
-                if(tmp.second == 2)
+                if(tmp.second == 3)
                     trustedAddSupply(DepotID.WAREHOUSE3, tmp.first);
             }
         }
@@ -121,7 +148,7 @@ public class Dashboard implements HasStatus{
             developments.addCardToSpace(0, new DevelopmentCard(status[22]));
         if(status[23] != 0)
             developments.addCardToSpace(0, new DevelopmentCard(status[23]));
-        container = getSupplies(Arrays.copyOfRange(status, 34, 38));
+        container = getSupplies(Arrays.copyOfRange(status, 34, 39));
         while(!container.isEmpty()) {
             developments.addSupply(DepotID.DEVELOPMENT1, container.get(0), DepotID.BASE_PRODUCTION);
             container.remove(0);
@@ -132,7 +159,7 @@ public class Dashboard implements HasStatus{
             developments.addCardToSpace(1, new DevelopmentCard(status[40]));
         if(status[41] != 0)
             developments.addCardToSpace(1, new DevelopmentCard(status[41]));
-        container = getSupplies(Arrays.copyOfRange(status, 52, 56));
+        container = getSupplies(Arrays.copyOfRange(status, 52, 57));
         while(!container.isEmpty()) {
             developments.addSupply(DepotID.DEVELOPMENT2, container.get(0), DepotID.BASE_PRODUCTION);
             container.remove(0);
@@ -143,18 +170,18 @@ public class Dashboard implements HasStatus{
             developments.addCardToSpace(2, new DevelopmentCard(status[58]));
         if(status[59] != 0)
             developments.addCardToSpace(2, new DevelopmentCard(status[59]));
-        container = getSupplies(Arrays.copyOfRange(status, 70, 74));
+        container = getSupplies(Arrays.copyOfRange(status, 70, 75));
         while(!container.isEmpty()) {
             developments.addSupply(DepotID.DEVELOPMENT3, container.get(0), DepotID.BASE_PRODUCTION);
             container.remove(0);
         }
 
-        container = getSupplies(Arrays.copyOfRange(status, 75, 79));
+        container = getSupplies(Arrays.copyOfRange(status, 75, 80));
         while(!container.isEmpty()) {
             paycheck.addSupply(container.get(0), DepotID.COFFER);
             container.remove(0);
         }
-        container = getSupplies(Arrays.copyOfRange(status, 80, 85));
+        container = getSupplies(Arrays.copyOfRange(status, 80, 86));
         while(!container.isEmpty()) {
             paycheck.addSupply(container.get(0), DepotID.DEVELOPMENT2);
             container.remove(0);
@@ -163,7 +190,7 @@ public class Dashboard implements HasStatus{
         swapBaseProduction(0, numberToType(status[90]));
         swapBaseProduction(1, numberToType(status[91]));
         swapBaseProduction(2, numberToType(status[97]));
-        container = getSupplies(Arrays.copyOfRange(status, 98, 102));
+        container = getSupplies(Arrays.copyOfRange(status, 98, 103));
         while(!container.isEmpty()) {
             baseProduction.addSupply(container.get(0), DepotID.DEVELOPMENT2);
             container.remove(0);
@@ -201,12 +228,12 @@ public class Dashboard implements HasStatus{
         }
         if(status[110] != 0)
             swapLeaderProduction(0, numberToType(status[110]));
-        container = getSupplies(Arrays.copyOfRange(status, 112, 116));
+        container = getSupplies(Arrays.copyOfRange(status, 112, 117));
         while(!container.isEmpty()) {
             productionManager.addSupply(DepotID.LEADER1, container.get(0), DepotID.BASE_PRODUCTION);
             container.remove(0);
         }
-        container = getSupplies(Arrays.copyOfRange(status, 117, 121));
+        container = getSupplies(Arrays.copyOfRange(status, 117, 122));
         while(!container.isEmpty()) {
             productionManager.addSupply(DepotID.LEADER1, container.get(0), DepotID.BASE_PRODUCTION);
             container.remove(0);
@@ -220,25 +247,18 @@ public class Dashboard implements HasStatus{
         }
         if(status[126] != 0)
             swapLeaderProduction(0, numberToType(status[126]));
-        container = getSupplies(Arrays.copyOfRange(status, 127, 130));
+        container = getSupplies(Arrays.copyOfRange(status, 127, 132));
         while(!container.isEmpty()) {
             productionManager.addSupply(DepotID.LEADER2, container.get(0), DepotID.BASE_PRODUCTION);
             container.remove(0);
         }
-        container = getSupplies(Arrays.copyOfRange(status, 131, 136));
+        container = getSupplies(Arrays.copyOfRange(status, 132, 138));
         while(!container.isEmpty()) {
             productionManager.addSupply(DepotID.LEADER2, container.get(0), DepotID.BASE_PRODUCTION);
             container.remove(0);
         }
 
-        unassignedSupplies.sum(new MarbleContainer(status[141], status[136], status[137], status[140], status[139], status[138]));
-
-        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
-        leaderCards.add(new LeaderCard(status[142]));
-        leaderCards.add(new LeaderCard(status[157]));
-        leaderCards.add(new LeaderCard(status[172]));
-        leaderCards.add(new LeaderCard(status[187]));
-        leadersPick.fillWithList(leaderCards);
+        unassignedSupplies.sum(new MarbleContainer(status[142], status[137], status[138], status[141], status[140], status[139]));
     }
 
 

@@ -22,7 +22,10 @@ public class LeadersPick implements HasStatus {
 
 
     public void fillWithList(ArrayList<LeaderCard> list) {
-        leaders.addAll(list);
+        leaders.add(list.get(0));
+        leaders.add(list.get(1));
+        leaders.add(list.get(2));
+        leaders.add(list.get(3));
     }
 
 

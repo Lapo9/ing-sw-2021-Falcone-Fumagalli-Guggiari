@@ -20,6 +20,139 @@ import static org.junit.Assert.*;
 public class DashboardTest {
 
     @Test
+    public void dashboard_classConstructor() {
+        int[] status = {0,
+                        1, 2, 0, 3, 0, //coffer
+                        0, 1, 0, 0, 0, //wh1
+                        0, 0, 0, 0, 0, //wh2
+                        0, 0, 0, 3, 0, //wh3
+                        2,             //dev 1 card 1 id
+                        0,             //dev 1 card 2 id
+                        0,             //dev 1 card 3 id
+                        0, 0, 0, 1, 0, //dev 1 in
+                        0, 1, 0, 0, 0, //dev 1 out
+                        0, 0, 0, 1, 0, //dev 1 curr
+                        0,             //dev 2 card 1 id
+                        0,             //dev 2 card 2 id
+                        0,             //dev 2 card 3 id
+                        0, 0, 0, 0, 0, //dev 2 in
+                        0, 0, 0, 0, 0, //dev 2 out
+                        0, 0, 0, 0, 0, //dev 2 curr
+                        5,             //dev 3 card 1 id
+                        21,            //dev 3 card 2 id
+                        0,             //dev 3 card 3 id
+                        0, 1, 0, 0, 0, //dev 3 in
+                        0, 0, 0, 0, 2, //dev 3 out
+                        0, 0, 1, 0, 0, //dev 3 curr
+                        0, 0, 0, 0, 0, //paycheck strongbox
+                        0, 0, 0, 0, 0, //paycheck depots
+                        0, 0, 0, 0, 0, //base in fix
+                        0,             //base in mutable 1
+                        0,             //base in mutable 2
+                        0, 0, 0, 0, 0, //base out fix
+                        0,             //base our mutable
+                        0, 0, 0, 0, 0, //base current
+                        0,             //faith track position
+                        0,             //pope tile 1
+                        0,             //pope tile 2
+                        0,             //pope tile 3
+                        3,             //leader 1 id
+                        0,             //leader 1 state
+                        0,             //leader 1 in fix
+                        0,             //leader 1 out fix
+                        0,             //leader 1 out mutable
+                        0, 0, 0, 0, 0, //leader 1 current
+                        0, 0, 0, 0, 0, //leader 1 depot
+                        2,             //leader 2 id
+                        0,             //leader 2 state
+                        0,             //leader 2 in fix
+                        0,             //leader 2 out fix
+                        0,             //leader 2 out mutable
+                        0, 0, 0, 0, 0, //leader 2 current
+                        0, 0, 0, 0, 0, //leader 2 depot
+                        0, 0, 0, 0, 0, 0, 
+                        4,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0,
+                        3,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0,
+                        2,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0,
+                        1,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0, 0, 0, 0, 0,
+                        0, 0, 0, 0, 0};
+        Dashboard dshbrd = null;
+        try {
+            dshbrd = new Dashboard(status, "test");
+        } catch (SupplyException | DevelopmentException | LeaderException | NoSuchMethodException e) {fail();}
+        ArrayList<Integer> realStatus = dshbrd.getStatus();
+        int[] actualResult = {realStatus.get(0), realStatus.get(1), realStatus.get(2), realStatus.get(3), realStatus.get(4),
+                              realStatus.get(5), realStatus.get(6), realStatus.get(7), realStatus.get(8), realStatus.get(9),
+                              realStatus.get(10), realStatus.get(11), realStatus.get(12), realStatus.get(13), realStatus.get(14),
+                              realStatus.get(15), realStatus.get(16), realStatus.get(17), realStatus.get(18), realStatus.get(19),
+                              realStatus.get(20),
+                              realStatus.get(21),
+                              realStatus.get(22),
+                              realStatus.get(23), realStatus.get(24),realStatus.get(25), realStatus.get(26), realStatus.get(27),
+                              realStatus.get(28), realStatus.get(29), realStatus.get(30), realStatus.get(31), realStatus.get(32),
+                              realStatus.get(33), realStatus.get(34), realStatus.get(35), realStatus.get(36), realStatus.get(37),
+                              realStatus.get(38),
+                              realStatus.get(39),
+                              realStatus.get(40),
+                              realStatus.get(41), realStatus.get(42),realStatus.get(43), realStatus.get(44), realStatus.get(45),
+                              realStatus.get(46), realStatus.get(47), realStatus.get(48), realStatus.get(49), realStatus.get(50),
+                              realStatus.get(51), realStatus.get(52), realStatus.get(53), realStatus.get(54), realStatus.get(55),
+                              realStatus.get(56),
+                              realStatus.get(57),
+                              realStatus.get(58),
+                              realStatus.get(59), realStatus.get(60),realStatus.get(61), realStatus.get(62), realStatus.get(63),
+                              realStatus.get(64), realStatus.get(65), realStatus.get(66), realStatus.get(67), realStatus.get(68),
+                              realStatus.get(69), realStatus.get(70), realStatus.get(71), realStatus.get(72), realStatus.get(73)
+        };
+        int[] expectedResult = {1, 2, 0, 3, 0, //coffer
+                                0, 1, 0, 0, 0, //wh1
+                                0, 0, 0, 0, 0, //wh2
+                                0, 0, 0, 3, 0, //wh3
+                                2,             //dev 1 card 1 id
+                                0,             //dev 1 card 2 id
+                                0,             //dev 1 card 3 id
+                                0, 0, 0, 1, 0, //dev 1 in
+                                0, 1, 0, 0, 0, //dev 1 out
+                                0, 0, 0, 1, 0, //dev 1 curr
+                                0,             //dev 2 card 1 id
+                                0,             //dev 2 card 2 id
+                                0,             //dev 2 card 3 id
+                                0, 0, 0, 0, 0, //dev 2 in
+                                0, 0, 0, 0, 0, //dev 2 out
+                                0, 0, 0, 0, 0, //dev 2 curr
+                                5,             //dev 3 card 1 id
+                                21,            //dev 3 card 2 id
+                                0,             //dev 3 card 3 id
+                                0, 1, 0, 0, 0, //dev 3 in
+                                0, 0, 0, 0, 2, //dev 3 out
+                                0, 0, 1, 0, 0}; //dev 3 curr
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void swapWarehouseRows_noEx() {
         ArrayList<MarbleColor> mrblclrs = new ArrayList<>();
         mrblclrs.add(MarbleColor.YELLOW);
