@@ -27,7 +27,7 @@ public class ScreenGUI extends Application implements Screen {
         if (scene.contains("opponent")){
             if (activeScene.second instanceof DashboardController){
                 Platform.runLater( () -> {
-                    ((DashboardController) activeScene.second).showOpponent(Integer.parseInt(scene.substring(scene.length() - 1)));
+                    ((DashboardController) activeScene.second).showOpponent(Integer.parseInt(scene.substring(scene.length()-1)));
                 });
             }
         }

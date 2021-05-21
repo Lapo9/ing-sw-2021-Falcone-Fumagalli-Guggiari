@@ -124,7 +124,7 @@ public class ViewableFactory {
      * @param id Id of the viewable
      * @param update New values to insert to the viewable
      */
-    public void update(int player, ViewableId id, int[] update){
+    public synchronized void update(int player, ViewableId id, int[] update){
         //the first item element is the owner of this cli. If the owner is not actually the first player, we have to shift
         int you = offlineInfo.getPlayerOrder(offlineInfo.getYourName())-1;
         if(player == you){

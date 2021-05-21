@@ -232,6 +232,9 @@ public class Match {
 
         activePlayer.getDashboard().giveInkwell(); //give the inkwell to the first player
 
+        //draw 4 random cards for leader selection
+        players.forEach(p -> p.getDashboard().fillLeadersPicks());
+
         //put players 3 and 4 one step ahead in the faith track
         try {
             players.get(2).getDashboard().goAhead();
@@ -239,9 +242,6 @@ public class Match {
         } catch (IndexOutOfBoundsException ioobe){
             //there wasn't player 3 or 4, no problem
         }
-
-        //draw 4 random cards for leader selection
-        players.forEach(p -> p.getDashboard().fillLeadersPicks());
 
         phase = PRE_MATCH;
         //make the view show the leaders/supplies pick
@@ -600,6 +600,11 @@ public class Match {
 
     }
 
+    private void skipTurn(Player player, String... args) {
+        phase = TURN_END;
+        update("endTurn", player);
+    }
+
 
 
     //sets the list of default commands and their respective actions
@@ -623,6 +628,7 @@ public class Match {
         commands.put("discardLeader", this::discardLeader);
         commands.put("pickLeaders", this::pickLeaders);
         commands.put("swapRows", this::swapWarehouse);
+        commands.put("skipTurn", this::skipTurn);
     }
 
 
@@ -662,7 +668,7 @@ public class Match {
 
             //if the player is alive, tell him it's his turn to play, if not perform auto action
             if (activePlayer.isConnected()) {
-                activePlayer.sendController("yourTurn");
+                //activePlayer.sendController("yourTurn");
             }
             else {
                 update("dead", activePlayer);

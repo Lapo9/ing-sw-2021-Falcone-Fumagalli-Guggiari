@@ -83,14 +83,12 @@ public class OfflineInfo {
 
 
     public synchronized String getProductionsAsArgs() {
-        StringBuilder args = new StringBuilder(" ");
-        args.append(activeProductions.get("dev1"))
-            .append(activeProductions.get("dev2"))
-            .append(activeProductions.get("dev3"))
-            .append(leader1Status==LeaderStatus.PRODUCER ? activeProductions.get("leader1") : false)
-            .append(leader2Status==LeaderStatus.PRODUCER ? activeProductions.get("leader2") : false)
-            .append(activeProductions.get("base"));
-        return args.toString();
+        return " " + activeProductions.get("dev1") + " " +
+                activeProductions.get("dev2") + " " +
+                activeProductions.get("dev3") + " " +
+                (leader1Status == LeaderStatus.PRODUCER ? activeProductions.get("leader1") : false) + " " +
+                (leader2Status == LeaderStatus.PRODUCER ? activeProductions.get("leader2") : false) + " " +
+                activeProductions.get("base");
     }
 
 

@@ -79,6 +79,10 @@ public class PlayersController extends SubSceneController {
     @Override
     public void update(int[] completeUpdate) {
         ArrayList<ImageView> players = new ArrayList<>(Arrays.asList(player1, player2, player3, player4));
+        for (int i = 0; i < 4 - offlineInfo.getPlayersNum(); ++i){
+            players.get(3-i).setVisible(false);
+        }
+
         double fromX = completeUpdate[1] == 0 ? centerCoordinates.get(0).first : centerCoordinates.get(completeUpdate[1] - 1).first + playerOffset.get(completeUpdate[0]).first;
         double fromY = completeUpdate[1] == 0 ? centerCoordinates.get(0).second : centerCoordinates.get(completeUpdate[1] - 1).second + playerOffset.get(completeUpdate[0]).second;
         double toX = centerCoordinates.get(completeUpdate[1]).first + playerOffset.get(completeUpdate[0]).first;
@@ -95,7 +99,8 @@ public class PlayersController extends SubSceneController {
 
     @FXML
     void player1mouseEntered() {
-        if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 0) {
+        int a = offlineInfo.getPlayerOrder(offlineInfo.getYourName());
+        if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 1) {
             player1.setEffect(new Glow(1));
             controllerInterpreter.execute("show opponent1");
         }
@@ -109,7 +114,7 @@ public class PlayersController extends SubSceneController {
 
     @FXML
     void player2mouseEntered() {
-        if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 1) {
+        if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 2) {
             player2.setEffect(new Glow(1));
             controllerInterpreter.execute("show opponent2");
         }
@@ -123,7 +128,7 @@ public class PlayersController extends SubSceneController {
 
     @FXML
     void player3mouseEntered() {
-        if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 2) {
+        if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 3) {
             player3.setEffect(new Glow(1));
             controllerInterpreter.execute("show opponent3");
         }
@@ -137,7 +142,7 @@ public class PlayersController extends SubSceneController {
 
     @FXML
     void player4mouseEntered() {
-        if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 3) {
+        if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 4) {
             player4.setEffect(new Glow(1));
             controllerInterpreter.execute("show opponent4");
         }
