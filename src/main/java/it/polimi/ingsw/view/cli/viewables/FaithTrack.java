@@ -13,12 +13,11 @@ public class FaithTrack implements Viewable {
     private HashMap<String, ArrayList<Integer>> data = new HashMap<String, ArrayList<Integer>>();
     int playerNumber = 0;
     OfflineInfo info;
-    int max = 0;
 
     FaithTrack() {
     }
 
-    //@Override
+    @Override
     public void update(int[] update, OfflineInfo info) {
         playerNumber = info.getPlayersNum();
         if (playerNumber != 0) {                     //check if there are any players left
@@ -44,11 +43,6 @@ public class FaithTrack implements Viewable {
             data.get(playerName).set(3, update[4]);
         }
         this.info = info;
-    }
-
-    @Override
-    public void update(int[] update) {
-
     }
 
     @Override

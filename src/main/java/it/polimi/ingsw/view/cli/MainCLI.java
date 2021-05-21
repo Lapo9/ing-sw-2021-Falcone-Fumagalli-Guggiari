@@ -366,4 +366,72 @@ public class MainCLI {
         screenCLI.show("baseProduction");
 
     }
+
+    private static void showLeaderSpace(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
+        View leaderSpace = new View();
+        LeaderCardSpace leaderCardSpaceViewable = factory.buildLeaderCardSpace(1, LEADERCARDSPACE);
+        leaderSpace.addViewable(leaderCardSpaceViewable);
+
+        screenCLI.addView("leaderCardSpace", leaderSpace);
+        screenCLI.start("leaderCardSpace");
+
+        int[] updateLeaderSpace = {11,             //leader 1 id
+                                   1,             //leader 1 state
+                                   3,             //leader 1 in fix
+                                   4,             //leader 1 out fix
+                                   2,             //leader 1 out mutable
+                                   0, 0, 1, 0, 0, //leader 1 current
+                                   0, 0, 0, 0, 0, //leader 1 depot
+                                   7,             //leader 2 id
+                                   1,             //leader 2 state
+                                   0,             //leader 2 in fix
+                                   0,             //leader 2 out fix
+                                   0,             //leader 2 out mutable
+                                   0, 0, 0, 0, 0, //leader 2 current
+                                   0, 0, 2, 0, 0}; //leader 2 depot}
+
+        leaderCardSpaceViewable.update(updateLeaderSpace);
+        screenCLI.show("leaderCardSpace");
+    }
+
+    private static void showLeaderPick(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
+        View leaderPick = new View();
+        LeaderPick leaderPickViewable = factory.buildLeaderPick(1, LEADERPICK);
+        leaderPick.addViewable(leaderPickViewable);
+
+        screenCLI.addView("leaderPick", leaderPick);
+        screenCLI.start("leaderPick");
+
+        int[] updateLeaderPick = {2,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0, 0, 0, 0, 0,
+                                  0, 0, 0, 0, 0,
+                                  11,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0, 0, 0, 0, 0,
+                                  0, 0, 0, 0, 0,
+                                  7,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0, 0, 0, 0, 0,
+                                  0, 0, 0, 0, 0,
+                                  15,
+                                  0,
+                                  0,
+                                  0,
+                                  0,
+                                  0, 0, 0, 0, 0,
+                                  0, 0, 0, 0, 0};
+
+        leaderPickViewable.update(updateLeaderPick);
+        screenCLI.show("leaderPick");
+    }
 }

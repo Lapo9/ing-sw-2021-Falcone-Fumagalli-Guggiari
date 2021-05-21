@@ -96,9 +96,9 @@ public class LeaderCard implements Viewable {
             tmp = tmp.concat("\033[0;35m");
 
         if(input.minLevel() == 1)
-            tmp = tmp.concat("⏺");
+            tmp = tmp.concat("⏹");
         else if(input.minLevel() == 2)
-            tmp = tmp.concat(String.valueOf((char) 8198)).concat(String.valueOf((char) 8197)).concat("⏺⏺");
+            tmp = tmp.concat(String.valueOf((char) 8198)).concat(String.valueOf((char) 8197)).concat("⏹⏹");
 
         tmp = tmp.concat("\033[0m");
 
