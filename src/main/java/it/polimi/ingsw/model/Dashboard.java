@@ -83,10 +83,6 @@ public class Dashboard implements HasStatus{
      * Creates a dashboard given its status.
      * @param status of the dashboard
      * @param name player nickname
-     * @throws SupplyException
-     * @throws DevelopmentException
-     * @throws LeaderException
-     * @throws NoSuchMethodException
      */
     public Dashboard(int[] status, String name) throws SupplyException, DevelopmentException, LeaderException, NoSuchMethodException {
         if(status[0] == 1)
@@ -183,7 +179,7 @@ public class Dashboard implements HasStatus{
         }
         container = getSupplies(Arrays.copyOfRange(status, 80, 86));
         while(!container.isEmpty()) {
-            paycheck.addSupply(container.get(0), DepotID.DEVELOPMENT2);
+            paycheck.addSupply(container.get(0), DepotID.WAREHOUSE3);
             container.remove(0);
         }
 
@@ -219,15 +215,15 @@ public class Dashboard implements HasStatus{
             }
         }
 
-        leadersSpace.addLeader(new LeaderCard(status[107]));
+        pickLeader(findIndex(status, 1));
         if(status[108] != 0) {
             if(status[108] == 1)
                 leadersSpace.activateLeaderCardTrusted(0);
             else
                 leadersSpace.discardLeaderCardTrusted(0);
         }
-        if(status[110] != 0)
-            swapLeaderProduction(0, numberToType(status[110]));
+        if(status[111] != 0)
+            swapLeaderProduction(0, numberToType(status[111]));
         container = getSupplies(Arrays.copyOfRange(status, 112, 117));
         while(!container.isEmpty()) {
             productionManager.addSupply(DepotID.LEADER1, container.get(0), DepotID.BASE_PRODUCTION);
@@ -235,10 +231,10 @@ public class Dashboard implements HasStatus{
         }
         container = getSupplies(Arrays.copyOfRange(status, 117, 122));
         while(!container.isEmpty()) {
-            productionManager.addSupply(DepotID.LEADER1, container.get(0), DepotID.BASE_PRODUCTION);
+            depotsManager.addSupply(DepotID.LEADER1, container.get(0), DepotID.BASE_PRODUCTION);
             container.remove(0);
         }
-        leadersSpace.addLeader(new LeaderCard(status[122]));
+        pickLeader(findIndex(status, 2));
         if(status[123] != 0) {
             if(status[123] == 1)
                 leadersSpace.activateLeaderCardTrusted(1);
@@ -246,15 +242,15 @@ public class Dashboard implements HasStatus{
                 leadersSpace.discardLeaderCardTrusted(1);
         }
         if(status[126] != 0)
-            swapLeaderProduction(0, numberToType(status[126]));
+            swapLeaderProduction(1, numberToType(status[126]));
         container = getSupplies(Arrays.copyOfRange(status, 127, 132));
         while(!container.isEmpty()) {
             productionManager.addSupply(DepotID.LEADER2, container.get(0), DepotID.BASE_PRODUCTION);
             container.remove(0);
         }
-        container = getSupplies(Arrays.copyOfRange(status, 132, 138));
+        container = getSupplies(Arrays.copyOfRange(status, 132, 137));
         while(!container.isEmpty()) {
-            productionManager.addSupply(DepotID.LEADER2, container.get(0), DepotID.BASE_PRODUCTION);
+            depotsManager.addSupply(DepotID.LEADER2, container.get(0), DepotID.BASE_PRODUCTION);
             container.remove(0);
         }
 
@@ -959,4 +955,33 @@ public class Dashboard implements HasStatus{
         return new Pair<>(winPoints, supplies);
     }
 
+
+
+    private int findIndex(int[] status, int number) {
+        if(number == 1) {
+            if(status[107] == status[143])
+                return 0;
+            else if (status[107] == status[158])
+                return 1;
+            else if (status[107] == status[173])
+                return 2;
+            else if (status[107] == status[188])
+                return 3;
+            else
+                return 0;
+        } else if (number == 2) {
+            if(status[122] == status[143])
+                return 0;
+            else if (status[122] == status[158])
+                return 1;
+            else if (status[122] == status[173])
+                return 2;
+            else if (status[122] == status[188])
+                return 3;
+            else
+                return 0;
+        }
+        else
+            return 0;
+    }
 }

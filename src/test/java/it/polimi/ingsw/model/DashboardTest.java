@@ -21,7 +21,7 @@ public class DashboardTest {
 
     @Test
     public void dashboard_classConstructor() {
-        int[] status = {0,
+        int[] status = {0,             //inkwell
                         1, 2, 0, 3, 0, //coffer
                         0, 1, 0, 0, 0, //wh1
                         0, 0, 0, 0, 0, //wh2
@@ -44,47 +44,33 @@ public class DashboardTest {
                         0, 1, 0, 0, 0, //dev 3 in
                         0, 0, 0, 0, 2, //dev 3 out
                         0, 0, 1, 0, 0, //dev 3 curr
-                        0, 0, 0, 0, 0, //paycheck strongbox
-                        0, 0, 0, 0, 0, //paycheck depots
+                        0, 2, 0, 1, 0, //paycheck strongbox
+                        1, 1, 3, 0, 0, //paycheck depots
                         0, 0, 0, 0, 0, //base in fix
-                        0,             //base in mutable 1
-                        0,             //base in mutable 2
+                        1,             //base in mutable 1
+                        2,             //base in mutable 2
                         0, 0, 0, 0, 0, //base out fix
-                        0,             //base our mutable
-                        0, 0, 0, 0, 0, //base current
-                        0,             //faith track position
-                        0,             //pope tile 1
-                        0,             //pope tile 2
+                        3,             //base our mutable
+                        0, 0, 1, 0, 0, //base current
+                        13,             //faith track position
+                        2,             //pope tile 1
+                        1,             //pope tile 2
                         0,             //pope tile 3
-                        3,             //leader 1 id
-                        0,             //leader 1 state
-                        0,             //leader 1 in fix
-                        0,             //leader 1 out fix
-                        0,             //leader 1 out mutable
-                        0, 0, 0, 0, 0, //leader 1 current
+                        11,             //leader 1 id
+                        1,             //leader 1 state
+                        3,             //leader 1 in fix
+                        4,             //leader 1 out fix
+                        2,             //leader 1 out mutable
+                        0, 0, 1, 0, 0, //leader 1 current
                         0, 0, 0, 0, 0, //leader 1 depot
-                        2,             //leader 2 id
-                        0,             //leader 2 state
+                        7,             //leader 2 id
+                        1,             //leader 2 state
                         0,             //leader 2 in fix
                         0,             //leader 2 out fix
                         0,             //leader 2 out mutable
                         0, 0, 0, 0, 0, //leader 2 current
-                        0, 0, 0, 0, 0, //leader 2 depot
-                        0, 0, 0, 0, 0, 0, 
-                        4,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0, 0, 0, 0, 0,
-                        0, 0, 0, 0, 0,
-                        3,
-                        0,
-                        0,
-                        0,
-                        0,
-                        0, 0, 0, 0, 0,
-                        0, 0, 0, 0, 0,
+                        0, 0, 2, 0, 0, //leader 2 depot
+                        1, 0, 1, 2, 0, 0,
                         2,
                         0,
                         0,
@@ -92,7 +78,21 @@ public class DashboardTest {
                         0,
                         0, 0, 0, 0, 0,
                         0, 0, 0, 0, 0,
-                        1,
+                        11,            
+                        1,             
+                        3,             
+                        4,             
+                        2,             
+                        0, 0, 1, 0, 0, 
+                        0, 0, 0, 0, 0, 
+                        7,             
+                        1,             
+                        0,             
+                        0,             
+                        0,             
+                        0, 0, 0, 0, 0, 
+                        0, 0, 2, 0, 0, 
+                        15,
                         0,
                         0,
                         0,
@@ -125,8 +125,62 @@ public class DashboardTest {
                               realStatus.get(58),
                               realStatus.get(59), realStatus.get(60),realStatus.get(61), realStatus.get(62), realStatus.get(63),
                               realStatus.get(64), realStatus.get(65), realStatus.get(66), realStatus.get(67), realStatus.get(68),
-                              realStatus.get(69), realStatus.get(70), realStatus.get(71), realStatus.get(72), realStatus.get(73)
-        };
+                              realStatus.get(69), realStatus.get(70), realStatus.get(71), realStatus.get(72), realStatus.get(73),
+                              realStatus.get(74), realStatus.get(75), realStatus.get(76), realStatus.get(77), realStatus.get(78),
+                              realStatus.get(79), realStatus.get(80), realStatus.get(81), realStatus.get(82), realStatus.get(83),
+                              realStatus.get(84), realStatus.get(85), realStatus.get(86), realStatus.get(87), realStatus.get(88),
+                              realStatus.get(89),
+                              realStatus.get(90),
+                              realStatus.get(91), realStatus.get(92), realStatus.get(93), realStatus.get(94), realStatus.get(95),
+                              realStatus.get(96),
+                              realStatus.get(97), realStatus.get(98), realStatus.get(99), realStatus.get(100), realStatus.get(101),
+                              realStatus.get(102),
+                              realStatus.get(103),
+                              realStatus.get(104),
+                              realStatus.get(105),
+                              realStatus.get(106),
+                              realStatus.get(107),
+                              realStatus.get(108),
+                              realStatus.get(109),
+                              realStatus.get(110),
+                              realStatus.get(111), realStatus.get(112), realStatus.get(113), realStatus.get(114), realStatus.get(115),
+                              realStatus.get(116), realStatus.get(117), realStatus.get(118), realStatus.get(119), realStatus.get(120),
+                              realStatus.get(121),
+                              realStatus.get(122),
+                              realStatus.get(123),
+                              realStatus.get(124),
+                              realStatus.get(125),
+                              realStatus.get(126), realStatus.get(127), realStatus.get(128), realStatus.get(129), realStatus.get(130),
+                              realStatus.get(131), realStatus.get(132), realStatus.get(133), realStatus.get(134), realStatus.get(135),
+                              realStatus.get(136), realStatus.get(137), realStatus.get(138), realStatus.get(139), realStatus.get(140), realStatus.get(141),
+                              realStatus.get(142),
+                              realStatus.get(143),
+                              realStatus.get(144),
+                              realStatus.get(145),
+                              realStatus.get(146),
+                              realStatus.get(147), realStatus.get(148), realStatus.get(149), realStatus.get(150), realStatus.get(151),
+                              realStatus.get(152), realStatus.get(153), realStatus.get(154), realStatus.get(155), realStatus.get(156),
+                              realStatus.get(157),
+                              realStatus.get(158),
+                              realStatus.get(159),
+                              realStatus.get(160),
+                              realStatus.get(161),
+                              realStatus.get(162), realStatus.get(163), realStatus.get(164), realStatus.get(165), realStatus.get(166),
+                              realStatus.get(167), realStatus.get(168), realStatus.get(169), realStatus.get(170), realStatus.get(171),
+                              realStatus.get(172),
+                              realStatus.get(173),
+                              realStatus.get(174),
+                              realStatus.get(175),
+                              realStatus.get(176),
+                              realStatus.get(177), realStatus.get(178), realStatus.get(179), realStatus.get(180), realStatus.get(181),
+                              realStatus.get(182), realStatus.get(183), realStatus.get(184), realStatus.get(185), realStatus.get(186),
+                              realStatus.get(187),
+                              realStatus.get(188),
+                              realStatus.get(189),
+                              realStatus.get(190),
+                              realStatus.get(191),
+                              realStatus.get(192), realStatus.get(193), realStatus.get(194), realStatus.get(195), realStatus.get(196),
+                              realStatus.get(197), realStatus.get(198), realStatus.get(199), realStatus.get(200), realStatus.get(201)};
         int[] expectedResult = {1, 2, 0, 3, 0, //coffer
                                 0, 1, 0, 0, 0, //wh1
                                 0, 0, 0, 0, 0, //wh2
@@ -148,7 +202,62 @@ public class DashboardTest {
                                 0,             //dev 3 card 3 id
                                 0, 1, 0, 0, 0, //dev 3 in
                                 0, 0, 0, 0, 2, //dev 3 out
-                                0, 0, 1, 0, 0}; //dev 3 curr
+                                0, 0, 1, 0, 0, //dev 3 curr
+                                0, 2, 0, 1, 0, //paycheck strongbox
+                                1, 1, 3, 0, 0, //paycheck depots
+                                0, 0, 0, 0, 0, //base in fix
+                                1,             //base in mutable 1
+                                2,             //base in mutable 2
+                                0, 0, 0, 0, 0, //base out fix
+                                3,             //base our mutable
+                                0, 0, 1, 0, 0, //base current
+                                13,             //faith track position
+                                2,             //pope tile 1
+                                1,             //pope tile 2
+                                0,             //pope tile 3
+                                11,             //leader 1 id
+                                1,             //leader 1 state
+                                3,             //leader 1 in fix
+                                4,             //leader 1 out fix
+                                2,             //leader 1 out mutable
+                                0, 0, 1, 0, 0, //leader 1 current
+                                0, 0, 0, 0, 0, //leader 1 depot
+                                7,             //leader 2 id
+                                1,             //leader 2 state
+                                0,             //leader 2 in fix
+                                0,             //leader 2 out fix
+                                0,             //leader 2 out mutable
+                                0, 0, 0, 0, 0, //leader 2 current
+                                0, 0, 2, 0, 0, //leader 2 depot
+                                1, 0, 1, 2, 0, 0,
+                                2,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0,
+                                11,
+                                1,
+                                3,
+                                4,
+                                2,
+                                0, 0, 1, 0, 0,
+                                0, 0, 0, 0, 0,
+                                7,
+                                1,
+                                0,
+                                0,
+                                0,
+                                0, 0, 0, 0, 0,
+                                0, 0, 2, 0, 0,
+                                15,
+                                0,
+                                0,
+                                0,
+                                0,
+                                0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0};
         assertArrayEquals(expectedResult, actualResult);
     }
 

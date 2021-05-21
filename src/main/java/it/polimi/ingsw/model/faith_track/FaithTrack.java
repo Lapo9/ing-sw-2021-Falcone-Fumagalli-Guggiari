@@ -95,6 +95,8 @@ public class FaithTrack implements WinPointsCountable, HasStatus {
      * @return true if a vaticanReport has been issued
      */
     public boolean goAhead(int num){
+        if(position == 24)
+            return false;
         boolean vr = false;
         for(int i = 0; i < num; i++) {
             vr |= goAhead();
