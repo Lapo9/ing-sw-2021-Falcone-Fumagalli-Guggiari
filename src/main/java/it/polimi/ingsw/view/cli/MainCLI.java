@@ -111,8 +111,9 @@ public class MainCLI {
 
         screen.start("welcome");
 
-    }
 
+        //showBaseProductionTest(screen, factory);
+    }
 
 
 
@@ -329,6 +330,7 @@ public class MainCLI {
         screenCLI.addView("activeProductions", activeProductions);
         screenCLI.start("activeProductions");
 
+
         int [] updateActiveProd = {
                 0, //dev 1
                 1, //dev 2
@@ -338,9 +340,27 @@ public class MainCLI {
                 0}; //base prod
         activeProductionsViewable.update(updateActiveProd);
         screenCLI.show("activeProductions");
-
-
     }
 
+    private static void showBaseProductionTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
+        View baseProduction = new View();
+        BaseProduction baseProductionViewable = factory.buildBaseProduction(1, ViewableId.BASE_PRODUCTIONS);
+        baseProduction.addViewable(baseProductionViewable);
 
+        screenCLI.addView("baseProduction", baseProduction);
+        screenCLI.start("baseProduction");
+
+
+        int [] updateBaseProd = {
+                0, 0, 0, 0, 0,
+                0, //COIN
+                1, //SERVANT
+                0, 0, 0, 0, 0,
+                1, //FAITH_MARKER
+                1, 0, 0, 0, 0
+        };
+        baseProductionViewable.update(updateBaseProd);
+        screenCLI.show("baseProduction");
+
+    }
 }

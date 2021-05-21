@@ -4,7 +4,6 @@ import it.polimi.ingsw.view.cli.OfflineInfo;
 import it.polimi.ingsw.view.cli.Viewable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
