@@ -203,8 +203,8 @@ public class DevelopmentCard implements Viewable {
                     "|                                |" + "\n" +
 
                     "|          " + BLACK(BACK_YELLOW(" " + cost.get(COIN).toString() + " ")) +
-                    BACK_BLUE(" " + cost.get(SERVANT).toString() + " ") +
-                    BACK_MAGENTA( " " + cost.get(SHIELD).toString() + " ") +
+                    BACK_MAGENTA(" " + cost.get(SERVANT).toString() + " ") +
+                    BACK_BLUE( " " + cost.get(SHIELD).toString() + " ") +
                     BLACK(BACK_WHITE(" " + cost.get(STONE).toString() + " "))+ "          |" + "\n" +
                     "|                                |" + "\n" +
 
