@@ -429,6 +429,7 @@ public class Match {
 
         try {
             player.getDashboard().buyDevelopment(col, row, space);
+            phase = TURN_END;
         } catch (Exception e){
             player.sendController("error " + e.getMessage());
         }
