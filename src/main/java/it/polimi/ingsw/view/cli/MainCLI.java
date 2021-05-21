@@ -1,6 +1,5 @@
 package it.polimi.ingsw.view.cli;
 
-import it.polimi.ingsw.view.Screen;
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
 import it.polimi.ingsw.view.cli.viewables.*;
 
@@ -39,6 +38,7 @@ public class MainCLI {
                 warehouse1,
                 leader11,
                 leader21,
+                factory.buildBaseProduction(1, BASE_PRODUCTION),
                 factory.buildDevelopmentSpace(1, DEVELOPMENT_SPACE1),
                 factory.buildDevelopmentSpace(1, DEVELOPMENT_SPACE2),
                 factory.buildDevelopmentSpace(1, DEVELOPMENT_SPACE3),
@@ -81,6 +81,7 @@ public class MainCLI {
                 factory.buildSupplyContainer(2, PAYCHECK_DEPOTS, "Paycheck depots"),
                 //factory.buildLeaderCard(2, LEADER1),
                 //factory.buildLeaderCard(2, LEADER2),
+                factory.buildBaseProduction(2, BASE_PRODUCTION),
                 factory.buildDevelopmentSpace(2, DEVELOPMENT_SPACE1),
                 factory.buildDevelopmentSpace(2, DEVELOPMENT_SPACE2),
                 factory.buildDevelopmentSpace(2, DEVELOPMENT_SPACE3));
@@ -92,6 +93,7 @@ public class MainCLI {
                 factory.buildSupplyContainer(3, PAYCHECK_DEPOTS, "Paycheck depots"),
                 //factory.buildLeaderCard(3, LEADER1),
                 //factory.buildLeaderCard(3, LEADER2),
+                factory.buildBaseProduction(3, BASE_PRODUCTION),
                 factory.buildDevelopmentSpace(3, DEVELOPMENT_SPACE1),
                 factory.buildDevelopmentSpace(3, DEVELOPMENT_SPACE2),
                 factory.buildDevelopmentSpace(3, DEVELOPMENT_SPACE3));
@@ -103,6 +105,7 @@ public class MainCLI {
                 factory.buildSupplyContainer(4, PAYCHECK_DEPOTS, "Paycheck depots"),
                 //factory.buildLeaderCard(4, LEADER1),
                 //factory.buildLeaderCard(4, LEADER2),
+                factory.buildBaseProduction(4, BASE_PRODUCTION),
                 factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE1),
                 factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE2),
                 factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE3));
@@ -344,7 +347,7 @@ public class MainCLI {
 
     private static void showBaseProductionTest(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View baseProduction = new View();
-        BaseProduction baseProductionViewable = factory.buildBaseProduction(1, ViewableId.BASE_PRODUCTIONS);
+        BaseProduction baseProductionViewable = factory.buildBaseProduction(1, ViewableId.BASE_PRODUCTION);
         baseProduction.addViewable(baseProductionViewable);
 
         screenCLI.addView("baseProduction", baseProduction);
