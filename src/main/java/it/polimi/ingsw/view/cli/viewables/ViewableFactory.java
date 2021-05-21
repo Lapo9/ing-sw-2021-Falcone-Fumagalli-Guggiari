@@ -118,6 +118,18 @@ public class ViewableFactory {
         return res;
     }
 
+    public LeaderCardSpace buildLeaderCardSpace (int player, ViewableId viewableId) {
+        LeaderCardSpace res = new LeaderCardSpace();
+        items.get(player - 1).put(viewableId, res);
+        return res;
+    }
+
+    public LeaderPick buildLeaderPick (int player, ViewableId viewableId) {
+        LeaderPick res = new LeaderPick();
+        items.get(player - 1).put(viewableId, res);
+        return res;
+    }
+
     /**
      * Updates the specified viewable with the specified int array.
      * @param player Player who owns the viewable
