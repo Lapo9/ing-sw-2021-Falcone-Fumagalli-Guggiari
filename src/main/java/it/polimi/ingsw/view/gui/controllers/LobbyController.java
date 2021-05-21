@@ -58,7 +58,8 @@ public class LobbyController extends SceneController {
         for (int i = 0; i < playersAndStatus.length-1; i+=2){
             this.players.get(i/2).second.setVisible(true);
             this.players.get(i/2).first.setText(playersAndStatus[i+1]);
-            this.players.get(i/2).second.setImage(new Image(playersAndStatus[i].equals("on") ? "/pictures/miscellaneous/online.png" : "/pictures/miscellaneous/offline.png"));
+            this.players.get(i/2).second.setImage(new Image(playersAndStatus[i].equals("on") ? "/pictures/miscellaneous/greenDot.png" :
+                                                                                            (playersAndStatus[i].equals("curr") ? "/pictures/miscellaneous/blueDot.png" : "/pictures/miscellaneous/redDot.png")));
         }
     }
 

@@ -64,7 +64,7 @@ public class ScreenGUI extends Application implements Screen {
 
     @Override
     public void setPlayers(String players) {
-        scenes.forEach((id, scene) -> Platform.runLater(() -> scene.second.setPlayers(players)));
+        scenes.forEach((id, scene) -> {Platform.runLater(() -> scene.second.setPlayers(players));});
     }
 
     @Override

@@ -31,15 +31,13 @@ public class Match {
 
 
     Match(Player leader) throws MatchException {
-        addPlayer(leader);
-        activePlayer = leader;
-        setDefaultCommands();
-
         marketplace.attach(modelObserver);
         developmentGrid.attach(modelObserver);
 
-        leader.attachDashboard(new Dashboard(false, marketplace, developmentGrid, leader.getName()));
-        modelObserver.attachTo(leader); //attach the model observer to the dashboard of this player
+        setDefaultCommands();
+
+        activePlayer = leader;
+        addPlayer(leader);
     }
 
 
@@ -162,7 +160,8 @@ public class Match {
                         activePlayer = activePlayers.get(0);
                     }
                 }
-                break;
+                players.forEach(p -> info(p));
+                return;
 
             case PRE_MATCH:
                 //fill the depot with coins
@@ -177,7 +176,7 @@ public class Match {
 
                 //pick the first 2 leaders
                 update("pickLeaders 1 2", player);
-                break;
+                return;
         }
 
 

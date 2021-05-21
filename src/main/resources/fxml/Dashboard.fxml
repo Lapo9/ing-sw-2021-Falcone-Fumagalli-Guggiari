@@ -29,7 +29,7 @@
       <fx:include fx:id="opponent2" source="Opponent.fxml" />
       <fx:include fx:id="opponent3" source="Opponent.fxml" />
       <fx:include fx:id="opponent4" source="Opponent.fxml" />
-      <fx:include fx:id="faithTrackPlayers" layoutX="303.0" layoutY="134.0" source="Players.fxml" />
+      <fx:include fx:id="faithTrackPlayers" source="Players.fxml" />
       <Label fx:id="message" layoutX="21.0" layoutY="639.0" prefHeight="22.0" prefWidth="489.0" text="Label">
          <font>
             <Font name="Consolas Bold" size="18.0" />
@@ -38,5 +38,6 @@
             <Bloom threshold="0.0" />
          </effect>
       </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

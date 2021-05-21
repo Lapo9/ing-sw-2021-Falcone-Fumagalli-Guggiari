@@ -3,6 +3,7 @@ package it.polimi.ingsw.view.gui.controllers;
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.model.leaders.LeaderCard;
 import it.polimi.ingsw.view.gui.WarehouseObjectTypeController;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
@@ -69,22 +70,24 @@ public class PreMatchController extends SceneController{
 
     @Override
     public void update(int[] completeUpdate) {
-        if(completeUpdate[0] == offlineInfo.getPlayerOrder(offlineInfo.getYourName())) {
-            int yourOrderToPlay = offlineInfo.getPlayerOrder(offlineInfo.getYourName());
-            selection1.setVisible(yourOrderToPlay > 1);
-            selection2.setVisible(yourOrderToPlay > 3);
+        Platform.runLater( ()-> {
+            if (completeUpdate[0] == offlineInfo.getPlayerOrder(offlineInfo.getYourName()) - 1) {
+                int yourOrderToPlay = offlineInfo.getPlayerOrder(offlineInfo.getYourName());
+                selection1.setVisible(yourOrderToPlay > 1);
+                selection2.setVisible(yourOrderToPlay > 3);
 
-            for (int i = 0; i < 4; ++i) {
-                idsActive.get(i).first = completeUpdate[i * 15 + 143];
-            }
+                for (int i = 0; i < 4; ++i) {
+                    idsActive.get(i).first = completeUpdate[i * 15 + 143];
+                }
 
-            ArrayList<ImageView> picks = new ArrayList<>(Arrays.asList(pick1, pick2, pick3, pick4));
-            for (int i = 0; i < picks.size(); ++i) {
-                if (idsActive.get(i).first != 0) {
-                    picks.get(i).setImage(new Image(LeaderCard.getUrl(idsActive.get(i).first)));
+                ArrayList<ImageView> picks = new ArrayList<>(Arrays.asList(pick1, pick2, pick3, pick4));
+                for (int i = 0; i < picks.size(); ++i) {
+                    if (idsActive.get(i).first != 0) {
+                        picks.get(i).setImage(new Image(LeaderCard.getUrl(idsActive.get(i).first)));
+                    }
                 }
             }
-        }
+        });
     }
 
     @FXML

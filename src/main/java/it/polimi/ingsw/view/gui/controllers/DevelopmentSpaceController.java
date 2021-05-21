@@ -32,9 +32,9 @@ public class DevelopmentSpaceController extends SubSceneController {
         servant.setText("0");
         shield.setText("0");
         stone.setText("0");
-        oldCard1.setImage(new Image("pictures/miscellaneous/void.png"));
+        oldCard1.setVisible(false);
         winPointsOldCard1.setText("");
-        oldCard2.setImage(new Image("pictures/miscellaneous/void.png"));
+        oldCard2.setVisible(false);
         winPointsOldCard2.setText("");
     }
 
@@ -43,12 +43,15 @@ public class DevelopmentSpaceController extends SubSceneController {
     public void update(int[] completeUpdate) {
         if(completeUpdate[3] != 0) {
             card.setImage(new Image(getUrl(completeUpdate[3])));
+            oldCard1.setVisible(true);
             oldCard1.setImage(new Image(getDot(getCategory(completeUpdate[1]))));
             winPointsOldCard1.setText(String.valueOf(getWinPoints(completeUpdate[1])));
+            oldCard2.setVisible(true);
             oldCard2.setImage(new Image(getDot(getCategory(completeUpdate[2]))));
             winPointsOldCard2.setText(String.valueOf(getWinPoints(completeUpdate[2])));
         } else if(completeUpdate[2] != 0) {
             card.setImage(new Image(getUrl(completeUpdate[2])));
+            oldCard1.setVisible(true);
             oldCard1.setImage(new Image(getDot(getCategory(completeUpdate[1]))));
             winPointsOldCard1.setText(String.valueOf(getWinPoints(completeUpdate[1])));
         } else if(completeUpdate[1] != 0){

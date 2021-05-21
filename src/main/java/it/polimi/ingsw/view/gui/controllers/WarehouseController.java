@@ -44,9 +44,9 @@ public class WarehouseController extends SubSceneController {
     @Override
     public void update(int[] completeUpdate) {
         //put images in arrays to make it easier to iterate through them
-        ArrayList<ImageView> first = new ArrayList<>(Arrays.asList(a1, b1, c1));
+        ArrayList<ImageView> third = new ArrayList<>(Arrays.asList(a1, b1, c1));
         ArrayList<ImageView> second = new ArrayList<>(Arrays.asList(a2, b2));
-        ArrayList<ImageView> third = new ArrayList<>(Arrays.asList(a3));
+        ArrayList<ImageView> first = new ArrayList<>(Arrays.asList(a3));
 
         //get the supply and quantity contained in each row
         Pair<WarehouseObjectTypeController, Integer> firstSupplies = getContainedSupplies(Arrays.copyOfRange(completeUpdate, 0, 4));
