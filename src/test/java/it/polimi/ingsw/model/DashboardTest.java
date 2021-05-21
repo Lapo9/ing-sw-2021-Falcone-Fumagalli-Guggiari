@@ -1111,15 +1111,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        cards.add(new CardsRequirement(2, 1, CardCategory.GREEN));
-        cards.add(new CardsRequirement(1, 1, CardCategory.VIOLET));
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
-        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(2));
+        leaderCards.add(new LeaderCard(1));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(10, new SupplyContainer(), cards, new Market(WarehouseObjectType.SHIELD), 3));
-            dshbrd.addLeader(new LeaderCard(9, new SupplyContainer(), cards2, new Market(WarehouseObjectType.SERVANT), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies
@@ -1161,15 +1161,15 @@ public class DashboardTest {
         dshbrd.buySupplies(MarketDirection.VERTICAL, 0);
         try {
             dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.GREY);
-            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.YELLOW);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
 
         //buy lvl one yellow development card
         try {
             dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.PAYCHECK, WarehouseObjectType.STONE);
-            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
-            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.COIN);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         try {
             dshbrd.buyDevelopment(2, 2, 2);
@@ -1182,9 +1182,6 @@ public class DashboardTest {
 
         //buy supplies
         dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
-        try {
-            dshbrd.swapWarehouseRows(1, 3);
-        } catch (SupplyException e) {fail();}
         try {
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
@@ -1268,6 +1265,7 @@ public class DashboardTest {
         //buy supplies
         dshbrd.buySupplies(MarketDirection.VERTICAL, 2);
         try {
+            dshbrd.swapWarehouseRows(2, 3);
             dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.VIOLET);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
@@ -1289,17 +1287,17 @@ public class DashboardTest {
         //buy supplies
         dshbrd.buySupplies(MarketDirection.VERTICAL, 1);
         try {
-            dshbrd.swapWarehouseRows(1, 3);
-            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET);
+            dshbrd.swapWarehouseRows(1, 2);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.VIOLET);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
 
         //buy lvl two green development card
         try {
-            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
-            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
-            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
-            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SERVANT);
             dshbrd.moveSupply(DepotID.COFFER, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         try {
@@ -1608,12 +1606,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(10));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -1892,12 +1893,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(10));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -1980,7 +1984,7 @@ public class DashboardTest {
         dshbrd.buySupplies(MarketDirection.VERTICAL, 2);
         try {
             dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.VIOLET);
-            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.YELLOW);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
 
@@ -2013,12 +2017,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(10));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -2101,7 +2108,7 @@ public class DashboardTest {
         dshbrd.buySupplies(MarketDirection.VERTICAL, 3);
         try {
             dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.YELLOW);
-            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.VIOLET);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
 
@@ -2114,9 +2121,9 @@ public class DashboardTest {
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         try {
             dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN);
-            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
-            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.DEVELOPMENT2, WarehouseObjectType.SHIELD);
-            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.LEADER2, WarehouseObjectType.SERVANT);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.DEVELOPMENT2, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.LEADER2, WarehouseObjectType.SERVANT);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.produce(false, true, false, false, true, true);
 
@@ -2143,12 +2150,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(10));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -2301,12 +2311,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(10));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -2389,7 +2402,7 @@ public class DashboardTest {
         dshbrd.buySupplies(MarketDirection.VERTICAL, 2);
         try {
             dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.VIOLET);
-            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.YELLOW);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
 
@@ -2633,13 +2646,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
-        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(1));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(9, new SupplyContainer(), cards2, new Market(WarehouseObjectType.SERVANT), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -2744,9 +2759,6 @@ public class DashboardTest {
         //buy supplies from the market
         dshbrd.buySupplies(MarketDirection.VERTICAL, 2);
         try {
-            dshbrd.swapWarehouseRows(1, 2);
-        } catch (SupplyException e) {fail();}
-        try {
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.YELLOW);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
@@ -2800,13 +2812,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(1, 1, CardCategory.GREEN));
-        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(15));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(2, new SupplyContainer(), cards2, new Discount(WarehouseObjectType.STONE), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -3247,13 +3261,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
-        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(1));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(9, new SupplyContainer(), cards2, new Market(WarehouseObjectType.SERVANT), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -3357,9 +3373,6 @@ public class DashboardTest {
 
         //buy supplies from the market
         dshbrd.buySupplies(MarketDirection.VERTICAL, 2);
-        try {
-            dshbrd.swapWarehouseRows(1, 2);
-        } catch (SupplyException e) {fail();}
         try {
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.YELLOW);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET);
@@ -3650,12 +3663,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(10));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -3736,7 +3752,7 @@ public class DashboardTest {
 
         ArrayList<Integer> status = new ArrayList<>(dshbrd.getStatus());
         int[] expectedResult = {5, 0,
-                                14, 1};
+                                10, 1};
         int[] actualResult = {status.get(106), status.get(107),
                               status.get(121), status.get(122)};
         assertArrayEquals(expectedResult,actualResult);
@@ -4379,12 +4395,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(10));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -4467,7 +4486,7 @@ public class DashboardTest {
         dshbrd.buySupplies(MarketDirection.VERTICAL, 2);
         try {
             dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.VIOLET);
-            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.YELLOW);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
 
@@ -4496,12 +4515,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(10));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -4584,7 +4606,7 @@ public class DashboardTest {
         dshbrd.buySupplies(MarketDirection.VERTICAL, 2);
         try {
             dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.VIOLET);
-            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.YELLOW);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
 
@@ -4867,15 +4889,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        cards.add(new CardsRequirement(2, 1, CardCategory.GREEN));
-        cards.add(new CardsRequirement(1, 1, CardCategory.VIOLET));
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
-        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(2));
+        leaderCards.add(new LeaderCard(1));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(10, new SupplyContainer(), cards, new Market(WarehouseObjectType.SHIELD), 3));
-            dshbrd.addLeader(new LeaderCard(9, new SupplyContainer(), cards2, new Market(WarehouseObjectType.SERVANT), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies
@@ -4917,15 +4939,15 @@ public class DashboardTest {
         dshbrd.buySupplies(MarketDirection.VERTICAL, 0);
         try {
             dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.GREY);
-            dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.YELLOW);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
 
         //buy lvl one yellow development card
         try {
             dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.PAYCHECK, WarehouseObjectType.STONE);
-            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
-            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.COIN);
+            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.PAYCHECK, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.PAYCHECK, WarehouseObjectType.COIN);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         try {
             dshbrd.buyDevelopment(2, 2, 2);
@@ -4938,9 +4960,6 @@ public class DashboardTest {
 
         //buy supplies
         dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
-        try {
-            dshbrd.swapWarehouseRows(1, 3);
-        } catch (SupplyException e) {fail();}
         try {
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
@@ -5024,6 +5043,7 @@ public class DashboardTest {
         //buy supplies
         dshbrd.buySupplies(MarketDirection.VERTICAL, 2);
         try {
+            dshbrd.swapWarehouseRows(2, 3);
             dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.VIOLET);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
@@ -5045,7 +5065,8 @@ public class DashboardTest {
         //buy supplies
         dshbrd.buySupplies(MarketDirection.VERTICAL, 1);
         try {
-            dshbrd.swapWarehouseRows(1, 3);
+            dshbrd.swapWarehouseRows(1, 2);
+            dshbrd.swapWarehouseRows(2, 3);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
@@ -5065,6 +5086,7 @@ public class DashboardTest {
         //buy supplies
         dshbrd.buySupplies(MarketDirection.VERTICAL, 0);
         try {
+            dshbrd.swapWarehouseRows(1, 3);
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.WHITE);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.WHITE);
@@ -5186,12 +5208,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(10));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -5320,12 +5345,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(10));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -5454,12 +5482,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(1, 2, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(5));
+        leaderCards.add(new LeaderCard(10));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(5, new SupplyContainer(5, 0, 0, 0, 0), cards, new Depot(WarehouseObjectType.STONE), 3));
-            dshbrd.addLeader(new LeaderCard(14, new SupplyContainer(), cards2, new Producer(new SupplyContainer(0, 0, 1, 0, 0)), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies from the market
@@ -5734,15 +5765,15 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(), "test");
-        ArrayList<CardsRequirement> cards = new ArrayList<>();
-        cards.add(new CardsRequirement(2, 1, CardCategory.GREEN));
-        cards.add(new CardsRequirement(1, 1, CardCategory.VIOLET));
-        ArrayList<CardsRequirement> cards2 = new ArrayList<>();
-        cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
-        cards2.add(new CardsRequirement(1, 1, CardCategory.BLUE));
+        ArrayList<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(new LeaderCard(2));
+        leaderCards.add(new LeaderCard(1));
+        leaderCards.add(new LeaderCard(3));
+        leaderCards.add(new LeaderCard(8));
+        dshbrd.fillLeadersPicksWithList(leaderCards);
         try {
-            dshbrd.addLeader(new LeaderCard(10, new SupplyContainer(), cards, new Market(WarehouseObjectType.SHIELD), 3));
-            dshbrd.addLeader(new LeaderCard(9, new SupplyContainer(), cards2, new Market(WarehouseObjectType.SERVANT), 5));
+            dshbrd.pickLeader(0);
+            dshbrd.pickLeader(1);
         } catch (LeaderException e) {fail();}
 
         //buy supplies
@@ -5783,6 +5814,7 @@ public class DashboardTest {
         //buy supplies
         dshbrd.buySupplies(MarketDirection.VERTICAL, 0);
         try {
+            dshbrd.swapWarehouseRows(2, 3);
             dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.GREY);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
@@ -5805,9 +5837,6 @@ public class DashboardTest {
 
         //buy supplies
         dshbrd.buySupplies(MarketDirection.HORIZONTAL, 0);
-        try {
-            dshbrd.swapWarehouseRows(1, 3);
-        } catch (SupplyException e) {fail();}
         try {
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.GREY);
@@ -5891,6 +5920,7 @@ public class DashboardTest {
         //buy supplies
         dshbrd.buySupplies(MarketDirection.VERTICAL, 2);
         try {
+            dshbrd.swapWarehouseRows(2, 3);
             dshbrd.assignMarble(DepotID.WAREHOUSE1, MarbleColor.VIOLET);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.YELLOW);
@@ -5912,7 +5942,8 @@ public class DashboardTest {
         //buy supplies
         dshbrd.buySupplies(MarketDirection.VERTICAL, 1);
         try {
-            dshbrd.swapWarehouseRows(1, 3);
+            dshbrd.swapWarehouseRows(1, 2);
+            dshbrd.swapWarehouseRows(2, 3);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.VIOLET);
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
@@ -5932,6 +5963,7 @@ public class DashboardTest {
         //buy supplies
         dshbrd.buySupplies(MarketDirection.VERTICAL, 0);
         try {
+            dshbrd.swapWarehouseRows(1, 3);
             dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.WHITE);
             dshbrd.assignMarble(DepotID.WAREHOUSE3, MarbleColor.WHITE);
@@ -6022,7 +6054,7 @@ public class DashboardTest {
         dshbrd.goAhead();
         dshbrd.goAhead();
 
-        int[] expectedResult = {39, 6};
+        int[] expectedResult = {41, 6};
         int[] actualResult = {dshbrd.getWinPoints().first, dshbrd.getWinPoints().second};
         assertArrayEquals(expectedResult, actualResult);
     }
