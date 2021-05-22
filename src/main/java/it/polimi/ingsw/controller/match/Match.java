@@ -493,7 +493,7 @@ public class Match {
             return;
         }
 
-        int slot = Integer.parseInt(args[1]);
+        int slot = Integer.parseInt(args[1]) -1;
         WarehouseObjectType newWot = WarehouseObjectType.stringToType(args[2]);
 
         try {
@@ -534,7 +534,7 @@ public class Match {
         }
 
         try {
-            player.getDashboard().playLeader(Integer.parseInt(args[1]));
+            player.getDashboard().playLeader(Integer.parseInt(args[1])-1);
         } catch (Exception e){
             player.sendController("error " + e.getMessage());
         }
@@ -551,7 +551,7 @@ public class Match {
         }
 
         try {
-            player.getDashboard().discardLeader(Integer.parseInt(args[1]));
+            player.getDashboard().discardLeader(Integer.parseInt(args[1])-1);
         } catch (Exception e){
             player.sendController("error " + e.getMessage());
         }

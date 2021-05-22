@@ -76,6 +76,17 @@ public class DevelopmentSpaceController extends SubSceneController {
             return null;
     }
 
+
+    public void reset(){
+        activeSquare.setVisible(false);
+    }
+
+
+    public void setActive(){
+        activeSquare.setVisible(true);
+    }
+
+
     @FXML
     void activeSquareClicked() {
         //this should never happen

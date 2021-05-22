@@ -30,14 +30,13 @@ public class MainCLI {
         //create viewables that are shared among different views
         SupplyContainer coffer1 = factory.buildSupplyContainer(1, COFFER, "Coffer"); //dashboard, development grid
         Warehouse warehouse1 = factory.buildWarehouse(1, WAREHOUSE); //dashboard, development grid, marketplace
-        LeaderCard leader11 = factory.buildLeaderCard(1, LEADER1); //dashboard, development grid, marketplace
-        LeaderCard leader21 = factory.buildLeaderCard(1, LEADER2); //dashboard, development grid, marketplace
+
+        LeaderCardSpace leaders = factory.buildLeaderCardSpace(1, LEADER_CARD_SPACE);
 
         createView("dashboard", screen,
                 coffer1,
                 warehouse1,
-                leader11,
-                leader21,
+                leaders,
                 factory.buildBaseProduction(1, BASE_PRODUCTION),
                 factory.buildDevelopmentSpace(1, DEVELOPMENT_SPACE1),
                 factory.buildDevelopmentSpace(1, DEVELOPMENT_SPACE2),
@@ -50,21 +49,16 @@ public class MainCLI {
                 warehouse1,
                 factory.buildSupplyContainer(1, PAYCHECK_STRONGBOX, "Paycheck strongbox"),
                 factory.buildSupplyContainer(1, PAYCHECK_DEPOTS, "Paycheck depots"),
-                leader11,
-                leader21,
+                leaders,
                 factory.buildDevelopmentGrid(DEVELOPMENT_GRID));
 
         createView("marketplace", screen,
                 warehouse1,
-                leader11,
-                leader21,
+                leaders,
                 factory.buildMarketplace(MARKETPLACE));
 
         createView("preMatch", screen,
-                factory.buildLeaderCard(1, LEADER_PICK1),
-                factory.buildLeaderCard(1, LEADER_PICK2),
-                factory.buildLeaderCard(1, LEADER_PICK3),
-                factory.buildLeaderCard(1, LEADER_PICK4));
+                factory.buildLeaderPick(1, LEADER_PICK));
 
         createView("faithTrack", screen,
                 factory.buildFaithTrack(FAITH_TRACK));
@@ -369,7 +363,7 @@ public class MainCLI {
 
     private static void showLeaderSpace(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View leaderSpace = new View();
-        LeaderCardSpace leaderCardSpaceViewable = factory.buildLeaderCardSpace(1, LEADERCARDSPACE);
+        LeaderCardSpace leaderCardSpaceViewable = factory.buildLeaderCardSpace(1, LEADER_CARD_SPACE);
         leaderSpace.addViewable(leaderCardSpaceViewable);
 
         screenCLI.addView("leaderCardSpace", leaderSpace);
@@ -396,7 +390,7 @@ public class MainCLI {
 
     private static void showLeaderPick(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View leaderPick = new View();
-        LeaderPick leaderPickViewable = factory.buildLeaderPick(1, LEADERPICK);
+        LeaderPick leaderPickViewable = factory.buildLeaderPick(1, LEADER_PICK);
         leaderPick.addViewable(leaderPickViewable);
 
         screenCLI.addView("leaderPick", leaderPick);
@@ -434,4 +428,5 @@ public class MainCLI {
         leaderPickViewable.update(updateLeaderPick);
         screenCLI.show("leaderPick");
     }
+
 }

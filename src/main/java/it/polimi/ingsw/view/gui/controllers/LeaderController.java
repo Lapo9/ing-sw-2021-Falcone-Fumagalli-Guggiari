@@ -64,9 +64,11 @@ public class LeaderController extends SubSceneController {
         //if the leader is inactive, make him black and white. If it is discarded hide him. If it is producer or depot show the correct panes.
         if (offlineInfo.getLeaderStatus(number) == OfflineInfo.LeaderStatus.INACTIVE){
             ColorAdjust tmp = new ColorAdjust();
-            tmp.setSaturation(0.0); //black and white
+            tmp.setSaturation(-1.0); //black and white
             leader.setEffect(tmp);
             leaderGroup.setVisible(true);
+            producerPane.setVisible(false);
+            depotPane.setVisible(false);
         }
         else if (offlineInfo.getLeaderStatus(number) == OfflineInfo.LeaderStatus.DISCARDED){
             leaderGroup.setVisible(false);
@@ -129,7 +131,7 @@ public class LeaderController extends SubSceneController {
     @FXML
     void activateClicked() {
         controllerInterpreter.execute("reset");
-        userInterpreter.execute("activateLeader" + number);
+        userInterpreter.execute("activateLeader " + number);
     }
 
     @FXML
@@ -158,7 +160,7 @@ public class LeaderController extends SubSceneController {
     @FXML
     void discardClicked() {
         controllerInterpreter.execute("reset");
-        userInterpreter.execute("discardLeader" + number); //assuming the ID is in the form of leaderX
+        userInterpreter.execute("discardLeader " + number); //assuming the ID is in the form of leaderX
     }
 
     @FXML

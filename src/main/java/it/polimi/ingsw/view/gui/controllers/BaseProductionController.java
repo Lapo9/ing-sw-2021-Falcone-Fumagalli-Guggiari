@@ -57,6 +57,16 @@ public class BaseProductionController extends SubSceneController {
         stone.setText(String.valueOf(completeUpdate[17]));
     }
 
+
+    public void reset(){
+        activeSquare.setVisible(false);
+    }
+
+    public void setActive(){
+        activeSquare.setVisible(true);
+    }
+
+
     @FXML
     void checkBoxClicked() {
         controllerInterpreter.execute("reset");

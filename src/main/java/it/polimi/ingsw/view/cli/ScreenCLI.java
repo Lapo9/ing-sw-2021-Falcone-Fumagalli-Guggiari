@@ -109,7 +109,7 @@ public class ScreenCLI implements Screen {
 
         activeView = views.get(view); //set active view
         if(activeView == null){
-            throw new ViewException(view.toString() + " is not a known view");
+            throw new ViewException(view + " is not a known view");
         }
     }
 
@@ -123,7 +123,7 @@ public class ScreenCLI implements Screen {
             throw new IllegalThreadStateException("Cannot show anything until the screen has been started");
         }
 
-        //TODO clear console
+        //TODO clear consoles
         System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + errorMessage + activeView);
     }
 

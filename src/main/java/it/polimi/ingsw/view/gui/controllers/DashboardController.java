@@ -105,10 +105,10 @@ public class DashboardController extends SceneController implements ResettableSc
         leader2Controller.reset();
         warehouseController.reset();
         cofferController.reset();
-        /*baseProductionController.reset();
+        baseProductionController.reset();
         developmentSpace1Controller.reset();
         developmentSpace2Controller.reset();
-        developmentSpace3Controller.reset();*/
+        developmentSpace3Controller.reset();
     }
 
 

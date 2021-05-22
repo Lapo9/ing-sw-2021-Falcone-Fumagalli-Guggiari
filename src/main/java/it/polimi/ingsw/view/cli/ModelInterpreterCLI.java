@@ -71,12 +71,8 @@ public class ModelInterpreterCLI implements ModelInterpreter {
         items.update(player, BASE_PRODUCTION, Arrays.copyOfRange(status, 85, 103));
         items.update(4, FAITH_TRACK, new int[] {status[0], status[103], status[104], status[105], status[106]});
         items.update(player, UNASSIGNED_MARBLES, Arrays.copyOfRange(status, 137, 143));
-        items.update(player, LEADER1, Arrays.copyOfRange(status, 107, 122));
-        items.update(player, LEADER2, Arrays.copyOfRange(status, 122, 137));
-        items.update(player, LEADER_PICK1, Arrays.copyOfRange(status, 143, 158));
-        items.update(player, LEADER_PICK2, Arrays.copyOfRange(status, 158, 173));
-        items.update(player, LEADER_PICK3, Arrays.copyOfRange(status, 173, 188));
-        items.update(player, LEADER_PICK4, Arrays.copyOfRange(status, 188, 203));
+        items.update(player, LEADER_CARD_SPACE, Arrays.copyOfRange(status, 107, 137));
+        items.update(player, LEADER_PICK, Arrays.copyOfRange(status, 143, 203));
 
     }
 
