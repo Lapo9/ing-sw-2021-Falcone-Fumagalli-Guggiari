@@ -118,8 +118,8 @@ public class ViewableFactory {
         return res;
     }
 
-    public LeaderCardSpace buildLeaderCardSpace (int player, ViewableId viewableId) {
-        LeaderCardSpace res = new LeaderCardSpace();
+    public LeaderCardSpace buildLeaderCardSpace (int player, ViewableId viewableId, boolean type) {
+        LeaderCardSpace res = new LeaderCardSpace(type);
         items.get(player - 1).put(viewableId, res);
         return res;
     }

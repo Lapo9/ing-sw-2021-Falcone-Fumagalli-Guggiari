@@ -109,7 +109,7 @@ public class MainCLI {
         screen.start("welcome");
 
 
-        //showBaseProductionTest(screen, factory);
+        //showLeaderSpace(screen, factory);
     }
 
 
@@ -363,7 +363,7 @@ public class MainCLI {
 
     private static void showLeaderSpace(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
         View leaderSpace = new View();
-        LeaderCardSpace leaderCardSpaceViewable = factory.buildLeaderCardSpace(1, LEADER_CARD_SPACE);
+        LeaderCardSpace leaderCardSpaceViewable = factory.buildLeaderCardSpace(1, LEADER_CARD_SPACE, false);
         leaderSpace.addViewable(leaderCardSpaceViewable);
 
         screenCLI.addView("leaderCardSpace", leaderSpace);
