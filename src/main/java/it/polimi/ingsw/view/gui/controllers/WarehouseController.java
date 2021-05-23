@@ -163,6 +163,12 @@ public class WarehouseController extends SubSceneController {
             return;
         }
 
+        if (offlineInfo.getSelectedItem().contains("marble")){
+            userInterpreter.execute("moveMarble " + offlineInfo.getSelectedItem().split(" ")[1] + " wh1");
+            controllerInterpreter.execute("reset");
+            return;
+        }
+
         userInterpreter.execute("move " + offlineInfo.getSelectedItem() + " wh1");
         controllerInterpreter.execute("reset");
     }
@@ -175,6 +181,12 @@ public class WarehouseController extends SubSceneController {
             return;
         }
 
+        if (offlineInfo.getSelectedItem().contains("marble")){
+            userInterpreter.execute("moveMarble " + offlineInfo.getSelectedItem().split(" ")[1] + " wh2");
+            controllerInterpreter.execute("reset");
+            return;
+        }
+
         userInterpreter.execute("move " + offlineInfo.getSelectedItem() + " wh2");
         controllerInterpreter.execute("reset");
     }
@@ -183,6 +195,12 @@ public class WarehouseController extends SubSceneController {
     void active3Clicked() {
         //this should never happen
         if (offlineInfo.getSelectedItem().isBlank()){
+            controllerInterpreter.execute("reset");
+            return;
+        }
+
+        if (offlineInfo.getSelectedItem().contains("marble")){
+            userInterpreter.execute("moveMarble " + offlineInfo.getSelectedItem().split(" ")[1] + " wh3");
             controllerInterpreter.execute("reset");
             return;
         }

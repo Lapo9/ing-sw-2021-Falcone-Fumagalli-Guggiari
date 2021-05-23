@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+
+<Group fx:id="unassignedMarblesGroup" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.UnassignedMarblesController">
+   <children>
+      <ImageView fitHeight="472.0" fitWidth="673.0" layoutX="-100.0" layoutY="-75.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/backgrounds/unassignedMarbles.png" />
+         </image>
+      </ImageView>
+      <Group layoutX="92.0" layoutY="-3.0">
+         <children>
+            <ImageView fx:id="marble3" fitHeight="129.0" fitWidth="113.0" layoutY="184.0" onMouseClicked="#marble3clicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/marbles/redMarble.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="marble4" fitHeight="129.0" fitWidth="113.0" layoutX="193.0" layoutY="184.0" onMouseClicked="#marble4clicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/marbles/redMarble.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="marble1" fitHeight="129.0" fitWidth="113.0" onMouseClicked="#marble1clicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/marbles/redMarble.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="marble2" fitHeight="129.0" fitWidth="113.0" layoutX="193.0" onMouseClicked="#marble2clicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/marbles/redMarble.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Group>
+      <Group fx:id="colorPane" layoutX="472.0" layoutY="23.0">
+         <children>
+            <ImageView fitHeight="109.0" fitWidth="65.0" onMouseClicked="#blueClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/marbles/blueMarble.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="109.0" fitWidth="65.0" layoutY="77.0" onMouseClicked="#greyClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/marbles/greyMarble.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="109.0" fitWidth="65.0" layoutY="161.0" onMouseClicked="#violetClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/marbles/violetMarble.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="109.0" fitWidth="65.0" layoutY="238.0" onMouseClicked="#yellowClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/marbles/yellowMarble.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Group>
+      <ImageView fitHeight="104.0" fitWidth="158.0" layoutX="-88.0" layoutY="227.0" onMouseClicked="#discardClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/discard.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+   </children>
+</Group>

@@ -23,7 +23,8 @@ public class ScreenGUI extends Application implements Screen {
 
     @Override
     public void show(String scene){
-        //if the argument is one of the opponents, then it happens a special show, since in the GUI opponents are not stan alone scenes
+
+        //if the argument is one of the opponents/unassigned marbles, then it happens a special show, since in the GUI opponents are not stand alone scenes
         if (scene.contains("opponent")){
             if (activeScene.second instanceof DashboardController){
                 Platform.runLater( () -> {
@@ -32,9 +33,18 @@ public class ScreenGUI extends Application implements Screen {
             }
         }
 
+        else if (scene.contains("unassignedMarbles")){
+            if (activeScene.second instanceof DashboardController){
+                Platform.runLater( () -> {
+                    ((DashboardController) activeScene.second).showUnassignedMarbles();
+                });
+            }
+        }
+
         else {
             activeScene = scenes.get(scene);
             Platform.runLater(() -> {
+                ((DashboardController)scenes.get("dashboard").second).hideUnassignedMarbles();
                 stage.setScene(activeScene.first);
                 stage.show();
             });
@@ -44,11 +54,19 @@ public class ScreenGUI extends Application implements Screen {
 
     @Override
     public void hide(String scene) {
-        //this works only if the argument is an opponent
+        //this works only if the argument is an opponent or the unassigned marbles
         if (scene.contains("opponent")){
             if (activeScene.second instanceof DashboardController){
                 Platform.runLater( () -> {
                     ((DashboardController) activeScene.second).hideOpponent(Integer.parseInt(scene.substring(scene.length() - 1)));
+                });
+            }
+        }
+
+        else if (scene.contains("unassignedMarbles")){
+            if (activeScene.second instanceof DashboardController){
+                Platform.runLater( () -> {
+                    ((DashboardController) activeScene.second).hideUnassignedMarbles();
                 });
             }
         }

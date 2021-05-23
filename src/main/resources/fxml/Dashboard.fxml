@@ -30,6 +30,8 @@
       <fx:include fx:id="opponent3" source="Opponent.fxml" />
       <fx:include fx:id="opponent4" source="Opponent.fxml" />
       <fx:include fx:id="faithTrackPlayers" source="Players.fxml" />
+      <fx:include fx:id="marketplace" layoutX="615.0" layoutY="315.0" scaleX="1.02" scaleY="1.05" source="Marketplace.fxml" />
+      <fx:include fx:id="unassignedMarbles" layoutX="598.0" layoutY="305.0" scaleX="0.965" source="UnassignedMarbles.fxml" />
       <Label fx:id="message" layoutX="21.0" layoutY="639.0" prefHeight="22.0" prefWidth="489.0" text="Label">
          <font>
             <Font name="Consolas Bold" size="18.0" />
@@ -39,5 +41,18 @@
          </effect>
       </Label>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="marketButton" fitHeight="83.0" fitWidth="91.0" layoutX="1088.0" layoutY="116.0" onMouseClicked="#marketButtonClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/Market.png" />
+         </image>
+         <effect>
+            <Bloom />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="83.0" fitWidth="91.0" layoutX="286.0" layoutY="22.0" onMouseClicked="#buyCardsButtonClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/buyCards.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

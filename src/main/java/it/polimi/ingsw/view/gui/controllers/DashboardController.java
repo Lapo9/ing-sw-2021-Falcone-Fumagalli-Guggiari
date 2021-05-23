@@ -3,9 +3,9 @@ package it.polimi.ingsw.view.gui.controllers;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
+import javafx.scene.effect.Bloom;
+import javafx.scene.image.ImageView;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +29,11 @@ public class DashboardController extends SceneController implements ResettableSc
     @FXML private OpponentController opponent2Controller;
     @FXML private OpponentController opponent3Controller;
     @FXML private OpponentController opponent4Controller;
+
+    @FXML private MarketplaceController marketplaceController;
+    @FXML private UnassignedMarblesController unassignedMarblesController;
+
+    @FXML private ImageView marketButton;
 
     private ArrayList<OpponentController> opponents = new ArrayList<>();
 
@@ -59,6 +64,8 @@ public class DashboardController extends SceneController implements ResettableSc
         popeFavorTiles2Controller.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
         popeFavorTiles3Controller.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
         faithTrackPlayersController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
+        marketplaceController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
+        unassignedMarblesController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
 
         controllerInterpreter.attachToResetScene(this);
     }
@@ -90,10 +97,15 @@ public class DashboardController extends SceneController implements ResettableSc
                     baseProductionController.update(Arrays.copyOfRange(completeUpdate, 85, 103));
                     leader1Controller.update(Arrays.copyOfRange(completeUpdate, 107, 122));
                     leader2Controller.update(Arrays.copyOfRange(completeUpdate, 122, 137));
+                    unassignedMarblesController.update(Arrays.copyOfRange(completeUpdate, 137, 143));
                 }
                 else {
                     opponents.get(completeUpdate[0]).update(completeUpdate);
                 }
+            }
+
+            else if (completeUpdate[0] == 4){
+                marketplaceController.update(Arrays.copyOfRange(completeUpdate, 1, completeUpdate.length));
             }
         });
     }
@@ -109,6 +121,7 @@ public class DashboardController extends SceneController implements ResettableSc
         developmentSpace1Controller.reset();
         developmentSpace2Controller.reset();
         developmentSpace3Controller.reset();
+        unassignedMarblesController.reset();
     }
 
 
@@ -133,7 +146,7 @@ public class DashboardController extends SceneController implements ResettableSc
         if (toActivate.contains("coffer")){
             cofferController.setActive();
         }
-        /*if (toActivate.contains("baseProd")){
+        if (toActivate.contains("baseProd")){
             baseProductionController.setActive();
         }
         if (toActivate.contains("dev1")){
@@ -144,7 +157,7 @@ public class DashboardController extends SceneController implements ResettableSc
         }
         if (toActivate.contains("dev3")){
             developmentSpace3Controller.setActive();
-        }*/
+        }
     }
 
     public void showOpponent(int i) {
@@ -156,12 +169,36 @@ public class DashboardController extends SceneController implements ResettableSc
         opponents.get(i-1).hide();
     }
 
+    public void showUnassignedMarbles(){
+        unassignedMarblesController.show();
+    }
+
+    public void hideUnassignedMarbles(){
+        unassignedMarblesController.hide();
+    }
+
 
 
     @FXML
     void backgroundClicked(){
         controllerInterpreter.execute("reset");
     }
+
+
+    @FXML
+    void marketButtonClicked(){
+        if (marketButton.getEffect() != null) {
+            marketplaceController.hide();
+            marketButton.setEffect(null);
+        }
+        else {
+            marketplaceController.show();
+            marketButton.setEffect(new Bloom(0.0));
+        }
+    }
+
+    @FXML
+    void buyCardsButtonClicked(){}
 
 
 }

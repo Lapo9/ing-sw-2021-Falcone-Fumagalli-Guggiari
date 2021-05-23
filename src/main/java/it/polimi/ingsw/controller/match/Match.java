@@ -600,6 +600,61 @@ public class Match {
 
     }
 
+    private void selected(Player player, String... args) {
+        if(player != activePlayer){
+            player.sendController("error It's not your turn!");
+            return;
+        }
+        if(phase != TURN_START && phase != TURN_END){
+            player.sendController("error You can't move supplies now!");
+            return;
+        }
+
+
+        ArrayList<DepotID> allowed = player.getDashboard().getAllowedDepots(DepotID.stringToId(args[2]), WarehouseObjectType.stringToType(args[1]));
+
+        StringBuilder allowedString = new StringBuilder(" ");
+        for (DepotID id : allowed){
+            switch (id) {
+                case COFFER:
+                    allowedString.append("coffer ");
+                    break;
+                case WAREHOUSE1:
+                    allowedString.append("wh1 ");
+                    break;
+                case WAREHOUSE2:
+                    allowedString.append("wh2 ");
+                    break;
+                case WAREHOUSE3:
+                    allowedString.append("wh3 ");
+                    break;
+                case LEADER1:
+                    allowedString.append("leader1 ");
+                    break;
+                case LEADER2:
+                    allowedString.append("leader2 ");
+                    break;
+                case DEVELOPMENT1:
+                    allowedString.append("dev1 ");
+                    break;
+                case DEVELOPMENT2:
+                    allowedString.append("dev2 ");
+                    break;
+                case DEVELOPMENT3:
+                    allowedString.append("dev3 ");
+                    break;
+                case BASE_PRODUCTION:
+                    allowedString.append("baseProd ");
+                    break;
+                case PAYCHECK:
+                    allowedString.append("paycheck ");
+                    break;
+            }
+        }
+
+        player.sendController("setActive" + allowedString);
+    }
+
     private void skipTurn(Player player, String... args) {
         phase = TURN_END;
         update("endTurn", player);
@@ -628,6 +683,7 @@ public class Match {
         commands.put("discardLeader", this::discardLeader);
         commands.put("pickLeaders", this::pickLeaders);
         commands.put("swapRows", this::swapWarehouse);
+        commands.put("selected", this::selected);
         commands.put("skipTurn", this::skipTurn);
     }
 
