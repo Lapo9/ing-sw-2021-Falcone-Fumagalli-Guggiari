@@ -133,7 +133,7 @@ public class DevelopmentCard implements Viewable {
         }
     }
 
-    private String categoryToColor() {
+    public String categoryToColor() {
         if (this.cat == CardCategory.YELLOW) {
             return FRAMED(BLACK(BACK_YELLOW(" " + lv + " ")));
         }
@@ -173,7 +173,7 @@ public class DevelopmentCard implements Viewable {
 
     @Override
     public String toString() {
-        return BOLD("Development Card: ") + id + "\n" + printOnlyNotNull();
+        return BOLD("Development Card: ") + id + "               " + "\n" + printOnlyNotNull();
     }
 
     private String calculateSpaces (int i, WarehouseObjectType wot) {

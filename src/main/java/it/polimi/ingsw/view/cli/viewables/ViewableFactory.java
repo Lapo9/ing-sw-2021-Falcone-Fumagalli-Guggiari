@@ -130,6 +130,12 @@ public class ViewableFactory {
         return res;
     }
 
+    public DevelopmentSpaceGrid buildDevelopmentSpacerGrid(int player, ViewableId viewableId) {
+        DevelopmentSpaceGrid res = new DevelopmentSpaceGrid();
+        items.get(player - 1).put(viewableId, res);
+        return res;
+    }
+
     /**
      * Updates the specified viewable with the specified int array.
      * @param player Player who owns the viewable

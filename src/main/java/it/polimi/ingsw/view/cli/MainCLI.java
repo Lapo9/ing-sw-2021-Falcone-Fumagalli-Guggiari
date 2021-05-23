@@ -429,4 +429,35 @@ public class MainCLI {
         screenCLI.show("leaderPick");
     }
 
+    private static void showDevelopmentSpaceGrid(ScreenCLI screenCLI, ViewableFactory factory) throws ViewException {
+        View developmentSpaceGrid = new View();
+        DevelopmentSpaceGrid developmentSpaceViewable = factory.buildDevelopmentSpacerGrid(1, DEVELOPMENT_SPACE_GRID);
+        developmentSpaceGrid.addViewable(developmentSpaceViewable);
+
+        screenCLI.addView("DevSpaceGrid", developmentSpaceGrid);
+        screenCLI.start("DevSpaceGrid");
+
+        int[] updateDevSpaceGrid = {2,
+                                    0,
+                                    0,
+                                    0, 0, 0, 1, 0,
+                                    0, 1, 0, 0, 0,
+                                    0, 0, 0, 1, 0,
+                                    11,
+                                    17,
+                                    47,
+                                    0, 1, 0, 1, 0,
+                                    2, 0, 2, 0, 1,
+                                    0, 0, 0, 0, 0,
+                                    5,
+                                    21,
+                                    0,
+                                    0, 1, 0, 0, 0,
+                                    0, 0, 0, 0, 2,
+                                    0, 0, 1, 0, 0};
+
+        developmentSpaceViewable.update(updateDevSpaceGrid);
+        screenCLI.show("DevSpaceGrid");
+    }
+
 }

@@ -97,50 +97,56 @@ public class DevelopmentSpace implements Viewable {
 
     @Override
     public String toString() {
-        return BOLD("DevelopmentSpace") + "\n" + printOnlyNotNull();
+        return printOnlyNotNull();
     }
 
     private String printOnlyNotNull () {
         if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) != null && wp0 < 10 && wp1 < 10) {
             //i have to print ONLY THE WIN POINTS of the first and second card
             return devSpace.get(2).toString() + "\n" +
-                    "|        " + FRAMED(" Win Points: " + wp1.toString() + " ") + "         |" + "\n" +
+                    "| "+devSpace.get(1).categoryToColor()+"   " + FRAMED("  Win Points: " + wp1.toString() + " ") + "     "+devSpace.get(1).categoryToColor()+" |" + "\n" +
                     "+--------------------------------+" + "\n" +
-                    "|        " + FRAMED(" Win Points: " + wp0.toString() + " ") + "         |" + "\n" +
-                    "+--------------------------------+";
+                    "| "+devSpace.get(0).categoryToColor()+"   " + FRAMED("  Win Points: " + wp0.toString() + " ") + "     "+devSpace.get(0).categoryToColor()+" |" + "\n" +
+                    "+--------------------------------+\n";
         }
         else if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) != null && wp0 < 10 && wp1 > 9) {
             //i have to print ONLY THE WIN POINTS of the first and second card
             return devSpace.get(2).toString() + "\n" +
-                    "|        " + FRAMED(" Win Points: " + wp1.toString() + " ") + "        |" + "\n" +
+                    "| "+devSpace.get(1).categoryToColor()+"   " + FRAMED("  Win Points: " + wp1.toString() + " ") + "    "+devSpace.get(1).categoryToColor()+" |" + "\n" +
                     "+--------------------------------+" + "\n" +
-                    "|        " + FRAMED(" Win Points: " + wp0.toString() + " ") + "         |" + "\n" +
-                    "+--------------------------------+";
+                    "| "+devSpace.get(0).categoryToColor()+"   " + FRAMED("  Win Points: " + wp0.toString() + " ") + "     "+devSpace.get(0).categoryToColor()+" |" + "\n" +
+                    "+--------------------------------+\n";
         }
         else if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) != null && wp0 >9 && wp1 < 10) {
             //i have to print ONLY THE WIN POINTS of the first and second card
             return devSpace.get(2).toString() + "\n" +
-                    "|        " + FRAMED(" Win Points: " + wp1.toString() + " ") + "         |" + "\n" +
+                    "| "+devSpace.get(1).categoryToColor()+"   " + FRAMED("  Win Points: " + wp1.toString() + " ") + "     "+devSpace.get(1).categoryToColor()+" |" + "\n" +
                     "+--------------------------------+" + "\n" +
-                    "|        " + FRAMED(" Win Points: " + wp0.toString() + " ") + "        |" + "\n" +
-                    "+--------------------------------+";
+                    "| "+devSpace.get(0).categoryToColor()+"   " + FRAMED("  Win Points: " + wp0.toString() + " ") + "    "+devSpace.get(0).categoryToColor()+" |" + "\n" +
+                    "+--------------------------------+\n";
         }
         else if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) != null && wp0 >9 && wp1 > 9) {
             //i have to print ONLY THE WIN POINTS of the first and second card
             return devSpace.get(2).toString() + "\n" +
-                    "|        " + FRAMED(" Win Points: " + wp1.toString() + " ") + "        |" + "\n" +
+                    "| "+devSpace.get(1).categoryToColor()+"   " + FRAMED("  Win Points: " + wp1.toString() + " ") + "    "+devSpace.get(1).categoryToColor()+" |" + "\n" +
                     "+--------------------------------+" + "\n" +
-                    "|        " + FRAMED(" Win Points: " + wp0.toString() + " ") + "        |" + "\n" +
-                    "+--------------------------------+";
+                    "| "+devSpace.get(0).categoryToColor()+"   " + FRAMED("  Win Points: " + wp0.toString() + " ") + "    "+devSpace.get(0).categoryToColor()+" |" + "\n" +
+                    "+--------------------------------+\n";
         }
         else if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) == null) {
             //i have to print ONLY THE WIN POINTS of the first card
             return devSpace.get(1).toString() + "\n" +
-                    "|        " + FRAMED(" Win Points: " + wp0.toString() + " ") + "         |" + "\n" +
-                    "+--------------------------------+";
+                    "| "+devSpace.get(0).categoryToColor()+"   " + FRAMED("  Win Points: " + wp0.toString() + " ") + "     "+devSpace.get(0).categoryToColor()+" |" + "\n" +
+                    "+--------------------------------+\n" +
+                    "                                  \n" +
+                    "                                  \n";
         }
         else if (devSpace.get(0) != null && devSpace.get(1) == null && devSpace.get(2) == null) {
-            return devSpace.get(0).toString();
+            return devSpace.get(0).toString() + "\n"+
+                    "                                  \n" +
+                    "                                  \n" +
+                    "                                  \n" +
+                    "                                  \n";
         }
         else if (devSpace.get(0) == null && devSpace.get(1) == null && devSpace.get(2) == null){
             return "+--------------------------------+" + "\n" +
@@ -153,7 +159,11 @@ public class DevelopmentSpace implements Viewable {
                     "|                                |" + "\n" +
                     "|                                |" + "\n" +
                     "|                                |" + "\n" +
-                    "+--------------------------------+";
+                    "+--------------------------------+" + "\n" +
+                    "                                  \n" +
+                    "                                  \n" +
+                    "                                  \n" +
+                    "                                  \n";
         }
         return null;
     }
