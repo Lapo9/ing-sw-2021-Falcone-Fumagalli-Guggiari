@@ -368,6 +368,10 @@ public class Dashboard implements HasStatus{
      * @throws SupplyException Thrown if the source doesn't have the specified type of resource, or if the destination cannot accept the resource
      */
     public void moveSupply(DepotID from, DepotID to, WarehouseObjectType type) throws SupplyException, NoSuchMethodException, LeaderException {
+        if (from.equals(to)){
+            return;
+        }
+
         //remove supply from specified container
         containers.get(from.getType()).removeSupply(from, type, to);
 

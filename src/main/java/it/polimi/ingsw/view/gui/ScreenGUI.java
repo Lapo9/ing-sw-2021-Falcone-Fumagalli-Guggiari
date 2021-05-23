@@ -44,7 +44,7 @@ public class ScreenGUI extends Application implements Screen {
         else {
             activeScene = scenes.get(scene);
             Platform.runLater(() -> {
-                ((DashboardController)scenes.get("dashboard").second).hideUnassignedMarbles();
+                //((DashboardController)scenes.get("dashboard").second).hideUnassignedMarbles();
                 stage.setScene(activeScene.first);
                 stage.show();
             });

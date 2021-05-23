@@ -49,7 +49,7 @@ public class UnassignedMarblesController extends SubSceneController {
         }
 
         for (int i = 0; i < 4 - processedMarbles; ++i){
-            marbles.get(4-i).setVisible(false);
+            //marbles.get(3-i).setVisible(false);
         }
     }
 

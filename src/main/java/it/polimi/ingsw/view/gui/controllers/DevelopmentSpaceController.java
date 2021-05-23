@@ -2,6 +2,7 @@ package it.polimi.ingsw.view.gui.controllers;
 
 import it.polimi.ingsw.model.CardCategory;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
@@ -22,6 +23,7 @@ public class DevelopmentSpaceController extends SubSceneController {
     @FXML private Text servant;
     @FXML private Text stone;
     @FXML private ImageView activeSquare;
+    @FXML private Group developmentGroup;
 
 
     @Override
@@ -36,6 +38,8 @@ public class DevelopmentSpaceController extends SubSceneController {
         winPointsOldCard1.setText("");
         oldCard2.setVisible(false);
         winPointsOldCard2.setText("");
+
+        developmentGroup.setVisible(false);
     }
 
 
@@ -49,13 +53,16 @@ public class DevelopmentSpaceController extends SubSceneController {
             oldCard2.setVisible(true);
             oldCard2.setImage(new Image(getDot(getCategory(completeUpdate[2]))));
             winPointsOldCard2.setText(String.valueOf(getWinPoints(completeUpdate[2])));
-        } else if(completeUpdate[2] != 0) {
+        }
+        else if(completeUpdate[2] != 0) {
             card.setImage(new Image(getUrl(completeUpdate[2])));
             oldCard1.setVisible(true);
             oldCard1.setImage(new Image(getDot(getCategory(completeUpdate[1]))));
             winPointsOldCard1.setText(String.valueOf(getWinPoints(completeUpdate[1])));
-        } else if(completeUpdate[1] != 0){
+        }
+        else if(completeUpdate[1] != 0){
             card.setImage(new Image(getUrl(completeUpdate[1])));
+            developmentGroup.setVisible(true);
         }
         coin.setText(String.valueOf(completeUpdate[14]));
         servant.setText(String.valueOf(completeUpdate[15]));

@@ -48,16 +48,16 @@ public enum WarehouseObjectTypeController {
 
 
     public static WarehouseObjectTypeController getTypeByUrl(String url){
-        if (url.equals(COIN.getUrl())){
+        if (url.contains(COIN.getUrl())){
             return COIN;
         }
-        if (url.equals(SERVANT.getUrl())){
+        if (url.contains(SERVANT.getUrl())){
             return SERVANT;
         }
-        if (url.equals(SHIELD.getUrl())){
+        if (url.contains(SHIELD.getUrl())){
             return SHIELD;
         }
-        if (url.equals(STONE.getUrl())){
+        if (url.contains(STONE.getUrl())){
             return STONE;
         }
         return null;

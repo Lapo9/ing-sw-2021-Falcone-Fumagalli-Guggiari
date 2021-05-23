@@ -31,7 +31,7 @@ public class MainCLI {
         SupplyContainer coffer1 = factory.buildSupplyContainer(1, COFFER, "Coffer"); //dashboard, development grid
         Warehouse warehouse1 = factory.buildWarehouse(1, WAREHOUSE); //dashboard, development grid, marketplace
 
-        LeaderCardSpace leaders = factory.buildLeaderCardSpace(1, LEADER_CARD_SPACE);
+        LeaderCardSpace leaders = factory.buildLeaderCardSpace(1, LEADER_CARD_SPACE, true);
 
         createView("dashboard", screen,
                 coffer1,

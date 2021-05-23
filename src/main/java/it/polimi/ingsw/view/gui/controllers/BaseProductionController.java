@@ -47,14 +47,14 @@ public class BaseProductionController extends SubSceneController {
 
     @Override
     public void update(int[] completeUpdate) {
-        input1 = WarehouseObjectTypeController.getTypeByNumber(completeUpdate[6]);
-        input2 = WarehouseObjectTypeController.getTypeByNumber(completeUpdate[7]);
-        output = WarehouseObjectTypeController.getTypeByNumber(completeUpdate[13]);
+        input1 = WarehouseObjectTypeController.getTypeByNumber(completeUpdate[5]);
+        input2 = WarehouseObjectTypeController.getTypeByNumber(completeUpdate[6]);
+        output = WarehouseObjectTypeController.getTypeByNumber(completeUpdate[12]);
 
-        coin.setText(String.valueOf(completeUpdate[14]));
-        servant.setText(String.valueOf(completeUpdate[15]));
-        shield.setText(String.valueOf(completeUpdate[16]));
-        stone.setText(String.valueOf(completeUpdate[17]));
+        coin.setText(String.valueOf(completeUpdate[13]));
+        servant.setText(String.valueOf(completeUpdate[14]));
+        shield.setText(String.valueOf(completeUpdate[15]));
+        stone.setText(String.valueOf(completeUpdate[16]));
     }
 
 
@@ -129,7 +129,7 @@ public class BaseProductionController extends SubSceneController {
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("coin base");
-        userInterpreter.execute("select coin");
+        userInterpreter.execute("selected coin base");
     }
 
     @FXML
@@ -139,7 +139,7 @@ public class BaseProductionController extends SubSceneController {
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("servant base");
-        userInterpreter.execute("select servant");
+        userInterpreter.execute("selected servant base");
     }
 
     @FXML
@@ -149,7 +149,7 @@ public class BaseProductionController extends SubSceneController {
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("shield base");
-        userInterpreter.execute("select shield");
+        userInterpreter.execute("selected shield base");
     }
 
     @FXML
@@ -159,7 +159,7 @@ public class BaseProductionController extends SubSceneController {
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("stone base");
-        userInterpreter.execute("select stone");
+        userInterpreter.execute("selected stone base");
     }
 
     @FXML

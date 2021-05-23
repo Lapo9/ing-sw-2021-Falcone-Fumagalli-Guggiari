@@ -45,9 +45,6 @@
          <image>
             <Image url="@../pictures/miscellaneous/Market.png" />
          </image>
-         <effect>
-            <Bloom />
-         </effect>
       </ImageView>
       <ImageView fitHeight="83.0" fitWidth="91.0" layoutX="286.0" layoutY="22.0" onMouseClicked="#buyCardsButtonClicked" pickOnBounds="true" preserveRatio="true">
          <image>

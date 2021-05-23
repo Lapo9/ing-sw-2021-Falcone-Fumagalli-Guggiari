@@ -112,21 +112,21 @@ public class WarehouseController extends SubSceneController {
     @FXML
     void a1Clicked() {
         controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh1");
+        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh3");
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
     @FXML
     void b1Clicked() {
         controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(b1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh1");
+        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(b1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh3");
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
     @FXML
     void c1Clicked() {
         controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(c1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh1");
+        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(c1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh3");
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
@@ -137,7 +137,6 @@ public class WarehouseController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
-
     @FXML
     void b2Clicked() {
         controllerInterpreter.execute("reset");
@@ -145,14 +144,13 @@ public class WarehouseController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
-
-
     @FXML
     void a3Clicked() {
         controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a3.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh3");
+        offlineInfo.setSelectedItem(WarehouseObjectTypeController.getTypeByUrl(a3.getImage().getUrl()).toString().toLowerCase(Locale.ROOT) + " wh1");
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
+
 
 
     @FXML
