@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.model.DepotID.DEVELOPMENT2;
 import static it.polimi.ingsw.model.DepotID.LEADER1;
 import static org.junit.Assert.*;
 
@@ -112,17 +113,18 @@ public class ProductionManagerTest {
 
     @Test
     public void removeSupply_production() {
-        ProductionManager prdmng = new ProductionManager(new Developments(), new MutableProduction(2, 1), new LeadersSpace());
-        boolean exc = false;
+        MutableProduction prod = new MutableProduction(2, 1);
+        ProductionManager prdmng = new ProductionManager(new Developments(), prod , new LeadersSpace());
         try {
-            prdmng.addSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN, DepotID.LEADER1);
+            prdmng.addSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN, DepotID.DEVELOPMENT3);
         } catch (SupplyException e) {fail();}
         try {
-            prdmng.removeSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN, DepotID.LEADER1);
-        } catch (SupplyException e) {
-            exc = true;
-        }
-        assertFalse(exc);
+            prdmng.removeSupply(DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN, DEVELOPMENT2);
+        } catch (SupplyException e) {fail();}
+        ArrayList<Integer> status = prod.getStatus();
+        int[] expected = {0, 0, 0, 0, 0};
+        int[] actual = {status.get(13), status.get(14),status.get(15),status.get(16),status.get(17)};
+        assertArrayEquals(expected, actual);
     }
 
     @Test
