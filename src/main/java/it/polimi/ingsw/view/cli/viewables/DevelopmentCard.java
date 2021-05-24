@@ -195,6 +195,8 @@ public class DevelopmentCard implements Viewable {
                     "|                                |" + "\n" +
                     "|                                |" + "\n" +
                     "|                                |" + "\n" +
+                    "|                                |" + "\n" +
+                    "|                                |" + "\n" +
                     "+--------------------------------+";
         }
         else {
@@ -223,6 +225,11 @@ public class DevelopmentCard implements Viewable {
                     deleteZeros(1, STONE) +
                     deleteZeros(1, FAITH_MARKER) +
                     calculateSpaces(1, COIN)+ calculateSpaces(1, SERVANT) + calculateSpaces(1, SHIELD) + calculateSpaces(1, STONE) + calculateSpaces(1, FAITH_MARKER) +" |" + "\n" +
+                    "|                                |" + "\n" +
+                    "|      CS: " + BLACK(BACK_YELLOW(" " + currentSupply.get(COIN).toString() + " ")) +
+                    BACK_MAGENTA(" " + currentSupply.get(SERVANT).toString() + " ") +
+                    BACK_BLUE( " " + currentSupply.get(SHIELD).toString() + " ") +
+                    BLACK(BACK_WHITE(" " + currentSupply.get(STONE).toString() + " "))+ "          |" + "\n" +
                     "|                                |" + "\n" +
                     printWinPoints() +
                     "+--------------------------------+";

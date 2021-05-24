@@ -37,7 +37,7 @@ public class DevelopmentSpaceGrid implements Viewable {
 
         tmp = tmp.concat(BOLD("Development Space\n"));
 
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 18; i++) {
             tmp = tmp.concat(cutIntoRows(0, i));
             tmp = tmp.concat("         ");
             tmp = tmp.concat(cutIntoRows(1, i));

@@ -108,9 +108,9 @@ public class Warehouse implements Viewable {
 
     @Override
     public String toString() {
-        return BOLD(" Warehouse: ") + "\n\n" + "     " + resourceToColor(0, 0) + "\n" +
-                "   " +  resourceToColor(1, 0) + " " + resourceToColor(1, 1) + "\n" +
-                " " + resourceToColor(2, 0) + " " + resourceToColor(2, 1) + " " + resourceToColor(2, 2);
+        return BOLD(" Warehouse: ") + "\n\n" + "1     " + resourceToColor(0, 0) + "\n" +
+                "2   " +  resourceToColor(1, 0) + " " + resourceToColor(1, 1) + "\n" +
+                "3 " + resourceToColor(2, 0) + " " + resourceToColor(2, 1) + " " + resourceToColor(2, 2);
     }
 
     private String resourceToColor (int lvl, int i) {

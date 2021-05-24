@@ -106,10 +106,10 @@ public class MainCLI {
 
         createView("lobby", screen);
 
-        screen.start("welcome");
+        //screen.start("welcome");
 
 
-        //showLeaderSpace(screen, factory);
+        showDevelopmentGridTest(screen, factory);
     }
 
 
@@ -146,7 +146,7 @@ public class MainCLI {
         screenCLI.addView("marbleContainer", marbleContainer);
         screenCLI.start("marbleContainer");
 
-        int [] updMarbleContainer = {2, 1, 0, 1, 0, 0};
+        int [] updMarbleContainer = {2, 0, 0, 1, 0, 0};
         marbleContainerViewable.update(updMarbleContainer);
         screenCLI.show("marbleContainer");
     }
@@ -311,9 +311,9 @@ public class MainCLI {
         screenCLI.start("developmentGrid");
 
         int [] updateDevGrid = {
-                0, 1, 2, 3,
-                4, 5, 6, 7,
-                8, 9, 10, 11};
+                48, 47, 2, 3,
+                1, 5, 6, 7,
+                8, 9, 48, 11};
         developmentGridViewable.update(updateDevGrid);
         screenCLI.show("developmentGrid");
 
@@ -351,10 +351,10 @@ public class MainCLI {
         int [] updateBaseProd = {
                 0, 0, 0, 0, 0,
                 0, //COIN
-                1, //SERVANT
+                0, //COIN
                 0, 0, 0, 0, 0,
-                1, //FAITH_MARKER
-                1, 0, 0, 0, 0
+                0, //FAITH_MARKER
+                0, 0, 0, 0, 0 //currentSupply
         };
         baseProductionViewable.update(updateBaseProd);
         screenCLI.show("baseProduction");
