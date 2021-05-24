@@ -106,10 +106,10 @@ public class MainCLI {
 
         createView("lobby", screen);
 
-        //screen.start("welcome");
+        screen.start("welcome");
 
 
-        showDevelopmentGridTest(screen, factory);
+        //showDevelopmentGridTest(screen, factory);
     }
 
 
