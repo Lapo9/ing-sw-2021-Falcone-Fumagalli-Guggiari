@@ -32,8 +32,10 @@ public class DashboardController extends SceneController implements ResettableSc
 
     @FXML private MarketplaceController marketplaceController;
     @FXML private UnassignedMarblesController unassignedMarblesController;
+    @FXML private DevelopmentGridController developmentGridController;
 
     @FXML private ImageView marketButton;
+    @FXML private ImageView buyCardsButton;
 
     private ArrayList<OpponentController> opponents = new ArrayList<>();
 
@@ -46,6 +48,11 @@ public class DashboardController extends SceneController implements ResettableSc
         opponents.add(opponent2Controller);
         opponents.add(opponent3Controller);
         opponents.add(opponent4Controller);
+
+        opponents.forEach(o -> o.hide());
+        marketplaceController.hide();
+        unassignedMarblesController.hide();
+        developmentGridController.hide();
 
     }
 
@@ -66,6 +73,9 @@ public class DashboardController extends SceneController implements ResettableSc
         faithTrackPlayersController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
         marketplaceController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
         unassignedMarblesController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
+        developmentGridController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
+
+        developmentGridController.initializeSubScenes();
 
         controllerInterpreter.attachToResetScene(this);
     }
@@ -98,6 +108,7 @@ public class DashboardController extends SceneController implements ResettableSc
                     leader1Controller.update(Arrays.copyOfRange(completeUpdate, 107, 122));
                     leader2Controller.update(Arrays.copyOfRange(completeUpdate, 122, 137));
                     unassignedMarblesController.update(Arrays.copyOfRange(completeUpdate, 137, 143));
+                    developmentGridController.update(Arrays.copyOfRange(completeUpdate, 75, 85));
                 }
                 else {
                     opponents.get(completeUpdate[0]).update(completeUpdate);
@@ -106,6 +117,10 @@ public class DashboardController extends SceneController implements ResettableSc
 
             else if (completeUpdate[0] == 4){
                 marketplaceController.update(Arrays.copyOfRange(completeUpdate, 1, completeUpdate.length));
+            }
+
+            else if (completeUpdate[0] == 5){
+                developmentGridController.update(Arrays.copyOfRange(completeUpdate, 1, completeUpdate.length));
             }
         });
     }
@@ -122,6 +137,7 @@ public class DashboardController extends SceneController implements ResettableSc
         developmentSpace2Controller.reset();
         developmentSpace3Controller.reset();
         unassignedMarblesController.reset();
+        developmentGridController.reset();
     }
 
 
@@ -158,6 +174,9 @@ public class DashboardController extends SceneController implements ResettableSc
         if (toActivate.contains("dev3")){
             developmentSpace3Controller.setActive();
         }
+        if (toActivate.contains("paycheck")){
+            developmentGridController.setActive();
+        }
     }
 
     public void showOpponent(int i) {
@@ -171,10 +190,15 @@ public class DashboardController extends SceneController implements ResettableSc
 
     public void showUnassignedMarbles(){
         unassignedMarblesController.show();
+        marketButton.setEffect(null);
     }
 
     public void hideUnassignedMarbles(){
         unassignedMarblesController.hide();
+    }
+
+    public void hideDevelopmentGrid(){
+        developmentGridController.hide();
     }
 
 
@@ -198,7 +222,28 @@ public class DashboardController extends SceneController implements ResettableSc
     }
 
     @FXML
-    void buyCardsButtonClicked(){}
+    void buyCardsButtonClicked(){
+        if (buyCardsButton.getEffect() != null) {
+            developmentGridController.hide();
+            buyCardsButton.setEffect(null);
+        }
+        else {
+            developmentGridController.show();
+            buyCardsButton.setEffect(new Bloom(0.0));
+        }
+    }
+
+    @FXML
+    void produceButtonClicked(){
+        controllerInterpreter.execute("reset");
+        userInterpreter.execute("produce");
+    }
+
+    @FXML
+    void endTurnButtonClicked(){
+        controllerInterpreter.execute("reset");
+        userInterpreter.execute("endTurn");
+    }
 
 
 }

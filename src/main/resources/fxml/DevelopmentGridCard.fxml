@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<Group fx:id="cardGroup" onMouseEntered="#cardEntered" onMouseExited="#cardExited" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.DevelopmentGridCardController">
+   <children>
+      <ImageView fx:id="card" fitHeight="150.0" fitWidth="200.0" layoutX="53.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/testCard.png" />
+         </image>
+      </ImageView>
+      <Group fx:id="slots" layoutX="85.0" layoutY="177.0" visible="false">
+         <children>
+            <ImageView fx:id="slot2" fitHeight="54.0" fitWidth="38.0" onMouseClicked="#slot2Clicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/slot2.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="slot1" fitHeight="54.0" fitWidth="38.0" layoutX="-43.0" onMouseClicked="#slot1Clicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/slot1.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="slot3" fitHeight="54.0" fitWidth="38.0" layoutX="41.0" onMouseClicked="#slot3Clicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pictures/miscellaneous/slot3.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </Group>
+   </children>
+</Group>

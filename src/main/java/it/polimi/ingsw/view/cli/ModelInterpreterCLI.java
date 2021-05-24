@@ -63,9 +63,7 @@ public class ModelInterpreterCLI implements ModelInterpreter {
 
         items.update(player, ViewableId.COFFER, Arrays.copyOfRange(status, 1, 5));
         items.update(player, ViewableId.WAREHOUSE, Arrays.copyOfRange(status, 6, 21));
-        items.update(player, DEVELOPMENT_SPACE1, Arrays.copyOfRange(status, 21, 39));
-        items.update(player, DEVELOPMENT_SPACE2, Arrays.copyOfRange(status, 39, 57));
-        items.update(player, DEVELOPMENT_SPACE3, Arrays.copyOfRange(status, 57, 75));
+        items.update(player, DEVELOPMENT_SPACE_GRID, Arrays.copyOfRange(status, 21, 75));
         items.update(player, PAYCHECK_STRONGBOX, Arrays.copyOfRange(status, 75, 80));
         items.update(player, PAYCHECK_DEPOTS, Arrays.copyOfRange(status, 80, 85));
         items.update(player, BASE_PRODUCTION, Arrays.copyOfRange(status, 85, 103));

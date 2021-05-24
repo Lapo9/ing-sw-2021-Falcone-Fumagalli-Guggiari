@@ -88,7 +88,7 @@ public class ProductionManager implements AcceptsSupplies {
             }
 
             else if (slot.getType() == DepotID.DepotType.BASE_PRODUCTION) {
-                baseProduction.removeSupply(wot);
+                baseProduction.removeSupply(wot, to);
                 //in this way it works -> baseProduction.removeSupply(wot, DepotID.DEVELOPMENT2);
             }
 

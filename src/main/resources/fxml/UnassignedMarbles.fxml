@@ -5,8 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-
-<Group fx:id="unassignedMarblesGroup" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.UnassignedMarblesController">
+<Group fx:id="unassignedMarblesGroup" visible="false" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.UnassignedMarblesController">
    <children>
       <ImageView fitHeight="472.0" fitWidth="673.0" layoutX="-100.0" layoutY="-75.0" pickOnBounds="true" preserveRatio="true">
          <image>

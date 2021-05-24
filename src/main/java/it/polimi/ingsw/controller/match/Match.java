@@ -288,10 +288,12 @@ public class Match {
     private void marketplace(Player player, String... args) {
         if(player != activePlayer){
             player.sendController("error It's not your turn!");
+            player.sendController("hide unassignedMarbles");
             return;
         }
         if(phase != TURN_START){
             player.sendController("error You can't buy marbles now!");
+            player.sendController("hide unassignedMarbles");
             return;
         }
 

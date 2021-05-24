@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<Group fx:id="developmentGroup" visible="false" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.DevelopmentGridController">
+   <children>
+      <ImageView fitHeight="666.0" fitWidth="910.0" layoutX="-100.0" layoutY="-75.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/backgrounds/developmentGrid.png" />
+         </image>
+      </ImageView>
+      <fx:include fx:id="paycheck" source="Paycheck.fxml" />
+      <fx:include fx:id="c00" layoutX="126.0" layoutY="-85.0" source="DevelopmentGridCard.fxml" />
+      <fx:include fx:id="c10" layoutX="126.0" layoutY="125.0" source="DevelopmentGridCard.fxml" />
+      <fx:include fx:id="c20" layoutX="126.0" layoutY="335.0" source="DevelopmentGridCard.fxml" />
+      <fx:include fx:id="c01" layoutX="290.0" layoutY="-85.0" source="DevelopmentGridCard.fxml" />
+      <fx:include fx:id="c11" layoutX="290.0" layoutY="125.0" source="DevelopmentGridCard.fxml" />
+      <fx:include fx:id="c21" layoutX="290.0" layoutY="335.0" source="DevelopmentGridCard.fxml" />
+      <fx:include fx:id="c02" layoutX="445.0" layoutY="-85.0" source="DevelopmentGridCard.fxml" />
+      <fx:include fx:id="c12" layoutX="445.0" layoutY="125.0" source="DevelopmentGridCard.fxml" />
+      <fx:include fx:id="c22" layoutX="445.0" layoutY="335.0" source="DevelopmentGridCard.fxml" />
+      <fx:include fx:id="c03" layoutX="607.0" layoutY="-85.0" source="DevelopmentGridCard.fxml" />
+      <fx:include fx:id="c13" layoutX="607.0" layoutY="126.0" source="DevelopmentGridCard.fxml" />
+      <fx:include fx:id="c23" layoutX="607.0" layoutY="335.0" source="DevelopmentGridCard.fxml" />
+   </children>
+</Group>

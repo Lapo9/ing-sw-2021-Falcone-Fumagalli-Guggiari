@@ -38,9 +38,7 @@ public class MainCLI {
                 warehouse1,
                 leaders,
                 factory.buildBaseProduction(1, BASE_PRODUCTION),
-                factory.buildDevelopmentSpace(1, DEVELOPMENT_SPACE1),
-                factory.buildDevelopmentSpace(1, DEVELOPMENT_SPACE2),
-                factory.buildDevelopmentSpace(1, DEVELOPMENT_SPACE3),
+                factory.buildDevelopmentSpacerGrid(1, DEVELOPMENT_SPACE_GRID),
                 factory.buildMarbleContainer(1, UNASSIGNED_MARBLES),
                 factory.buildActiveProductions(1, ACTIVE_PRODUCTIONS));
 
@@ -73,36 +71,27 @@ public class MainCLI {
                 factory.buildWarehouse(2, WAREHOUSE),
                 factory.buildSupplyContainer(2, PAYCHECK_STRONGBOX, "Paycheck strongbox"),
                 factory.buildSupplyContainer(2, PAYCHECK_DEPOTS, "Paycheck depots"),
-                //factory.buildLeaderCard(2, LEADER1),
-                //factory.buildLeaderCard(2, LEADER2),
+                factory.buildLeaderCardSpace(2, LEADER_CARD_SPACE, false),
                 factory.buildBaseProduction(2, BASE_PRODUCTION),
-                factory.buildDevelopmentSpace(2, DEVELOPMENT_SPACE1),
-                factory.buildDevelopmentSpace(2, DEVELOPMENT_SPACE2),
-                factory.buildDevelopmentSpace(2, DEVELOPMENT_SPACE3));
+                factory.buildDevelopmentSpacerGrid(2, DEVELOPMENT_SPACE_GRID));
 
         createView("opponent2", screen,
                 factory.buildSupplyContainer(3, COFFER, "Coffer"),
                 factory.buildWarehouse(3, WAREHOUSE),
                 factory.buildSupplyContainer(3, PAYCHECK_STRONGBOX, "Paycheck strongbox"),
                 factory.buildSupplyContainer(3, PAYCHECK_DEPOTS, "Paycheck depots"),
-                //factory.buildLeaderCard(3, LEADER1),
-                //factory.buildLeaderCard(3, LEADER2),
+                factory.buildLeaderCardSpace(3, LEADER_CARD_SPACE, false),
                 factory.buildBaseProduction(3, BASE_PRODUCTION),
-                factory.buildDevelopmentSpace(3, DEVELOPMENT_SPACE1),
-                factory.buildDevelopmentSpace(3, DEVELOPMENT_SPACE2),
-                factory.buildDevelopmentSpace(3, DEVELOPMENT_SPACE3));
+                factory.buildDevelopmentSpacerGrid(3, DEVELOPMENT_SPACE_GRID));
 
         createView("opponent3", screen,
                 factory.buildSupplyContainer(4, COFFER, "Coffer"),
                 factory.buildWarehouse(4, WAREHOUSE),
                 factory.buildSupplyContainer(4, PAYCHECK_STRONGBOX, "Paycheck strongbox"),
                 factory.buildSupplyContainer(4, PAYCHECK_DEPOTS, "Paycheck depots"),
-                //factory.buildLeaderCard(4, LEADER1),
-                //factory.buildLeaderCard(4, LEADER2),
+                factory.buildLeaderCardSpace(4, LEADER_CARD_SPACE, false),
                 factory.buildBaseProduction(4, BASE_PRODUCTION),
-                factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE1),
-                factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE2),
-                factory.buildDevelopmentSpace(4, DEVELOPMENT_SPACE3));
+                factory.buildDevelopmentSpacerGrid(4, DEVELOPMENT_SPACE_GRID));
 
         createView("lobby", screen);
 

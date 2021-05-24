@@ -211,10 +211,12 @@ public class WarehouseController extends SubSceneController {
     void swap1Clicked() {
         //if no rows were selected, select this row
         if (offlineInfo.getSelectedWarehouseRow().equals("")){
+            controllerInterpreter.execute("reset");
             offlineInfo.setSelectedWarehouseRow("1");
         }
         else {
             userInterpreter.execute("swapRows 1 " + offlineInfo.getSelectedWarehouseRow());
+            controllerInterpreter.execute("reset");
         }
     }
 
@@ -222,10 +224,12 @@ public class WarehouseController extends SubSceneController {
     void swap2Clicked() {
         //if no rows were selected, select this row
         if (offlineInfo.getSelectedWarehouseRow().equals("")){
+            controllerInterpreter.execute("reset");
             offlineInfo.setSelectedWarehouseRow("2");
         }
         else {
             userInterpreter.execute("swapRows 2 " + offlineInfo.getSelectedWarehouseRow());
+            controllerInterpreter.execute("reset");
         }
     }
 
@@ -233,10 +237,12 @@ public class WarehouseController extends SubSceneController {
     void swap3Clicked() {
         //if no rows were selected, select this row
         if (offlineInfo.getSelectedWarehouseRow().equals("")){
+            controllerInterpreter.execute("reset");
             offlineInfo.setSelectedWarehouseRow("3");
         }
         else {
             userInterpreter.execute("swapRows 3 " + offlineInfo.getSelectedWarehouseRow());
+            controllerInterpreter.execute("reset");
         }
     }
 

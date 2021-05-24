@@ -70,6 +70,14 @@ public class ScreenGUI extends Application implements Screen {
                 });
             }
         }
+
+        else if (scene.contains("developmentGrid")){
+            if (activeScene.second instanceof DashboardController){
+                Platform.runLater( () -> {
+                    ((DashboardController) activeScene.second).hideDevelopmentGrid();
+                });
+            }
+        }
     }
 
 
