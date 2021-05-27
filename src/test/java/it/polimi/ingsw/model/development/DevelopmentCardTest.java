@@ -10,12 +10,18 @@ import it.polimi.ingsw.model.development.Production;
 import it.polimi.ingsw.model.exceptions.SupplyException;
 import org.junit.Assert;
 import org.junit.Test;
+import static it.polimi.ingsw.model.development.DevelopmentCard.getUrl;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
 public class DevelopmentCardTest {
+
+    @Test
+    public void getUrl_test() {
+        assertEquals("pictures/developmentCards/dev18.png", getUrl(29));
+    }
 
     @Test
     public void developmentCard_classConstructor() {

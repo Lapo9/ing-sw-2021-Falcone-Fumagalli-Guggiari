@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model.match_items;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import it.polimi.ingsw.controller.ModelObserver;
 import it.polimi.ingsw.model.ActionTilesStack;
@@ -322,89 +323,42 @@ public class DevelopmentGrid implements HasStatus {
         }
         else{
             //fill the grid with cards in a random order
-            grid.add(new ArrayList<>());
-            for (int i = 0; i < 4; i++){
-                int rnd = (int)(Math.random() * (4-i));
-                DevelopmentCard tmp = greenLvlThree.remove(rnd);
-                grid.get(0).add(tmp);
-            }
 
-            grid.add(new ArrayList<>());
-            for(int i = 0; i < 4; i++){
-                int rnd = (int)(Math.random())*(4-i);
-                DevelopmentCard tmp = blueLvlThree.remove(rnd);
-                grid.get(1).add(tmp);
-            }
+            Collections.shuffle(greenLvlThree);
+            grid.add(greenLvlThree);
 
-            grid.add(new ArrayList<>());
-            for(int i = 0; i < 4; i++){
-                int rnd = (int)(Math.random())*(4-i);
-                DevelopmentCard tmp = yellowLvlThree.remove(rnd);
-                grid.get(2).add(tmp);
-            }
+            Collections.shuffle(blueLvlThree);
+            grid.add(blueLvlThree);
 
-            grid.add(new ArrayList<>());
-            for(int i = 0; i < 4; i++){
-                int rnd = (int)(Math.random())*(4-i);
-                DevelopmentCard tmp = violetLvlThree.remove(rnd);
-                grid.get(3).add(tmp);
-            }
+            Collections.shuffle(yellowLvlThree);
+            grid.add(yellowLvlThree);
 
-            grid.add(new ArrayList<>());
-            for(int i = 0; i < 4; i++){
-                int rnd = (int)(Math.random())*(4-i);
-                DevelopmentCard tmp = greenLvlTwo.remove(rnd);
-                grid.get(4).add(tmp);
-            }
+            Collections.shuffle(violetLvlThree);
+            grid.add(violetLvlThree);
 
-            grid.add(new ArrayList<>());
-            for(int i = 0; i < 4; i++){
-                int rnd = (int)(Math.random())*(4-i);
-                DevelopmentCard tmp = blueLvlTwo.remove(rnd);
-                grid.get(5).add(tmp);
-            }
+            Collections.shuffle(greenLvlTwo);
+            grid.add(greenLvlTwo);
 
-            grid.add(new ArrayList<>());
-            for(int i = 0; i < 4; i++){
-                int rnd = (int)(Math.random())*(4-i);
-                DevelopmentCard tmp = yellowLvlTwo.remove(rnd);
-                grid.get(6).add(tmp);
-            }
+            Collections.shuffle(blueLvlTwo);
+            grid.add(blueLvlTwo);
 
-            grid.add(new ArrayList<>());
-            for(int i = 0; i < 4; i++){
-                int rnd = (int)(Math.random())*(4-i);
-                DevelopmentCard tmp = violetLvlTwo.remove(rnd);
-                grid.get(7).add(tmp);
-            }
+            Collections.shuffle(yellowLvlTwo);
+            grid.add(yellowLvlTwo);
 
-            grid.add(new ArrayList<>());
-            for(int i = 0; i < 4; i++){
-                int rnd = (int)(Math.random())*(4-i);
-                DevelopmentCard tmp = greenLvlOne.remove(rnd);
-                grid.get(8).add(tmp);
-            }
+            Collections.shuffle(violetLvlTwo);
+            grid.add(violetLvlTwo);
 
-            grid.add(new ArrayList<>());
-            for(int i = 0; i < 4; i++){
-                int rnd = (int)(Math.random())*(4-i);
-                DevelopmentCard tmp = blueLvlOne.remove(rnd);
-                grid.get(9).add(tmp);
-            }
+            Collections.shuffle(greenLvlOne);
+            grid.add(greenLvlOne);
 
-            grid.add(new ArrayList<>());
-            for(int i = 0; i < 4; i++){
-                int rnd = (int)(Math.random())*(4-i);
-                DevelopmentCard tmp = yellowLvlOne.remove(rnd);
-                grid.get(10).add(tmp);
-            }
+            Collections.shuffle(blueLvlOne);
+            grid.add(blueLvlOne);
 
-            grid.add(new ArrayList<>());
-            for(int i = 0; i < 4; i++){
-                int rnd = (int)(Math.random())*(4-i);
-                DevelopmentCard tmp = violetLvlOne.remove(rnd);
-                grid.get(11).add(tmp);
-            }
+            Collections.shuffle(yellowLvlOne);
+            grid.add(yellowLvlOne);
+
+            Collections.shuffle(violetLvlOne);
+            grid.add(violetLvlOne);
         }
     }
 }
