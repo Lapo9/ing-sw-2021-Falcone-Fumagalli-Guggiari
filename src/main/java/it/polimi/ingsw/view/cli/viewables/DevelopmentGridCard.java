@@ -212,7 +212,7 @@ public class DevelopmentGridCard implements Viewable {
         }
     }
     private String printWinPoints() {
-        if (wp < 9) {
+        if (wp <= 9) {
             return "|        " + FRAMED(" Win Points: " + wp + " ") + "         |" + "\n";
         }
         else {

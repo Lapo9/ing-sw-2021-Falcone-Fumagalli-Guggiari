@@ -26,7 +26,7 @@ public class MainCLI {
         serverSocket.attachInterpreter(modelInterpreter);
 
 
-
+/*
         //create viewables that are shared among different views
         SupplyContainer coffer1 = factory.buildSupplyContainer(1, COFFER, "Coffer"); //dashboard, development grid
         Warehouse warehouse1 = factory.buildWarehouse(1, WAREHOUSE); //dashboard, development grid, marketplace
@@ -96,9 +96,9 @@ public class MainCLI {
         createView("lobby", screen);
 
         screen.start("welcome");
+*/
 
-
-        //showMarbleContainer(screen, factory);
+        showDevelopmentGridTest(screen, factory);
     }
 
 
@@ -300,7 +300,7 @@ public class MainCLI {
         screenCLI.start("developmentGrid");
 
         int [] updateDevGrid = {
-                48, 47, 2, 3,
+                48, 37, 2, 3,
                 1, 5, 6, 7,
                 8, 9, 48, 11};
         developmentGridViewable.update(updateDevGrid);
