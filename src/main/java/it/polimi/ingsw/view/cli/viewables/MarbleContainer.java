@@ -39,6 +39,23 @@ public class MarbleContainer implements Viewable {
 
     }
 
+    private String fillMarbleContainer() {
+        int sumMarbles = marbles.get(0) + marbles.get(1) + marbles.get(2) + marbles.get(3) + marbles.get(4) + marbles.get(5);
+        if (sumMarbles == 0 || sumMarbles == 4) {
+            return "";
+        }
+        else if (sumMarbles == 1) {
+            return ("" + ((char)8197) + ((char)8201) + "  ║" + ((char)8196) + ((char)8196) + "   ║" + ((char)8196) + ((char)8196) + "   ║");
+        }
+        else if (sumMarbles == 2) {
+            return ("" + ((char)8197) + ((char)8201) + "  ║" + ((char)8196) + ((char)8196) + "   ║");
+        }
+        else if (sumMarbles == 3) {
+            return ("" + ((char)8197) + ((char)8201) + "  ║");
+        }
+        else return null;
+    }
+
     private String marbleContainer() {
         if (marbles.get(0) == 0 && marbles.get(1) == 0 && marbles.get(2) == 0 && marbles.get(3) == 0 && marbles.get(4) == 0 && marbles.get(5) == 0) {
             return "╔════╦════╦════╦════╗\n" +
@@ -47,12 +64,14 @@ public class MarbleContainer implements Viewable {
         }
         else {
             return "╔════╦════╦════╦════╗\n" +
-                    "║ " + ((char)8201) + putMarbles(0, marbles.get(0)) +
+                    "║ " + ((char)8201) +
+                    putMarbles(0, marbles.get(0)) +
                     putMarbles(1, marbles.get(1)) +
                     putMarbles(2, marbles.get(2)) +
                     putMarbles(3, marbles.get(3)) +
                     putMarbles(4, marbles.get(4)) +
-                    putMarbles(5, marbles.get(5)) + "\n" +
+                    putMarbles(5, marbles.get(5)) + fillMarbleContainer() +
+                    "\n" +
                     "╚════╩════╩════╩════╝";
         }
     }

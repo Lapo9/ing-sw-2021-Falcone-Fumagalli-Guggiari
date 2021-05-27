@@ -25,7 +25,7 @@ public class MainCLI {
         serverSocket.attachInterpreter(controllerInterpreter);
         serverSocket.attachInterpreter(modelInterpreter);
 
-
+/*
 
         //create viewables that are shared among different views
         SupplyContainer coffer1 = factory.buildSupplyContainer(1, COFFER, "Coffer"); //dashboard, development grid
@@ -96,9 +96,9 @@ public class MainCLI {
         createView("lobby", screen);
 
         screen.start("welcome");
+*/
 
-
-        //showDevelopmentGridTest(screen, factory);
+        showMarbleContainer(screen, factory);
     }
 
 
@@ -120,8 +120,8 @@ public class MainCLI {
 
     private static void showMarketplace (ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
         View Marketplace = new View();
-        Marketplace MarketplaceViewable = factory.buildMarketplace(MARKETPLACE);
-        Marketplace.addViewable(MarketplaceViewable);
+        Marketplace marketplaceViewable = factory.buildMarketplace(MARKETPLACE);
+        Marketplace.addViewable(marketplaceViewable);
 
         screenCLI.addView("Marketplace", Marketplace);
         screenCLI.start("Marketplace");
@@ -135,7 +135,7 @@ public class MainCLI {
         screenCLI.addView("marbleContainer", marbleContainer);
         screenCLI.start("marbleContainer");
 
-        int [] updMarbleContainer = {2, 0, 0, 1, 0, 0};
+        int [] updMarbleContainer = {0, 2, 2, 0, 0, 0};
         marbleContainerViewable.update(updMarbleContainer);
         screenCLI.show("marbleContainer");
     }
