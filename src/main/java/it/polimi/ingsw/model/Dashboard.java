@@ -65,6 +65,7 @@ public class Dashboard implements HasStatus{
         this.inkwell = inkwell;
         this.marketplace = marketplace;
         this.developmentGrid = developmentGrid;
+        this.leadersList = leadersList;
 
         this.name = name;
 
