@@ -77,7 +77,7 @@ public class OfflineInfo {
     public synchronized void setProduction(String production, boolean isActive){
         activeProductions.put(production, isActive);
         if(factory != null){
-            factory.update(1, ViewableId.ACTIVE_PRODUCTIONS, getProductionsAsArray());
+            factory.update(0, ViewableId.ACTIVE_PRODUCTIONS, getProductionsAsArray());
         }
     }
 
