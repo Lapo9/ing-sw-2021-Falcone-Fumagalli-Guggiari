@@ -60,7 +60,7 @@ public class CofferController extends SubSceneController{
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("coin coffer");
-        userInterpreter.execute("select coin");
+        userInterpreter.execute("selected coin coffer");
     }
 
     @FXML
@@ -70,7 +70,7 @@ public class CofferController extends SubSceneController{
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("servant coffer");
-        userInterpreter.execute("select servant");
+        userInterpreter.execute("selected servant coffer");
     }
 
     @FXML
@@ -80,7 +80,7 @@ public class CofferController extends SubSceneController{
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("shield coffer");
-        userInterpreter.execute("select shield");
+        userInterpreter.execute("selected shield coffer");
     }
 
     @FXML
@@ -90,7 +90,7 @@ public class CofferController extends SubSceneController{
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("stone coffer");
-        userInterpreter.execute("select stone");
+        userInterpreter.execute("selected stone coffer");
     }
 
 }
