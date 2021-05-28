@@ -75,9 +75,12 @@ public class DashboardController extends SceneController implements ResettableSc
         unassignedMarblesController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
         developmentGridController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
 
-        developmentSpace1Controller.setId("1");
-        developmentSpace1Controller.setId("2");
-        developmentSpace1Controller.setId("3");
+        developmentSpace1Controller.setId("dev1");
+        developmentSpace1Controller.setId("dev2");
+        developmentSpace1Controller.setId("dev3");
+        baseProductionController.setId("base");
+        leader1Controller.setId("leader1");
+        leader2Controller.setId("leader2");
 
         developmentGridController.initializeSubScenes();
 

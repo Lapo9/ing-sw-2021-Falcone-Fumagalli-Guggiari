@@ -71,7 +71,7 @@ public class BaseProductionController extends SubSceneController {
     void checkBoxClicked() {
         controllerInterpreter.execute("reset");
         produce.setVisible(!produce.isVisible());
-        offlineInfo.setProduction(id, produce.isVisible());
+        offlineInfo.setProduction("base", produce.isVisible());
     }
 
     @FXML

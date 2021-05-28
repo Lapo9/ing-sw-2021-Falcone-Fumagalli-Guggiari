@@ -474,6 +474,10 @@ public class Match {
             player.sendController("error You can't produce now!");
             return;
         }
+        if (args[1].equals("false") && args[2].equals("false") && args[3].equals("false") && args[4].equals("false") && args[5].equals("false") && args[6].equals("false")){
+            player.sendController("error You must activate at least one production!");
+            return;
+        }
 
         try {
             player.getDashboard().checkProduction(Boolean.parseBoolean(args[1]), Boolean.parseBoolean(args[2]), Boolean.parseBoolean(args[3]), Boolean.parseBoolean(args[4]), Boolean.parseBoolean(args[5]), Boolean.parseBoolean(args[6]));
