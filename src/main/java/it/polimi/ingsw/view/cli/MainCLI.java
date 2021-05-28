@@ -96,6 +96,9 @@ public class MainCLI {
         createView("lobby", screen);
 
         screen.start("welcome");
+
+
+        //showBaseProductionTest(screen, factory);
     }
 
 
@@ -114,7 +117,7 @@ public class MainCLI {
 
 
 
-
+//methods used to test every viewable
     private static void showMarketplace (ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
         View Marketplace = new View();
         Marketplace marketplaceViewable = factory.buildMarketplace(MARKETPLACE);
@@ -343,6 +346,17 @@ public class MainCLI {
                 0, 0, 0, 0, 0 //currentSupply
         };
         baseProductionViewable.update(updateBaseProd);
+        screenCLI.show("baseProduction");
+
+        int [] updateBaseProd2 = {
+                0, 0, 0, 0, 0,
+                1,
+                2,
+                0, 0, 0, 0, 0,
+                4,
+                0, 0, 0, 0, 0
+        };
+        baseProductionViewable.update(updateBaseProd2);
         screenCLI.show("baseProduction");
 
     }

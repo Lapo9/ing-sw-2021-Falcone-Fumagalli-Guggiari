@@ -50,6 +50,32 @@ public class BaseProduction implements Viewable {
 
     @Override
     public void update(int[] update) {
+        //reset everything
+        mutableInput1.put(WarehouseObjectType.COIN, 0);
+        mutableInput1.put(WarehouseObjectType.SERVANT, 0);
+        mutableInput1.put(WarehouseObjectType.SHIELD, 0);
+        mutableInput1.put(WarehouseObjectType.STONE, 0);
+        mutableInput1.put(WarehouseObjectType.FAITH_MARKER, 0);
+
+        mutableInput2.put(WarehouseObjectType.COIN, 0);
+        mutableInput2.put(WarehouseObjectType.SERVANT, 0);
+        mutableInput2.put(WarehouseObjectType.SHIELD, 0);
+        mutableInput2.put(WarehouseObjectType.STONE, 0);
+        mutableInput2.put(WarehouseObjectType.FAITH_MARKER, 0);
+
+        mutableOutput.put(WarehouseObjectType.COIN, 0);
+        mutableOutput.put(WarehouseObjectType.SERVANT, 0);
+        mutableOutput.put(WarehouseObjectType.SHIELD, 0);
+        mutableOutput.put(WarehouseObjectType.STONE, 0);
+        mutableOutput.put(WarehouseObjectType.FAITH_MARKER, 0);
+
+        currentSupply.put(WarehouseObjectType.COIN, 0);
+        currentSupply.put(WarehouseObjectType.SERVANT, 0);
+        currentSupply.put(WarehouseObjectType.SHIELD, 0);
+        currentSupply.put(WarehouseObjectType.STONE, 0);
+        currentSupply.put(WarehouseObjectType.FAITH_MARKER, 0);
+
+        //replace only the resource added to the update
         mutableInput1.put(intToResource(update[5]), 1);
         mutableInput2.put(intToResource(update[6]), 1);
 
