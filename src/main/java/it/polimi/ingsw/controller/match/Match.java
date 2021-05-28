@@ -26,6 +26,7 @@ public class Match {
     private Player activePlayer;
     private DevelopmentGrid developmentGrid = new DevelopmentGrid();
     private Marketplace marketplace = new Marketplace();
+    private LeadersList leadersList = new LeadersList();
     private MatchPhase phase = LOBBY;
     private HashMap<String, BiConsumer<Player, String[]>> commands = new HashMap<>();
     private ModelObserver modelObserver = new ModelObserver();
@@ -69,7 +70,7 @@ public class Match {
         else {
             //simply add the new player
             players.add(p);
-            p.attachDashboard(new Dashboard(false, marketplace, developmentGrid, p.getName(), new LeadersList()));
+            p.attachDashboard(new Dashboard(false, marketplace, developmentGrid, p.getName(), leadersList));
             modelObserver.attachTo(p); //attach the model observer to the dashboard of this player
 
             //tell each player a new player connected
