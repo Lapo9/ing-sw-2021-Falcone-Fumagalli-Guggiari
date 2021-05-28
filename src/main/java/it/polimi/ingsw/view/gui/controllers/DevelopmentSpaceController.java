@@ -45,29 +45,29 @@ public class DevelopmentSpaceController extends SubSceneController {
 
     @Override
     public void update(int[] completeUpdate) {
-        if(completeUpdate[3] != 0) {
-            card.setImage(new Image(getUrl(completeUpdate[3])));
-            oldCard1.setVisible(true);
-            oldCard1.setImage(new Image(getDot(getCategory(completeUpdate[1]))));
-            winPointsOldCard1.setText(String.valueOf(getWinPoints(completeUpdate[1])));
-            oldCard2.setVisible(true);
-            oldCard2.setImage(new Image(getDot(getCategory(completeUpdate[2]))));
-            winPointsOldCard2.setText(String.valueOf(getWinPoints(completeUpdate[2])));
-        }
-        else if(completeUpdate[2] != 0) {
+        if(completeUpdate[2] != 0) {
             card.setImage(new Image(getUrl(completeUpdate[2])));
             oldCard1.setVisible(true);
-            oldCard1.setImage(new Image(getDot(getCategory(completeUpdate[1]))));
-            winPointsOldCard1.setText(String.valueOf(getWinPoints(completeUpdate[1])));
+            oldCard1.setImage(new Image(getDot(getCategory(completeUpdate[0]))));
+            winPointsOldCard1.setText(String.valueOf(getWinPoints(completeUpdate[0])));
+            oldCard2.setVisible(true);
+            oldCard2.setImage(new Image(getDot(getCategory(completeUpdate[1]))));
+            winPointsOldCard2.setText(String.valueOf(getWinPoints(completeUpdate[1])));
         }
-        else if(completeUpdate[1] != 0){
+        else if(completeUpdate[1] != 0) {
             card.setImage(new Image(getUrl(completeUpdate[1])));
+            oldCard1.setVisible(true);
+            oldCard1.setImage(new Image(getDot(getCategory(completeUpdate[0]))));
+            winPointsOldCard1.setText(String.valueOf(getWinPoints(completeUpdate[0])));
+        }
+        else if(completeUpdate[0] != 0){
+            card.setImage(new Image(getUrl(completeUpdate[0])));
             developmentGroup.setVisible(true);
         }
-        coin.setText(String.valueOf(completeUpdate[14]));
-        servant.setText(String.valueOf(completeUpdate[15]));
-        shield.setText(String.valueOf(completeUpdate[16]));
-        stone.setText(String.valueOf(completeUpdate[17]));
+        coin.setText(String.valueOf(completeUpdate[13]));
+        servant.setText(String.valueOf(completeUpdate[14]));
+        shield.setText(String.valueOf(completeUpdate[15]));
+        stone.setText(String.valueOf(completeUpdate[16]));
     }
     
     private String getDot(CardCategory cat) {

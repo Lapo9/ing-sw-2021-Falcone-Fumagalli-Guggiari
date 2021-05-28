@@ -68,7 +68,7 @@ public class PaycheckController extends SubSceneController {
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("coin paycheck");
-        userInterpreter.execute("select coin");
+        userInterpreter.execute("selected coin paycheck");
     }
 
     @FXML
@@ -78,7 +78,7 @@ public class PaycheckController extends SubSceneController {
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("servant paycheck");
-        userInterpreter.execute("select servant");
+        userInterpreter.execute("selected servant paycheck");
     }
 
     @FXML
@@ -88,7 +88,7 @@ public class PaycheckController extends SubSceneController {
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("shield paycheck");
-        userInterpreter.execute("select shield");
+        userInterpreter.execute("selected shield paycheck");
     }
 
     @FXML
@@ -98,7 +98,7 @@ public class PaycheckController extends SubSceneController {
         }
         controllerInterpreter.execute("reset");
         offlineInfo.setSelectedItem("stone paycheck");
-        userInterpreter.execute("select stone");
+        userInterpreter.execute("selected stone paycheck");
     }
 
 }
