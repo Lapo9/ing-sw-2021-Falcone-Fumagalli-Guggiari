@@ -2,8 +2,6 @@ package it.polimi.ingsw.model;
 
 import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
 import static it.polimi.ingsw.model.WarehouseObjectType.*;
-import static it.polimi.ingsw.model.leaders.LeaderCard.getAbility;
-import static it.polimi.ingsw.model.leaders.LeaderCard.getAbilityNumber;
 
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.controller.ModelObserver;
@@ -41,7 +39,7 @@ public class Dashboard implements HasStatus{
     private final FaithTrack faithTrack = new FaithTrack();
     private final LeadersSpace leadersSpace = new LeadersSpace();
     private final Developments developments = new Developments();
-    private final LeadersList leadersList = new LeadersList();
+    private LeadersList leadersList;
     private final LeadersPick leadersPick = new LeadersPick();
     private MarbleContainer unassignedSupplies = new MarbleContainer(0,0,0,0,0,0);
     private final Paycheck paycheck = new Paycheck();
@@ -61,8 +59,9 @@ public class Dashboard implements HasStatus{
      * @param marketplace match marketplace, to collect the supplies from
      * @param developmentGrid match development grid, to buy the development cards from
      * @param name player nickname
+     * @param leadersList
      */
-    public Dashboard(boolean inkwell, Marketplace marketplace, DevelopmentGrid developmentGrid, String name){
+    public Dashboard(boolean inkwell, Marketplace marketplace, DevelopmentGrid developmentGrid, String name, LeadersList leadersList){
         this.inkwell = inkwell;
         this.marketplace = marketplace;
         this.developmentGrid = developmentGrid;

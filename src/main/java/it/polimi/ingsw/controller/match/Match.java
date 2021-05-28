@@ -7,6 +7,7 @@ import it.polimi.ingsw.controller.exceptions.MatchException;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.exceptions.SupplyException;
 import it.polimi.ingsw.model.match_items.DevelopmentGrid;
+import it.polimi.ingsw.model.match_items.LeadersList;
 import it.polimi.ingsw.model.match_items.MarketDirection;
 import it.polimi.ingsw.model.match_items.Marketplace;
 
@@ -68,7 +69,7 @@ public class Match {
         else {
             //simply add the new player
             players.add(p);
-            p.attachDashboard(new Dashboard(false, marketplace, developmentGrid, p.getName()));
+            p.attachDashboard(new Dashboard(false, marketplace, developmentGrid, p.getName(), new LeadersList()));
             modelObserver.attachTo(p); //attach the model observer to the dashboard of this player
 
             //tell each player a new player connected
