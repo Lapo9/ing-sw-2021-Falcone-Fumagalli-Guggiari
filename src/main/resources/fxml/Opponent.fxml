@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 
-<Group fx:id="pane" visible="false" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.OpponentController">
+<Group fx:id="pane" visible="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.OpponentController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -201,22 +199,22 @@
       </Group>
       <Group layoutX="291.0" layoutY="414.0">
          <children>
-            <Text fx:id="shieldCoffer" fill="WHITE" layoutX="75.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="37.0">
+            <Text fx:id="coinCoffer" fill="WHITE" layoutX="75.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="37.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text fx:id="stoneCoffer" fill="WHITE" layoutX="75.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="34.0">
+            <Text fx:id="servantCoffer" fill="WHITE" layoutX="75.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="34.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text fx:id="coinCoffer" fill="WHITE" layoutX="3.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="36.0">
+            <Text fx:id="shieldCoffer" fill="WHITE" layoutX="3.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="36.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text fx:id="servantCoffer" fill="WHITE" layoutX="-2.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="39.0">
+            <Text fx:id="stoneCoffer" fill="WHITE" layoutX="-2.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="39.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
@@ -301,22 +299,22 @@
                   </Text>
                </children>
             </Group>
-            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="37.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="coD1" fitHeight="25.0" fitWidth="38.0" layoutX="37.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/miscellaneous/coin.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="109.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="shD1" fitHeight="25.0" fitWidth="38.0" layoutX="109.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/miscellaneous/shield.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="38.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="seD1" fitHeight="25.0" fitWidth="38.0" layoutX="38.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/miscellaneous/servant.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="110.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="stD1" fitHeight="25.0" fitWidth="38.0" layoutX="110.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/miscellaneous/stone.png" />
                </image>
@@ -378,22 +376,22 @@
                   </Text>
                </children>
             </Group>
-            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="37.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="coD2" fitHeight="25.0" fitWidth="38.0" layoutX="37.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/miscellaneous/coin.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="109.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="shD2" fitHeight="25.0" fitWidth="38.0" layoutX="109.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/miscellaneous/shield.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="38.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="seD2" fitHeight="25.0" fitWidth="38.0" layoutX="38.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/miscellaneous/servant.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="110.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="stD2" fitHeight="25.0" fitWidth="38.0" layoutX="110.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/miscellaneous/stone.png" />
                </image>
@@ -455,22 +453,22 @@
                   </Text>
                </children>
             </Group>
-            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="37.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="coD3" fitHeight="25.0" fitWidth="38.0" layoutX="37.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/miscellaneous/coin.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="109.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="shD3" fitHeight="25.0" fitWidth="38.0" layoutX="109.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/miscellaneous/shield.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="38.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="seD3" fitHeight="25.0" fitWidth="38.0" layoutX="38.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/miscellaneous/servant.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="38.0" layoutX="110.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="stD3" fitHeight="25.0" fitWidth="38.0" layoutX="110.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pictures/miscellaneous/stone.png" />
                </image>
@@ -499,22 +497,22 @@
       </Group>
       <Group layoutX="300.0" layoutY="556.0">
          <children>
-            <Text fx:id="shieldPaycheck" fill="WHITE" layoutX="68.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="37.0">
+            <Text fx:id="coinPaycheck" fill="WHITE" layoutX="68.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="37.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text fx:id="stonePaycheck" fill="WHITE" layoutX="66.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="36.0">
+            <Text fx:id="servantPaycheck" fill="WHITE" layoutX="66.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="36.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text fx:id="coinPaycheck" fill="WHITE" layoutX="-8.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="39.0">
+            <Text fx:id="shieldPaycheck" fill="WHITE" layoutX="-8.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="39.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>
             </Text>
-            <Text fx:id="servantPaycheck" fill="WHITE" layoutX="-10.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="40.0">
+            <Text fx:id="stonePaycheck" fill="WHITE" layoutX="-10.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="55" textAlignment="RIGHT" wrappingWidth="40.0">
                <font>
                   <Font name="Vivaldi Italic" size="36.0" />
                </font>

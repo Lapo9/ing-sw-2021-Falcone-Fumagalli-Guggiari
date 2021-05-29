@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.gui.controllers;
 
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.model.CardCategory;
 import it.polimi.ingsw.model.leaders.LeaderCard;
 import it.polimi.ingsw.model.leaders.leader_abilities.Depot;
 import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
@@ -19,6 +20,7 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static it.polimi.ingsw.model.development.DevelopmentCard.*;
 import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getContainedSupplies;
 import static java.lang.String.valueOf;
 
@@ -71,6 +73,10 @@ public class OpponentController extends SubSceneController{
     @FXML private Text shieldD1;
     @FXML private Text servantD1;
     @FXML private Text stoneD1;
+    @FXML private ImageView coD1;
+    @FXML private ImageView seD1;
+    @FXML private ImageView shD1;
+    @FXML private ImageView stD1;
     @FXML private ImageView card2;
     @FXML private ImageView oldCard21;
     @FXML private Text winPointsOldCard21;
@@ -80,6 +86,10 @@ public class OpponentController extends SubSceneController{
     @FXML private Text shieldD2;
     @FXML private Text servantD2;
     @FXML private Text stoneD2;
+    @FXML private ImageView coD2;
+    @FXML private ImageView seD2;
+    @FXML private ImageView shD2;
+    @FXML private ImageView stD2;
     @FXML private ImageView card3;
     @FXML private ImageView oldCard31;
     @FXML private Text winPointsOldCard31;
@@ -89,6 +99,10 @@ public class OpponentController extends SubSceneController{
     @FXML private Text shieldD3;
     @FXML private Text servantD3;
     @FXML private Text stoneD3;
+    @FXML private ImageView coD3;
+    @FXML private ImageView seD3;
+    @FXML private ImageView shD3;
+    @FXML private ImageView stD3;
     @FXML private Text shieldPaycheck;
     @FXML private Text stonePaycheck;
     @FXML private Text coinPaycheck;
@@ -174,13 +188,20 @@ public class OpponentController extends SubSceneController{
 
     private void updatePaycheck(int[] arr){
         coinPaycheck.setText(valueOf(arr[0] + arr[5]));
-        coinPaycheck.setText(valueOf(arr[1] + arr[6]));
-        coinPaycheck.setText(valueOf(arr[2] + arr[7]));
-        coinPaycheck.setText(valueOf(arr[3] + arr[8]));
+        servantPaycheck.setText(valueOf(arr[1] + arr[6]));
+        shieldPaycheck.setText(valueOf(arr[2] + arr[7]));
+        stonePaycheck.setText(valueOf(arr[3] + arr[8]));
     }
 
     private void updateBase(int[] arr){
-        //TODO
+        in1.setImage(new Image(WarehouseObjectTypeController.getTypeByNumber(arr[5]).getUrl()));
+        in2.setImage(new Image(WarehouseObjectTypeController.getTypeByNumber(arr[6]).getUrl()));
+        out.setImage(new Image(WarehouseObjectTypeController.getTypeByNumber(arr[12]).getUrl()));
+
+        coinBase.setText(String.valueOf(arr[13]));
+        servantBase.setText(String.valueOf(arr[14]));
+        shieldBase.setText(String.valueOf(arr[15]));
+        stoneBase.setText(String.valueOf(arr[16]));
     }
 
     private void updateLeader1(int[] arr){
@@ -300,15 +321,169 @@ public class OpponentController extends SubSceneController{
     }
 
     private void updateDevelopment1(int[] arr){
-        //TODO
+        if(arr[2] != 0) {
+            card1.setImage(new Image(getUrl(arr[2])));
+            oldCard11.setVisible(true);
+            oldCard11.setImage(new Image(getDot(getCategory(arr[0]))));
+            winPointsOldCard11.setText(String.valueOf(getWinPoints(arr[0])));
+            oldCard12.setVisible(true);
+            oldCard12.setImage(new Image(getDot(getCategory(arr[1]))));
+            winPointsOldCard12.setText(String.valueOf(getWinPoints(arr[1])));
+        }
+        else if(arr[1] != 0) {
+            card1.setImage(new Image(getUrl(arr[1])));
+            oldCard11.setVisible(true);
+            oldCard11.setImage(new Image(getDot(getCategory(arr[0]))));
+            winPointsOldCard11.setText(String.valueOf(getWinPoints(arr[0])));
+            oldCard12.setVisible(false);
+            winPointsOldCard12.setText(String.valueOf(""));
+        }
+        else if(arr[0] != 0){
+            card1.setImage(new Image(getUrl(arr[0])));
+            oldCard11.setVisible(false);
+            winPointsOldCard11.setText(String.valueOf(""));
+            oldCard12.setVisible(false);
+            winPointsOldCard12.setText(String.valueOf(""));
+        }
+        else {
+            oldCard11.setVisible(false);
+            winPointsOldCard11.setText(String.valueOf(""));
+            oldCard12.setVisible(false);
+            winPointsOldCard12.setText(String.valueOf(""));
+            coD1.setVisible(false);
+            stD1.setVisible(false);
+            shD1.setVisible(false);
+            seD1.setVisible(false);
+            coinD1.setText(String.valueOf(""));
+            servantD1.setText(String.valueOf(""));
+            shieldD1.setText(String.valueOf(""));
+            stoneD1.setText(String.valueOf(""));
+            return;
+        }
+
+        coD1.setVisible(true);
+        stD1.setVisible(true);
+        shD1.setVisible(true);
+        seD1.setVisible(true);
+        coinD1.setText(String.valueOf(arr[13]));
+        servantD1.setText(String.valueOf(arr[14]));
+        shieldD1.setText(String.valueOf(arr[15]));
+        stoneD1.setText(String.valueOf(arr[16]));
     }
 
     private void updateDevelopment2(int[] arr){
-        //TODO
+        if(arr[2] != 0) {
+            card2.setImage(new Image(getUrl(arr[2])));
+            oldCard21.setVisible(true);
+            oldCard21.setImage(new Image(getDot(getCategory(arr[0]))));
+            winPointsOldCard21.setText(String.valueOf(getWinPoints(arr[0])));
+            oldCard22.setVisible(true);
+            oldCard22.setImage(new Image(getDot(getCategory(arr[1]))));
+            winPointsOldCard12.setText(String.valueOf(getWinPoints(arr[1])));
+        }
+        else if(arr[1] != 0) {
+            card2.setImage(new Image(getUrl(arr[1])));
+            oldCard21.setVisible(true);
+            oldCard21.setImage(new Image(getDot(getCategory(arr[0]))));
+            winPointsOldCard21.setText(String.valueOf(getWinPoints(arr[0])));
+            oldCard22.setVisible(false);
+            winPointsOldCard22.setText(String.valueOf(""));
+        }
+        else if(arr[0] != 0){
+            card2.setImage(new Image(getUrl(arr[0])));
+            oldCard21.setVisible(false);
+            winPointsOldCard21.setText(String.valueOf(""));
+            oldCard22.setVisible(false);
+            winPointsOldCard22.setText(String.valueOf(""));
+        }
+        else {
+            oldCard21.setVisible(false);
+            winPointsOldCard21.setText(String.valueOf(""));
+            oldCard22.setVisible(false);
+            winPointsOldCard22.setText(String.valueOf(""));
+            coD2.setVisible(false);
+            stD2.setVisible(false);
+            shD2.setVisible(false);
+            seD2.setVisible(false);
+            coinD2.setText(String.valueOf(""));
+            servantD2.setText(String.valueOf(""));
+            shieldD2.setText(String.valueOf(""));
+            stoneD2.setText(String.valueOf(""));
+            return;
+        }
+
+        coD2.setVisible(true);
+        stD2.setVisible(true);
+        shD2.setVisible(true);
+        seD2.setVisible(true);
+        coinD2.setText(String.valueOf(arr[13]));
+        servantD2.setText(String.valueOf(arr[14]));
+        shieldD2.setText(String.valueOf(arr[15]));
+        stoneD2.setText(String.valueOf(arr[16]));
     }
 
     private void updateDevelopment3(int[] arr){
-        //TODO
+        if(arr[2] != 0) {
+            card3.setImage(new Image(getUrl(arr[2])));
+            oldCard31.setVisible(true);
+            oldCard31.setImage(new Image(getDot(getCategory(arr[0]))));
+            winPointsOldCard31.setText(String.valueOf(getWinPoints(arr[0])));
+            oldCard32.setVisible(true);
+            oldCard32.setImage(new Image(getDot(getCategory(arr[1]))));
+            winPointsOldCard32.setText(String.valueOf(getWinPoints(arr[1])));
+        }
+        else if(arr[1] != 0) {
+            card3.setImage(new Image(getUrl(arr[1])));
+            oldCard31.setVisible(true);
+            oldCard31.setImage(new Image(getDot(getCategory(arr[0]))));
+            winPointsOldCard31.setText(String.valueOf(getWinPoints(arr[0])));
+            oldCard32.setVisible(false);
+            winPointsOldCard32.setText(String.valueOf(""));
+        }
+        else if(arr[0] != 0){
+            card3.setImage(new Image(getUrl(arr[0])));
+            oldCard31.setVisible(false);
+            winPointsOldCard31.setText(String.valueOf(""));
+            oldCard32.setVisible(false);
+            winPointsOldCard32.setText(String.valueOf(""));
+        }
+        else {
+            oldCard31.setVisible(false);
+            winPointsOldCard31.setText(String.valueOf(""));
+            oldCard32.setVisible(false);
+            winPointsOldCard32.setText(String.valueOf(""));
+            coD3.setVisible(false);
+            stD3.setVisible(false);
+            shD3.setVisible(false);
+            seD3.setVisible(false);
+            coinD3.setText(String.valueOf(""));
+            servantD3.setText(String.valueOf(""));
+            shieldD3.setText(String.valueOf(""));
+            stoneD3.setText(String.valueOf(""));
+            return;
+        }
+
+        coD3.setVisible(true);
+        stD3.setVisible(true);
+        shD3.setVisible(true);
+        seD3.setVisible(true);
+        coinD3.setText(String.valueOf(arr[13]));
+        servantD3.setText(String.valueOf(arr[14]));
+        shieldD3.setText(String.valueOf(arr[15]));
+        stoneD3.setText(String.valueOf(arr[16]));
+    }
+
+    private String getDot(CardCategory cat) {
+        if(cat == CardCategory.GREEN)
+            return "pictures/miscellaneous/greenDot.png";
+        else if(cat == CardCategory.VIOLET)
+            return "pictures/miscellaneous/violetDot.png";
+        else if(cat == CardCategory.BLUE)
+            return "pictures/miscellaneous/cyanDot.png";
+        else if(cat == CardCategory.YELLOW)
+            return "pictures/miscellaneous/yellowDot.png";
+        else
+            return null;
     }
 
 
