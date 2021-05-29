@@ -31,6 +31,7 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         SupplyContainer s2 = new SupplyContainer();
         SupplyContainer s3 = new SupplyContainer();
 
+        //the single depot can contain only one type of resource, furthermore the resources cannot come from the strongbox (coffer)
         s1.setAcceptCheck(maxOneTypeNotPresentIn(1, s2, s3).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
         s2.setAcceptCheck(maxOneTypeNotPresentIn(2, s1, s3).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
         s3.setAcceptCheck(maxOneTypeNotPresentIn(3, s1, s2).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
@@ -90,12 +91,12 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
 
 
     /**
-     * Tries to convert the marble to the specified row supply type, and, if possible, adds it to the row.
+     * Tries to convert the marble (from Marketplace or from the LeaderCard Market) to the specified row supply type, and, if possible, adds it to the row.
      * @param row row to add the marble to
      * @param color color of the marble to add
+     * @param leadersSpace where to look for white marble transformations
      * @throws SupplyException Specified depot is full
      * @throws MarbleException Marble cannot be converted to a compatible supply type
-     * @throws NoSuchMethodException Leader cannot accept a marble
      */
     public void addMarble(DepotID row, MarbleColor color, LeadersSpace leadersSpace) throws SupplyException, MarbleException {
         depots.get(row.getNum()).addMarble(color, leadersSpace);
@@ -108,7 +109,6 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
      * @param wot type of resource
      * @param from source of the supply
      * @throws SupplyException Row cannot accept the specified resource. Probably the row is full or accepts a different type, or there is another row with the same type.
-     * @throws NoSuchMethodException This object needs more information to store the supply
      */
     @Override
     public void addSupply(DepotID row, WarehouseObjectType wot, DepotID from) throws SupplyException{
@@ -125,16 +125,33 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         depots.get(row.getNum()).removeSupply(wot);
     }
 
+    /**
+     * Checks if the addition of the supply to the specified storage, coming from the specified source, is allowed.
+     * @param row Storage to add the supply to
+     * @param wot One of the five types of resources in the game
+     * @param from Source of the supply
+     * @return Whether the container can accept the supply or not
+     */
     @Override
     public boolean additionAllowed(DepotID row, WarehouseObjectType wot, DepotID from) {
         return depots.get(row.getNum()).additionAllowed(wot, from);
     }
 
+    /**
+     * Checks if the removal of the supply from the specified storage is allowed.
+     * @param row Storage to remove the supply from
+     * @param wot One of the five types of resources in the game
+     * @return Whether the container can remove the supply or not
+     */
     @Override
     public boolean removalAllowed(DepotID row, WarehouseObjectType wot) {
         return depots.get(row.getNum()).removalAllowed(wot);
     }
 
+    /**
+     * Removes all of the supplies.
+     * @return A pair of SupplyContainer(s) containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     */
     @Override
     public Pair<SupplyContainer, SupplyContainer> clearSupplies() {
         SupplyContainer result = new SupplyContainer();
@@ -146,6 +163,11 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         return new Pair<>(result, new SupplyContainer());
     }
 
+    /**
+     * Removes all of the supplies in the specified storage.
+     * @param slot Storage to clear.
+     * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     */
     @Override
     public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) {
         return depots.get(slot.getNum()).clearSupplies();
@@ -178,7 +200,8 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
 
 
     /**
-     * Adds the supplies in the container passed as argument to the warehouse depots. In the process it is likely that the order of the depots will be modified.
+     * Adds the supplies in the container given as argument to the warehouse depots.
+     * In the process it is likely that the order of the depots will be modified.
      * @param sc SupplyContainer containing the resources to add to the warehouse
      */
     public void allocate(SupplyContainer sc){
@@ -187,7 +210,7 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
             sc.sum(depots.get(i).clearSupplies().first);
         }
 
-        //create ArrayList of sc
+        //create ArrayList of SupplyContainer
         List<Pair<WarehouseObjectType, Integer>> listOfSc = new ArrayList<>();
         for(WarehouseObjectType wot : WarehouseObjectType.values()){
             if(wot != WarehouseObjectType.NO_TYPE)
@@ -200,7 +223,7 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         //order the list
         listOfSc = listOfSc.stream().sorted((pair1, pair2) -> pair1.second<pair2.second ? 1 : (pair1.second==pair2.second ? 0 : -1)).collect(Collectors.toList());
 
-        //if we have more than 3 items, we're fucked
+        //if we have more than 3 items, we're in trouble
         if(listOfSc.size() > 3){
             //TODO terminate
         }
@@ -217,7 +240,10 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
     }
 
 
-
+    /**
+     * Allows to receive the status of every object which implements this interface in the form of an ArrayList of Integer
+     * @return an ArrayList made of 15 Integer
+     */
     @Override
     public ArrayList<Integer> getStatus() {
         ArrayList<Integer> status = new ArrayList<>();

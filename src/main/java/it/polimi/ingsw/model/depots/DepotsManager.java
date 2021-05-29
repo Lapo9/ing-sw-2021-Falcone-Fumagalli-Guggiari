@@ -28,7 +28,14 @@ public class DepotsManager implements AcceptsSupplies {
         this.leadersSpace = leadersSpace;
     }
 
-
+    /**
+     * Adds the supply to the specified storage. Information about the source of the object needed.
+     * Beforehand the corresponding additionAllowed method is called to check if the operation can be performed.
+     * @param slot Storage to add the supply to
+     * @param wot One of the five types of resources in the game
+     * @param from Source of the supply
+     * @throws SupplyException The container cannot accept the supply
+     */
     @Override
     public void addSupply(DepotID slot, WarehouseObjectType wot, DepotID from) throws SupplyException {
         if (slot.getType() == DepotID.DepotType.WAREHOUSE){
@@ -46,6 +53,12 @@ public class DepotsManager implements AcceptsSupplies {
         }
     }
 
+    /**
+     * Removes the supply from the specified storage. Beforehand the corresponding removalAllowed method is called to check if the operation can be performed.
+     * @param from Storage to remove the supply from
+     * @param wot One of the five types of resources in the game
+     * @throws SupplyException The container cannot remove the supply
+     */
     @Override
     public void removeSupply(DepotID from, WarehouseObjectType wot) throws SupplyException {
         if (from.getType() == DepotID.DepotType.WAREHOUSE){
@@ -63,6 +76,13 @@ public class DepotsManager implements AcceptsSupplies {
         }
     }
 
+    /**
+     * Checks if the addition of the supply to the specified storage, coming from the specified source, is allowed.
+     * @param slot Storage to add the supply to
+     * @param wot One of the five types of resources in the game
+     * @param from Source of the supply
+     * @return Whether the container can accept the supply or not
+     */
     @Override
     public boolean additionAllowed(DepotID slot, WarehouseObjectType wot, DepotID from) {
         if (slot.getType() == DepotID.DepotType.WAREHOUSE){
@@ -80,6 +100,13 @@ public class DepotsManager implements AcceptsSupplies {
         }
     }
 
+    /**
+     * Checks if the removal of the supply from the specified storage, direct to the specified destination, is allowed.
+     * @param from Storage to remove the supply from
+     * @param wot One of the five types of resources in the game
+     * @param to Destination of the supply
+     * @return Whether the container can remove the supply or not
+     */
     @Override
     public boolean removalAllowed(DepotID from, WarehouseObjectType wot, DepotID to) {
         if (from.getType() == DepotID.DepotType.WAREHOUSE){
@@ -97,6 +124,10 @@ public class DepotsManager implements AcceptsSupplies {
         }
     }
 
+    /**
+     * Removes all of the supplies.
+     * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     */
     @Override
     public Pair<SupplyContainer, SupplyContainer> clearSupplies() {
         SupplyContainer res = new SupplyContainer();
@@ -115,6 +146,11 @@ public class DepotsManager implements AcceptsSupplies {
         return new Pair<>(res, new SupplyContainer());
     }
 
+    /**
+     * Removes all of the supplies in the specified storage.
+     * @param slot Storage to clear.
+     * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     */
     @Override
     public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) {
         SupplyContainer result = new SupplyContainer();

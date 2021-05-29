@@ -136,7 +136,10 @@ public class MutableProduction extends Production implements HasStatus {
         mutableOutput.set(num, newOutput);
     }
 
-
+    /**
+     * Allows to receive the status of every object which implements this interface in the form of an ArrayList of Integer
+     * @return an ArrayList describing the MutableProduction
+     */
     @Override
     public ArrayList<Integer> getStatus(){
         ArrayList<Integer> status = new ArrayList<>();

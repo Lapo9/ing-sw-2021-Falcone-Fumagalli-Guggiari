@@ -8,7 +8,7 @@ import it.polimi.ingsw.model.exceptions.SupplyException;
 import java.util.ArrayList;
 
 /**
- * The class has the responsibility to manage the development spaces on the board.
+ * The class has the responsibility to manage the three development spaces on the board.
  * You can add a card to a specified development space, and you can activate the production on the specified spaces.
  * The class also has functions to get information about the cards in the 3 development spaces.
  */
@@ -49,9 +49,9 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
 
     /**
      * Activate the production on the specified development spaces.
-     * @param s1 produce on space 1?
-     * @param s2 produce on space 2?
-     * @param s3 produce on space 3?
+     * @param s1 produce on space 1? True/False
+     * @param s2 produce on space 2? True/False
+     * @param s3 produce on space 3? True/False
      * @return The sum of all the productions.
      */
     public SupplyContainer produce(boolean s1, boolean s2, boolean s3){
@@ -69,9 +69,9 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
 
     /**
      * Checks if there is the exact amount of supplies on the specified development spaces. If everything is ok, no exception is thrown.
-     * @param s1 produce on space 1?
-     * @param s2 produce on space 2?
-     * @param s3 produce on space 3?
+     * @param s1 produce on space 1? True/False
+     * @param s2 produce on space 2? True/False
+     * @param s3 produce on space 3? True/False
      * @throws SupplyException On one of the active spaces there isn't the right amount of supplies.
      */
     public void checkProduction(boolean s1, boolean s2, boolean s3) throws SupplyException {
@@ -107,20 +107,35 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
         spaces.get(space.getNum()).removeSupply(wot, to);
     }
 
-
+    /**
+     * Checks if the addition of the supply to the specified storage, coming from the specified source, is allowed.
+     * @param space Storage of the space to add the supply to
+     * @param wot One of the five types of resources in the game
+     * @param from Source of the supply
+     * @return Whether the container can accept the supply or not
+     */
     @Override
     public boolean additionAllowed(DepotID space, WarehouseObjectType wot, DepotID from) {
         return spaces.get(space.getNum()).additionAllowed(wot, from);
     }
 
-
+    /**
+     * Checks if the removal of the supply from the specified storage, direct to the specified destination, is allowed.
+     * @param space Storage to remove the supply from
+     * @param wot One of the five types of resources in the game
+     * @param to Destination of the supply
+     * @return Whether the container can remove the supply or not
+     */
     @Override
     public boolean removalAllowed(DepotID space, WarehouseObjectType wot, DepotID to) {
         return spaces.get(space.getNum()).removalAllowed(wot, to);
     }
 
 
-
+    /**
+     * Removes all of the supplies.
+     * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     */
     @Override
     public Pair<SupplyContainer, SupplyContainer> clearSupplies(){
         for (int i = 0; i<3; ++i){
@@ -129,7 +144,11 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
         return null;
     }
 
-
+    /**
+     * Removes all of the supplies in the specified storage.
+     * @param slot Storage to clear.
+     * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     */
     @Override
     public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot){
         return spaces.get(slot.getNum()).clearSupplies();
@@ -180,7 +199,10 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
 
 
 
-
+    /**
+     * Allows to receive the status of every object which implements this interface in the form of an ArrayList of Integer
+     * @return an ArrayList made of 54 Integer
+     */
     @Override
     public ArrayList<Integer> getStatus(){
         ArrayList<Integer> status = new ArrayList<>();
@@ -192,7 +214,10 @@ public class Developments implements HasStatus, WinPointsCountable, AcceptsSuppl
         return status;
     }
 
-
+    /**
+     * Gets the win points of the object
+     * @return the win points of the object
+     */
     @Override
     public int getWinPoints() {
         int totalPoints = 0;

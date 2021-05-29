@@ -37,7 +37,14 @@ public class ProductionManager implements AcceptsSupplies {
         this.leadersSpace = leadersSpace;
     }
 
-
+    /**
+     * Adds the supply to the specified storage. Information about the source of the object needed.
+     * Beforehand the corresponding additionAllowed method is called to check if the operation can be performed.
+     * @param slot Storage to add the supply to
+     * @param wot One of the five types of resources in the game
+     * @param from Source of the supply
+     * @throws SupplyException The container cannot accept the supply
+     */
     @Override
     public void addSupply(DepotID slot, WarehouseObjectType wot, DepotID from) throws SupplyException {
         //TODO check if you can add, if not throw
@@ -69,6 +76,14 @@ public class ProductionManager implements AcceptsSupplies {
         }
     }
 
+    /**
+     * Removes the supply from the specified storage. Information about the destination of the object needed.
+     * Beforehand the corresponding removalAllowed method is called to check if the operation can be performed.
+     * @param slot Storage to remove the supply from
+     * @param wot One of the five types of resources in the game
+     * @param to Destination of the supply
+     * @throws SupplyException The container cannot remove the supply
+     */
     @Override
     public void removeSupply(DepotID slot, WarehouseObjectType wot, DepotID to) throws SupplyException {
         //TODO check if you can remove, if not throw
@@ -104,6 +119,13 @@ public class ProductionManager implements AcceptsSupplies {
         } catch(Exception e){/*TODO terminate the program because we checked before, so everything should go smooth*/}
     }
 
+    /**
+     * Checks if the addition of the supply to the specified storage, coming from the specified source, is allowed.
+     * @param slot Storage to add the supply to
+     * @param wot One of the five types of resources in the game
+     * @param from Source of the supply
+     * @return Whether the container can accept the supply or not
+     */
     @Override
     public boolean additionAllowed(DepotID slot, WarehouseObjectType wot, DepotID from){
 
@@ -126,6 +148,13 @@ public class ProductionManager implements AcceptsSupplies {
         }
     }
 
+    /**
+     * Checks if the removal of the supply from the specified storage, direct to the specified destination, is allowed.
+     * @param from Storage to remove the supply from
+     * @param wot One of the five types of resources in the game
+     * @param to Destination of the supply
+     * @return Whether the container can remove the supply or not
+     */
     @Override
     public boolean removalAllowed(DepotID from, WarehouseObjectType wot, DepotID to) {
         if (from.getType() == DepotID.DepotType.DEVELOPMENT){
@@ -147,6 +176,10 @@ public class ProductionManager implements AcceptsSupplies {
         }
     }
 
+    /**
+     * Removes all of the supplies.
+     * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     */
     @Override
     public Pair<SupplyContainer, SupplyContainer> clearSupplies() {
         developments.clearSupplies();
@@ -164,6 +197,11 @@ public class ProductionManager implements AcceptsSupplies {
         return new Pair<>(containers.get(DepotID.SourceType.DEPOT).clearSupplies().first, containers.get(DepotID.SourceType.STRONGBOX).clearSupplies().first);
     }
 
+    /**
+     * Removes all of the supplies in the specified storage.
+     * @param slot Storage to clear.
+     * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     */
     @Override
     public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) throws NoSuchMethodException {
         SupplyContainer removed = new SupplyContainer();
@@ -196,8 +234,11 @@ public class ProductionManager implements AcceptsSupplies {
     }
 
 
-
-    //remove the resources from the source containers (first try to remove from coffer, then from strongbox)
+    /**
+     * Removes the resources from the source containers (first try to remove from coffer, then from strongbox)
+     * @param toRemove the SupplyContainer to empty
+     * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     */
     private Pair<SupplyContainer, SupplyContainer> removeFromSourceContainers(SupplyContainer toRemove) {
         //initially try to remove from the strongbox, if you can't try from the depots
         Pair<SupplyContainer, SupplyContainer> res = new Pair<>(new SupplyContainer(), new SupplyContainer());

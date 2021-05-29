@@ -178,33 +178,33 @@ public class MainCLI {
         screenCLI.start("developmentCard");
 
         //updating the developmentCard
-        int [] updWarehouse = {
+        int [] updDC = {
                 1, //id
                 1, 2, 0, 0, 0, //input
                 0, 0, 1, 0, 1, //output
                 1, 0, 0, 0, 0 //currentSupply
         };
-        developmentCardViewable.update(updWarehouse);
+        developmentCardViewable.update(updDC);
         screenCLI.show("developmentCard");
 
         //another update test
-        int [] updWarehouse1 = {
+        int [] updDC1 = {
                 5, //id
                 1, 2, 0, 0, 0, //input
                 0, 0, 1, 0, 1, //output
                 1, 0, 0, 0, 0 //currentSupply
         };
-        developmentCardViewable.update(updWarehouse1);
+        developmentCardViewable.update(updDC1);
         screenCLI.show("developmentCard");
 
         //empty card
-        int [] updWarehouse2 = {
+        int [] updDC2 = {
                 48, //id
                 1, 2, 0, 0, 0, //input
                 0, 0, 1, 0, 1, //output
                 1, 0, 0, 0, 0 //currentSupply
         };
-        developmentCardViewable.update(updWarehouse2);
+        developmentCardViewable.update(updDC2);
         screenCLI.show("developmentCard");
     }
 

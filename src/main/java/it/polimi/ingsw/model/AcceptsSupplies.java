@@ -223,14 +223,14 @@ public interface AcceptsSupplies {
 
     /**
      * Removes all of the supplies.
-     * @return A pair of SupplyContainer(s) containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
      */
     public Pair<SupplyContainer, SupplyContainer> clearSupplies() throws NoSuchMethodException;
 
     /**
      * Removes all of the supplies in the specified storage.
      * @param slot Storage to clear.
-     * @return A pair of SupplyContainer(s) containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
      */
     public default Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) throws NoSuchMethodException {
         throw new NoSuchMethodException();

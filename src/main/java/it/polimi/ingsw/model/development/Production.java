@@ -67,34 +67,65 @@ public class Production implements AcceptsSupplies, HasStatus {
             throw new SupplyException("There isn't the correct number of supplies to produce");
     }
 
-
+    /**
+     * Adds the supply to the storage. Information about the source of the object needed.
+     * Beforehand the corresponding additionAllowed method is called to check if the operation can be performed.
+     * @param wot One of the five types of resources in the game
+     * @param from Source of the supply
+     * @throws SupplyException The container cannot accept the supply
+     */
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException{
         currentSupply.addSupply(wot, from);
     }
 
+    /**
+     * Removes the supply from the storage. Information about the destination of the object needed.
+     * Beforehand the corresponding removalAllowed method is called to check if the operation can be performed.
+     * @param wot One of the five types of resources in the game
+     * @param to Destination of the supply
+     * @throws SupplyException The container cannot remove the supply
+     */
     @Override
     public void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException{
         currentSupply.removeSupply(wot);
     }
 
+    /**
+     * Checks if the addition of the supply to the storage, coming from the specified source, is allowed.
+     * @param wot One of the five types of resources in the game
+     * @param from Source of the supply
+     * @return Whether the container can accept the supply or not
+     */
     @Override
     public boolean additionAllowed(WarehouseObjectType wot, DepotID from) {
         return currentSupply.additionAllowed(wot, from);
     }
 
+    /**
+     * Checks if the removal of the supply from the storage, direct to the specified destination, is allowed.
+     * @param wot One of the five types of resources in the game
+     * @param to Destination of the supply
+     * @return Whether the container can remove the supply or not
+     */
     @Override
     public boolean removalAllowed(WarehouseObjectType wot, DepotID to) {
         return currentSupply.removalAllowed(wot, to);
     }
 
-
+    /**
+     * Removes all of the supplies in the currentSupply
+     * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     */
     @Override
     public Pair<SupplyContainer, SupplyContainer> clearSupplies(){
         return currentSupply.clearSupplies();
     }
 
-
+    /**
+     * Allows to receive the status of every object which implements this interface in the form of an ArrayList of Integer
+     * @return an ArrayList made of Integer describing the Production
+     */
     @Override
     public ArrayList<Integer> getStatus(){
         ArrayList<Integer> status = new ArrayList<>();
