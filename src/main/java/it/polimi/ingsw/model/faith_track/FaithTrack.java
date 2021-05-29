@@ -128,6 +128,8 @@ public class FaithTrack implements WinPointsCountable, HasStatus {
      * @return true if a vatican report needs to be issued
      */
     public boolean goAheadDontTrigger(){
+        if(position == 24)
+            return false;
         boolean vr = false;
         position++;
         if(track.get(position).isPopeSpace &&
