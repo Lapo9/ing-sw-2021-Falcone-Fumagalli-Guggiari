@@ -16,7 +16,12 @@ public class ResourceChecker {
     private SupplyContainer coffer;
     private Developments developments;
 
-
+    /**
+     * Class constructor
+     * @param depotsManager the DepotsManager
+     * @param coffer the coffer of the player
+     * @param developments the three DevelopmentSpace(s) of the player
+     */
     public ResourceChecker(DepotsManager depotsManager, SupplyContainer coffer, Developments developments){
         this.depotsManager = depotsManager;
         this.coffer = coffer;

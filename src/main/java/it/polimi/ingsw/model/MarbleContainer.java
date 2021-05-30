@@ -169,6 +169,10 @@ public class MarbleContainer implements HasStatus {
         this.white = this.white + mc.white;
     }
 
+    /**
+     * Allows to receive the status of every object which implements this interface in the form of an ArrayList of Integer
+     * @return an ArrayList made of 6 Integer
+     */
     @Override
     public ArrayList<Integer> getStatus(){
         ArrayList<Integer> status = new ArrayList<>();

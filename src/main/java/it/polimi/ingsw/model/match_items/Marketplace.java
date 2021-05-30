@@ -58,8 +58,12 @@ public class Marketplace implements HasStatus {
 
     }
 
-
-    //Returns the index of the array list given row and column
+    /**
+     * Returns the index of the array list given row and column
+     * @param r index of the row of the Marketplace
+     * @param c index of the column of the marketplace
+     * @return the position in the ArrayList
+     */
     private int getPos(int r, int c){
         return r*4 + c;
     }
@@ -108,7 +112,11 @@ public class Marketplace implements HasStatus {
     }
 
 
-    //Shifts marbles the given line
+    /**
+     * Shifts marbles the given line
+     * @param dir enum
+     * @param index index of the row/column
+     */
     private void shiftMarketplace(MarketDirection dir, int index){
 
         MarbleColor tmp;
@@ -141,7 +149,12 @@ public class Marketplace implements HasStatus {
     }
 
 
-    //In the status, 0: blue, 1: grey, 2: red, 3: violet, 4: white, 5: yellow
+    //
+
+    /**
+     * In the status, 0: blue, 1: grey, 2: red, 3: violet, 4: white, 5: yellow
+     * @return an ArrayList made of 13 Integer
+     */
     @Override
     public ArrayList<Integer> getStatus(){
         ArrayList<Integer> status = new ArrayList<>();

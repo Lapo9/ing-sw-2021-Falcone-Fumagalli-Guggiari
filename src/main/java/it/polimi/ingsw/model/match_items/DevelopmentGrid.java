@@ -47,8 +47,12 @@ public class DevelopmentGrid implements HasStatus {
         fill(true);
     }
 
-
-    //Returns the index of the ArrayList given column and row number.
+    /**
+     * Returns the index of the ArrayList given column and row number.
+     * @param column index of the column of the grid
+     * @param row index of the row of the grid
+     * @return the index of the ArrayList
+     */
     private int getPlace(int column, int row){
         return 4 * row + column;
     }
@@ -186,22 +190,24 @@ public class DevelopmentGrid implements HasStatus {
             return 3 - row;
     }
 
-
-    /*The status contains all the id's of the cards in the grid. 0 if the card has been removed.
-    *The status is made this way:
-    * lvl 3 cards   green
-    *               blue
-    *               yellow
-    *               violet
-    *lvl 2 cards   green
-    *              blue
-    *              yellow
-    *              violet
-    *lvl 1 cards   green
-    *              blue
-    *              yellow
-    *              blue
-    */
+    /**
+     * The status contains all the id's of the cards in the grid. 0 if the card has been removed.
+     * The status is made this way:
+     * lvl 3 cards   green
+     *               blue
+     *               yellow
+     *               violet
+     * lvl 2 cards   green
+     *              blue
+     *              yellow
+     *              violet
+     * lvl 1 cards   green
+     *              blue
+     *              yellow
+     *              blue
+     *
+     * @return the ArrayList made of 12 Integer
+     */
     @Override
     public ArrayList<Integer> getStatus() {
         ArrayList<Integer> status = new ArrayList<>();
@@ -215,7 +221,9 @@ public class DevelopmentGrid implements HasStatus {
         return status;
     }
 
-
+    /**
+     * Notify to the ModelObserver the status of the DevelopmentGrid so the players can have this item updated  in real time
+     */
     public void notifyViews(){
         ArrayList<Integer> status = getStatus();
 
@@ -224,13 +232,18 @@ public class DevelopmentGrid implements HasStatus {
         }
     }
 
-
+    /**
+     * Adds to the list of observers the ModelObserver given
+     * @param mo ModelObserver
+     */
     public void attach(ModelObserver mo){
         observers.add(mo);
     }
 
-
-    //Puts the cards in the grid.
+    /**
+     * Puts the cards in the grid (in two possible ways)
+     * @param type if true fills the grid with cards in a specific order, if false fills the grid in a random way
+     */
     private void fill(boolean type) {
         ArrayList<DevelopmentCard> greenLvlOne = new ArrayList<>();
         greenLvlOne.add(new DevelopmentCard(1));
