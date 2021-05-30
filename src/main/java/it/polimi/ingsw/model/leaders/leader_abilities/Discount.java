@@ -30,7 +30,10 @@ public class Discount implements LeaderAbility {
         return discount;
     }
 
-
+    /**
+     * Allows to receive the status of every object which implements this interface in the form of an ArrayList of Integer
+     * @return an ArrayList made of Integer
+     */
     @Override
     public ArrayList<Integer> getStatus() {
         ArrayList<Integer> status = new ArrayList<>();

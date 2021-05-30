@@ -379,6 +379,10 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
         return tmp;
     }
 
+    /**
+     * Allows to receive the status of every object which implements this interface in the form of an ArrayList of Integer
+     * @return an ArrayList made of 15 Integer
+     */
     @Override
     public ArrayList<Integer> getStatus() {
         ArrayList<Integer> status = new ArrayList<>();
@@ -404,6 +408,10 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
         return status;
     }
 
+    /**
+     * Method that gets the win points of the object
+     * @return the win points of the object
+     */
     @Override
     public int getWinPoints() {
         return winPoints;

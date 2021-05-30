@@ -21,13 +21,19 @@ public class Market implements LeaderAbility {
         this.transformTo = transformTo;
     }
 
-
+    /**
+     * Third ability: when the player gets white marbles from market, player can choose one of the resources to get
+     * @return The resource to get in exchange for white marble
+     */
     @Override
     public WarehouseObjectType transformWhiteMarble() {
         return transformTo;
     }
 
-
+    /**
+     * Third ability: returns the color to what the white marble can be transformed
+     * @return the color to what the white marble can be transformed
+     */
     @Override
     public MarbleColor colorWhiteMarble() throws NoSuchMethodException {
         switch (transformTo) {
@@ -44,6 +50,10 @@ public class Market implements LeaderAbility {
         }
     }
 
+    /**
+     * Allows to receive the status of every object which implements this interface in the form of an ArrayList of Integer
+     * @return an ArrayList made of Integer
+     */
     @Override
     public ArrayList<Integer> getStatus() {
         ArrayList<Integer> status = new ArrayList<>();

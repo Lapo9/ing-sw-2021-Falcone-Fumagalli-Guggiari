@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * The class that manages tho operations on the 2 leaders.
+ * Manages tho operations on the 2 leaders of the player
  */
 public class LeadersSpace implements HasStatus, WinPointsCountable {
 
@@ -114,11 +114,19 @@ public class LeadersSpace implements HasStatus, WinPointsCountable {
         leaders.get(index).discard();
     }
 
+    /**
+     * Method that gets the win points of the object
+     * @return the win points of the object
+     */
     @Override
     public int getWinPoints() {
         return leaders.get(0).getWinPoints() + leaders.get(1).getWinPoints();
     }
 
+    /**
+     * Allows to receive the status of every object which implements this interface in the form of an ArrayList of Integer
+     * @return an ArrayList made of 30 Integer
+     */
     @Override
     public ArrayList<Integer> getStatus() {
         ArrayList<Integer> status = new ArrayList<>();
