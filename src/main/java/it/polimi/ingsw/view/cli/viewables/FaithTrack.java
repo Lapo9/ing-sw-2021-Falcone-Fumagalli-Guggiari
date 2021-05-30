@@ -47,7 +47,7 @@ public class FaithTrack implements Viewable {
 
     @Override
     public String toString() {
-        return getPlayersInfo();
+        return getPlayersInfo() + getFaithTrack();
     }
 
     private String getPlayersInfo() {
@@ -126,7 +126,7 @@ public class FaithTrack implements Viewable {
             return new String("      ");
         else
             return new String("    ");*/
-        return new String("         ");
+        return new String("        " + String.valueOf((char) 8196) + String.valueOf((char) 8198));
     }
 
     private String rightColor(int number) {
@@ -136,6 +136,15 @@ public class FaithTrack implements Viewable {
             return "\033[0;32m☑\033[0m"; //Active "));
         else             //discarded
             return "\033[0;31m☒\033[0m";  //Discarded "));
+    }
+
+    private String getFaithTrack() {
+        String tmp = "\n";
+
+        tmp = tmp.concat("0  1  2  3  4  5  6  7  8  9 " + String.valueOf((char)8194) + "10 11 12 13 14 15 16 17 18 19 20 21 22 23 24\n");
+        tmp = tmp.concat("▄  ▄  ▄  ▄  ▄  \u001B[33m▄  ▄  ▄  \033[0;31m▄\033[0m  ▄  ▄  ▄  \u001B[33m▄  ▄  ▄  ▄  \033[0;31m▄\033[0m  ▄  ▄  \u001B[33m▄  ▄  ▄  ▄  ▄  \033[0;31m▄\033[0m\n");
+
+        return tmp;
     }
 }
 
