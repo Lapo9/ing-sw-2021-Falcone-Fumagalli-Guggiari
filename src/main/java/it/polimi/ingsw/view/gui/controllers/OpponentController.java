@@ -22,6 +22,7 @@ import java.util.Arrays;
 
 import static it.polimi.ingsw.model.development.DevelopmentCard.*;
 import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getContainedSupplies;
+import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getTypeByNumber;
 import static java.lang.String.valueOf;
 
 public class OpponentController extends SubSceneController{
@@ -212,6 +213,8 @@ public class OpponentController extends SubSceneController{
 
         leader1.setImage(new Image(LeaderCard.getUrl(leaderCardId)));
 
+        producerPane1.setVisible(false);
+
         //if the leader is inactive, make him black and white. If it is discarded hide him. If it is producer or depot show the correct panes.
         if (arr[1] == 0){
             ColorAdjust tmp = new ColorAdjust();
@@ -227,6 +230,8 @@ public class OpponentController extends SubSceneController{
             producerPane1.setVisible(true);
             depotPane1.setVisible(false);
             leader1group.setVisible(true);
+            mutableProduction1.setVisible(true);
+            mutableProduction1.setImage(new Image(getTypeByNumber(arr[4]).getUrl()));
 
             //set producer pane
             coin1.setText(String.valueOf(arr[5]));
@@ -270,6 +275,8 @@ public class OpponentController extends SubSceneController{
 
         leader2.setImage(new Image(LeaderCard.getUrl(leaderCardId)));
 
+        producerPane2.setVisible(false);
+
         //if the leader is inactive, make him black and white. If it is discarded hide him. If it is producer or depot show the correct panes.
         if (arr[1] == 0){
             ColorAdjust tmp = new ColorAdjust();
@@ -285,6 +292,8 @@ public class OpponentController extends SubSceneController{
             producerPane2.setVisible(true);
             depotPane2.setVisible(false);
             leader2group.setVisible(true);
+            mutableProduction2.setVisible(true);
+            mutableProduction2.setImage(new Image(getTypeByNumber(arr[4]).getUrl()));
 
             //set producer pane
             coin2.setText(String.valueOf(arr[5]));
