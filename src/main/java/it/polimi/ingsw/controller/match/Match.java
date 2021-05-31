@@ -372,7 +372,7 @@ public class Match {
 
         //first, check if the active player triggered a vatican report
         if(triggeredPope){
-            for (Player p : players){
+            for (Player p : players.stream().filter(plr -> plr != player).collect(Collectors.toList())){
                 p.getDashboard().vaticanReport();
             }
         }
