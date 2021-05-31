@@ -116,4 +116,23 @@ public class Paycheck implements AcceptsSupplies, HasStatus {
 
         return status;
     }
+
+    /**
+     * Returns an integer that indicates the source of the given WarehouseObjectType.
+     * @param wot a WarehouseObjectType
+     * @return 0 if the given WarehouseObjectType isn't contained in any production depot,
+     *         1 if there are at least two different given WarehouseObjectType, one from a depot and the other from the coffer,
+     *         2 if the given WarehouseObjectType is from a depot,
+     *         3 if the given WarehouseObjectType is from the coffer
+     */
+    public int getSource(WarehouseObjectType wot) {
+        if(fromDepot.getQuantity(wot) != 0 && fromStrongbox.getQuantity(wot) != 0)
+            return 1;
+        else if(fromDepot.getQuantity(wot) != 0 && fromStrongbox.getQuantity(wot) == 0)
+            return 2;
+        else if(fromDepot.getQuantity(wot) == 0 && fromStrongbox.getQuantity(wot) != 0)
+            return 3;
+        else
+            return 0;
+    }
 }

@@ -13,6 +13,7 @@ import it.polimi.ingsw.model.faith_track.FaithTrack;
 import it.polimi.ingsw.model.leaders.LeaderCard;
 import it.polimi.ingsw.model.leaders.LeadersPick;
 import it.polimi.ingsw.model.leaders.LeadersSpace;
+import it.polimi.ingsw.model.leaders.leader_abilities.LeaderAbility;
 import it.polimi.ingsw.model.match_items.DevelopmentGrid;
 import it.polimi.ingsw.model.match_items.LeadersList;
 import it.polimi.ingsw.model.match_items.MarketDirection;
@@ -372,8 +373,18 @@ public class Dashboard implements HasStatus{
             return;
         }
 
+        int index = 0;
+
+        if(from.getType() == DepotID.DepotType.LEADER_PRODUCTION || from.getType() == DepotID.DepotType.DEVELOPMENT || from.getType() == DepotID.DepotType.BASE_PRODUCTION)
+            index = productionManager.getSource(type);
+        if(from.getType() == DepotID.DepotType.PAYCHECK)
+            index = paycheck.getSource(type);
+
         //remove supply from specified container
         containers.get(from.getType()).removeSupply(from, type, to);
+
+        if(to == DepotID.COFFER && (index == 1 || index == 3))
+            from = DepotID.COFFER;
 
         //add supply to specified container, if you cannot, put supply back to original container and throw the exception
         try{
@@ -702,6 +713,16 @@ public class Dashboard implements HasStatus{
     public ArrayList<DepotID> getAllowedDepots(DepotID from, WarehouseObjectType type) {
         ArrayList<DepotID> res = new ArrayList<>();
 
+        int index = 0;
+
+        if(from.getType() == DepotID.DepotType.LEADER_PRODUCTION || from.getType() == DepotID.DepotType.DEVELOPMENT || from.getType() == DepotID.DepotType.BASE_PRODUCTION)
+            index = productionManager.getSource(type);
+        if(from.getType() == DepotID.DepotType.PAYCHECK)
+            index = paycheck.getSource(type);
+
+        if(index == 1)
+            res.add(DepotID.COFFER);
+
         res.addAll(depotsManager.getAllowedDepots(from, type));
 
         res.addAll(productionManager.getAllowedDepots(from, type));
@@ -711,6 +732,11 @@ public class Dashboard implements HasStatus{
         }
 
         if (coffer.additionAllowed(type, from)){
+            res.add(DepotID.COFFER);
+        }
+
+        if(index == 3) {
+            res = new ArrayList<>();
             res.add(DepotID.COFFER);
         }
 

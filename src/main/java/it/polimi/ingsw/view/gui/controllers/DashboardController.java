@@ -76,8 +76,8 @@ public class DashboardController extends SceneController implements ResettableSc
         developmentGridController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
 
         developmentSpace1Controller.setId("dev1");
-        developmentSpace1Controller.setId("dev2");
-        developmentSpace1Controller.setId("dev3");
+        developmentSpace2Controller.setId("dev2");
+        developmentSpace3Controller.setId("dev3");
         baseProductionController.setId("base");
         leader1Controller.setId("leader1");
         leader2Controller.setId("leader2");
