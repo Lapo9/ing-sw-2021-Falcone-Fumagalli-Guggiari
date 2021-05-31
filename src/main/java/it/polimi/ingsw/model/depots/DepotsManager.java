@@ -67,7 +67,7 @@ public class DepotsManager implements AcceptsSupplies {
 
         else if (from.getType() == DepotID.DepotType.LEADER_DEPOT){
             try {
-                leadersSpace.getLeaderAbility(from.getNum()).addSupply(wot);
+                leadersSpace.getLeaderAbility(from.getNum()).removeSupply(wot);
             } catch (LeaderException | NoSuchMethodException e){/*TODO terminate program*/}
         }
 

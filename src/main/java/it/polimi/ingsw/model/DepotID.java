@@ -121,7 +121,12 @@ public enum DepotID {
         else if (s.equals("base")){
             return BASE_PRODUCTION;
         }
-        //FIXME leaders
+        else if (s.equals("leader1")){
+            return LEADER1;
+        }
+        else if (s.equals("leader2")){
+            return LEADER2;
+        }
 
         return null;
 

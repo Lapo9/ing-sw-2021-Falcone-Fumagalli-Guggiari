@@ -49,11 +49,14 @@ public class LeaderController extends SubSceneController {
     @Override
     public void initialize() {
         super.initialize();
-        number = 1;// Integer.parseInt(id.substring(id.length() - 1)); //assuming the ID is in the form of leaderX
     }
 
     @Override
     public void update(int[] completeUpdate) {
+        if (number == 0){
+            number = Integer.parseInt(id.substring(id.length() - 1)); //assuming the ID is in the form of leaderX
+        }
+
         leaderCardId = completeUpdate[0];
         if(leaderCardId == 0){
             return;
