@@ -120,7 +120,7 @@ public class DepotsManagerTest {
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         Pair<SupplyContainer, SupplyContainer> dpt = new Pair<>(dptmng.clearSupplies(DepotID.LEADER1));
         SupplyContainer result = new SupplyContainer(dpt.first.sum(dpt.second));
-        int[] expectedResult = {0, 2, 0, 0, 0};
+        int[] expectedResult = {0, 1, 0, 0, 0};
         int[] actualResult = {result.getQuantity(WarehouseObjectType.COIN),
                               result.getQuantity(WarehouseObjectType.SERVANT),
                               result.getQuantity(WarehouseObjectType.SHIELD),

@@ -99,24 +99,24 @@ public class ProductionManager implements AcceptsSupplies {
         //actual remove, cannot fail cause of the previous check
         try {
             if (slot.getType() == DepotID.DepotType.DEVELOPMENT) {
-                developments.removeSupply(slot, wot);
+                developments.removeSupply(slot, wot, to);
             }
 
             else if (slot.getType() == DepotID.DepotType.BASE_PRODUCTION) {
                 baseProduction.removeSupply(wot, to);
-                //in this way it works -> baseProduction.removeSupply(wot, DepotID.DEVELOPMENT2);
             }
 
             else if (slot.getType() == DepotID.DepotType.LEADER_PRODUCTION) {
                 try {
-                    leadersSpace.getLeaderAbility(slot.getNum()).removeSupply(wot);
+                    leadersSpace.getLeaderAbility(slot.getNum()).removeSupply(wot, to);
                 } catch (LeaderException | NoSuchMethodException e) {/*TODO terminate program*/}
             }
 
             else {
                 /*TODO terminate program*/
             }
-        } catch(Exception e){/*TODO terminate the program because we checked before, so everything should go smooth*/}
+        } catch(Exception e){
+            e.printStackTrace();/*TODO terminate the program because we checked before, so everything should go smooth*/}
     }
 
     /**
