@@ -28,7 +28,7 @@
             <Font name="Vivaldi Italic" size="36.0" />
          </font>
       </Text>
-      <ImageView fx:id="activeSquare" fitHeight="97.0" fitWidth="165.0" layoutX="-7.0" layoutY="2.0" onMouseClicked="#activeSquareClicked" pickOnBounds="true">
+      <ImageView fx:id="activeSquare" fitHeight="97.0" fitWidth="165.0" layoutX="-7.0" layoutY="2.0" onMouseClicked="#activeSquareClicked" pickOnBounds="true" visible="false">
          <image>
             <Image url="@../pictures/miscellaneous/rectangularActive.png" />
          </image>

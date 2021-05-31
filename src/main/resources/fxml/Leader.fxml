@@ -9,12 +9,12 @@
 
 <Group fx:id="leaderGroup" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.LeaderController">
    <children>
-      <ImageView fx:id="leader" fitHeight="305.0" fitWidth="160.0" layoutX="68.0" onMouseClicked="#leaderClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leader" fitHeight="305.0" fitWidth="160.0" layoutX="68.0" onMouseClicked="#leaderClicked" onMouseEntered="#leaderEntered" onMouseExited="#leaderExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/leaders/leader7.png" />
          </image>
       </ImageView>
-      <Group fx:id="producerPane" layoutY="18.462890625">
+      <Group fx:id="producerPane" layoutY="18.462890625" visible="false">
          <children>
             <Group layoutY="79.0">
                <children>
@@ -58,7 +58,7 @@
                         <Image url="@../pictures/miscellaneous/stone.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="produce" fitHeight="38.0" fitWidth="40.0" layoutX="16.0" layoutY="-76.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="produce" fitHeight="38.0" fitWidth="40.0" layoutX="16.0" layoutY="-76.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../pictures/miscellaneous/tick.png" />
                      </image>
@@ -94,7 +94,7 @@
             </Group>
          </children>
       </Group>
-      <Group fx:id="depotPane" layoutX="109.0" layoutY="170.0">
+      <Group fx:id="depotPane" layoutX="109.0" layoutY="170.0" visible="false">
          <children>
             <ImageView fx:id="depot2" fitHeight="29.0" fitWidth="38.0" layoutX="46.0" onMouseClicked="#depot2Clicked" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -108,12 +108,12 @@
             </ImageView>
          </children>
       </Group>
-      <ImageView fx:id="leaderActive" fitHeight="301.0" fitWidth="154.0" layoutX="69.0" onMouseClicked="#leaderActiveClicked" pickOnBounds="true">
+      <ImageView fx:id="leaderActive" fitHeight="301.0" fitWidth="154.0" layoutX="69.0" onMouseClicked="#leaderActiveClicked" pickOnBounds="true" visible="false">
          <image>
             <Image url="@../pictures/leaders/leaderClickable.png" />
          </image>
       </ImageView>
-      <Group fx:id="menu" layoutX="81.0" layoutY="39.0">
+      <Group fx:id="menu" layoutX="81.0" layoutY="39.0" visible="false">
          <children>
             <ImageView fx:id="activate" fitHeight="69.0" fitWidth="129.0" layoutX="2.0" onMouseClicked="#activateClicked" pickOnBounds="true" preserveRatio="true">
                <image>

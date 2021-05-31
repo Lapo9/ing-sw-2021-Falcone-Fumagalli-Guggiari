@@ -391,7 +391,12 @@ public class Match {
             }
         }
 
-        phase = TURN_END;
+        if (checkWinner()){
+            phase = GAME_OVER;
+        }
+        else {
+            phase = TURN_END;
+        }
     }
 
     private void move(Player player, String... args) {
@@ -433,10 +438,16 @@ public class Match {
 
         try {
             player.getDashboard().buyDevelopment(col, row, space);
-            phase = TURN_END;
+            if (checkWinner()){
+                phase = GAME_OVER;
+            }
+            else {
+                phase = TURN_END;
+            }
         } catch (Exception e){
             player.sendController("error " + e.getMessage());
         }
+
     }
 
     private void endTurn(Player player, String... args) {
@@ -488,7 +499,12 @@ public class Match {
 
         player.getDashboard().produce(Boolean.parseBoolean(args[1]), Boolean.parseBoolean(args[2]), Boolean.parseBoolean(args[3]), Boolean.parseBoolean(args[4]), Boolean.parseBoolean(args[5]), Boolean.parseBoolean(args[6]));
 
-        phase = TURN_END;
+        if (checkWinner()){
+            phase = GAME_OVER;
+        }
+        else {
+            phase = TURN_END;
+        }
     }
 
     private void swapBase(Player player, String... args) {
@@ -560,6 +576,12 @@ public class Match {
 
         try {
             player.getDashboard().discardLeader(Integer.parseInt(args[1])-1);
+            if (checkWinner()){
+                phase = GAME_OVER;
+            }
+            else {
+                phase = TURN_END;
+            }
         } catch (Exception e){
             player.sendController("error " + e.getMessage());
         }
@@ -739,5 +761,31 @@ public class Match {
             }
         }
     }
+
+
+    //checks if someone won, if so sends the players the game over
+    private synchronized boolean checkWinner(){
+        //check if the match ended
+        if (players.stream().anyMatch(p -> p.getDashboard().isMatchEnded())){
+            //find who won
+            Player winner = activePlayer;
+            for (Player p : players){
+                Pair<Integer, Integer> winnerPoints = winner.getDashboard().getWinPoints();
+                Pair<Integer, Integer> pPoints = p.getDashboard().getWinPoints();
+                if ((winnerPoints.first == pPoints.first && winnerPoints.second < pPoints.second) || winnerPoints.first < pPoints.first){
+                    winner = p;
+                }
+            }
+
+            //tell the players who won
+            broadcast("show endMatch");
+            broadcast("message " + winner.getName() + " won the match!");
+
+            return true;
+        }
+
+        return false;
+    }
+
 
 }

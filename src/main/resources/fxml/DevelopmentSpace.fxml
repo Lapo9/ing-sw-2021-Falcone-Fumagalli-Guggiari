@@ -42,7 +42,7 @@
             </Text>
          </children>
       </Group>
-      <ImageView fx:id="produce" fitHeight="38.0" fitWidth="40.0" layoutX="52.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="produce" fitHeight="38.0" fitWidth="40.0" layoutX="52.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../pictures/miscellaneous/tick.png" />
          </image>

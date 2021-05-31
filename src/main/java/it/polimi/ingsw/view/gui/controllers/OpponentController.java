@@ -206,6 +206,7 @@ public class OpponentController extends SubSceneController{
     }
 
     private void updateLeader1(int[] arr){
+
         int leaderCardId = arr[0];
         if(leaderCardId == 0){
             return;
@@ -215,15 +216,18 @@ public class OpponentController extends SubSceneController{
 
         producerPane1.setVisible(false);
 
-        //if the leader is inactive, make him black and white. If it is discarded hide him. If it is producer or depot show the correct panes.
+        //if the leader is discarded, make him black and white. If it is producer or depot show the correct panes.
         if (arr[1] == 0){
             ColorAdjust tmp = new ColorAdjust();
             tmp.setSaturation(0.0); //black and white
             leader1.setEffect(tmp);
-            leader1group.setVisible(true);
+            leader1group.setVisible(false);
         }
         else if (arr[1] == 2){
-            leader1group.setVisible(false);
+            ColorAdjust tmp = new ColorAdjust();
+            tmp.setSaturation(-1.0); //black and white
+            leader1.setEffect(tmp);
+            leader1group.setVisible(true);
         }
         else if (LeaderCard.getAbility(leaderCardId) instanceof Producer){
             leader1.setEffect(null); //remove any possible effect
@@ -277,15 +281,15 @@ public class OpponentController extends SubSceneController{
 
         producerPane2.setVisible(false);
 
-        //if the leader is inactive, make him black and white. If it is discarded hide him. If it is producer or depot show the correct panes.
+        //if the leader is discarded, make him black and white. If it is producer or depot show the correct panes.
         if (arr[1] == 0){
-            ColorAdjust tmp = new ColorAdjust();
-            tmp.setSaturation(0.0); //black and white
-            leader2.setEffect(tmp);
-            leader2group.setVisible(true);
+            leader2group.setVisible(false);
         }
         else if (arr[1] == 2){
-            leader2group.setVisible(false);
+            ColorAdjust tmp = new ColorAdjust();
+            tmp.setSaturation(-1.0); //black and white
+            leader2.setEffect(tmp);
+            leader2group.setVisible(true);
         }
         else if (LeaderCard.getAbility(leaderCardId) instanceof Producer){
             leader2.setEffect(null); //remove any possible effect

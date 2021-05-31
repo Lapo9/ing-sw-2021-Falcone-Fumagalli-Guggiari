@@ -246,4 +246,18 @@ public class LeaderController extends SubSceneController {
         userInterpreter.execute("swapLeader " + number + " " + WarehouseObjectTypeController.getTypeByUrl(producerInput.getUrl()).toString().toLowerCase(Locale.ROOT));
     }
 
+    @FXML
+    void leaderEntered(){
+        leader.setEffect(null);
+    }
+
+    @FXML
+    void leaderExited(){
+        if (offlineInfo.getLeaderStatus(number) == OfflineInfo.LeaderStatus.INACTIVE){
+            ColorAdjust tmp = new ColorAdjust();
+            tmp.setSaturation(-1.0); //black and white
+            leader.setEffect(tmp);
+        }
+    }
+
 }
