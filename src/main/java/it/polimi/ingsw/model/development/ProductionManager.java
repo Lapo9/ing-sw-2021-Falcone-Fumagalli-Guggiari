@@ -230,12 +230,12 @@ public class ProductionManager implements AcceptsSupplies {
         }
 
 
-        return removeFromSourceContainers(removed); //remove the resources from the source containers (first try to remove from coffer, then from strongbox)
+        return removeFromSourceContainers(removed); //remove the resources from the source containers (first try to remove from strongbox, then from depots)
     }
 
 
     /**
-     * Removes the resources from the source containers (first try to remove from coffer, then from strongbox)
+     * Removes the resources from the source containers (first try to remove from strongbox, then from depots)
      * @param toRemove the SupplyContainer to empty
      * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
      */
@@ -309,7 +309,7 @@ public class ProductionManager implements AcceptsSupplies {
         //sum inputs in temporary container and remove them from the source containers
         SupplyContainer tmp = new SupplyContainer();
         tmp.sum(developmentsInputs).sum(baseInputs).sum(leader1Inputs).sum(leader2Inputs);
-        removeFromSourceContainers(tmp); //remove the resources from the source containers (first try to remove from coffer, then from strongbox)
+        removeFromSourceContainers(tmp); //remove the resources from the source containers (first try to remove from strongbox, then from depots)
 
 
         //sum output in temporary container
