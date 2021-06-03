@@ -8,7 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.shape.Rectangle?>
 
-<Group fx:id="marketplaceGroup" visible="false" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.MarketplaceController">
+<Group fx:id="marketplaceGroup" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.MarketplaceController">
    <children>
       <ImageView fitHeight="424.0" fitWidth="638.0" layoutX="-100.0" layoutY="-75.0" pickOnBounds="true" preserveRatio="true">
          <image>

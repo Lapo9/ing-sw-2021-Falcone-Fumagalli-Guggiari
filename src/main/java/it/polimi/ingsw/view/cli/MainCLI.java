@@ -33,6 +33,9 @@ public class MainCLI {
 
         LeaderCardSpace leaders = factory.buildLeaderCardSpace(1, LEADER_CARD_SPACE, true);
 
+        Marketplace marketplace = factory.buildMarketplace(MARKETPLACE);
+        DevelopmentGrid developmentGrid = factory.buildDevelopmentGrid(DEVELOPMENT_GRID);
+
         createView("dashboard", screen,
                 coffer1,
                 warehouse1,
@@ -48,15 +51,17 @@ public class MainCLI {
                 factory.buildSupplyContainer(1, PAYCHECK_STRONGBOX, "Paycheck strongbox"),
                 factory.buildSupplyContainer(1, PAYCHECK_DEPOTS, "Paycheck depots"),
                 leaders,
-                factory.buildDevelopmentGrid(DEVELOPMENT_GRID));
+                developmentGrid);
 
         createView("marketplace", screen,
                 warehouse1,
                 leaders,
-                factory.buildMarketplace(MARKETPLACE));
+                marketplace);
 
         createView("preMatch", screen,
-                factory.buildLeaderPick(1, LEADER_PICK));
+                factory.buildLeaderPick(1, LEADER_PICK),
+                developmentGrid,
+                marketplace);
 
         createView("faithTrack", screen,
                 factory.buildFaithTrack(FAITH_TRACK));

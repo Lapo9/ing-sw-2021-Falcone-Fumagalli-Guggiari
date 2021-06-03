@@ -4,7 +4,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 
-<Group fx:id="developmentGroup" visible="false" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.DevelopmentGridController">
+<Group fx:id="developmentGroup" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.DevelopmentGridController">
    <children>
       <ImageView fitHeight="666.0" fitWidth="910.0" layoutX="-100.0" layoutY="-75.0" pickOnBounds="true" preserveRatio="true">
          <image>

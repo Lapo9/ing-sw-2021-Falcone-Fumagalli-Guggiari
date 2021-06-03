@@ -35,6 +35,8 @@ public class PreMatchController extends SceneController{
     @FXML private Group selection2;
     @FXML private ImageView supply2;
     @FXML private ImageView go;
+    @FXML private DevelopmentGridController developmentGridController;
+    @FXML private MarketplaceController marketplaceController;
 
     private WarehouseObjectTypeController supply1Data = COIN;
     private WarehouseObjectTypeController supply2Data = COIN;
@@ -86,6 +88,14 @@ public class PreMatchController extends SceneController{
                         picks.get(i).setImage(new Image(LeaderCard.getUrl(idsActive.get(i).first)));
                     }
                 }
+            }
+
+            else if (completeUpdate[0] == 4) {
+                marketplaceController.update(Arrays.copyOfRange(completeUpdate, 1, completeUpdate.length));
+            }
+
+            else if (completeUpdate[0] == 5) {
+                developmentGridController.update(Arrays.copyOfRange(completeUpdate, 1, completeUpdate.length));
             }
         });
     }
@@ -174,6 +184,16 @@ public class PreMatchController extends SceneController{
     void goExited() {
         //go.setDisable(false);
         go.setEffect(null);
+    }
+
+    @FXML
+    void showMarketplaceEntered() {
+        marketplaceController.show();
+    }
+
+    @FXML
+    void showMarketplaceExited() {
+        marketplaceController.hide();
     }
 
 }

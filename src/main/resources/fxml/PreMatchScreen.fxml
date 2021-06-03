@@ -120,7 +120,7 @@
             </Group>
          </children>
       </Group>
-      <Group fx:id="selection1" layoutX="239.0" layoutY="63.0">
+      <Group fx:id="selection1" layoutX="162.0" layoutY="63.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="-81.0" layoutY="38.0" onMouseClicked="#arrowDown1Clicked" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
@@ -145,7 +145,7 @@
             </ImageView>
          </children>
       </Group>
-      <Group fx:id="selection2" layoutX="606.0" layoutY="63.0">
+      <Group fx:id="selection2" layoutX="445.0" layoutY="63.0">
          <children>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="-81.0" layoutY="38.0" onMouseClicked="#arrowDown2Clicked" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
@@ -186,5 +186,12 @@
             <Bloom threshold="0.0" />
          </effect>
       </Label>
+      <fx:include fx:id="marketplace" layoutX="600.0" source="Marketplace.fxml" />
+      <fx:include fx:id="developmentGrid" layoutX="-120.0" layoutY="150.0" scaleX="1.1" scaleY="1.1" source="DevelopmentGrid.fxml" />
+      <ImageView fitHeight="77.0" fitWidth="75.0" layoutX="701.0" layoutY="40.0" onMouseEntered="#showMarketplaceEntered" onMouseExited="#showMarketplaceExited" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/marbles/redMarble.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
