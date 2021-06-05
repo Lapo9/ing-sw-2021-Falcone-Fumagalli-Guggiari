@@ -30,6 +30,7 @@ public class DevelopmentGridCardController extends SubSceneController {
     public void update(int[] completeUpdate) {
         if (completeUpdate[0] == 0){
             cardGroup.setVisible(false);
+            return;
         }
         card.setImage(new Image(DevelopmentCard.getUrl(completeUpdate[0])));
     }

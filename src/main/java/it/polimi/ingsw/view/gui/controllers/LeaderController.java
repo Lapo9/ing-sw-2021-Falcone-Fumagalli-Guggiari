@@ -170,7 +170,13 @@ public class LeaderController extends SubSceneController {
     void leaderActiveClicked() {
         //this should never happen
         if (offlineInfo.getSelectedItem().isBlank()){
-            controllerInterpreter.execute("reset"); //TODO add reset to controllerInterpreter
+            controllerInterpreter.execute("reset");
+            return;
+        }
+
+        if (offlineInfo.getSelectedItem().contains("marble")){
+            userInterpreter.execute("moveMarble " + offlineInfo.getSelectedItem().split(" ")[1] + " leader" + number);
+            controllerInterpreter.execute("reset");
             return;
         }
 
