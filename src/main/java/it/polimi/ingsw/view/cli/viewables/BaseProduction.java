@@ -9,6 +9,9 @@ import static it.polimi.ingsw.model.WarehouseObjectType.*;
 import static it.polimi.ingsw.model.WarehouseObjectType.STONE;
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
+/**
+ * Represents the BaseProduction of the player
+ */
 public class BaseProduction implements Viewable {
 
     private HashMap<Integer, HashMap<WarehouseObjectType, Integer>> prod = new HashMap<>();
@@ -17,6 +20,9 @@ public class BaseProduction implements Viewable {
     private HashMap<WarehouseObjectType, Integer> mutableOutput = new HashMap<>();
     private HashMap<WarehouseObjectType, Integer> currentSupply = new HashMap<>();
 
+    /**
+     * Class constructor
+     */
     BaseProduction() {
         mutableInput1.put(WarehouseObjectType.COIN, 0);
         mutableInput1.put(WarehouseObjectType.SERVANT, 0);
@@ -48,6 +54,14 @@ public class BaseProduction implements Viewable {
         prod.put(3, currentSupply);
     }
 
+    /**
+     * Updates the class constructor using numbers from the getStatus
+     * @param update array composed of 18 integer (from 0 to 4, from 7 to 11 and from 13 to 17 there are only zeros, design error)
+     *               5 -> Integer corresponding to the resource of the first mutable input
+     *               6 -> Integer corresponding to the resource of the second mutable input
+     *               12 -> Integer corresponding to the resource of the desired mutable output
+     *               (go to intToResource method)
+     */
     @Override
     public void update(int[] update) {
         //reset everything
@@ -88,6 +102,11 @@ public class BaseProduction implements Viewable {
         currentSupply.put(WarehouseObjectType.FAITH_MARKER, update[17]);
     }
 
+    /**
+     * Creates the match between the given int and the corresponding resource in the enum WarehouseObjectType
+     * @param i int corresponding to the resource wanted
+     * @return the resource wanted in the form of WarehouseObjectType
+     */
     private WarehouseObjectType intToResource(int i) {
         if (i == 0){
             return WarehouseObjectType.COIN;
@@ -107,6 +126,10 @@ public class BaseProduction implements Viewable {
         else return WarehouseObjectType.NO_TYPE;
     }
 
+    /**
+     * Prints the needed resources to have the production
+     * @return string with resources
+     */
     @Override
     public String toString() {
         return BOLD("Base Production:\n") +
@@ -134,7 +157,12 @@ public class BaseProduction implements Viewable {
                 ;
     }
 
-
+    /**
+     * Helps to "compress" the string, so we have "" if the resource does not exist and we don't have empty spaces
+     * @param i index of the production (mutableInput1(0)/mutableInput2(1)/mutableOutput(2))
+     * @param wot type of resource, used to convert resource in colour
+     * @return one marker for the type of resource or an empty string if the resource does not exist
+     */
     private String deleteZeros (int i, WarehouseObjectType wot) {
         if (prod.get(i).get(wot) == 0) {
             return "";

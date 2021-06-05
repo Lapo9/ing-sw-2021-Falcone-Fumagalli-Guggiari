@@ -12,13 +12,16 @@ public enum Style {
     WHITE  ("37"),       BACK_WHITE   ("47"),
     BLACK  ("30"),       BACK_BLACK   ("40");
 
-    private String colorCode;
+    private String colorCode; //the code of the chosen color
 
     private Style(String colorCode){
         this.colorCode = colorCode;
     }
 
-
+    /**
+     * Transform the name of the style in his corresponding number
+     * @return the code of the chosen color
+     */
     public String toString(){
         return colorCode;
     }
