@@ -11,10 +11,7 @@ import it.polimi.ingsw.model.match_items.LeadersList;
 import it.polimi.ingsw.model.match_items.MarketDirection;
 import it.polimi.ingsw.model.match_items.Marketplace;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
@@ -31,9 +28,14 @@ public class Match {
     private HashMap<String, BiConsumer<Player, String[]>> commands = new HashMap<>();
     private ModelObserver modelObserver = new ModelObserver();
     private boolean isSinglePlayer;
+    private MatchManager matchManager;
+    private String matchId;
 
 
-    Match(Player leader, boolean isSinglePlayer) throws MatchException {
+    Match(Player leader, boolean isSinglePlayer, MatchManager matchManager, String matchId) throws MatchException {
+        this.matchManager = matchManager;
+        this.matchId = matchId;
+
         marketplace.attach(modelObserver);
         developmentGrid.attach(modelObserver);
 
@@ -44,6 +46,41 @@ public class Match {
         activePlayer = leader;
         addPlayer(leader);
     }
+
+
+
+    Match(String status, MatchManager matchManager, String matchId) {
+
+        this.matchManager = matchManager;
+        this.matchId = matchId;
+        setDefaultCommands();
+
+        String[] playersNames = status.split(" xXx ")[2].split(" ");
+        String[] playersStati = Arrays.copyOfRange(status.split(" xXx "), 6, 6 + playersNames.length-1);
+
+        //restore players
+        for(int i = 0; i < playersNames.length; ++i) {
+            try {
+                players.add(new Player(playersNames[i], this, i, playersStati[i]));
+            } catch (Exception e){
+                endMatch();
+                return;
+            }
+        }
+        activePlayer = players.get(Integer.parseInt(status.split(" xXx ")[3]));
+
+        isSinglePlayer = Boolean.parseBoolean(status.split(" xXx ")[1]); //type of match
+
+        //restore match items FIXME add those methods to marketplace and development grid
+        //developmentGrid = new DevelopmentGrid(Arrays.asList(status.split(" xXx ")[4]).stream().mapToInt(Integer::parseInt).toArray());
+        //marketplace = new Marketplace(Arrays.asList(status.split(" xXx ")[5]).stream().mapToInt(Integer::parseInt).toArray());
+
+        developmentGrid.attach(modelObserver);
+        marketplace.attach(modelObserver);
+
+        phase = TURN_START; //it's always saved at the beginning of a turn
+    }
+
 
 
 
@@ -161,6 +198,12 @@ public class Match {
     }
 
     private void dead(Player player, String... args) {
+        //if no player is active, end the match
+        if (players.stream().filter(p -> p.isConnected()).count() == 0){
+            endMatch();
+            return;
+        }
+
         switch (phase) {
             case LOBBY:
                 //if the leader disconnected and there is another active player replace him
@@ -188,8 +231,6 @@ public class Match {
                 update("pickLeaders 1 2", player);
                 return;
         }
-
-
 
         if(player == activePlayer) {
             switch (phase) {
@@ -401,6 +442,8 @@ public class Match {
 
         if (checkWinner()){
             phase = GAME_OVER;
+            endMatch();
+            return;
         }
         else {
             phase = TURN_END;
@@ -448,6 +491,8 @@ public class Match {
             player.getDashboard().buyDevelopment(col, row, space);
             if (checkWinner()){
                 phase = GAME_OVER;
+                endMatch();
+                return;
             }
             else {
                 phase = TURN_END;
@@ -478,6 +523,8 @@ public class Match {
         activePlayer = players.get(index);
 
         phase = TURN_START;
+
+        matchManager.saveMatchState(matchId); //save match state
 
         //if the player is alive, tell him it's his turn to play, if not perform auto action
         if(activePlayer.isConnected()) {
@@ -517,6 +564,8 @@ public class Match {
 
         if (checkWinner()){
             phase = GAME_OVER;
+            endMatch();
+            return;
         }
         else {
             phase = TURN_END;
@@ -599,6 +648,8 @@ public class Match {
 
             if (checkWinner()){
                 phase = GAME_OVER;
+                endMatch();
+                return;
             }
             else {
                 phase = TURN_END;
@@ -800,7 +851,7 @@ public class Match {
 
             //tell the players who won
             broadcast("show endMatch");
-            broadcast("message " + winner.getName() + " won the match!");
+            broadcast("message " + winner.getName() + " won the match! " + winner.getDashboard().getWinPoints() + " points!");
 
             return true;
         }
@@ -812,9 +863,36 @@ public class Match {
     private synchronized void extractSinglePlayerTile(){
         boolean matchEnded = activePlayer.getDashboard().extractActionTile();
 
-        activePlayer.sendController("show endMatch");
-        activePlayer.sendController("message You LOST!");
+        if (matchEnded) {
+            phase = GAME_OVER;
+            activePlayer.sendController("show endMatch");
+            activePlayer.sendController("message You LOST!");
+            endMatch();
+            return;
+        }
     }
 
+
+    public synchronized void endMatch(){
+        players.forEach(p -> p.destroy());
+        matchManager.notifyMatchEnded(matchId);
+    }
+
+
+    public synchronized ArrayList<Player> getPlayers(){
+        return players;
+    }
+
+    public synchronized Pair<DevelopmentGrid, Marketplace> getMatchItems() {
+        return new Pair<>(developmentGrid, marketplace);
+    }
+
+    public synchronized int getActivePlayer(){
+        return activePlayer.getOrder();
+    }
+
+    public synchronized boolean isSinglePlayer(){
+        return isSinglePlayer;
+    }
 
 }

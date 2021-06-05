@@ -11,10 +11,12 @@ import java.util.Set;
 public class ListeningSocket {
 
     private ServerSocket listeningSocket;
-    private MatchManager matchManager = new MatchManager();
+    private MatchManager matchManager;
 
 
-    public ListeningSocket(){}
+    public ListeningSocket(boolean recovery){
+        matchManager = new MatchManager(recovery);
+    }
 
 
     public void start() {

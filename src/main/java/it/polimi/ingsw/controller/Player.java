@@ -9,7 +9,9 @@ import it.polimi.ingsw.model.Dashboard;
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public class Player {
 
@@ -37,6 +39,19 @@ public class Player {
         }
 
         new Thread(() -> handshake(matchManager)).start();
+    }
+
+
+    public Player(String name, Match match, int order, String dashboard) throws Exception{
+        this.name = name;
+        this.match = match;
+        this.order = order;
+        int[] status = Arrays.asList(dashboard.split(", ")).stream().mapToInt(Integer::parseInt).toArray();
+
+        this.dashboard = new Dashboard(status, name);
+
+        selectedLeadersInPreMatch = 2;
+        selectedItemsInPreMatch = order == 0 ? 0 : order == 1 ? 1 : order == 2 ? 1 : order == 3 ? 2 : 0;
     }
 
 
@@ -234,7 +249,7 @@ public class Player {
     }
 
 
-    private void destroy() {
+    public synchronized void destroy() {
         //if this thread called destroy first
         if (setDestroy(true)) {
             System.out.print("\n" + name + " disconnected");
@@ -245,7 +260,7 @@ public class Player {
                     listenRoutineThread.join();
                     heartbeatThread.join();
                 } catch (InterruptedException ie) {
-                    ie.printStackTrace();
+
                 }
                 try {
                     setConnected(false);
