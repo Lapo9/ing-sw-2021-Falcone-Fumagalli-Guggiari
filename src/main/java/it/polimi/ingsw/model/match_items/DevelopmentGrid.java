@@ -39,13 +39,33 @@ public class DevelopmentGrid implements HasStatus {
 
 
     /**
-     * Create a fixed DevelopmentGrid.
+     * Creates a fixed DevelopmentGrid.
      * @param type needed to create a not-random DevelopmentGrid
      */
     public DevelopmentGrid(boolean type){
         grid = new ArrayList<ArrayList<DevelopmentCard>>();
         fill(true);
     }
+
+
+    /**
+     * Creates a DevelopmentGrid given an array of integer that contains cards id.
+     * @param status an array of integer in the same style of the status of the DevelopmentGrid
+     */
+    public DevelopmentGrid(int[] status) {
+        grid = new ArrayList<ArrayList<DevelopmentCard>>();
+        for(int i = 0; i<12; i++) {
+            ArrayList<DevelopmentCard> list = new ArrayList<DevelopmentCard>();
+            int index = 0;
+            for(int j = 0; j<4; j++) {
+                if (status[i + index] != 0)
+                    list.add(new DevelopmentCard(status[i + index]));
+                index = index + 12;
+            }
+            grid.add(list);
+        }
+    }
+
 
     /**
      * Returns the index of the ArrayList given column and row number.
@@ -205,8 +225,8 @@ public class DevelopmentGrid implements HasStatus {
      *              blue
      *              yellow
      *              blue
-     *
-     * @return the ArrayList made of 12 Integer
+     * and its repeated for four times
+     * @return the ArrayList made of 48 Integer
      */
     @Override
     public ArrayList<Integer> getStatus() {
@@ -217,6 +237,27 @@ public class DevelopmentGrid implements HasStatus {
                 status.add(0);
             else
                 status.add(list.get(0).getId());
+        }
+        for(int i = 0; i<12; i++){
+            ArrayList<DevelopmentCard> list = grid.get(i);
+            if(list.size() <= 1)
+                status.add(0);
+            else
+                status.add(list.get(1).getId());
+        }
+        for(int i = 0; i<12; i++){
+            ArrayList<DevelopmentCard> list = grid.get(i);
+            if(list.size() <= 2)
+                status.add(0);
+            else
+                status.add(list.get(2).getId());
+        }
+        for(int i = 0; i<12; i++){
+            ArrayList<DevelopmentCard> list = grid.get(i);
+            if(list.size() <= 3)
+                status.add(0);
+            else
+                status.add(list.get(3).getId());
         }
         return status;
     }

@@ -24,6 +24,50 @@ import static org.junit.Assert.*;
 public class DevelopmentGridTest {
 
     @Test
+    public void developmentGrid_classConstructor() {
+        int[] grid = {33, 37, 41, 45,
+                      17, 21, 25, 29,
+                       3,  5, 10,  0,
+                      34, 38, 42, 46,
+                      18, 22, 26, 30,
+                       4,  6, 11,  0,
+                      35, 39, 43, 47,
+                      19, 23, 27, 31,
+                       0,  7, 12,  0,
+                      36, 40, 44, 48,
+                      20, 24, 28, 32,
+                       0,  8,  0,  0};
+        DevelopmentGrid dvlpgrd = new DevelopmentGrid(grid);
+
+        ArrayList<Integer> status = new ArrayList<>(dvlpgrd.getStatus());
+        int[] expectedResult = {33, 37, 41, 45,
+                                17, 21, 25, 29,
+                                 3,  5, 10,  0,
+                                34, 38, 42, 46,
+                                18, 22, 26, 30,
+                                 4,  6, 11,  0,
+                                35, 39, 43, 47,
+                                19, 23, 27, 31,
+                                 0,  7, 12,  0,
+                                36, 40, 44, 48,
+                                20, 24, 28, 32,
+                                 0,  8,  0,  0};
+        int[] actualResult = {status.get(0), status.get(1), status.get(2),status.get(3),
+                status.get(4), status.get(5), status.get(6), status.get(7),
+                status.get(8), status.get(9), status.get(10), status.get(11),
+                status.get(12), status.get(13), status.get(14), status.get(15),
+                status.get(16), status.get(17), status.get(18), status.get(19),
+                status.get(20), status.get(21), status.get(22), status.get(23),
+                status.get(24), status.get(25), status.get(26), status.get(27),
+                status.get(28), status.get(29), status.get(30), status.get(31),
+                status.get(32), status.get(33), status.get(34), status.get(35),
+                status.get(36), status.get(37), status.get(38), status.get(39),
+                status.get(40), status.get(41), status.get(42), status.get(43),
+                status.get(44), status.get(45), status.get(46), status.get(47)};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void buyCard_lvlOneCardNoLeader() {
         DevelopmentGrid dvlpgrd = new DevelopmentGrid(false);
         DevelopmentCard card = null;
@@ -360,10 +404,28 @@ public class DevelopmentGridTest {
         ArrayList<Integer> status = new ArrayList<>(dvlpgrd.getStatus());
         int[] expectedResult = {33, 37, 41, 45,
                                 17, 21, 25, 29,
-                                 2,  5, 11,  0};
+                                 2,  5, 11,  0,
+                                34, 38, 42, 46,
+                                18, 22, 26, 30,
+                                 3,  6, 12,  0,
+                                35, 39, 43, 47,
+                                19, 23, 27, 31,
+                                 4,  7,  0,  0,
+                                36, 40, 44, 48,
+                                20, 24, 28, 32,
+                                 0,  8,  0,  0};
         int[] actualResult = {status.get(0), status.get(1), status.get(2),status.get(3),
                               status.get(4), status.get(5), status.get(6), status.get(7),
-                              status.get(8), status.get(9), status.get(10), status.get(11)};
+                              status.get(8), status.get(9), status.get(10), status.get(11),
+                              status.get(12), status.get(13), status.get(14), status.get(15),
+                              status.get(16), status.get(17), status.get(18), status.get(19),
+                              status.get(20), status.get(21), status.get(22), status.get(23),
+                              status.get(24), status.get(25), status.get(26), status.get(27),
+                              status.get(28), status.get(29), status.get(30), status.get(31),
+                              status.get(32), status.get(33), status.get(34), status.get(35),
+                              status.get(36), status.get(37), status.get(38), status.get(39),
+                              status.get(40), status.get(41), status.get(42), status.get(43),
+                              status.get(44), status.get(45), status.get(46), status.get(47)};
         assertArrayEquals(expectedResult, actualResult);
     }
 }

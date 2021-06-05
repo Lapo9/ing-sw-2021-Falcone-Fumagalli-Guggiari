@@ -13,6 +13,23 @@ import static org.junit.Assert.*;
 public class MarketplaceTest {
 
     @Test
+    public void marketplace_classConstructor() {
+        int[] market = {4, 0, 1, 2, 3, 4, 5, 0, 1, 3, 4, 5, 4};
+        Marketplace mrktplc = new Marketplace(market);
+        mrktplc.obtain(MarketDirection.HORIZONTAL, 1);
+        ArrayList<Integer> status = new ArrayList<>(mrktplc.getStatus());
+        int[] expectedResult = {4, 0, 1, 2,
+                                4, 5, 0, 4,
+                                1, 3, 4, 5,
+                                3};
+        int[] actualResult= {status.get(0), status.get(1), status.get(2), status.get(3),
+                status.get(4), status.get(5), status.get(6), status.get(7),
+                status.get(8), status.get(9), status.get(10), status.get(11),
+                status.get(12)};
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test
     public void obtain_Horizontal() {
         ArrayList<MarbleColor> mcolor = new ArrayList<>();
         mcolor.add(MarbleColor.YELLOW);

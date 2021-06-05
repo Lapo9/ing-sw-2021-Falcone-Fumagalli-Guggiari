@@ -39,7 +39,7 @@ public class Marketplace implements HasStatus {
         for(int i=0; i<12; i++){
             grid.add(i, numberToColor(status[i]));
         }
-        slide = numberToColor(status[13]);
+        slide = numberToColor(status[12]);
     }
 
 
