@@ -8,6 +8,7 @@ import static it.polimi.ingsw.view.cli.ViewableId.*;
 public class MainCLI {
 
     public static void main(String[] args) throws ViewException {
+
         ScreenCLI screen = new ScreenCLI();
 
         ServerSocket serverSocket = new ServerSocket();
