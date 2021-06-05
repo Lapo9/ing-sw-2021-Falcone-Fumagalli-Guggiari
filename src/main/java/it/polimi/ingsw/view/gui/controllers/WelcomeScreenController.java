@@ -64,7 +64,7 @@ public class WelcomeScreenController extends SceneController {
 
     @FXML
     private void singlePlayerClicked() {
-        //TODO
+        userInterpreter.execute("singlePlayer " + serverIp.getText() + " " + serverPort.getText() + " " + name.getText() + " " + matchId.getText());
     }
 
 

@@ -6,6 +6,7 @@ import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.effect.Glow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
@@ -19,6 +20,8 @@ public class PlayersController extends SubSceneController {
     @FXML private ImageView player2;
     @FXML private ImageView player3;
     @FXML private ImageView player4;
+
+    private boolean isSinglePlayer = false;
 
     private ArrayList<Pair<Double, Double>> centerCoordinates = new ArrayList<>(Arrays.asList(
             new Pair<>(310.0, 146.0),
@@ -56,23 +59,12 @@ public class PlayersController extends SubSceneController {
             new Pair<>(12.5, 12.5)
     ));
 
-    private ArrayList<TranslateTransition> moveAnimations = new ArrayList<>(Arrays.asList(
-            new TranslateTransition(new Duration(200)),
-            new TranslateTransition(new Duration(200)),
-            new TranslateTransition(new Duration(200)),
-            new TranslateTransition(new Duration(200))
-    ));
-
 
     @Override
     public void initialize() {
         super.initialize();
 
         ArrayList<ImageView> players = new ArrayList<>(Arrays.asList(player1, player2, player3, player4));
-
-        for (int i = 0; i < 4; ++i){
-            moveAnimations.get(i).setNode(players.get(i));
-        }
     }
 
 
@@ -83,23 +75,26 @@ public class PlayersController extends SubSceneController {
             players.get(3-i).setVisible(false);
         }
 
-        double fromX = completeUpdate[1] == 0 ? centerCoordinates.get(0).first : centerCoordinates.get(completeUpdate[1] - 1).first + playerOffset.get(completeUpdate[0]).first;
-        double fromY = completeUpdate[1] == 0 ? centerCoordinates.get(0).second : centerCoordinates.get(completeUpdate[1] - 1).second + playerOffset.get(completeUpdate[0]).second;
         double toX = centerCoordinates.get(completeUpdate[1]).first + playerOffset.get(completeUpdate[0]).first;
         double toY = centerCoordinates.get(completeUpdate[1]).second + playerOffset.get(completeUpdate[0]).second;
 
-        moveAnimations.get(completeUpdate[0]).setFromX(fromX);
-        moveAnimations.get(completeUpdate[0]).setFromY(fromY);
-        moveAnimations.get(completeUpdate[0]).setToX(toX);
-        moveAnimations.get(completeUpdate[0]).setToY(toY);
+        players.get(completeUpdate[0]).setX(toX);
+        players.get(completeUpdate[0]).setY(toY);
 
-        moveAnimations.get(completeUpdate[0]).playFromStart();
+        //for single player match
+        if (completeUpdate[2] != -1){
+            isSinglePlayer = true;
+            player4.setVisible(true);
+            player4.setX(centerCoordinates.get(completeUpdate[2]).first + playerOffset.get(3).first);
+            player4.setY(centerCoordinates.get(completeUpdate[2]).second + playerOffset.get(3).second);
+            player4.setImage(new Image("/pictures/miscellaneous/blackCross.png"));
+        }
+
     }
     
 
     @FXML
     void player1mouseEntered() {
-        int a = offlineInfo.getPlayerOrder(offlineInfo.getYourName());
         if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 1) {
             player1.setEffect(new Glow(1));
             controllerInterpreter.execute("show opponent1");
@@ -142,7 +137,8 @@ public class PlayersController extends SubSceneController {
 
     @FXML
     void player4mouseEntered() {
-        if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 4) {
+        //player 4 is used ad Lorenzo for single players matches
+        if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 4 && !isSinglePlayer) {
             player4.setEffect(new Glow(1));
             controllerInterpreter.execute("show opponent4");
         }

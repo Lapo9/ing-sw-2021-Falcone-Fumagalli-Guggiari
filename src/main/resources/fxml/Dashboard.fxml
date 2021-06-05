@@ -54,7 +54,7 @@
             <Image url="@../pictures/miscellaneous/redX.png" />
          </image>
       </ImageView>
-      <Label fx:id="message" layoutX="21.0" layoutY="639.0" prefHeight="22.0" prefWidth="1154.0" text="Label">
+      <Label fx:id="message" layoutX="21.0" layoutY="622.0" prefHeight="39.0" prefWidth="1154.0">
          <font>
             <Font name="Consolas Bold" size="18.0" />
          </font>

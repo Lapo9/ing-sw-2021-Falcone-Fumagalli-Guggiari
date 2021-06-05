@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.gui.controllers;
 
+import it.polimi.ingsw.model.ActionTilesStack;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -99,7 +100,7 @@ public class DashboardController extends SceneController implements ResettableSc
         Platform.runLater( () -> {
             //if it is an update of one player
             if(completeUpdate[0] < 4) {
-                faithTrackPlayersController.update(new int[]{completeUpdate[0], completeUpdate[103]});
+                faithTrackPlayersController.update(new int[]{completeUpdate[0], completeUpdate[103], completeUpdate[completeUpdate.length-1]});
                 popeFavorTiles1Controller.update(new int[]{completeUpdate[0], completeUpdate[104]});
                 popeFavorTiles2Controller.update(new int[]{completeUpdate[0], completeUpdate[105]});
                 popeFavorTiles3Controller.update(new int[]{completeUpdate[0], completeUpdate[106]});
@@ -129,6 +130,7 @@ public class DashboardController extends SceneController implements ResettableSc
             else if (completeUpdate[0] == 5){
                 developmentGridController.update(Arrays.copyOfRange(completeUpdate, 1, completeUpdate.length));
             }
+
         });
     }
 
@@ -207,6 +209,7 @@ public class DashboardController extends SceneController implements ResettableSc
     public void hideDevelopmentGrid(){
         developmentGridController.hide();
     }
+
 
 
 

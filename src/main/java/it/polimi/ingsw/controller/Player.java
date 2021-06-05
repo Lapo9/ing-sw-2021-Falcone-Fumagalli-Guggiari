@@ -178,7 +178,7 @@ public class Player {
         this.name = tokens[1]; //set the name
 
         try {
-            matchManager.addPlayer(this, tokens[2]); //add the player to the match, if you cannot destroy
+            matchManager.addPlayer(this, tokens[2], tokens[3].contains("singlePlayer")); //add the player to the match, if you cannot destroy
         } catch (MatchException me){
             sendController("fatal " + me.getMessage());
             destroy();

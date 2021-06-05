@@ -53,8 +53,8 @@ public class UserInterpreter {
         String error = checkSyntacticalCorrectness(tokens);
         if(error.equals("OK")) {
             //check if it is a connection request
-            if (tokens[0].equals("connect")){
-                socket.connect(tokens[1], Integer.parseInt(tokens[2]), tokens[3], tokens[4]); //connect to the specified server
+            if (tokens[0].equals("connect") || tokens[0].equals("singlePlayer")){
+                socket.connect(tokens[1], Integer.parseInt(tokens[2]), tokens[3], tokens[4], tokens[0]); //connect to the specified server
                 offlineInfo.setYourName(tokens[3]);
             }
             //produce is the only command that needs some elaboration
@@ -88,7 +88,7 @@ public class UserInterpreter {
         else  {
             UserCommand actualCommand = tmp.get(0);
             //connect is the only command that doesn't have a proper list of arguments (we cannot list all of the possible IPs or names obviously)
-            if (actualCommand.toString().equals("connect")){
+            if (actualCommand.toString().equals("connect") || tokens[0].equals("singlePlayer")){
                 if(!tokens[3].equals("developmentGrid") && !tokens[3].equals("marketplace") && !tokens[3].toLowerCase(Locale.ROOT).contains("fuma")) {
                     return "OK";
                 }
@@ -125,6 +125,7 @@ public class UserInterpreter {
         commands.add(new UserCommand(false, "spy", new ArrayList<>()));
         commands.add(new UserCommand(false, "show", new ArrayList<>(Arrays.asList("dashboard", "faithTrack", "marketplace", "developmentGrid"))));
         commands.add(new UserCommand(false, "connect", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        commands.add(new UserCommand(false, "singlePlayer", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
         commands.add(new UserCommand(true, "info"));
         commands.add(new UserCommand(true, "start"));
         commands.add(new UserCommand(true, "select", new ArrayList<>(Arrays.asList("coin", "servant", "shield", "stone"))));

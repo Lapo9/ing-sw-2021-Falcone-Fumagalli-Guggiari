@@ -12,6 +12,12 @@ public class EndScreenController extends SceneController{
     }
 
     @Override
+    public void initialize() {
+        super.initialize();
+        fadeOut.setToValue(1.0); //don't fade out
+    }
+
+    @Override
     public void initializeSubScenes() {
 
     }

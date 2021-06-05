@@ -1,14 +1,19 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.controller.ModelObserver;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
  * The ActionTilesStack contains the solo action tokens, used to play the game in the solo-mode.
  */
-public class ActionTilesStack {
+public class ActionTilesStack{
 
     private ArrayList<ActionTile> stack = new ArrayList<>();
+
+    ArrayList<ModelObserver> observers = new ArrayList<>();
 
 
     /**
@@ -27,6 +32,7 @@ public class ActionTilesStack {
         Random r = new Random();
         int i = r.nextInt(stack.size());
         ActionTile at = stack.remove(i);
+        notifyViews(at);
         return at;
     }
 
@@ -52,6 +58,27 @@ public class ActionTilesStack {
         stack.add(ActionTile.VIOLET);
         stack.add(ActionTile.PLUS_2);
         stack.add(ActionTile.PLUS_1_SHUFFLE);
+    }
+
+
+    /**
+     * Notify to the ModelObserver the last extracted tile
+     */
+    public void notifyViews(ActionTile tile){
+        ArrayList<Integer> status = new ArrayList<>(Arrays.asList(tile.ordinal()));
+
+        for (ModelObserver mo : observers){
+            mo.update("actionTile", status);
+        }
+    }
+
+
+    /**
+     * Attached a new observer
+     * @param modelObserver new observer
+     */
+    public void attach(ModelObserver modelObserver){
+        observers.add(modelObserver);
     }
 
 

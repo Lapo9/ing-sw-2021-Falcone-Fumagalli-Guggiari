@@ -7,6 +7,9 @@ import java.util.concurrent.TimeUnit;
 
 public class YourTurnController extends SceneController{
 
+    @FXML ActionTileController actionTileController;
+
+
     @Override
     public void initialize() {
         super.initialize();
@@ -15,12 +18,14 @@ public class YourTurnController extends SceneController{
 
     @Override
     public void initializeSubScenes() {
-
+        actionTileController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
     }
 
     @Override
     public void update(int[] completeUpdate) {
-
+        if (completeUpdate[0] == 6){
+            actionTileController.update(completeUpdate);
+        }
     }
 
 

@@ -38,8 +38,9 @@ public class ServerSocket {
      * @param ip IP address of the server
      * @param port Port of the server
      * @param playerName Name of the player
+     * @param isSinglePlayer whether the match is a single player match or not
      */
-    public synchronized void connect(String ip, int port, String playerName, String matchId){
+    public synchronized void connect(String ip, int port, String playerName, String matchId, String isSinglePlayer){
         if(controllerInterpreter == null || modelInterpreter == null){
             throw new IllegalThreadStateException("Cannot connect without an interpreter");
         }
@@ -54,7 +55,7 @@ public class ServerSocket {
             //connect
             socket = new ClientSocket(ip, port);
             //send player name, if the send fails, terminate
-            if(!send("name " + playerName + " " + matchId)){
+            if(!send("name " + playerName + " " + matchId + " " + isSinglePlayer)){
                 return;
             }
 

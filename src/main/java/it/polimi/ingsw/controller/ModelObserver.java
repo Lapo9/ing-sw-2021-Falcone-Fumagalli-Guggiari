@@ -47,6 +47,13 @@ public class ModelObserver {
             broadcast(updateToSend);
         }
 
+        else if (updatedItem.equals("actionTile")) {
+            ArrayList<Integer> updateToSend = new ArrayList<>();
+            updateToSend.add(6);
+            updateToSend.addAll(update);
+            broadcast(updateToSend);
+        }
+
         else {
             Player toUpdate = players.get(updatedItem);
             ArrayList<Integer> updateToSend = new ArrayList<>();

@@ -274,7 +274,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -325,7 +325,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -367,7 +367,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -399,7 +399,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -431,7 +431,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -475,7 +475,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -580,7 +580,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(11));
         leaderCards.add(new LeaderCard(5));
@@ -677,7 +677,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -718,7 +718,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -758,7 +758,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -795,7 +795,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -832,7 +832,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -869,7 +869,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(2));
         leaderCards.add(new LeaderCard(1));
@@ -1107,7 +1107,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(2));
         leaderCards.add(new LeaderCard(1));
@@ -1337,7 +1337,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -1380,7 +1380,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -1414,7 +1414,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -1450,7 +1450,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -1504,7 +1504,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -1552,7 +1552,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -1602,7 +1602,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(10));
@@ -1704,7 +1704,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -1747,7 +1747,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -1790,7 +1790,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -1840,7 +1840,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -1889,7 +1889,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(10));
@@ -2013,7 +2013,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(10));
@@ -2146,7 +2146,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(10));
@@ -2202,7 +2202,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -2254,7 +2254,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -2307,7 +2307,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(10));
@@ -2436,7 +2436,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -2492,7 +2492,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -2537,7 +2537,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -2642,7 +2642,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -2808,7 +2808,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(15));
@@ -2889,7 +2889,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -2994,7 +2994,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -3082,7 +3082,7 @@ public class DashboardTest {
 
     @Test
     public void buyableDevelopmentLevels_allDevelopmentsEmpty() {
-        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<Integer> list = new ArrayList<>(dshbrd.buyableDevelopmentLevels());
         int[] expectedResult = {1, 1, 1};
         int[] actualResult = {list.get(0), list.get(1), list.get(2)};
@@ -3105,7 +3105,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -3152,7 +3152,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -3257,7 +3257,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -3409,7 +3409,7 @@ public class DashboardTest {
 
     @Test
     public void discardLeader_noVaticanReport() {
-        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<CardsRequirement> cards = new ArrayList<>();
         ArrayList<CardsRequirement> cards2 = new ArrayList<>();
         cards2.add(new CardsRequirement(2, 1, CardCategory.YELLOW));
@@ -3440,7 +3440,7 @@ public class DashboardTest {
 
     @Test
     public void discardLeader_vaticanReport() {
-        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -3469,7 +3469,7 @@ public class DashboardTest {
 
     @Test
     public void discardLeader_alreadyDiscardedEX() {
-        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -3508,7 +3508,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -3592,7 +3592,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(15));
@@ -3659,7 +3659,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(10));
@@ -3771,7 +3771,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -3854,7 +3854,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -3939,7 +3939,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4024,7 +4024,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4077,7 +4077,7 @@ public class DashboardTest {
 
     @Test
     public void goAhead_noVaticanReport() {
-        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4096,7 +4096,7 @@ public class DashboardTest {
 
     @Test
     public void goAhead_vaticanReportTriggered() {
-        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4115,7 +4115,7 @@ public class DashboardTest {
 
     @Test
     public void goAheadDontTrigger() {
-        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4137,7 +4137,7 @@ public class DashboardTest {
 
     @Test
     public void vaticanReport_discardPopeFavorTile() {
-        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4158,7 +4158,7 @@ public class DashboardTest {
 
     @Test
     public void vaticanReport_activatePopeFavorTile() {
-        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4193,7 +4193,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4231,7 +4231,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4271,7 +4271,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4311,7 +4311,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4351,7 +4351,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4391,7 +4391,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(10));
@@ -4511,7 +4511,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(10));
@@ -4632,7 +4632,7 @@ public class DashboardTest {
          mrblclrs.add(MarbleColor.VIOLET);
          mrblclrs.add(MarbleColor.VIOLET);
          Marketplace mrkt = new Marketplace(mrblclrs);
-         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+         Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
          ArrayList<LeaderCard> leaderCards = new ArrayList<>();
          leaderCards.add(new LeaderCard(5));
          leaderCards.add(new LeaderCard(1));
@@ -4669,7 +4669,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4710,7 +4710,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(15));
@@ -4779,7 +4779,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4826,13 +4826,13 @@ public class DashboardTest {
 
     @Test
     public void hasInkwell_true() {
-        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList(), false);
         assertTrue(dshbrd.hasInkwell());
     }
 
     @Test
     public void hasInkwell_false() {
-        Dashboard dshbrd = new Dashboard(false, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(false, new Marketplace(), new DevelopmentGrid(false), "test", new LeadersList(), false);
         assertFalse(dshbrd.hasInkwell());
     }
 
@@ -4852,7 +4852,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -4885,7 +4885,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(2));
         leaderCards.add(new LeaderCard(1));
@@ -5173,7 +5173,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -5204,7 +5204,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(10));
@@ -5341,7 +5341,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(10));
@@ -5478,7 +5478,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(true), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(10));
@@ -5615,7 +5615,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -5671,7 +5671,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -5723,7 +5723,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(5));
         leaderCards.add(new LeaderCard(1));
@@ -5761,7 +5761,7 @@ public class DashboardTest {
         mrblclrs.add(MarbleColor.VIOLET);
         mrblclrs.add(MarbleColor.VIOLET);
         Marketplace mrkt = new Marketplace(mrblclrs);
-        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList());
+        Dashboard dshbrd = new Dashboard(true, mrkt, new DevelopmentGrid(false), "test", new LeadersList(), false);
         ArrayList<LeaderCard> leaderCards = new ArrayList<>();
         leaderCards.add(new LeaderCard(2));
         leaderCards.add(new LeaderCard(1));

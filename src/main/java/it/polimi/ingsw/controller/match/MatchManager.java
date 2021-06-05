@@ -15,7 +15,7 @@ public class MatchManager {
 
 
 
-    public synchronized void addPlayer(Player p, String matchId) throws MatchException {
+    public synchronized void addPlayer(Player p, String matchId, boolean isSinglePlayer) throws MatchException {
 
         Match specified = activeMatches.get(matchId);
 
@@ -25,7 +25,7 @@ public class MatchManager {
         }
         else {
             //if not create a new match
-            activeMatches.put(matchId, new Match(p));
+            activeMatches.put(matchId, new Match(p, isSinglePlayer));
         }
 
         p.attachMatch(activeMatches.get(matchId));

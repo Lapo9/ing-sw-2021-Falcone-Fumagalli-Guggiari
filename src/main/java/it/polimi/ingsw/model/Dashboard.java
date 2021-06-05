@@ -13,7 +13,6 @@ import it.polimi.ingsw.model.faith_track.FaithTrack;
 import it.polimi.ingsw.model.leaders.LeaderCard;
 import it.polimi.ingsw.model.leaders.LeadersPick;
 import it.polimi.ingsw.model.leaders.LeadersSpace;
-import it.polimi.ingsw.model.leaders.leader_abilities.LeaderAbility;
 import it.polimi.ingsw.model.match_items.DevelopmentGrid;
 import it.polimi.ingsw.model.match_items.LeadersList;
 import it.polimi.ingsw.model.match_items.MarketDirection;
@@ -48,7 +47,7 @@ public class Dashboard implements HasStatus{
     private final ProductionManager productionManager = new ProductionManager(developments, baseProduction, leadersSpace);
     private final DepotsManager depotsManager = new DepotsManager(warehouse, leadersSpace);
     private final ActionTilesStack actionTilesStack = new ActionTilesStack();
-    private int blackCrossPosition = 0;
+    private int blackCrossPosition = -1;
     private ArrayList<ModelObserver> observers = new ArrayList<ModelObserver>();
 
     private final HashMap<DepotID.DepotType, AcceptsSupplies> containers = new HashMap<>();
@@ -61,14 +60,17 @@ public class Dashboard implements HasStatus{
      * @param developmentGrid match development grid, to buy the development cards from
      * @param name player nickname
      * @param leadersList
+     * @param isSinglePlayer
      */
-    public Dashboard(boolean inkwell, Marketplace marketplace, DevelopmentGrid developmentGrid, String name, LeadersList leadersList){
+    public Dashboard(boolean inkwell, Marketplace marketplace, DevelopmentGrid developmentGrid, String name, LeadersList leadersList, boolean isSinglePlayer){
         this.inkwell = inkwell;
         this.marketplace = marketplace;
         this.developmentGrid = developmentGrid;
         this.leadersList = leadersList;
 
         this.name = name;
+
+        blackCrossPosition = isSinglePlayer ? 0 : -1;
 
         containers.put(DepotID.DepotType.WAREHOUSE, depotsManager);
         containers.put(DepotID.DepotType.LEADER_DEPOT, depotsManager);
@@ -943,6 +945,7 @@ public class Dashboard implements HasStatus{
         status.addAll(leadersSpace.getStatus());
         status.addAll(unassignedSupplies.getStatus());
         status.addAll(leadersPick.getStatus());
+        status.add(blackCrossPosition);
 
         return status;
     }
@@ -954,6 +957,7 @@ public class Dashboard implements HasStatus{
      */
     public void attach(ModelObserver observer){
         observers.add(observer);
+        actionTilesStack.attach(observer); //also attach the observer to the action tile stack
     }
 
 

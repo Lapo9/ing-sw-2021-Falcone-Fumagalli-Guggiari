@@ -30,11 +30,14 @@ public class Match {
     private MatchPhase phase = LOBBY;
     private HashMap<String, BiConsumer<Player, String[]>> commands = new HashMap<>();
     private ModelObserver modelObserver = new ModelObserver();
+    private boolean isSinglePlayer;
 
 
-    Match(Player leader) throws MatchException {
+    Match(Player leader, boolean isSinglePlayer) throws MatchException {
         marketplace.attach(modelObserver);
         developmentGrid.attach(modelObserver);
+
+        this.isSinglePlayer = isSinglePlayer;
 
         setDefaultCommands();
 
@@ -45,6 +48,11 @@ public class Match {
 
 
     synchronized void addPlayer(Player p) throws MatchException {
+
+        if (isSinglePlayer && players.size() != 0){
+            throw new MatchException("error This is a single player match");
+        }
+
         if(players.stream().anyMatch(player -> player.getName().equals(p.getName()) && !player.isConnected())){
             //in this case there is a player with the same name who disconnected, so you can replace him
             Player replacingPlayer = players.stream().filter(player -> player.getName().equals(p.getName()) && !player.isConnected()).collect(Collectors.toList()).get(0);
@@ -70,7 +78,7 @@ public class Match {
         else {
             //simply add the new player
             players.add(p);
-            p.attachDashboard(new Dashboard(false, marketplace, developmentGrid, p.getName(), leadersList));
+            p.attachDashboard(new Dashboard(false, marketplace, developmentGrid, p.getName(), leadersList, isSinglePlayer));
             modelObserver.attachTo(p); //attach the model observer to the dashboard of this player
 
             //tell each player a new player connected
@@ -460,6 +468,10 @@ public class Match {
             return;
         }
 
+        if (isSinglePlayer) {
+            extractSinglePlayerTile();
+        }
+
         int index = players.indexOf(activePlayer) + 1;
         index = index == players.size() ? 0 : index;
 
@@ -497,7 +509,11 @@ public class Match {
             return;
         }
 
-        player.getDashboard().produce(Boolean.parseBoolean(args[1]), Boolean.parseBoolean(args[2]), Boolean.parseBoolean(args[3]), Boolean.parseBoolean(args[4]), Boolean.parseBoolean(args[5]), Boolean.parseBoolean(args[6]));
+        boolean vaticanReport = player.getDashboard().produce(Boolean.parseBoolean(args[1]), Boolean.parseBoolean(args[2]), Boolean.parseBoolean(args[3]), Boolean.parseBoolean(args[4]), Boolean.parseBoolean(args[5]), Boolean.parseBoolean(args[6]));
+
+        if (vaticanReport){
+            players.forEach(p -> p.getDashboard().vaticanReport());
+        }
 
         if (checkWinner()){
             phase = GAME_OVER;
@@ -575,7 +591,12 @@ public class Match {
         }
 
         try {
-            player.getDashboard().discardLeader(Integer.parseInt(args[1])-1);
+            boolean vaticanReport = player.getDashboard().discardLeader(Integer.parseInt(args[1])-1);
+
+            if (vaticanReport){
+                players.forEach(p -> p.getDashboard().vaticanReport());
+            }
+
             if (checkWinner()){
                 phase = GAME_OVER;
             }
@@ -785,6 +806,14 @@ public class Match {
         }
 
         return false;
+    }
+
+
+    private synchronized void extractSinglePlayerTile(){
+        boolean matchEnded = activePlayer.getDashboard().extractActionTile();
+
+        activePlayer.sendController("show endMatch");
+        activePlayer.sendController("message You LOST!");
     }
 
 
