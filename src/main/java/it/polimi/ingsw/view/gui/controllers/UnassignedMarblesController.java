@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.gui.controllers;
 
 import it.polimi.ingsw.model.MarbleColor;
+import it.polimi.ingsw.view.cli.OfflineInfo;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
@@ -131,7 +132,7 @@ public class UnassignedMarblesController extends SubSceneController {
         else {
             colorPane.setVisible(false);
             offlineInfo.setSelectedItem("marble " + urlToColor(marble1.getImage().getUrl()).toString().toLowerCase(Locale.ROOT));
-            controllerInterpreter.execute("setActive wh1 wh2 wh3");
+            controllerInterpreter.execute("setActive wh1 wh2 wh3" + (offlineInfo.getLeaderStatus(1).equals(OfflineInfo.LeaderStatus.DEPOT) ? " leader1" : "") + (offlineInfo.getLeaderStatus(2).equals(OfflineInfo.LeaderStatus.DEPOT) ? " leader2" : ""));
         }
     }
 
@@ -150,7 +151,8 @@ public class UnassignedMarblesController extends SubSceneController {
         else {
             colorPane.setVisible(false);
             offlineInfo.setSelectedItem("marble " + urlToColor(marble2.getImage().getUrl()).toString().toLowerCase(Locale.ROOT));
-            controllerInterpreter.execute("setActive wh1 wh2 wh3");
+            controllerInterpreter.execute("setActive wh1 wh2 wh3" + (offlineInfo.getLeaderStatus(1).equals(OfflineInfo.LeaderStatus.DEPOT) ? " leader1" : "") + (offlineInfo.getLeaderStatus(2).equals(OfflineInfo.LeaderStatus.DEPOT) ? " leader2" : ""));
+
         }
     }
 
@@ -169,7 +171,8 @@ public class UnassignedMarblesController extends SubSceneController {
         else {
             colorPane.setVisible(false);
             offlineInfo.setSelectedItem("marble " + urlToColor(marble3.getImage().getUrl()).toString().toLowerCase(Locale.ROOT));
-            controllerInterpreter.execute("setActive wh1 wh2 wh3");
+            controllerInterpreter.execute("setActive wh1 wh2 wh3" + (offlineInfo.getLeaderStatus(1).equals(OfflineInfo.LeaderStatus.DEPOT) ? " leader1" : "") + (offlineInfo.getLeaderStatus(2).equals(OfflineInfo.LeaderStatus.DEPOT) ? " leader2" : ""));
+
         }
     }
 
@@ -188,7 +191,8 @@ public class UnassignedMarblesController extends SubSceneController {
         else {
             colorPane.setVisible(false);
             offlineInfo.setSelectedItem("marble " + urlToColor(marble4.getImage().getUrl()).toString().toLowerCase(Locale.ROOT));
-            controllerInterpreter.execute("setActive wh1 wh2 wh3");
+            controllerInterpreter.execute("setActive wh1 wh2 wh3" + (offlineInfo.getLeaderStatus(1).equals(OfflineInfo.LeaderStatus.DEPOT) ? " leader1" : "") + (offlineInfo.getLeaderStatus(2).equals(OfflineInfo.LeaderStatus.DEPOT) ? " leader2" : ""));
+
         }
     }
 

@@ -35,6 +35,7 @@ public class PreMatchController extends SceneController{
     @FXML private Group selection2;
     @FXML private ImageView supply2;
     @FXML private ImageView go;
+    @FXML private ImageView resourcesBackground;
     @FXML private DevelopmentGridController developmentGridController;
     @FXML private MarketplaceController marketplaceController;
 
@@ -188,11 +189,15 @@ public class PreMatchController extends SceneController{
 
     @FXML
     void showMarketplaceEntered() {
+        resourcesBackground.setVisible(true);
         marketplaceController.show();
+        developmentGridController.show();
     }
 
     @FXML
     void showMarketplaceExited() {
+        resourcesBackground.setVisible(false);
+        developmentGridController.hide();
         marketplaceController.hide();
     }
 
