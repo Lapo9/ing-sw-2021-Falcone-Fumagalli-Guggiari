@@ -7,6 +7,8 @@ import it.polimi.ingsw.model.MarbleContainer;
 
 import java.util.ArrayList;
 
+import static it.polimi.ingsw.model.MarbleColor.numberToColor;
+
 /**
  * The marketplace is where the player can buy resources. It is made by 12 marbles placed in a grid of three rows
  * and four columns. There is another marble placed on the slide.
@@ -27,6 +29,17 @@ public class Marketplace implements HasStatus {
             grid.add(i, mc.get(i));
         }
         slide = MarbleColor.RED;
+    }
+
+    /**
+     * Creates a marketplace given an array of number that represents the marble colors (0: blue, 1: grey, 2: red, 3: violet, 4: white, 5: yellow).
+     * @param status an array of integer
+     */
+    public Marketplace(int[] status) {
+        for(int i=0; i<12; i++){
+            grid.add(i, numberToColor(status[i]));
+        }
+        slide = numberToColor(status[13]);
     }
 
 
