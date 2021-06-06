@@ -7,7 +7,7 @@ import static it.polimi.ingsw.view.cli.ViewableId.*;
 
 public class MainCLI {
 
-    public static void main(String[] args) throws ViewException {
+    public static void mainCLI(String[] args) throws ViewException {
 
         ScreenCLI screen = new ScreenCLI();
 

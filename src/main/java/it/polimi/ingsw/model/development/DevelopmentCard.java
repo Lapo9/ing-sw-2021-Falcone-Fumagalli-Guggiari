@@ -23,7 +23,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
     private Production production;
     private SupplyContainer cost;
 
-    private static final String path  = "src/main/resources/cards_info/DevelopmentCards.txt";
+    private static final String path  = "src/mainCLI/resources/cards_info/DevelopmentCards.txt";
 
 
     /**

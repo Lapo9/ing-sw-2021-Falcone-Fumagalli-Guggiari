@@ -120,7 +120,7 @@ public class ScreenGUI extends Application implements Screen {
     }
 
 
-    public static void main(String[] args) {
+    public static void mainGUI(String[] args) {
         launch(args);
     }
 

@@ -25,7 +25,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
     private boolean discarded = false;
     private final int winPoints;
 
-    private static final String path = "src/main/resources/cards_info/LeaderCards.txt";
+    private static final String path = "src/mainCLI/resources/cards_info/LeaderCards.txt";
 
     /**
      * Creates a leader card.

@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class MatchManager {
 
     private HashMap<String, Match> activeMatches = new HashMap<>();
-    private String recoveryPath = "src/main/resources/files/savedMatches.txt";
+    private String recoveryPath = "src/mainCLI/resources/files/savedMatches.txt";
 
     public MatchManager(){
         restoreMatches();
