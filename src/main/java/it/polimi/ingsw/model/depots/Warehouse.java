@@ -204,7 +204,8 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
      * In the process it is likely that the order of the depots will be modified.
      * @param sc SupplyContainer containing the resources to add to the warehouse
      */
-    public void allocate(SupplyContainer sc){
+    public void allocate(SupplyContainer newSupplies){
+        SupplyContainer sc = new SupplyContainer(newSupplies).sum(clearSupplies().first);
         //create ArrayList of SupplyContainer
         List<Pair<WarehouseObjectType, Integer>> listOfSc = new ArrayList<>();
         for(WarehouseObjectType wot : WarehouseObjectType.values()){
