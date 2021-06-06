@@ -55,13 +55,22 @@ public class Match {
         this.matchId = matchId;
         setDefaultCommands();
 
+        //restore match items
+        developmentGrid = new DevelopmentGrid(Arrays.asList(status.split(" xXx ")[4].split(", ")).stream().mapToInt(Integer::parseInt).toArray());
+        marketplace = new Marketplace(Arrays.asList(status.split(" xXx ")[5].split(", ")).stream().mapToInt(Integer::parseInt).toArray());
+
+        developmentGrid.attach(modelObserver);
+        marketplace.attach(modelObserver);
+
         String[] playersNames = status.split(" xXx ")[2].split(" ");
-        String[] playersStati = Arrays.copyOfRange(status.split(" xXx "), 6, 6 + playersNames.length-1);
+        String[] playersStati = Arrays.copyOfRange(status.split(" xXx "), 6, 6 + playersNames.length);
 
         //restore players
         for(int i = 0; i < playersNames.length; ++i) {
             try {
-                players.add(new Player(playersNames[i], this, i, playersStati[i]));
+                Player p = new Player(playersNames[i], this, i, playersStati[i], marketplace, developmentGrid, isSinglePlayer, leadersList);
+                players.add(p);
+                modelObserver.attachTo(p);
             } catch (Exception e){
                 endMatch();
                 return;
@@ -71,14 +80,9 @@ public class Match {
 
         isSinglePlayer = Boolean.parseBoolean(status.split(" xXx ")[1]); //type of match
 
-        //restore match items FIXME add those methods to marketplace and development grid
-        //developmentGrid = new DevelopmentGrid(Arrays.asList(status.split(" xXx ")[4]).stream().mapToInt(Integer::parseInt).toArray());
-        //marketplace = new Marketplace(Arrays.asList(status.split(" xXx ")[5]).stream().mapToInt(Integer::parseInt).toArray());
-
-        developmentGrid.attach(modelObserver);
-        marketplace.attach(modelObserver);
-
         phase = TURN_START; //it's always saved at the beginning of a turn
+
+        System.out.print("\nMatch " + matchId + " restored");
     }
 
 

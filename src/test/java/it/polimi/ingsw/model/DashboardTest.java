@@ -98,7 +98,7 @@ public class DashboardTest {
                         0, 0, 0, 0, 0};
         Dashboard dshbrd = null;
         try {
-            dshbrd = new Dashboard(status, "test");
+            dshbrd = new Dashboard(status, new Marketplace(), new DevelopmentGrid(), "test", new LeadersList(), false);
         } catch (SupplyException | DevelopmentException | LeaderException | NoSuchMethodException e) {fail();}
         ArrayList<Integer> realStatus = dshbrd.getStatus();
         int[] actualResult = {realStatus.get(0), realStatus.get(1), realStatus.get(2), realStatus.get(3), realStatus.get(4),

@@ -5,6 +5,9 @@ import it.polimi.ingsw.controller.exceptions.MatchException;
 import it.polimi.ingsw.controller.match.Match;
 import it.polimi.ingsw.controller.match.MatchManager;
 import it.polimi.ingsw.model.Dashboard;
+import it.polimi.ingsw.model.match_items.DevelopmentGrid;
+import it.polimi.ingsw.model.match_items.LeadersList;
+import it.polimi.ingsw.model.match_items.Marketplace;
 
 import java.io.*;
 import java.net.Socket;
@@ -42,13 +45,13 @@ public class Player {
     }
 
 
-    public Player(String name, Match match, int order, String dashboard) throws Exception{
+    public Player(String name, Match match, int order, String dashboard, Marketplace marketplace, DevelopmentGrid developmentGrid, boolean isSinglePlayer, LeadersList leadersList) throws Exception{
         this.name = name;
         this.match = match;
         this.order = order;
         int[] status = Arrays.asList(dashboard.split(", ")).stream().mapToInt(Integer::parseInt).toArray();
 
-        this.dashboard = new Dashboard(status, name);
+        this.dashboard = new Dashboard(status, marketplace, developmentGrid, name, leadersList, isSinglePlayer);
 
         selectedLeadersInPreMatch = 2;
         selectedItemsInPreMatch = order == 0 ? 0 : order == 1 ? 1 : order == 2 ? 1 : order == 3 ? 2 : 0;
@@ -259,7 +262,7 @@ public class Player {
                     //wait for the threads to end
                     listenRoutineThread.join();
                     heartbeatThread.join();
-                } catch (InterruptedException ie) {
+                } catch (Exception e) {
 
                 }
                 try {

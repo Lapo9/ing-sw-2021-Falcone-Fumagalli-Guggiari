@@ -14,8 +14,8 @@ public class ListeningSocket {
     private MatchManager matchManager;
 
 
-    public ListeningSocket(boolean recovery){
-        matchManager = new MatchManager(recovery);
+    public ListeningSocket(){
+        matchManager = new MatchManager();
     }
 
 

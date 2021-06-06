@@ -18,11 +18,8 @@ public class MatchManager {
     private HashMap<String, Match> activeMatches = new HashMap<>();
     private String recoveryPath = "src/main/resources/files/savedMatches.txt";
 
-    public MatchManager(boolean recovery){
-
-        if (recovery){
-            restoreMatches();
-        }
+    public MatchManager(){
+        restoreMatches();
     }
 
 
@@ -48,11 +45,12 @@ public class MatchManager {
 
     public synchronized void notifyMatchEnded(String matchId){
         activeMatches.remove(matchId);
+        saveToFile(removeMatch(matchId)); //remove the ended match from the status
     }
 
 
     /**
-     * START_OF_MATCH matchID xXx player1, player2, ... xXx active player index xXx development grid status xXx marketplace status xXx player1 status xXx player2 status xXx ... xXx END_OF_MATCH
+     * START_OF_MATCH matchID xXx isSinglePlayer xXx player1, player2, ... xXx active player index xXx development grid status xXx marketplace status xXx player1 status xXx player2 status xXx ... xXx END_OF_MATCH
      * @param matchId match to save to file
      */
     public synchronized void saveMatchState(String matchId){
@@ -70,35 +68,17 @@ public class MatchManager {
         matchStatus.append(matchItems.second.getStatus()).append(" xXx "); //save marketplace status
 
         //save players status
-        players.forEach(p -> matchStatus.append(p.getDashboard().getStatus()).append(" xXx "));
+        players.forEach(p -> matchStatus.append(p.getOrder()).append(", ").append(p.getDashboard().getStatus()).append(" xXx "));
+
+        matchStatus.append("END_OF_MATCH\n\n");
 
         StringBuilder finalMatchStatus = new StringBuilder(matchStatus.toString().replaceAll("\\[", ""));
         finalMatchStatus = new StringBuilder(finalMatchStatus.toString().replaceAll("]", ""));
 
 
-        //save status to file
-        Path path = Path.of(recoveryPath);
-        String savedMatches = "";
-        try {
-            savedMatches = Files.readString(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String[] matches = savedMatches.split("END_OF_MATCH\n\n");
-
-        for (String match : matches) {
-            if (!match.contains("START_OF_MATCH " + matchId)) {
-                finalMatchStatus.append(match).append("END_OF_MATCH\n\n");
-            }
-        }
-
-        File file = new File(recoveryPath);
-        try (FileWriter writer = new FileWriter(file)) {
-            writer.write(finalMatchStatus.toString());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        //remove the match you're going to save and replace it with the new version
+        finalMatchStatus.append(removeMatch(matchId));
+        saveToFile(finalMatchStatus.toString());
 
     }
 
@@ -112,6 +92,10 @@ public class MatchManager {
             e.printStackTrace();
         }
 
+        if (savedMatches.isEmpty()){
+            return; //there are no matches to restore
+        }
+
         String[] matches = savedMatches.split("END_OF_MATCH\n\n");
 
 
@@ -123,5 +107,38 @@ public class MatchManager {
 
     }
 
+
+
+    //removes the specified match from the saved matches
+    private String removeMatch(String matchId){
+        StringBuilder newMatches = new StringBuilder();
+        Path path = Path.of(recoveryPath);
+        String savedMatches = "";
+        try {
+            savedMatches = Files.readString(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String[] matches = savedMatches.split("END_OF_MATCH\n\n");
+
+        for (String match : matches) {
+            if (!match.contains("START_OF_MATCH " + matchId)) {
+                newMatches.append(match).append("END_OF_MATCH\n\n");
+            }
+        }
+
+        return newMatches.toString();
+    }
+
+
+    private void saveToFile(String matches){
+        File file = new File(recoveryPath);
+        try (FileWriter writer = new FileWriter(file)) {
+            writer.write(matches);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 }

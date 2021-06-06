@@ -87,8 +87,22 @@ public class Dashboard implements HasStatus{
      * @param status of the dashboard
      * @param name player nickname
      */
-    public Dashboard(int[] status, String name) throws SupplyException, DevelopmentException, LeaderException, NoSuchMethodException {
-        if(status[0] == 1)
+    public Dashboard(int[] status, Marketplace marketplace, DevelopmentGrid developmentGrid, String name, LeadersList leadersList, boolean isSinglePlayer) throws SupplyException, DevelopmentException, LeaderException, NoSuchMethodException {
+        this.developmentGrid = developmentGrid;
+        this.marketplace = marketplace;
+        this.leadersList = leadersList;
+
+        blackCrossPosition = isSinglePlayer ? status[status.length-1] : -1;
+
+        containers.put(DepotID.DepotType.WAREHOUSE, depotsManager);
+        containers.put(DepotID.DepotType.LEADER_DEPOT, depotsManager);
+        containers.put(DepotID.DepotType.DEVELOPMENT, productionManager);
+        containers.put(DepotID.DepotType.LEADER_PRODUCTION, productionManager);
+        containers.put(DepotID.DepotType.COFFER, coffer);
+        containers.put(DepotID.DepotType.PAYCHECK, paycheck);
+        containers.put(DepotID.DepotType.BASE_PRODUCTION, productionManager);
+
+        if(status[0] == 0)
             inkwell = true;
         this.name = name;
 
