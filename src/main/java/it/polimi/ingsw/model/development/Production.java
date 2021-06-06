@@ -22,7 +22,6 @@ public class Production implements AcceptsSupplies, HasStatus {
     protected SupplyContainer currentSupply = new SupplyContainer(  onlyFrom(DepotID.SourceType.PAYCHECK).negate().
                                                                     and(specificType(WarehouseObjectType.FAITH_MARKER).negate()),
                                                                     onlyFrom(DepotID.SourceType.PAYCHECK).negate());
-    //TODO maybe add that you cannot add more than the max?
 
 
     /**

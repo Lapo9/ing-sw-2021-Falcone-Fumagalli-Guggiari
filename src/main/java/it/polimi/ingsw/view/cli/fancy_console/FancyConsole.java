@@ -9,7 +9,7 @@ public class FancyConsole {
 
     /**
      * Reset the text, we have to reset the text before printing another string
-     * @return TODO
+     * @return Code to clear any text effect
      */
     public static String reset(){
         return "\033[0m";
@@ -24,16 +24,6 @@ public class FancyConsole {
         return "\033[" + style.toString() + "m";
     }
 
-
-    /**
-     *
-     */
-    //FIXME it doesn't work
-    public static void clear() {
-        for(int i = 0; i < 1; ++i) {
-            System.out.print("\r");
-        }
-    }
 
 
     /**

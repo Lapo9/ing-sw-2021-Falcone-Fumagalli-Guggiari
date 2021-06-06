@@ -30,17 +30,8 @@ public class ViewableFactory {
         items.add(new HashMap<>()); //others
     }
 
-    //TODO create method to build all of the implementations of Viewable, and when build one, add it to the items map
     public SupplyContainer buildSupplyContainer(int player, ViewableId viewableId, String name) {
         SupplyContainer res = new SupplyContainer(name);
-        items.get(player-1).put(viewableId, res);
-        return res;
-    }
-
-
-    //TODO remove test
-    public TestViewable buildTestViewable(int player, ViewableId viewableId){
-        TestViewable res = new TestViewable();
         items.get(player-1).put(viewableId, res);
         return res;
     }
@@ -158,7 +149,6 @@ public class ViewableFactory {
 
             nsme.printStackTrace();
         } catch (NullPointerException e) {
-            System.out.print("\n don't worry"); //FIXME to remove
         }
     }
 

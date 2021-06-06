@@ -681,7 +681,6 @@ public class Match {
             player.addSelectedLeaderInPreMatch();
         } catch (Exception e){
             player.sendController("error " + e.getMessage());
-            //TODO there should be a way to clear leaders, if not this state is forever
             return;
         }
 

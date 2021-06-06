@@ -60,7 +60,7 @@ public class MatchManager {
         matchStatus.append(activeMatches.get(matchId).isSinglePlayer()).append(" xXx "); //single player match?
         ArrayList<Player> players = activeMatches.get(matchId).getPlayers();
         players.forEach(p -> matchStatus.append(p.getName()).append(" ")); //names of the players
-        matchStatus.append(" xXx ");
+        matchStatus.append("xXx ");
         matchStatus.append(activeMatches.get(matchId).getActivePlayer()).append(" xXx "); //active player
 
         Pair<DevelopmentGrid, Marketplace> matchItems = activeMatches.get(matchId).getMatchItems();

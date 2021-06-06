@@ -47,7 +47,6 @@ public class ProductionManager implements AcceptsSupplies {
      */
     @Override
     public void addSupply(DepotID slot, WarehouseObjectType wot, DepotID from) throws SupplyException {
-        //TODO check if you can add, if not throw
         additionAllowed(slot, wot, from);
 
         //add supply to common "virtual" reserve
@@ -86,7 +85,6 @@ public class ProductionManager implements AcceptsSupplies {
      */
     @Override
     public void removeSupply(DepotID slot, WarehouseObjectType wot, DepotID to) throws SupplyException {
-        //TODO check if you can remove, if not throw
         removalAllowed(slot, wot, to);
 
 
@@ -242,7 +240,7 @@ public class ProductionManager implements AcceptsSupplies {
     private Pair<SupplyContainer, SupplyContainer> removeFromSourceContainers(SupplyContainer toRemove) {
         //initially try to remove from the strongbox, if you can't try from the depots
         Pair<SupplyContainer, SupplyContainer> res = new Pair<>(new SupplyContainer(), new SupplyContainer());
-        //for each type of supply FIXME
+        //for each type of supply
         for (WarehouseObjectType wot : WarehouseObjectType.values()) {
             //for each supply of the processed type removed previously
             if (wot != WarehouseObjectType.NO_TYPE) {

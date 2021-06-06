@@ -18,6 +18,10 @@ public class UserInterpreter {
     private ControllerInterpreter controllerInterpreter;
     private OfflineInfo offlineInfo;
 
+    private ArrayList<String> forbiddenNames = new ArrayList<>(Arrays.asList(
+            "START_OF_MATCH", "END_OF_MATCH", "developmentGrid", "marketplace", "xXx", ",", ".", "\n"
+    ));
+
 
     /**
      * Creates an interpreter and adds a standard set of known user commands.
@@ -89,7 +93,7 @@ public class UserInterpreter {
             UserCommand actualCommand = tmp.get(0);
             //connect is the only command that doesn't have a proper list of arguments (we cannot list all of the possible IPs or names obviously)
             if (actualCommand.toString().equals("connect") || tokens[0].equals("singlePlayer")){
-                if(!tokens[3].equals("developmentGrid") && !tokens[3].equals("marketplace") && !tokens[3].toLowerCase(Locale.ROOT).contains("fuma")) {
+                if(forbiddenNames.stream().anyMatch(name -> tokens[3].contains(name))) {
                     return "OK";
                 }
                 return "Come on, choose a better name!";

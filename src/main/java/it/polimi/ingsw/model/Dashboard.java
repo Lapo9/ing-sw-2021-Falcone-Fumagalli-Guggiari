@@ -26,7 +26,6 @@ import java.util.HashMap;
  * The dashboard is the access point of the controller to the model.
  * It exposes a function for all of the possible actions a player can perform during a match.
  * Generally, when the action performed goes well, nothing is returned, but if the action violates any of the game rule an exception is thrown.
- * TODO maybe there should be methods to check if an action is possible before performing it? It can be useful if you want to visualize only the actions that can be executed (for example if you don't have enough supplies to buy a card, then the card is grey and not clickable)
  */
 public class Dashboard implements HasStatus{
 
