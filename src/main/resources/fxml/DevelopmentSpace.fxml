@@ -79,21 +79,33 @@
          <font>
             <Font name="Vivaldi Italic" size="36.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
       <Text fx:id="shield" layoutX="74.0" layoutY="254.0" onMouseClicked="#shieldClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
          <font>
             <Font name="Vivaldi Italic" size="36.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
       <Text fx:id="servant" layoutX="3.0" layoutY="297.0" onMouseClicked="#servantClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
          <font>
             <Font name="Vivaldi Italic" size="36.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
       <Text fx:id="stone" layoutX="75.0" layoutY="297.0" onMouseClicked="#stoneClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="65.0">
          <font>
             <Font name="Vivaldi Italic" size="36.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Text>
       <ImageView fx:id="activeSquare" fitHeight="94.0" fitWidth="148.0" layoutY="220.0" onMouseClicked="#activeSquareClicked" pickOnBounds="true" visible="false">
          <image>

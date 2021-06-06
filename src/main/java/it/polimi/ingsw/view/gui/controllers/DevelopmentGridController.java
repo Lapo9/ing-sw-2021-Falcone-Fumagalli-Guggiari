@@ -32,7 +32,7 @@ public class DevelopmentGridController extends SubSceneController{
 
     @Override
     public void update(int[] completeUpdate) {
-        if (completeUpdate.length == 12){
+        if (completeUpdate.length == 48){
             c00Controller.update(new int[]{completeUpdate[0]});
             c10Controller.update(new int[]{completeUpdate[4]});
             c20Controller.update(new int[]{completeUpdate[8]});

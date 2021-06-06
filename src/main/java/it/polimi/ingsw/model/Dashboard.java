@@ -48,6 +48,7 @@ public class Dashboard implements HasStatus{
     private final ActionTilesStack actionTilesStack = new ActionTilesStack();
     private int blackCrossPosition = -1;
     private ArrayList<ModelObserver> observers = new ArrayList<ModelObserver>();
+    private int boughtCards = 0;
 
     private final HashMap<DepotID.DepotType, AcceptsSupplies> containers = new HashMap<>();
 
@@ -90,6 +91,8 @@ public class Dashboard implements HasStatus{
         this.developmentGrid = developmentGrid;
         this.marketplace = marketplace;
         this.leadersList = leadersList;
+
+        boughtCards = status[status.length-2];
 
         blackCrossPosition = isSinglePlayer ? status[status.length-1] : -1;
 
@@ -499,6 +502,7 @@ public class Dashboard implements HasStatus{
         //buy the card
         developments.addCardToSpace(space, developmentGrid.buyCard(column, row, paycheck, leadersSpace));
         paycheck.clearSupplies();
+        boughtCards++;
 
         notifyViews();
     }
@@ -715,7 +719,7 @@ public class Dashboard implements HasStatus{
      * @return If the player triggered an end match condition.
      */
     public boolean isMatchEnded(){
-        return developmentGrid.getBoughtCards() >= 7 || faithTrack.getPosition() >= 24;
+        return boughtCards >= 7 || faithTrack.getPosition() >= 24;
     }
 
 
@@ -958,6 +962,7 @@ public class Dashboard implements HasStatus{
         status.addAll(leadersSpace.getStatus());
         status.addAll(unassignedSupplies.getStatus());
         status.addAll(leadersPick.getStatus());
+        status.add(boughtCards);
         status.add(blackCrossPosition);
 
         return status;

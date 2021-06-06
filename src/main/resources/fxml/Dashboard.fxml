@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.image.Image?>
@@ -27,13 +28,18 @@
          <image>
             <Image url="@../pictures/miscellaneous/Market.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fitHeight="75.0" fitWidth="76.0" layoutX="906.0" layoutY="109.0" onMouseClicked="#produceButtonClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/miscellaneous/produce.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <fx:include fx:id="developmentGrid" layoutX="375.0" layoutY="86.0" scaleX="1.02" scaleY="1.02" source="DevelopmentGrid.fxml" />
       <fx:include fx:id="warehouse" layoutX="240.0" layoutY="290.0" source="Warehouse.fxml" />
       <fx:include fx:id="coffer" layoutX="289.0" layoutY="515.0" source="Coffer.fxml" />
@@ -44,23 +50,29 @@
       <fx:include fx:id="opponent3" source="Opponent.fxml" />
       <fx:include fx:id="opponent4" source="Opponent.fxml" />
       <fx:include fx:id="faithTrackPlayers" source="Players.fxml" />
-      <ImageView fx:id="buyCardsButton" fitHeight="83.0" fitWidth="91.0" layoutX="286.0" layoutY="22.0" onMouseClicked="#buyCardsButtonClicked" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pictures/miscellaneous/buyCards.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="75.0" fitWidth="76.0" layoutX="7.0" layoutY="286.0" onMouseClicked="#endTurnButtonClicked" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pictures/miscellaneous/redX.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="message" layoutX="21.0" layoutY="618.0" prefHeight="43.0" prefWidth="1154.0" wrapText="true">
+      <Label fx:id="message" layoutX="77.0" layoutY="618.0" prefHeight="43.0" prefWidth="1098.0" wrapText="true">
          <font>
-            <Font name="Consolas Bold" size="12.0" />
+            <Font name="Consolas Bold" size="18.0" />
          </font>
          <effect>
             <Bloom threshold="0.0" />
          </effect>
       </Label>
+      <ImageView fitHeight="75.0" fitWidth="65.0" layoutX="14.0" layoutY="596.0" onMouseClicked="#endTurnButtonClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/endTurn.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="buyCardsButton" fitHeight="83.0" fitWidth="91.0" layoutX="286.0" layoutY="22.0" onMouseClicked="#buyCardsButtonClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pictures/miscellaneous/buyCards.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>
