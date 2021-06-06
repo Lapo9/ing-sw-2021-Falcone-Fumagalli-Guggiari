@@ -61,7 +61,7 @@ public class MutableProduction extends Production implements HasStatus {
         mutableInput.forEach(warehouseObjectType -> {
             try{
                 tmp.addSupply(warehouseObjectType);
-            } catch (SupplyException se){/*FIXME end program*/}
+            } catch (SupplyException se){System.out.print("BUG"); /*TODO end program*/}
         });
 
         return tmp;
@@ -77,14 +77,14 @@ public class MutableProduction extends Production implements HasStatus {
     public SupplyContainer produce(){
         try{
             check();
-        } catch (SupplyException se){/*FIXME end program*/}
+        } catch (SupplyException se){System.out.print("BUG"); /*TODO end program*/}
 
         SupplyContainer res = new SupplyContainer();
         res.sum(output);
         mutableOutput.forEach(warehouseObjectType -> {
             try{
                 res.addSupply(warehouseObjectType);
-            } catch (SupplyException se){/*FIXME end program*/}
+            } catch (SupplyException se){System.out.print("BUG"); /*TODO end program*/}
         });
 
         currentSupply.clearSupplies();
@@ -104,7 +104,7 @@ public class MutableProduction extends Production implements HasStatus {
         mutableInput.forEach(warehouseObjectType -> {
             try{
                 tmp.addSupply(warehouseObjectType);
-            } catch (SupplyException se){/*FIXME end program*/}
+            } catch (SupplyException se){System.out.print("BUG"); /*TODO end program*/}
         });
 
         if(!tmp.equals(currentSupply))

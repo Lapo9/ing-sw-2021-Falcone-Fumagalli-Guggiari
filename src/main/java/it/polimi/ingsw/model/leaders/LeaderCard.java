@@ -122,7 +122,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -146,7 +146,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -177,7 +177,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -201,7 +201,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -230,7 +230,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -270,7 +270,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -300,7 +300,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -368,7 +368,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)

@@ -45,11 +45,11 @@ public class DepotsManager implements AcceptsSupplies {
         else if (slot.getType() == DepotID.DepotType.LEADER_DEPOT){
             try {
                 leadersSpace.getLeaderAbility(slot.getNum()).addSupply(wot, from);
-            } catch (LeaderException | NoSuchMethodException e){/*TODO terminate program*/}
+            } catch (LeaderException | NoSuchMethodException e){System.out.print("BUG"); /*TODO terminate program*/}
         }
 
         else {
-            /*TODO terminate the program*/
+            System.out.print("BUG"); /*TODO terminate the program*/
         }
     }
 
@@ -68,11 +68,11 @@ public class DepotsManager implements AcceptsSupplies {
         else if (from.getType() == DepotID.DepotType.LEADER_DEPOT){
             try {
                 leadersSpace.getLeaderAbility(from.getNum()).removeSupply(wot);
-            } catch (LeaderException | NoSuchMethodException e){/*TODO terminate program*/}
+            } catch (LeaderException | NoSuchMethodException e){System.out.print("BUG"); /*TODO terminate program*/}
         }
 
         else {
-            /*TODO terminate the program*/
+            System.out.print("BUG"); /*TODO terminate the program*/
         }
     }
 
@@ -165,13 +165,13 @@ public class DepotsManager implements AcceptsSupplies {
                     result = leadersSpace.getLeaderAbility(slot.getNum()).clearSupplies().first;
                 }
                 else {
-                    //TODO terminate the program
+                    System.out.print("BUG"); //TODO terminate the program
                 }
-            } catch (LeaderException | NoSuchMethodException e){/*TODO terminate program*/}
+            } catch (LeaderException | NoSuchMethodException e){System.out.print("BUG"); /*TODO terminate program*/}
         }
 
         else {
-            /*TODO terminate the program*/
+            System.out.print("BUG"); /*TODO terminate the program*/
         }
 
         return new Pair<>(result, new SupplyContainer());
@@ -249,7 +249,7 @@ public class DepotsManager implements AcceptsSupplies {
                             qty--;
                         }
                     } catch (LeaderException le) {
-                    } catch (SupplyException | NoSuchMethodException se) {/*TODO terminate*/}
+                    } catch (SupplyException | NoSuchMethodException se) {System.out.print("BUG"); /*TODO terminate*/}
                 }
             }
         }

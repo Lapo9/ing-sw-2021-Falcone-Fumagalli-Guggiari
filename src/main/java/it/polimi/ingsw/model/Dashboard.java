@@ -451,7 +451,7 @@ public class Dashboard implements HasStatus{
         for (int i = 0; i<faithPoints; ++i){
             try {
                 tmp.removeSupply(WarehouseObjectType.FAITH_MARKER);
-            } catch (SupplyException se) {/*TODO this should never happen, so maybe fail the program*/}
+            } catch (SupplyException se) {System.out.print("BUG"); /*TODO this should never happen, so maybe fail the program*/}
         }
 
         //store outputs in the coffer

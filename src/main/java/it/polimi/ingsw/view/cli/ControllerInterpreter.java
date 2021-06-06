@@ -117,7 +117,7 @@ public class ControllerInterpreter {
         try {
             screen.show("win");
         } catch (ViewException ve){
-            //TODO terminate
+            System.out.print("BUG"); //TODO terminate
             return;
         }
         execute("message " + tokens[1] + "won the match!!");

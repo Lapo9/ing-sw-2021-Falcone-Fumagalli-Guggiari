@@ -93,7 +93,7 @@ public class UserInterpreter {
             UserCommand actualCommand = tmp.get(0);
             //connect is the only command that doesn't have a proper list of arguments (we cannot list all of the possible IPs or names obviously)
             if (actualCommand.toString().equals("connect") || tokens[0].equals("singlePlayer")){
-                if(forbiddenNames.stream().anyMatch(name -> tokens[3].contains(name))) {
+                if(forbiddenNames.stream().noneMatch(name -> tokens[3].contains(name))) {
                     return "OK";
                 }
                 return "Come on, choose a better name!";

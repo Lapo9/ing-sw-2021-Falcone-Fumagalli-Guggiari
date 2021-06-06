@@ -225,7 +225,7 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
 
         //if we have more than 3 items, we're in trouble
         if(listOfSc.size() > 3){
-            //TODO terminate
+            System.out.print("BUG"); //TODO terminate
         }
 
         //add to the depots

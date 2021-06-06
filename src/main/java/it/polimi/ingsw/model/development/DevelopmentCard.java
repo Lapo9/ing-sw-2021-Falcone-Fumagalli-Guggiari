@@ -128,7 +128,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -149,7 +149,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -171,7 +171,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -202,7 +202,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -231,7 +231,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -259,7 +259,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
@@ -287,7 +287,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
         try {
             scan = new Scanner(file);
         } catch (FileNotFoundException e) {
-            //TODO end the program
+            System.out.print("BUG"); //TODO end the program
         }
         scan.useDelimiter(", ");
         while(scan.nextInt() != id)
