@@ -235,16 +235,20 @@ public class DepotsManager implements AcceptsSupplies {
      * @param sc SupplyContainer containing the resources to add to the depots
      */
     public void allocate(SupplyContainer sc){
+        //create new supply container, because you don't know the policies of the received supply container, and you have to be able to add and remove without any constraint
+        SupplyContainer received = new SupplyContainer();
+        //clear the warehouse, in order to reorganize the supplies between the warehouse and the leaders spaces
+        received.sum(warehouse.clearSupplies().first).sum(sc);
         //first, place as supplies as you can in the leaders depots
         for (WarehouseObjectType wot : WarehouseObjectType.values()){
             if(wot != WarehouseObjectType.NO_TYPE) {
-                int qty = sc.getQuantity(wot);
+                int qty = received.getQuantity(wot);
                 //for each leader, try to add the current type of resource (as long as there is a supply of the current type)
                 //the cycle is repeated as most 4 times because if the 2 leaders both have the same contained supply, then at most you can add 4 supplies of that type to the leaders depots
                 for (int i = 0; i < 4 && qty > 0; ++i) {
                     try {
                         if (leadersSpace.getLeaderAbility(i / 2) instanceof Depot && leadersSpace.getLeaderAbility(i / 2).additionAllowed(wot, DepotID.WAREHOUSE1)) {
-                            sc.removeSupply(wot);
+                            received.removeSupply(wot);
                             leadersSpace.getLeaderAbility(i / 2).addSupply(wot, DepotID.WAREHOUSE1);
                             qty--;
                         }
@@ -254,9 +258,8 @@ public class DepotsManager implements AcceptsSupplies {
             }
         }
 
-
         //second, reorganize the warehouse with the remaining resources
-        warehouse.allocate(sc);
+        warehouse.allocate(received);
     }
 
 

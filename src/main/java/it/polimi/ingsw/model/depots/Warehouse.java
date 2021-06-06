@@ -205,11 +205,6 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
      * @param sc SupplyContainer containing the resources to add to the warehouse
      */
     public void allocate(SupplyContainer sc){
-        //empty the warehouse and re-add everything
-        for(int i=0; i<3; ++i){
-            sc.sum(depots.get(i).clearSupplies().first);
-        }
-
         //create ArrayList of SupplyContainer
         List<Pair<WarehouseObjectType, Integer>> listOfSc = new ArrayList<>();
         for(WarehouseObjectType wot : WarehouseObjectType.values()){
