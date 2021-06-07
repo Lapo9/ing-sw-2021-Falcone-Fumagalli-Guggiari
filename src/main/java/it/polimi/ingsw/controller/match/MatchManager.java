@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class MatchManager {
 
     private HashMap<String, Match> activeMatches = new HashMap<>();
-    private static final String recoveryPath = "/files/savedMatches.txt";
+    private static final String recoveryPath = "./savedMatches.txt";
 
     public MatchManager(){
         restoreMatches();
@@ -85,12 +85,11 @@ public class MatchManager {
 
 
     private void restoreMatches(){
+        Path path = Path.of(recoveryPath);
         String savedMatches = "";
         try {
-            InputStream inputStream = getClass().getResourceAsStream(recoveryPath);
-            Scanner scanner = new Scanner(inputStream);
-            savedMatches = scanner.hasNext() ? scanner.next() : "";
-        } catch (Exception e) {
+            savedMatches = Files.readString(path);
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

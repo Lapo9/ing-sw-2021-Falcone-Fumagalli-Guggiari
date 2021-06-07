@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.leaders.CardsRequirement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
     private Production production;
     private SupplyContainer cost;
 
-    private static final String path  = "src/main/resources/cards_info/DevelopmentCards.txt";
+    private static final String path  = "/cards_info/DevelopmentCards.txt";
 
 
     /**
@@ -123,17 +124,16 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
     public static int getLevel(int id) {
         if(id == 0)
             return 0;
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = DevelopmentCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            return scan.nextInt();
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return -1;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        return scan.nextInt();
     }
 
     /**
@@ -142,20 +142,20 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the win points of the card
      */
     public static int getWinPoints(int id) {
-        if(id == 0)
+        if (id == 0)
             return 0;
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = DevelopmentCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            scan.nextInt();    //lvl
+            return scan.nextInt();
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return -1;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        scan.nextInt();    //lvl
-        return scan.nextInt();
     }
 
     /**
@@ -164,29 +164,29 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the card category
      */
     public static CardCategory getCategory(int id) {
-        if(id == 0)
+        if (id == 0)
             return null;
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = DevelopmentCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            scan.nextInt();         //lvl
+            scan.nextInt();         //winPoints
+            int color = scan.nextInt();
+            if (color == 1)
+                return CardCategory.GREEN;
+            else if (color == 2)
+                return CardCategory.BLUE;
+            else if (color == 3)
+                return CardCategory.YELLOW;
+            else
+                return CardCategory.VIOLET;
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return null;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        scan.nextInt();         //lvl
-        scan.nextInt();         //winPoints
-        int color = scan.nextInt();
-        if(color == 1)
-            return CardCategory.GREEN;
-        else if(color == 2)
-            return CardCategory.BLUE;
-        else if(color == 3)
-            return CardCategory.YELLOW;
-        else
-            return CardCategory.VIOLET;
     }
 
     /**
@@ -195,27 +195,27 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the input of the card production
      */
     public static SupplyContainer getInput(int id) {
-        if(id == 0)
+        if (id == 0)
             return null;
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = DevelopmentCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            scan.nextInt();
+            scan.nextInt();
+            scan.nextInt();
+            int c = scan.nextInt();
+            int st = scan.nextInt();
+            int se = scan.nextInt();
+            int sh = scan.nextInt();
+            int f = scan.nextInt();
+            return new SupplyContainer(c, st, se, sh, f);
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return null;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        scan.nextInt();
-        scan.nextInt();
-        scan.nextInt();
-        int c = scan.nextInt();
-        int st = scan.nextInt();
-        int se = scan.nextInt();
-        int sh = scan.nextInt();
-        int f = scan.nextInt();
-        return new SupplyContainer(c, st, se, sh, f);
     }
 
     /**
@@ -224,26 +224,26 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the output of the card production
      */
     public static SupplyContainer getOutput(int id) {
-        if(id == 0)
+        if (id == 0)
             return null;
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = DevelopmentCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            for (int i = 0; i < 8; i++)
+                scan.nextInt();
+            int c = scan.nextInt();
+            int st = scan.nextInt();
+            int se = scan.nextInt();
+            int sh = scan.nextInt();
+            int f = scan.nextInt();
+            return new SupplyContainer(c, st, se, sh, f);
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return null;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        for(int i = 0; i < 8; i++)
-            scan.nextInt();
-        int c = scan.nextInt();
-        int st = scan.nextInt();
-        int se = scan.nextInt();
-        int sh = scan.nextInt();
-        int f = scan.nextInt();
-        return new SupplyContainer(c, st, se, sh, f);
     }
 
     /**
@@ -252,26 +252,26 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the card cost
      */
     public static SupplyContainer getCost(int id) {
-        if(id == 0)
+        if (id == 0)
             return null;
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = DevelopmentCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            for (int i = 0; i < 13; i++)
+                scan.nextInt();
+            int c = scan.nextInt();
+            int st = scan.nextInt();
+            int se = scan.nextInt();
+            int sh = scan.nextInt();
+            int f = scan.nextInt();
+            return new SupplyContainer(c, st, se, sh, f);
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return null;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        for(int i = 0; i < 13; i++)
-            scan.nextInt();
-        int c = scan.nextInt();
-        int st = scan.nextInt();
-        int se = scan.nextInt();
-        int sh = scan.nextInt();
-        int f = scan.nextInt();
-        return new SupplyContainer(c, st, se, sh, f);
     }
 
     /**
@@ -280,22 +280,22 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
      * @return the url to the card image
      */
     public static String getUrl(int id) {
-        if(id == 0)
+        if (id == 0)
             return null;
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = DevelopmentCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            for (int i = 0; i < 18; i++)
+                scan.nextInt();
+            String tmp = scan.next();
+            return tmp;
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return null;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        for(int i = 0; i < 18; i++)
-            scan.nextInt();
-        String tmp = scan.next();
-        return tmp;
     }
 
     /**

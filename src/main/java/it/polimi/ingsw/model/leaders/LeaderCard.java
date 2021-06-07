@@ -4,10 +4,12 @@ import it.polimi.ingsw.Pair;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.development.DevelopmentCard;
 import it.polimi.ingsw.model.exceptions.LeaderException;
 import it.polimi.ingsw.model.leaders.leader_abilities.*;
 
@@ -25,7 +27,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
     private boolean discarded = false;
     private final int winPoints;
 
-    private static final String path = "src/main/resources/cards_info/LeaderCards.txt";
+    private static final String path = "/cards_info/LeaderCards.txt";
 
     /**
      * Creates a leader card.
@@ -114,20 +116,19 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the card win points
      */
     public static Integer getWinPoints(int id) {
-        if(id == 0){
+        if (id == 0) {
             return null;
         }
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = LeaderCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            return scan.nextInt();
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return -1;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        return scan.nextInt();
     }
 
     /**
@@ -136,31 +137,28 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the card ability
      */
     public static LeaderAbility getAbility(int id) {
-        if(id == 0)
+        if (id == 0)
             return null;
-        if(id == 0){
-            return null;
-        }
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = LeaderCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            scan.nextInt();    //points
+            int abil = scan.nextInt();
+            if (abil == 1)
+                return new Market(getAbilityWOT(id));
+            else if (abil == 2)
+                return new Depot(getAbilityWOT(id));
+            else if (abil == 3)
+                return new Producer(getAbilitySC(id));
+            else
+                return new Discount(getAbilityWOT(id));
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return null;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        scan.nextInt();    //points
-        int abil = scan.nextInt();
-        if(abil == 1)
-            return new Market(getAbilityWOT(id));
-        else if(abil == 2)
-            return new Depot(getAbilityWOT(id));
-        else if(abil == 3)
-            return new Producer(getAbilitySC(id));
-        else
-            return new Discount(getAbilityWOT(id));
     }
 
     /**
@@ -169,22 +167,22 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the type of leader ability
      */
     public static Integer getAbilityNumber(int id) {
-        if(id == 0){
+        if (id == 0) {
             return null;
         }
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = LeaderCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            scan.nextInt();    //points
+            int abil = scan.nextInt();
+            return abil;
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return null;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        scan.nextInt();    //points
-        int abil = scan.nextInt();
-        return abil;
     }
 
     /**
@@ -193,27 +191,27 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the supply container that contains the details of the leader abilty.
      */
     public static SupplyContainer getAbilitySC(int id) {
-        if(id == 0){
+        if (id == 0) {
             return null;
         }
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = LeaderCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            scan.nextInt();   //points
+            scan.nextInt();   //ability
+            int c = scan.nextInt();
+            int st = scan.nextInt();
+            int se = scan.nextInt();
+            int sh = scan.nextInt();
+            int f = scan.nextInt();
+            return new SupplyContainer(c, st, se, sh, f);
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return null;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        scan.nextInt();   //points
-        scan.nextInt();   //ability
-        int c = scan.nextInt();
-        int st = scan.nextInt();
-        int se = scan.nextInt();
-        int sh = scan.nextInt();
-        int f = scan.nextInt();
-        return new SupplyContainer(c, st, se, sh, f);
     }
 
     /**
@@ -222,37 +220,37 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the warehouse object type of the ability
      */
     public static WarehouseObjectType getAbilityWOT(int id) {
-        if(id == 0){
+        if (id == 0) {
             return null;
         }
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = LeaderCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            scan.nextInt();   //points
+            scan.nextInt();   //ability
+            int count = 0;
+            while (scan.hasNext("0")) {
+                scan.nextInt();
+                count++;
+            }
+            switch (count) {
+                case 0:
+                    return WarehouseObjectType.COIN;
+                case 1:
+                    return WarehouseObjectType.STONE;
+                case 2:
+                    return WarehouseObjectType.SERVANT;
+                case 3:
+                    return WarehouseObjectType.SHIELD;
+                default:
+                    return WarehouseObjectType.NO_TYPE;
+            }
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
-        }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        scan.nextInt();   //points
-        scan.nextInt();   //ability
-        int count = 0;
-        while(scan.hasNext("0")){
-            scan.nextInt();
-            count++;
-        }
-        switch(count){
-            case 0:
-                return WarehouseObjectType.COIN;
-            case 1:
-                return WarehouseObjectType.STONE;
-            case 2:
-                return WarehouseObjectType.SERVANT;
-            case 3:
-                return WarehouseObjectType.SHIELD;
-            default:
-                return WarehouseObjectType.NO_TYPE;
+            return null;
         }
     }
 
@@ -262,27 +260,27 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the supplies requirements to buy the card
      */
     public static SupplyContainer getSuppliesRequirement(int id) {
-        if(id == 0){
+        if (id == 0) {
             return null;
         }
-        File file = new File(path);
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = LeaderCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            for (int i = 0; i < 7; i++)
+                scan.nextInt();
+            int c = scan.nextInt();
+            int st = scan.nextInt();
+            int se = scan.nextInt();
+            int sh = scan.nextInt();
+            int f = scan.nextInt();
+            return new SupplyContainer(c, st, se, sh, f);
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return null;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        for(int i = 0; i < 7; i++)
-            scan.nextInt();
-        int c = scan.nextInt();
-        int st = scan.nextInt();
-        int se = scan.nextInt();
-        int sh = scan.nextInt();
-        int f = scan.nextInt();
-        return new SupplyContainer(c, st, se, sh, f);
     }
 
     /**
@@ -291,66 +289,66 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the cards requirements to buy the card
      */
     public static ArrayList<CardsRequirement> getCardsRequirements(int id) {
-        if(id == 0){
+        if (id == 0) {
             return null;
         }
-        File file = new File(path);
         ArrayList<CardsRequirement> list = new ArrayList<>();
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = LeaderCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            for (int i = 0; i < 12; i++)
+                scan.nextInt();
+            int num1 = scan.nextInt();
+            int lvl1 = scan.nextInt();
+            int color = scan.nextInt();
+            CardCategory color1;
+            switch (color) {
+                case (1):
+                    color1 = CardCategory.GREEN;
+                    break;
+                case (2):
+                    color1 = CardCategory.BLUE;
+                    break;
+                case (3):
+                    color1 = CardCategory.YELLOW;
+                    break;
+                case (4):
+                    color1 = CardCategory.VIOLET;
+                    break;
+                default:
+                    color1 = null;
+            }
+            list.add(new CardsRequirement(num1, lvl1, color1));
+            int num2 = scan.nextInt();
+            int lvl2 = scan.nextInt();
+            int colors = scan.nextInt();
+            CardCategory color2;
+            switch (colors) {
+                case (1):
+                    color2 = CardCategory.GREEN;
+                    break;
+                case (2):
+                    color2 = CardCategory.BLUE;
+                    break;
+                case (3):
+                    color2 = CardCategory.YELLOW;
+                    break;
+                case (4):
+                    color2 = CardCategory.VIOLET;
+                    break;
+                default:
+                    color2 = null;
+            }
+            if (num2 != 0)
+                list.add(new CardsRequirement(num2, lvl2, color2));
+            return list;
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return null;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        for(int i = 0; i < 12; i++)
-            scan.nextInt();
-        int num1 = scan.nextInt();
-        int lvl1 = scan.nextInt();
-        int color = scan.nextInt();
-        CardCategory color1;
-        switch(color){
-            case(1):
-               color1 = CardCategory.GREEN;
-               break;
-            case(2):
-                color1 = CardCategory.BLUE;
-                break;
-            case(3):
-                color1 = CardCategory.YELLOW;
-                break;
-            case(4):
-                color1 = CardCategory.VIOLET;
-                break;
-            default:
-                color1 = null;
-        }
-        list.add(new CardsRequirement(num1, lvl1, color1));
-        int num2 = scan.nextInt();
-        int lvl2 = scan.nextInt();
-        int colors = scan.nextInt();
-        CardCategory color2;
-        switch(colors){
-            case(1):
-                color2 = CardCategory.GREEN;
-                break;
-            case(2):
-                color2 = CardCategory.BLUE;
-                break;
-            case(3):
-                color2 = CardCategory.YELLOW;
-                break;
-            case(4):
-                color2 = CardCategory.VIOLET;
-                break;
-            default:
-                color2 = null;
-        }
-        if(num2 != 0)
-            list.add(new CardsRequirement(num2, lvl2, color2));
-        return list;
     }
 
     /**
@@ -359,24 +357,24 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * @return the url to the card image
      */
     public static String getUrl(int id) {
-        if(id == 0){
+        if (id == 0) {
             return null;
         }
-        File file = new File(path);
         ArrayList<CardsRequirement> list = new ArrayList<>();
-        Scanner scan = null;
-        try {
-            scan = new Scanner(file);
-        } catch (FileNotFoundException e) {
+        try (InputStream file = LeaderCard.class.getResourceAsStream(path)) {
+            Scanner scan = new Scanner(file);
+
+            scan.useDelimiter(", ");
+            while (scan.nextInt() != id)
+                scan.nextLine();
+            for (int i = 0; i < 18; i++)
+                scan.nextInt();
+            String tmp = scan.next();
+            return tmp;
+        } catch (Exception e) {
             System.out.print("BUG"); //TODO end the program
+            return null;
         }
-        scan.useDelimiter(", ");
-        while(scan.nextInt() != id)
-            scan.nextLine();
-        for(int i = 0; i < 18; i++)
-            scan.nextInt();
-        String tmp = scan.next();
-        return tmp;
     }
 
     /**
