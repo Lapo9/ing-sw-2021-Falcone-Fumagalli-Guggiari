@@ -443,7 +443,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
                 boolean res = false;
                 try {
                     res = container.getType() == type || container.getType() == WarehouseObjectType.NO_TYPE;
-                } catch (SupplyException se) {System.out.print("BUG"); /*TODO end program?*/}
+                } catch (SupplyException se) {(new Throwable()).printStackTrace(); /*TODO end program?*/}
                 return res;
             };
         }
@@ -470,7 +470,7 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
                     for (SupplyContainer sc : scs){
                         isPresent |= sc.getType()==type;
                     }
-                } catch (SupplyException se){System.out.print("BUG"); /*TODO terminate*/}
+                } catch (SupplyException se){(new Throwable()).printStackTrace(); /*TODO terminate*/}
                 return maxOneType(max).test(container, type, depot) && !isPresent;
             };
         }

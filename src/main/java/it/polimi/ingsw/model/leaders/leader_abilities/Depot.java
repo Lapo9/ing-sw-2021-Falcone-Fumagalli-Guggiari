@@ -37,7 +37,7 @@ public class Depot implements LeaderAbility {
         Pair<WarehouseObjectType, Integer> res = null;
         try {
             res = new Pair<>(depot.getType(), depot.getQuantity());
-        } catch (SupplyException se){System.out.print("BUG"); /*TODO terminate program*/}
+        } catch (SupplyException se){(new Throwable()).printStackTrace(); /*TODO terminate program*/}
         return res;
     }
 

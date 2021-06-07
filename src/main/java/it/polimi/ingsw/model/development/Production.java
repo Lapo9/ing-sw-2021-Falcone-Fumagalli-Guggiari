@@ -52,7 +52,7 @@ public class Production implements AcceptsSupplies, HasStatus {
     public SupplyContainer produce(){
         try {
             check();
-        } catch (SupplyException e) {System.out.print("BUG"); /*TODO terminate program*/ }
+        } catch (SupplyException e) {(new Throwable()).printStackTrace(); /*TODO terminate program*/ }
         clearSupplies();
         return new SupplyContainer(output);
     }

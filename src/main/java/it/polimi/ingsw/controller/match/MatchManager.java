@@ -80,7 +80,6 @@ public class MatchManager {
         //remove the match you're going to save and replace it with the new version
         finalMatchStatus.append(removeMatch(matchId));
         saveToFile(finalMatchStatus.toString());
-
     }
 
 

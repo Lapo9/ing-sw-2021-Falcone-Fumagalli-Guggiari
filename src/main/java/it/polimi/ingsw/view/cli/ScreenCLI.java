@@ -43,7 +43,7 @@ public class ScreenCLI implements Screen {
 
         try {
             show(startingViewId);
-        } catch (ViewException ve){System.out.print("BUG"); /*TODO terminate*/}
+        } catch (ViewException ve){(new Throwable()).printStackTrace(); /*TODO terminate*/}
 
         reader.start();
     }
@@ -123,7 +123,7 @@ public class ScreenCLI implements Screen {
             throw new IllegalThreadStateException("Cannot show anything until the screen has been started");
         }
 
-        System.out.print("BUG"); //TODO clear consoles
+        (new Throwable()).printStackTrace(); //TODO clear consoles
         System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + errorMessage + activeView);
     }
 

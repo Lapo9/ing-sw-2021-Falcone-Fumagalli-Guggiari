@@ -24,7 +24,7 @@ public class Producer implements LeaderAbility {
         SupplyContainer fixedOutput = new SupplyContainer();
         try {
             fixedOutput.addSupply(WarehouseObjectType.FAITH_MARKER);
-        } catch (SupplyException se) {System.out.print("BUG"); /*TODO terminate program*/}
+        } catch (SupplyException se) {(new Throwable()).printStackTrace(); /*TODO terminate program*/}
 
         production = new MutableProduction(fixedInput, fixedOutput, 1, 2);
     }
