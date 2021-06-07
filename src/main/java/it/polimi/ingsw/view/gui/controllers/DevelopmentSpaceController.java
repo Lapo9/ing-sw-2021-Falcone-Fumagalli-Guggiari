@@ -53,12 +53,14 @@ public class DevelopmentSpaceController extends SubSceneController {
             oldCard2.setVisible(true);
             oldCard2.setImage(new Image(getDot(getCategory(completeUpdate[1]))));
             winPointsOldCard2.setText(String.valueOf(getWinPoints(completeUpdate[1])));
+            developmentGroup.setVisible(true);
         }
         else if(completeUpdate[1] != 0) {
             card.setImage(new Image(getUrl(completeUpdate[1])));
             oldCard1.setVisible(true);
             oldCard1.setImage(new Image(getDot(getCategory(completeUpdate[0]))));
             winPointsOldCard1.setText(String.valueOf(getWinPoints(completeUpdate[0])));
+            developmentGroup.setVisible(true);
         }
         else if(completeUpdate[0] != 0){
             card.setImage(new Image(getUrl(completeUpdate[0])));

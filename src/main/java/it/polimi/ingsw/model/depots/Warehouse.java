@@ -202,7 +202,7 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
     /**
      * Adds the supplies in the container given as argument to the warehouse depots.
      * In the process it is likely that the order of the depots will be modified.
-     * @param sc SupplyContainer containing the resources to add to the warehouse
+     * @param newSupplies SupplyContainer containing the resources to add to the warehouse
      */
     public void allocate(SupplyContainer newSupplies){
         SupplyContainer sc = new SupplyContainer(newSupplies).sum(clearSupplies().first);

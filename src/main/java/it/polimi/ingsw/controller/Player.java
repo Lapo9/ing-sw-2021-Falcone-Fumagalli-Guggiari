@@ -215,7 +215,7 @@ public class Player {
             destroy();
             return;
         }
-        System.out.print("\n" + name + " got accepted in match " + tokens[2]);
+        System.out.print("\n" + name + " got accepted in match " + tokens[2] + " SinglePlayer:" + match.isSinglePlayer());
 
         listenRoutineThread = new Thread(this::listenRoutine);
         heartbeatThread = new Thread(this::heartbeat);
@@ -255,7 +255,7 @@ public class Player {
     public synchronized void destroy() {
         //if this thread called destroy first
         if (setDestroy(true)) {
-            System.out.print("\n" + name + " disconnected");
+            System.out.print("\n" + name + " disconnected from match " + match.getMatchId());
             //a new thread wait for the listener an the heartbeat to end. It must be a new thread, if not it happens that the thread that called destroy waits for the join on himself, causing a deadlock.
             new Thread(() -> {
                 try {

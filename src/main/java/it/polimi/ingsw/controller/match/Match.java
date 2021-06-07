@@ -92,7 +92,7 @@ public class Match {
 
         //if it's a single player match and there is someone connected or a different player tries to connect, throw the error
         if (isSinglePlayer && (players.stream().anyMatch(plr -> plr.isConnected()) || !p.getName().equals(players.get(0).getName()))){
-            throw new MatchException("error This is a single player match");
+            throw new MatchException("This is a single player match");
         }
 
         if(players.stream().anyMatch(player -> player.getName().equals(p.getName()) && !player.isConnected())){
@@ -262,7 +262,7 @@ public class Match {
             return;
         }
 
-        System.out.print("\nMatch started");
+        System.out.print("\nMatch" + matchId + " started with " + players.size() + " players");
 
         Collections.shuffle(players); //randomize players order
         activePlayer = players.get(0); //set the first player to play
@@ -607,7 +607,7 @@ public class Match {
             return;
         }
 
-        int slot = Integer.parseInt(args[1]);
+        int slot = Integer.parseInt(args[1]) -1;
         WarehouseObjectType newWot = WarehouseObjectType.stringToType(args[2]);
 
         try {
@@ -880,6 +880,7 @@ public class Match {
     public synchronized void endMatch(){
         players.forEach(p -> p.destroy());
         matchManager.notifyMatchEnded(matchId);
+        System.out.print("\nMatch " + matchId + " ended");
     }
 
 
@@ -897,6 +898,10 @@ public class Match {
 
     public synchronized boolean isSinglePlayer(){
         return isSinglePlayer;
+    }
+
+    public synchronized String getMatchId() {
+        return matchId;
     }
 
 }

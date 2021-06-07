@@ -120,7 +120,7 @@ public class ControllerInterpreter {
             (new Throwable()).printStackTrace(); //TODO terminate
             return;
         }
-        execute("message " + tokens[1] + "won the match!!");
+        execute("message " + tokens[1] + " won the match!!");
     }
 
     private void yourTurn(String... tokens){

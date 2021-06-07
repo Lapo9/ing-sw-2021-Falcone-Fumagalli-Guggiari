@@ -123,8 +123,8 @@ public class ScreenCLI implements Screen {
             throw new IllegalThreadStateException("Cannot show anything until the screen has been started");
         }
 
-        (new Throwable()).printStackTrace(); //TODO clear consoles
-        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + errorMessage + activeView);
+        FancyConsole.clear();
+        System.out.print(errorMessage + activeView);
     }
 
 
