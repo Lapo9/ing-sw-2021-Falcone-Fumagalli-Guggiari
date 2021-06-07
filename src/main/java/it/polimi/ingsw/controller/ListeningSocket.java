@@ -19,9 +19,13 @@ public class ListeningSocket {
     }
 
 
-    public void start() {
+    public void start(String portNumber) {
+        int pn;
         try {
-            listeningSocket = new ServerSocket(14009);
+            pn = Integer.parseInt(portNumber);
+        } catch (Exception e){pn = 14009;}
+        try {
+            listeningSocket = new ServerSocket((pn < 1024 || pn > 49152) ? 14009 : pn);
         } catch (IOException ioe){
             ioe.printStackTrace();
         }

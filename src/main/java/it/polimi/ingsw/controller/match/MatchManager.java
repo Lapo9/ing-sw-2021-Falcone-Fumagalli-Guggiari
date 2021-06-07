@@ -7,6 +7,7 @@ import it.polimi.ingsw.model.match_items.DevelopmentGrid;
 import it.polimi.ingsw.model.match_items.Marketplace;
 
 import java.io.*;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.Scanner;
 public class MatchManager {
 
     private HashMap<String, Match> activeMatches = new HashMap<>();
-    private String recoveryPath = "src/mainCLI/resources/files/savedMatches.txt";
+    private static final String recoveryPath = "/files/savedMatches.txt";
 
     public MatchManager(){
         restoreMatches();
@@ -84,11 +85,12 @@ public class MatchManager {
 
 
     private void restoreMatches(){
-        Path path = Path.of(recoveryPath);
         String savedMatches = "";
         try {
-            savedMatches = Files.readString(path);
-        } catch (IOException e) {
+            InputStream inputStream = getClass().getResourceAsStream(recoveryPath);
+            Scanner scanner = new Scanner(inputStream);
+            savedMatches = scanner.hasNext() ? scanner.next() : "";
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

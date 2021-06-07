@@ -25,6 +25,17 @@ public class FancyConsole {
     }
 
 
+    /**
+     * Clears the screen by printing 300 new lines
+     */
+    public static void clear(){
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < 300; ++i) {
+            s.append("\n");
+        }
+        System.out.print(s.toString());
+    }
+
 
     /**
      * Makes the given string bold
