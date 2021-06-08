@@ -35,9 +35,9 @@ public class LeaderPick implements Viewable {
     private String buildLeaderSpace() {
         String tmp = "";
 
-        tmp = tmp.concat("      Leader card 1      " + "         " + "      Leader card 2      " + "         " + "      Leader card 3      " + "         " + "      Leader card 4      " + "\n");
+        tmp = tmp.concat("       Leader card 1      " + "         " + "       Leader card 2      " + "         " + "       Leader card 3      " + "         " + "       Leader card 4      " + "\n");
 
-        for(int i = 0; i<11; i++) {
+        for(int i = 0; i<12; i++) {
             tmp = tmp.concat(cutIntoRows(0, i));
             tmp = tmp.concat("         ");
             tmp = tmp.concat(cutIntoRows(1, i));
@@ -47,8 +47,6 @@ public class LeaderPick implements Viewable {
             tmp = tmp.concat(cutIntoRows(3, i));
             tmp = tmp.concat("\n");
         }
-
-        tmp = tmp.concat("\n");
 
         return tmp;
     }

@@ -36,9 +36,9 @@ public class LeaderCardSpace implements Viewable {
     private String buildLeaderSpace() {
         String tmp = "";
         if(type || (state2 != 0 && state1 != 0)) {
-            tmp = tmp.concat("      Leader card 1      " + "         " + "      Leader card 2      " + "\n");
+            tmp = tmp.concat("       Leader card 1      " + "         " + "       Leader card 2      " + "\n");
 
-            for (int i = 0; i < 11; i++) {
+            for (int i = 0; i < 12; i++) {
                 tmp = tmp.concat(cutIntoRows(0, i));
                 tmp = tmp.concat("         ");
                 tmp = tmp.concat(cutIntoRows(1, i));
@@ -47,27 +47,27 @@ public class LeaderCardSpace implements Viewable {
             tmp = tmp.concat("\n");
         } else {
             if(state1 == 0 && state2 == 0) {
-                tmp = tmp.concat("      Leader card 1      " + "         " + "      Leader card 2      " + "\n");
+                tmp = tmp.concat("       Leader card 1      " + "         " + "       Leader card 2      " + "\n");
 
-                tmp = tmp.concat("╔═══════════════════════╗         ╔═══════════════════════╗\n");
+                tmp = tmp.concat(" ________________________           ________________________ \n");
 
-                for(int i = 0; i<9; i++)
-                    tmp = tmp.concat("║                       ║         ║                       ║\n");
+                for(int i = 0; i<10; i++)
+                    tmp = tmp.concat("|                        |         |                        |\n");
 
-                tmp = tmp.concat("╚═══════════════════════╝         ╚═══════════════════════╝\n");
+                tmp = tmp.concat("|________________________|         |________________________|\n");
 
                 tmp = tmp.concat("\n");
             }
             else if (state2 != 0) {
-                tmp = tmp.concat("      Leader card 1      " + "         " + "      Leader card 2      " + "\n");
+                tmp = tmp.concat("       Leader card 1      " + "         " + "       Leader card 2      " + "\n");
 
-                for (int i = 0; i < 11; i++) {
+                for (int i = 0; i < 12; i++) {
                     if(i == 0)
                         tmp = tmp.concat("╔═══════════════════════╗");
-                    else if(i == 10)
-                        tmp = tmp.concat("╚═══════════════════════╝");
+                    else if(i == 11)
+                        tmp = tmp.concat("|________________________|");
                     else
-                        tmp = tmp.concat("║                       ║");
+                        tmp = tmp.concat("|                        |");
                     tmp = tmp.concat("         ");
                     tmp = tmp.concat(cutIntoRows(1, i));
                     tmp = tmp.concat("\n");
@@ -76,17 +76,17 @@ public class LeaderCardSpace implements Viewable {
                 tmp = tmp.concat("\n");
             }
             else {
-                tmp = tmp.concat("      Leader card 1      " + "         " + "      Leader card 2      " + "\n");
+                tmp = tmp.concat("       Leader card 1      " + "         " + "       Leader card 2      " + "\n");
 
-                for (int i = 0; i < 11; i++) {
+                for (int i = 0; i < 12; i++) {
                     tmp = tmp.concat(cutIntoRows(0, i));
                     tmp = tmp.concat("         ");
                     if(i == 0)
-                        tmp = tmp.concat("╔═══════════════════════╗");
-                    else if(i == 10)
-                        tmp = tmp.concat("╚═══════════════════════╝");
+                        tmp = tmp.concat(" ________________________ ");
+                    else if(i == 11)
+                        tmp = tmp.concat("|________________________|");
                     else
-                        tmp = tmp.concat("║                       ║");
+                        tmp = tmp.concat("|                        |");
                     tmp = tmp.concat("\n");
                 }
 

@@ -51,40 +51,38 @@ public class LeaderCard implements Viewable {
     private String leaderCard() {
         String tmp = "";
 
-        tmp = tmp.concat("╔═══════════════════════╗\n");
+        tmp = tmp.concat(" ________________________ \n");
 
-        tmp = tmp.concat(requirements());
+        tmp = tmp.concat(requirementsAndState());
 
-        tmp = tmp.concat(state());
-
-        tmp = tmp.concat("║ ┌───────────────────┐ ║\n");
+        tmp = tmp.concat("|  ____________________  |\n");
 
         tmp = tmp.concat(ability());
 
-        tmp = tmp.concat("║ └───────────────────┘ ║\n");
+        tmp = tmp.concat("| |____________________| |\n");
 
-        tmp = tmp.concat("║      ").concat(String.valueOf((char)8196)).concat("Points:").concat(FRAMED(" " + getWinPoints(id) + " ")).concat(String.valueOf((char)8196)).concat("      ║\n");
+        tmp = tmp.concat("|       ").concat("Points:").concat(FRAMED(" " + getWinPoints(id) + " ")).concat("       |\n");
 
-        tmp = tmp.concat("╚═══════════════════════╝\n");
+        tmp = tmp.concat("|________________________|\n");
 
         return tmp;
     }
 
-    private String requirements() {
+    private String requirementsAndState() {
         String tmp = "";
         if(suppliesRequirement.getQuantity() == 0) {    //no supplies requirements, only cards requirements
             if(cardsRequirements.size() == 1)     //one card required, lvl two card
-                tmp = tmp.concat("║ ").concat(getCardLevelAndType(cardsRequirements.get(0))).concat(" ").concat(String.valueOf((int)cardsRequirements.get(0).getNumber())).concat("       ");
+                tmp = tmp.concat("| ").concat(getCardLevelAndType(cardsRequirements.get(0), 1)).concat("           State: |\n").concat("|").concat(getCardLevelAndType(cardsRequirements.get(0), 2)).concat("       ").concat(state());
             else if(cardsRequirements.size() == 2)
-                tmp = tmp.concat("║ ").concat(getCardLevelAndType(cardsRequirements.get(0))).concat(" ").concat(String.valueOf((int)cardsRequirements.get(0).getNumber())).concat(" + ").concat(getCardLevelAndType(cardsRequirements.get(1))).concat(" ").concat(String.valueOf((int)cardsRequirements.get(1).getNumber())).concat(String.valueOf((char)8201)).concat(String.valueOf((char)8201)).concat("  ");
+                tmp = tmp.concat("| ").concat(getCardLevelAndType(cardsRequirements.get(0), 0)).concat("        State: |\n").concat("| ").concat(getCardLevelAndType(cardsRequirements.get(1), 0)).concat("     ").concat(state());
         }
         else {    //supplies requirements
-            tmp = tmp.concat("║ ").concat(getSupplies(suppliesRequirement));
+            tmp = tmp.concat("| ").concat(getSupplies(suppliesRequirement)).concat("    State: |\n").concat("|              ").concat(state());
         }
         return tmp;
     }
 
-    private String getCardLevelAndType(CardsRequirement input) {
+    private String getCardLevelAndType(CardsRequirement input, Integer index) {
         String tmp = "";
         if(input.reqCard() == CardCategory.GREEN)
             tmp = tmp.concat("\033[0;32m");
@@ -96,23 +94,40 @@ public class LeaderCard implements Viewable {
             tmp = tmp.concat("\033[0;35m");
 
         if(input.minLevel() == 1)
-            tmp = tmp.concat("⏹");
-        else if(input.minLevel() == 2)
-            tmp = tmp.concat(String.valueOf((char) 8198)).concat(String.valueOf((char) 8197)).concat("⏹⏹");
+            tmp = tmp.concat(String.valueOf(input.getNumber())).concat(turnTypeIntoString(input));
+        else if(input.minLevel() == 2 && index == 1)
+            tmp = tmp.concat("lvl 2");
+        else if(input.minLevel() == 2 && index == 2)
+            tmp = tmp.concat(turnTypeIntoString(input));
 
         tmp = tmp.concat("\033[0m");
 
         return tmp;
     }
 
+    private String turnTypeIntoString(CardsRequirement input) {
+        String tmp = "";
+
+        if(input.reqCard() == CardCategory.VIOLET)
+            tmp = tmp.concat(" violet");
+        else if(input.reqCard() == CardCategory.GREEN)
+            tmp = tmp.concat(" green ");
+        else if(input.reqCard() == CardCategory.BLUE)
+            tmp = tmp.concat(" blue  ");
+        else if(input.reqCard() == CardCategory.YELLOW)
+            tmp = tmp.concat(" yellow");
+
+        return tmp;
+    }
+
     private String state() {
-        String tmp = "  State:";
+        String tmp = "";
         if(state == 0)   //inactive
-            tmp = tmp.concat("☐").concat(String.valueOf((char)8201)).concat("║\n");
+            tmp = tmp.concat(" Inactive ").concat("|\n");
         else if(state == 1)   //active
-            tmp = tmp.concat("\033[0;32m☑\033[0m").concat(String.valueOf((char)8201)).concat("║\n");
+            tmp = tmp.concat("\033[0;32m   Active \033[0m").concat("|\n");
         else             //discarded
-            tmp = tmp.concat("\033[0;31m☒\033[0m").concat(String.valueOf((char)8201)).concat("║\n");
+            tmp = tmp.concat("\033[0;31mDiscarded \033[0m").concat("|\n");
         return tmp;
     }
 
@@ -135,7 +150,7 @@ public class LeaderCard implements Viewable {
         else if(num == 3)
             tmp = tmp.concat("\033[0;36m5 shields   ");
 
-        tmp = tmp.concat(String.valueOf((char)8201)).concat("\033[0m");
+        tmp = tmp.concat("\033[0m");
 
         return tmp;
     }
@@ -144,92 +159,92 @@ public class LeaderCard implements Viewable {
         String tmp = "";
 
         if(getAbilityNumber(id) == 1) {
-            tmp = tmp.concat("║ │                   │ ║\n");
-            tmp = tmp.concat("║ │").concat(String.valueOf((char) 8196)).concat("  Market ability  ").concat(String.valueOf((char) 8196)).concat("│ ║\n");
-            tmp = tmp.concat("║ │                   │ ║\n");
-            tmp = tmp.concat("║ │").concat(String.valueOf((char) 8196)).concat("      ⏺ ⇒ ");
+            tmp = tmp.concat("| |                    | |\n");
+            tmp = tmp.concat("| |").concat("   Market ability   ").concat("| |\n");
+            tmp = tmp.concat("| |                    | |\n");
+            tmp = tmp.concat("| |");
             if(getAbilityWOT(id) == WarehouseObjectType.COIN)
-                tmp = tmp.concat("\033[0;33m⏺\033[0m");
+                tmp = tmp.concat("   white -> ").concat("\033[0;33myellow  \033[0m");
             else if(getAbilityWOT(id) == WarehouseObjectType.SERVANT)
-                tmp = tmp.concat("\033[0;35m⏺\033[0m");
+                tmp = tmp.concat("   white -> ").concat("\033[0;35mviolet  \033[0m");
             else if(getAbilityWOT(id) == WarehouseObjectType.SHIELD)
-                tmp = tmp.concat("\033[0;36m⏺\033[0m");
+                tmp = tmp.concat("    white -> ").concat("\033[0;36mblue   \033[0m");
             else if(getAbilityWOT(id) == WarehouseObjectType.STONE)
-                tmp = tmp.concat("\033[0;37m⏺\033[0m");
-            tmp = tmp.concat("      ").concat(String.valueOf((char) 8196)).concat("│ ║\n");
-            tmp = tmp.concat("║ │                   │ ║\n");
+                tmp = tmp.concat("    white -> ").concat("\033[0;37mgrey   \033[0m");
+            tmp = tmp.concat("| |\n");
+            tmp = tmp.concat("| |                    | |\n");
         }
         else if(getAbilityNumber(id) == 2) {
-            tmp = tmp.concat("║ │                   │ ║\n");
-            tmp = tmp.concat("║ │").concat("   Depot ability   ").concat("│ ║\n");
-            tmp = tmp.concat("║ │                   │ ║\n");
+            tmp = tmp.concat("| |                    | |\n");
+            tmp = tmp.concat("| |").concat("    Depot ability   ").concat("| |\n");
+            tmp = tmp.concat("| |                    | |\n");
             if(getAbilityWOT(id) == WarehouseObjectType.COIN) {
-                tmp = tmp.concat("║ │").concat("     ").concat(FRAMED(" " + String.valueOf(abilityDepot[abilityIndex(abilityDepot)]) +" ")).concat(" \033[0;33mcoins\033[0m").concat("     ").concat("│ ║\n");
+                tmp = tmp.concat("| |").concat("      ").concat(FRAMED(" " + String.valueOf(abilityDepot[abilityIndex(abilityDepot)]) +" ")).concat(" \033[0;33mcoins\033[0m").concat("     ").concat("| |\n");
             }
             else if(getAbilityWOT(id) == WarehouseObjectType.SERVANT) {
-                tmp = tmp.concat("║ │").concat(String.valueOf((char)8196)).concat("   ").concat(FRAMED(" " + String.valueOf(abilityDepot[abilityIndex(abilityDepot)]) +" ")).concat(" \033[0;35mservants\033[0m").concat("   ").concat(String.valueOf((char)8196)).concat("│ ║\n");
+                tmp = tmp.concat("| |").concat("    ").concat(FRAMED(" " + String.valueOf(abilityDepot[abilityIndex(abilityDepot)]) +" ")).concat(" \033[0;35mservants\033[0m").concat("    ").concat("| |\n");
             }
             else if(getAbilityWOT(id) == WarehouseObjectType.SHIELD) {
-                tmp = tmp.concat("║ │").concat("    ").concat(FRAMED(" " + String.valueOf(abilityDepot[abilityIndex(abilityDepot)]) +" ")).concat(" \033[0;36mshields\033[0m").concat("    ").concat("│ ║\n");
+                tmp = tmp.concat("| |").concat("     ").concat(FRAMED(" " + String.valueOf(abilityDepot[abilityIndex(abilityDepot)]) +" ")).concat(" \033[0;36mshields\033[0m").concat("    ").concat("| |\n");
             }
             else if(getAbilityWOT(id) == WarehouseObjectType.STONE) {
-                tmp = tmp.concat("║ │").concat(String.valueOf((char)8196)).concat("    ").concat(FRAMED(" " + String.valueOf(abilityDepot[abilityIndex(abilityDepot)]) +" ")).concat(" \033[0;37mstones\033[0m").concat("    ").concat(String.valueOf((char)8196)).concat("│ ║\n");
+                tmp = tmp.concat("| |").concat("     ").concat(FRAMED(" " + String.valueOf(abilityDepot[abilityIndex(abilityDepot)]) +" ")).concat(" \033[0;37mstones\033[0m").concat("     ").concat("| |\n");
             }
 
-            tmp = tmp.concat("║ │                   │ ║\n");
+            tmp = tmp.concat("| |                    | |\n");
         }
         else if(getAbilityNumber(id) == 3) {
-            tmp = tmp.concat("║ │").concat(String.valueOf((char) 8196)).concat("Production ability").concat(String.valueOf((char) 8196)).concat("│ ║\n");
-            tmp = tmp.concat("║ │                   │ ║\n");
-            tmp = tmp.concat("║ │ ").concat(String.valueOf((char)8197)).concat(String.valueOf((char)8197));
+            tmp = tmp.concat("| |").concat(" Production ability ").concat("| |\n");
+            tmp = tmp.concat("| |                    | |\n");
+            tmp = tmp.concat("| |  ");
 
             if(getAbilityWOT(id) == WarehouseObjectType.COIN)
-                tmp = tmp.concat(FRAMED(BACK_YELLOW(" 1 ")));
+                tmp = tmp.concat(FRAMED(BLACK(BACK_YELLOW(" 1 "))));
             else if(getAbilityWOT(id) == WarehouseObjectType.SERVANT)
-                tmp = tmp.concat(FRAMED(BACK_MAGENTA(" 1 ")));
+                tmp = tmp.concat(FRAMED(BLACK(BACK_MAGENTA(" 1 "))));
             else if(getAbilityWOT(id) == WarehouseObjectType.SHIELD)
-                tmp = tmp.concat(FRAMED(BACK_CYAN(" 1 ")));
+                tmp = tmp.concat(FRAMED(BLACK(BACK_CYAN(" 1 "))));
             else if(getAbilityWOT(id) == WarehouseObjectType.STONE)
-                tmp = tmp.concat(FRAMED(BACK_WHITE(" 1 ")));
+                tmp = tmp.concat(FRAMED(BLACK(BACK_WHITE(" 1 "))));
 
-            tmp = tmp.concat(" ⇒ ");
+            tmp = tmp.concat(" -> ");
 
             if(abilityMutableOutput == 0)
-                tmp = tmp.concat(FRAMED(BACK_YELLOW(" 1 ")));
+                tmp = tmp.concat(FRAMED(BLACK(BACK_YELLOW(" 1 "))));
             else if(abilityMutableOutput == 1)
-                tmp = tmp.concat(FRAMED(BACK_MAGENTA(" 1 ")));
+                tmp = tmp.concat(FRAMED(BLACK(BACK_MAGENTA(" 1 "))));
             else if(abilityMutableOutput == 2)
-                tmp = tmp.concat(FRAMED(BACK_CYAN(" 1 ")));
+                tmp = tmp.concat(FRAMED(BLACK(BACK_CYAN(" 1 "))));
             else if(abilityMutableOutput == 3)
-                tmp = tmp.concat(FRAMED(BACK_WHITE(" 1 ")));
+                tmp = tmp.concat(FRAMED(BLACK(BACK_WHITE(" 1 "))));
             else if(abilityMutableOutput == 4)
-                tmp = tmp.concat(FRAMED(BACK_RED(" 1 ")));
+                tmp = tmp.concat(FRAMED(BLACK(BACK_RED(" 1 "))));
 
-            tmp = tmp.concat(" + ").concat(FRAMED(BACK_RED(" 1 ")));
+            tmp = tmp.concat(" + ").concat(FRAMED(BLACK(BACK_RED(" 1 "))));
 
-            tmp = tmp.concat(String.valueOf((char)8197)).concat(String.valueOf((char)8197)).concat(" │ ║\n");
+            tmp = tmp.concat("  | |\n");
 
-            tmp = tmp.concat("║ │                   │ ║\n");
+            tmp = tmp.concat("| |                    | |\n");
 
-            tmp = tmp.concat("║ │   ").concat(String.valueOf((char)8196)).concat(FRAMED(BACK_YELLOW(" " + abilityProduction[0] + " "))).concat(FRAMED(BACK_MAGENTA(" " + abilityProduction[1] + " "))).concat(FRAMED(BACK_CYAN(" " + abilityProduction[2] + " "))).concat(FRAMED(BACK_WHITE(" " + abilityProduction[3] + " "))).concat(String.valueOf((char)8196)).concat("   │ ║\n");
+            tmp = tmp.concat("| |    ").concat(BLACK(FRAMED(BACK_YELLOW(" " + abilityProduction[0] + " ")))).concat(BLACK(FRAMED(BACK_MAGENTA(" " + abilityProduction[1] + " ")))).concat(BLACK(FRAMED(BACK_CYAN(" " + abilityProduction[2] + " ")))).concat(BLACK(FRAMED(BACK_WHITE(" " + abilityProduction[3] + " ")))).concat("    | |\n");
         }
         else if(getAbilityNumber(id) == 4) {
-            tmp = tmp.concat("║ │                   │ ║\n");
-            tmp = tmp.concat("║ │").concat(String.valueOf((char) 8196)).concat(" Discount ability ").concat(String.valueOf((char) 8196)).concat("│ ║\n");
-            tmp = tmp.concat("║ │                   │ ║\n");
+            tmp = tmp.concat("| |                    | |\n");
+            tmp = tmp.concat("| |").concat("  Discount ability  ").concat("| |\n");
+            tmp = tmp.concat("| |                    | |\n");
 
-            tmp = tmp.concat("║ │");
+            tmp = tmp.concat("| | ");
             if(getAbilityWOT(id) == WarehouseObjectType.COIN)
-                tmp = tmp.concat("   \033[0;33mcoin discount\033[0m   ");
+                tmp = tmp.concat("   \033[0;33mcoin discount\033[0m  ");
             else if(getAbilityWOT(id) == WarehouseObjectType.SERVANT)
-                tmp = tmp.concat(String.valueOf((char) 8196)).concat(" \033[0;35mservant discount\033[0m ").concat(String.valueOf((char) 8196));
+                tmp = tmp.concat(" \033[0;35mservant discount\033[0m ");
             else if(getAbilityWOT(id) == WarehouseObjectType.SHIELD)
-                tmp = tmp.concat("  \033[0;36mshield discount\033[0m  ");
+                tmp = tmp.concat("  \033[0;36mshield discount\033[0m ");
             else if(getAbilityWOT(id) == WarehouseObjectType.STONE)
-                tmp = tmp.concat(String.valueOf((char) 8196)).concat("  \033[0;37mstone discount\033[0m  ").concat(String.valueOf((char) 8196));
-            tmp = tmp.concat("│ ║\n");
+                tmp = tmp.concat("  \033[0;37mstone discount\033[0m  ");
+            tmp = tmp.concat(" | |\n");
 
-            tmp = tmp.concat("║ │                   │ ║\n");
+            tmp = tmp.concat("| |                    | |\n");
         }
         return tmp;
     }
