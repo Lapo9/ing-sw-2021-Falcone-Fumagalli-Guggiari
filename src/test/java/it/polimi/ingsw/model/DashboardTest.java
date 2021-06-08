@@ -2109,6 +2109,14 @@ public class DashboardTest {
         } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.discardSupplies();
 
+        //buy supplies from the market
+        dshbrd.buySupplies(MarketDirection.VERTICAL, 3);
+        try {
+            dshbrd.swapWarehouseRows(1, 2);
+            dshbrd.assignMarble(DepotID.WAREHOUSE2, MarbleColor.VIOLET);
+        } catch (SupplyException | MarbleException | NoSuchMethodException | LeaderException e) {fail();}
+        dshbrd.discardSupplies();
+
         //activate production
         try {
             dshbrd.swapLeaderProduction(1, WarehouseObjectType.COIN);
@@ -2119,7 +2127,7 @@ public class DashboardTest {
         try {
             dshbrd.moveSupply(DepotID.WAREHOUSE1, DepotID.BASE_PRODUCTION, WarehouseObjectType.COIN);
             dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD);
-            dshbrd.moveSupply(DepotID.WAREHOUSE3, DepotID.DEVELOPMENT2, WarehouseObjectType.SHIELD);
+            dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.DEVELOPMENT2, WarehouseObjectType.SERVANT);
             dshbrd.moveSupply(DepotID.WAREHOUSE2, DepotID.LEADER2, WarehouseObjectType.SERVANT);
         } catch (SupplyException | NoSuchMethodException | LeaderException e) {fail();}
         dshbrd.produce(false, true, false, false, true, true);

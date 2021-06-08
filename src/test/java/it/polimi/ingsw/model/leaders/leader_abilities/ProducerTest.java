@@ -25,6 +25,10 @@ public class ProducerTest {
             prod.swapProduction(WarehouseObjectType.SERVANT);
         } catch (SupplyException e) {fail();}
 
+        try {
+            prod.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
+        } catch (SupplyException e) {fail();}
+
         SupplyContainer p = prod.produce();
 
         //output swapped + FAITH_MARKER
@@ -64,6 +68,11 @@ public class ProducerTest {
         } catch (SupplyException e) {
             fail();
         }
+
+        try {
+            prod.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE1);
+        } catch (SupplyException e) {fail();}
+
         SupplyContainer p = prod.produce();
 
         assertEquals(1, p.getQuantity(WarehouseObjectType.COIN));
