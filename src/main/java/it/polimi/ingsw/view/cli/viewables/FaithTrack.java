@@ -59,9 +59,9 @@ public class FaithTrack implements Viewable {
         tmp += new StringBuilder().
                 append(findSpaceNamePre(info.getPlayerName(i))).append(info.getPlayerName(i)).append(findSpaceNamePost(info.getPlayerName(i))).append("|").
                 append(findSpacePositionPre(data.get(info.getPlayerName(i)).get(0))).append(data.get(info.getPlayerName(i)).get(0)).append(findSpacePositionPost(data.get(info.getPlayerName(i)).get(0))).append("|").
-                append(findSpacePopeTilePre(data.get(info.getPlayerName(i)).get(1))).append(rightColor(data.get(info.getPlayerName(i)).get(1))).append(findSpacePopeTilePost(data.get(info.getPlayerName(i)).get(1))).append("|").
-                append(findSpacePopeTilePre(data.get(info.getPlayerName(i)).get(2))).append(rightColor(data.get(info.getPlayerName(i)).get(2))).append(findSpacePopeTilePost(data.get(info.getPlayerName(i)).get(2))).append("|").
-                append(findSpacePopeTilePre(data.get(info.getPlayerName(i)).get(3))).append(rightColor(data.get(info.getPlayerName(i)).get(3))).append(findSpacePopeTilePost(data.get(info.getPlayerName(i)).get(3))).append("\n").toString();
+                append(rightColor(data.get(info.getPlayerName(i)).get(1))).append("|").
+                append(rightColor(data.get(info.getPlayerName(i)).get(2))).append("|").
+                append(rightColor(data.get(info.getPlayerName(i)).get(3))).append("\n").toString();
         return tmp;
     }
 
@@ -111,38 +111,21 @@ public class FaithTrack implements Viewable {
         return tmp;
     }
 
-    private String findSpacePopeTilePre(int num) {
-        /*if(num == 0 | num ==2)
-            return new String("    ");
-        else
-            return new String("     ");*/
-        return new String("         ");
-    }
-
-    private String findSpacePopeTilePost(int num) {
-        /*if(num == 0)
-            return new String("     ");
-        else if(num == 1)
-            return new String("      ");
-        else
-            return new String("    ");*/
-        return new String("        " + String.valueOf((char) 8196) + String.valueOf((char) 8198));
-    }
-
     private String rightColor(int number) {
         if(number == 0)   //inactive
-            return "☐"; //Inactive "));
+            return "     inactive      ";
         else if(number == 1)   //active
-            return "\033[0;32m☑\033[0m"; //Active "));
+            return GREEN("      active       ");
         else             //discarded
-            return "\033[0;31m☒\033[0m";  //Discarded "));
+            return RED("     discarded     ");
     }
 
     private String getFaithTrack() {
         String tmp = "\n";
 
-        tmp = tmp.concat("0  1  2  3  4  5  6  7  8  9 " + String.valueOf((char)8194) + "10 11 12 13 14 15 16 17 18 19 20 21 22 23 24\n");
-        tmp = tmp.concat("▄  ▄  ▄  ▄  ▄  \u001B[33m▄  ▄  ▄  \033[0;31m▄\033[0m  ▄  ▄  ▄  \u001B[33m▄  ▄  ▄  ▄  \033[0;31m▄\033[0m  ▄  ▄  \u001B[33m▄  ▄  ▄  ▄  ▄  \033[0;31m▄\033[0m\n");
+        tmp = tmp.concat(FRAMED(" 0 |")).concat(FRAMED(" 1 |")).concat(FRAMED(" 2 |")).concat(FRAMED(" 3 |")).concat(FRAMED(" 4 ")).concat(BACK_YELLOW(FRAMED("| 5 |"))).concat(BACK_YELLOW(FRAMED(" 6 |"))).concat(BACK_YELLOW(FRAMED(" 7 "))).concat(BACK_RED(FRAMED("| 8 |")));
+        tmp = tmp.concat(FRAMED(" 9 |")).concat(FRAMED(" 10 |")).concat(FRAMED(" 11 ")).concat(BACK_YELLOW(FRAMED("| 12 |"))).concat(BACK_YELLOW(FRAMED(" 13 |"))).concat(BACK_YELLOW(FRAMED(" 14 |"))).concat(BACK_YELLOW(FRAMED(" 15 "))).concat(BACK_RED(FRAMED("| 16 |")));
+        tmp = tmp.concat(FRAMED(" 17 |")).concat(FRAMED(" 18 ")).concat(BACK_YELLOW(FRAMED("| 19 |"))).concat(BACK_YELLOW(FRAMED(" 20 |"))).concat(BACK_YELLOW(FRAMED(" 21 |"))).concat(BACK_YELLOW(FRAMED(" 22 |"))).concat(BACK_YELLOW(FRAMED(" 23 "))).concat(BACK_RED(FRAMED("| 24 "))).concat("\n");
 
         return tmp;
     }

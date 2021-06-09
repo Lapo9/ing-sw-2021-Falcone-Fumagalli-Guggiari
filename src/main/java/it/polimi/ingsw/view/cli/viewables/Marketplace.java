@@ -7,7 +7,7 @@ import it.polimi.ingsw.view.cli.ViewableId;
 
 import java.util.ArrayList;
 
-import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.BOLD;
+import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
 public class Marketplace implements Viewable {
 
@@ -35,21 +35,20 @@ public class Marketplace implements Viewable {
         int i = 0;
         int index = 1;
 
-        tmp = tmp.concat("   ").concat("  ").concat(String.valueOf((char)8201)).concat("1").concat(String.valueOf((char)8201)).concat("   ").concat(String.valueOf((char)8201)).concat(String.valueOf((char)8201)).concat("2").concat(String.valueOf((char)8201)).concat(String.valueOf((char)8201)).concat("   ").concat(String.valueOf((char)8201)).concat("3").concat(String.valueOf((char)8201)).concat(String.valueOf((char)8201)).concat("   ").concat(String.valueOf((char)8201)).concat("4").concat(String.valueOf((char)8201)).concat("\n");
+        tmp = tmp.concat("   ").concat("   1      2      3      4   ").concat("\n");
 
-        tmp = tmp.concat("   ╔════╦════╦════╦════╗\n");
+        tmp = tmp.concat("    ______ ______ ______ ______ \n");
 
         while(i<12){
-            tmp = tmp.concat(" ").concat(String.valueOf(index)).concat(" ").concat("║ ").concat(String.valueOf((char)8201)).concat(marbleColor(grid.get(i))).concat(String.valueOf((char)8201)).concat(" ║ ").concat(String.valueOf((char)8201)).concat(marbleColor(grid.get(i+1))).concat(String.valueOf((char)8201)).concat(" ║ ").concat(String.valueOf((char)8201)).concat(marbleColor(grid.get(i+2))).concat(String.valueOf((char)8201)).concat(" ║ ").concat(String.valueOf((char)8201)).concat(marbleColor(grid.get(i+3))).concat(String.valueOf((char)8201)).concat(" ║  ←").concat("\n");
-            if(i<8)
-                tmp = tmp.concat("   ╠════╬════╬════╬════╣ \n");
-            i = i + 4;
+            tmp = tmp.concat("   |      |      |      |      |\n");
+            tmp = tmp.concat(" ").concat(String.valueOf(index)).concat(" ").concat("|  ").concat(marbleColor(grid.get(i))).concat("  |  ").concat(marbleColor(grid.get(i+1))).concat("  |  ").concat(marbleColor(grid.get(i+2))).concat("  |  ").concat(marbleColor(grid.get(i+3))).concat("  |  <-").concat("\n");
+            if(i<=8)
+                tmp = tmp.concat("   |______|______|______|______| \n");
             index++;
+            i = i + 4;
         }
 
-        tmp = tmp.concat("   ╚════╩════╩════╩════╝\n");
-
-        tmp = tmp.concat("     ").concat(String.valueOf((char)8201)).concat(" ↑ ").concat(String.valueOf((char)8201)).concat(" ").concat(String.valueOf((char)8201)).concat(" ↑ ").concat(String.valueOf((char)8201)).concat(" ").concat(String.valueOf((char)8201)).concat(" ↑ ").concat(String.valueOf((char)8201)).concat(" ").concat(String.valueOf((char)8201)).concat(" ↑ ").concat(String.valueOf((char)8201)).concat(" ").concat("\n");
+        tmp = tmp.concat("    ").concat("   |      |      |      |   ").concat("\n");
 
         tmp = tmp.concat("   Slide: ").concat(marbleColor(grid.get(12)));
 
@@ -58,16 +57,16 @@ public class Marketplace implements Viewable {
 
     private String marbleColor(int num) {
         if(num == 0)  //blue
-            return "\033[0;36m⏺\033[0m";
+            return FRAMED(BACK_CYAN("  "));
         else if(num == 1)  //grey
-            return "\033[0;37m⏺\033[0m";
+            return FRAMED(BACK_WHITE("  "));
         else if(num == 2)   //red
-            return "\033[0;31m⏺\033[0m";
+            return FRAMED(BACK_RED("  "));
         else if(num == 3)   //violet
-            return "\033[0;35m⏺\033[0m";
+            return FRAMED(BACK_MAGENTA("  "));
         else if(num == 4)   //white
-            return "⏺";
+            return FRAMED("  ");
         else                //yellow
-            return "\033[0;33m⏺\033[0m";
+            return FRAMED(BACK_YELLOW("  "));
     }
 }
