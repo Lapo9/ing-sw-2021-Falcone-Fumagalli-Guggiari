@@ -23,6 +23,7 @@ public class OfflineInfo {
     private String selectedItem = "";
     private String selectedWarehouseRow = "";
     private ViewableFactory factory;
+    private boolean matchStarted = false;
 
 
     public OfflineInfo(){
@@ -73,6 +74,14 @@ public class OfflineInfo {
     }
 
 
+    public synchronized void setMatchStarted(boolean matchStarted) {
+        this.matchStarted = matchStarted;
+    }
+
+
+    public synchronized boolean isMatchStarted() {
+        return matchStarted;
+    }
 
     public synchronized void setProduction(String production, boolean isActive){
         activeProductions.put(production, isActive);

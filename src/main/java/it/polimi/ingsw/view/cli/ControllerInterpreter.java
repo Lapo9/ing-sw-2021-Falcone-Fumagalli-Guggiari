@@ -51,11 +51,16 @@ public class ControllerInterpreter {
 
 
     private void show(String... tokens){
-        try {
-            screen.show(tokens[1]);
-        } catch (ViewException ve){
-            execute("fatal Sorry, we had a problem, please retry, and if the problem keeps happening try to disconnect and reconnect");
+        if (offlineInfo.isMatchStarted() || !(tokens[1].equals("dashboard") || tokens[1].equals("faithTrack") || tokens[1].equals("marketplace") || tokens[1].equals("developmentGrid"))) {
+            try {
+                screen.show(tokens[1]);
+                screen.refresh();
+            } catch (ViewException ve) {
+                execute("fatal Sorry, we had a problem, please retry, and if the problem keeps happening try to disconnect and reconnect");
+            }
         }
+
+        else execute("error Connect to a match first! Use command connect serverIP portNumber username matchID");
     }
 
     private void hide(String... tokens){
@@ -99,6 +104,7 @@ public class ControllerInterpreter {
             errorMessage.append(" ");
         }
 
+        offlineInfo.setMatchStarted(false);
         execute("show welcome");
         screen.setMessage(errorMessage.toString(), MessageType.FATAL);
         screen.refresh();
@@ -110,12 +116,13 @@ public class ControllerInterpreter {
 
     private void start(String... tokens){
         offlineInfo.setPlayers(Arrays.copyOfRange(tokens, 2, tokens.length));
+        offlineInfo.setMatchStarted(true);
         execute("message You are player " + tokens[1] + "!");
     }
 
     private void win(String... tokens){
         try {
-            screen.show("win");
+            screen.show("endMatch");
         } catch (ViewException ve){
             (new Throwable()).printStackTrace(); //TODO terminate
             return;
@@ -163,6 +170,15 @@ public class ControllerInterpreter {
         }
     }
 
+    private void help(String... tokens){
+        try {
+            screen.show("help");
+        } catch (ViewException ve){
+            (new Throwable()).printStackTrace(); //TODO terminate
+            return;
+        }
+    }
+
 
 
     //sets the standard commands the server can send to the view
@@ -183,6 +199,7 @@ public class ControllerInterpreter {
         knownCommands.put("setPlayers", this::setPlayers);
         knownCommands.put("reset", this::reset);
         knownCommands.put("setActive", this::setActive);
+        knownCommands.put("help", this::help);
     }
 
 

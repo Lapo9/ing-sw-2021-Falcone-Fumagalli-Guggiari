@@ -1,7 +1,11 @@
 package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
+import it.polimi.ingsw.view.cli.fancy_console.FancyConsole;
 import it.polimi.ingsw.view.cli.viewables.*;
+
+import java.io.InputStream;
+import java.util.Scanner;
 
 import static it.polimi.ingsw.view.cli.ViewableId.*;
 
@@ -67,9 +71,33 @@ public class MainCLI {
         createView("faithTrack", screen,
                 factory.buildFaithTrack(FAITH_TRACK));
 
-        createView("welcome", screen);
+        createView("welcome", screen,
+                new Viewable() {
+                    @Override
+                    public String toString() {
+                        return FancyConsole.BOLD(FancyConsole.YELLOW(
+                                "\n" +
+                                " __      __  ___   _       ___    ___    __  __   ___   _ \n" +
+                                " \\ \\    / / | __| | |     / __|  / _ \\  |  \\/  | | __| | |\n" +
+                                "  \\ \\/\\/ /  | _|  | |__  | (__  | (_) | | |\\/| | | _|  |_|\n" +
+                                "   \\_/\\_/   |___| |____|  \\___|  \\___/  |_|  |_| |___| (_)\n" +
+                                "                                                          \n\n\n Type help to get the commands!"));
+                    }
+                });
 
-        createView("yourTurn", screen);
+        createView("yourTurn", screen,
+                new Viewable() {
+                    @Override
+                    public String toString() {
+                        return FancyConsole.BOLD(FancyConsole.YELLOW(
+                                "\n" +
+                                "  ___  _    _                             _                     _ \n" +
+                                " |_ _|| |_ ( )___  _  _  ___  _  _  _ _  | |_  _  _  _ _  _ _  | |\n" +
+                                "  | | |  _||/(_-< | || |/ _ \\| || || '_| |  _|| || || '_|| ' \\ |_|\n" +
+                                " |___| \\__|  /__/  \\_, |\\___/ \\_,_||_|    \\__| \\_,_||_|  |_||_|(_)\n" +
+                                "                   |__/                                           \n"));
+                    }
+                });
 
 
         createView("opponent1", screen,
@@ -99,12 +127,49 @@ public class MainCLI {
                 factory.buildBaseProduction(4, BASE_PRODUCTION),
                 factory.buildDevelopmentSpacerGrid(4, DEVELOPMENT_SPACE_GRID));
 
-        createView("lobby", screen);
+        createView("lobby", screen,
+                new Viewable() {
+                    @Override
+                    public String toString() {
+                        return "\n\nType info to get players connected to this match!";
+                    }
+                });
+
+        createView("help", screen,
+                new Viewable() {
+                    @Override
+                    public String toString() {
+
+                        InputStream rules = getClass().getResourceAsStream("/files/ListOfCommands.txt");
+                        Scanner s = new Scanner(rules).useDelimiter("\\A");
+                        String result = s.hasNext() ? s.next() : "";
+
+                        return FancyConsole.BOLD(FancyConsole.YELLOW(
+                                "\n" +
+                                "  _     _      _           __                                         _     \n" +
+                                " | |   (_) ___| |_   ___  / _|  __  ___  _ __   _ __   __ _  _ _   __| | ___\n" +
+                                " | |__ | |(_-<|  _| / _ \\|  _| / _|/ _ \\| '  \\ | '  \\ / _` || ' \\ / _` |(_-<\n" +
+                                " |____||_|/__/ \\__| \\___/|_|   \\__|\\___/|_|_|_||_|_|_|\\__,_||_||_|\\__,_|/__/\n" +
+                                "                                                                            \n\n\n")) + result;
+                    }
+                });
+
+        createView("endMatch", screen,
+                new Viewable() {
+                    @Override
+                    public String toString() {
+                        return FancyConsole.BOLD(FancyConsole.YELLOW(
+                                "\n" +
+                                "   ___                                        \n" +
+                                "  / __| __ _  _ __   ___   ___ __ __ ___  _ _ \n" +
+                                " | (_ |/ _` || '  \\ / -_) / _ \\\\ V // -_)| '_|\n" +
+                                "  \\___|\\__,_||_|_|_|\\___| \\___/ \\_/ \\___||_|  \n" +
+                                "                                              \n"));
+                    }
+                });
 
         screen.start("welcome");
 
-
-        //showFaithTrack(screen, factory);
     }
 
 

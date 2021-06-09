@@ -43,6 +43,7 @@ public class ScreenCLI implements Screen {
 
         try {
             show(startingViewId);
+            refresh();
         } catch (ViewException ve){(new Throwable()).printStackTrace(); /*TODO terminate*/}
 
         reader.start();

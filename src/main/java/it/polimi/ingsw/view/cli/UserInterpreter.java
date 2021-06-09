@@ -151,6 +151,7 @@ public class UserInterpreter {
         commands.add(new UserCommand(true, "swapRows", new ArrayList<>(Arrays.asList("1", "2", "3")), new ArrayList<>(Arrays.asList("1", "2", "3"))));
         commands.add(new UserCommand(true, "selected", new ArrayList<>(Arrays.asList("coin", "servant", "shield", "stone")), new ArrayList<>(Arrays.asList("wh1", "wh2", "wh3", "dev1", "dev2", "dev3", "leader1", "leader2", "paycheck", "coffer", "base"))));
         commands.add(new UserCommand(false, "u"));
+        commands.add(new UserCommand(false, "help"));
 
         return commands;
     }
