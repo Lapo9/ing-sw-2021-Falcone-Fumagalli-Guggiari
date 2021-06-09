@@ -55,7 +55,7 @@ public class BaseProduction implements Viewable {
     }
 
     /**
-     * Updates the class constructor using numbers from the getStatus
+     * Updates the viewable using numbers from the getStatus
      * @param update array composed of 18 integer (from 0 to 4, from 7 to 11 and from 13 to 17 there are only zeros, design error)
      *               5 -> Integer corresponding to the resource of the first mutable input
      *               6 -> Integer corresponding to the resource of the second mutable input

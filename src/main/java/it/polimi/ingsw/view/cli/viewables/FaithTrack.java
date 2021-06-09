@@ -8,15 +8,26 @@ import java.util.HashMap;
 
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
+/**
+ * Represents the position of all players in the faith track
+ */
 public class FaithTrack implements Viewable {
 
     private HashMap<String, ArrayList<Integer>> data = new HashMap<String, ArrayList<Integer>>();
     int playerNumber = 0;
     OfflineInfo info;
 
+    /**
+     * Class constructor
+     */
     FaithTrack() {
     }
 
+    /**
+     * Updates the viewable using numbers from the getStatus
+     * @param update array composed of 5 numbers (player's number in the queue, position of the first player, second, third, fourth)
+     * @param info containing the number and the name of the player
+     */
     @Override
     public void update(int[] update, OfflineInfo info) {
         playerNumber = info.getPlayersNum();
@@ -45,11 +56,19 @@ public class FaithTrack implements Viewable {
         this.info = info;
     }
 
+    /**
+     * Prints the positions of the players in the faith track
+     * @return the positions table
+     */
     @Override
     public String toString() {
         return getPlayersInfo() + getFaithTrack();
     }
 
+    /**
+     * Table
+     * @return the positions table to print
+     */
     private String getPlayersInfo() {
         String tmp = BOLD("Faith Track info: \n");
         if(info.getPlayersNum() != 0) {
@@ -65,6 +84,11 @@ public class FaithTrack implements Viewable {
         return tmp;
     }
 
+    /**
+     * Finds the position of the player
+     * @param name
+     * @return
+     */
     private String findSpaceNamePre(String name) {
         int num = name.length();
         String tmp = "";
@@ -111,6 +135,11 @@ public class FaithTrack implements Viewable {
         return tmp;
     }
 
+    /**
+     * Combine the pope favor tile considered and its status
+     * @param number of the chosen pope favor tile
+     * @return the status
+     */
     private String rightColor(int number) {
         if(number == 0)   //inactive
             return "     inactive      ";
@@ -119,6 +148,7 @@ public class FaithTrack implements Viewable {
         else             //discarded
             return RED("     discarded     ");
     }
+
 
     private String getFaithTrack() {
         String tmp = "\n";

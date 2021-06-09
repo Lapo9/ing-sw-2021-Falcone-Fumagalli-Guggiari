@@ -27,7 +27,7 @@ public class ActiveProductions implements Viewable  {
     }
 
     /**
-     * Updates the class constructor using numbers from the getStatus
+     * Updates the viewable using numbers from the getStatus
      * @param update array composed of 6 integer which can be 0(inactive)/1(active)/2(not existing)
      */
     @Override

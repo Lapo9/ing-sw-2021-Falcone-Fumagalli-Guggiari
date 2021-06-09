@@ -104,7 +104,7 @@ public class MainCLI {
         screen.start("welcome");
 
 
-        //showBaseProductionTest(screen, factory);
+        //showFaithTrack(screen, factory);
     }
 
 
@@ -466,4 +466,18 @@ public class MainCLI {
         screenCLI.show("DevSpaceGrid");
     }
 
+    private static void showFaithTrack (ScreenCLI screenCLI, ViewableFactory factory) throws ViewException{
+        View FaithTrack = new View();
+        FaithTrack faithTrackViewable = factory.buildFaithTrack(FAITH_TRACK);
+        FaithTrack.addViewable(faithTrackViewable);
+
+        screenCLI.addView("FaithTrack", FaithTrack);
+        screenCLI.start("FaithTrack");
+
+        int [] updateFT = {
+            1, 0, 1, 2, 3
+        };
+        faithTrackViewable.update(updateFT, new OfflineInfo());
+        screenCLI.show("FaithTrack");
+    }
 }

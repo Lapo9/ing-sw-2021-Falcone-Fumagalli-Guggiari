@@ -12,7 +12,9 @@ import static it.polimi.ingsw.model.WarehouseObjectType.*;
 import static it.polimi.ingsw.model.WarehouseObjectType.STONE;
 
 
-
+/**
+ * This class creates the viewable of the development card used in the DevelopmentSpace and DevelopmentSpaceGrid
+ */
 public class DevelopmentCard implements Viewable {
 
     //card id
@@ -34,6 +36,9 @@ public class DevelopmentCard implements Viewable {
     //win points of the card
     private Integer wp;
 
+    /**
+     * Class constructor
+     */
     DevelopmentCard() {
         id = 0; //not visible
         cost.put(WarehouseObjectType.COIN, 0);
@@ -61,11 +66,17 @@ public class DevelopmentCard implements Viewable {
         prod.put(1, output);
         prod.put(2, currentSupply);
 
+        //category, level and number of win points
         cat = CardCategory.YELLOW;
         lv = 0;
         wp = 0;
     }
 
+    /**
+     * Updates the viewable using numbers from the getStatus (if the id is 0 the card is empty)
+     * @param update array composed by the id of the card (used to update the cost, category, level and win points of the card,
+     *               those info are from the development cards file) and 15 int to update the card production
+     */
     @Override
     public void update(int[] update) {
         //the card will receive its id (to update cost, category, level and wp) and its three supplyContainer to update its production
@@ -133,6 +144,19 @@ public class DevelopmentCard implements Viewable {
         }
     }
 
+    /**
+     * Prints the development card
+     * @return string with the development card
+     */
+    @Override
+    public String toString() {
+        return BOLD("Development Card: ") + id + "               " + "\n" + printOnlyNotNull();
+    }
+
+    /**
+     * Associates a color (from Style) to the category of the card
+     * @return the color of the category
+     */
     public String categoryToColor() {
         if (this.cat == CardCategory.YELLOW) {
             return FRAMED(BLACK(BACK_YELLOW(" " + lv + " ")));
@@ -149,6 +173,12 @@ public class DevelopmentCard implements Viewable {
         else return null;
     }
 
+    /**
+     * Helps to "compress" the string, so we have "" if the resource does not exist and we don't have empty spaces
+     * @param i index of the production (mutableInput1(0)/mutableInput2(1)/mutableOutput(2))
+     * @param wot type of resource, used to convert resource in colour
+     * @return one marker for the type of resource or an empty string if the resource does not exist
+     */
     private String deleteZeros (int i, WarehouseObjectType wot) {
         if (prod.get(i).get(wot) == 0) {
             return "";
@@ -171,19 +201,26 @@ public class DevelopmentCard implements Viewable {
         else return null;
     }
 
-    @Override
-    public String toString() {
-        return BOLD("Development Card: ") + id + "               " + "\n" + printOnlyNotNull();
-    }
-
+    /**
+     * Calculate the spaces to have a proportioned card. If that resource is not in the production, we have to substitute
+     * with three empty spaces to put the production in the centre
+     * @param i input/output/currentSupply
+     * @param wot resource chosen
+     * @return three spaces for every resource not existent in the prod
+     */
     private String calculateSpaces (int i, WarehouseObjectType wot) {
         if (prod.get(i).get(wot) == 0) {
-            return "   ";
+            return "   "; //three spaces
         }
         else return "";
     }
 
+    /**
+     * Prints an empty card if the id is zero and if not, print the card using all helper methods
+     * @return the string describing the development card
+     */
     private String printOnlyNotNull () {
+        //empty card
         if (id == 0) {
             return "+--------------------------------+" + "\n" +
                     "|                                |" + "\n" +
@@ -236,6 +273,10 @@ public class DevelopmentCard implements Viewable {
         }
     }
 
+    /**
+     * Print the number of win points considering the occurrence of a double digit
+     * @return the number of win points framed and the right number of spaces to not ruin the shape of the card
+     */
     private String printWinPoints() {
         if (wp <= 9) {
             return "|        " + FRAMED(" Win Points: " + wp + " ") + "         |" + "\n";

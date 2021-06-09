@@ -13,7 +13,7 @@ public class ActionTile implements Viewable {
     ActionTile() {}
 
     /**
-     * Updates the class with the last extracted tile.
+     * Updates the viewable with the last extracted tile.
      * @param update status array made by 7 integers that represents the action tile index
      */
     @Override
