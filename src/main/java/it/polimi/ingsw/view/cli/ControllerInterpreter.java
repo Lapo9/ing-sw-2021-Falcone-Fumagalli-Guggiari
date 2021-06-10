@@ -173,6 +173,7 @@ public class ControllerInterpreter {
     private void help(String... tokens){
         try {
             screen.show("help");
+            screen.refresh();
         } catch (ViewException ve){
             (new Throwable()).printStackTrace(); //TODO terminate
             return;

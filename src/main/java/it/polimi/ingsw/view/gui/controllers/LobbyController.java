@@ -6,7 +6,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
+
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class LobbyController extends SceneController {
@@ -21,6 +25,7 @@ public class LobbyController extends SceneController {
     @FXML private ImageView status2;
     @FXML private ImageView status3;
     @FXML private ImageView status4;
+    @FXML private Label text;
 
     ArrayList<Pair<Label, ImageView>> players = new ArrayList<>();
 
@@ -33,6 +38,12 @@ public class LobbyController extends SceneController {
         players.add(new Pair<>(player2, status2));
         players.add(new Pair<>(player3, status3));
         players.add(new Pair<>(player4, status4));
+
+        InputStream rules = getClass().getResourceAsStream("/files/LobbyText.txt");
+        Scanner s = new Scanner(rules).useDelimiter("\\A");
+        String result = s.hasNext() ? s.next() : "";
+
+        text.setText(result);
     }
 
 

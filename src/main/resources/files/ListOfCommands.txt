@@ -1,21 +1,39 @@
-messages Match::update can receive:
+COMMAND NAME             ARGUMENTS (use spaces, not commas)                ACTIVE PHASE   DESCRIPTION
 
-- start										LOBBY			only from leader, starts the match
-- listPlayers									ANY			lists the players and their connection state
-- dead										ANY			the player is disconnected
-- select 		supply type						PRE_MATCH		player selected a starting supply
-- marketplace		direction	index					TURN_START		player bought marbles
-- moveMarble		color		depot					MARKETPLACE		player assigned a marble to a depot
-- colorMarble		color							MARKETPLACE		player coloured one white marble
-- discard									MARKETPLACE		player discarded remaining marbles
-- move			supply type	from		to			TURN_START		player moved one supply
-- buy			row		column		space			TURN_START		player bought one development card
-- swapBase		slot		new supply type				TURN_START		player switched base production input or output
-- swapLeader		slot		new supply type				TURN_START		player switched leader production output
-- produce		y/n		y/n	y/n	y/n	y/n	y/n	TURN_START		player produced
-- activateLeader	index							TURN_START, TURN_END	player activated one leader
-- discardLeader		index							TURN_START, TURN_END	player discarded one leader
-- endTurn									TURN_END		player ended his turn
-- pickLeaders		index1		index2					PRE_MATCH		player chose his leaders
-- swapRows		index1		index2					TURN_START		player swapped 2 warehouse rows
-- selected		supply type	from					TURN_START		player selected an item
+spy                      player name                                      | MATCH        | Look at opponent dashboard.	
+show                     <screen>                                         | MATCH        | Show specified screen.	
+connect                  server IP, server port, nickname, match ID       | HOME         | Connect to the specified match with the specified username. You can reconnect to a match with the same username.	
+singlePlayer             server IP, server port, nickname, match ID       | HOME         | Connect to the specified single player match.	
+info                                                                      | MATCH, LOBBY | Get info about the state of the match	
+start                                                                     | LOBBY        | Start the match (only if you are the leader of the match).	
+select                   <supply>                                         | PRE MATCH    | Select the starting resources. Player 1 has 0 starting resources, player 2 and 3 have 1, player 4 has 2.	
+marketplace              <direction>, index                               | MATCH        | Buy the marbles in the specified row or column.	
+moveMarble               <marble color>, <depot>                          | MATCH        | Move the marble you bought to a depot (warehouse or leaders).	
+colorMarble              <marble color>                                   | MATCH        | Color a white marble you bought, if you activated the corresponding leader.	
+discard                                                                   | MATCH        | Discard the remaining marbles. Even if no marbles remains you have to use this command to end the marketplace phase.	
+move                     <supply>, <depot> from, <depot> to               | MATCH        | Move a supply between the specified depots.	
+endTurn                                                                   | MATCH        | End your turn.	
+buy                      row, column, development space                   | MATCH        | Buy the specified development card from the grid and place it in the specified development space.	
+swapBase                 slot, <supply>                                   | MATCH        | Change the base production input/output. Slot 1 and 2 are the inputs, slot 3 is the output.	
+swapLeader               index, <supply>                                  | MATCH        | Change the specified leader production output. Available only in case the specified leader is an active Producer.	
+activateLeader           index                                            | MATCH        | Activate the specified leader.	
+discardLeader            index                                            | MATCH        | Discard the specified leader.	
+pickLeaders              index, index                                     | PRE MATCH    | Pick 2 leaders to use during the match.	
+activateProduction       <production name>                                | MATCH        | Activate the specified production.	
+deactivateProduction     <production name>                                | MATCH        | Deactivate the specified production.	
+produce                                                                   | MATCH        | Produce with the active productions.	
+swapRows                 index, index                                     | MATCH        | Swap 2 warhouse rows.	
+u                                                                         | ALWAYS       | Update the screen.	
+help                                                                      | ALWAYS       | Show this screen.	
+exit                                                                      | LOBBY        | Leave the match.	
+										
+										
+
+ARGUMENT PACK            POSSIBLE ARGUMENTS
+										
+<screen>                 dashboard, faithTrack, marketplace, developmentGrid						
+<supply>                 coin, servant, shield, stone						
+<direction>              h, v								
+<marble color>           blue, grey, violet, yellow						
+<depot>                  wh1, wh2, wh3, dev1, dev2, dev3, leader1, leader2, base, paycheck
+<production name>        dev1, dev2, dev3, leader1, leader2, base				
