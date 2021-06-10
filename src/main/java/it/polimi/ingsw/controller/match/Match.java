@@ -338,7 +338,8 @@ public class Match {
 
         player.addSelectedItemsInPreMatch(); //report that the player chose one supply to start
 
-        checkPreMatchDone();
+        checkPreMatchDoneSpecificPlayer(player); //check if this specific player has selected all of his items
+        checkPreMatchDone(); //check if all of the players have selected all of their items
     }
 
     private void marketplace(Player player, String... args) {
@@ -685,7 +686,8 @@ public class Match {
             return;
         }
 
-        checkPreMatchDone();
+        checkPreMatchDoneSpecificPlayer(player); //check if this specific player has selected all of his items
+        checkPreMatchDone(); //check if all of the players have selected all of their items
     }
 
     private void swapWarehouse(Player player, String... args) {
@@ -766,6 +768,18 @@ public class Match {
         update("endTurn", player);
     }
 
+    private void exit(Player player, String... args) {
+        if (phase != LOBBY) {
+            player.sendController("error You can't leave now!");
+            return;
+        }
+
+        players.remove(player);
+        performAction("dead", player);
+
+        player.destroy();
+    }
+
 
 
     //sets the list of default commands and their respective actions
@@ -791,6 +805,7 @@ public class Match {
         commands.put("swapRows", this::swapWarehouse);
         commands.put("selected", this::selected);
         commands.put("skipTurn", this::skipTurn);
+        commands.put("exit", this::exit);
     }
 
 
@@ -836,6 +851,27 @@ public class Match {
                 update("dead", activePlayer);
             }
         }
+    }
+
+
+    private synchronized void checkPreMatchDoneSpecificPlayer(Player p){
+        boolean doneItems = true;
+        if((p.getSelectedItemsInPreMatch() != 0 && p.getOrder() == 0) ||
+                (p.getSelectedItemsInPreMatch() != 1 && p.getOrder() == 1) ||
+                (p.getSelectedItemsInPreMatch() != 1 && p.getOrder() == 2) ||
+                (p.getSelectedItemsInPreMatch() != 2 && p.getOrder() == 3)){
+            doneItems = false;
+        }
+
+        boolean doneLeaders = true;
+        if(p.getSelectedLeadersInPreMatch() < 2){
+            doneLeaders = false;
+        }
+
+        if (doneItems && doneItems){
+            p.sendController("show wait");
+        }
+
     }
 
 

@@ -8,7 +8,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.text.Font?>
 
-
 <Group xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.EndScreenController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
@@ -16,7 +15,7 @@
             <Image url="@../pictures/backgrounds/gameOver.png" />
          </image>
       </ImageView>
-      <Label fx:id="message" layoutX="42.0" layoutY="558.0" prefHeight="56.0" prefWidth="615.0" text="Label" textFill="RED">
+      <Label fx:id="message" layoutX="42.0" layoutY="558.0" prefHeight="56.0" prefWidth="615.0" textFill="RED">
          <font>
             <Font name="Consolas" size="36.0" />
          </font>

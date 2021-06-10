@@ -50,7 +50,7 @@
       <fx:include fx:id="opponent3" source="Opponent.fxml" />
       <fx:include fx:id="opponent4" source="Opponent.fxml" />
       <fx:include fx:id="faithTrackPlayers" source="Players.fxml" />
-      <Label fx:id="message" layoutX="77.0" layoutY="618.0" prefHeight="43.0" prefWidth="1098.0" wrapText="true">
+      <Label fx:id="message" layoutX="77.0" layoutY="643.0" prefHeight="30.0" prefWidth="1098.0" wrapText="true">
          <font>
             <Font name="Consolas Bold" size="18.0" />
          </font>

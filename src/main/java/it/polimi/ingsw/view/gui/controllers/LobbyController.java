@@ -73,7 +73,9 @@ public class LobbyController extends SceneController {
 
 
     @FXML
-    private void exitClicked(){}
+    private void exitClicked(){
+        userInterpreter.execute("exit");
+    }
 
 
 }

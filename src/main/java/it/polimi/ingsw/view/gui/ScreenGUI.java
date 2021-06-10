@@ -112,6 +112,7 @@ public class ScreenGUI extends Application implements Screen {
         loadView("preMatch", "/fxml/PreMatchScreen.fxml", ci, ui, oi, mi);
         loadView("yourTurn", "/fxml/YourTurn.fxml", ci, ui, oi, mi);
         loadView("endMatch", "/fxml/EndScreen.fxml", ci, ui, oi, mi);
+        loadView("wait", "/fxml/WaitScreen.fxml", ci, ui, oi, mi);
 
         activeScene = scenes.get("welcome");
 
