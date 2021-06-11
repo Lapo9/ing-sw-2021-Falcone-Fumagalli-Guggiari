@@ -16,6 +16,7 @@ public class Main {
         int choiceNumber = 0;
 
         while (!choiceMade) {
+            FancyConsole.clear();
             System.out.print(FancyConsole.YELLOW(FancyConsole.BOLD("\n" +
                     "                     _                                            \n" +
                     "  /\\/\\    __ _  ___ | |_   ___  _ __  ___                         \n" +
