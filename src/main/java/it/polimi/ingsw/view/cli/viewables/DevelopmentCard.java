@@ -13,7 +13,7 @@ import static it.polimi.ingsw.model.WarehouseObjectType.STONE;
 
 
 /**
- * This class creates the viewable of the development card used in the DevelopmentSpace and DevelopmentSpaceGrid
+ * This class creates the viewable of the development card used in DevelopmentSpace and DevelopmentSpaceGrid
  */
 public class DevelopmentCard implements Viewable {
 
@@ -75,7 +75,7 @@ public class DevelopmentCard implements Viewable {
     /**
      * Updates the viewable using numbers from the getStatus (if the id is 0 the card is empty)
      * @param update array composed by the id of the card (used to update the cost, category, level and win points of the card,
-     *               those info are from the development cards file) and 15 int to update the card production
+     *               those info are from the development cards file) and other 15 int to update the card production
      */
     @Override
     public void update(int[] update) {

@@ -13,6 +13,9 @@ import java.util.Locale;
 import static it.polimi.ingsw.model.leaders.LeaderCard.*;
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
+/**
+ * This class creates the viewable of the leader card used in LeaderCardSpace of the player
+ */
 public class LeaderCard implements Viewable {
 
     private int id;
@@ -23,6 +26,12 @@ public class LeaderCard implements Viewable {
     private int abilityMutableOutput;
     private int[] abilityProduction = {0, 0, 0, 0};
 
+    /**
+     * Updates the viewable using numbers from the getStatus (if the id is 0 the card is empty)
+     * @param update array composed by the id of the leader card (used to update the requirements), other 4 int to define
+     *               the state (inactive/active/discarded), fixed input, fixed output, mutable output, and
+     *               other 10 int to define the current supply and the depot ability
+     */
     @Override
     public void update(int[] update) {
         id = update[0];
@@ -43,11 +52,19 @@ public class LeaderCard implements Viewable {
         abilityDepot[3] = update[13];
     }
 
+    /**
+     * Prints the leader card
+     * @return string with the leader card
+     */
     @Override
     public String toString() {
         return leaderCard();
     }
 
+    /**
+     * Composes the leader card using some helper methods
+     * @return the leader card to print
+     */
     private String leaderCard() {
         String tmp = "";
 
@@ -68,6 +85,10 @@ public class LeaderCard implements Viewable {
         return tmp;
     }
 
+    /**
+     * Gets the requirements of the card and its state from the file that contains all leader cards of the game
+     * @return those information in the form of String
+     */
     private String requirementsAndState() {
         String tmp = "";
         if(suppliesRequirement.getQuantity() == 0) {    //no supplies requirements, only cards requirements
@@ -82,6 +103,10 @@ public class LeaderCard implements Viewable {
         return tmp;
     }
 
+    /**
+     * Gets the card level and type of the card and its state from the file that contains all leader cards of the game
+     * @return those information in the form of String
+     */
     private String getCardLevelAndType(CardsRequirement input, Integer index) {
         String tmp = "";
         if(input.reqCard() == CardCategory.GREEN)
@@ -105,6 +130,11 @@ public class LeaderCard implements Viewable {
         return tmp;
     }
 
+    /**
+     * Turns the type of the card (CardCategory) into String type
+     * @param input the card requirement to convert
+     * @return the String corresponding to that category
+     */
     private String turnTypeIntoString(CardsRequirement input) {
         String tmp = "";
 
@@ -120,6 +150,10 @@ public class LeaderCard implements Viewable {
         return tmp;
     }
 
+    /**
+     * Turns the state of the leader card into String type (int to String)
+     * @return the String corresponding to the state
+     */
     private String state() {
         String tmp = "";
         if(state == 0)   //inactive
@@ -131,6 +165,11 @@ public class LeaderCard implements Viewable {
         return tmp;
     }
 
+    /**
+     * Turns the resources required into String
+     * @param input the supplies required
+     * @return those requirements into String type
+     */
     private String getSupplies(SupplyContainer input) {
         String tmp = "";
         int num = 0;
@@ -155,6 +194,10 @@ public class LeaderCard implements Viewable {
         return tmp;
     }
 
+    /**
+     * Turns the ability of the leader in a String we can print
+     * @return the String describing the ability
+     */
     private String ability() {
         String tmp = "";
 
@@ -249,6 +292,12 @@ public class LeaderCard implements Viewable {
         return tmp;
     }
 
+    /**
+     * Helper method that, given an array, returns the index of the element that is not zero
+     * (used to understand what WarehouseObjectType is content by the Depot of the leader card that has Depot ability)
+     * @param array array composed by 4 int (arrayDepots)
+     * @return the int corresponding to the resource (contained in the Depot of the leader)
+     */
     private int abilityIndex(int[] array) {
         if(array[0] != 0)
             return 0;
