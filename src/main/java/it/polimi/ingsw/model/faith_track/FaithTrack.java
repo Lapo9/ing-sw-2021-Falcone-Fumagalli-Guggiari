@@ -99,6 +99,8 @@ public class FaithTrack implements WinPointsCountable, HasStatus {
             return false;
         boolean vr = false;
         for(int i = 0; i < num; i++) {
+            if(position == 24)
+                return vr;
             vr |= goAhead();
         }
         return vr;

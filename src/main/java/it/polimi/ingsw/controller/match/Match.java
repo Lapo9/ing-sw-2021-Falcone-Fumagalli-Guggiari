@@ -565,7 +565,9 @@ public class Match {
         boolean vaticanReport = player.getDashboard().produce(Boolean.parseBoolean(args[1]), Boolean.parseBoolean(args[2]), Boolean.parseBoolean(args[3]), Boolean.parseBoolean(args[4]), Boolean.parseBoolean(args[5]), Boolean.parseBoolean(args[6]));
 
         if (vaticanReport){
-            players.forEach(p -> p.getDashboard().vaticanReport());
+            for (Player p : players.stream().filter(plr -> plr != player).collect(Collectors.toList())){
+                p.getDashboard().vaticanReport();
+            }
         }
 
         if (checkWinner()){

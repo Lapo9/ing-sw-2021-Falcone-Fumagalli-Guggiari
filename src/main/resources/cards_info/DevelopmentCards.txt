@@ -5,7 +5,7 @@
 5, 1, 1, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 2, 0, 0, 0, 0, pictures/developmentCards/dev3.png, x
 6, 1, 2, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, pictures/developmentCards/dev7.png, x
 7, 1, 3, 2, 0, 2, 0, 0, 0, 1, 0, 1, 1, 0, 3, 0, 0, 0, 0, pictures/developmentCards/dev11.png, x
-8, 1, 4, 2, 0, 1, 0, 1, 0, 0, 2, 0, 0, 1, 2, 0, 2, 0, 0, pictures/developmentCards/dev15.png, x
+8, 1, 4, 2, 0, 1, 0, 1, 0, 0, 0, 2, 0, 1, 2, 0, 2, 0, 0, pictures/developmentCards/dev15.png, x
 9, 1, 1, 3, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, pictures/developmentCards/dev4.png, x
 10, 1, 2, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, pictures/developmentCards/dev8.png, x
 11, 1, 3, 3, 0, 0, 0, 2, 0, 1, 1, 1, 0, 0, 0, 3, 0, 0, 0, pictures/developmentCards/dev12.png, x
