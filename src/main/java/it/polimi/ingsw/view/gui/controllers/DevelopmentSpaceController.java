@@ -45,6 +45,7 @@ public class DevelopmentSpaceController extends SubSceneController {
 
     @Override
     public void update(int[] completeUpdate) {
+
         if(completeUpdate[2] != 0) {
             card.setImage(new Image(getUrl(completeUpdate[2])));
             oldCard1.setVisible(true);
@@ -61,11 +62,18 @@ public class DevelopmentSpaceController extends SubSceneController {
             oldCard1.setImage(new Image(getDot(getCategory(completeUpdate[0]))));
             winPointsOldCard1.setText(String.valueOf(getWinPoints(completeUpdate[0])));
             developmentGroup.setVisible(true);
+            oldCard2.setVisible(false);
         }
         else if(completeUpdate[0] != 0){
             card.setImage(new Image(getUrl(completeUpdate[0])));
             developmentGroup.setVisible(true);
+            oldCard1.setVisible(false);
+            oldCard2.setVisible(false);
         }
+        else {
+            developmentGroup.setVisible(false);
+        }
+
         coin.setText(String.valueOf(completeUpdate[13]));
         servant.setText(String.valueOf(completeUpdate[14]));
         shield.setText(String.valueOf(completeUpdate[15]));

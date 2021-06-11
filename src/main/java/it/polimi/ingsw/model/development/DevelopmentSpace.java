@@ -85,7 +85,11 @@ public class DevelopmentSpace implements AcceptsSupplies, HasStatus, WinPointsCo
      * @throws SupplyException There isn't the right number of supplies to activate production.
      */
     public void checkProduction() throws SupplyException {
-        cards.get(cards.size()-1).check();
+        try {
+            cards.get(cards.size() - 1).check();
+        } catch (IndexOutOfBoundsException ioobe){
+            throw new SupplyException("You don't have this development card!");
+        }
     }
 
     /**
