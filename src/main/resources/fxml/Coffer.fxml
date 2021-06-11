@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Group xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.CofferController">
+<Group xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="it.polimi.ingsw.view.gui.controllers.CofferController">
    <children>
       <Text fx:id="shield" fill="WHITE" layoutX="85.0" layoutY="38.0" onMouseClicked="#shieldClicked" strokeType="OUTSIDE" strokeWidth="0.0" text="55" wrappingWidth="73.0">
          <font>

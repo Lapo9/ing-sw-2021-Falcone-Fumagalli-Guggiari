@@ -3,4 +3,4 @@
 <?import javafx.scene.image.ImageView?>
 
 
-<ImageView fx:id="actionTile" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.ActionTileController" />
+<ImageView fx:id="actionTile" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="it.polimi.ingsw.view.gui.controllers.ActionTileController" />

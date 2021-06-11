@@ -57,9 +57,11 @@ public class Main {
                 MainController.mainServer(new String[]{portNumber});
                 break;
             case 2:
+                FancyConsole.clear();
                 DummyMain.dummyMainGUI(args);
                 break;
             case 3:
+                FancyConsole.clear();
                 MainCLI.mainCLI(args);
                 break;
         }

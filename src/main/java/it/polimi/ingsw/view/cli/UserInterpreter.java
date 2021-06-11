@@ -66,12 +66,8 @@ public class UserInterpreter {
                 socket.send(userCommand + offlineInfo.getProductionsAsArgs());
             }
 
-            else if (tokens[0].equals("info") && offlineInfo.getPlayersNum() == 0){
-                controllerInterpreter.execute("error Enter a match to get info");
-            }
-
             //check if the server is required
-            else if (commands.stream().filter(command -> command.toString().equals(tokens[0])).collect(Collectors.toList()).get(0).isServerOperation() && offlineInfo.isMatchStarted()) {
+            else if (commands.stream().filter(command -> command.toString().equals(tokens[0])).collect(Collectors.toList()).get(0).isServerOperation()) {
                 socket.send(userCommand);
             }
             else {

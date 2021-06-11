@@ -123,12 +123,12 @@ public class Match {
             p.attachDashboard(new Dashboard(false, marketplace, developmentGrid, p.getName(), leadersList, isSinglePlayer));
             modelObserver.attachTo(p); //attach the model observer to the dashboard of this player
 
+            p.sendController("show lobby"); //tell the player to show the lobby screen
+
             //tell each player a new player connected
             for (Player plr : players){
                 info(plr);
             }
-
-            p.sendController("show lobby"); //tell the player to show the lobby screen
         }
     }
 

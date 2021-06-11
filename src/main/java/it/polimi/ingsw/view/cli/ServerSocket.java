@@ -162,6 +162,9 @@ public class ServerSocket {
         } catch (IOException ioe) {
             terminate("fatal Server is down :(");
             return false;
+        } catch (NullPointerException npe) {
+            terminate("fatal Socket doesn't exists");
+            return false;
         }
         return true;
     }
