@@ -141,7 +141,7 @@ public class DevelopmentSpaceController extends SubSceneController {
             return;
         }
         controllerInterpreter.execute("reset");
-        offlineInfo.setSelectedItem("servant  " + id);
+        offlineInfo.setSelectedItem("servant " + id);
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
