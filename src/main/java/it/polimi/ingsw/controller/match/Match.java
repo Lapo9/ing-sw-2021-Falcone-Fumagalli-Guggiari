@@ -91,7 +91,7 @@ public class Match {
     synchronized void addPlayer(Player p) throws MatchException {
 
         //if it's a single player match and there is someone connected or a different player tries to connect, throw the error
-        if (isSinglePlayer && (players.stream().anyMatch(plr -> plr.isConnected()) || !p.getName().equals(players.get(0).getName()))){
+        if (players.size() != 0 && isSinglePlayer && (players.stream().anyMatch(plr -> plr.isConnected()) || !p.getName().equals(players.get(0).getName()))){
             throw new MatchException("This is a single player match");
         }
 
