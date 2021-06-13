@@ -57,7 +57,7 @@ public class FaithTrack implements Viewable {
     }
 
     /**
-     * Prints the positions of the players in the faith track
+     * Prints the positions of the players in the faith track in a table and a simple graphic representation of the faith track
      * @return the positions table
      */
     @Override
@@ -76,8 +76,8 @@ public class FaithTrack implements Viewable {
         }
         for(int i = 0; i<info.getPlayersNum(); i++)
         tmp += new StringBuilder().
-                append(findSpaceNamePre(info.getPlayerName(i))).append(info.getPlayerName(i)).append(findSpaceNamePost(info.getPlayerName(i))).append("|").
-                append(findSpacePositionPre(data.get(info.getPlayerName(i)).get(0))).append(data.get(info.getPlayerName(i)).get(0)).append(findSpacePositionPost(data.get(info.getPlayerName(i)).get(0))).append("|").
+                append(findSpaceName(info.getPlayerName(i), 1)).append(info.getPlayerName(i)).append(findSpaceName(info.getPlayerName(i), 2)).append("|").
+                append(findSpacePosition(data.get(info.getPlayerName(i)).get(0), 1)).append(data.get(info.getPlayerName(i)).get(0)).append(findSpacePosition(data.get(info.getPlayerName(i)).get(0), 2)).append("|").
                 append(rightColor(data.get(info.getPlayerName(i)).get(1))).append("|").
                 append(rightColor(data.get(info.getPlayerName(i)).get(2))).append("|").
                 append(rightColor(data.get(info.getPlayerName(i)).get(3))).append("\n").toString();
@@ -85,49 +85,35 @@ public class FaithTrack implements Viewable {
     }
 
     /**
-     * Finds the position of the player
-     * @param name
-     * @return
+     * Helper function needed to find the right amount of space character
+     * @param name the name of the player
+     * @param type 1 if the function needs to calculate the right amount of spaces before the name, 2 if after the name
+     * @return a string made of space character
      */
-    private String findSpaceNamePre(String name) {
+    private String findSpaceName(String name, int type) {
         int num = name.length();
         String tmp = "";
         if(num <= 13)
             num = (13 - num)/2;
-        for(int i = 0; i<num; i++)
-            tmp = tmp.concat(" ");
-        return tmp;
-    }
-
-    private String findSpaceNamePost(String name) {
-        int num = name.length();
-        String tmp = "";
-        if(num <= 13)
-            num = (13 - num)/2;
-        if(name.length() % 2 == 0)
+        if(name.length() % 2 == 0 && type == 2)
             num++;
         for(int i = 0; i<num; i++)
             tmp = tmp.concat(" ");
         return tmp;
     }
 
-    private String findSpacePositionPre(int num) {
+    /**
+     * Helper function needed to find the right amount of space character
+     * @param num the position of the player
+     * @param type 1 if the function needs to calculate the right amount of spaces before the position number, 2 if after the name
+     * @return a string made of space character
+     */
+    private String findSpacePosition(int num, int type) {
         String numero = String.valueOf(num);
         String tmp = "";
         int index = numero.length();
-        if(num < 10)
+        if(num < 10 && type == 1)
             tmp = tmp.concat(" ");
-        if(numero.length() <= 10)
-            index = (10 - index)/2;
-        for(int i = 0; i<index; i++)
-            tmp = tmp.concat(" ");
-        return tmp;
-    }
-
-    private String findSpacePositionPost(int num) {
-        String numero = String.valueOf(num);
-        String tmp = "";
-        int index = numero.length();
         if(numero.length() <= 10)
             index = (10 - index)/2;
         for(int i = 0; i<index; i++)
@@ -149,7 +135,10 @@ public class FaithTrack implements Viewable {
             return RED("     discarded     ");
     }
 
-
+    /**
+     * Creates a simple graphic representation of the faith track
+     * @return the faith track
+     */
     private String getFaithTrack() {
         String tmp = "\n";
 

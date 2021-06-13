@@ -519,6 +519,9 @@ public class Match {
             return;
         }
 
+        player.getDashboard().clearPaycheck();
+        player.getDashboard().clearProductions();
+
         if (isSinglePlayer) {
             extractSinglePlayerTile();
         }
