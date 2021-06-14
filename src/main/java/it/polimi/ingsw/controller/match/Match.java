@@ -662,9 +662,6 @@ public class Match {
                 endMatch();
                 return;
             }
-            else {
-                phase = TURN_END;
-            }
         } catch (Exception e){
             player.sendController("error " + e.getMessage());
         }

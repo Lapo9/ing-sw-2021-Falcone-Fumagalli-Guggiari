@@ -71,7 +71,7 @@ public class MatchManager {
         //save players status
         players.forEach(p -> matchStatus.append(p.getOrder()).append(", ").append(p.getDashboard().getStatus()).append(" xXx "));
 
-        matchStatus.append("END_OF_MATCH\n\n");
+        matchStatus.append("END_OF_MATCH");
 
         StringBuilder finalMatchStatus = new StringBuilder(matchStatus.toString().replaceAll("\\[", ""));
         finalMatchStatus = new StringBuilder(finalMatchStatus.toString().replaceAll("]", ""));
@@ -96,7 +96,7 @@ public class MatchManager {
             return; //there are no matches to restore
         }
 
-        String[] matches = savedMatches.split("END_OF_MATCH\n\n");
+        String[] matches = savedMatches.split("END_OF_MATCH");
 
 
         for (String match : matches){
@@ -120,11 +120,11 @@ public class MatchManager {
             e.printStackTrace();
         }
 
-        String[] matches = savedMatches.split("END_OF_MATCH\n\n");
+        String[] matches = savedMatches.split("END_OF_MATCH");
 
         for (String match : matches) {
             if (!match.contains("START_OF_MATCH " + matchId)) {
-                newMatches.append(match).append("END_OF_MATCH\n\n");
+                newMatches.append(match).append("END_OF_MATCH");
             }
         }
 
