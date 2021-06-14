@@ -522,8 +522,8 @@ public class Match {
         player.getDashboard().clearPaycheck();
         player.getDashboard().clearProductions();
 
-        if (isSinglePlayer) {
-            extractSinglePlayerTile();
+        if (isSinglePlayer && extractSinglePlayerTile()) {
+            return;
         }
 
         int index = players.indexOf(activePlayer) + 1;
@@ -902,7 +902,7 @@ public class Match {
     }
 
 
-    private synchronized void extractSinglePlayerTile(){
+    private synchronized boolean extractSinglePlayerTile(){
         boolean matchEnded = activePlayer.getDashboard().extractActionTile();
 
         if (matchEnded) {
@@ -910,8 +910,10 @@ public class Match {
             activePlayer.sendController("show endMatch");
             activePlayer.sendController("message You LOST!");
             endMatch();
-            return;
+            return true;
         }
+
+        return false;
     }
 
 
