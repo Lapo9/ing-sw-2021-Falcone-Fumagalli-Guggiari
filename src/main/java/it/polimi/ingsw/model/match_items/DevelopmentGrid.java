@@ -1,13 +1,12 @@
 package it.polimi.ingsw.model.match_items;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 
 import it.polimi.ingsw.controller.ModelObserver;
-import it.polimi.ingsw.model.ActionTilesStack;
-import it.polimi.ingsw.model.HasStatus;
-import it.polimi.ingsw.model.SupplyContainer;
-import it.polimi.ingsw.model.WarehouseObjectType;
+import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.development.DevelopmentCard;
 import it.polimi.ingsw.model.development.Paycheck;
 import it.polimi.ingsw.model.exceptions.*;
@@ -27,6 +26,7 @@ public class DevelopmentGrid implements HasStatus {
     private ArrayList<ArrayList<DevelopmentCard>> grid;
     private int boughtCards = 0;
     private ArrayList<ModelObserver> observers = new ArrayList<>();
+    private ArrayList<Integer> remainingCardsPerColor = new ArrayList<>(Arrays.asList(9,9,9,9));
 
 
     /**
@@ -161,6 +161,7 @@ public class DevelopmentGrid implements HasStatus {
             boughtCards++;
             DevelopmentCard res = grid.get(pos).remove(0);
             notifyViews();
+            remainingCardsPerColor.set(column, remainingCardsPerColor.get(column)-1);
             return res;
         }
         else {
@@ -179,6 +180,7 @@ public class DevelopmentGrid implements HasStatus {
             if (!grid.get(getPlace(color.ordinal(), 2-i)).isEmpty()){
                 grid.get(getPlace(color.ordinal(), 2-i)).remove(0);
                 notifyViews();
+                remainingCardsPerColor.set(color.ordinal(), remainingCardsPerColor.get(color.ordinal())-1);
                 return;
             }
         }
@@ -192,6 +194,15 @@ public class DevelopmentGrid implements HasStatus {
      */
     public int getBoughtCards() {
         return boughtCards;
+    }
+
+
+    /**
+     * Returns whether one card category has no remaining cards in the grid.
+     * @return Whether one card category has no remaining cards in the grid.
+     */
+    public boolean isOneColorFinished(){
+        return remainingCardsPerColor.stream().anyMatch(i -> i <= 0);
     }
 
 

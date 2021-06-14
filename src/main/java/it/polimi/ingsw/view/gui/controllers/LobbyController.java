@@ -86,7 +86,6 @@ public class LobbyController extends SceneController {
     @FXML
     private void exitClicked(){
         userInterpreter.execute("exit");
-        controllerInterpreter.execute("show welcome");
     }
 
 

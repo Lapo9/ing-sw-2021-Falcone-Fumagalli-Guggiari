@@ -176,6 +176,18 @@ public class Player {
 
 
 
+    public synchronized boolean sendTerminate() {
+        try {
+            socket.send("", ClientSocket.packUpStringWithLengthAndType((byte) 2));
+        } catch (Exception e){
+            destroy();
+            return false;
+        }
+        return true;
+    }
+
+
+
     //function to accept the player and add it to the specified match
     private void handshake(MatchManager matchManager){
         setConnected(true);

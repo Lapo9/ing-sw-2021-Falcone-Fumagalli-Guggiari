@@ -239,7 +239,7 @@ Structure of the packet
 
 
 
-    private void terminate(String fatalMessage) {
+    public void terminate(String fatalMessage) {
         if (setDestroy(true)) {
             //a new thread must wait for the joins, in order not to create deadlocks
             new Thread(() -> {

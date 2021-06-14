@@ -27,12 +27,4 @@ public class EndScreenController extends SceneController{
 
     }
 
-
-
-    @FXML
-    void leaveMatchClicked(){
-        controllerInterpreter.execute("reset");
-        controllerInterpreter.execute("show welcome");
-    }
-
 }

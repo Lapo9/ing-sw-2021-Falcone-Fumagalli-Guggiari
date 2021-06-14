@@ -777,6 +777,9 @@ public class Match {
         }
 
         players.remove(player);
+        player.sendController("show welcome");
+        player.sendController("message Wait a couple of seconds please");
+        player.sendTerminate();
         performAction("dead", player);
 
         player.destroy();
