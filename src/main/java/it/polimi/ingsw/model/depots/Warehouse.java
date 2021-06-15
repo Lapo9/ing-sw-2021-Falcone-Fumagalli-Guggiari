@@ -68,7 +68,7 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
         //find what depot has the maximum and minimum position, and store the remaining container in a third variable
         SupplyContainer rMax = depots.get(Math.max(r1, r2) -1);
         SupplyContainer rMin = depots.get(Math.min(r1, r2) -1);
-        SupplyContainer theThird = depots.get((r1==1 && r2==2) ? 2 : ((r1==1 && r2==3) ? 1 : 0));
+        SupplyContainer theThird = depots.get((r1==1 && r2==2 || r1==2 && r2==1) ? 2 : ((r1==1 && r2==3 || r1==3 && r2==1) ? 1 : 0));
 
         //if the depot in min position (so with higher capacity) has less or equal elements than the elements in the depot in max position can contain, then the swap is possible
         //if(rMin.getQuantity() <= 4 - Math.max(r1, r2)){
