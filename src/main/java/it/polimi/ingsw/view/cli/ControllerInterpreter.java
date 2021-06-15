@@ -124,7 +124,7 @@ public class ControllerInterpreter {
         try {
             screen.show("endMatch");
         } catch (ViewException ve){
-            (new Throwable()).printStackTrace(); //TODO terminate
+            System.exit(1); //TODO terminate
             return;
         }
         execute("message " + tokens[1] + " won the match!!");
@@ -175,7 +175,7 @@ public class ControllerInterpreter {
             screen.show("help");
             screen.refresh();
         } catch (ViewException ve){
-            (new Throwable()).printStackTrace(); //TODO terminate
+            System.exit(1); //TODO terminate
             return;
         }
     }

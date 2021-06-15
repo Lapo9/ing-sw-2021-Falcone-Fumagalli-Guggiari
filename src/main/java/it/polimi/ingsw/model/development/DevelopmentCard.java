@@ -131,7 +131,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
                 scan.nextLine();
             return scan.nextInt();
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return -1;
         }
     }
@@ -153,7 +153,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
             scan.nextInt();    //lvl
             return scan.nextInt();
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return -1;
         }
     }
@@ -184,7 +184,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
             else
                 return CardCategory.VIOLET;
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return null;
         }
     }
@@ -213,7 +213,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
             int f = scan.nextInt();
             return new SupplyContainer(c, st, se, sh, f);
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return null;
         }
     }
@@ -241,7 +241,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
             int f = scan.nextInt();
             return new SupplyContainer(c, st, se, sh, f);
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return null;
         }
     }
@@ -269,7 +269,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
             int f = scan.nextInt();
             return new SupplyContainer(c, st, se, sh, f);
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return null;
         }
     }
@@ -293,7 +293,7 @@ public class DevelopmentCard implements HasStatus, WinPointsCountable, AcceptsSu
             String tmp = scan.next();
             return tmp;
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return null;
         }
     }

@@ -67,11 +67,11 @@ public class ProductionManager implements AcceptsSupplies {
         else if (slot.getType() == DepotID.DepotType.LEADER_PRODUCTION){
             try {
                 leadersSpace.getLeaderAbility(slot.getNum()).addSupply(wot, from);
-            } catch (LeaderException | NoSuchMethodException e){(new Throwable()).printStackTrace(); /*TODO terminate program*/}
+            } catch (LeaderException | NoSuchMethodException e){System.exit(1); /*TODO terminate program*/}
         }
 
         else {
-            (new Throwable()).printStackTrace(); /*TODO terminate program*/
+            System.exit(1); /*TODO terminate program*/
         }
     }
 
@@ -107,14 +107,14 @@ public class ProductionManager implements AcceptsSupplies {
             else if (slot.getType() == DepotID.DepotType.LEADER_PRODUCTION) {
                 try {
                     leadersSpace.getLeaderAbility(slot.getNum()).removeSupply(wot, to);
-                } catch (LeaderException | NoSuchMethodException e) {(new Throwable()).printStackTrace(); /*TODO terminate program*/}
+                } catch (LeaderException | NoSuchMethodException e) {System.exit(1); /*TODO terminate program*/}
             }
 
             else {
-                (new Throwable()).printStackTrace(); /*TODO terminate program*/
+                System.exit(1); /*TODO terminate program*/
             }
         } catch(Exception e){
-            e.printStackTrace();(new Throwable()).printStackTrace(); /*TODO terminate the program because we checked before, so everything should go smooth*/}
+            e.printStackTrace();System.exit(1); /*TODO terminate the program because we checked before, so everything should go smooth*/}
     }
 
     /**
@@ -218,13 +218,13 @@ public class ProductionManager implements AcceptsSupplies {
                     removed = leadersSpace.getLeaderAbility(slot.getNum()).clearSupplies().first;
                 }
                 else {
-                    (new Throwable()).printStackTrace(); //TODO terminate the program
+                    System.exit(1); //TODO terminate the program
                 }
-            } catch (LeaderException | NoSuchMethodException e){(new Throwable()).printStackTrace(); /*TODO terminate program*/}
+            } catch (LeaderException | NoSuchMethodException e){System.exit(1); /*TODO terminate program*/}
         }
 
         else {
-            (new Throwable()).printStackTrace(); /*TODO terminate program*/
+            System.exit(1); /*TODO terminate program*/
         }
 
 
@@ -252,7 +252,7 @@ public class ProductionManager implements AcceptsSupplies {
                         try {
                             containers.get(DepotID.SourceType.DEPOT).removeSupply(wot); //if cannot remove from strongbox try to remove from depots
                             res.first.addSupply(wot); //add supply to return from depots
-                        } catch (SupplyException se1) {(new Throwable()).printStackTrace(); /*TODO terminate program*/}
+                        } catch (SupplyException se1) {System.exit(1); /*TODO terminate program*/}
                     }
                 }
             }

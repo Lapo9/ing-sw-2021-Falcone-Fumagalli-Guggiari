@@ -47,7 +47,7 @@ public class ResourceChecker {
                 for (int i = 0; i < qty; ++i) {
                     try {
                         allSupplies.addSupply(wot);
-                    } catch (SupplyException se) {(new Throwable()).printStackTrace(); /*TODO terminate program*/}
+                    } catch (SupplyException se) {System.exit(1); /*TODO terminate program*/}
                 }
             }
         }

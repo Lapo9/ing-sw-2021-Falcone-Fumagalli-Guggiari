@@ -126,7 +126,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
                 scan.nextLine();
             return scan.nextInt();
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return -1;
         }
     }
@@ -156,7 +156,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
             else
                 return new Discount(getAbilityWOT(id));
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return null;
         }
     }
@@ -180,7 +180,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
             int abil = scan.nextInt();
             return abil;
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return null;
         }
     }
@@ -209,7 +209,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
             int f = scan.nextInt();
             return new SupplyContainer(c, st, se, sh, f);
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return null;
         }
     }
@@ -249,7 +249,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
                     return WarehouseObjectType.NO_TYPE;
             }
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return null;
         }
     }
@@ -278,7 +278,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
             int f = scan.nextInt();
             return new SupplyContainer(c, st, se, sh, f);
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return null;
         }
     }
@@ -346,7 +346,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
                 list.add(new CardsRequirement(num2, lvl2, color2));
             return list;
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return null;
         }
     }
@@ -372,7 +372,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
             String tmp = scan.next();
             return tmp;
         } catch (Exception e) {
-            (new Throwable()).printStackTrace(); //TODO end the program
+            System.exit(1); //TODO end the program
             return null;
         }
     }
