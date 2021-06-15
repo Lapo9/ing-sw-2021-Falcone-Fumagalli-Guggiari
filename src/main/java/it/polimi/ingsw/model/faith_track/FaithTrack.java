@@ -201,6 +201,67 @@ public class FaithTrack implements WinPointsCountable, HasStatus {
         }
     }
 
+    /**
+     * Triggers a vatican report for the single player match.
+     * @param blackCrossPosition the black cross position
+     */
+    public void vaticanReportSP(int blackCrossPosition){
+        if((blackCrossPosition == 8 && vaticanReportCounter >= 1) || (blackCrossPosition == 16 && vaticanReportCounter >=2) ||
+                (blackCrossPosition == 24 && vaticanReportCounter >= 3 ))
+            return;
+        //Check if the player who called the vaticanReport method is the one who activated it
+        if((position == 8 && vaticanReportCounter == 0) ||(position ==16 && vaticanReportCounter == 1)||
+                (position == 24 && vaticanReportCounter == 2)){
+            popeFavors.get(vaticanReportCounter).activate();
+            vaticanReportCounter++;          //update the vaticanReportCounter
+        }
+        //If you aren't the player who triggered the vaticanReport, the game needs to check your position and if you
+        //are in the right vatican report section. If yes, you can activate the right Pope's favor tile
+        else{
+            //The player isn't in a vatican report section
+            if(position < 5 || (position > 8 && position < 12) || position == 17 || position == 18){
+                popeFavors.get(vaticanReportCounter).discard();
+                vaticanReportCounter++;
+            }
+            //The player is in the first vatican report section, if he is there when the first vaticanReport has been
+            //called, he can turn the first PopeFavorTile
+            else if(position >= 5 && position <= 8){
+                if(vaticanReportCounter == 0){
+                    popeFavors.get(vaticanReportCounter).activate();
+                    vaticanReportCounter++;
+                }
+                else{
+                    popeFavors.get(vaticanReportCounter).discard();
+                    vaticanReportCounter++;
+                }
+            }
+            //The player is in the second vatican report section, if he is there when the second vaticanReport has been
+            //called, he can turn the second PopeFavorTile
+            else if(position >= 12 && position <= 16){
+                if(vaticanReportCounter == 1){
+                    popeFavors.get(vaticanReportCounter).activate();
+                    vaticanReportCounter++;
+                }
+                else{
+                    popeFavors.get(vaticanReportCounter).discard();
+                    vaticanReportCounter++;
+                }
+            }
+            //The player is in the third vatican report section, if he is there when the third vaticanReport has been
+            //called, he can turn the third PopeFavorTile
+            else{
+                if(vaticanReportCounter == 2){
+                    popeFavors.get(vaticanReportCounter).activate();
+                    vaticanReportCounter++;
+                }
+                else{
+                    popeFavors.get(vaticanReportCounter).discard();
+                    vaticanReportCounter++;
+                }
+            }
+        }
+    }
+
     @Override
     public int getWinPoints() {
         int pftPoints = 0;

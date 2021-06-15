@@ -807,14 +807,14 @@ public class Dashboard implements HasStatus{
                 for(int i=0; i<2; ++i) {
                     blackCrossPosition++;
                     if (blackCrossPosition == 8 || blackCrossPosition == 16 || blackCrossPosition == 24) {
-                        vaticanReport();
+                        vaticanReportSP(blackCrossPosition);
                     }
                 }
                 break;
             case PLUS_1_SHUFFLE:
                 blackCrossPosition++;
                 if (blackCrossPosition == 8 || blackCrossPosition == 16 || blackCrossPosition == 24) {
-                    vaticanReport();
+                    vaticanReportSP(blackCrossPosition);
                 }
                 actionTilesStack.reinsertAll();
                 break;
@@ -823,6 +823,16 @@ public class Dashboard implements HasStatus{
         notifyViews();
 
         return blackCrossPosition >= 24;
+    }
+
+
+    /**
+     * Triggers a vatican report for the single player match.
+     * @param position the black cross position
+     */
+    public void vaticanReportSP(int position){
+        faithTrack.vaticanReportSP(position);
+        notifyViews();
     }
 
 
