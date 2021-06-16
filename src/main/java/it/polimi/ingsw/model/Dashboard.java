@@ -775,6 +775,9 @@ public class Dashboard implements HasStatus{
                 try {
                     developmentGrid.removeCard(ActionTilesStack.ActionTile.YELLOW);
                     developmentGrid.removeCard(ActionTilesStack.ActionTile.YELLOW);
+                    if(developmentGrid.isOneColorFinished()){
+                        return true;
+                    }
                 } catch (NoSuchCardException nsce){
                     return true;
                 }
@@ -783,6 +786,9 @@ public class Dashboard implements HasStatus{
                 try {
                     developmentGrid.removeCard(ActionTilesStack.ActionTile.GREEN);
                     developmentGrid.removeCard(ActionTilesStack.ActionTile.GREEN);
+                    if(developmentGrid.isOneColorFinished()){
+                        return true;
+                    }
                 } catch (NoSuchCardException nsce){
                     return true;
                 }
@@ -791,6 +797,9 @@ public class Dashboard implements HasStatus{
                 try {
                     developmentGrid.removeCard(ActionTilesStack.ActionTile.BLUE);
                     developmentGrid.removeCard(ActionTilesStack.ActionTile.BLUE);
+                    if(developmentGrid.isOneColorFinished()){
+                        return true;
+                    }
                 } catch (NoSuchCardException nsce){
                     return true;
                 }
@@ -799,6 +808,9 @@ public class Dashboard implements HasStatus{
                 try {
                     developmentGrid.removeCard(ActionTilesStack.ActionTile.VIOLET);
                     developmentGrid.removeCard(ActionTilesStack.ActionTile.VIOLET);
+                    if(developmentGrid.isOneColorFinished()){
+                        return true;
+                    }
                 } catch (NoSuchCardException nsce){
                     return true;
                 }
