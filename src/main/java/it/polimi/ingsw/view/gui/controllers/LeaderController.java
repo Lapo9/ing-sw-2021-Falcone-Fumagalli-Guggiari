@@ -79,6 +79,7 @@ public class LeaderController extends SubSceneController {
         else if (offlineInfo.getLeaderStatus(number) == OfflineInfo.LeaderStatus.PRODUCER){
             leader.setEffect(null); //remove any possible effect
             producerPane.setVisible(true);
+            mutableProduction.setImage(new Image("pictures/miscellaneous/coin.png"));
             depotPane.setVisible(false);
             leaderGroup.setVisible(true);
         }

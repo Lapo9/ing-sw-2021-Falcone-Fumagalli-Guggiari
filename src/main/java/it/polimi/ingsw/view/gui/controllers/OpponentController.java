@@ -392,7 +392,7 @@ public class OpponentController extends SubSceneController{
             winPointsOldCard21.setText(String.valueOf(getWinPoints(arr[0])));
             oldCard22.setVisible(true);
             oldCard22.setImage(new Image(getDot(getCategory(arr[1]))));
-            winPointsOldCard12.setText(String.valueOf(getWinPoints(arr[1])));
+            winPointsOldCard22.setText(String.valueOf(getWinPoints(arr[1])));
         }
         else if(arr[1] != 0) {
             card2.setImage(new Image(getUrl(arr[1])));
