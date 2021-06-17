@@ -896,7 +896,7 @@ public class Match {
 
             //tell the players who won
             broadcast("show endMatch");
-            broadcast("message " + winner.getName() + " won the match! " + winner.getDashboard().getWinPoints() + " points!");
+            broadcast("message " + winner.getName() + " won the match! " + winner.getDashboard().getWinPoints().first + " points!");
 
             return true;
         }
