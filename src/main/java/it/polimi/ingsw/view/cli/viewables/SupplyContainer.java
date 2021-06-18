@@ -35,8 +35,8 @@ public class SupplyContainer implements Viewable {
     @Override
     public String toString() {
         return FRAMED(" " + name + " ") + " " +  BLACK(BACK_YELLOW(" " + items.get(COIN).toString() + " ")) +
-                                                    BACK_MAGENTA(" " + items.get(SERVANT).toString() + " ") +
-                                                    BACK_BLUE( " " + items.get(SHIELD).toString() + " ") +
+                                                    BLACK(BACK_MAGENTA(" " + items.get(SERVANT).toString() + " ")) +
+                                                    BLACK(BACK_BLUE( " " + items.get(SHIELD).toString() + " ")) +
                                                     BLACK(BACK_WHITE(" " + items.get(STONE).toString() + " "));
     }
 

@@ -5,6 +5,8 @@ import it.polimi.ingsw.view.cli.Viewable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
+
 /**
  * Represents the space containing the two LeaderCard(s) of the player
  */
@@ -55,6 +57,7 @@ public class LeaderCardSpace implements Viewable {
      */
     private String buildLeaderSpace() {
         String tmp = "";
+        tmp = tmp.concat(BOLD("Leader cards: \n"));
         if(type || (state2 != 0 && state1 != 0)) {
             tmp = tmp.concat("       Leader card 1      " + "         " + "       Leader card 2      " + "\n");
 
@@ -64,7 +67,6 @@ public class LeaderCardSpace implements Viewable {
                 tmp = tmp.concat(cutIntoRows(1, i));
                 tmp = tmp.concat("\n");
             }
-            tmp = tmp.concat("\n");
         } else {
             if(state1 == 0 && state2 == 0) {
                 tmp = tmp.concat("       Leader card 1      " + "         " + "       Leader card 2      " + "\n");
@@ -75,15 +77,13 @@ public class LeaderCardSpace implements Viewable {
                     tmp = tmp.concat("|                        |         |                        |\n");
 
                 tmp = tmp.concat("|________________________|         |________________________|\n");
-
-                tmp = tmp.concat("\n");
             }
             else if (state2 != 0) {
                 tmp = tmp.concat("       Leader card 1      " + "         " + "       Leader card 2      " + "\n");
 
                 for (int i = 0; i < 12; i++) {
                     if(i == 0)
-                        tmp = tmp.concat("╔═══════════════════════╗");
+                        tmp = tmp.concat(" ________________________ ");
                     else if(i == 11)
                         tmp = tmp.concat("|________________________|");
                     else
@@ -92,8 +92,6 @@ public class LeaderCardSpace implements Viewable {
                     tmp = tmp.concat(cutIntoRows(1, i));
                     tmp = tmp.concat("\n");
                 }
-
-                tmp = tmp.concat("\n");
             }
             else {
                 tmp = tmp.concat("       Leader card 1      " + "         " + "       Leader card 2      " + "\n");
@@ -109,8 +107,6 @@ public class LeaderCardSpace implements Viewable {
                         tmp = tmp.concat("|                        |");
                     tmp = tmp.concat("\n");
                 }
-
-                tmp = tmp.concat("\n");
             }
         }
         return tmp;

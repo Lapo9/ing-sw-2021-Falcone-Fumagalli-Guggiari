@@ -163,16 +163,16 @@ public class DevelopmentGridCard implements Viewable {
             return BLACK(BACK_YELLOW(" " + prod.get(i).get(COIN).toString() + " "));
         }
         else if (wot == SERVANT){
-            return BACK_MAGENTA( " " + prod.get(i).get(SERVANT).toString() + " ");
+            return BLACK(BACK_MAGENTA( " " + prod.get(i).get(SERVANT).toString() + " "));
         }
         else if (wot == SHIELD){
-            return BACK_BLUE(" " + prod.get(i).get(SHIELD).toString() + " ");
+            return BLACK(BACK_CYAN(" " + prod.get(i).get(SHIELD).toString() + " "));
         }
         else if (wot == STONE){
             return BLACK(BACK_WHITE(" " + prod.get(i).get(STONE).toString() + " ")) ;
         }
         else if (wot == FAITH_MARKER) {
-            return BACK_RED(" " + prod.get(1).get(FAITH_MARKER).toString() + " ");
+            return BLACK(BACK_RED(" " + prod.get(1).get(FAITH_MARKER).toString() + " "));
         }
         else return null;
     }
@@ -225,8 +225,8 @@ public class DevelopmentGridCard implements Viewable {
                     "|                                |" + "\n" +
 
                     "|          " + BLACK(BACK_YELLOW(" " + cost.get(COIN).toString() + " ")) +
-                    BACK_MAGENTA(" " + cost.get(SERVANT).toString() + " ") +
-                    BACK_BLUE( " " + cost.get(SHIELD).toString() + " ") +
+                    BLACK(BACK_MAGENTA(" " + cost.get(SERVANT).toString() + " ")) +
+                    BLACK(BACK_CYAN( " " + cost.get(SHIELD).toString() + " ")) +
                     BLACK(BACK_WHITE(" " + cost.get(STONE).toString() + " "))+ "          |" + "\n" +
                     "|                                |" + "\n" +
 

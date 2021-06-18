@@ -138,21 +138,22 @@ public class BaseProduction implements Viewable {
                 deleteZeros(0, SHIELD) +
                 deleteZeros(0, STONE) +
                 deleteZeros(0, FAITH_MARKER) +
+                " + " +
                 deleteZeros(1, COIN) +
                 deleteZeros(1, SERVANT) +
                 deleteZeros(1, SHIELD) +
                 deleteZeros(1, STONE) +
                 deleteZeros(1, FAITH_MARKER)
-                + "} " +
+                + " } " +
                 deleteZeros(2, COIN) +
                 deleteZeros(2, SERVANT) +
                 deleteZeros(2, SHIELD) +
                 deleteZeros(2, STONE) +
                 deleteZeros(2, FAITH_MARKER) +
                 "\n" +
-                "BaseProdCS: " + BLACK(BACK_YELLOW(" " + prod.get(3).get(COIN).toString() + " ")) +
-                BACK_MAGENTA(" " + prod.get(3).get(SERVANT).toString() + " ") +
-                BACK_BLUE( " " + prod.get(3).get(SHIELD).toString() + " ") +
+                "\nBaseProdCS: " + BLACK(BACK_YELLOW(" " + prod.get(3).get(COIN).toString() + " ")) +
+                BLACK(BACK_MAGENTA(" " + prod.get(3).get(SERVANT).toString() + " ")) +
+                BLACK(BACK_CYAN( " " + prod.get(3).get(SHIELD).toString() + " ")) +
                 BLACK(BACK_WHITE(" " + prod.get(3).get(STONE).toString() + " "))
                 ;
     }
@@ -169,31 +170,31 @@ public class BaseProduction implements Viewable {
         }
         else if (wot == COIN) {
             if (prod.get(i).get(COIN) == 1)
-                return ("\033[0;33m⏺\033[0m" + " "); //yellow
+                return FRAMED(BACK_YELLOW( "   ")); //yellow
             else
                 return null;
         }
         else if (wot == SERVANT){
             if (prod.get(i).get(SERVANT) == 1)
-                return ("\033[0;35m⏺\033[0m" + " "); //violet
+                return FRAMED(BACK_MAGENTA("   ")); //violet
             else
                 return null;
         }
         else if (wot == SHIELD){
             if (prod.get(i).get(SHIELD) == 1)
-                return ("\033[0;36m⏺\033[0m" + " "); //blue
+                return FRAMED(BACK_CYAN("   ")); //blue
             else
                 return null;
         }
         else if (wot == STONE){
             if (prod.get(i).get(STONE) == 1)
-                return ("\033[0;37m⏺\033[0m" + " "); //grey
+                return FRAMED(BACK_WHITE("   ")); //grey
             else
                 return null;
         }
         else if (wot == FAITH_MARKER) {
             if (prod.get(i).get(FAITH_MARKER) == 1)
-                return ("\033[0;31m⏺\033[0m" + " "); //red
+                return FRAMED(BACK_RED("   ")); //red
             else
                 return null;
         }

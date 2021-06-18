@@ -63,7 +63,6 @@ public class DevelopmentSpaceGrid implements Viewable {
             tmp = tmp.concat(cutIntoRows(2, i));
             tmp = tmp.concat("\n");
         }
-        tmp = tmp.concat("\n");
 
         return tmp;
     }

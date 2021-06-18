@@ -46,7 +46,7 @@ public class ActiveProductions implements Viewable  {
      */
     @Override
     public String toString() {
-        return FRAMED("Active Productions:\n") +
+        return FRAMED(" Active Productions: \n") +
                 printList(0, "Development Space 1: ") +
                 printList(1, "Development Space 2: ") +
                 printList(2, "Development Space 3: ") +
@@ -63,10 +63,10 @@ public class ActiveProductions implements Viewable  {
      */
     private String printList(int i, String prod) {
         if (activeProductions.get(i) == 0) {
-            return (prod + "\033[0;31m☒\033[0m\n"); //inactive
+            return prod + FRAMED("   ") + "\n"; //inactive
         }
         else if (activeProductions.get(i) == 1) {
-            return (prod + "\033[0;32m☑\033[0m\n"); //active
+            return prod + FRAMED(BACK_GREEN("   ")) + "\n"; //active
         }
         else if (activeProductions.get(i) == 2) {
             return ""; //not exists

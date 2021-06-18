@@ -81,7 +81,7 @@ public class Production implements Viewable {
                 deleteZeros(1, FAITH_MARKER) + "\n\n" +
                 BOLD(" Current Supply: ") + BLACK(BACK_YELLOW(" " + prod.get(2).get(COIN).toString() + " ")) +
                 BACK_MAGENTA(" " + prod.get(2).get(SERVANT).toString() + " ") +
-                BACK_BLUE( " " + prod.get(2).get(SHIELD).toString() + " ") +
+                BACK_CYAN( " " + prod.get(2).get(SHIELD).toString() + " ") +
                 BLACK(BACK_WHITE(" " + prod.get(2).get(STONE).toString() + " "));
     }
 
@@ -93,16 +93,16 @@ public class Production implements Viewable {
             return BLACK(BACK_YELLOW(" " + prod.get(i).get(COIN).toString() + " "));
         }
         else if (wot == SERVANT){
-            return BACK_MAGENTA( " " + prod.get(i).get(SERVANT).toString() + " ");
+            return BLACK(BACK_MAGENTA( " " + prod.get(i).get(SERVANT).toString() + " "));
         }
         else if (wot == SHIELD){
-            return BACK_BLUE(" " + prod.get(i).get(SHIELD).toString() + " ");
+            return BLACK(BACK_CYAN(" " + prod.get(i).get(SHIELD).toString() + " "));
         }
         else if (wot == STONE){
             return BLACK(BACK_WHITE(" " + prod.get(i).get(STONE).toString() + " ")) ;
         }
         else if (wot == FAITH_MARKER) {
-            return BACK_RED(" " + prod.get(1).get(FAITH_MARKER).toString() + " ");
+            return BLACK(BACK_RED(" " + prod.get(1).get(FAITH_MARKER).toString() + " "));
         }
         else return null;
     }

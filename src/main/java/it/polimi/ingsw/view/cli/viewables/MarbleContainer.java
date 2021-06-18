@@ -45,26 +45,28 @@ public class MarbleContainer implements Viewable {
             return "";
         }
         else if (sumMarbles == 1) {
-            return ("" + ((char)8197) + ((char)8201) + "  ║" + ((char)8196) + ((char)8196) + "   ║" + ((char)8196) + ((char)8196) + "   ║");
+            return "   |" + "    |" + "    |";
         }
         else if (sumMarbles == 2) {
-            return ("" + ((char)8197) + ((char)8201) + "  ║" + ((char)8196) + ((char)8196) + "   ║");
+            return "   |" + "    |";
         }
         else if (sumMarbles == 3) {
-            return ("" + ((char)8197) + ((char)8201) + "  ║");
+            return "   |";
         }
         else return null;
     }
 
     private String marbleContainer() {
         if (marbles.get(0) == 0 && marbles.get(1) == 0 && marbles.get(2) == 0 && marbles.get(3) == 0 && marbles.get(4) == 0 && marbles.get(5) == 0) {
-            return "╔════╦════╦════╦════╗\n" +
-                    "║  " + ((char)8196) + ((char)8196) + " ║  " + ((char)8196) + ((char)8196) + " ║  " + ((char)8196) + ((char)8196) + " ║  " + ((char)8196) + ((char)8196) + " ║" +
-                    "\n╚════╩════╩════╩════╝";
+            return " _____ _____ _____ _____\n" +
+                   "|     |     |     |     |\n" +
+                   "|     |     |     |     |\n" +
+                   "|_____|_____|_____|_____|";
         }
         else {
-            return "╔════╦════╦════╦════╗\n" +
-                    "║ " + ((char)8201) +
+            return  " _____ _____ _____ _____\n" +
+                    "|     |     |     |     |\n" +
+                    "| " +
                     putMarbles(0, marbles.get(0)) +
                     putMarbles(1, marbles.get(1)) +
                     putMarbles(2, marbles.get(2)) +
@@ -72,38 +74,38 @@ public class MarbleContainer implements Viewable {
                     putMarbles(4, marbles.get(4)) +
                     putMarbles(5, marbles.get(5)) + fillMarbleContainer() +
                     "\n" +
-                    "╚════╩════╩════╩════╝";
+                    "|_____|_____|_____|_____|";
         }
     }
 
     private String putMarbles(int marbleIndex, Integer i){
         if (i == 2) {
-            return (intToBall(marbleIndex) + ((char)8201) + " ║ " + ((char)8201) + intToBall(marbleIndex) + ((char)8201) + " ║ " + ((char)8201));
+            return intToBall(marbleIndex) + " | " +  intToBall(marbleIndex) + " | ";
         }
         else if (i == 1) {
-            return (intToBall(marbleIndex) + ((char)8201) + " ║ " + ((char)8201));
+            return intToBall(marbleIndex)  + " | ";
         }
         else return "";
     }
 
     private String intToBall (Integer i) {
         if (i == 0) {
-            return "\033[0;36m⏺\033[0m";
+            return FRAMED(BACK_CYAN("   "));
         }
         else if (i == 1) {
-            return "\033[0;37m⏺\033[0m";
+            return FRAMED(BACK_WHITE("   "));
         }
         else if (i == 2) {
-            return "\033[0;31m⏺\033[0m";
+            return FRAMED(BACK_RED("   "));
         }
         else if (i == 3) {
-            return "\033[0;35m⏺\033[0m";
+            return FRAMED(BACK_MAGENTA("   "));
         }
         else if (i == 4) {
-            return "⏺";
+            return FRAMED("   ");
         }
         else if (i == 5) {
-            return "\033[0;33m⏺\033[0m";
+            return FRAMED(BACK_YELLOW("   "));
         }
         else return null;
     }
