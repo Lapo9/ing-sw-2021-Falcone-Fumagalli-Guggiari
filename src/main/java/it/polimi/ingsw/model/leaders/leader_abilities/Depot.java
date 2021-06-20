@@ -62,7 +62,7 @@ public class Depot implements LeaderAbility {
      */
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
-        depot.addSupply(wot, from);
+        depot.addSupply(wot, from) &&
     }
 
     /**

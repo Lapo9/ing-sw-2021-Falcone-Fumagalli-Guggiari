@@ -50,8 +50,8 @@ public class ProductionManager implements AcceptsSupplies {
         additionAllowed(slot, wot, from);
 
         //add supply to common "virtual" reserve
-        if (from.getSource() != DepotID.SourceType.ANY) {
-            containers.get(from.getSource()).addSupply(wot, from);
+        if (from.getSource(leadersSpace) != DepotID.SourceType.ANY) {
+            containers.get(from.getSource(leadersSpace)).addSupply(wot, from);
         }
 
 
@@ -89,8 +89,8 @@ public class ProductionManager implements AcceptsSupplies {
 
 
         //remove supply to common "virtual" reserve
-        if (to.getSource() != DepotID.SourceType.ANY) {
-            containers.get(to.getSource()).removeSupply(wot);
+        if (to.getSource(leadersSpace) != DepotID.SourceType.ANY) {
+            containers.get(to.getSource(leadersSpace)).removeSupply(wot);
         }
 
 

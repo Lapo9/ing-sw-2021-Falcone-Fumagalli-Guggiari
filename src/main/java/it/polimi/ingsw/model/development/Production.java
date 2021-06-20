@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.exceptions.*;
+import it.polimi.ingsw.model.leaders.LeadersSpace;
 
 /**
  * The Production class represents the production mechanism of the game.
@@ -19,9 +20,7 @@ public class Production implements AcceptsSupplies, HasStatus {
     protected final SupplyContainer output;
     //currentSupply is the temporary depot to store resources that will be used for production
     //can't accept FAITH_MARKER and can't accept from PAYCHECK
-    protected SupplyContainer currentSupply = new SupplyContainer(  onlyFrom(DepotID.SourceType.PAYCHECK).negate().
-                                                                    and(specificType(WarehouseObjectType.FAITH_MARKER).negate()),
-                                                                    onlyFrom(DepotID.SourceType.PAYCHECK).negate());
+    protected SupplyContainer currentSupply = new SupplyContainer((specificType(WarehouseObjectType.FAITH_MARKER).negate()));
 
 
     /**
@@ -75,6 +74,7 @@ public class Production implements AcceptsSupplies, HasStatus {
      */
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException{
+        additionAllowed(wot, from);
         currentSupply.addSupply(wot, from);
     }
 
@@ -87,6 +87,7 @@ public class Production implements AcceptsSupplies, HasStatus {
      */
     @Override
     public void removeSupply(WarehouseObjectType wot, DepotID to) throws SupplyException{
+        removalAllowed(wot, to);
         currentSupply.removeSupply(wot);
     }
 
@@ -98,7 +99,7 @@ public class Production implements AcceptsSupplies, HasStatus {
      */
     @Override
     public boolean additionAllowed(WarehouseObjectType wot, DepotID from) {
-        return currentSupply.additionAllowed(wot, from);
+        return currentSupply.additionAllowed(wot, from) && from != DepotID.PAYCHECK;
     }
 
     /**
@@ -109,7 +110,7 @@ public class Production implements AcceptsSupplies, HasStatus {
      */
     @Override
     public boolean removalAllowed(WarehouseObjectType wot, DepotID to) {
-        return currentSupply.removalAllowed(wot, to);
+        return currentSupply.removalAllowed(wot, to) && to != DepotID.PAYCHECK;
     }
 
     /**

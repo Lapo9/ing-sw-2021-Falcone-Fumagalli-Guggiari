@@ -483,25 +483,11 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         }
 
 
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> onlyFrom(DepotID.SourceType source){
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> onlyFrom(DepotID.SourceType source, LeadersSpace leadersSpace){
             return (container, type, depot) -> {
-                return depot.getSource() == source;
+                return depot.getSource(leadersSpace) == source;
             };
         }
 
-
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> onlyFromMaxOneType(int max, DepotID.SourceType source){
-            return (container, type, depot) -> {
-                return onlyFrom(source).test(container, type, depot) && maxOneType(max).test(container, type, depot);
-            };
-        }
-
-
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> onlyFromMaxSpecificType(WarehouseObjectType type, int max, DepotID.SourceType source){
-            return (container, wot, depot) -> {
-                return onlyFrom(source).test(container, wot, depot) && maxSpecificType(type, max).test(container, wot, depot);
-            };
-        }
-    }
 
 }

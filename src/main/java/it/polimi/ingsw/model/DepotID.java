@@ -96,9 +96,22 @@ public enum DepotID {
     /**
      * Returns the source from which resources in the depot can came from.
      * @return the source from which resources in the depot can came from.
+     * @param leadersSpace
      */
-    public SourceType getSource() {
-        return source;
+    public SourceType getSource(LeadersSpace leadersSpace) {
+        if (type != null){
+            return source;
+        }
+
+        if (leadersSpace.getLeaderAbilityTrusted(typeOrder) instanceof Depot){
+            return SourceType.DEPOT;
+        }
+
+        if (leadersSpace.getLeaderAbilityTrusted(typeOrder) instanceof Producer){
+            return SourceType.ANY;
+        }
+
+        return SourceType.NONE;
     }
 
 
@@ -109,6 +122,7 @@ public enum DepotID {
     public void setSource(SourceType source) {
         this.source = source;
     }
+
 
     public static DepotID stringToId(String s){
         if (s.equals("wh1")){
