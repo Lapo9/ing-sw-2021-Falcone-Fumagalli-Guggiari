@@ -51,6 +51,9 @@ public class LeadersSpace implements HasStatus, WinPointsCountable {
                     DepotID.LEADER2.setType(DepotID.DepotType.NONE);
                 }
             }
+
+            //TODO debug remove later
+            System.out.print(DepotID.LEADER1.getType(this).toString());
         }
         else throw new LeaderException("Cannot add more than 2 leaders");
     }
@@ -75,6 +78,13 @@ public class LeadersSpace implements HasStatus, WinPointsCountable {
     public LeaderAbility getLeaderAbility(int i) throws LeaderException{
         return leaders.get(i).getAbility();
     }
+
+
+
+    public LeaderAbility getLeaderAbilityTrusted(int i) {
+        return leaders.get(i).getAbilityTrusted();
+    }
+
 
 
     /**

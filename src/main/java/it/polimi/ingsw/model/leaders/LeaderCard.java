@@ -79,7 +79,7 @@ public class LeaderCard implements WinPointsCountable, HasStatus {
      * The getAbility returns the ability of the LeaderCard, whether the leader is active or not
      * @return the ability of the LeaderCard
      */
-    public LeaderAbility getAbilityTrusted() throws LeaderException{
+    public LeaderAbility getAbilityTrusted(){
         return ability;
     }
 

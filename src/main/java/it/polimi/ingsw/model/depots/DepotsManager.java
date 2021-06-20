@@ -38,11 +38,11 @@ public class DepotsManager implements AcceptsSupplies {
      */
     @Override
     public void addSupply(DepotID slot, WarehouseObjectType wot, DepotID from) throws SupplyException {
-        if (slot.getType() == DepotID.DepotType.WAREHOUSE){
+        if (slot.getType(leadersSpace) == DepotID.DepotType.WAREHOUSE){
             warehouse.addSupply(slot, wot, from);
         }
 
-        else if (slot.getType() == DepotID.DepotType.LEADER_DEPOT){
+        else if (slot.getType(leadersSpace) == DepotID.DepotType.LEADER_DEPOT){
             try {
                 leadersSpace.getLeaderAbility(slot.getNum()).addSupply(wot, from);
             } catch (LeaderException | NoSuchMethodException e){System.exit(1); /*TODO terminate program*/}
@@ -61,11 +61,11 @@ public class DepotsManager implements AcceptsSupplies {
      */
     @Override
     public void removeSupply(DepotID from, WarehouseObjectType wot) throws SupplyException {
-        if (from.getType() == DepotID.DepotType.WAREHOUSE){
+        if (from.getType(leadersSpace) == DepotID.DepotType.WAREHOUSE){
             warehouse.removeSupply(from, wot);
         }
 
-        else if (from.getType() == DepotID.DepotType.LEADER_DEPOT){
+        else if (from.getType(leadersSpace) == DepotID.DepotType.LEADER_DEPOT){
             try {
                 leadersSpace.getLeaderAbility(from.getNum()).removeSupply(wot);
             } catch (LeaderException | NoSuchMethodException e){System.exit(1); /*TODO terminate program*/}
@@ -85,11 +85,11 @@ public class DepotsManager implements AcceptsSupplies {
      */
     @Override
     public boolean additionAllowed(DepotID slot, WarehouseObjectType wot, DepotID from) {
-        if (slot.getType() == DepotID.DepotType.WAREHOUSE){
+        if (slot.getType(leadersSpace) == DepotID.DepotType.WAREHOUSE){
             return warehouse.additionAllowed(slot, wot, from);
         }
 
-        else if (slot.getType() == DepotID.DepotType.LEADER_DEPOT){
+        else if (slot.getType(leadersSpace) == DepotID.DepotType.LEADER_DEPOT){
             try {
                 return leadersSpace.getLeaderAbility(slot.getNum()).additionAllowed(wot, from);
             } catch (LeaderException | NoSuchMethodException e){return false;}
@@ -109,11 +109,11 @@ public class DepotsManager implements AcceptsSupplies {
      */
     @Override
     public boolean removalAllowed(DepotID from, WarehouseObjectType wot, DepotID to) {
-        if (from.getType() == DepotID.DepotType.WAREHOUSE){
+        if (from.getType(leadersSpace) == DepotID.DepotType.WAREHOUSE){
             return warehouse.removalAllowed(from, wot);
         }
 
-        else if (from.getType() == DepotID.DepotType.LEADER_DEPOT){
+        else if (from.getType(leadersSpace) == DepotID.DepotType.LEADER_DEPOT){
             try {
                 return leadersSpace.getLeaderAbility(from.getNum()).removalAllowed(wot, to);
             } catch (LeaderException | NoSuchMethodException e){return false;}
@@ -155,11 +155,11 @@ public class DepotsManager implements AcceptsSupplies {
     public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) {
         SupplyContainer result = new SupplyContainer();
 
-        if (slot.getType() == DepotID.DepotType.WAREHOUSE){
+        if (slot.getType(leadersSpace) == DepotID.DepotType.WAREHOUSE){
             result = warehouse.clearSupplies(slot).first;
         }
 
-        else if (slot.getType() == DepotID.DepotType.LEADER_DEPOT){
+        else if (slot.getType(leadersSpace) == DepotID.DepotType.LEADER_DEPOT){
             try {
                 if (leadersSpace.getLeaderAbility(slot.getNum()) instanceof Depot) {
                     result = leadersSpace.getLeaderAbility(slot.getNum()).clearSupplies().first;
@@ -273,11 +273,11 @@ public class DepotsManager implements AcceptsSupplies {
      * @throws NoSuchMethodException No leader with the market ability
      */
     public void addMarble(DepotID slot, MarbleColor color) throws MarbleException, SupplyException, LeaderException, NoSuchMethodException {
-        if (slot.getType() == DepotID.DepotType.WAREHOUSE){
+        if (slot.getType(leadersSpace) == DepotID.DepotType.WAREHOUSE){
             warehouse.addMarble(slot, color, leadersSpace);
         }
 
-        else if(slot.getType() == DepotID.DepotType.LEADER_DEPOT){
+        else if(slot.getType(leadersSpace) == DepotID.DepotType.LEADER_DEPOT){
             leadersSpace.getLeaderAbility(slot.getNum()).addMarble(color, leadersSpace);
         }
 

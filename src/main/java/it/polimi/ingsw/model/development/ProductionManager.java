@@ -56,15 +56,15 @@ public class ProductionManager implements AcceptsSupplies {
 
 
         //actual addition, cannot fail cause of the previous check
-        if (slot.getType() == DepotID.DepotType.DEVELOPMENT){
+        if (slot.getType(leadersSpace) == DepotID.DepotType.DEVELOPMENT){
             developments.addSupply(slot, wot, from);
         }
 
-        else if (slot.getType() == DepotID.DepotType.BASE_PRODUCTION){
+        else if (slot.getType(leadersSpace) == DepotID.DepotType.BASE_PRODUCTION){
             baseProduction.addSupply(wot, from);
         }
 
-        else if (slot.getType() == DepotID.DepotType.LEADER_PRODUCTION){
+        else if (slot.getType(leadersSpace) == DepotID.DepotType.LEADER_PRODUCTION){
             try {
                 leadersSpace.getLeaderAbility(slot.getNum()).addSupply(wot, from);
             } catch (LeaderException | NoSuchMethodException e){System.exit(1); /*TODO terminate program*/}
@@ -96,15 +96,15 @@ public class ProductionManager implements AcceptsSupplies {
 
         //actual remove, cannot fail cause of the previous check
         try {
-            if (slot.getType() == DepotID.DepotType.DEVELOPMENT) {
+            if (slot.getType(leadersSpace) == DepotID.DepotType.DEVELOPMENT) {
                 developments.removeSupply(slot, wot, to);
             }
 
-            else if (slot.getType() == DepotID.DepotType.BASE_PRODUCTION) {
+            else if (slot.getType(leadersSpace) == DepotID.DepotType.BASE_PRODUCTION) {
                 baseProduction.removeSupply(wot, to);
             }
 
-            else if (slot.getType() == DepotID.DepotType.LEADER_PRODUCTION) {
+            else if (slot.getType(leadersSpace) == DepotID.DepotType.LEADER_PRODUCTION) {
                 try {
                     leadersSpace.getLeaderAbility(slot.getNum()).removeSupply(wot, to);
                 } catch (LeaderException | NoSuchMethodException e) {System.exit(1); /*TODO terminate program*/}
@@ -127,15 +127,15 @@ public class ProductionManager implements AcceptsSupplies {
     @Override
     public boolean additionAllowed(DepotID slot, WarehouseObjectType wot, DepotID from){
 
-        if (slot.getType() == DepotID.DepotType.DEVELOPMENT){
+        if (slot.getType(leadersSpace) == DepotID.DepotType.DEVELOPMENT){
             return developments.additionAllowed(slot, wot, from);
         }
 
-        else if (slot.getType() == DepotID.DepotType.BASE_PRODUCTION){
+        else if (slot.getType(leadersSpace) == DepotID.DepotType.BASE_PRODUCTION){
             return baseProduction.additionAllowed(wot, from);
         }
 
-        else if (slot.getType() == DepotID.DepotType.LEADER_PRODUCTION){
+        else if (slot.getType(leadersSpace) == DepotID.DepotType.LEADER_PRODUCTION){
             try {
                 return leadersSpace.getLeaderAbility(slot.getNum()).additionAllowed(wot, from);
             } catch (LeaderException | NoSuchMethodException e){return false;}
@@ -155,15 +155,15 @@ public class ProductionManager implements AcceptsSupplies {
      */
     @Override
     public boolean removalAllowed(DepotID from, WarehouseObjectType wot, DepotID to) {
-        if (from.getType() == DepotID.DepotType.DEVELOPMENT){
+        if (from.getType(leadersSpace) == DepotID.DepotType.DEVELOPMENT){
             return developments.removalAllowed(from, wot, to);
         }
 
-        else if (from.getType() == DepotID.DepotType.BASE_PRODUCTION){
+        else if (from.getType(leadersSpace) == DepotID.DepotType.BASE_PRODUCTION){
             return baseProduction.removalAllowed(wot, to);
         }
 
-        else if (from.getType() == DepotID.DepotType.LEADER_PRODUCTION){
+        else if (from.getType(leadersSpace) == DepotID.DepotType.LEADER_PRODUCTION){
             try {
                 return leadersSpace.getLeaderAbility(from.getNum()).removalAllowed(wot, to);
             } catch (LeaderException | NoSuchMethodException e){return false;}
@@ -204,15 +204,15 @@ public class ProductionManager implements AcceptsSupplies {
     public Pair<SupplyContainer, SupplyContainer> clearSupplies(DepotID slot) throws NoSuchMethodException {
         SupplyContainer removed = new SupplyContainer();
 
-        if (slot.getType() == DepotID.DepotType.DEVELOPMENT){
+        if (slot.getType(leadersSpace) == DepotID.DepotType.DEVELOPMENT){
             removed = developments.clearSupplies(slot).first;
         }
 
-        else if (slot.getType() == DepotID.DepotType.BASE_PRODUCTION){
+        else if (slot.getType(leadersSpace) == DepotID.DepotType.BASE_PRODUCTION){
             removed = baseProduction.clearSupplies().first;
         }
 
-        else if (slot.getType() == DepotID.DepotType.LEADER_PRODUCTION){
+        else if (slot.getType(leadersSpace) == DepotID.DepotType.LEADER_PRODUCTION){
             try {
                 if (leadersSpace.getLeaderAbility(slot.getNum()) instanceof Producer) {
                     removed = leadersSpace.getLeaderAbility(slot.getNum()).clearSupplies().first;

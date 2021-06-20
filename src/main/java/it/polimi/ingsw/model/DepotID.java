@@ -1,5 +1,9 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.leaders.LeadersSpace;
+import it.polimi.ingsw.model.leaders.leader_abilities.Depot;
+import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
+
 /**
  * Contains the numerical IDs of the places where you can store resources.
  */
@@ -55,9 +59,22 @@ public enum DepotID {
     /**
      * Returns the type of the depot.
      * @return the type of the depot
+     * @param leadersSpace
      */
-    public DepotType getType(){
-        return type;
+    public DepotType getType(LeadersSpace leadersSpace){
+        if (type != null){
+            return type;
+        }
+
+        if (leadersSpace.getLeaderAbilityTrusted(typeOrder) instanceof Depot){
+            return DepotType.LEADER_DEPOT;
+        }
+
+        if (leadersSpace.getLeaderAbilityTrusted(typeOrder) instanceof Producer){
+            return DepotType.LEADER_PRODUCTION;
+        }
+
+        return DepotType.NONE;
     }
 
     /**

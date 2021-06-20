@@ -393,22 +393,22 @@ public class Dashboard implements HasStatus{
 
         int index = 0;
 
-        if(from.getType() == DepotID.DepotType.LEADER_PRODUCTION || from.getType() == DepotID.DepotType.DEVELOPMENT || from.getType() == DepotID.DepotType.BASE_PRODUCTION)
+        if(from.getType(leadersSpace) == DepotID.DepotType.LEADER_PRODUCTION || from.getType(leadersSpace) == DepotID.DepotType.DEVELOPMENT || from.getType(leadersSpace) == DepotID.DepotType.BASE_PRODUCTION)
             index = productionManager.getSource(type);
-        if(from.getType() == DepotID.DepotType.PAYCHECK)
+        if(from.getType(leadersSpace) == DepotID.DepotType.PAYCHECK)
             index = paycheck.getSource(type);
 
         //remove supply from specified container
-        containers.get(from.getType()).removeSupply(from, type, to);
+        containers.get(from.getType(leadersSpace)).removeSupply(from, type, to);
 
         if(to == DepotID.COFFER && (index == 1 || index == 3))
             from = DepotID.COFFER;
 
         //add supply to specified container, if you cannot, put supply back to original container and throw the exception
         try{
-            containers.get(to.getType()).addSupply(to, type, from);
+            containers.get(to.getType(leadersSpace)).addSupply(to, type, from);
         } catch (SupplyException | LeaderException | NoSuchMethodException e) {
-            containers.get(from.getType()).addSupply(from, type, from);
+            containers.get(from.getType(leadersSpace)).addSupply(from, type, from);
             throw e;
         }
 
@@ -656,7 +656,7 @@ public class Dashboard implements HasStatus{
      */
     public void clearDepot(DepotID id) throws NoSuchMethodException{
         Pair<SupplyContainer, SupplyContainer> destination;
-        destination = containers.get(id.getType()).clearSupplies(id);
+        destination = containers.get(id.getType(leadersSpace)).clearSupplies(id);
 
         coffer.sum(destination.second);
         depotsManager.allocate(destination.first);
@@ -734,9 +734,9 @@ public class Dashboard implements HasStatus{
 
         int index = 0;
 
-        if(from.getType() == DepotID.DepotType.LEADER_PRODUCTION || from.getType() == DepotID.DepotType.DEVELOPMENT || from.getType() == DepotID.DepotType.BASE_PRODUCTION)
+        if(from.getType(leadersSpace) == DepotID.DepotType.LEADER_PRODUCTION || from.getType(leadersSpace) == DepotID.DepotType.DEVELOPMENT || from.getType(leadersSpace) == DepotID.DepotType.BASE_PRODUCTION)
             index = productionManager.getSource(type);
-        if(from.getType() == DepotID.DepotType.PAYCHECK)
+        if(from.getType(leadersSpace) == DepotID.DepotType.PAYCHECK)
             index = paycheck.getSource(type);
 
         if(index == 1)
