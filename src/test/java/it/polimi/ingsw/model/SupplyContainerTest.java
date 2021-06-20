@@ -74,14 +74,14 @@ public class SupplyContainerTest {
 
     @Test
     public void setAcceptCheck(){
-        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX));
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX, new LeadersSpace()));
         boolean exc = false;
         try {
             sc.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
         } catch (SupplyException e) {
             exc = true;
         }
-        sc.setAcceptCheck(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT));
+        sc.setAcceptCheck(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT, new LeadersSpace()));
         try {
             sc.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
         } catch (SupplyException e) {fail();}
@@ -90,7 +90,7 @@ public class SupplyContainerTest {
 
     @Test
     public void setRemoveCheck(){
-        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX), SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.SHIELD));
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX, new LeadersSpace()), SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.SHIELD));
         boolean exc = false;
         try {
             sc.addSupply(WarehouseObjectType.SHIELD, DepotID.COFFER);
@@ -148,7 +148,7 @@ public class SupplyContainerTest {
 
     @Test
     public void addSupply_cofferTesting() {
-        SupplyContainer coffer = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX).and(SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.FAITH_MARKER).negate()));
+        SupplyContainer coffer = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX, new LeadersSpace()).and(SupplyContainer.AcceptStrategy.specificType(WarehouseObjectType.FAITH_MARKER).negate()));
         boolean exc = false;
         try {
             coffer.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
@@ -211,7 +211,7 @@ public class SupplyContainerTest {
 
     @Test
     public void addSupply_sourceSpecifiedNoEx(){
-        SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0, SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX));
+        SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0, SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX, new LeadersSpace()));
         try {
             sc1.addSupply(WarehouseObjectType.SERVANT, DepotID.COFFER);
         } catch (Exception e) {fail();}
@@ -229,7 +229,7 @@ public class SupplyContainerTest {
 
     @Test
     public void addSupply_sourceSpecifiedWrongSourceEx(){
-        SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0, SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX));
+        SupplyContainer sc1 = new SupplyContainer(3, 7, 7, 2, 0, SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX, new LeadersSpace()));
         boolean exc = false;
         try {
             sc1.addSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE1);
@@ -311,7 +311,7 @@ public class SupplyContainerTest {
 
     @Test
     public void removeSupply_withDestinationNoEx(){
-        SupplyContainer sc = new SupplyContainer(2, 7, 6, 2, 0, SupplyContainer.AcceptStrategy.any(), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT));
+        SupplyContainer sc = new SupplyContainer(2, 7, 6, 2, 0, SupplyContainer.AcceptStrategy.any(), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT, new LeadersSpace()));
         try {
             sc.removeSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE2);
         } catch (Exception e) {fail();}
@@ -326,7 +326,7 @@ public class SupplyContainerTest {
 
     @Test
     public void removeSupply_withWrongDestinationEx(){
-        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.any(), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT));
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.any(), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT, new LeadersSpace()));
         boolean exc = false;
         try {
             sc.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
@@ -341,19 +341,19 @@ public class SupplyContainerTest {
 
     @Test
     public void additionAllowed_true(){
-        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT));
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT, new LeadersSpace()));
         assertTrue(sc.additionAllowed(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE3));
     }
 
     @Test
     public void additionAllowed_false(){
-        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT));
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT, new LeadersSpace()));
         assertFalse(sc.additionAllowed(WarehouseObjectType.STONE, DepotID.COFFER));
     }
 
     @Test
     public void removalAllowed_true(){
-        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.any(), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX));
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.any(), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX, new LeadersSpace()));
         try {
             sc.addSupply(WarehouseObjectType.SHIELD, DepotID.COFFER);
         } catch (SupplyException e) {fail();}
@@ -362,7 +362,7 @@ public class SupplyContainerTest {
 
     @Test
     public void removalAllowed_false(){
-        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.any(), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX));
+        SupplyContainer sc = new SupplyContainer(SupplyContainer.AcceptStrategy.any(), SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX, new LeadersSpace()));
         try {
             sc.addSupply(WarehouseObjectType.COIN, DepotID.COFFER);
         } catch (SupplyException e) {fail();}
@@ -421,7 +421,7 @@ public class SupplyContainerTest {
             ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
         } catch (LeaderException e) {fail();}
         try {
-            ldrspc.playLeader(0, new ResourceChecker(new DepotsManager(new Warehouse(), ldrspc), new SupplyContainer(2, 0, 0, 0, 0), new Developments()));
+            ldrspc.playLeader(0, new ResourceChecker(new DepotsManager(new Warehouse(ldrspc), ldrspc), new SupplyContainer(2, 0, 0, 0, 0), new Developments()));
         } catch (SupplyException | LeaderException e) {fail();}
         try {
             sc.addMarble(MarbleColor.WHITE, ldrspc);

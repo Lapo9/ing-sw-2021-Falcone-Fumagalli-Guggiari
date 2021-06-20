@@ -43,7 +43,7 @@ public class ResourceCheckerTest {
         } catch (LeaderException e) {fail();}
 
         //creating DepotsManager
-        DepotsManager dm = new DepotsManager(new Warehouse(), ls);
+        DepotsManager dm = new DepotsManager(new Warehouse(ls), ls);
 
         //creating my coffer
         SupplyContainer coff = new SupplyContainer(2, 1, 0, 0, 0);
@@ -101,7 +101,7 @@ public class ResourceCheckerTest {
         } catch (LeaderException e) {fail();}
 
         //creating DepotsManager
-        DepotsManager dm = new DepotsManager(new Warehouse(), ls);
+        DepotsManager dm = new DepotsManager(new Warehouse(ls), ls);
 
         //creating my coffer -> not enough
         SupplyContainer coff = new SupplyContainer(1, 1, 0, 0, 0);
@@ -159,7 +159,7 @@ public class ResourceCheckerTest {
         } catch (LeaderException e) {fail();}
 
         //creating DepotsManager
-        DepotsManager dm = new DepotsManager(new Warehouse(), ls);
+        DepotsManager dm = new DepotsManager(new Warehouse(ls), ls);
 
         //creating my coffer
         SupplyContainer coff = new SupplyContainer(2, 1, 0, 0, 0);

@@ -71,8 +71,8 @@ public class DevelopmentGridTest {
     public void buyCard_lvlOneCardNoLeader() {
         DevelopmentGrid dvlpgrd = new DevelopmentGrid(false);
         DevelopmentCard card = null;
-        Paycheck pychck = new Paycheck();
         LeadersSpace ldrspc = new LeadersSpace();
+        Paycheck pychck = new Paycheck(ldrspc);
         try {
             ldrspc.addLeader(new LeaderCard(43, new SupplyContainer(2, 0, 0, 0, 0), new ArrayList<>(0), new Market(WarehouseObjectType.STONE), 5));
             ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
@@ -91,8 +91,8 @@ public class DevelopmentGridTest {
     public void buyCard_lvlTwoCardNoLeader() {
         DevelopmentGrid dvlpgrd = new DevelopmentGrid(false);
         DevelopmentCard card = null;
-        Paycheck pychck = new Paycheck();
         LeadersSpace ldrspc = new LeadersSpace();
+        Paycheck pychck = new Paycheck(ldrspc);
         try {
             ldrspc.addLeader(new LeaderCard(43, new SupplyContainer(2, 0, 0, 0, 0), new ArrayList<>(0), new Market(WarehouseObjectType.STONE), 5));
             ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
@@ -113,8 +113,8 @@ public class DevelopmentGridTest {
     public void buyCard_lvlThreeCardNoLeader() {
         DevelopmentGrid dvlpgrd = new DevelopmentGrid(false);
         DevelopmentCard card = null;
-        Paycheck pychck = new Paycheck();
         LeadersSpace ldrspc = new LeadersSpace();
+        Paycheck pychck = new Paycheck(ldrspc);
         try {
             ldrspc.addLeader(new LeaderCard(43, new SupplyContainer(2, 0, 0, 0, 0), new ArrayList<>(0), new Market(WarehouseObjectType.STONE), 5));
             ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
@@ -137,14 +137,14 @@ public class DevelopmentGridTest {
     public void buyCard_withLeaderDiscount() {
         DevelopmentGrid dvlpgrd = new DevelopmentGrid(false);
         DevelopmentCard card = null;
-        Paycheck pychck = new Paycheck();
         LeadersSpace ldrspc = new LeadersSpace();
+        Paycheck pychck = new Paycheck(ldrspc);
         try {
             ldrspc.addLeader(new LeaderCard(43, new SupplyContainer(2, 0, 0, 0, 0), new ArrayList<>(0), new Discount(WarehouseObjectType.STONE), 5));
             ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
         } catch (LeaderException e) {fail();}
         try {
-            ldrspc.playLeader(0, new ResourceChecker(new DepotsManager(new Warehouse(), ldrspc), new SupplyContainer(2, 0, 0, 0, 0), new Developments()));
+            ldrspc.playLeader(0, new ResourceChecker(new DepotsManager(new Warehouse(ldrspc), ldrspc), new SupplyContainer(2, 0, 0, 0, 0), new Developments()));
         } catch (SupplyException | LeaderException e) {fail();}
         try {
             pychck.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
@@ -160,8 +160,8 @@ public class DevelopmentGridTest {
     @Test
     public void buyCard_emptyPositionEx() {
         DevelopmentGrid dvlpgrd = new DevelopmentGrid(false);
-        Paycheck pychck = new Paycheck();
         LeadersSpace ldrspc = new LeadersSpace();
+        Paycheck pychck = new Paycheck(ldrspc);
         try {
             ldrspc.addLeader(new LeaderCard(43, new SupplyContainer(2, 0, 0, 0, 0), new ArrayList<>(0), new Market(WarehouseObjectType.STONE), 5));
             ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
@@ -173,7 +173,7 @@ public class DevelopmentGridTest {
         try {
             dvlpgrd.buyCard(1, 2, pychck, ldrspc);
         } catch (SupplyException | NoSuchCardException e){fail();}
-        pychck = new Paycheck();
+        pychck = new Paycheck(ldrspc);
         try {
             pychck.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE2);
             pychck.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
@@ -182,7 +182,7 @@ public class DevelopmentGridTest {
         try {
             dvlpgrd.buyCard(1, 2, pychck, ldrspc);
         } catch (SupplyException | NoSuchCardException e){fail();}
-        pychck = new Paycheck();
+        pychck = new Paycheck(ldrspc);
         try {
             pychck.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
             pychck.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
@@ -191,7 +191,7 @@ public class DevelopmentGridTest {
         try {
             dvlpgrd.buyCard(1, 2, pychck, ldrspc);
         } catch (SupplyException | NoSuchCardException e){fail();}
-        pychck = new Paycheck();
+        pychck = new Paycheck(ldrspc);
         try {
             pychck.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
             pychck.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
@@ -214,8 +214,8 @@ public class DevelopmentGridTest {
     @Test
     public void buyCard_wrongPaycheckEx() {
         DevelopmentGrid dvlpgrd = new DevelopmentGrid(false);
-        Paycheck pychck = new Paycheck();
         LeadersSpace ldrspc = new LeadersSpace();
+        Paycheck pychck = new Paycheck(ldrspc);
         boolean exc = false;
         try {
             ldrspc.addLeader(new LeaderCard(43, new SupplyContainer(2, 0, 0, 0, 0), new ArrayList<>(0), new Market(WarehouseObjectType.STONE), 5));
@@ -280,8 +280,8 @@ public class DevelopmentGridTest {
     public void getBoughtCards() {
         DevelopmentGrid dvlpgrd = new DevelopmentGrid(false);
         DevelopmentCard card = null;
-        Paycheck pychck = new Paycheck();
         LeadersSpace ldrspc = new LeadersSpace();
+        Paycheck pychck = new Paycheck(ldrspc);
         try {
             ldrspc.addLeader(new LeaderCard(43, new SupplyContainer(2, 0, 0, 0, 0), new ArrayList<>(0), new Market(WarehouseObjectType.STONE), 5));
             ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
@@ -293,7 +293,7 @@ public class DevelopmentGridTest {
         try {
             dvlpgrd.buyCard(1, 2, pychck, ldrspc);
         } catch (SupplyException | NoSuchCardException e){fail();}
-        pychck = new Paycheck();
+        pychck = new Paycheck(ldrspc);
         try {
             pychck.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE2);
             pychck.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
@@ -338,8 +338,8 @@ public class DevelopmentGridTest {
     @Test
     public void getLevel_emptyEx() {
         DevelopmentGrid dvlpgrd = new DevelopmentGrid(false);
-        Paycheck pychck = new Paycheck();
         LeadersSpace ldrspc = new LeadersSpace();
+        Paycheck pychck = new Paycheck(ldrspc);
         try {
             ldrspc.addLeader(new LeaderCard(43, new SupplyContainer(2, 0, 0, 0, 0), new ArrayList<>(0), new Market(WarehouseObjectType.STONE), 5));
             ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
@@ -351,7 +351,7 @@ public class DevelopmentGridTest {
         try {
             dvlpgrd.buyCard(1, 2, pychck, ldrspc);
         } catch (SupplyException | NoSuchCardException e){fail();}
-        pychck = new Paycheck();
+        pychck = new Paycheck(ldrspc);
         try {
             pychck.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE2);
             pychck.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
@@ -360,7 +360,7 @@ public class DevelopmentGridTest {
         try {
             dvlpgrd.buyCard(1, 2, pychck, ldrspc);
         } catch (SupplyException | NoSuchCardException e){fail();}
-        pychck = new Paycheck();
+        pychck = new Paycheck(ldrspc);
         try {
             pychck.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
             pychck.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
@@ -369,7 +369,7 @@ public class DevelopmentGridTest {
         try {
             dvlpgrd.buyCard(1, 2, pychck, ldrspc);
         } catch (SupplyException | NoSuchCardException e){fail();}
-        pychck = new Paycheck();
+        pychck = new Paycheck(ldrspc);
         try {
             pychck.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
             pychck.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE3);

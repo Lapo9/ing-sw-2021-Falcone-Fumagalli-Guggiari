@@ -24,7 +24,7 @@ public class ProductionManagerTest {
     @Test
     public void addSupply_development() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -61,7 +61,7 @@ public class ProductionManagerTest {
     @Test
     public void addSupply_leader() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -86,7 +86,7 @@ public class ProductionManagerTest {
     @Test
     public void removeSupply_development() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -130,7 +130,7 @@ public class ProductionManagerTest {
     @Test
     public void removeSupply_leader() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -158,7 +158,7 @@ public class ProductionManagerTest {
     @Test
     public void additionAllowed_development() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -188,7 +188,7 @@ public class ProductionManagerTest {
     @Test
     public void additionAllowed_leaderCard() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -213,7 +213,7 @@ public class ProductionManagerTest {
     @Test
     public void removalAllowed_development() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -247,7 +247,7 @@ public class ProductionManagerTest {
     @Test
     public void removalAllowed_leaderCard() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -268,16 +268,21 @@ public class ProductionManagerTest {
 
     @Test
     public void removalAllowed_wrongIDFalse() {
-        ProductionManager prdmng = new ProductionManager(new Developments(), new MutableProduction(2, 1), new LeadersSpace());
-        LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
-        LEADER1.setSource(DepotID.SourceType.DEPOT);
+        LeadersSpace ldrspc = new LeadersSpace();
+        try {
+            ldrspc.addLeader(new LeaderCard(6));
+        } catch (Exception e){
+            fail();
+        }
+
+        ProductionManager prdmng = new ProductionManager(new Developments(), new MutableProduction(2, 1), ldrspc);
         assertFalse(prdmng.removalAllowed(DepotID.LEADER1, WarehouseObjectType.COIN, DepotID.COFFER));
     }
 
     @Test
     public void clearSupplies_fromDevelopment() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(1, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -311,7 +316,7 @@ public class ProductionManagerTest {
     @Test
     public void clearSupplies_fromProduction() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -350,7 +355,7 @@ public class ProductionManagerTest {
     @Test
     public void clearSupplies_fromLeader() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -386,7 +391,7 @@ public class ProductionManagerTest {
     @Test
     public void clearSupplies_fromAll() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(1, 1, 0, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -449,7 +454,7 @@ public class ProductionManagerTest {
     @Test
     public void produce_moreThanOneProduction(){
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -509,7 +514,7 @@ public class ProductionManagerTest {
     @Test
     public void checkProduction_moreThanOneProduction() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -561,7 +566,7 @@ public class ProductionManagerTest {
     @Test
     public void swapLeaderProduction(){
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(0, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));
@@ -586,7 +591,7 @@ public class ProductionManagerTest {
     @Test
     public void getAllowedDepots(){
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         Developments dvlpmts = new Developments();
         try {
             dvlpmts.addCardToSpace(0, new DevelopmentCard(24, 1, 2, CardCategory.BLUE, new Production(new SupplyContainer(1, 0, 1, 0, 0), new SupplyContainer(0, 1, 0, 0, 0)), new SupplyContainer(1, 1, 1, 0, 0)));

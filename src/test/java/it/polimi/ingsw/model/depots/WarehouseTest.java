@@ -114,8 +114,9 @@ public class WarehouseTest {
 
     @Test
     public void addMarble_white() {
-        Warehouse wrhs =  new Warehouse();
         LeadersSpace ldrspc = new LeadersSpace();
+        Warehouse wrhs =  new Warehouse(ldrspc);
+
         try {
             ldrspc.addLeader(new LeaderCard(43, new SupplyContainer(2, 0, 0, 0, 0), new ArrayList<>(0), new Market(WarehouseObjectType.STONE), 5));
             ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
@@ -141,8 +142,9 @@ public class WarehouseTest {
 
     @Test
     public void addMarble_notWhite() {
-        Warehouse wrhs =  new Warehouse();
         LeadersSpace ldrspc = new LeadersSpace();
+        Warehouse wrhs =  new Warehouse(ldrspc);
+
         try {
             wrhs.addMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE, ldrspc);
             wrhs.addMarble(DepotID.WAREHOUSE2, MarbleColor.BLUE, ldrspc);
@@ -160,7 +162,7 @@ public class WarehouseTest {
 
     @Test
     public void addSupply_oneNoEx() {
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(new LeadersSpace());
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e) {fail();}
@@ -176,7 +178,7 @@ public class WarehouseTest {
 
     @Test
     public void addSupply_wrongSourceEx() {
-        Warehouse wrhs =  new Warehouse();
+        Warehouse wrhs =  new Warehouse(new LeadersSpace());
         boolean exc = false;
         try {
             wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.SHIELD, DepotID.COFFER);
@@ -188,7 +190,7 @@ public class WarehouseTest {
 
     @Test
     public void addSupply_fullEx() {
-        Warehouse wrhs =  new Warehouse();
+        Warehouse wrhs =  new Warehouse(new LeadersSpace());
         boolean exc = false;
         try {
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.BASE_PRODUCTION);
@@ -204,7 +206,7 @@ public class WarehouseTest {
 
     @Test
     public void addSupply_sameTypeDifferentLineEx() {
-        Warehouse wrhs =  new Warehouse();
+        Warehouse wrhs =  new Warehouse(new LeadersSpace());
         boolean exc = false;
         try {
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
@@ -219,7 +221,7 @@ public class WarehouseTest {
 
     @Test
     public void addSupply_differentTypeSameLineEx() {
-        Warehouse wrhs =  new Warehouse();
+        Warehouse wrhs =  new Warehouse(new LeadersSpace());
         boolean exc = false;
         try {
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
@@ -234,7 +236,7 @@ public class WarehouseTest {
 
     @Test
     public void removeSupply() {
-        Warehouse wrhs =  new Warehouse();
+        Warehouse wrhs =  new Warehouse(new LeadersSpace());
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.WAREHOUSE3);
             wrhs.removeSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD);
@@ -251,13 +253,13 @@ public class WarehouseTest {
 
     @Test
     public void additionAllowed_true() {
-        Warehouse wrhs =  new Warehouse();
+        Warehouse wrhs =  new Warehouse(new LeadersSpace());
         assertTrue(wrhs.additionAllowed(DepotID.WAREHOUSE3, WarehouseObjectType.COIN, DepotID.PAYCHECK));
     }
 
     @Test
     public void additionAllowed_wrongTypeFalse() {
-        Warehouse wrhs =  new Warehouse();
+        Warehouse wrhs =  new Warehouse(new LeadersSpace());
         try {
             wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.STONE, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e) {fail();}
@@ -266,7 +268,7 @@ public class WarehouseTest {
 
     @Test
     public void additionAllowed_alreadyFullFalse() {
-        Warehouse wrhs =  new Warehouse();
+        Warehouse wrhs =  new Warehouse(new LeadersSpace());
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SERVANT, DepotID.WAREHOUSE2);
         } catch (SupplyException e) {fail();}
@@ -275,7 +277,7 @@ public class WarehouseTest {
 
     @Test
     public void removalAllowed_true() {
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(new LeadersSpace());
         try{
             wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.COIN, DepotID.PAYCHECK);
         }catch(SupplyException e){fail();}
@@ -284,16 +286,21 @@ public class WarehouseTest {
 
     @Test
     public void removalAllowed_emptyFalse() {
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(new LeadersSpace());
         assertFalse(wrhs.removalAllowed(DepotID.WAREHOUSE3, WarehouseObjectType.COIN));
     }
 
     @Test
     public void clearSupplies_checkAllSupplies() {
-        Warehouse wrhs = new Warehouse();
+        LeadersSpace ldrspc = new LeadersSpace();
         try {
-            LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
-            LEADER1.setSource(DepotID.SourceType.DEPOT);
+            ldrspc.addLeader(new LeaderCard(6));
+        } catch (Exception e){
+            fail();
+        }
+
+        Warehouse wrhs = new Warehouse(ldrspc);
+        try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.LEADER1);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.PAYCHECK);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.BASE_PRODUCTION);
@@ -310,7 +317,7 @@ public class WarehouseTest {
 
     @Test
     public void clearSupplies_checkEmptiness() {
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(new LeadersSpace());
         try {
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.PAYCHECK);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.BASE_PRODUCTION);
@@ -328,7 +335,7 @@ public class WarehouseTest {
 
     @Test
     public void getAllowedDepots_warehouseEmptyAllAllowed() {
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(new LeadersSpace());
         ArrayList<DepotID> result= new ArrayList<DepotID>(wrhs.getAllowedDepots(DepotID.BASE_PRODUCTION, WarehouseObjectType.SHIELD));
         int[] expectedResult = {1, 1, 1};
         int[] actualResult = {result.contains(DepotID.WAREHOUSE1) ? 1 : 0,
@@ -339,11 +346,16 @@ public class WarehouseTest {
 
     @Test
     public void getAllowedDepots_oneAllowed() {
-        Warehouse wrhs = new Warehouse();
+        LeadersSpace ldrspc = new LeadersSpace();
+        try {
+            ldrspc.addLeader(new LeaderCard(6));
+        } catch (Exception e){
+            fail();
+        }
+
+        Warehouse wrhs = new Warehouse(ldrspc);
         try {
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
-            LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
-            LEADER1.setSource(DepotID.SourceType.DEPOT);
             wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.COIN, DepotID.LEADER1);
         } catch (SupplyException e) {fail();}
         ArrayList<DepotID> result= new ArrayList<DepotID>(wrhs.getAllowedDepots(DepotID.DEVELOPMENT2, WarehouseObjectType.SHIELD));
@@ -356,7 +368,7 @@ public class WarehouseTest {
 
     @Test
     public void getAllowedDepots_wrongSource() {
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(new LeadersSpace());
         ArrayList<DepotID> result= new ArrayList<DepotID>(wrhs.getAllowedDepots(DepotID.COFFER, WarehouseObjectType.SHIELD));
         int[] expectedResult = {0, 0, 0};
         int[] actualResult = {result.contains(DepotID.WAREHOUSE1) ? 1 : 0,
@@ -367,7 +379,7 @@ public class WarehouseTest {
 
     @Test
     public void allocate_full(){
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(new LeadersSpace());
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.DEVELOPMENT3);
@@ -387,7 +399,7 @@ public class WarehouseTest {
 
     @Test
     public void allocate_warehouse2AndWarehouse3(){
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(new LeadersSpace());
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
             wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.STONE, DepotID.BASE_PRODUCTION);
@@ -406,7 +418,7 @@ public class WarehouseTest {
 
     @Test
     public void allocate_warehouse1AndWarehouse2(){
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(new LeadersSpace());
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.STONE, DepotID.BASE_PRODUCTION);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
@@ -424,7 +436,7 @@ public class WarehouseTest {
 
     @Test
     public void allocate_warehouse1AndWarehouse3(){
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(new LeadersSpace());
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
             wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.STONE, DepotID.BASE_PRODUCTION);
@@ -442,7 +454,7 @@ public class WarehouseTest {
 
     @Test
     public void getStatus(){
-        Warehouse wrhs =  new Warehouse();
+        Warehouse wrhs =  new Warehouse(new LeadersSpace());
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.COIN, DepotID.DEVELOPMENT3);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.SERVANT, DepotID.BASE_PRODUCTION);
