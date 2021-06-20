@@ -5,6 +5,7 @@ import static it.polimi.ingsw.model.SupplyContainer.AcceptStrategy.*;
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.exceptions.SupplyException;
+import it.polimi.ingsw.model.leaders.LeadersSpace;
 
 import java.util.ArrayList;
 
@@ -14,14 +15,17 @@ import java.util.ArrayList;
  */
 public class Paycheck implements AcceptsSupplies, HasStatus {
 
-    private SupplyContainer fromStrongbox = new SupplyContainer(onlyFrom(DepotID.SourceType.STRONGBOX), onlyFrom(DepotID.SourceType.STRONGBOX));
-    private SupplyContainer fromDepot = new SupplyContainer(onlyFrom(DepotID.SourceType.DEPOT), onlyFrom(DepotID.SourceType.DEPOT));
+    private SupplyContainer fromStrongbox;
+    private SupplyContainer fromDepot;
 
 
     /**
      * Creates a paycheck.
      */
-    public Paycheck(){}
+    public Paycheck(LeadersSpace leadersSpace){
+        fromStrongbox = new SupplyContainer(onlyFrom(DepotID.SourceType.STRONGBOX, leadersSpace), onlyFrom(DepotID.SourceType.STRONGBOX, leadersSpace));
+        fromDepot = new SupplyContainer(onlyFrom(DepotID.SourceType.DEPOT, leadersSpace), onlyFrom(DepotID.SourceType.DEPOT, leadersSpace));
+    }
 
 
     /**

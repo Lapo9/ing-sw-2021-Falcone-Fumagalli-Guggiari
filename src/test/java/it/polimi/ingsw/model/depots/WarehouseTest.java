@@ -22,7 +22,7 @@ public class WarehouseTest {
 
     @Test
     public void getResourceCount_oneType() {
-        Warehouse wrhs =  new Warehouse();
+        Warehouse wrhs =  new Warehouse(new LeadersSpace());
         try {
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e) {fail();}
@@ -31,11 +31,15 @@ public class WarehouseTest {
 
     @Test
     public void getResourceCount_moreThanOneType() {
-        Warehouse wrhs =  new Warehouse();
+        LeadersSpace ldrspc = new LeadersSpace();
+        try {
+            ldrspc.addLeader(new LeaderCard(10));
+        } catch (Exception e){
+            fail();
+        }
+        Warehouse wrhs =  new Warehouse(ldrspc);
         try {
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
-            LEADER1.setType(DepotID.DepotType.LEADER_PRODUCTION);
-            LEADER1.setSource(DepotID.SourceType.ANY);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, LEADER1);
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e) {fail();}
@@ -44,12 +48,17 @@ public class WarehouseTest {
 
     @Test
     public void swapRows_noEx() {
-        Warehouse wrhs =  new Warehouse();
+        LeadersSpace ldrspc = new LeadersSpace();
+        try {
+            ldrspc.addLeader(new LeaderCard(7));
+        } catch (Exception e){
+            fail();
+        }
+
+        Warehouse wrhs =  new Warehouse(ldrspc);
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SERVANT, DepotID.PAYCHECK);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
-            LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
-            LEADER1.setSource(DepotID.SourceType.DEPOT);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.LEADER1);
             wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e) {fail();}
@@ -80,13 +89,18 @@ public class WarehouseTest {
 
     @Test
     public void swapRows_ex() {
-        Warehouse wrhs =  new Warehouse();
+        LeadersSpace ldrspc = new LeadersSpace();
+        try {
+            ldrspc.addLeader(new LeaderCard(6));
+        } catch (Exception e){
+            fail();
+        }
+
+        Warehouse wrhs =  new Warehouse(ldrspc);
         boolean exc = false;
         try {
             wrhs.addSupply(DepotID.WAREHOUSE1, WarehouseObjectType.SERVANT, DepotID.PAYCHECK);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
-            LEADER1.setType(DepotID.DepotType.LEADER_DEPOT);
-            LEADER1.setSource(DepotID.SourceType.DEPOT);
             wrhs.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.LEADER1);
             wrhs.addSupply(DepotID.WAREHOUSE3, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e) {fail();}

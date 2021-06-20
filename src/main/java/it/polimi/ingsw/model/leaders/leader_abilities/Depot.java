@@ -25,7 +25,7 @@ public class Depot implements LeaderAbility {
      * @param type Type contained by the depot
      */
     public Depot(WarehouseObjectType type){
-        depot = new SupplyContainer(onlyFrom(DepotID.SourceType.STRONGBOX).negate().and(maxSpecificType(type, 2)));
+        depot = new SupplyContainer(maxSpecificType(type, 2));
     }
 
     /**
@@ -62,7 +62,8 @@ public class Depot implements LeaderAbility {
      */
     @Override
     public void addSupply(WarehouseObjectType wot, DepotID from) throws SupplyException {
-        depot.addSupply(wot, from) &&
+        additionAllowed(wot, from);
+        depot.addSupply(wot, from);
     }
 
     /**
@@ -83,7 +84,7 @@ public class Depot implements LeaderAbility {
      */
     @Override
     public boolean additionAllowed(WarehouseObjectType wot, DepotID from) {
-        return depot.additionAllowed(wot, from);
+        return depot.additionAllowed(wot, from) && from != DepotID.COFFER;
     }
 
     /**

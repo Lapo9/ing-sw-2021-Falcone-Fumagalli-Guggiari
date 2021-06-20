@@ -62,7 +62,7 @@ public class DepotTest {
             ldrspc.addLeader(new LeaderCard(42, new SupplyContainer(0, 2, 0, 0, 0), new ArrayList<>(0), new Depot(WarehouseObjectType.COIN), 3));
         } catch (LeaderException e) {fail();}
         try {
-            ldrspc.playLeader(0, new ResourceChecker(new DepotsManager(new Warehouse(), ldrspc), new SupplyContainer(2, 0, 0, 0, 0), new Developments()));
+            ldrspc.playLeader(0, new ResourceChecker(new DepotsManager(new Warehouse(ldrspc), ldrspc), new SupplyContainer(2, 0, 0, 0, 0), new Developments()));
         } catch (SupplyException | LeaderException e) {fail();}
         try {
             dpt.addMarble(MarbleColor.WHITE, ldrspc);

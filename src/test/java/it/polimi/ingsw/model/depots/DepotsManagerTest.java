@@ -23,7 +23,7 @@ public class DepotsManagerTest {
     @Test
     public void addSupply_warehouse() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         DepotsManager dptmng = new DepotsManager(wrhs, ldrspc);
         ResourceChecker rschck = new ResourceChecker(dptmng, new SupplyContainer(2, 2, 0, 0, 0), new Developments());
         try {
@@ -51,7 +51,7 @@ public class DepotsManagerTest {
     @Test
     public void addSupply_leader() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         DepotsManager dptmng = new DepotsManager(wrhs, ldrspc);
         ResourceChecker rschck = new ResourceChecker(dptmng, new SupplyContainer(2, 2, 0, 0, 0), new Developments());
         try {
@@ -78,7 +78,7 @@ public class DepotsManagerTest {
 
     @Test
     public void removeSupply_warehouse() {
-        DepotsManager dptmng = new DepotsManager(new Warehouse(), new LeadersSpace());
+        DepotsManager dptmng = new DepotsManager(new Warehouse(new LeadersSpace()), new LeadersSpace());
         try {
             dptmng.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
             dptmng.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
@@ -100,7 +100,7 @@ public class DepotsManagerTest {
     @Test
     public void removeSupply_leader() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         DepotsManager dptmng = new DepotsManager(wrhs, ldrspc);
         ResourceChecker rschck = new ResourceChecker(dptmng, new SupplyContainer(2, 2, 0, 0, 0), new Developments());
         try {
@@ -131,14 +131,14 @@ public class DepotsManagerTest {
 
     @Test
     public void additionAllowed_warehouse() {
-        DepotsManager dptmng = new DepotsManager(new Warehouse(), new LeadersSpace());
+        DepotsManager dptmng = new DepotsManager(new Warehouse(new LeadersSpace()), new LeadersSpace());
         assertTrue(dptmng.additionAllowed(DepotID.WAREHOUSE2, WarehouseObjectType.SHIELD, DepotID.BASE_PRODUCTION));
     }
 
     @Test
     public void additionAllowed_leader() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         DepotsManager dptmng = new DepotsManager(wrhs, ldrspc);
         ResourceChecker rschck = new ResourceChecker(dptmng, new SupplyContainer(2, 2, 0, 0, 0), new Developments());
         try {
@@ -154,13 +154,13 @@ public class DepotsManagerTest {
 
     @Test
     public void additionAllowed_false() {
-        DepotsManager dptmng = new DepotsManager(new Warehouse(), new LeadersSpace());
+        DepotsManager dptmng = new DepotsManager(new Warehouse(new LeadersSpace()), new LeadersSpace());
         assertFalse(dptmng.additionAllowed(DepotID.COFFER, WarehouseObjectType.SERVANT, DepotID.WAREHOUSE3));
     }
 
     @Test
     public void removalAllowed_warehouse() {
-        DepotsManager dptmng = new DepotsManager(new Warehouse(), new LeadersSpace());
+        DepotsManager dptmng = new DepotsManager(new Warehouse(new LeadersSpace()), new LeadersSpace());
         try {
             dptmng.addSupply(DepotID.WAREHOUSE2, WarehouseObjectType.COIN, DepotID.BASE_PRODUCTION);
         } catch (SupplyException e) {fail();}
@@ -170,7 +170,7 @@ public class DepotsManagerTest {
     @Test
     public void removalAllowed_leader() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         DepotsManager dptmng = new DepotsManager(wrhs, ldrspc);
         ResourceChecker rschck = new ResourceChecker(dptmng, new SupplyContainer(2, 2, 0, 0, 0), new Developments());
         try {
@@ -189,14 +189,14 @@ public class DepotsManagerTest {
 
     @Test
     public void removalAllowed_false() {
-        DepotsManager dptmng = new DepotsManager(new Warehouse(), new LeadersSpace());
+        DepotsManager dptmng = new DepotsManager(new Warehouse(new LeadersSpace()), new LeadersSpace());
         assertFalse(dptmng.removalAllowed(DepotID.COFFER, WarehouseObjectType.COIN, DepotID.DEVELOPMENT3));
     }
 
     @Test
     public void clearSupplies_fromAll() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         DepotsManager dptmng = new DepotsManager(wrhs, ldrspc);
         ResourceChecker rschck = new ResourceChecker(dptmng, new SupplyContainer(2, 2, 0, 0, 0), new Developments());
         try {
@@ -229,7 +229,7 @@ public class DepotsManagerTest {
     @Test
     public void getResourceCount_differentTypeSeparately() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         DepotsManager dptmng = new DepotsManager(wrhs, ldrspc);
         ResourceChecker rschck = new ResourceChecker(dptmng, new SupplyContainer(2, 2, 0, 0, 0), new Developments());
         try {
@@ -259,7 +259,7 @@ public class DepotsManagerTest {
     @Test
     public void getResourceCount_allResources() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         DepotsManager dptmng = new DepotsManager(wrhs, ldrspc);
         ResourceChecker rschck = new ResourceChecker(dptmng, new SupplyContainer(2, 2, 0, 0, 0), new Developments());
         try {
@@ -283,7 +283,7 @@ public class DepotsManagerTest {
     @Test
     public void getAllowedDepots() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         DepotsManager dptmng = new DepotsManager(wrhs, ldrspc);
         ResourceChecker rschck = new ResourceChecker(dptmng, new SupplyContainer(2, 2, 0, 0, 0), new Developments());
         try {
@@ -313,7 +313,7 @@ public class DepotsManagerTest {
     @Test
     public void addMarble_notWhite() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         DepotsManager dptmng = new DepotsManager(wrhs, ldrspc);
         ResourceChecker rschck = new ResourceChecker(dptmng, new SupplyContainer(2, 2, 0, 0, 0), new Developments());
         try {
@@ -343,7 +343,7 @@ public class DepotsManagerTest {
     @Test
     public void addMarble_white(){
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         DepotsManager dptmng = new DepotsManager(wrhs, ldrspc);
         ResourceChecker rschck = new ResourceChecker(dptmng, new SupplyContainer(2, 2, 0, 0, 0), new Developments());
         try {
@@ -371,7 +371,7 @@ public class DepotsManagerTest {
     @Test
     public void allocate() {
         LeadersSpace ldrspc = new LeadersSpace();
-        Warehouse wrhs = new Warehouse();
+        Warehouse wrhs = new Warehouse(ldrspc);
         DepotsManager dptmng = new DepotsManager(wrhs, ldrspc);
         ResourceChecker rschck = new ResourceChecker(dptmng, new SupplyContainer(2, 2, 0, 0, 0), new Developments());
         try {

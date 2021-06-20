@@ -29,8 +29,8 @@ public class ProductionManager implements AcceptsSupplies {
      * @param leadersSpace the player's leader space
      */
     public ProductionManager(Developments developments, MutableProduction baseProduction, LeadersSpace leadersSpace) {
-        containers.put(DepotID.SourceType.DEPOT, new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT)));
-        containers.put(DepotID.SourceType.STRONGBOX, new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX)));
+        containers.put(DepotID.SourceType.DEPOT, new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.DEPOT, leadersSpace)));
+        containers.put(DepotID.SourceType.STRONGBOX, new SupplyContainer(SupplyContainer.AcceptStrategy.onlyFrom(DepotID.SourceType.STRONGBOX, leadersSpace)));
 
         this.developments = developments;
         this.baseProduction = baseProduction;

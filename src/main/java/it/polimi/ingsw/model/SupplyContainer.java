@@ -414,80 +414,85 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      */
     public static class AcceptStrategy {
 
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> any(){
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> any() {
             return (supplyContainer, warehouseObjectType, depotID) -> true;
         }
 
 
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> none(){
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> none() {
             return (supplyContainer, warehouseObjectType, depotID) -> false;
         }
 
 
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> max(int max){
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> max(int max) {
             return (supplyContainer, warehouseObjectType, depotID) -> {
                 return supplyContainer.getQuantity() < max;
             };
         }
 
 
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> min(int min){
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> min(int min) {
             return (supplyContainer, warehouseObjectType, depotID) -> {
                 return supplyContainer.getQuantity() > min;
             };
         }
 
 
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> oneType(){
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> oneType() {
             return (container, type, depot) -> {
                 boolean res = false;
                 try {
                     res = container.getType() == type || container.getType() == WarehouseObjectType.NO_TYPE;
-                } catch (SupplyException se) {System.exit(1); /*TODO end program?*/}
+                } catch (SupplyException se) {
+                    System.exit(1); /*TODO end program?*/
+                }
                 return res;
             };
         }
 
 
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> specificType(WarehouseObjectType type){
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> specificType(WarehouseObjectType type) {
             return (container, wot, depot) -> {
                 return wot == type;
             };
         }
 
 
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxOneType(int max){
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxOneType(int max) {
             return (container, type, depot) -> {
                 return oneType().test(container, type, depot) && container.getQuantity() < max;
             };
         }
 
 
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxOneTypeNotPresentIn(int max, SupplyContainer... scs){
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxOneTypeNotPresentIn(int max, SupplyContainer... scs) {
             return (container, type, depot) -> {
                 boolean isPresent = false;
                 try {
-                    for (SupplyContainer sc : scs){
-                        isPresent |= sc.getType()==type;
+                    for (SupplyContainer sc : scs) {
+                        isPresent |= sc.getType() == type;
                     }
-                } catch (SupplyException se){System.exit(1); /*TODO terminate*/}
+                } catch (SupplyException se) {
+                    System.exit(1); /*TODO terminate*/
+                }
                 return maxOneType(max).test(container, type, depot) && !isPresent;
             };
         }
 
 
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxSpecificType(WarehouseObjectType type, int max){
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxSpecificType(WarehouseObjectType type, int max) {
             return (container, wot, depot) -> {
                 return container.getQuantity() < max && specificType(type).test(container, wot, depot);
             };
         }
 
 
-        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> onlyFrom(DepotID.SourceType source, LeadersSpace leadersSpace){
+        public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> onlyFrom(DepotID.SourceType source, LeadersSpace leadersSpace) {
             return (container, type, depot) -> {
                 return depot.getSource(leadersSpace) == source;
             };
         }
 
+    }
 
 }

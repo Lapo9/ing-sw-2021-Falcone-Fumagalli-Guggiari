@@ -20,21 +20,24 @@ import java.util.stream.Collectors;
 public class Warehouse implements AcceptsSupplies, HasStatus {
 
     private ArrayList<SupplyContainer> depots = new ArrayList<>();
+    private final LeadersSpace leadersSpace;
 
 
 
     /**
      * Creates a new warehouse.
      */
-    public Warehouse(){
+    public Warehouse(LeadersSpace leadersSpace){
         SupplyContainer s1 = new SupplyContainer();
         SupplyContainer s2 = new SupplyContainer();
         SupplyContainer s3 = new SupplyContainer();
 
+        this.leadersSpace = leadersSpace;
+
         //the single depot can contain only one type of resource, furthermore the resources cannot come from the strongbox (coffer)
-        s1.setAcceptCheck(maxOneTypeNotPresentIn(1, s2, s3).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
-        s2.setAcceptCheck(maxOneTypeNotPresentIn(2, s1, s3).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
-        s3.setAcceptCheck(maxOneTypeNotPresentIn(3, s1, s2).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
+        s1.setAcceptCheck(maxOneTypeNotPresentIn(1, s2, s3).and(onlyFrom(DepotID.SourceType.STRONGBOX, leadersSpace).negate()));
+        s2.setAcceptCheck(maxOneTypeNotPresentIn(2, s1, s3).and(onlyFrom(DepotID.SourceType.STRONGBOX, leadersSpace).negate()));
+        s3.setAcceptCheck(maxOneTypeNotPresentIn(3, s1, s2).and(onlyFrom(DepotID.SourceType.STRONGBOX, leadersSpace).negate()));
 
         depots.add(s1);
         depots.add(s2);
@@ -77,8 +80,8 @@ public class Warehouse implements AcceptsSupplies, HasStatus {
             int min = Math.min(r1, r2);
 
             //swap the max accepted by the depots
-            rMin.setAcceptCheck(maxOneTypeNotPresentIn(max, rMax, theThird).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
-            rMax.setAcceptCheck(maxOneTypeNotPresentIn(min, rMin, theThird).and(onlyFrom(DepotID.SourceType.STRONGBOX).negate()));
+            rMin.setAcceptCheck(maxOneTypeNotPresentIn(max, rMax, theThird).and(onlyFrom(DepotID.SourceType.STRONGBOX, leadersSpace).negate()));
+            rMax.setAcceptCheck(maxOneTypeNotPresentIn(min, rMin, theThird).and(onlyFrom(DepotID.SourceType.STRONGBOX, leadersSpace).negate()));
 
             //swap the order of the depots in the array list
             Collections.swap(depots, r1-1, r2-1);

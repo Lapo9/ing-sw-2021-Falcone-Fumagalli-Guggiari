@@ -78,14 +78,6 @@ public enum DepotID {
     }
 
     /**
-     * Sets the type of the depot
-     * @param type depot type
-     */
-    public void setType(DepotType type) {
-        this.type = type;
-    }
-
-    /**
      * Returns the number of the depot
      * @return the number of the depot
      */
@@ -112,15 +104,6 @@ public enum DepotID {
         }
 
         return SourceType.NONE;
-    }
-
-
-    /**
-     * Sets the source of the depot
-     * @param source depot sourc
-     */
-    public void setSource(SourceType source) {
-        this.source = source;
     }
 
 

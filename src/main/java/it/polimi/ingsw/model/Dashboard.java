@@ -32,8 +32,8 @@ public class Dashboard implements HasStatus{
     private final String name;
     private Marketplace marketplace;
     private DevelopmentGrid developmentGrid;
-    private final Warehouse warehouse = new Warehouse();
-    private final SupplyContainer coffer = new SupplyContainer(onlyFrom(DepotID.SourceType.STRONGBOX).and(specificType(WarehouseObjectType.FAITH_MARKER).negate()));
+    private final Warehouse warehouse;
+    private final SupplyContainer coffer;
     private final MutableProduction baseProduction = new MutableProduction(2, 1);
     private final FaithTrack faithTrack = new FaithTrack();
     private final LeadersSpace leadersSpace = new LeadersSpace();
@@ -41,10 +41,10 @@ public class Dashboard implements HasStatus{
     private LeadersList leadersList;
     private final LeadersPick leadersPick = new LeadersPick();
     private MarbleContainer unassignedSupplies = new MarbleContainer(0,0,0,0,0,0);
-    private final Paycheck paycheck = new Paycheck();
+    private final Paycheck paycheck;
     private boolean inkwell;
     private final ProductionManager productionManager = new ProductionManager(developments, baseProduction, leadersSpace);
-    private final DepotsManager depotsManager = new DepotsManager(warehouse, leadersSpace);
+    private final DepotsManager depotsManager;
     private final ActionTilesStack actionTilesStack = new ActionTilesStack();
     private int blackCrossPosition = -1;
     private ArrayList<ModelObserver> observers = new ArrayList<ModelObserver>();
@@ -70,6 +70,11 @@ public class Dashboard implements HasStatus{
 
         this.name = name;
 
+        warehouse = new Warehouse(leadersSpace);
+        depotsManager = new DepotsManager(warehouse, leadersSpace);
+        coffer = new SupplyContainer(onlyFrom(DepotID.SourceType.STRONGBOX, leadersSpace).and(specificType(WarehouseObjectType.FAITH_MARKER).negate()));
+        paycheck = new Paycheck(leadersSpace);
+
         blackCrossPosition = isSinglePlayer ? 0 : -1;
 
         containers.put(DepotID.DepotType.WAREHOUSE, depotsManager);
@@ -93,6 +98,11 @@ public class Dashboard implements HasStatus{
         this.leadersList = leadersList;
 
         boughtCards = status[status.length-2];
+
+        coffer = new SupplyContainer(onlyFrom(DepotID.SourceType.STRONGBOX, leadersSpace).and(specificType(WarehouseObjectType.FAITH_MARKER).negate()));
+        warehouse = new Warehouse(leadersSpace);
+        depotsManager = new DepotsManager(warehouse, leadersSpace);
+        paycheck = new Paycheck(leadersSpace);
 
         blackCrossPosition = isSinglePlayer ? status[status.length-1] : -1;
 

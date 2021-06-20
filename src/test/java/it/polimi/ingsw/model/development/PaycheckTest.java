@@ -8,6 +8,7 @@ import it.polimi.ingsw.model.SupplyContainer;
 import it.polimi.ingsw.model.WarehouseObjectType;
 import it.polimi.ingsw.model.development.Paycheck;
 import it.polimi.ingsw.model.exceptions.*;
+import it.polimi.ingsw.model.leaders.LeadersSpace;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class PaycheckTest {
 
     @Test
     public void getAll() {
-        Paycheck pychk = new Paycheck();
+        Paycheck pychk = new Paycheck(new LeadersSpace());
         boolean exc = false;
         try {
             pychk.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE2);
@@ -36,7 +37,7 @@ public class PaycheckTest {
 
     @Test
     public void addSupply_fromCoffer() {
-        Paycheck pychk = new Paycheck();
+        Paycheck pychk = new Paycheck(new LeadersSpace());
         boolean exc = false;
         try {
             pychk.addSupply(WarehouseObjectType.COIN, DepotID.COFFER);
@@ -48,7 +49,7 @@ public class PaycheckTest {
 
     @Test
     public void addSupply_fromDepot() {
-        Paycheck pychk = new Paycheck();
+        Paycheck pychk = new Paycheck(new LeadersSpace());
         boolean exc = false;
         try {
             pychk.addSupply(WarehouseObjectType.COIN, DepotID.WAREHOUSE3);
@@ -60,7 +61,7 @@ public class PaycheckTest {
 
     @Test
     public void addSupply_fromDepotAndFromCoffer(){
-        Paycheck pychk = new Paycheck();
+        Paycheck pychk = new Paycheck(new LeadersSpace());
         try {
             pychk.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
             pychk.addSupply(WarehouseObjectType.COIN, DepotID.COFFER);
@@ -79,7 +80,7 @@ public class PaycheckTest {
 
     @Test
     public void removeSupply_fromCoffer() {
-        Paycheck pychk = new Paycheck();
+        Paycheck pychk = new Paycheck(new LeadersSpace());
         boolean exc = false;
         try {
             pychk.addSupply(WarehouseObjectType.SHIELD, DepotID.COFFER);
@@ -94,7 +95,7 @@ public class PaycheckTest {
 
     @Test
     public void removeSupply_fromDepot() {
-        Paycheck pychk = new Paycheck();
+        Paycheck pychk = new Paycheck(new LeadersSpace());
         boolean exc = false;
         try {
             pychk.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
@@ -109,19 +110,19 @@ public class PaycheckTest {
 
     @Test
     public void additionAllowed_true(){
-        Paycheck pychk = new Paycheck();
+        Paycheck pychk = new Paycheck(new LeadersSpace());
         assertTrue(pychk.additionAllowed(WarehouseObjectType.COIN, DepotID.WAREHOUSE1));
     }
 
     @Test
     public void additionAllowed_false(){
-        Paycheck pychk = new Paycheck();
+        Paycheck pychk = new Paycheck(new LeadersSpace());
         assertFalse(pychk.additionAllowed(WarehouseObjectType.COIN, DepotID.PAYCHECK));
     }
 
     @Test
     public void removalAllowed_true(){
-        Paycheck pychk = new Paycheck();
+        Paycheck pychk = new Paycheck(new LeadersSpace());
         try {
             pychk.addSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE3);
         } catch (SupplyException e) {fail();}
@@ -130,7 +131,7 @@ public class PaycheckTest {
 
     @Test
     public void removalAllowed_false(){
-        Paycheck pychk = new Paycheck();
+        Paycheck pychk = new Paycheck(new LeadersSpace());
         try {
             pychk.addSupply(WarehouseObjectType.SERVANT, DepotID.WAREHOUSE1);
         } catch (SupplyException e) {fail();}
@@ -139,7 +140,7 @@ public class PaycheckTest {
 
     @Test
     public void clearSupplies() {
-        Paycheck pychk = new Paycheck();
+        Paycheck pychk = new Paycheck(new LeadersSpace());
         try {
             pychk.addSupply(WarehouseObjectType.STONE, DepotID.WAREHOUSE3);
             pychk.addSupply(WarehouseObjectType.COIN, DepotID.COFFER);
@@ -159,7 +160,7 @@ public class PaycheckTest {
 
     @Test
     public void getStatus(){
-        Paycheck pychk = new Paycheck();
+        Paycheck pychk = new Paycheck(new LeadersSpace());
         try {
             pychk.addSupply(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1);
             pychk.addSupply(WarehouseObjectType.COIN, DepotID.COFFER);
