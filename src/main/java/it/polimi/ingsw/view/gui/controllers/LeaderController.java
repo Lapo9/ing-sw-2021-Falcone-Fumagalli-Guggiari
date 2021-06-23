@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getContainedSupplies;
+import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getTypeByNumber;
 
 
 public class LeaderController extends SubSceneController {
@@ -79,7 +80,7 @@ public class LeaderController extends SubSceneController {
         else if (offlineInfo.getLeaderStatus(number) == OfflineInfo.LeaderStatus.PRODUCER){
             leader.setEffect(null); //remove any possible effect
             producerPane.setVisible(true);
-            mutableProduction.setImage(new Image("pictures/miscellaneous/coin.png"));
+            mutableProduction.setImage(new Image(getTypeByNumber(completeUpdate[4]).getUrl()));
             depotPane.setVisible(false);
             leaderGroup.setVisible(true);
         }
