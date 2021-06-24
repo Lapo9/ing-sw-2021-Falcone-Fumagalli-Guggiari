@@ -9,11 +9,18 @@ import java.util.HashMap;
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 import static it.polimi.ingsw.model.WarehouseObjectType.*;
 
+/**
+ * Represents the SupplyContainer
+ */
 public class SupplyContainer implements Viewable {
 
     private HashMap<WarehouseObjectType, Integer> items = new HashMap<>();
     private String name;
 
+    /**
+     * Class constructor
+     * @param name of the container (Coffer, ...)
+     */
     SupplyContainer(String name){
         this.name = name;
         items.put(WarehouseObjectType.COIN, 0);
@@ -22,6 +29,10 @@ public class SupplyContainer implements Viewable {
         items.put(WarehouseObjectType.STONE, 0);
     }
 
+    /**
+     * Updates the viewable using numbers from the getStatus
+     * @param update 4 int for every type of resource it can contains
+     */
     @Override
     public void update(int[] update) {
         items.put(WarehouseObjectType.COIN, update[0]);
@@ -31,7 +42,10 @@ public class SupplyContainer implements Viewable {
     }
 
 
-
+    /**
+     * Builds the SupplyContainer
+     * @return the string ready to print
+     */
     @Override
     public String toString() {
         return FRAMED(" " + name + " ") + " " +  BLACK(BACK_YELLOW(" " + items.get(COIN).toString() + " ")) +

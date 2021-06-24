@@ -8,11 +8,17 @@ import java.util.HashMap;
 
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
+/**
+ * Represents the viewable of the Warehouse
+ */
 public class Warehouse implements Viewable {
 
     //the level of the SupplyContainer and the resources contained
     private HashMap<Integer, ArrayList<WarehouseObjectType>> level = new HashMap<>();
 
+    /**
+     * Class constructor
+     */
     Warehouse () {
         ArrayList<WarehouseObjectType> top = new ArrayList<>();
         top.add(WarehouseObjectType.NO_TYPE);
@@ -29,10 +35,13 @@ public class Warehouse implements Viewable {
         level.put(2, bot);
     }
 
+    /**
+     * Updates the viewable using numbers from the getStatus
+     * @param update array composed by 15 numbers representing if the three levels of the warehouse contain
+     *               COIN, SERVANT, SHIELD, STONE or FAITH_MARKER and how many
+     */
     @Override
     public void update(int[] update) {
-        //the array received is composed by 15 numbers representing if the level of the warehouse contains
-        //COIN, SERVANT, SHIELD, STONE or FAITH_MARKER (and how many?)
         ArrayList<WarehouseObjectType> top = new ArrayList<>();
         top.add(WarehouseObjectType.NO_TYPE);
         for (int i=0; i<5; i++) {
@@ -87,6 +96,22 @@ public class Warehouse implements Viewable {
         level.put(2, bot);
     }
 
+    /**
+     * Builds the SupplyContainer
+     * @return the string ready to print
+     */
+    @Override
+    public String toString() {
+        return BOLD("Warehouse: ") + "\n\n" + "1     " + resourceToColor(0, 0) + "\n" +
+                "2   " +  resourceToColor(1, 0) + " " + resourceToColor(1, 1) + "\n" +
+                "3 " + resourceToColor(2, 0) + " " + resourceToColor(2, 1) + " " + resourceToColor(2, 2);
+    }
+
+    /**
+     * Helper method that allows to convert an int in the resource corresponding (0==COIN, 1==SERVANT, ...)
+     * @param i index of the resource
+     * @return the resource corresponding (WarehouseObjectType)
+     */
     private WarehouseObjectType intToResource(int i) {
         if (i == 0){
             return WarehouseObjectType.COIN;
@@ -106,13 +131,12 @@ public class Warehouse implements Viewable {
         else return WarehouseObjectType.NO_TYPE;
     }
 
-    @Override
-    public String toString() {
-        return BOLD("Warehouse: ") + "\n\n" + "1     " + resourceToColor(0, 0) + "\n" +
-                "2   " +  resourceToColor(1, 0) + " " + resourceToColor(1, 1) + "\n" +
-                "3 " + resourceToColor(2, 0) + " " + resourceToColor(2, 1) + " " + resourceToColor(2, 2);
-    }
-
+    /**
+     * Helper method that allows to convert an int in the color corresponding (0==YELLOW==COIN, ...) at the considered level of the Warehouse
+     * @param lvl level of the Warehouse
+     * @param i index of the resource
+     * @return the colored string corresponding to one slot of the Warehouse
+     */
     private String resourceToColor (int lvl, int i) {
         if (this.level.get(lvl).get(i).ordinal() == 0) {
             return FRAMED(BLACK(BACK_YELLOW("   ")));

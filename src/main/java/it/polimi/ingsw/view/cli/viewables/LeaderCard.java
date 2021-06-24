@@ -27,10 +27,11 @@ public class LeaderCard implements Viewable {
     private int[] abilityProduction = {0, 0, 0, 0};
 
     /**
-     * Updates the viewable using numbers from the getStatus (if the id is 0 the card is empty)
+     * Updates the viewable using numbers from the getStatus
      * @param update array composed by the id of the leader card (used to update the requirements), other 4 int to define
      *               the state (inactive/active/discarded), fixed input, fixed output, mutable output, and
      *               other 10 int to define the current supply and the depot ability
+     *               (if the id is 0 the card is empty)
      */
     @Override
     public void update(int[] update) {
@@ -53,7 +54,7 @@ public class LeaderCard implements Viewable {
     }
 
     /**
-     * Prints the leader card
+     * Builds the leader card
      * @return string with the leader card
      */
     @Override

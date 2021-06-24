@@ -9,6 +9,9 @@ import static it.polimi.ingsw.model.WarehouseObjectType.*;
 import static it.polimi.ingsw.model.WarehouseObjectType.STONE;
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
+/**
+ * Represents the viewable of a production composed by an input, an output and a currentSupply
+ */
 public class Production implements Viewable {
 
     private HashMap<Integer, HashMap<WarehouseObjectType, Integer>> prod = new HashMap<>();
@@ -16,6 +19,9 @@ public class Production implements Viewable {
     private HashMap<WarehouseObjectType, Integer> output = new HashMap<>();
     private HashMap<WarehouseObjectType, Integer> currentSupply = new HashMap<>();
 
+    /**
+     * Class constructor
+     */
     Production() {
         input.put(WarehouseObjectType.COIN, 0);
         input.put(WarehouseObjectType.SERVANT, 0);
@@ -40,6 +46,11 @@ public class Production implements Viewable {
         prod.put(2, currentSupply);
     }
 
+    /**
+     * Updates the viewable using numbers from the getStatus
+     * @param update array composed by 15 int: 5 for the input, 5 for the output and 5 for the currentSupply
+     *               array: every element represents the quantity of the resource corresponding to that index
+     */
     @Override
     public void update(int[] update) {
         input.put(WarehouseObjectType.COIN, update[0]);
@@ -65,7 +76,10 @@ public class Production implements Viewable {
         prod.put(2, currentSupply);
     }
 
-
+    /**
+     * Builds the Production
+     * @return the string ready to print
+     */
     @Override
     public String toString() {
         return deleteZeros(0, COIN) +
@@ -85,6 +99,13 @@ public class Production implements Viewable {
                 BLACK(BACK_WHITE(" " + prod.get(2).get(STONE).toString() + " "));
     }
 
+    /**
+     * Deletes the spaces occupied by the resources not existing
+     * @param i (0==input, 1==output, 2=currentSupply)
+     * @param wot type of resource to insert in the input/output/currentSupply
+     * @return "" if the resource is not in the input/output/currentSupply of the production,
+     *         the color if the resource exists in the input/output/currentSupply
+     */
     private String deleteZeros (int i, WarehouseObjectType wot) {
         if (prod.get(i).get(wot) == 0) {
             return "";

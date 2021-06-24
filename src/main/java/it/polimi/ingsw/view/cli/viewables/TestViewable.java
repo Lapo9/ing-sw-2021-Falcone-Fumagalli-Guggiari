@@ -5,6 +5,7 @@ import it.polimi.ingsw.view.cli.Viewable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//TODO not used class
 public class TestViewable implements Viewable {
     private ArrayList<Integer> state = new ArrayList<>();
 

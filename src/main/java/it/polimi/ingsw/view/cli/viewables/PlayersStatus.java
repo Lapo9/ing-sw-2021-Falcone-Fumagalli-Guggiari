@@ -9,10 +9,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+//TODO not used class
+/**
+ * Represents the status of the player during the match (online/offline/current)
+ */
 public class PlayersStatus implements Viewable {
     private ArrayList<Pair<String, Integer>> playersStatus = new ArrayList<>(); //0 = online, 1 = offline, 2 = current
     private String matchStatus = "";
 
+    /**
+     * Updates those information using the OfflineInfo and the array update
+     * @param update array of int
+     * @param oi OfflineInfo
+     * @throws NoSuchMethodException
+     */
     @Override
     public void update(int[] update, OfflineInfo oi) throws NoSuchMethodException {
         for (int i = 0; i < playersStatus.size(); ++i){
@@ -25,7 +35,10 @@ public class PlayersStatus implements Viewable {
         }
     }
 
-
+    /**
+     * Builds the string representing the status of the player
+     * @return the string ready to print
+     */
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
