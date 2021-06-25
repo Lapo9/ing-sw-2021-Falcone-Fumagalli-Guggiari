@@ -30,6 +30,7 @@ public class Match {
     private boolean isSinglePlayer;
     private MatchManager matchManager;
     private String matchId;
+    private boolean matchEndedWait = false;
 
 
     Match(Player leader, boolean isSinglePlayer, MatchManager matchManager, String matchId) throws MatchException {
@@ -519,6 +520,12 @@ public class Match {
             return;
         }
 
+        if (checkWinner()){
+            phase = GAME_OVER;
+            endMatch();
+            return;
+        }
+
         player.getDashboard().clearPaycheck();
         player.getDashboard().clearProductions();
 
@@ -884,21 +891,27 @@ public class Match {
     private synchronized boolean checkWinner(){
         //check if the match ended
         if (players.stream().anyMatch(p -> p.getDashboard().isMatchEnded())){
-            //find who won
-            Player winner = activePlayer;
-            for (Player p : players){
-                Pair<Integer, Integer> winnerPoints = winner.getDashboard().getWinPoints();
-                Pair<Integer, Integer> pPoints = p.getDashboard().getWinPoints();
-                if ((winnerPoints.first == pPoints.first && winnerPoints.second < pPoints.second) || winnerPoints.first < pPoints.first){
-                    winner = p;
+            //set the end flag
+            matchEndedWait = true;
+
+            //if the current player is the last player (the next player has the inkwell), then end the match, if not, wait
+            if(activePlayer.getOrder() == players.size()-1) {
+                //find who won
+                Player winner = activePlayer;
+                for (Player p : players) {
+                    Pair<Integer, Integer> winnerPoints = winner.getDashboard().getWinPoints();
+                    Pair<Integer, Integer> pPoints = p.getDashboard().getWinPoints();
+                    if ((winnerPoints.first == pPoints.first && winnerPoints.second < pPoints.second) || winnerPoints.first < pPoints.first) {
+                        winner = p;
+                    }
                 }
+
+                //tell the players who won
+                broadcast("show endMatch");
+                broadcast("message " + winner.getName() + " won the match! " + winner.getDashboard().getWinPoints().first + " points!");
+
+                return true;
             }
-
-            //tell the players who won
-            broadcast("show endMatch");
-            broadcast("message " + winner.getName() + " won the match! " + winner.getDashboard().getWinPoints().first + " points!");
-
-            return true;
         }
 
         return false;
