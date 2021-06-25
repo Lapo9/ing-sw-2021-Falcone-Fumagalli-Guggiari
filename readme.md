@@ -1,11 +1,11 @@
 # Masters of Renaissance
 
-** Lapo Falcone - Marco Fumagalli - Sofia Guggiari **
+**Lapo Falcone - Marco Fumagalli - Sofia Guggiari**
 
 ## Tools to run the game
 
 In order to run the game you should use a Windows 10 machine with Java 11 installed and configured as default java runtime.
-To run the CLI in the intended way you should install [this]() terminal or use the Git Bash, since ANSI color codes are not supported anymore in latest versions of Windows cmd or PowerShell. Using the CLI in cmd or PowerShell is still possible, but it is not recommended, since colors are fundamental in our implementation of the CLI.
+To run the CLI in the intended way you should install [this](https://conemu.github.io/en/Downloads.html) terminal (ConEmu) or use the Git Bash (not recommended), since ANSI color codes are not supported anymore in latest versions of Windows cmd or PowerShell. Using the CLI in cmd or PowerShell is still possible, but it is not recommended, since colors are fundamental in our implementation of the CLI.
 
 ## How to run the game
 
