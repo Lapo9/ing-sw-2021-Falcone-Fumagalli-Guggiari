@@ -65,13 +65,13 @@ public class MarbleContainer implements Viewable {
             return "";
         }
         else if (sumMarbles == 1) {
-            return "   |" + "    |" + "    |";
+            return "    |" + "     |" + "     |";
         }
         else if (sumMarbles == 2) {
-            return "   |" + "    |";
+            return "    |" + "     |";
         }
         else if (sumMarbles == 3) {
-            return "   |";
+            return "    |";
         }
         else return null;
     }
