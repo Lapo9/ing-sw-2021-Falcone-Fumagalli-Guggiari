@@ -51,6 +51,11 @@ public class BaseProductionController extends SubSceneController {
         input2 = WarehouseObjectTypeController.getTypeByNumber(completeUpdate[6]);
         output = WarehouseObjectTypeController.getTypeByNumber(completeUpdate[12]);
 
+        //server is authoritative about what to show
+        in1.setImage(new Image(input1.getUrl()));
+        in2.setImage(new Image(input2.getUrl()));
+        out.setImage(new Image(output.getUrl()));
+
         coin.setText(String.valueOf(completeUpdate[13]));
         servant.setText(String.valueOf(completeUpdate[14]));
         shield.setText(String.valueOf(completeUpdate[15]));

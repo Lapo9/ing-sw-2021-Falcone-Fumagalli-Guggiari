@@ -10,6 +10,7 @@ import it.polimi.ingsw.view.gui.controllers.ResettableScene;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 
@@ -128,6 +129,15 @@ public class ControllerInterpreter {
             return;
         }
         execute("message " + tokens[1] + " won the match!!");
+
+        new Thread(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(8);
+            } catch (InterruptedException ie){
+                System.exit(1);
+            }
+            System.exit(0);
+        }).start();
     }
 
     private void yourTurn(String... tokens){

@@ -149,7 +149,7 @@ public class Match {
         }
 
         if(phase == LOBBY){
-            reconnected.sendController("show lobby");
+            reconnected.sendController("show wait");
         }
         else if(phase == PRE_MATCH){
             reconnected.sendController("show preMatch");

@@ -248,6 +248,16 @@ public class OpponentController extends SubSceneController{
             depotPane1.setVisible(true);
             producerPane1.setVisible(false);
             leader1group.setVisible(true);
+
+            Pair<WarehouseObjectTypeController, Integer> contained = getContainedSupplies(Arrays.copyOfRange(arr, 10, 14));
+            if (contained.second >= 1){
+                depot11.setImage(new Image(contained.first.getUrl()));
+                depot11.setVisible(true);
+            }
+            if (contained.second >= 2){
+                depot12.setImage(new Image(contained.first.getUrl()));
+                depot12.setVisible(true);
+            }
         }
         else {
             leader1.setEffect(null); //remove any possible effect
@@ -310,6 +320,16 @@ public class OpponentController extends SubSceneController{
             depotPane2.setVisible(true);
             producerPane2.setVisible(false);
             leader2group.setVisible(true);
+
+            Pair<WarehouseObjectTypeController, Integer> contained = getContainedSupplies(Arrays.copyOfRange(arr, 10, 14));
+            if (contained.second >= 1){
+                depot21.setImage(new Image(contained.first.getUrl()));
+                depot21.setVisible(true);
+            }
+            if (contained.second >= 2){
+                depot22.setImage(new Image(contained.first.getUrl()));
+                depot22.setVisible(true);
+            }
         }
         else {
             leader2.setEffect(null); //remove any possible effect

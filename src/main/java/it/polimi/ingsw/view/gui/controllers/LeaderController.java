@@ -103,6 +103,7 @@ public class LeaderController extends SubSceneController {
         servant.setText(String.valueOf(completeUpdate[6]));
         shield.setText(String.valueOf(completeUpdate[7]));
         stone.setText(String.valueOf(completeUpdate[8]));
+        mutableProduction.setImage(new Image(producerInput.getUrl()));
 
 
         //set depot pane
