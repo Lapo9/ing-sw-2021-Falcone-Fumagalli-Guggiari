@@ -146,7 +146,7 @@ public class Match {
         if (phase != LOBBY) {
             marketplace.notifyViews();
             developmentGrid.notifyViews();
-            reconnected.getDashboard().notifyViews();
+            players.forEach(p -> p.getDashboard().notifyViews());
         }
 
         if(phase == LOBBY){
@@ -773,6 +773,10 @@ public class Match {
     }
 
     private void skipTurn(Player player, String... args) {
+        if (checkWinner()){
+            phase = GAME_OVER;
+            endMatch();
+        }
         phase = TURN_END;
         update("endTurn", player);
     }

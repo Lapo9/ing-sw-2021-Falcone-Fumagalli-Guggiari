@@ -109,6 +109,7 @@ public class OpponentController extends SubSceneController{
     @FXML private Text coinPaycheck;
     @FXML private Text servantPaycheck;
     @FXML private Group pane;
+    @FXML private Text playerName;
 
     private FadeTransition fadeIn = new FadeTransition(Duration.millis(200));
     private FadeTransition fadeOut = new FadeTransition(Duration.millis(200));
@@ -132,6 +133,7 @@ public class OpponentController extends SubSceneController{
 
     @Override
     public void update(int[] completeUpdate) {
+        playerName.setText(offlineInfo.getPlayerName(completeUpdate[0]));
         updateCoffer(Arrays.copyOfRange(completeUpdate, 1, 6));
         updateWarehouse(Arrays.copyOfRange(completeUpdate, 6, 21));
         updatePaycheck(Arrays.copyOfRange(completeUpdate, 75, 85));
@@ -322,11 +324,16 @@ public class OpponentController extends SubSceneController{
             leader2group.setVisible(true);
 
             Pair<WarehouseObjectTypeController, Integer> contained = getContainedSupplies(Arrays.copyOfRange(arr, 10, 14));
+            if (contained.second == 0) {
+                depot21.setVisible(false);
+                depot22.setVisible(false);
+            }
             if (contained.second >= 1){
                 depot21.setImage(new Image(contained.first.getUrl()));
                 depot21.setVisible(true);
+                depot22.setVisible(false);
             }
-            if (contained.second >= 2){
+            if (contained.second == 2){
                 depot22.setImage(new Image(contained.first.getUrl()));
                 depot22.setVisible(true);
             }

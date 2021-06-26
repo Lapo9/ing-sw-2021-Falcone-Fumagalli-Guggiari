@@ -103,6 +103,7 @@ public class ControllerInterpreter {
         for (int i=1; i<tokens.length; ++i){
             errorMessage.append(tokens[i]);
             errorMessage.append(" ");
+            System.exit(0);
         }
 
         offlineInfo.setMatchStarted(false);

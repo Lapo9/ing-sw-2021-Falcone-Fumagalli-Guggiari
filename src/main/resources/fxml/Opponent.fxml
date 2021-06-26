@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Group fx:id="pane" visible="false" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="it.polimi.ingsw.view.gui.controllers.OpponentController">
+<Group fx:id="pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.view.gui.controllers.OpponentController">
    <children>
       <ImageView fitHeight="800.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../pictures/backgrounds/opponentBackground.png" />
          </image>
       </ImageView>
-      <Group fx:id="leader1group" layoutX="14.0" layoutY="14.0">
+      <Group fx:id="leader1group" layoutX="14.0" layoutY="55.0">
          <children>
             <ImageView fx:id="leader1" fitHeight="305.0" fitWidth="160.0" layoutX="68.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -73,12 +75,12 @@
             </Group>
             <Group fx:id="depotPane1" layoutX="109.0" layoutY="170.0" visible="false">
                <children>
-                  <ImageView fx:id="depot12" fitHeight="29.0" fitWidth="38.0" layoutX="46.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="depot12" fitHeight="29.0" fitWidth="38.0" layoutX="46.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../pictures/miscellaneous/coin.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="depot11" fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="depot11" fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../pictures/miscellaneous/no_type.png" />
                      </image>
@@ -87,7 +89,7 @@
             </Group>
          </children>
       </Group>
-      <Group fx:id="leader2group" layoutX="14.0" layoutY="338.0">
+      <Group fx:id="leader2group" layoutX="14.0" layoutY="361.0">
          <children>
             <ImageView fx:id="leader2" fitHeight="305.0" fitWidth="160.0" layoutX="68.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -149,12 +151,12 @@
             </Group>
             <Group fx:id="depotPane2" layoutX="109.0" layoutY="170.0" visible="false">
                <children>
-                  <ImageView fx:id="depot22" fitHeight="29.0" fitWidth="38.0" layoutX="46.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="depot22" fitHeight="29.0" fitWidth="38.0" layoutX="46.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../pictures/miscellaneous/coin.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="depot21" fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="depot21" fitHeight="29.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
                         <Image url="@../pictures/miscellaneous/no_type.png" />
                      </image>
@@ -519,5 +521,10 @@
             </Text>
          </children>
       </Group>
+      <Text fx:id="playerName" layoutX="30.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sofia1234">
+         <font>
+            <Font name="Vivaldi Italic" size="36.0" />
+         </font>
+      </Text>
    </children>
 </Group>

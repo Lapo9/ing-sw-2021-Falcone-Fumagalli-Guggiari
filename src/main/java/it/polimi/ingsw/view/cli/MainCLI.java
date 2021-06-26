@@ -97,7 +97,8 @@ public class MainCLI {
                                 " |___| \\__|  /__/  \\_, |\\___/ \\_,_||_|    \\__| \\_,_||_|  |_||_|(_)\n" +
                                 "                   |__/                                           \n"));
                     }
-                });
+                },
+                factory.buildActionTile(ACTION_TILE));
 
 
         createView("wait", screen,

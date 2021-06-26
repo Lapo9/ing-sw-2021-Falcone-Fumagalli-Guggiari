@@ -18,7 +18,7 @@ public class ActionTile implements Viewable {
      */
     @Override
     public void update(int[] update) {
-        index = update[1];
+        index = update[0];
     }
 
     /**
@@ -35,6 +35,10 @@ public class ActionTile implements Viewable {
      * @return string with a message
      */
     private String getTileInfo() {
+        if (index == -1){
+            return "";
+        }
+
         String tmp = BOLD("Lorenzo's turn: \n");
 
         tmp = tmp.concat("Lorenzo picked -> ");

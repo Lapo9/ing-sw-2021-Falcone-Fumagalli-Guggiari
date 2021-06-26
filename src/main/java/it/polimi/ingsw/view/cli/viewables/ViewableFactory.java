@@ -221,6 +221,12 @@ public class ViewableFactory {
         return res;
     }
 
+    public ActionTile buildActionTile(ViewableId viewableId){
+        ActionTile actionTile = new ActionTile();
+        items.get(4).put(viewableId, actionTile);
+        return actionTile;
+    }
+
     /**
      * Updates the specified viewable with the specified int array.
      * @param player Player who owns the viewable

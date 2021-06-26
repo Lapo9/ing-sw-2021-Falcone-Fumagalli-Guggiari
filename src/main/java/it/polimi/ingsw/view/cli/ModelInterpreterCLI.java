@@ -49,6 +49,9 @@ public class ModelInterpreterCLI implements ModelInterpreter {
         else if(status[0] == 5){
             updateDevelopmentGrid(status);
         }
+        else if (status[0] == 6){
+            updateActionTile(status);
+        }
     }
 
 
@@ -109,6 +112,11 @@ public class ModelInterpreterCLI implements ModelInterpreter {
      */
     private void updateDevelopmentGrid(int[] status){
         items.update(4, DEVELOPMENT_GRID, Arrays.copyOfRange(status, 1, status.length));
+    }
+
+
+    private void updateActionTile(int[] status){
+        items.update(4, ACTION_TILE, Arrays.copyOfRange(status, 1, status.length));
     }
 
 }
