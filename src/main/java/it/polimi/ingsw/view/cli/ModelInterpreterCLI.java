@@ -55,8 +55,11 @@ public class ModelInterpreterCLI implements ModelInterpreter {
     }
 
 
-    /*
-    Updates the viewables related to the specified player.
+
+    /**
+     * Updates the viewables related to the specified player
+     * @param player number of the player to update
+     * @param status array used to update the player's dashboard
      */
     private void updatePlayer(int player, int[] status){
 
@@ -78,7 +81,12 @@ public class ModelInterpreterCLI implements ModelInterpreter {
     }
 
 
-
+    /**
+     * Updates the status of the LeaderCard
+     * @param id of the card to update
+     * @param status array used to update the status of the LeaderCard
+     * @return the status of the LeaderCard
+     */
     private static OfflineInfo.LeaderStatus dataToStatus(int id, int status){
         LeaderAbility la = LeaderCard.getAbility(id);
 
@@ -99,22 +107,29 @@ public class ModelInterpreterCLI implements ModelInterpreter {
 
 
 
-    /*
-    Updates the marketplace viewable.
+
+    /**
+     * Updates the marketplace viewable
+     * @param status array used to update the Marketplace
      */
     private void updateMarketplace(int[] status){
         items.update(4, MARKETPLACE, Arrays.copyOfRange(status, 1, status.length));
     }
 
 
-    /*
-    Updates the development grid viewable.
+
+    /**
+     * Updates the development grid viewable
+     * @param status array used to update the DevelopmentGrid
      */
     private void updateDevelopmentGrid(int[] status){
         items.update(4, DEVELOPMENT_GRID, Arrays.copyOfRange(status, 1, status.length));
     }
 
-
+    /**
+     * Updates the ActionTile grid viewable
+     * @param status array used to update the ActionTile of the FaithTrack
+     */
     private void updateActionTile(int[] status){
         items.update(4, ACTION_TILE, Arrays.copyOfRange(status, 1, status.length));
     }

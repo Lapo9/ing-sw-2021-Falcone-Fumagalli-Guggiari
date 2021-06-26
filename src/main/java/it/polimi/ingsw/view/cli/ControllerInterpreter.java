@@ -50,7 +50,10 @@ public class ControllerInterpreter {
     }
 
 
-
+    /**
+     * Shows the view contained in tokens[1]
+     * @param tokens array composed by the player number and the view to visualize
+     */
     private void show(String... tokens){
         if (offlineInfo.isMatchStarted() || !(tokens[1].equals("dashboard") || tokens[1].equals("faithTrack") || tokens[1].equals("marketplace") || tokens[1].equals("developmentGrid"))) {
             try {
@@ -64,10 +67,18 @@ public class ControllerInterpreter {
         else execute("error Connect to a match first! Use command connect serverIP portNumber username matchID");
     }
 
+    /**
+     * Hides the viewable contained in tokens[1]
+     * @param tokens array composed by the player number and the view to visualize
+     */
     private void hide(String... tokens){
         screen.hide(tokens[1]);
     }
 
+    /**
+     * Allows to show the other player's dashboard
+     * @param tokens array composed by the player number and his name
+     */
     private void spy(String... tokens) {
         if (tokens[1].equals(offlineInfo.getYourName())) {
             execute("show dashboard");
@@ -76,6 +87,10 @@ public class ControllerInterpreter {
         execute("show opponent" + offlineInfo.getOpponentOrder(tokens[1]));
     }
 
+    /**
+     * Allows to show all the errors encountered
+     * @param tokens array composed by the player number and the views with errors
+     */
     private void error(String... tokens){
         StringBuilder errorMessage = new StringBuilder("");
         for (int i=1; i<tokens.length; ++i){
@@ -87,6 +102,10 @@ public class ControllerInterpreter {
         screen.refresh();
     }
 
+    /**
+     * Allows to show messages
+     * @param tokens array composed by the player number and the views which have to shows messages
+     */
     private void message(String... tokens){
         StringBuilder errorMessage = new StringBuilder("");
         for (int i=1; i<tokens.length; ++i){
@@ -98,6 +117,10 @@ public class ControllerInterpreter {
         screen.refresh();
     }
 
+    /**
+     * Stops the match and shows fatal errors
+     * @param tokens array composed by the player number and the views that causes fatal errors
+     */
     private void fatal(String... tokens){
         StringBuilder errorMessage = new StringBuilder("");
         for (int i=1; i<tokens.length; ++i){
@@ -112,16 +135,28 @@ public class ControllerInterpreter {
         screen.refresh();
     }
 
+    /**
+     * Allows to refresh the screen (and every viewable on it)
+     * @param tokens array composed by the player number
+     */
     private void refresh(String... tokens){
         screen.refresh();
     }
 
+    /**
+     * Starts the match
+     * @param tokens array composed by the player number
+     */
     private void start(String... tokens){
         offlineInfo.setPlayers(Arrays.copyOfRange(tokens, 2, tokens.length));
         offlineInfo.setMatchStarted(true);
         execute("message You are player " + tokens[1] + "!");
     }
 
+    /**
+     * Ends the match and declares the winner
+     * @param tokens array composed by the player number which will visualize the message and the number of the winner
+     */
     private void win(String... tokens){
         try {
             screen.show("endMatch");
@@ -141,6 +176,10 @@ public class ControllerInterpreter {
         }).start();
     }
 
+    /**
+     * Shows to the player the start of his turn
+     * @param tokens array composed by the player number
+     */
     private void yourTurn(String... tokens){
         try {
             screen.show("yourTurn");
@@ -149,14 +188,26 @@ public class ControllerInterpreter {
         }
     }
 
+    /**
+     * Activate the selected production
+     * @param tokens array composed by the player number and the production to activate
+     */
     private void activateProduction(String... tokens){
         offlineInfo.setProduction(tokens[1], true);
     }
 
+    /**
+     * Deactivate the selected production
+     * @param tokens array composed by the player number and the production to deactivate
+     */
     private void deactivateProduction(String... tokens){
         offlineInfo.setProduction(tokens[1], false);
     }
 
+    /**
+     * Sets the number of players and their names
+     * @param tokens array composed by the players' name
+     */
     private void setPlayers(String... tokens){
         StringBuilder toSend = new StringBuilder();
 
@@ -167,6 +218,10 @@ public class ControllerInterpreter {
         screen.setPlayers(toSend.toString());
     }
 
+    /**
+     * Resets the warehouse putting in order the resources and empty the paychecks returning all the resources to their places
+     * @param tokens array composed by the player number
+     */
     private void reset(String... tokens){
         offlineInfo.setSelectedWarehouseRow("");
         offlineInfo.setSelectedItem("");
@@ -175,12 +230,20 @@ public class ControllerInterpreter {
         }
     }
 
+    /**
+     *
+     * @param tokens
+     */
     private void setActive(String... tokens){
         for(ResettableScene rs : toReset){
             rs.setActive(Arrays.copyOfRange(tokens, 1, tokens.length));
         }
     }
 
+    /**
+     * Shows the list of commands to the player
+     * @param tokens array composed by the player number
+     */
     private void help(String... tokens){
         try {
             screen.show("help");
@@ -192,8 +255,9 @@ public class ControllerInterpreter {
     }
 
 
-
-    //sets the standard commands the server can send to the view
+    /**
+     * Sets the standard commands the server can send to the view
+     */
     private void fillStandardKnownCommands(){
         knownCommands.put("show", this::show);
         knownCommands.put("hide", this::hide);
@@ -215,7 +279,10 @@ public class ControllerInterpreter {
     }
 
 
-
+    /**
+     *
+     * @param rs
+     */
     public void attachToResetScene(ResettableScene rs){
         toReset.add(rs);
     }

@@ -9,8 +9,16 @@ import java.util.Scanner;
 
 import static it.polimi.ingsw.view.cli.ViewableId.*;
 
+/**
+ * Class responsible to manage the CLI
+ */
 public class MainCLI {
 
+    /**
+     * Manages the screen of the player
+     * @param args array containing the arguments passed from the command line
+     * @throws ViewException if can't visualize something
+     */
     public static void mainCLI(String[] args) throws ViewException {
 
         ScreenCLI screen = new ScreenCLI();
@@ -196,7 +204,12 @@ public class MainCLI {
     }
 
 
-
+    /**
+     * Allows to "put" Viewable(s) on the screen
+     * @param name name of the viewable
+     * @param screen where to put the Viewable(s)
+     * @param viewables to put on the screen
+     */
     private static void createView(String name, ScreenCLI screen, Viewable... viewables){
         View tmp = new View();
 

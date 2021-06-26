@@ -80,7 +80,11 @@ public class UserInterpreter {
     }
 
 
-    //checks if the command is legal
+    /**
+     * Checks if the command is legal
+     * @param tokens command to check
+     * @return "OK" or a possible error
+     */
     private String checkSyntacticalCorrectness(String[] tokens) {
         List<UserCommand> tmp = commands.stream().filter(command -> command.toString().equals(tokens[0])).collect(Collectors.toList());
         //check if the command exists and if the arguments count is correct
@@ -123,7 +127,10 @@ public class UserInterpreter {
     }
 
 
-    //inserts all known commands
+    /**
+     * Inserts all known commands
+     * @return a collection made of all the CLI commands
+     */
     private static Set<UserCommand> allCommands() {
         Set<UserCommand> commands = new HashSet<>();
 
