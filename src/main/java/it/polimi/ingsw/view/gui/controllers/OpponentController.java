@@ -252,9 +252,14 @@ public class OpponentController extends SubSceneController{
             leader1group.setVisible(true);
 
             Pair<WarehouseObjectTypeController, Integer> contained = getContainedSupplies(Arrays.copyOfRange(arr, 10, 14));
+            if (contained.second == 0) {
+                depot11.setVisible(false);
+                depot12.setVisible(false);
+            }
             if (contained.second >= 1){
                 depot11.setImage(new Image(contained.first.getUrl()));
                 depot11.setVisible(true);
+                depot12.setVisible(false);
             }
             if (contained.second >= 2){
                 depot12.setImage(new Image(contained.first.getUrl()));
