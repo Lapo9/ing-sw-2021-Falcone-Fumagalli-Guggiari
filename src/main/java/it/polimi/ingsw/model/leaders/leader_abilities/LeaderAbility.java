@@ -63,8 +63,11 @@ public interface LeaderAbility extends AcceptsSupplies, HasStatus {
     }
 
 
-
-
+    /**
+     * Gets the input/mutable input of the production selected
+     * @return the SupplyContainer containing the input of the production
+     * @throws NoSuchMethodException If the LeaderCard is not allowed to use that ability
+     */
     public default SupplyContainer getInput() throws NoSuchMethodException{
         throw new NoSuchMethodException();
     }
@@ -90,7 +93,12 @@ public interface LeaderAbility extends AcceptsSupplies, HasStatus {
         throw new NoSuchMethodException();
     };
 
-
+    /**
+     * Substitutes the current supply present in the specified output slot with the supply given as argument, in the Producer Ability
+     * @param wot supply to replace
+     * @throws SupplyException the container cannot accept the supply
+     * @throws NoSuchMethodException If the LeaderCard is not allowed to use that ability
+     */
     public default void swapProduction(WarehouseObjectType wot) throws SupplyException, NoSuchMethodException{
         throw new NoSuchMethodException();
     }
@@ -106,7 +114,10 @@ public interface LeaderAbility extends AcceptsSupplies, HasStatus {
         throw new NoSuchMethodException();
     };
 
-
+    /**
+     * Removes all of the supplies.
+     * @return A pair of SupplyContainer containing the removed supplies. The first element contains supplies from the depots, the second one supplies from the strongbox.
+     */
     @Override
     public default Pair<SupplyContainer, SupplyContainer> clearSupplies() throws NoSuchMethodException{
         throw new NoSuchMethodException();

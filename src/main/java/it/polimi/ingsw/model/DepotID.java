@@ -50,6 +50,8 @@ public enum DepotID {
     private int typeOrder;
     private SourceType source;
 
+
+
     private DepotID(DepotType depotType, SourceType source, int typeOrder){
         this.type = depotType;
         this.typeOrder = typeOrder;

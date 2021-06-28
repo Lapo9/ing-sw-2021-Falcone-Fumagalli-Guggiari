@@ -8,11 +8,13 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 /**
- *
+ * Class managing the info of the match
  */
 public class OfflineInfo {
 
-
+    /**
+     * Enum describing the status of the LeaderCard(s)
+     */
     public enum LeaderStatus{
         INACTIVE, DISCARDED, PRODUCER, DEPOT, OTHER;
     }
@@ -28,12 +30,16 @@ public class OfflineInfo {
     private ViewableFactory factory;
     private boolean matchStarted = false;
 
-
+    /**
+     * Class constructor
+     */
     public OfflineInfo(){
         reset();
     }
 
-
+    /**
+     * Resets the match
+     */
     public synchronized void reset(){
         activeProductions.put("dev1", false);
         activeProductions.put("dev2", false);
@@ -48,7 +54,10 @@ public class OfflineInfo {
         selectedItem = "";
     }
 
-
+    /**
+     * Sets the ViewableFactory used
+     * @param factory to use
+     */
     public synchronized void attachFactory(ViewableFactory factory){
         this.factory = factory;
     }

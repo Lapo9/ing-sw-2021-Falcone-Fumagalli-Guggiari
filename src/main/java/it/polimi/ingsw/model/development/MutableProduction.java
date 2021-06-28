@@ -53,7 +53,10 @@ public class MutableProduction extends Production implements HasStatus {
         }
     }
 
-
+    /**
+     * Gets the mutable input of the MutableProduction
+     * @return the SupplyContainer containing the input
+     */
     @Override
     public SupplyContainer getInput() {
         SupplyContainer tmp = new SupplyContainer();

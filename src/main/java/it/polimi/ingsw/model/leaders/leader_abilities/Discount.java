@@ -24,7 +24,10 @@ public class Discount implements LeaderAbility {
         } catch (SupplyException se){System.exit(1); /*TODO terminate program*/}
     }
 
-
+    /**
+     * First ability: when the player buys a SupplyCard, he can do it using less resources
+     * @return The discount to apply to the SupplyCard
+     */
     @Override
     public SupplyContainer getDiscount() {
         return discount;

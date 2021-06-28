@@ -18,7 +18,11 @@ public class LeadersSpace implements HasStatus, WinPointsCountable {
 
     private ArrayList<LeaderCard> leaders = new ArrayList<>();
 
-
+    /**
+     * Adds the leader selected to the pick of the player
+     * @param leader selected to add
+     * @throws LeaderException If the leader is active or already discarded
+     */
     public void addLeader(LeaderCard leader) throws LeaderException {
         if(leaders.size()<2) {
             leaders.add(leader);
@@ -48,7 +52,11 @@ public class LeadersSpace implements HasStatus, WinPointsCountable {
     }
 
 
-
+    /**
+     * Returns the leader ability, whether the leader is active or not
+     * @param i index of the LeaderCard in the ArrayList
+     * @return the ability of the LeaderCard
+     */
     public LeaderAbility getLeaderAbilityTrusted(int i) {
         return leaders.get(i).getAbilityTrusted();
     }

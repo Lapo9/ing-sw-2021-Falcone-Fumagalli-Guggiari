@@ -47,12 +47,19 @@ public class PopeFavorTile implements HasStatus, WinPointsCountable {
         }
     }
 
+    /**
+     * Gets the win points of the object
+     * @return the win points of the object
+     */
     @Override
     public int getWinPoints(){
         return active ? points : 0;
     }
 
-
+    /**
+     * Allows to receive the status of every object which implements this interface in the form of an ArrayList of Integer
+     * @return an ArrayList made of 1 Integer
+     */
     @Override
     public ArrayList<Integer> getStatus(){
         ArrayList<Integer> status = new ArrayList<>();

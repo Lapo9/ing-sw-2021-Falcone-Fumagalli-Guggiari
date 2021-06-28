@@ -156,7 +156,10 @@ public class Marketplace implements HasStatus {
     }
 
 
-    //Returns the color of the Marble on the slide
+    /**
+     * Gets the marble in the slide
+     * @return the color of the Marble on the slide
+     */
     private MarbleColor getSlide(){
         return slide;
     }
@@ -191,7 +194,9 @@ public class Marketplace implements HasStatus {
         return status;
     }
 
-
+    /**
+     * Notify the status of the Marketplace to the ModelObserver so the players can have this item updated  in real time
+     */
     public void notifyViews(){
         ArrayList<Integer> status = getStatus();
 
@@ -200,7 +205,10 @@ public class Marketplace implements HasStatus {
         }
     }
 
-
+    /**
+     * Adds to the list of observers the ModelObserver given
+     * @param mo ModelObserver that will receive the status of the Marketplace
+     */
     public void attach(ModelObserver mo){
         observers.add(mo);
     }

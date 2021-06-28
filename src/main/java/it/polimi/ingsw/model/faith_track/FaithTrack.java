@@ -17,8 +17,9 @@ public class FaithTrack implements WinPointsCountable, HasStatus {
     private ArrayList<PopeFavorTile> popeFavors;
     private ArrayList<FaithTrackTiles> track;
 
-    /*
-     * The FaithTrackTiles class represents a tile of the FaithTrack
+
+    /**
+     * Subclass constructor, the FaithTrackTiles class represents a tile of the FaithTrack
      */
     private class FaithTrackTiles{
         private final int points;
@@ -106,7 +107,7 @@ public class FaithTrack implements WinPointsCountable, HasStatus {
         return vr;
     }
 
-    /*
+    /**
      * Moves the player one tile ahead in the FaithTrack
      * @return true is a vaticanReport has been issued
      */
@@ -262,6 +263,10 @@ public class FaithTrack implements WinPointsCountable, HasStatus {
         }
     }
 
+    /**
+     * Gets the win points of the object
+     * @return the win points of the object
+     */
     @Override
     public int getWinPoints() {
         int pftPoints = 0;
@@ -297,6 +302,10 @@ public class FaithTrack implements WinPointsCountable, HasStatus {
         vaticanReportCounter++;
     }
 
+    /**
+     * Allows to receive the status of every object which implements this interface in the form of an ArrayList of Integer
+     * @return an ArrayList made of 4 Integer
+     */
     @Override
     public ArrayList<Integer> getStatus() {
         ArrayList<Integer> status = new ArrayList<>();

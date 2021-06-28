@@ -35,7 +35,10 @@ public class Production implements AcceptsSupplies, HasStatus {
 
 
 
-
+    /**
+     * Gets the input of the Production
+     * @return the SupplyContainer containing the input
+     */
     public SupplyContainer getInput(){
         return new SupplyContainer(input);
     }

@@ -29,7 +29,11 @@ public class Producer implements LeaderAbility {
         production = new MutableProduction(fixedInput, fixedOutput, 1, 2);
     }
 
-
+    /**
+     * Gets the input of the MutableProduction
+     * @return the SupplyContainer containing the mutable input
+     * @throws NoSuchMethodException iif the LeaderCard is not allowed to use that ability
+     */
     @Override
     public SupplyContainer getInput() throws NoSuchMethodException {
         return production.getInput();
@@ -46,13 +50,18 @@ public class Producer implements LeaderAbility {
 
     /**
      * This method checks if the LeaderCard actually can activate the production
+     * @throws SupplyException The container cannot accept the supply
      */
     @Override
     public void checkProduction() throws SupplyException {
         production.check();
     }
 
-
+    /**
+     * Substitutes the current supply present in the specified output slot with the supply given as argument
+     * @param wot supply to replace
+     * @throws SupplyException The container cannot accept the supply
+     */
     @Override
     public void swapProduction(WarehouseObjectType wot) throws SupplyException{
         production.swapOutput(0, wot);

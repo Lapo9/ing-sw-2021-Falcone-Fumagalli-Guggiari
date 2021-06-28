@@ -221,6 +221,11 @@ public class ViewableFactory {
         return res;
     }
 
+    /**
+     * Builds player's viewable and puts it in the ArrayList items
+     * @param viewableId id of the viewable
+     * @return the viewable to build
+     */
     public ActionTile buildActionTile(ViewableId viewableId){
         ActionTile actionTile = new ActionTile();
         items.get(4).put(viewableId, actionTile);

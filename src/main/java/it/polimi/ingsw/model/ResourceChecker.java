@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Manages the check operation that controls if the player has enough resources and development cards to match the requirements
+ */
 public class ResourceChecker {
 
     private DepotsManager depotsManager;
