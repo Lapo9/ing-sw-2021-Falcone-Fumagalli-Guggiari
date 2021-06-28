@@ -73,7 +73,7 @@ public class ModelInterpreterCLI implements ModelInterpreter {
         items.update(player, PAYCHECK_STRONGBOX, Arrays.copyOfRange(status, 75, 80));
         items.update(player, PAYCHECK_DEPOTS, Arrays.copyOfRange(status, 80, 85));
         items.update(player, BASE_PRODUCTION, Arrays.copyOfRange(status, 85, 103));
-        items.update(4, FAITH_TRACK, new int[] {status[0], status[103], status[104], status[105], status[106]});
+        items.update(4, FAITH_TRACK, new int[] {status[0], status[103], status[104], status[105], status[106], status[204]});
         items.update(player, UNASSIGNED_MARBLES, Arrays.copyOfRange(status, 137, 143));
         items.update(player, LEADER_CARD_SPACE, Arrays.copyOfRange(status, 107, 137));
         items.update(player, LEADER_PICK, Arrays.copyOfRange(status, 143, 203));

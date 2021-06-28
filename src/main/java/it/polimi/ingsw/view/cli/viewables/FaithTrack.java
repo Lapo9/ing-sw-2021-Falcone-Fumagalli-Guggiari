@@ -14,6 +14,7 @@ import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 public class FaithTrack implements Viewable {
 
     private HashMap<String, ArrayList<Integer>> data = new HashMap<String, ArrayList<Integer>>();
+    private int blackCross = -1;
     int playerNumber = 0;
     OfflineInfo info;
 
@@ -52,6 +53,8 @@ public class FaithTrack implements Viewable {
             data.get(playerName).set(1, update[2]);
             data.get(playerName).set(2, update[3]);
             data.get(playerName).set(3, update[4]);
+
+            blackCross = update[5];
         }
         this.info = info;
     }
@@ -81,6 +84,10 @@ public class FaithTrack implements Viewable {
                 append(rightColor(data.get(info.getPlayerName(i)).get(1))).append("|").
                 append(rightColor(data.get(info.getPlayerName(i)).get(2))).append("|").
                 append(rightColor(data.get(info.getPlayerName(i)).get(3))).append("\n").toString();
+        if(blackCross != -1) {
+            tmp += new StringBuilder().append(" Black Cross |").append(findSpacePosition(blackCross, 1)).append(blackCross).append(findSpacePosition(blackCross, 2)).append("|").
+                    append("                   |").append("                   |").append("\n").toString();
+        }
         return tmp;
     }
 
@@ -109,12 +116,12 @@ public class FaithTrack implements Viewable {
      * @return a string made of space character
      */
     private String findSpacePosition(int num, int type) {
-        String numero = String.valueOf(num);
+        String number = String.valueOf(num);
         String tmp = "";
-        int index = numero.length();
+        int index = number.length();
         if(num < 10 && type == 1)
             tmp = tmp.concat(" ");
-        if(numero.length() <= 10)
+        if(number.length() <= 10)
             index = (10 - index)/2;
         for(int i = 0; i<index; i++)
             tmp = tmp.concat(" ");
