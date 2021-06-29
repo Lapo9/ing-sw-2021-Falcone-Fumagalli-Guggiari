@@ -63,7 +63,11 @@ public class OfflineInfo {
     }
 
 
-
+    /**
+     * Sets the status of the two leader
+     * @param leader first leader status
+     * @param status second leader status
+     */
     public synchronized void setLeaderStatus(int leader, LeaderStatus status){
         if (leader == 1){
             leader1Status = status;
@@ -74,7 +78,11 @@ public class OfflineInfo {
     }
 
 
-
+    /**
+     * Gets the status of the selected leader
+     * @param leader index of the leader
+     * @return the status of the leader
+     */
     public synchronized LeaderStatus getLeaderStatus(int leader){
         if (leader == 1){
             return leader1Status;
@@ -85,16 +93,27 @@ public class OfflineInfo {
         return null;
     }
 
-
+    /**
+     * Sets the status of the match
+     * @param matchStarted status
+     */
     public synchronized void setMatchStarted(boolean matchStarted) {
         this.matchStarted = matchStarted;
     }
 
-
+    /**
+     * Is the match started?
+     * @return 1 = started, 0 = not started
+     */
     public synchronized boolean isMatchStarted() {
         return matchStarted;
     }
 
+    /**
+     * Sets the production active or not active
+     * @param production the production chosen
+     * @param isActive active/not active
+     */
     public synchronized void setProduction(String production, boolean isActive){
         activeProductions.put(production, isActive);
         if(factory != null){
@@ -102,7 +121,10 @@ public class OfflineInfo {
         }
     }
 
-
+    /**
+     * Gets the status of the productions as a String
+     * @return String containing the status of every production
+     */
     public synchronized String getProductionsAsArgs() {
         return " " + activeProductions.get("dev1") + " " +
                 activeProductions.get("dev2") + " " +
@@ -113,7 +135,10 @@ public class OfflineInfo {
     }
 
 
-
+    /**
+     * Gets the status of the productions as an array of int
+     * @return array containing the list of status of every production
+     */
     private synchronized int[] getProductionsAsArray() {
         int[] res = new int[6];
         res[0] = activeProductions.get("dev1") ? 1 : 0;
@@ -127,58 +152,94 @@ public class OfflineInfo {
     }
 
 
-
+    /**
+     * Gets the order of the chosen opponent
+     * @param playerName name of the player
+     * @return order of the player
+     */
     public synchronized int getOpponentOrder(String playerName){
         return playersNamesInOrder.stream().filter(player -> !player.equals(yourName)).collect(Collectors.toList()).indexOf(playerName) + 1;
     }
 
 
-
+    /**
+     * Gets the order of the player
+     * @param playerName name of the player
+     * @return order of the player
+     */
     public synchronized int getPlayerOrder(String playerName){
         return playersNamesInOrder.indexOf(playerName) +1;
     }
 
-
+    /**
+     * Gets the number of the participants
+     * @return number of the players
+     */
     public synchronized int getPlayersNum(){
         return playersNamesInOrder.size();
     }
 
+    /**
+     * Gets the player's name
+     * @param index of the player chosen
+     * @return the player's name
+     */
     public synchronized String getPlayerName(int index) {
         return playersNamesInOrder.get(index);
     }
 
-
+    /**
+     * Sets the players putting them in an ArrayList
+     * @param playersNamesInOrder name of every player
+     */
     public synchronized void setPlayers(String... playersNamesInOrder){
         this.playersNamesInOrder.addAll(Arrays.asList(playersNamesInOrder));
     }
 
-
-
+    /**
+     * Gets the selected item
+     * @return the selected item
+     */
     public synchronized String getSelectedItem(){
         return selectedItem;
     }
 
-
+    /**
+     * Sets the selected item
+     * @param item the item to set
+     */
     public synchronized void setSelectedItem(String item){
         selectedItem = item;
     }
 
-
+    /**
+     * Gets the selected row of the Warehouse
+     * @return that row
+     */
     public synchronized String getSelectedWarehouseRow() {
         return selectedWarehouseRow;
     }
 
-
+    /**
+     * Sets the selected row of the Warehouse
+     * @param selectedWarehouseRow row to set
+     */
     public synchronized void setSelectedWarehouseRow(String selectedWarehouseRow) {
         this.selectedWarehouseRow = selectedWarehouseRow;
     }
 
-
+    /**
+     * Sets the name of the player
+     * @param name of the player
+     */
     public synchronized void setYourName(String name){
         yourName = name;
     }
 
-
+    /**
+     * Gets the name of the player
+     * @return his name
+     */
     public synchronized String getYourName(){
         return yourName;
     }

@@ -120,7 +120,7 @@ public class DevelopmentSpace implements Viewable {
 
     /**
      * Prints the top card (complete) and the possible underlying cards (only the win points and the card category)
-     * @return
+     * @return the DevelopmentSpace into String
      */
     private String printOnlyNotNull () {
         if (devSpace.get(0) != null && devSpace.get(1) != null && devSpace.get(2) != null && wp0 < 10 && wp1 < 10) {

@@ -1,5 +1,8 @@
 package it.polimi.ingsw.view.cli;
 
+/**
+ * Manages every type of Viewable in the CLI
+ */
 public interface Viewable {
 
     /**

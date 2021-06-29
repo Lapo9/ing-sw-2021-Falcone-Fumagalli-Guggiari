@@ -105,8 +105,8 @@ public class MarbleContainer implements Viewable {
     /**
      * Places the marbles in the MarbleContainer from the ArrayList of marbles
      * @param marbleIndex index of the marble (0==SHIELD, 1==COIN, ...)
-     * @param i idex of the ArrayList of marbles
-     * @return
+     * @param i index of the ArrayList of marbles
+     * @return the String with that marble insert
      */
     private String putMarbles(int marbleIndex, Integer i){
         if (i == 2) {

@@ -30,7 +30,7 @@ public class ScreenCLI implements Screen {
 
 
     /**
-     * Constructor
+     * Class constructor
      */
     public ScreenCLI() {}
 
@@ -99,6 +99,7 @@ public class ScreenCLI implements Screen {
     /**
      * Shows the specified view. Cannot be called before the screen is started.
      * @param view ID of the view to show
+     * @throws ViewException if we don't have any activeView  to show
      */
     @Override
     public void show(String view) throws ViewException {

@@ -47,8 +47,8 @@ public class DevelopmentSpaceGrid implements Viewable {
     }
 
     /**
-     *
-     * @return
+     * Builds the grid of the three DevelopmentSpace(s)
+     * @return the grid into String
      */
     private String buildDevelopmentSpaceGrid() {
         String tmp = "";

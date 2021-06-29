@@ -80,20 +80,35 @@ public class ServerSocket {
         heartbeatThread.start();
     }
 
-
+    /**
+     * Asks if the player is connected to the server
+     * @return true or false
+     */
     public synchronized boolean isConnected(){
         return connected;
     }
 
+    /**
+     * Sets the status of connection
+     * @param c true or false
+     */
     private synchronized void setConnected(boolean c){
         connected = c;
     }
 
-
+    /**
+     * Gets the value of param destroy
+     * @return true or false
+     */
     private synchronized boolean isDestroyed(){
         return destroy;
     }
 
+    /**
+     * Sets the value of param destroy and return the boolean d
+     * @param d value to set
+     * @return the value set
+     */
     private synchronized boolean setDestroy(boolean d){
         boolean res = d != destroy;
         destroy = d;
@@ -101,7 +116,11 @@ public class ServerSocket {
     }
 
 
-
+    /**
+     * Analyzes a message
+     * @param message to analyze
+     * @return true if it is an error, false otherwise
+     */
     private boolean isError(String message){
         String command = message.split(" ")[0];
         if (command.equals("error") || command.equals("fatal")){
@@ -110,6 +129,11 @@ public class ServerSocket {
         return false;
     }
 
+    /**
+     * Analyzes a message
+     * @param message to analyze
+     * @return true if it is a fatal error, false otherwise
+     */
     private boolean isFatal(String message){
         String command = message.split(" ")[0];
         if (command.equals("fatal")){
@@ -118,6 +142,11 @@ public class ServerSocket {
         return false;
     }
 
+    /**
+     * Analyzes a message
+     * @param message to analyze
+     * @return true if it is a an ECG, false otherwise
+     */
     private boolean isECG(String message){
         String command = message.split(" ")[0];
         if (command.equals("ECG")){
@@ -171,8 +200,10 @@ public class ServerSocket {
 
 
 
-    /*
-    Send an ACK once every 4 seconds in order to keep the connection to the server alive
+
+
+    /**
+     * Send an ACK once every 4 seconds in order to keep the connection to the server alive
      */
     private void heartbeat() {
         while (!isDestroyed()) {
@@ -193,14 +224,17 @@ public class ServerSocket {
 
 
 
-    /*
-Structure of the packet
 
-     byte 0   byte 1   byte 2   byte 3   byte ...
-    +--------+--------+--------+--------+------
-    | length | type   | data   | data   | ...
-    +--------+--------+--------+--------+------
-*/
+    /**
+     * Listening routine of the socket
+     *
+     * Structure of the packet
+     *
+     *      byte 0   byte 1   byte 2   byte 3   byte ...
+     *     +--------+--------+--------+--------+------
+     *     | length | type   | data   | data   | ...
+     *     +--------+--------+--------+--------+------
+     */
     private void socketListenRoutine() {
         while (!isDestroyed()) {
             try {
@@ -237,8 +271,10 @@ Structure of the packet
     }
 
 
-
-
+    /**
+     * Terminate the connection
+     * @param fatalMessage message of fatal error
+     */
     public void terminate(String fatalMessage) {
         if (setDestroy(true)) {
             //a new thread must wait for the joins, in order not to create deadlocks

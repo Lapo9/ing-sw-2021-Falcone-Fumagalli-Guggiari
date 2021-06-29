@@ -13,7 +13,9 @@ public class ModelObserver {
 
     private HashMap<String, Player> players = new HashMap<>();
 
-
+    /**
+     * Class constructor
+     */
     public ModelObserver(){}
 
 
@@ -64,7 +66,10 @@ public class ModelObserver {
     }
 
 
-     //sends the update to all of the players
+    /**
+     * Sends the update to all of the players
+     * @param update Update
+     */
     private void broadcast(ArrayList<Integer> update){
         for (Player p : players.values()){
             p.sendModel(update);

@@ -15,7 +15,7 @@ import static it.polimi.ingsw.view.cli.ViewableId.*;
 public class MainCLI {
 
     /**
-     * Manages the screen of the player
+     * Manages the CLI screen of the player
      * @param args array containing the arguments passed from the command line
      * @throws ViewException if can't visualize something
      */
@@ -205,10 +205,10 @@ public class MainCLI {
 
 
     /**
-     * Allows to "put" Viewable(s) on the screen
-     * @param name name of the viewable
-     * @param screen where to put the Viewable(s)
-     * @param viewables to put on the screen
+     * Adds the Viewable(s) to the collection View to show, then adds the View to the screen
+     * @param name name of the View to add
+     * @param screen where to show the Viewable(s)
+     * @param viewables to put in the new View
      */
     private static void createView(String name, ScreenCLI screen, Viewable... viewables){
         View tmp = new View();

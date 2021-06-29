@@ -14,6 +14,10 @@ public enum Style {
 
     private String colorCode; //the code of the chosen color
 
+    /**
+     * Sets the colorCode
+     * @param colorCode given
+     */
     private Style(String colorCode){
         this.colorCode = colorCode;
     }
