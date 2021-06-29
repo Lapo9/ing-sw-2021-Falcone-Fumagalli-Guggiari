@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+/**
+ * Manages the active matches on the server
+ */
 public class MatchManager {
 
     private HashMap<String, Match> activeMatches = new HashMap<>();

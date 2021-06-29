@@ -17,6 +17,9 @@ import java.util.stream.Collectors;
 
 import static it.polimi.ingsw.controller.match.MatchPhase.*;
 
+/**
+ * This class represents the match
+ */
 public class Match {
 
     private ArrayList<Player> players = new ArrayList<>();
@@ -32,7 +35,14 @@ public class Match {
     private String matchId;
     private boolean matchEndedWait = false;
 
-
+    /**
+     * Class constructor
+     * @param leader Player who can start the game
+     * @param isSinglePlayer the match is single player or multiplayer?
+     * @param matchManager MatchManager
+     * @param matchId name of the match
+     * @throws MatchException if there are problems with the match
+     */
     Match(Player leader, boolean isSinglePlayer, MatchManager matchManager, String matchId) throws MatchException {
         this.matchManager = matchManager;
         this.matchId = matchId;
@@ -49,7 +59,12 @@ public class Match {
     }
 
 
-
+    /**
+     * Class constructor
+     * @param status of the match
+     * @param matchManager MatchManager
+     * @param matchId name of the match
+     */
     Match(String status, MatchManager matchManager, String matchId) {
 
         this.matchManager = matchManager;
@@ -87,8 +102,11 @@ public class Match {
     }
 
 
-
-
+    /**
+     * Adds a player to the match
+     * @param p Player to add
+     * @throws MatchException if there are problems with the addition of the player (match already started, name already chosen, ...)
+     */
     synchronized void addPlayer(Player p) throws MatchException {
 
         //if it's a single player match and there is someone connected or a different player tries to connect, throw the error
@@ -134,7 +152,10 @@ public class Match {
     }
 
 
-
+    /**
+     * Reintroduces the player who disconnected
+     * @param reconnected player to reconnect
+     */
     synchronized void reintroduceReconnectedPlayer(Player reconnected){
         //prepare player order string to send to the reconnected view
         StringBuilder playersNamesInOrder = new StringBuilder();
@@ -161,13 +182,21 @@ public class Match {
     }
 
 
-
+    /**
+     * Create a thread to perform the action in the message
+     * @param message action to perform
+     * @param player player involved
+     */
     public void update(String message, Player player) {
         new Thread(() -> performAction(message, player)).start();
     }
 
 
-
+    /**
+     * Perform the action in the message
+     * @param message action to perform
+     * @param player player involved
+     */
     private synchronized void performAction(String message, Player player) {
         String[] tokens = message.split(" ");
 
@@ -181,7 +210,11 @@ public class Match {
 
 
 
-    //actions
+    /**
+     * List of players and their status
+     * @param player to analyze
+     * @param args of the command (nothing)
+     */
     private void info(Player player, String... args) {
         StringBuilder infoBox = new StringBuilder("setPlayers");
 
@@ -203,6 +236,11 @@ public class Match {
         player.sendController(infoBox.toString());
     }
 
+    /**
+     * Manages the actions to perform in consequence of player's disconnection (before the start the match)
+     * @param player who disconnected
+     * @param args of the command (nothing)
+     */
     private void dead(Player player, String... args) {
         //if no player is active, end the match
         if (players.stream().filter(p -> p.isConnected()).count() == 0){
@@ -253,6 +291,11 @@ public class Match {
         }
     }
 
+    /**
+     * Player starts the match if there are no errors
+     * @param player who wants to start the match
+     * @param args of the command (nothing)
+     */
     private void start(Player player, String... args) {
         if(!player.equals(activePlayer)){
             player.sendController("error You are not the leader");
@@ -312,6 +355,11 @@ public class Match {
         }
     }
 
+    /**
+     * Player select a starting supply if he can
+     * @param player who wants to select an item
+     * @param args of the command (supply type)
+     */
     private void select(Player player, String... args)  {
         if(phase != PRE_MATCH){
             player.sendController("error You can't use this command now");
@@ -343,6 +391,11 @@ public class Match {
         checkPreMatchDone(); //check if all of the players have selected all of their items
     }
 
+    /**
+     * Player select a row/column of the Marketplace to take
+     * @param player who wants to pick marbles
+     * @param args argo of the command marketplace (direction h/v, index of row/column)
+     */
     private void marketplace(Player player, String... args) {
         if(player != activePlayer){
             player.sendController("error It's not your turn!");
@@ -372,6 +425,11 @@ public class Match {
         player.sendController("refresh");
     }
 
+    /**
+     * Player moves a marble to a specified depot
+     * @param player who wants to move a marble
+     * @param args of the command (marbleColor, depot)
+     */
     private void moveMarble(Player player, String... args) {
         if(player != activePlayer){
             player.sendController("error It's not your turn!");
@@ -394,6 +452,11 @@ public class Match {
         }
     }
 
+    /**
+     * Player colors a white marble
+     * @param player who want to color a white marble
+     * @param args of the command (marbleColor)
+     */
     private void colorMarble(Player player, String... args) {
         if(player != activePlayer){
             player.sendController("error It's not your turn!");
@@ -412,6 +475,11 @@ public class Match {
         }
     }
 
+    /**
+     * Player discards the remaining marbles
+     * @param player who want to discard marbles
+     * @param args of the command (nothing)
+     */
     private void discard(Player player, String... args) {
         if(player != activePlayer){
             player.sendController("error It's not your turn!");
@@ -457,6 +525,11 @@ public class Match {
         }
     }
 
+    /**
+     * Player moves a supply
+     * @param player who want to move a supply
+     * @param args of the command (supply type, from, to)
+     */
     private void move(Player player, String... args) {
 
         if(player != activePlayer){
@@ -479,6 +552,11 @@ public class Match {
         }
     }
 
+    /**
+     * Player buys a DevelopmentCard
+     * @param player who want to buy a card
+     * @param args of the command (row, column, space where to put the card)
+     */
     private void buy(Player player, String... args) {
 
         if(player != activePlayer){
@@ -510,6 +588,11 @@ public class Match {
 
     }
 
+    /**
+     * Player ends his turn
+     * @param player who want to end his turn
+     * @param args of the command (nothing)
+     */
     private void endTurn(Player player, String... args) {
         if(player != activePlayer){
             player.sendController("error It's not your turn!");
@@ -551,6 +634,11 @@ public class Match {
         }
     }
 
+    /**
+     * Player produces
+     * @param player who wants to produce
+     * @param args
+     */
     private void produce(Player player, String... args) {
         if(player != activePlayer){
             player.sendController("error It's not your turn!");
@@ -590,6 +678,11 @@ public class Match {
         }
     }
 
+    /**
+     * Player switches base production input or output
+     * @param player who wants to perform this action
+     * @param args of the command (slot, new supply type)
+     */
     private void swapBase(Player player, String... args) {
         if (player != activePlayer) {
             player.sendController("error It's not your turn!");
@@ -610,6 +703,11 @@ public class Match {
         }
     }
 
+    /**
+     * Player switches leader production output
+     * @param player who wants to perform this action
+     * @param args of the command (slot, new supply type)
+     */
     private void swapLeader(Player player, String... args) {
         if (player != activePlayer) {
             player.sendController("error It's not your turn!");
@@ -630,6 +728,11 @@ public class Match {
         }
     }
 
+    /**
+     * Player activates one LeaderCard
+     * @param player who wants to activate a leader
+     * @param args of the command (index)
+     */
     private void activateLeader(Player player, String... args) {
         if (player != activePlayer) {
             player.sendController("error It's not your turn!");
@@ -647,6 +750,11 @@ public class Match {
         }
     }
 
+    /**
+     * Player discards one LeaderCard
+     * @param player who wants to discard a leader
+     * @param args of the command (index)
+     */
     private void discardLeader(Player player, String... args) {
         if (player != activePlayer) {
             player.sendController("error It's not your turn!");
@@ -674,6 +782,11 @@ public class Match {
         }
     }
 
+    /**
+     * Player chooses his leaders
+     * @param player who has to chose leaders
+     * @param args of the command (index1, index2)
+     */
     private void pickLeaders(Player player, String... args) {
         if (phase != PRE_MATCH) {
             player.sendController("error You' ve already picked your leaders!");
@@ -699,6 +812,11 @@ public class Match {
         checkPreMatchDone(); //check if all of the players have selected all of their items
     }
 
+    /**
+     * Player swaps two rows of the Warehouse
+     * @param player who wants to perform the action
+     * @param args of the command (index1, index2)
+     */
     private void swapWarehouse(Player player, String... args) {
         if (player != activePlayer) {
             player.sendController("error It's not your turn!");
@@ -717,6 +835,11 @@ public class Match {
 
     }
 
+    /**
+     * Player selects an item to move
+     * @param player who wants to select an item
+     * @param args of the command (supply type, from)
+     */
     private void selected(Player player, String... args) {
         if(player != activePlayer){
             player.sendController("error It's not your turn!");
@@ -772,6 +895,7 @@ public class Match {
         player.sendController("setActive" + allowedString);
     }
 
+
     private void skipTurn(Player player, String... args) {
         if (checkWinner()){
             phase = GAME_OVER;
@@ -780,6 +904,7 @@ public class Match {
         phase = TURN_END;
         update("endTurn", player);
     }
+
 
     private void exit(Player player, String... args) {
         if (phase != LOBBY) {
@@ -798,7 +923,9 @@ public class Match {
 
 
 
-    //sets the list of default commands and their respective actions
+    /**
+     * Sets the list of default commands and their respective actions
+     */
     private void setDefaultCommands() {
         commands.put("start", this::start);
         commands.put("info", this::info);
@@ -826,7 +953,10 @@ public class Match {
 
 
 
-    //sends the message to every player in the match
+    /**
+     * Sends the message to every player in the match
+     * @param message to show to the players
+     */
     private synchronized void broadcast(String message){
         //avoid first turn for disconnected players
         for(Player p : players) {
@@ -834,7 +964,9 @@ public class Match {
         }
     }
 
-
+    /**
+     * Checks if the pre match session is ended (item and card selection)
+     */
     private synchronized void checkPreMatchDone(){
         boolean doneItems = true;
         for(int i = 0; i < players.size(); ++i){
@@ -869,7 +1001,10 @@ public class Match {
         }
     }
 
-
+    /**
+     * Checks if the pre match session is ended (item and card selection) for a specific player
+     * @param p player to check
+     */
     private synchronized void checkPreMatchDoneSpecificPlayer(Player p){
         boolean doneItems = true;
         if((p.getSelectedItemsInPreMatch() != 0 && p.getOrder() == 0) ||
@@ -891,7 +1026,11 @@ public class Match {
     }
 
 
-    //checks if someone won, if so sends the players the game over
+
+    /**
+     * Chack if someone won, if so every player after him has to end his turn
+     * @return true (there is a winner) or false
+     */
     private synchronized boolean checkWinner(){
         //check if the match ended
         if (players.stream().anyMatch(p -> p.getDashboard().isMatchEnded())){
@@ -921,7 +1060,10 @@ public class Match {
         return false;
     }
 
-
+    /**
+     * Extract the position of the active player, if it not correspond to the last tile, he lost the game
+     * @return false if he won
+     */
     private synchronized boolean extractSinglePlayerTile(){
         boolean matchEnded = activePlayer.getDashboard().extractActionTile();
 
@@ -936,30 +1078,51 @@ public class Match {
         return false;
     }
 
-
+    /**
+     * Ends the match
+     */
     public synchronized void endMatch(){
         players.forEach(p -> p.destroy());
         matchManager.notifyMatchEnded(matchId);
         System.out.print("\nMatch " + matchId + " ended");
     }
 
-
+    /**
+     * Gets the array list of teh players in the match
+     * @return players' names
+     */
     public synchronized ArrayList<Player> getPlayers(){
         return players;
     }
 
+    /**
+     * Gets the items of the match from DevelopmentGrid and Marketplace
+     * @return match items
+     */
     public synchronized Pair<DevelopmentGrid, Marketplace> getMatchItems() {
         return new Pair<>(developmentGrid, marketplace);
     }
 
+    /**
+     * Gets the active player
+     * @return the index of the active player
+     */
     public synchronized int getActivePlayer(){
         return activePlayer.getOrder();
     }
 
+    /**
+     * Is this a single player match?
+     * @return true/false
+     */
     public synchronized boolean isSinglePlayer(){
         return isSinglePlayer;
     }
 
+    /**
+     * Gets the match id (its name)
+     * @return a string containing the match id
+     */
     public synchronized String getMatchId() {
         return matchId;
     }

@@ -1,5 +1,10 @@
 package it.polimi.ingsw;
 
+/**
+ * Helper class defining Pair
+ * @param <F> first
+ * @param <S> second
+ */
 public class Pair<F, S> {
 
     public Pair(F first, S second){
