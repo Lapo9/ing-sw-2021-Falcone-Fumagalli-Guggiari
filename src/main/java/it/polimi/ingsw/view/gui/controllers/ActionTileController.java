@@ -9,6 +9,9 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Represents the action tile for the single player mode
+ */
 public class ActionTileController extends SubSceneController{
 
     @FXML private ImageView actionTile;
@@ -22,13 +25,18 @@ public class ActionTileController extends SubSceneController{
             new Image("/pictures/actionTiles/plus1shuffle.png")
     ));
 
-
+    /**
+     * Updates the actionTile image using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         actionTile.setImage(tiles.get(completeUpdate[1]));
     }
 
-
+    /**
+     * Initialize the class
+     */
     @Override
     public void initialize() {
 

@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents the player dashboard.
+ */
 public class DashboardController extends SceneController implements ResettableScene {
 
     @FXML private LeaderController leader1Controller;
@@ -41,6 +44,9 @@ public class DashboardController extends SceneController implements ResettableSc
     private ArrayList<OpponentController> opponents = new ArrayList<>();
 
 
+    /**
+     * Initialize the class with default values and default images
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -57,7 +63,9 @@ public class DashboardController extends SceneController implements ResettableSc
 
     }
 
-
+    /**
+     * Initialize every sub scene contained in the dashboard
+     */
     @Override
     public void initializeSubScenes() {
         leader1Controller.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
@@ -91,12 +99,19 @@ public class DashboardController extends SceneController implements ResettableSc
     }
 
 
+    /**
+     * Unused method of the superClass
+     */
     @Override
     public void setPlayers(String players) {
 
     }
 
 
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         Platform.runLater( () -> {
@@ -137,6 +152,9 @@ public class DashboardController extends SceneController implements ResettableSc
     }
 
 
+    /**
+     * Resets all dashboard sub scene
+     */
     @Override
     public void reset() {
         leader1Controller.reset();
@@ -152,6 +170,10 @@ public class DashboardController extends SceneController implements ResettableSc
     }
 
 
+    /**
+     * Sets the active square of the given depots active
+     * @param depots a list of depots in the dashboard
+     */
     @Override
     public void setActive(String... depots) {
         List<String> toActivate = Arrays.asList(depots);
@@ -190,37 +212,56 @@ public class DashboardController extends SceneController implements ResettableSc
         }
     }
 
+    /**
+     * Shows a opponent board
+     * @param i integer that represents a player
+     */
     public void showOpponent(int i) {
         opponents.get(i-1).show();
     }
 
-
+    /**
+     * Hides a opponent board
+     * @param i integer that represents a player
+     */
     public void hideOpponent(int i) {
         opponents.get(i-1).hide();
     }
 
+    /**
+     * Shows the unassigned marble container
+     */
     public void showUnassignedMarbles(){
         unassignedMarblesController.show();
         marketButton.setEffect(null);
     }
 
+    /**
+     * Hides the unassigned marble container
+     */
     public void hideUnassignedMarbles(){
         unassignedMarblesController.hide();
     }
 
+    /**
+     * Hides the development card grid
+     */
     public void hideDevelopmentGrid(){
         developmentGridController.hide();
     }
 
 
-
-
+    /**
+     * Resets the action
+     */
     @FXML
     void backgroundClicked(){
         controllerInterpreter.execute("reset");
     }
 
-
+    /**
+     * Hides/shows the marketplace
+     */
     @FXML
     void marketButtonClicked(){
         if (marketButton.getEffect() != null) {
@@ -233,6 +274,9 @@ public class DashboardController extends SceneController implements ResettableSc
         }
     }
 
+    /**
+     * Hides/shows the development card grid
+     */
     @FXML
     void buyCardsButtonClicked(){
         if (buyCardsButton.getEffect() != null) {
@@ -245,12 +289,18 @@ public class DashboardController extends SceneController implements ResettableSc
         }
     }
 
+    /**
+     * Activates all the active productions
+     */
     @FXML
     void produceButtonClicked(){
         controllerInterpreter.execute("reset");
         userInterpreter.execute("produce");
     }
 
+    /**
+     * Ends the player turn
+     */
     @FXML
     void endTurnButtonClicked(){
         controllerInterpreter.execute("reset");

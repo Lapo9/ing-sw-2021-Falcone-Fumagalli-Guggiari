@@ -5,6 +5,9 @@ import javafx.scene.Group;
 
 import java.util.Arrays;
 
+/**
+ * Represents the development card grid
+ */
 public class DevelopmentGridController extends SubSceneController{
 
     @FXML PaycheckController paycheckController;
@@ -24,12 +27,19 @@ public class DevelopmentGridController extends SubSceneController{
     @FXML Group developmentGroup;
 
 
+    /**
+     * Initialize the class
+     */
     @Override
     public void initialize() {
         super.initialize();
     }
 
 
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         if (completeUpdate.length == 48){
@@ -52,6 +62,9 @@ public class DevelopmentGridController extends SubSceneController{
     }
 
 
+    /**
+     * Initializes all the cards stack contained in the development card grid
+     */
     public void initializeSubScenes(){
         paycheckController.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
         c00Controller.attachInterpreters(controllerInterpreter, userInterpreter, offlineInfo);
@@ -82,20 +95,33 @@ public class DevelopmentGridController extends SubSceneController{
     }
 
 
+    /**
+     * Sets the paycheck activeSquare not visible
+     */
     public void reset(){
         paycheckController.reset();
     }
 
 
+    /**
+     * Sets the paycheck activeSquare visible
+     */
     public void setActive(){
         paycheckController.setActive();
     }
 
 
+    /**
+     * Sets the development card grid visible
+     */
     public void show(){
         developmentGroup.setVisible(true);
     }
 
+
+    /**
+     * Sets the development card grid not visible
+     */
     public void hide(){
         developmentGroup.setVisible(false);
     }

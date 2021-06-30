@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
+/**
+ * Represents the coffer on the player dashboard.
+ */
 public class CofferController extends SubSceneController{
 
     @FXML private Text shield;
@@ -13,6 +16,9 @@ public class CofferController extends SubSceneController{
     @FXML private ImageView activeSquare;
 
 
+    /**
+     *  Initialize the class with default values
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -24,6 +30,10 @@ public class CofferController extends SubSceneController{
     }
 
 
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         coin.setText(String.valueOf(completeUpdate[0]));
@@ -33,16 +43,25 @@ public class CofferController extends SubSceneController{
     }
 
 
+    /**
+     * Sets the activeSquare image not visible
+     */
     public void reset(){
         activeSquare.setVisible(false);
     }
 
 
+    /**
+     * Sets the activeSquare image visible
+     */
     public void setActive(){
         activeSquare.setVisible(true);
     }
 
 
+    /**
+     * Move the selected item of the OfflineInfo class to the coffer
+     */
     @FXML
     void activeSquareClicked() {
         if (offlineInfo.getSelectedItem().isBlank()){
@@ -53,6 +72,9 @@ public class CofferController extends SubSceneController{
         controllerInterpreter.execute("reset");
     }
 
+    /**
+     * Sets to 'coin' the selected item in the OfflineInfo class
+     */
     @FXML
     void coinClicked() {
         if(coin.getText().equals("0")){
@@ -63,6 +85,9 @@ public class CofferController extends SubSceneController{
         userInterpreter.execute("selected coin coffer");
     }
 
+    /**
+     * Sets to 'servant' the selected item in the OfflineInfo class
+     */
     @FXML
     void servantClicked() {
         if(servant.getText().equals("0")){
@@ -73,6 +98,9 @@ public class CofferController extends SubSceneController{
         userInterpreter.execute("selected servant coffer");
     }
 
+    /**
+     * Sets to 'shield' the selected item in the OfflineInfo class
+     */
     @FXML
     void shieldClicked() {
         if(shield.getText().equals("0")){
@@ -83,6 +111,9 @@ public class CofferController extends SubSceneController{
         userInterpreter.execute("selected shield coffer");
     }
 
+    /**
+     * Sets to 'stone' the selected item in the OfflineInfo class
+     */
     @FXML
     void stoneClicked() {
         if(stone.getText().equals("0")){

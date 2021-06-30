@@ -8,6 +8,9 @@ import javafx.scene.text.Text;
 
 import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.*;
 
+/**
+ * Represents the base production on the player dashboard.
+ */
 public class BaseProductionController extends SubSceneController {
 
     @FXML private ImageView out;
@@ -31,6 +34,9 @@ public class BaseProductionController extends SubSceneController {
     private WarehouseObjectTypeController input2 = COIN;
     private WarehouseObjectTypeController output = COIN;
 
+    /**
+     * Initialize the class with default values and default images
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -45,6 +51,10 @@ public class BaseProductionController extends SubSceneController {
         stone.setText("0");
     }
 
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         input1 = WarehouseObjectTypeController.getTypeByNumber(completeUpdate[5]);
@@ -63,15 +73,25 @@ public class BaseProductionController extends SubSceneController {
     }
 
 
+    /**
+     * Sets the activeSquare image not visible
+     */
     public void reset(){
         activeSquare.setVisible(false);
     }
 
+
+    /**
+     * Sets the activeSquare image visible
+     */
     public void setActive(){
         activeSquare.setVisible(true);
     }
 
 
+    /**
+     * Sets the base production active/inactive
+     */
     @FXML
     void checkBoxClicked() {
         controllerInterpreter.execute("reset");
@@ -79,6 +99,9 @@ public class BaseProductionController extends SubSceneController {
         offlineInfo.setProduction("base", produce.isVisible());
     }
 
+    /**
+     * Changes the first input of the base production with the next warehouse object type
+     */
     @FXML
     void in1downClicked() {
         controllerInterpreter.execute("reset");
@@ -87,6 +110,9 @@ public class BaseProductionController extends SubSceneController {
         userInterpreter.execute("swapBase 1 " + input1.toString().toLowerCase());
     }
 
+    /**
+     * Changes the first input of the base production with the previous warehouse object type
+     */
     @FXML
     void in1upClicked() {
         controllerInterpreter.execute("reset");
@@ -95,6 +121,9 @@ public class BaseProductionController extends SubSceneController {
         userInterpreter.execute("swapBase 1 " + input1.toString().toLowerCase());
     }
 
+    /**
+     * Changes the second input of the base production with the next warehouse object type
+     */
     @FXML
     void in2downClicked() {
         controllerInterpreter.execute("reset");
@@ -103,6 +132,9 @@ public class BaseProductionController extends SubSceneController {
         userInterpreter.execute("swapBase 2 " + input2.toString().toLowerCase());
     }
 
+    /**
+     * Changes the second input of the base production with the previous warehouse object type
+     */
     @FXML
     void in2upClicked() {
         controllerInterpreter.execute("reset");
@@ -111,6 +143,9 @@ public class BaseProductionController extends SubSceneController {
         userInterpreter.execute("swapBase 2 " + input2.toString().toLowerCase());
     }
 
+    /**
+     * Changes the output of the base production with the next warehouse object type
+     */
     @FXML
     void outDownClicked() {
         controllerInterpreter.execute("reset");
@@ -119,6 +154,9 @@ public class BaseProductionController extends SubSceneController {
         userInterpreter.execute("swapBase 3 " + output.toString().toLowerCase());
     }
 
+    /**
+     * Changes the output of the base production with the previous warehouse object type
+     */
     @FXML
     void outUpClicked() {
         controllerInterpreter.execute("reset");
@@ -127,6 +165,9 @@ public class BaseProductionController extends SubSceneController {
         userInterpreter.execute("swapBase 3 " + output.toString().toLowerCase());
     }
 
+    /**
+     * Sets to 'coin' the selected item in the OfflineInfo class
+     */
     @FXML
     void coinClicked() {
         if(coin.getText().equals("0")){
@@ -137,6 +178,9 @@ public class BaseProductionController extends SubSceneController {
         userInterpreter.execute("selected coin base");
     }
 
+    /**
+     * Sets to 'servant' the selected item in the OfflineInfo class
+     */
     @FXML
     void servantClicked() {
         if(servant.getText().equals("0")){
@@ -147,6 +191,9 @@ public class BaseProductionController extends SubSceneController {
         userInterpreter.execute("selected servant base");
     }
 
+    /**
+     * Sets to 'shield' the selected item in the OfflineInfo class
+     */
     @FXML
     void shieldClicked() {
         if(shield.getText().equals("0")){
@@ -157,6 +204,9 @@ public class BaseProductionController extends SubSceneController {
         userInterpreter.execute("selected shield base");
     }
 
+    /**
+     * Sets to 'stone' the selected item in the OfflineInfo class
+     */
     @FXML
     void stoneClicked() {
         if(stone.getText().equals("0")){
@@ -167,6 +217,9 @@ public class BaseProductionController extends SubSceneController {
         userInterpreter.execute("selected stone base");
     }
 
+    /**
+     * Move the selected item of the OfflineInfo class to the base production current supply
+     */
     @FXML
     void activeSquareClicked() {
         if (offlineInfo.getSelectedItem().isBlank()){
