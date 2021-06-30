@@ -223,5 +223,5 @@ public class MainCLI {
 
         screen.addView(name, tmp);
     }
-    
+
 }
