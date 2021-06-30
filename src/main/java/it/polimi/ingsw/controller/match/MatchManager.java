@@ -20,7 +20,7 @@ import java.util.Scanner;
 public class MatchManager {
 
     private HashMap<String, Match> activeMatches = new HashMap<>();
-    private static final String recoveryPath = "deliverables/savedMatches.txt";
+    private static final String recoveryPath = "./savedMatches.txt";
 
     public MatchManager(){
         restoreMatches();
