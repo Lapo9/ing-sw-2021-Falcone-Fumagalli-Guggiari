@@ -11,6 +11,8 @@ In order to run the game, launch `deliverables/MastersOfRenaissance.jar`. A simp
 
 `savedMatches.txt` and `MastersOfRenaissance.jar` must be in he same folder for the game to work.
 
+The client will shut down each time there is a fatal error. This doesn't mean the client or the server crashed, for example, if a user enters a wrong IP, the server won't respond, causing a fatal error, and the client will shut down gracefully. We chose this design choice in order to avoid any kind of broken state in the client. The client will also shut down at the end of a match.
+
 ### Server
 When launching the server, a message asking you what port number you want to use will pop up. If you enter an invalid value (any value not between 1024 and 49152), the default port (14009) will be chosen.
 
@@ -83,3 +85,10 @@ _Known bug: If you are hoovering over a player, and you become the active player
 The rules for the CLI are, of course, the same as the rules used in the GUI. As stated in the CLI home screen, you can use the `help` command to get all of the necessary info about the commands.
 
 It is important to note that the CLI isn't auto-updating. This means that if an opponent performs an action, the CLI won't show it immediately, in order not to frustrate the user with continuous updates, making it impossible to type any command. So, if the CLI isn't showing what you expect, use the command `u` to update the CLI.
+
+## Ambiguous game rules
+The rules of the game specified in the game instruction document were sometimes unclear, or left space for interpretation. Here we list some of the rules we considered ambiguous:
+* **White marble discard**: in the rules it isn't clear if white marbles, when discarded, should make the opponents advance in the faith track. We chose not to advance the opponents.
+* **Advancement order**: in the rules it isn't specified in what order the players should move on the faith track, once an opponent has discarded any marble. We chose to advance every player by one tile simultaneously, and to trigger the Vatican report at the end of the one-tile advancement (not at the end of all of the advancements).
+* **Faith track points**: in the rules it isn't clear if the points gained thanks to the faith track are cumulative or only the ones given by the last tile reached. We chose cumulative.
+* **Marble discard**: rules in Italian and English, specify different things: Italian rules says that marbles can be discarded only if they don't fit in the warehouse, whereas English ones states that a player can discard marbles at his will. We chose English rules here.
