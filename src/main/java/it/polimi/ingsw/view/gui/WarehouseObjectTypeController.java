@@ -2,21 +2,38 @@ package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Pair;
 
+
+/**
+ * Enumeration to associate a WarehouseObjectType with its image and some other properties
+ */
 public enum WarehouseObjectTypeController {
     COIN("pictures/miscellaneous/coin.png"), SERVANT("pictures/miscellaneous/servant.png"), SHIELD("pictures/miscellaneous/shield.png"), STONE("pictures/miscellaneous/stone.png");
 
 
     private String url;
 
+    /**
+     * Builds the enum object
+     * @param url Location of the image
+     */
     private WarehouseObjectTypeController(String url){
         this.url = url;
     }
 
+    /**
+     * Returns the location of the image of this resource
+     * @return Location of the image
+     */
     public String getUrl(){
         return url;
     }
 
 
+    /**
+     * In order to cycle over the resources, the resources must have an order.
+     * @param wotc Current resource
+     * @return Next resource
+     */
     public static WarehouseObjectTypeController next(WarehouseObjectTypeController wotc){
         switch (wotc){
             case COIN:
@@ -32,6 +49,11 @@ public enum WarehouseObjectTypeController {
     }
 
 
+    /**
+     * In order to cycle over the resources, the resources must have an order.
+     * @param wotc Current resource
+     * @return Previous resource
+     */
     public static WarehouseObjectTypeController prev(WarehouseObjectTypeController wotc){
         switch (wotc){
             case COIN:
@@ -47,6 +69,11 @@ public enum WarehouseObjectTypeController {
     }
 
 
+    /**
+     * Returns the WarehouseObjectType given an image URL
+     * @param url Location of the image
+     * @return Associated resource
+     */
     public static WarehouseObjectTypeController getTypeByUrl(String url){
         if (url.contains(COIN.getUrl())){
             return COIN;
@@ -64,8 +91,11 @@ public enum WarehouseObjectTypeController {
     }
 
 
-
-    //returns the supply contained in a warehouse row, and its quantity
+    /**
+     * Returns the supply contained in a warehouse row, and its quantity
+     * @param arr Array containing the resources in a warehouse row in this order: coin, servant, shield, stone, (faith point)
+     * @return The supply contained in a warehouse row, and its quantity
+     */
     public static Pair<WarehouseObjectTypeController, Integer> getContainedSupplies(int[] arr){
         int i;
         for(i = 0; i < 4; ++i){
@@ -92,6 +122,11 @@ public enum WarehouseObjectTypeController {
     }
 
 
+    /**
+     * Returns the warehouse object type given its cardinal order as defined in next and prev
+     * @param number Order of the resource
+     * @return Corresponding resource
+     */
     public static WarehouseObjectTypeController getTypeByNumber(int number) {
         if(number == 0)
             return COIN;

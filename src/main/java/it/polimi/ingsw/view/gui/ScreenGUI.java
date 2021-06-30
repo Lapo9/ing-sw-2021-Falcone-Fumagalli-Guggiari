@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 
 import java.util.HashMap;
 
+
+/**
+ * This class is responsible to orchestrate the various scenes.
+ */
 public class ScreenGUI extends Application implements Screen {
 
     private Stage stage;
@@ -20,6 +24,10 @@ public class ScreenGUI extends Application implements Screen {
     private Pair<Scene, SceneController> activeScene;
 
 
+    /**
+     * Display the selected element
+     * @param scene The scene to display
+     */
     @Override
     public void show(String scene){
 
@@ -51,6 +59,10 @@ public class ScreenGUI extends Application implements Screen {
     }
 
 
+    /**
+     * Hides the specified element
+     * @param scene The element to be hidden
+     */
     @Override
     public void hide(String scene) {
         //this works only if the argument is an opponent or the unassigned marbles
@@ -80,18 +92,32 @@ public class ScreenGUI extends Application implements Screen {
     }
 
 
+    /**
+     * Sets the message on screen
+     * @param message Content of the message
+     * @param type Type of message
+     */
     @Override
     public void setMessage(String message, MessageType type) {
         Platform.runLater(() -> activeScene.second.setMessage(message, type));
     }
 
 
-
+    /**
+     * Tells each scene what are the players and the status of the match
+     * @param players String containing the players and their status
+     */
     @Override
     public void setPlayers(String players) {
         scenes.forEach((id, scene) -> {Platform.runLater(() -> scene.second.setPlayers(players));});
     }
 
+
+    /**
+     * Starts the GUI
+     * @param stage First scene to display
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
@@ -120,12 +146,25 @@ public class ScreenGUI extends Application implements Screen {
     }
 
 
+    /**
+     * Wrapper to call the launch method to start the GUI
+     * @param args --Disabled--
+     */
     public static void mainGUI(String[] args) {
         launch(args);
     }
 
 
-
+    /**
+     * Loads a view to the current stage
+     * @param id Id of the scene
+     * @param fxml Graphical structure of the scene
+     * @param ci Controller interpreter to be used by the scene, to communicate with other scenes and receive updates from the server
+     * @param ui User interpreter to be used by the scene, to communicate with the server
+     * @param oi Offline info to be used by the scene, to retrieve information about the match offline
+     * @param mi Model interpreter to be used by the scene, to receive updates from the model
+     * @throws Exception Something went wrong
+     */
     private void loadView(String id, String fxml, ControllerInterpreter ci, UserInterpreter ui, OfflineInfo oi, ModelInterpreterGUI mi) throws Exception{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(fxml)); //tell the loader where is the .fxml file of the scene
@@ -145,7 +184,15 @@ public class ScreenGUI extends Application implements Screen {
         scenes.put(id, new Pair<>(tmpScene, tmpController));
     }
 
-
+    /**
+     * Loads a view to the current stage
+     * @param id Id of the scene
+     * @param fxml Graphical structure of the scene
+     * @param ci Controller interpreter to be used by the scene, to communicate with other scenes and receive updates from the server
+     * @param ui User interpreter to be used by the scene, to communicate with the server
+     * @param oi Offline info to be used by the scene, to retrieve information about the match offline
+     * @throws Exception Something went wrong
+     */
     private void loadView(String id, String fxml, ControllerInterpreter ci, UserInterpreter ui, OfflineInfo oi) throws Exception{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource(fxml)); //tell the loader where is the .fxml file of the scene

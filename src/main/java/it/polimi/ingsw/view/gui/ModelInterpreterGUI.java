@@ -10,6 +10,9 @@ import it.polimi.ingsw.view.gui.controllers.SceneController;
 
 import java.util.ArrayList;
 
+/**
+ * This class is responsible for receiving updates from the model and forward them to the observer SceneController(s)
+ */
 public class ModelInterpreterGUI implements ModelInterpreter {
 
     private ArrayList<SceneController> toNotify = new ArrayList<>();
@@ -22,7 +25,10 @@ public class ModelInterpreterGUI implements ModelInterpreter {
     }
 
 
-
+    /**
+     * Sends the model update to all of the SceneController(s) subscribed
+     * @param update Model update
+     */
     @Override
     public synchronized void update(int[] update) {
         //update offline info for the leaders
@@ -37,7 +43,12 @@ public class ModelInterpreterGUI implements ModelInterpreter {
     }
 
 
-
+    /**
+     * Returns the leader status based on its id and current status
+     * @param id Leader id
+     * @param status Leader status ad defined in Dashboard.getStatus()
+     * @return Leader status
+     */
     private static OfflineInfo.LeaderStatus dataToStatus(int id, int status){
         LeaderAbility la = LeaderCard.getAbility(id);
 
@@ -57,7 +68,10 @@ public class ModelInterpreterGUI implements ModelInterpreter {
     }
 
 
-
+    /**
+     * Attaches a SceneController to the observer list of this object
+     * @param controller SceneController to attach
+     */
     public void attach(SceneController controller){
         toNotify.add(controller);
     }
