@@ -1,8 +1,6 @@
 package it.polimi.ingsw.view;
 
 
-import it.polimi.ingsw.view.cli.ControllerInterpreter;
-
 import java.util.*;
 import java.util.stream.Collectors;
 

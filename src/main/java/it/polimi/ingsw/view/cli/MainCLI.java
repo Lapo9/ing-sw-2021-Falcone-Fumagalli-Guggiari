@@ -1,5 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.view.ControllerInterpreter;
 import it.polimi.ingsw.view.OfflineInfo;
 import it.polimi.ingsw.view.ServerSocket;
 import it.polimi.ingsw.view.UserInterpreter;

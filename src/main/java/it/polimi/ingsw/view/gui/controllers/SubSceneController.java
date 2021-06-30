@@ -1,6 +1,6 @@
 package it.polimi.ingsw.view.gui.controllers;
 
-import it.polimi.ingsw.view.cli.ControllerInterpreter;
+import it.polimi.ingsw.view.ControllerInterpreter;
 import it.polimi.ingsw.view.OfflineInfo;
 import it.polimi.ingsw.view.UserInterpreter;
 

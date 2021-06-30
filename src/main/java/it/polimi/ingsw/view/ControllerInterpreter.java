@@ -1,4 +1,4 @@
-package it.polimi.ingsw.view.cli;
+package it.polimi.ingsw.view;
 
 import it.polimi.ingsw.view.OfflineInfo;
 import it.polimi.ingsw.view.Screen;
