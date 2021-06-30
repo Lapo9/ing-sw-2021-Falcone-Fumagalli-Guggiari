@@ -1,4 +1,6 @@
-package it.polimi.ingsw.view.cli;
+package it.polimi.ingsw.view.cli.viewables;
+
+import it.polimi.ingsw.view.OfflineInfo;
 
 /**
  * Manages every type of Viewable in the CLI

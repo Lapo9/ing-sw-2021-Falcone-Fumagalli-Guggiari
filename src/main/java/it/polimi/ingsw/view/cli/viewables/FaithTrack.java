@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.cli.viewables;
 
-import it.polimi.ingsw.view.cli.OfflineInfo;
-import it.polimi.ingsw.view.cli.Viewable;
+import it.polimi.ingsw.view.OfflineInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;

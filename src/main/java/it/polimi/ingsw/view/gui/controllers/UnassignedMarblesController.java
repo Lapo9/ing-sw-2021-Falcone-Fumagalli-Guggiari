@@ -1,7 +1,7 @@
 package it.polimi.ingsw.view.gui.controllers;
 
 import it.polimi.ingsw.model.MarbleColor;
-import it.polimi.ingsw.view.cli.OfflineInfo;
+import it.polimi.ingsw.view.OfflineInfo;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.image.Image;

@@ -4,11 +4,8 @@ import it.polimi.ingsw.model.CardCategory;
 import it.polimi.ingsw.model.SupplyContainer;
 import it.polimi.ingsw.model.WarehouseObjectType;
 import it.polimi.ingsw.model.leaders.CardsRequirement;
-import it.polimi.ingsw.model.leaders.leader_abilities.LeaderAbility;
-import it.polimi.ingsw.view.cli.Viewable;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import static it.polimi.ingsw.model.leaders.LeaderCard.*;
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;

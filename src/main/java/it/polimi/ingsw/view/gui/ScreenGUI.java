@@ -1,7 +1,10 @@
 package it.polimi.ingsw.view.gui;
 
 import it.polimi.ingsw.Pair;
+import it.polimi.ingsw.view.OfflineInfo;
 import it.polimi.ingsw.view.Screen;
+import it.polimi.ingsw.view.ServerSocket;
+import it.polimi.ingsw.view.UserInterpreter;
 import it.polimi.ingsw.view.cli.*;
 import it.polimi.ingsw.view.gui.controllers.DashboardController;
 import it.polimi.ingsw.view.gui.controllers.SceneController;

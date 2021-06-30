@@ -1,11 +1,7 @@
 package it.polimi.ingsw.view.cli.viewables;
 
-import it.polimi.ingsw.model.CardCategory;
-import it.polimi.ingsw.view.cli.Viewable;
-import it.polimi.ingsw.view.cli.viewables.DevelopmentGridCard.*;
-
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 
 /**

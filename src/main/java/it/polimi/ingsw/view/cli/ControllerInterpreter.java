@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.cli;
 
-import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
-
+import it.polimi.ingsw.view.OfflineInfo;
 import it.polimi.ingsw.view.Screen;
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
 import it.polimi.ingsw.view.gui.MessageType;
@@ -126,13 +125,14 @@ public class ControllerInterpreter {
         for (int i=1; i<tokens.length; ++i){
             errorMessage.append(tokens[i]);
             errorMessage.append(" ");
-            System.exit(0);
         }
 
         offlineInfo.setMatchStarted(false);
         execute("show welcome");
         screen.setMessage(errorMessage.toString(), MessageType.FATAL);
         screen.refresh();
+
+        System.exit(0);
     }
 
     /**

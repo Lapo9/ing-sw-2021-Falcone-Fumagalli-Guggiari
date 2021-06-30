@@ -1,6 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
 import it.polimi.ingsw.view.Screen;
+import it.polimi.ingsw.view.UserInterpreter;
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
 import it.polimi.ingsw.view.cli.fancy_console.FancyConsole;
 import it.polimi.ingsw.view.gui.MessageType;

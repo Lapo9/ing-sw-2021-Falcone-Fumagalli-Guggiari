@@ -2,9 +2,7 @@ package it.polimi.ingsw.view.gui.controllers;
 
 import it.polimi.ingsw.Pair;
 import it.polimi.ingsw.model.leaders.LeaderCard;
-import it.polimi.ingsw.model.leaders.leader_abilities.Depot;
-import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
-import it.polimi.ingsw.view.cli.OfflineInfo;
+import it.polimi.ingsw.view.OfflineInfo;
 import it.polimi.ingsw.view.gui.WarehouseObjectTypeController;
 import javafx.fxml.FXML;
 import javafx.scene.Group;

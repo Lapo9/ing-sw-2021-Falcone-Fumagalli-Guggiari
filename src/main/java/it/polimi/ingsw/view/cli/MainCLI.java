@@ -1,5 +1,8 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.view.OfflineInfo;
+import it.polimi.ingsw.view.ServerSocket;
+import it.polimi.ingsw.view.UserInterpreter;
 import it.polimi.ingsw.view.cli.exceptions.ViewException;
 import it.polimi.ingsw.view.cli.fancy_console.FancyConsole;
 import it.polimi.ingsw.view.cli.viewables.*;

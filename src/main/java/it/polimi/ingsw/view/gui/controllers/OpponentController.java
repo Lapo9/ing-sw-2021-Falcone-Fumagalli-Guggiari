@@ -5,7 +5,6 @@ import it.polimi.ingsw.model.CardCategory;
 import it.polimi.ingsw.model.leaders.LeaderCard;
 import it.polimi.ingsw.model.leaders.leader_abilities.Depot;
 import it.polimi.ingsw.model.leaders.leader_abilities.Producer;
-import it.polimi.ingsw.view.cli.OfflineInfo;
 import it.polimi.ingsw.view.gui.WarehouseObjectTypeController;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;

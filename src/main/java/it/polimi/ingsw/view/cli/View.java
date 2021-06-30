@@ -1,5 +1,7 @@
 package it.polimi.ingsw.view.cli;
 
+import it.polimi.ingsw.view.cli.viewables.Viewable;
+
 import java.util.ArrayList;
 
 

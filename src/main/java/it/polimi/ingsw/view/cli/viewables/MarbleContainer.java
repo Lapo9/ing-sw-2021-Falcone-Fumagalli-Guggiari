@@ -1,12 +1,6 @@
 package it.polimi.ingsw.view.cli.viewables;
 
-import it.polimi.ingsw.model.MarbleColor;
-import it.polimi.ingsw.view.cli.Viewable;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import static it.polimi.ingsw.model.MarbleColor.*;
 
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;
 

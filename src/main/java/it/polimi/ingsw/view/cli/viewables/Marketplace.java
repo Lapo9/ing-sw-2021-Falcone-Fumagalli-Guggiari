@@ -1,10 +1,5 @@
 package it.polimi.ingsw.view.cli.viewables;
 
-import it.polimi.ingsw.view.cli.ScreenCLI;
-import it.polimi.ingsw.view.cli.View;
-import it.polimi.ingsw.view.cli.Viewable;
-import it.polimi.ingsw.view.cli.ViewableId;
-
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;

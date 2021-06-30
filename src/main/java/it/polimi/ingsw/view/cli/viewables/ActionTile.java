@@ -1,7 +1,5 @@
 package it.polimi.ingsw.view.cli.viewables;
 
-import it.polimi.ingsw.view.cli.Viewable;
-
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.BOLD;
 
 /**

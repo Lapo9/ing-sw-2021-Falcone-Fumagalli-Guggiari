@@ -1,7 +1,6 @@
 package it.polimi.ingsw.view.cli.viewables;
 
 import it.polimi.ingsw.model.WarehouseObjectType;
-import it.polimi.ingsw.view.cli.Viewable;
 
 import java.util.HashMap;
 

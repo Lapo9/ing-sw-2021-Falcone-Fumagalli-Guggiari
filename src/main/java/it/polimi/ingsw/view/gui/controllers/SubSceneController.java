@@ -1,13 +1,8 @@
 package it.polimi.ingsw.view.gui.controllers;
 
 import it.polimi.ingsw.view.cli.ControllerInterpreter;
-import it.polimi.ingsw.view.cli.OfflineInfo;
-import it.polimi.ingsw.view.cli.UserInterpreter;
-import it.polimi.ingsw.view.gui.MessageType;
-import javafx.animation.FadeTransition;
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.util.Duration;
+import it.polimi.ingsw.view.OfflineInfo;
+import it.polimi.ingsw.view.UserInterpreter;
 
 
 public abstract class SubSceneController {

@@ -210,7 +210,7 @@ public class Player {
         try {
             matchManager.addPlayer(this, tokens[2], tokens[3].contains("singlePlayer")); //add the player to the match, if you cannot destroy
         } catch (MatchException me){
-            sendController("fatal " + me.getMessage());
+            sendController("error " + me.getMessage());
             destroy();
             return;
         }

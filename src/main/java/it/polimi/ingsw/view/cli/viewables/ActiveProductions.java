@@ -1,8 +1,5 @@
 package it.polimi.ingsw.view.cli.viewables;
 
-import it.polimi.ingsw.view.cli.OfflineInfo;
-import it.polimi.ingsw.view.cli.Viewable;
-
 import java.util.ArrayList;
 
 import static it.polimi.ingsw.view.cli.fancy_console.FancyConsole.*;

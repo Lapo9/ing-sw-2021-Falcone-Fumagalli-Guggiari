@@ -1,7 +1,7 @@
-package it.polimi.ingsw.view.cli;
+package it.polimi.ingsw.view;
 
 
-import it.polimi.ingsw.ClientSocket;
+import it.polimi.ingsw.view.cli.ControllerInterpreter;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,9 +1,6 @@
 package it.polimi.ingsw.view.cli.viewables;
 
-import it.polimi.ingsw.view.cli.Viewable;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 
 //TODO not used class
 public class TestViewable implements Viewable {

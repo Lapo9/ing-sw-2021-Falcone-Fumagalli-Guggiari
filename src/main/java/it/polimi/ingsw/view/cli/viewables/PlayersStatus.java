@@ -1,13 +1,10 @@
 package it.polimi.ingsw.view.cli.viewables;
 
 import it.polimi.ingsw.Pair;
-import it.polimi.ingsw.view.cli.OfflineInfo;
-import it.polimi.ingsw.view.cli.Viewable;
+import it.polimi.ingsw.view.OfflineInfo;
 import it.polimi.ingsw.view.cli.fancy_console.FancyConsole;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 //TODO not used class
 /**

@@ -1,5 +1,6 @@
-package it.polimi.ingsw.view.cli;
+package it.polimi.ingsw.view;
 
+import it.polimi.ingsw.view.cli.ViewableId;
 import it.polimi.ingsw.view.cli.viewables.ViewableFactory;
 
 import java.util.ArrayList;
