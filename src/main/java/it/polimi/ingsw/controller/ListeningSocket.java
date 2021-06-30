@@ -8,17 +8,25 @@ import java.net.Socket;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Manages the socket to create the connection between the players
+ */
 public class ListeningSocket {
 
     private ServerSocket listeningSocket;
     private MatchManager matchManager;
 
-
+    /**
+     * Class constructor
+     */
     public ListeningSocket(){
         matchManager = new MatchManager();
     }
 
-
+    /**
+     * Starts the connection
+     * @param portNumber where to create the connection
+     */
     public void start(String portNumber) {
         int pn;
         try {

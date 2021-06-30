@@ -16,6 +16,9 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+/**
+ * Class that manages the player of the game
+ */
 public class Player {
 
     private ClientSocket socket;
@@ -32,7 +35,11 @@ public class Player {
     private Thread heartbeatThread;
 
 
-
+    /**
+     * Class constructor
+     * @param client Socket to copy
+     * @param matchManager matchManager
+     */
     public Player(Socket client, MatchManager matchManager) {
         try {
             this.socket = new ClientSocket(client);
@@ -44,7 +51,18 @@ public class Player {
         new Thread(() -> handshake(matchManager)).start();
     }
 
-
+    /**
+     * Class constructor
+     * @param name of the player
+     * @param match where the player wants to join
+     * @param order of the player
+     * @param dashboard of the player
+     * @param marketplace of the match
+     * @param developmentGrid of the match
+     * @param isSinglePlayer boolean to establish if it is a single player match or not
+     * @param leadersList list of leaders to choose
+     * @throws Exception checked exception
+     */
     public Player(String name, Match match, int order, String dashboard, Marketplace marketplace, DevelopmentGrid developmentGrid, boolean isSinglePlayer, LeadersList leadersList) throws Exception{
         this.name = name;
         this.match = match;
@@ -57,60 +75,102 @@ public class Player {
         selectedItemsInPreMatch = order == 0 ? 0 : order == 1 ? 1 : order == 2 ? 1 : order == 3 ? 2 : 0;
     }
 
-
+    /**
+     * Gets the number of selected items in the pre match session by the player
+     * (first player has to select 0 items to take,
+     * second and third player have to select one item
+     * and the fourth player has to select 2 items)
+     * @return number of the items
+     */
     public synchronized int getSelectedItemsInPreMatch() {
         return selectedItemsInPreMatch;
     }
 
+    /**
+     * Adds the selected items to the counter
+     */
     public synchronized void addSelectedItemsInPreMatch() {
         selectedItemsInPreMatch++;
     }
 
-
+    /**
+     * Gets the number of selected leader cards in the pre match session by the player (every player has to select two leaders to take)
+     * @return index of the cards
+     */
     public synchronized int getSelectedLeadersInPreMatch() {
         return selectedLeadersInPreMatch;
     }
 
+    /**
+     * Adds the selected leaders to the counter
+     */
     public synchronized void addSelectedLeaderInPreMatch() {
         selectedLeadersInPreMatch++;
     }
 
-
+    /**
+     * Gets the order of the player
+     * @return the order of the player
+     */
     public synchronized int getOrder() {
         return order;
     }
 
+    /**
+     * Sets the order of the player
+     * @param order the order to set
+     */
     public synchronized void setOrder(int order){
         this.order = order;
     }
 
-
+    /**
+     * Gets the player's name
+     * @return a String containing the player's name
+     */
     public synchronized String getName(){
         return new String(name);
     }
 
-
-
+    /**
+     * Gets the player's status in the match
+     * @return player's status
+     */
     public synchronized boolean isConnected(){
         return isConnected;
     }
 
+    /**
+     * Sets the player's status
+     * @param isConnected status to set
+     */
     private synchronized void setConnected(boolean isConnected){
         this.isConnected = isConnected;
     }
 
-
+    /**
+     * Is the player to destroy?
+     * @return true/false
+     */
     private synchronized boolean isDestroyed(){
         return destroy;
     }
 
+    /**
+     * Set the status of the player
+     * @param d status to set
+     * @return returns whether it was this thread to change the status
+     */
     private synchronized boolean setDestroy(boolean d){
         boolean res = destroy != d;
         destroy = d;
-        return res; //returns whether it was this thread to change the status
+        return res;
     }
 
-
+    /**
+     * Reconnects the player to the match
+     * @param replacingPlayer player to reconnect
+     */
     public synchronized void reconnect(Player replacingPlayer){
         if(!isConnected()) {
             System.out.print("\n" + name + " reconnected");
@@ -134,23 +194,36 @@ public class Player {
         }
     }
 
-
+    /**
+     * Sets the dashboard of the player with the dashboard given
+     * @param dashboard Dashboard
+     */
     public void attachDashboard(Dashboard dashboard){
         this.dashboard = dashboard;
     }
 
-
+    /**
+     * Sets the match of the player with the match given
+     * @param match Match
+     */
     public void attachMatch(Match match) {
         this.match = match;
     }
 
-
+    /**
+     * Gets the player's dashboard
+     * @return player's dashboard
+     */
     public Dashboard getDashboard() {
         return dashboard;
     }
 
 
-
+    /**
+     * Sends a message to the controller
+     * @param message to send
+     * @return if the message is sent without errors
+     */
     public synchronized boolean sendController(String message){
         try {
             socket.send(message, ClientSocket.packUpStringWithLengthAndType((byte) 0));
@@ -162,7 +235,11 @@ public class Player {
     }
 
 
-
+    /**
+     * Sends the status of the model to the controller
+     * @param update ArrayList of integer representing the dashboard (HasStatus)
+     * @return if the message is sent without errors
+     */
     public synchronized boolean sendModel(ArrayList<Integer> update){
         int[] updateArr = update.stream().mapToInt(i -> i).toArray();
         try {
@@ -175,7 +252,10 @@ public class Player {
     }
 
 
-
+    /**
+     * Send terminate message to the controller
+     * @return
+     */
     public synchronized boolean sendTerminate() {
         try {
             socket.send("", ClientSocket.packUpStringWithLengthAndType((byte) 2));
@@ -188,7 +268,11 @@ public class Player {
 
 
 
-    //function to accept the player and add it to the specified match
+
+    /**
+     * Function to accept the player and add it to the specified match
+     * @param matchManager MatchManager
+     */
     private void handshake(MatchManager matchManager){
         setConnected(true);
 
@@ -236,7 +320,10 @@ public class Player {
     }
 
 
-    //routine performed by the socket to listen. It is performed at max once every 5 seconds
+
+    /**
+     * Routine performed by the socket to listen. It is performed at max once every 5 seconds
+     */
     private void listenRoutine() {
         while (!isDestroyed()) {
             String message;
@@ -251,7 +338,10 @@ public class Player {
     }
 
 
-    //send an heartbeat to the player once every 8 seconds to tell him everything is ok
+
+    /**
+     * Send an heartbeat to the player once every 8 seconds to tell him everything is ok
+     */
     private void heartbeat(){
         while(!isDestroyed()) {
             sendController("ECG");
@@ -263,7 +353,9 @@ public class Player {
         }
     }
 
-
+    /**
+     * Destroy the player
+     */
     public synchronized void destroy() {
         //if this thread called destroy first
         if (setDestroy(true)) {

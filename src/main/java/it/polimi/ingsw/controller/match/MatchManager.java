@@ -22,12 +22,21 @@ public class MatchManager {
     private HashMap<String, Match> activeMatches = new HashMap<>();
     private static final String recoveryPath = "./savedMatches.txt";
 
+    /**
+     * Class constructor
+     */
     public MatchManager(){
         restoreMatches();
     }
 
 
-
+    /**
+     * Adds the player to the match
+     * @param p player to add
+     * @param matchId id of the match
+     * @param isSinglePlayer true/false
+     * @throws MatchException if there are problems with join
+     */
     public synchronized void addPlayer(Player p, String matchId, boolean isSinglePlayer) throws MatchException {
 
         Match specified = activeMatches.get(matchId);
@@ -46,7 +55,10 @@ public class MatchManager {
     }
 
 
-
+    /**
+     * Notifies the end of the match
+     * @param matchId name of the match to end
+     */
     public synchronized void notifyMatchEnded(String matchId){
         activeMatches.remove(matchId);
         saveToFile(removeMatch(matchId)); //remove the ended match from the status
@@ -85,7 +97,9 @@ public class MatchManager {
         saveToFile(finalMatchStatus.toString());
     }
 
-
+    /**
+     * Restores the saved match following the path where they are stored
+     */
     private void restoreMatches(){
         Path path = Path.of(recoveryPath);
         String savedMatches = "";
@@ -112,7 +126,12 @@ public class MatchManager {
 
 
 
-    //removes the specified match from the saved matches
+
+    /**
+     * Removes the specified match from the saved matches
+     * @param matchId id of the match to remove
+     * @return new match
+     */
     private String removeMatch(String matchId){
         StringBuilder newMatches = new StringBuilder();
         Path path = Path.of(recoveryPath);
@@ -134,7 +153,10 @@ public class MatchManager {
         return newMatches.toString();
     }
 
-
+    /**
+     * Saves the match in a new file
+     * @param matches string representing the match
+     */
     private void saveToFile(String matches){
         File file = new File(recoveryPath);
         try (FileWriter writer = new FileWriter(file)) {

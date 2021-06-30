@@ -292,7 +292,7 @@ public class Match {
     }
 
     /**
-     * Player starts the match if there are no errors
+     * Starts the match if there are no errors
      * @param player who wants to start the match
      * @param args of the command (nothing)
      */
@@ -356,7 +356,7 @@ public class Match {
     }
 
     /**
-     * Player select a starting supply if he can
+     * Select a starting supply (if the player is allowed)
      * @param player who wants to select an item
      * @param args of the command (supply type)
      */
@@ -392,7 +392,7 @@ public class Match {
     }
 
     /**
-     * Player select a row/column of the Marketplace to take
+     * Select a row/column of the Marketplace to take
      * @param player who wants to pick marbles
      * @param args argo of the command marketplace (direction h/v, index of row/column)
      */
@@ -426,7 +426,7 @@ public class Match {
     }
 
     /**
-     * Player moves a marble to a specified depot
+     * Moves a marble to a specified depot
      * @param player who wants to move a marble
      * @param args of the command (marbleColor, depot)
      */
@@ -453,7 +453,7 @@ public class Match {
     }
 
     /**
-     * Player colors a white marble
+     * Colors a white marble
      * @param player who want to color a white marble
      * @param args of the command (marbleColor)
      */
@@ -476,7 +476,7 @@ public class Match {
     }
 
     /**
-     * Player discards the remaining marbles
+     * Discards the remaining marbles
      * @param player who want to discard marbles
      * @param args of the command (nothing)
      */
@@ -526,7 +526,7 @@ public class Match {
     }
 
     /**
-     * Player moves a supply
+     * Moves a supply
      * @param player who want to move a supply
      * @param args of the command (supply type, from, to)
      */
@@ -553,7 +553,7 @@ public class Match {
     }
 
     /**
-     * Player buys a DevelopmentCard
+     * Buys a DevelopmentCard
      * @param player who want to buy a card
      * @param args of the command (row, column, space where to put the card)
      */
@@ -589,7 +589,7 @@ public class Match {
     }
 
     /**
-     * Player ends his turn
+     * Ends the turn of the player
      * @param player who want to end his turn
      * @param args of the command (nothing)
      */
@@ -635,9 +635,9 @@ public class Match {
     }
 
     /**
-     * Player produces
+     * Produces the active productions
      * @param player who wants to produce
-     * @param args
+     * @param args of the command (nothing)
      */
     private void produce(Player player, String... args) {
         if(player != activePlayer){
@@ -679,7 +679,7 @@ public class Match {
     }
 
     /**
-     * Player switches base production input or output
+     * Switches base production input or output
      * @param player who wants to perform this action
      * @param args of the command (slot, new supply type)
      */
@@ -704,7 +704,7 @@ public class Match {
     }
 
     /**
-     * Player switches leader production output
+     * Switches leader production output
      * @param player who wants to perform this action
      * @param args of the command (slot, new supply type)
      */
@@ -729,7 +729,7 @@ public class Match {
     }
 
     /**
-     * Player activates one LeaderCard
+     * Activates one LeaderCard
      * @param player who wants to activate a leader
      * @param args of the command (index)
      */
@@ -751,7 +751,7 @@ public class Match {
     }
 
     /**
-     * Player discards one LeaderCard
+     * Discards one LeaderCard
      * @param player who wants to discard a leader
      * @param args of the command (index)
      */
@@ -783,7 +783,7 @@ public class Match {
     }
 
     /**
-     * Player chooses his leaders
+     * Chooses his leaders
      * @param player who has to chose leaders
      * @param args of the command (index1, index2)
      */
@@ -813,7 +813,7 @@ public class Match {
     }
 
     /**
-     * Player swaps two rows of the Warehouse
+     * Swaps two rows of the Warehouse
      * @param player who wants to perform the action
      * @param args of the command (index1, index2)
      */
@@ -836,7 +836,7 @@ public class Match {
     }
 
     /**
-     * Player selects an item to move
+     * Selects an item to move
      * @param player who wants to select an item
      * @param args of the command (supply type, from)
      */
@@ -895,7 +895,11 @@ public class Match {
         player.sendController("setActive" + allowedString);
     }
 
-
+    /**
+     * Skip player's turn (for example when he is disconnected)
+     * @param player who has to skip turn
+     * @param args of the command (nothing)
+     */
     private void skipTurn(Player player, String... args) {
         if (checkWinner()){
             phase = GAME_OVER;
@@ -905,7 +909,11 @@ public class Match {
         update("endTurn", player);
     }
 
-
+    /**
+     * Disconnection from the match
+     * @param player who wants to disconnect
+     * @param args of the command (nothing)
+     */
     private void exit(Player player, String... args) {
         if (phase != LOBBY) {
             player.sendController("error You can't leave now!");
@@ -1028,7 +1036,7 @@ public class Match {
 
 
     /**
-     * Chack if someone won, if so every player after him has to end his turn
+     * Checks if someone won, if so every player after him has to end his turn
      * @return true (there is a winner) or false
      */
     private synchronized boolean checkWinner(){
@@ -1061,7 +1069,7 @@ public class Match {
     }
 
     /**
-     * Extract the position of the active player, if it not correspond to the last tile, he lost the game
+     * Extracts the position of the active player, if it not correspond to the last tile, he lost the game
      * @return false if he won
      */
     private synchronized boolean extractSinglePlayerTile(){
