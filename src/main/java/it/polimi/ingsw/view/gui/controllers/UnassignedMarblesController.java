@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
 
+/**
+ * Represents the unassigned marbles
+ */
 public class UnassignedMarblesController extends SubSceneController {
 
     @FXML private ImageView marble3;
@@ -29,7 +32,9 @@ public class UnassignedMarblesController extends SubSceneController {
             "/pictures/marbles/yellowMarble.png"
     ));
 
-
+    /**
+     * Initializes the class
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -38,6 +43,10 @@ public class UnassignedMarblesController extends SubSceneController {
         colorPane.setVisible(false);
     }
 
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         ArrayList<ImageView> marbles = new ArrayList<>(Arrays.asList(marble1, marble2, marble3, marble4));
@@ -55,21 +64,33 @@ public class UnassignedMarblesController extends SubSceneController {
     }
 
 
-
+    /**
+     * Shows the unassigned marble
+     */
     public void show(){
         unassignedMarblesGroup.setVisible(true);
     }
 
+    /**
+     * Hides the unassigned marble
+     */
     public void hide(){
         unassignedMarblesGroup.setVisible(false);
     }
 
+    /**
+     * Resets the color pane
+     */
     public void reset(){
         colorPane.setVisible(false);
     }
 
 
-
+    /**
+     * Gets the marble color from the url
+     * @param url of the picture
+     * @return marble color
+     */
     private MarbleColor urlToColor(String url){
         if (url.contains("/pictures/marbles/blueMarble.png")){
             return MarbleColor.BLUE;
@@ -87,7 +108,9 @@ public class UnassignedMarblesController extends SubSceneController {
     }
 
 
-
+    /**
+     * 
+     */
     @FXML
     void blueClicked() {
         controllerInterpreter.execute("reset");

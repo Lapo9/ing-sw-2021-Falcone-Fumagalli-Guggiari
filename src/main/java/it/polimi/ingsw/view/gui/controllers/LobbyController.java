@@ -12,7 +12,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Represents the lobby of the game
+ */
 public class LobbyController extends SceneController {
 
     @FXML private Button start;
@@ -29,7 +31,9 @@ public class LobbyController extends SceneController {
 
     ArrayList<Pair<Label, ImageView>> players = new ArrayList<>();
 
-
+    /**
+     * Initializes the class
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -46,16 +50,24 @@ public class LobbyController extends SceneController {
         text.setText(result);
     }
 
-
+    /**
+     * Does nothing
+     */
     @Override
     public void initializeSubScenes() {}
 
+    /**
+     * Does nothing
+     */
     @Override
     public void update(int[] completeUpdate) {
 
     }
 
-
+    /**
+     * Sets the players who join the match on the screen
+     * @param players what players are present and their status, in a specific format
+     */
     @Override
     public void setPlayers(String players) {
         //clear the table
@@ -75,14 +87,18 @@ public class LobbyController extends SceneController {
     }
 
 
-
+    /**
+     * Starts the match with the button
+     */
     @FXML
     private void startClicked(){
         userInterpreter.execute("start");
     }
 
 
-
+    /**
+     * Exit from the lobby
+     */
     @FXML
     private void exitClicked(){
         userInterpreter.execute("exit");

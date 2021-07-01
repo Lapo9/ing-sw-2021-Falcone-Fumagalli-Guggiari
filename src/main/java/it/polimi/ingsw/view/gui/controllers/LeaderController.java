@@ -17,7 +17,9 @@ import java.util.Locale;
 import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getContainedSupplies;
 import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getTypeByNumber;
 
-
+/**
+ * Represents the leader card
+ */
 public class LeaderController extends SubSceneController {
 
     @FXML private Group leaderGroup;
@@ -44,12 +46,18 @@ public class LeaderController extends SubSceneController {
     private int leaderCardId;
     private WarehouseObjectTypeController producerInput = WarehouseObjectTypeController.COIN;
 
-
+    /**
+     * Initialize the class
+     */
     @Override
     public void initialize() {
         super.initialize();
     }
 
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         if (number == 0){
@@ -119,25 +127,34 @@ public class LeaderController extends SubSceneController {
         }
     }
 
-
+    /**
+     * Makes the card invisible
+     */
     public void reset(){
         menu.setVisible(false);
         leaderActive.setVisible(false);
     }
 
-
+    /**
+     * Sets the active leader card visible
+     */
     public void setActive(){
         leaderActive.setVisible(true);
     }
 
 
-
+    /**
+     * Activates the leader selected
+     */
     @FXML
     void activateClicked() {
         controllerInterpreter.execute("reset");
         userInterpreter.execute("activateLeader " + number);
     }
 
+    /**
+     * Activates the production of the leader producer
+     */
     @FXML
     void checkBoxClicked() {
         controllerInterpreter.execute("reset");
@@ -145,6 +162,9 @@ public class LeaderController extends SubSceneController {
         offlineInfo.setProduction(id, produce.isVisible());
     }
 
+    /**
+     * Moves the selected item (resource) to the first depot of the leader
+     */
     @FXML
     void depot1Clicked() {
         //if there are no supplies, it shouldn't be possible to click
@@ -153,6 +173,9 @@ public class LeaderController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Moves the selected item (resource) to the second depot of the leader
+     */
     @FXML
     void depot2Clicked() {
         //if there are no supplies, it shouldn't be possible to click
@@ -161,12 +184,18 @@ public class LeaderController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Discards the leader card
+     */
     @FXML
     void discardClicked() {
         controllerInterpreter.execute("reset");
         userInterpreter.execute("discardLeader " + number); //assuming the ID is in the form of leaderX
     }
 
+    /**
+     * Insert the marble selected in the depot provided by the leader depot
+     */
     @FXML
     void leaderActiveClicked() {
         //this should never happen
@@ -185,6 +214,9 @@ public class LeaderController extends SubSceneController {
         controllerInterpreter.execute("reset");
     }
 
+    /**
+     * Opens the menu of what to do about the leader clicked (activate/discard)
+     */
     @FXML
     void leaderClicked() {
         controllerInterpreter.execute("reset");
@@ -193,6 +225,9 @@ public class LeaderController extends SubSceneController {
         }
     }
 
+    /**
+     * Sets to 'coin' the selected item in the OfflineInfo class
+     */
     @FXML
     void coinClicked() {
         //check if there is a supply to pick
@@ -204,6 +239,9 @@ public class LeaderController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Sets to 'servant' the selected item in the OfflineInfo class
+     */
     @FXML
     void servantClicked() {
         //check if there is a supply to pick
@@ -215,6 +253,9 @@ public class LeaderController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Sets to 'shield' the selected item in the OfflineInfo class
+     */
     @FXML
     void shieldClicked() {
         //check if there is a supply to pick
@@ -226,6 +267,9 @@ public class LeaderController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Sets to 'stone' the selected item in the OfflineInfo class
+     */
     @FXML
     void stoneClicked() {
         //check if there is a supply to pick
@@ -237,6 +281,9 @@ public class LeaderController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Changes the resource to choose for the leader producer
+     */
     @FXML
     void arrowUpClicked(){
         controllerInterpreter.execute("reset");
@@ -245,6 +292,9 @@ public class LeaderController extends SubSceneController {
         userInterpreter.execute("swapLeader " + number + " " + WarehouseObjectTypeController.getTypeByUrl(producerInput.getUrl()).toString().toLowerCase(Locale.ROOT));
     }
 
+    /**
+     * Changes the resource to choose for the leader producer
+     */
     @FXML
     void arrowDownClicked(){
         controllerInterpreter.execute("reset");
@@ -253,11 +303,17 @@ public class LeaderController extends SubSceneController {
         userInterpreter.execute("swapLeader " + number + " " + WarehouseObjectTypeController.getTypeByUrl(producerInput.getUrl()).toString().toLowerCase(Locale.ROOT));
     }
 
+    /**
+     * If the pointer is over the leader, the card became coloured (it removes the b&w effect)
+     */
     @FXML
     void leaderEntered(){
         leader.setEffect(null);
     }
 
+    /**
+     * If the leader is not active and the pointer is away, the card is black and white
+     */
     @FXML
     void leaderExited(){
         if (offlineInfo.getLeaderStatus(number) == OfflineInfo.LeaderStatus.INACTIVE){

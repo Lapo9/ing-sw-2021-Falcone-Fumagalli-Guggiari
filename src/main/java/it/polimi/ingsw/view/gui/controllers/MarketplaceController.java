@@ -10,6 +10,9 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Represents the marketplace
+ */
 public class MarketplaceController extends SubSceneController {
 
     @FXML private Rectangle r7;
@@ -53,7 +56,9 @@ public class MarketplaceController extends SubSceneController {
             "/pictures/marbles/yellowMarble.png"
     ));
 
-
+    /**
+     * Initializes the class
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -82,6 +87,10 @@ public class MarketplaceController extends SubSceneController {
 
     }
 
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         ArrayList<ImageView> marbles = new ArrayList<>(Arrays.asList(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, slide));
@@ -91,18 +100,24 @@ public class MarketplaceController extends SubSceneController {
     }
 
 
-
+    /**
+     * Shows the marketplace
+     */
     public void show(){
         marketplaceGroup.setVisible(true);
     }
 
-
+    /**
+     * Hides the marketplace
+     */
     public void hide(){
         marketplaceGroup.setVisible(false);
     }
 
 
-
+    /**
+     * Picks the marbles selected in the row 1
+     */
     @FXML
     void h1Clicked() {
         controllerInterpreter.execute("reset");
@@ -111,16 +126,25 @@ public class MarketplaceController extends SubSceneController {
         controllerInterpreter.execute("show unassignedMarbles");
     }
 
+    /**
+     * Surround the row to show the marbles that the player will get, if he clicks that arrow
+     */
     @FXML
     void h1Entered() {
         rowsColsSquares.get(0).forEach(r -> r.setVisible(true));
     }
 
+    /**
+     * Remove the surround effect
+     */
     @FXML
     void h1Exited() {
         rowsColsSquares.get(0).forEach(r -> r.setVisible(false));
     }
 
+    /**
+     * Picks the marbles selected in the row 2
+     */
     @FXML
     void h2Clicked() {
         controllerInterpreter.execute("reset");
@@ -129,16 +153,25 @@ public class MarketplaceController extends SubSceneController {
         controllerInterpreter.execute("show unassignedMarbles");
     }
 
+    /**
+     * Surround the row to show the marbles that the player will get, if he clicks that arrow
+     */
     @FXML
     void h2Entered() {
         rowsColsSquares.get(1).forEach(r -> r.setVisible(true));
     }
 
+    /**
+     * Remove the surround effect
+     */
     @FXML
     void h2Exited() {
         rowsColsSquares.get(1).forEach(r -> r.setVisible(false));
     }
 
+    /**
+     * Picks the marbles selected in the row 3
+     */
     @FXML
     void h3Clicked() {
         controllerInterpreter.execute("reset");
@@ -147,16 +180,25 @@ public class MarketplaceController extends SubSceneController {
         controllerInterpreter.execute("show unassignedMarbles");
     }
 
+    /**
+     * Surround the row to show the marbles that the player will get, if he clicks that arrow
+     */
     @FXML
     void h3Entered() {
         rowsColsSquares.get(2).forEach(r -> r.setVisible(true));
     }
 
+    /**
+     * Remove the surround effect
+     */
     @FXML
     void h3Exited() {
         rowsColsSquares.get(2).forEach(r -> r.setVisible(false));
     }
 
+    /**
+     * Picks the marbles selected in the column 1
+     */
     @FXML
     void v1Clicked() {
         controllerInterpreter.execute("reset");
@@ -165,16 +207,25 @@ public class MarketplaceController extends SubSceneController {
         controllerInterpreter.execute("show unassignedMarbles");
     }
 
+    /**
+     * Surround the column to show the marbles that the player will get, if he clicks that arrow
+     */
     @FXML
     void v1Entered() {
         rowsColsSquares.get(3).forEach(r -> r.setVisible(true));
     }
 
+    /**
+     * Remove the surround effect
+     */
     @FXML
     void v1Exited() {
         rowsColsSquares.get(3).forEach(r -> r.setVisible(false));
     }
 
+    /**
+     * Picks the marbles selected in the column 2
+     */
     @FXML
     void v2Clicked() {
         controllerInterpreter.execute("reset");
@@ -183,16 +234,25 @@ public class MarketplaceController extends SubSceneController {
         controllerInterpreter.execute("show unassignedMarbles");
     }
 
+    /**
+     * Surround the column to show the marbles that the player will get, if he clicks that arrow
+     */
     @FXML
     void v2Entered() {
         rowsColsSquares.get(4).forEach(r -> r.setVisible(true));
     }
 
+    /**
+     * Remove the surround effect
+     */
     @FXML
     void v2Exited() {
         rowsColsSquares.get(4).forEach(r -> r.setVisible(false));
     }
 
+    /**
+     * Picks the marbles selected in the column 3
+     */
     @FXML
     void v3Clicked() {
         controllerInterpreter.execute("reset");
@@ -201,16 +261,25 @@ public class MarketplaceController extends SubSceneController {
         controllerInterpreter.execute("show unassignedMarbles");
     }
 
+    /**
+     * Surround the column to show the marbles that the player will get, if he clicks that arrow
+     */
     @FXML
     void v3Entered() {
         rowsColsSquares.get(5).forEach(r -> r.setVisible(true));
     }
 
+    /**
+     * Remove the surround effect
+     */
     @FXML
     void v3Exited() {
         rowsColsSquares.get(5).forEach(r -> r.setVisible(false));
     }
 
+    /**
+     * Picks the marbles selected in the column 4
+     */
     @FXML
     void v4Clicked() {
         controllerInterpreter.execute("reset");
@@ -219,11 +288,17 @@ public class MarketplaceController extends SubSceneController {
         controllerInterpreter.execute("show unassignedMarbles");
     }
 
+    /**
+     * Surround the column to show the marbles that the player will get, if he clicks that arrow
+     */
     @FXML
     void v4Entered() {
         rowsColsSquares.get(6).forEach(r -> r.setVisible(true));
     }
 
+    /**
+     * Remove the surround effect
+     */
     @FXML
     void v4Exited() {
         rowsColsSquares.get(6).forEach(r -> r.setVisible(false));

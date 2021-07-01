@@ -8,6 +8,9 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Represents the pope favor tile
+ */
 public class PopeFavorTilesController extends SubSceneController {
 
     @FXML private ImageView player1;
@@ -22,7 +25,9 @@ public class PopeFavorTilesController extends SubSceneController {
             new Pair<>("blueSquare.png", "blueX.png")
     ));
 
-
+    /**
+     * Initializes the class
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -33,7 +38,10 @@ public class PopeFavorTilesController extends SubSceneController {
         player4.setVisible(false);
     }
 
-
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         ArrayList<ImageView> players = new ArrayList<>(Arrays.asList(player1, player2, player3, player4));

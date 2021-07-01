@@ -5,7 +5,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 
-
+/**
+ * Represents the paycheck
+ */
 public class PaycheckController extends SubSceneController {
 
     @FXML private Text stoneDepot;
@@ -18,13 +20,18 @@ public class PaycheckController extends SubSceneController {
     @FXML private Text coinStrongbox;
     @FXML private ImageView activeSquare;
 
-
+    /**
+     * Initializes the class
+     */
     @Override
     public void initialize() {
         super.initialize();
     }
 
-
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         coinStrongbox.setText(String.valueOf(completeUpdate[0]));
@@ -39,17 +46,23 @@ public class PaycheckController extends SubSceneController {
     }
 
 
-
+    /**
+     * Hides the paycheck
+     */
     public void reset(){
         activeSquare.setVisible(false);
     }
 
-
+    /**
+     * Shows the paycheck
+     */
     public void setActive() {
         activeSquare.setVisible(true);
     }
 
-
+    /**
+     * Colours the paycheck when we select an item that can go there
+     */
     @FXML
     void activeSquareClicked() {
         if (offlineInfo.getSelectedItem().isBlank()) {
@@ -60,7 +73,9 @@ public class PaycheckController extends SubSceneController {
         controllerInterpreter.execute("reset");
     }
 
-
+    /**
+     * Sets to 'coin' the selected item in the OfflineInfo class
+     */
     @FXML
     void coinClicked() {
         if(Integer.parseInt(coinDepot.getText()) + Integer.parseInt(coinStrongbox.getText()) == 0){
@@ -71,6 +86,9 @@ public class PaycheckController extends SubSceneController {
         userInterpreter.execute("selected coin paycheck");
     }
 
+    /**
+     * Sets to 'servant' the selected item in the OfflineInfo class
+     */
     @FXML
     void servantClicked() {
         if(Integer.parseInt(servantDepot.getText()) + Integer.parseInt(servantStrongbox.getText()) == 0){
@@ -81,6 +99,9 @@ public class PaycheckController extends SubSceneController {
         userInterpreter.execute("selected servant paycheck");
     }
 
+    /**
+     * Sets to 'shield' the selected item in the OfflineInfo class
+     */
     @FXML
     void shieldClicked() {
         if(Integer.parseInt(shieldDepot.getText()) + Integer.parseInt(shieldStrongbox.getText()) == 0){
@@ -91,6 +112,9 @@ public class PaycheckController extends SubSceneController {
         userInterpreter.execute("selected shield paycheck");
     }
 
+    /**
+     * Sets to 'stone' the selected item in the OfflineInfo class
+     */
     @FXML
     void stoneClicked() {
         if(Integer.parseInt(stoneDepot.getText()) + Integer.parseInt(stoneStrongbox.getText()) == 0){

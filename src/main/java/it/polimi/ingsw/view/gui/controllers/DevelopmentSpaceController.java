@@ -9,6 +9,9 @@ import javafx.scene.text.Text;
 
 import static it.polimi.ingsw.model.development.DevelopmentCard.*;
 
+/**
+ * Represents the development space
+ */
 public class DevelopmentSpaceController extends SubSceneController {
 
     @FXML private ImageView card;
@@ -25,7 +28,9 @@ public class DevelopmentSpaceController extends SubSceneController {
     @FXML private ImageView activeSquare;
     @FXML private Group developmentGroup;
 
-
+    /**
+     * Initialize the class
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -42,7 +47,10 @@ public class DevelopmentSpaceController extends SubSceneController {
         developmentGroup.setVisible(false);
     }
 
-
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
 
@@ -79,7 +87,12 @@ public class DevelopmentSpaceController extends SubSceneController {
         shield.setText(String.valueOf(completeUpdate[15]));
         stone.setText(String.valueOf(completeUpdate[16]));
     }
-    
+
+    /**
+     * Gets the color of the card from the category
+     * @param cat category of the card
+     * @return the string containing the color path
+     */
     private String getDot(CardCategory cat) {
         if(cat == CardCategory.GREEN)
             return "pictures/miscellaneous/greenDot.png";
@@ -93,17 +106,23 @@ public class DevelopmentSpaceController extends SubSceneController {
             return null;
     }
 
-
+    /**
+     * Sets the activeSquare image not visible
+     */
     public void reset(){
         activeSquare.setVisible(false);
     }
 
-
+    /**
+     * Sets the activeSquare image visible
+     */
     public void setActive(){
         activeSquare.setVisible(true);
     }
 
-
+    /**
+     * Moves the resource selected to the paycheck of the card in the space
+     */
     @FXML
     void activeSquareClicked() {
         //this should never happen
@@ -116,6 +135,9 @@ public class DevelopmentSpaceController extends SubSceneController {
         controllerInterpreter.execute("reset");
     }
 
+    /**
+     * Sets active the production of the card in the space (if the card is visible)
+     */
     @FXML
     void checkboxClicked() {
         controllerInterpreter.execute("reset");
@@ -123,6 +145,9 @@ public class DevelopmentSpaceController extends SubSceneController {
         offlineInfo.setProduction(id, produce.isVisible());
     }
 
+    /**
+     * Sets to 'coin' the selected item in the OfflineInfo class
+     */
     @FXML
     void coinClicked() {
         //check if there is a supply to pick
@@ -134,6 +159,9 @@ public class DevelopmentSpaceController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Sets to 'servant' the selected item in the OfflineInfo class
+     */
     @FXML
     void servantClicked() {
         //check if there is a supply to pick
@@ -145,6 +173,9 @@ public class DevelopmentSpaceController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Sets to 'shield' the selected item in the OfflineInfo class
+     */
     @FXML
     void shieldClicked() {
         //check if there is a supply to pick
@@ -156,6 +187,9 @@ public class DevelopmentSpaceController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Sets to 'stone' the selected item in the OfflineInfo class
+     */
     @FXML
     void stoneClicked() {
         //check if there is a supply to pick

@@ -220,7 +220,7 @@ public class Player {
 
 
     /**
-     * Sends a message to the controller
+     * Sends a message to the client
      * @param message to send
      * @return if the message is sent without errors
      */
@@ -236,7 +236,7 @@ public class Player {
 
 
     /**
-     * Sends the status of the model to the controller
+     * Sends the status of the model to the client
      * @param update ArrayList of integer representing the dashboard (HasStatus)
      * @return if the message is sent without errors
      */
@@ -253,8 +253,8 @@ public class Player {
 
 
     /**
-     * Send terminate message to the controller
-     * @return
+     * Send terminate message to the client
+     * @return if the message is sent without errors
      */
     public synchronized boolean sendTerminate() {
         try {

@@ -24,6 +24,9 @@ import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getContaine
 import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getTypeByNumber;
 import static java.lang.String.valueOf;
 
+/**
+ * Manages what to view when spying the opponent
+ */
 public class OpponentController extends SubSceneController{
     @FXML private ImageView leader1;
     @FXML private Group leader1group;
@@ -113,7 +116,9 @@ public class OpponentController extends SubSceneController{
     private FadeTransition fadeIn = new FadeTransition(Duration.millis(200));
     private FadeTransition fadeOut = new FadeTransition(Duration.millis(200));
 
-
+    /**
+     * Initializes the class
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -129,7 +134,10 @@ public class OpponentController extends SubSceneController{
         fadeOut.setOnFinished(event -> pane.setVisible(false));
     }
 
-
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         playerName.setText(offlineInfo.getPlayerName(completeUpdate[0]));
@@ -144,7 +152,10 @@ public class OpponentController extends SubSceneController{
         updateDevelopment3(Arrays.copyOfRange(completeUpdate, 57, 75));
     }
 
-
+    /**
+     * Updates opponent's coffer
+     * @param arr array made of integer
+     */
     private void updateCoffer(int[] arr){
         coinCoffer.setText(valueOf(arr[0]));
         servantCoffer.setText(valueOf(arr[1]));
@@ -152,6 +163,10 @@ public class OpponentController extends SubSceneController{
         stoneCoffer.setText(valueOf(arr[3]));
     }
 
+    /**
+     * Updates opponent's warehouse
+     * @param arr array made of integer
+     */
     private void updateWarehouse(int[] arr){
         //put images in arrays to make it easier to iterate through them
         ArrayList<ImageView> third = new ArrayList<>(Arrays.asList(a1, b1, c1));
@@ -188,6 +203,10 @@ public class OpponentController extends SubSceneController{
         }
     }
 
+    /**
+     * Updates opponent's paycheck
+     * @param arr array made of integer
+     */
     private void updatePaycheck(int[] arr){
         coinPaycheck.setText(valueOf(arr[0] + arr[5]));
         servantPaycheck.setText(valueOf(arr[1] + arr[6]));
@@ -195,6 +214,10 @@ public class OpponentController extends SubSceneController{
         stonePaycheck.setText(valueOf(arr[3] + arr[8]));
     }
 
+    /**
+     * Updates opponent's base production
+     * @param arr array made of integer
+     */
     private void updateBase(int[] arr){
         in1.setImage(new Image(WarehouseObjectTypeController.getTypeByNumber(arr[5]).getUrl()));
         in2.setImage(new Image(WarehouseObjectTypeController.getTypeByNumber(arr[6]).getUrl()));
@@ -206,6 +229,10 @@ public class OpponentController extends SubSceneController{
         stoneBase.setText(String.valueOf(arr[16]));
     }
 
+    /**
+     * Updates opponent's first leader card
+     * @param arr array made of integer
+     */
     private void updateLeader1(int[] arr){
 
         int leaderCardId = arr[0];
@@ -287,6 +314,10 @@ public class OpponentController extends SubSceneController{
         }
     }
 
+    /**
+     * Updates opponent's second leader card
+     * @param arr array made of integer
+     */
     private void updateLeader2(int[] arr){
         int leaderCardId = arr[0];
         if(leaderCardId == 0){
@@ -364,6 +395,10 @@ public class OpponentController extends SubSceneController{
         }
     }
 
+    /**
+     * Update opponent's development space 1
+     * @param arr array made of integer
+     */
     private void updateDevelopment1(int[] arr){
         if(arr[2] != 0) {
             card1.setImage(new Image(getUrl(arr[2])));
@@ -415,6 +450,10 @@ public class OpponentController extends SubSceneController{
         stoneD1.setText(String.valueOf(arr[16]));
     }
 
+    /**
+     * Update opponent's development space 2
+     * @param arr array made of integer
+     */
     private void updateDevelopment2(int[] arr){
         if(arr[2] != 0) {
             card2.setImage(new Image(getUrl(arr[2])));
@@ -466,6 +505,10 @@ public class OpponentController extends SubSceneController{
         stoneD2.setText(String.valueOf(arr[16]));
     }
 
+    /**
+     * Update opponent's development space 3
+     * @param arr array made of integer
+     */
     private void updateDevelopment3(int[] arr){
         if(arr[2] != 0) {
             card3.setImage(new Image(getUrl(arr[2])));
@@ -517,6 +560,11 @@ public class OpponentController extends SubSceneController{
         stoneD3.setText(String.valueOf(arr[16]));
     }
 
+    /**
+     * Gets the category of the underlying card in the development space
+     * @param cat card category
+     * @return the colour of the card
+     */
     private String getDot(CardCategory cat) {
         if(cat == CardCategory.GREEN)
             return "pictures/miscellaneous/greenDot.png";
@@ -530,13 +578,17 @@ public class OpponentController extends SubSceneController{
             return null;
     }
 
-
+    /**
+     * Shows opponent's pane
+     */
     public void show(){
         pane.setVisible(true);
         fadeIn.play();
     }
 
-
+    /**
+     * Hides opponent's pane
+     */
     public void hide(){
         fadeOut.play();
     }

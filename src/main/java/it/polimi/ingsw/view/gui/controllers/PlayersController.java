@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Represents the players' interfaces
+ */
 public class PlayersController extends SubSceneController {
 
     @FXML private ImageView player1;
@@ -59,7 +62,9 @@ public class PlayersController extends SubSceneController {
             new Pair<>(12.5, 12.5)
     ));
 
-
+    /**
+     * Initializes the class
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -67,7 +72,10 @@ public class PlayersController extends SubSceneController {
         ArrayList<ImageView> players = new ArrayList<>(Arrays.asList(player1, player2, player3, player4));
     }
 
-
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         ArrayList<ImageView> players = new ArrayList<>(Arrays.asList(player1, player2, player3, player4));
@@ -91,8 +99,10 @@ public class PlayersController extends SubSceneController {
         }
 
     }
-    
 
+    /**
+     * Shows the player 1 when the mouse is over his pawn
+     */
     @FXML
     void player1mouseEntered() {
         if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 1) {
@@ -101,12 +111,18 @@ public class PlayersController extends SubSceneController {
         }
     }
 
+    /**
+     * Returns to the player's dashboard
+     */
     @FXML
     void player1mouseExited() {
         player1.setEffect(null);
         controllerInterpreter.execute("hide opponent1");
     }
 
+    /**
+     * Shows the player 2 when the mouse is over his pawn
+     */
     @FXML
     void player2mouseEntered() {
         if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 2) {
@@ -115,12 +131,18 @@ public class PlayersController extends SubSceneController {
         }
     }
 
+    /**
+     * Returns to the player's dashboard
+     */
     @FXML
     void player2mouseExited() {
         player2.setEffect(null);
         controllerInterpreter.execute("hide opponent2");
     }
 
+    /**
+     * Shows the player 3 when the mouse is over his pawn
+     */
     @FXML
     void player3mouseEntered() {
         if(offlineInfo.getPlayerOrder(offlineInfo.getYourName()) != 3) {
@@ -129,12 +151,18 @@ public class PlayersController extends SubSceneController {
         }
     }
 
+    /**
+     * Returns to the player's dashboard
+     */
     @FXML
     void player3mouseExited() {
         player3.setEffect(null);
         controllerInterpreter.execute("hide opponent3");
     }
 
+    /**
+     * Shows the player 4 when the mouse is over his pawn
+     */
     @FXML
     void player4mouseEntered() {
         //player 4 is used ad Lorenzo for single players matches
@@ -144,6 +172,9 @@ public class PlayersController extends SubSceneController {
         }
     }
 
+    /**
+     * Returns to the player's dashboard
+     */
     @FXML
     void player4mouseExited() {
         player4.setEffect(null);

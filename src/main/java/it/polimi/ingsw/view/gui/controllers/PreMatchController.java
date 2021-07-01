@@ -20,6 +20,9 @@ import java.util.stream.Collectors;
 
 import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.*;
 
+/**
+ * Represents the pre match phase
+ */
 public class PreMatchController extends SceneController{
 
     @FXML private ImageView pick1;
@@ -43,7 +46,9 @@ public class PreMatchController extends SceneController{
     private WarehouseObjectTypeController supply2Data = COIN;
     private ArrayList<Pair<Integer, Boolean>> idsActive = new ArrayList<>();
 
-
+    /**
+     * Initializes the class
+     */
     @Override
     public void initialize() {
         super.initialize();
@@ -59,18 +64,27 @@ public class PreMatchController extends SceneController{
         idsActive.add(new Pair<>(0, false));
     }
 
-
+    /**
+     * Does nothing
+     */
     @Override
     public void initializeSubScenes() {
 
     }
 
-
+    /**
+     * Does nothing
+     * @param players nothing
+     */
     @Override
     public void setPlayers(String players) {
 
     }
 
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         Platform.runLater( ()-> {
@@ -101,54 +115,81 @@ public class PreMatchController extends SceneController{
         });
     }
 
+    /**
+     * Changes the first resource that player can choose
+     */
     @FXML
     void arrowDown1Clicked() {
         supply1Data = prev(supply1Data);
         supply1.setImage(new Image(supply1Data.getUrl()));
     }
 
+    /**
+     * Changes the second resource that player can choose
+     */
     @FXML
     void arrowDown2Clicked() {
         supply2Data = prev(supply2Data);
         supply2.setImage(new Image(supply2Data.getUrl()));
     }
 
+    /**
+     * Changes the first resource that player can choose
+     */
     @FXML
     void arrowUp1Clicked() {
         supply1Data = next(supply1Data);
         supply1.setImage(new Image(supply1Data.getUrl()));
     }
 
+    /**
+     * Changes the second resource that player can choose
+     */
     @FXML
     void arrowUp2Clicked() {
         supply2Data = next(supply2Data);
         supply2.setImage(new Image(supply2Data.getUrl()));
     }
 
+    /**
+     * Checks the box of the first leader to choose
+     */
     @FXML
     void checkBox1Clicked() {
         tick1.setVisible(!tick1.isVisible());
         idsActive.get(0).second = tick1.isVisible();
     }
 
+    /**
+     * Checks the box of the second leader to choose
+     */
     @FXML
     void checkBox2Clicked() {
         tick2.setVisible(!tick2.isVisible());
         idsActive.get(1).second = tick2.isVisible();
     }
 
+    /**
+     * Checks the box of the third leader to choose
+     */
     @FXML
     void checkBox3Clicked() {
         tick3.setVisible(!tick3.isVisible());
         idsActive.get(2).second = tick3.isVisible();
     }
 
+    /**
+     * Checks the box of the fourth leader to choose
+     */
     @FXML
     void checkBox4Clicked() {
         tick4.setVisible(!tick4.isVisible());
         idsActive.get(3).second = tick4.isVisible();
     }
 
+    /**
+     * The player is ready to enter in the match
+     */
     @FXML
     void goClicked() {
         //extract the selected leaders and check they are exactly 2
@@ -171,6 +212,9 @@ public class PreMatchController extends SceneController{
         userInterpreter.execute("pickLeaders " + (idsActive.indexOf(selectedLeaders.get(0))+1) + " " +(idsActive.indexOf(selectedLeaders.get(1))+1));
     }
 
+    /**
+     * The "go" button becomes highlighted
+     */
     @FXML
     void goEntered() {
         if(idsActive.stream().filter(pair -> pair.second == true).collect(Collectors.toList()).size() != 2){
@@ -181,12 +225,18 @@ public class PreMatchController extends SceneController{
         }
     }
 
+    /**
+     * The "go" button returns normal
+     */
     @FXML
     void goExited() {
         //go.setDisable(false);
         go.setEffect(null);
     }
 
+    /**
+     * Shows the marketplace and development grid if the pointer of the mouse is over the button
+     */
     @FXML
     void showMarketplaceEntered() {
         resourcesBackground.setVisible(true);
@@ -194,6 +244,9 @@ public class PreMatchController extends SceneController{
         developmentGridController.show();
     }
 
+    /**
+     * Hides the marketplace and development grid if the pointer of the mouse goes away
+     */
     @FXML
     void showMarketplaceExited() {
         resourcesBackground.setVisible(false);
