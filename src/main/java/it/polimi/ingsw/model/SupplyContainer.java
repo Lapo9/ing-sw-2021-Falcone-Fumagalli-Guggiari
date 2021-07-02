@@ -415,33 +415,47 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
     public static class AcceptStrategy {
 
         /**
-         *
-         * @return
+         * The SupplyContainer can accept any supply from any depot type
+         * @return TriPredicate that can be used as accept/remove policy for a SupplyContainer (if the condition is satisfied)
          */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> any() {
             return (supplyContainer, warehouseObjectType, depotID) -> true;
         }
 
-
+        /**
+         * The SupplyContainer can't accept any supply from any depot type
+         * @return TriPredicate that can be used as accept/remove policy for a SupplyContainer (if the condition is satisfied)
+         */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> none() {
             return (supplyContainer, warehouseObjectType, depotID) -> false;
         }
 
-
+        /**
+         * The SupplyContainer can accept resources only if it is not full
+         * @param max number of resources to full it
+         * @return TriPredicate that can be used as accept/remove policy for a SupplyContainer (if the condition is satisfied)
+         */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> max(int max) {
             return (supplyContainer, warehouseObjectType, depotID) -> {
                 return supplyContainer.getQuantity() < max;
             };
         }
 
-
+        /**
+         * The SupplyContainer can accept resources only if it has a certain number of resources inside (not used method)
+         * @param min minimum number of resources
+         * @return TriPredicate that can be used as accept/remove policy for a SupplyContainer (if the condition is satisfied)
+         */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> min(int min) {
             return (supplyContainer, warehouseObjectType, depotID) -> {
                 return supplyContainer.getQuantity() > min;
             };
         }
 
-
+        /**
+         * The SupplyContainer can accept only one supply type from any depot type
+         * @return TriPredicate that can be used as accept/remove policy for a SupplyContainer (if the condition is satisfied)
+         */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> oneType() {
             return (container, type, depot) -> {
                 boolean res = false;
@@ -454,21 +468,35 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
             };
         }
 
-
+        /**
+         * The SupplyContainer can accept only the specified supply type from any depot type
+         * @param type supply type that the container can contain
+         * @return TriPredicate that can be used as accept/remove policy for a SupplyContainer (if the condition is satisfied)
+         */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> specificType(WarehouseObjectType type) {
             return (container, wot, depot) -> {
                 return wot == type;
             };
         }
 
-
+        /**
+         * The SupplyContainer can accept only the specified supply type from any depot type and only if it is not full
+         * @param max number of resources to full it
+         * @return TriPredicate that can be used as accept/remove policy for a SupplyContainer (if the condition is satisfied)
+         */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxOneType(int max) {
             return (container, type, depot) -> {
                 return oneType().test(container, type, depot) && container.getQuantity() < max;
             };
         }
 
-
+        /**
+         * Manages the three SupplyContainer(s) of the Warehouse. Those containers have to contain 1, 2 or 3 resources
+         * different from the other two containers
+         * @param max number of resources to full it (1, 2 or 3)
+         * @param scs containers that can't contain the same resource of this one
+         * @return TriPredicate that can be used as accept/remove policy for a SupplyContainer (if the condition is satisfied)
+         */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxOneTypeNotPresentIn(int max, SupplyContainer... scs) {
             return (container, type, depot) -> {
                 boolean isPresent = false;
@@ -484,10 +512,10 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         }
 
         /**
-         * Dictates that the container passed can contain a maximum number of that warehouseObjectType
-         * @param type WarehouseObjectType
-         * @param max
-         * @return
+         * The SupplyContainer can contain a maximum number of a specified WarehouseObjectType
+         * @param type of the resource
+         * @param max number of resources
+         * @return TriPredicate that can be used as accept/remove policy for a SupplyContainer (if the condition is satisfied)
          */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxSpecificType(WarehouseObjectType type, int max) {
             return (container, wot, depot) -> {
@@ -496,10 +524,10 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
         }
 
         /**
-         *
-         * @param source
-         * @param leadersSpace
-         * @return
+         * The SupplyContainer can accept resources only from a specified DepotID
+         * @param source depot id
+         * @param leadersSpace of the player
+         * @return TriPredicate that can be used as accept/remove policy for a SupplyContainer (if the condition is satisfied)
          */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> onlyFrom(DepotID.SourceType source, LeadersSpace leadersSpace) {
             return (container, type, depot) -> {

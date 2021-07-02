@@ -97,9 +97,9 @@ public enum DepotID {
     }
 
     /**
-     * Returns the source from which resources in the depot can came from.
-     * @return the source from which resources in the depot can came from.
+     * Returns the source from which the resources in the depot can came from.
      * @param leadersSpace leader space where to look for the depot ability
+     * @return the source from which resources in the depot can came from.
      */
     public SourceType getSource(LeadersSpace leadersSpace) {
         if (type != null){
