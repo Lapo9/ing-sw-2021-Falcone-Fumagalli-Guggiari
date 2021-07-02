@@ -11,7 +11,7 @@ In order to run the game, launch `deliverables/MastersOfRenaissance.jar`. A simp
 
 `savedMatches.txt` and `MastersOfRenaissance.jar` must be in he same folder for the game to work.
 
-If you need to generate the jar from the source code, please change the value of the field `recoveryPath` in class controller.match.MatchManager, row 23, from "deliverables/savedMatches.txt" to "./savedMatches.txt".
+If you need to generate the jar from the source code, please change the value of the field `recoveryPath` in class controller.match.MatchManager, row 23, from "deliverables/savedMatches.txt" to "./savedMatches.txt" (and vice-versa).
 
 The client will shut down each time there is a fatal error. This doesn't mean the client or the server crashed, for example, if a user enters a wrong IP, the server won't respond, causing a fatal error, and the client will shut down gracefully. We chose this design choice in order to avoid any kind of broken state in the client. The client will also shut down at the end of a match.
 
