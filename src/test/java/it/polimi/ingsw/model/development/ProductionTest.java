@@ -131,7 +131,6 @@ public class ProductionTest {
         SupplyContainer in = new SupplyContainer(0, 1, 0, 1, 0);
         SupplyContainer out = new SupplyContainer(1, 0, 3,0, 2);
         Production prd = new Production(in, out);
-        //FIXME useless test?
         //ProductionManager checks if WAREHOUSE1 has one STONE
         assertTrue(prd.additionAllowed(WarehouseObjectType.STONE, DepotID.WAREHOUSE1));
     }

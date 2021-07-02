@@ -45,7 +45,7 @@ public class ScreenCLI implements Screen {
         try {
             show(startingViewId);
             refresh();
-        } catch (ViewException ve){System.exit(1); /*TODO terminate*/}
+        } catch (ViewException ve){System.exit(1);}
 
         reader.start();
     }

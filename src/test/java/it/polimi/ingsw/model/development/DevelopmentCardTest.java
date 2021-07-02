@@ -238,7 +238,6 @@ public class DevelopmentCardTest {
         SupplyContainer out = new SupplyContainer(0, 0, 0, 0, 2);
         Production prod = new Production(in, out);
         DevelopmentCard dc = new DevelopmentCard(0, 2, 5, CardCategory.YELLOW, prod, cost);
-        //FIXME same doubt of ProductionTest
         assertTrue(dc.additionAllowed(WarehouseObjectType.SHIELD, DepotID.WAREHOUSE1));
     }
 

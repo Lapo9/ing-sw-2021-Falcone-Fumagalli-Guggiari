@@ -161,7 +161,7 @@ public class ControllerInterpreter {
         try {
             screen.show("endMatch");
         } catch (ViewException ve){
-            System.exit(1); //TODO terminate
+            System.exit(1);
             return;
         }
         execute("message " + tokens[1] + " won the match!!");
@@ -249,7 +249,7 @@ public class ControllerInterpreter {
             screen.show("help");
             screen.refresh();
         } catch (ViewException ve){
-            System.exit(1); //TODO terminate
+            System.exit(1);
             return;
         }
     }

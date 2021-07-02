@@ -54,7 +54,7 @@ public class Production implements AcceptsSupplies, HasStatus {
     public SupplyContainer produce(){
         try {
             check();
-        } catch (SupplyException e) {System.exit(1); /*TODO terminate program*/ }
+        } catch (SupplyException e) {System.exit(1); }
         clearSupplies();
         return new SupplyContainer(output);
     }

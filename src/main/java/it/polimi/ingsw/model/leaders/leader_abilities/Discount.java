@@ -21,7 +21,7 @@ public class Discount implements LeaderAbility {
     public Discount(WarehouseObjectType wot){
         try {
             discount.addSupply(wot);
-        } catch (SupplyException se){System.exit(1); /*TODO terminate program*/}
+        } catch (SupplyException se){System.exit(1);}
     }
 
     /**

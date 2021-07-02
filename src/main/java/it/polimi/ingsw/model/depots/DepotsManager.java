@@ -45,11 +45,11 @@ public class DepotsManager implements AcceptsSupplies {
         else if (slot.getType(leadersSpace) == DepotID.DepotType.LEADER_DEPOT){
             try {
                 leadersSpace.getLeaderAbility(slot.getNum()).addSupply(wot, from);
-            } catch (LeaderException | NoSuchMethodException e){System.exit(1); /*TODO terminate program*/}
+            } catch (LeaderException | NoSuchMethodException e){System.exit(1); }
         }
 
         else {
-            System.exit(1); /*TODO terminate the program*/
+            System.exit(1);
         }
     }
 
@@ -68,11 +68,11 @@ public class DepotsManager implements AcceptsSupplies {
         else if (from.getType(leadersSpace) == DepotID.DepotType.LEADER_DEPOT){
             try {
                 leadersSpace.getLeaderAbility(from.getNum()).removeSupply(wot);
-            } catch (LeaderException | NoSuchMethodException e){System.exit(1); /*TODO terminate program*/}
+            } catch (LeaderException | NoSuchMethodException e){System.exit(1);}
         }
 
         else {
-            System.exit(1); /*TODO terminate the program*/
+            System.exit(1);
         }
     }
 
@@ -165,13 +165,13 @@ public class DepotsManager implements AcceptsSupplies {
                     result = leadersSpace.getLeaderAbility(slot.getNum()).clearSupplies().first;
                 }
                 else {
-                    System.exit(1); //TODO terminate the program
+                    System.exit(1);
                 }
-            } catch (LeaderException | NoSuchMethodException e){System.exit(1); /*TODO terminate program*/}
+            } catch (LeaderException | NoSuchMethodException e){System.exit(1);}
         }
 
         else {
-            System.exit(1); /*TODO terminate the program*/
+            System.exit(1);
         }
 
         return new Pair<>(result, new SupplyContainer());
@@ -253,7 +253,7 @@ public class DepotsManager implements AcceptsSupplies {
                             qty--;
                         }
                     } catch (LeaderException le) {
-                    } catch (SupplyException | NoSuchMethodException se) {System.exit(1); /*TODO terminate*/}
+                    } catch (SupplyException | NoSuchMethodException se) {System.exit(1);}
                 }
             }
         }
