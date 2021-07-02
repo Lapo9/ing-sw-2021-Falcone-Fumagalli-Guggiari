@@ -137,7 +137,7 @@ public class ControllerInterpreter {
 
     /**
      * Allows to refresh the screen (and every viewable on it)
-     * @param tokens
+     * @param tokens Empty
      */
     private void refresh(String... tokens){
         screen.refresh();
@@ -178,7 +178,7 @@ public class ControllerInterpreter {
 
     /**
      * Shows to the player the start of his turn
-     * @param tokens
+     * @param tokens Empty
      */
     private void yourTurn(String... tokens){
         try {
@@ -220,7 +220,7 @@ public class ControllerInterpreter {
 
     /**
      * Resets the warehouse putting in order the resources and empty the paychecks returning all the resources to their places
-     * @param tokens
+     * @param tokens Empty
      */
     private void reset(String... tokens){
         offlineInfo.setSelectedWarehouseRow("");
@@ -231,8 +231,8 @@ public class ControllerInterpreter {
     }
 
     /**
-     *
-     * @param tokens
+     * Highlights the depots who can receive the supply
+     * @param tokens Empty
      */
     private void setActive(String... tokens){
         for(ResettableScene rs : toReset){
@@ -242,7 +242,7 @@ public class ControllerInterpreter {
 
     /**
      * Shows the list of commands to the player
-     * @param tokens 
+     * @param tokens Empty
      */
     private void help(String... tokens){
         try {
@@ -280,8 +280,8 @@ public class ControllerInterpreter {
 
 
     /**
-     *
-     * @param rs
+     * Adds a ResettableScene to the list of observers
+     * @param rs The ResettableScene
      */
     public void attachToResetScene(ResettableScene rs){
         toReset.add(rs);
