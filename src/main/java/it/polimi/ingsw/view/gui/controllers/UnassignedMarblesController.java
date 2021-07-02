@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 /**
- * Represents the unassigned marbles
+ * Represents the unassigned marbles picked from the marketplace
  */
 public class UnassignedMarblesController extends SubSceneController {
 
@@ -148,7 +148,9 @@ public class UnassignedMarblesController extends SubSceneController {
         colorPane.setVisible(false);
     }
 
-
+    /**
+     * Clicks the first marble and highlights the depots where you can place that marble
+     */
     @FXML
     void marble1clicked() {
         controllerInterpreter.execute("reset");
@@ -168,6 +170,9 @@ public class UnassignedMarblesController extends SubSceneController {
         }
     }
 
+    /**
+     * Clicks the second marble and highlights the depots where you can place that marble
+     */
     @FXML
     void marble2clicked() {
         controllerInterpreter.execute("reset");
@@ -188,6 +193,9 @@ public class UnassignedMarblesController extends SubSceneController {
         }
     }
 
+    /**
+     * Clicks the third marble and highlights the depots where you can place that marble
+     */
     @FXML
     void marble3clicked() {
         controllerInterpreter.execute("reset");
@@ -208,6 +216,9 @@ public class UnassignedMarblesController extends SubSceneController {
         }
     }
 
+    /**
+     * Clicks the fourth marble and highlights the depots where you can place that marble
+     */
     @FXML
     void marble4clicked() {
         controllerInterpreter.execute("reset");
@@ -228,7 +239,9 @@ public class UnassignedMarblesController extends SubSceneController {
         }
     }
 
-
+    /**
+     * Discards the remaining marbles
+     */
     @FXML
     void discardClicked(){
         controllerInterpreter.execute("reset");
