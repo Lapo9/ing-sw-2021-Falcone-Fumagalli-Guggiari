@@ -65,14 +65,14 @@ public class UnassignedMarblesController extends SubSceneController {
 
 
     /**
-     * Shows the unassigned marble
+     * Shows the unassigned marbles
      */
     public void show(){
         unassignedMarblesGroup.setVisible(true);
     }
 
     /**
-     * Hides the unassigned marble
+     * Hides the unassigned marbles
      */
     public void hide(){
         unassignedMarblesGroup.setVisible(false);
@@ -109,7 +109,7 @@ public class UnassignedMarblesController extends SubSceneController {
 
 
     /**
-     * 
+     * Colors the marble blue
      */
     @FXML
     void blueClicked() {
@@ -118,6 +118,9 @@ public class UnassignedMarblesController extends SubSceneController {
         colorPane.setVisible(false);
     }
 
+    /**
+     * Colors the marble grey
+     */
     @FXML
     void greyClicked() {
         controllerInterpreter.execute("reset");
@@ -125,6 +128,9 @@ public class UnassignedMarblesController extends SubSceneController {
         colorPane.setVisible(false);
     }
 
+    /**
+     * Colors the marble violet
+     */
     @FXML
     void violetClicked() {
         controllerInterpreter.execute("reset");
@@ -132,6 +138,9 @@ public class UnassignedMarblesController extends SubSceneController {
         colorPane.setVisible(false);
     }
 
+    /**
+     * Colors the marble yellow
+     */
     @FXML
     void yellowClicked() {
         controllerInterpreter.execute("reset");

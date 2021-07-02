@@ -414,6 +414,10 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
      */
     public static class AcceptStrategy {
 
+        /**
+         *
+         * @return
+         */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> any() {
             return (supplyContainer, warehouseObjectType, depotID) -> true;
         }
@@ -479,14 +483,24 @@ public class SupplyContainer implements AcceptsSupplies, HasStatus{
             };
         }
 
-
+        /**
+         * Dictates that the container passed can contain a maximum number of that warehouseObjectType
+         * @param type WarehouseObjectType
+         * @param max
+         * @return
+         */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> maxSpecificType(WarehouseObjectType type, int max) {
             return (container, wot, depot) -> {
                 return container.getQuantity() < max && specificType(type).test(container, wot, depot);
             };
         }
 
-
+        /**
+         *
+         * @param source
+         * @param leadersSpace
+         * @return
+         */
         public static TriPredicate<SupplyContainer, WarehouseObjectType, DepotID> onlyFrom(DepotID.SourceType source, LeadersSpace leadersSpace) {
             return (container, type, depot) -> {
                 return depot.getSource(leadersSpace) == source;

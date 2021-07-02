@@ -25,6 +25,10 @@ public enum DepotID {
 
         private int order;
 
+        /**
+         * Class constructor
+         * @param order index of the depot type to build
+         */
         private DepotType(int order){
             this.order = order;
         }
@@ -51,7 +55,12 @@ public enum DepotID {
     private SourceType source;
 
 
-
+    /**
+     * Class constructor
+     * @param depotType type of the depot to build
+     * @param source source where the resources can come from
+     * @param typeOrder index of the depot type
+     */
     private DepotID(DepotType depotType, SourceType source, int typeOrder){
         this.type = depotType;
         this.typeOrder = typeOrder;
@@ -61,7 +70,7 @@ public enum DepotID {
     /**
      * Returns the type of the depot.
      * @return the type of the depot
-     * @param leadersSpace
+     * @param leadersSpace leader space where to look for the depot ability
      */
     public DepotType getType(LeadersSpace leadersSpace){
         if (type != null){
@@ -90,7 +99,7 @@ public enum DepotID {
     /**
      * Returns the source from which resources in the depot can came from.
      * @return the source from which resources in the depot can came from.
-     * @param leadersSpace
+     * @param leadersSpace leader space where to look for the depot ability
      */
     public SourceType getSource(LeadersSpace leadersSpace) {
         if (type != null){
@@ -108,7 +117,11 @@ public enum DepotID {
         return SourceType.NONE;
     }
 
-
+    /**
+     * Convert a string to the depot ID
+     * @param s string
+     * @return DepotID corresponding
+     */
     public static DepotID stringToId(String s){
         if (s.equals("wh1")){
             return WAREHOUSE1;

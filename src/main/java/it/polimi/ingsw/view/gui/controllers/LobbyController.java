@@ -51,13 +51,13 @@ public class LobbyController extends SceneController {
     }
 
     /**
-     * Does nothing
+     * Unused method of the superClass
      */
     @Override
     public void initializeSubScenes() {}
 
     /**
-     * Does nothing
+     * Unused method of the superClass
      */
     @Override
     public void update(int[] completeUpdate) {

@@ -65,7 +65,7 @@ public class PreMatchController extends SceneController{
     }
 
     /**
-     * Does nothing
+     * Unused method of the superClass
      */
     @Override
     public void initializeSubScenes() {
@@ -73,8 +73,7 @@ public class PreMatchController extends SceneController{
     }
 
     /**
-     * Does nothing
-     * @param players nothing
+     * Unused method of the superClass
      */
     @Override
     public void setPlayers(String players) {

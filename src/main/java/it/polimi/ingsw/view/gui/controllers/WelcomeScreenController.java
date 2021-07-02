@@ -7,6 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+/**
+ * Represents the welcome scene
+ */
 public class WelcomeScreenController extends SceneController {
 
 
@@ -23,7 +26,9 @@ public class WelcomeScreenController extends SceneController {
     RotateTransition A2 = new RotateTransition(Duration.millis(8200));
     RotateTransition A3 = new RotateTransition(Duration.millis(9060));
 
-
+    /**
+     * Initializes the class
+     */
     @Override
     public void initialize(){
         super.initialize();
@@ -47,27 +52,37 @@ public class WelcomeScreenController extends SceneController {
         A3.play();
     }
 
-
+    /**
+     * Unused method of the superClass
+     */
     @Override
     public void initializeSubScenes() {}
 
-
+    /**
+     * Unused method of the superClass
+     */
     @Override
     public void update(int[] completeUpdate) {}
 
-
+    /**
+     * Goes to the lobby (waiting room)
+     */
     @FXML
     private void goClicked() {
         userInterpreter.execute("connect " + serverIp.getText() + " " + serverPort.getText() + " " + name.getText() + " " + matchId.getText());
     }
 
-
+    /**
+     * Starts the single player match
+     */
     @FXML
     private void singlePlayerClicked() {
         userInterpreter.execute("singlePlayer " + serverIp.getText() + " " + serverPort.getText() + " " + name.getText() + " " + matchId.getText());
     }
 
-
+    /**
+     * Unused method of the superClass
+     */
     @Override
     public void setPlayers(String players) {}
 }

@@ -18,7 +18,14 @@ import static it.polimi.ingsw.view.gui.WarehouseObjectTypeController.getContaine
         a2      b2
     a1      b1      c1
 */
-
+/**
+ * Represents the warehouse
+ *
+ *             a3
+ *         a2      b2
+ *     a1      b1      c1
+ *
+ */
 public class WarehouseController extends SubSceneController {
 
     @FXML private ImageView a1;
@@ -34,13 +41,18 @@ public class WarehouseController extends SubSceneController {
     @FXML private ImageView active2;
     @FXML private ImageView active1;
 
-
+    /**
+     * Initializes the class
+     */
     @Override
     public void initialize() {
         super.initialize();
     }
 
-
+    /**
+     * Updates the class status using values from the model
+     * @param completeUpdate array made of integer
+     */
     @Override
     public void update(int[] completeUpdate) {
         //put images in arrays to make it easier to iterate through them
@@ -74,7 +86,9 @@ public class WarehouseController extends SubSceneController {
 
 
 
-    //makes all of the objects invisible
+    /**
+     * Makes all of the objects invisible
+     */
     private void clearWarehouse() {
         a1.setVisible(false);
         a2.setVisible(false);
@@ -85,14 +99,19 @@ public class WarehouseController extends SubSceneController {
     }
 
 
-
+    /**
+     * Resets the green highlighting
+     */
     public void reset(){
         active1.setVisible(false);
         active2.setVisible(false);
         active3.setVisible(false);
     }
 
-
+    /**
+     * Sets active the highlighting of the row
+     * @param i row chosen
+     */
     public void setActive(int i){
         switch (i){
             case 1:
@@ -108,7 +127,9 @@ public class WarehouseController extends SubSceneController {
     }
 
 
-
+    /**
+     * Sets to 'a1'(coin, servant, ...) the selected item in the OfflineInfo class and highlights the third row of the warehouse
+     */
     @FXML
     void a1Clicked() {
         controllerInterpreter.execute("reset");
@@ -116,6 +137,9 @@ public class WarehouseController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Sets to 'b1'(coin, servant, ...) the selected item in the OfflineInfo class and highlights the third row of the warehouse
+     */
     @FXML
     void b1Clicked() {
         controllerInterpreter.execute("reset");
@@ -123,6 +147,9 @@ public class WarehouseController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Sets to 'c1'(coin, servant, ...) the selected item in the OfflineInfo class and highlights the third row of the warehouse
+     */
     @FXML
     void c1Clicked() {
         controllerInterpreter.execute("reset");
@@ -130,6 +157,9 @@ public class WarehouseController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Sets to 'a2'(coin, servant, ...) the selected item in the OfflineInfo class and highlights the second row of the warehouse
+     */
     @FXML
     void a2Clicked() {
         controllerInterpreter.execute("reset");
@@ -137,6 +167,9 @@ public class WarehouseController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Sets to 'b2'(coin, servant, ...) the selected item in the OfflineInfo class and highlights the second row of the warehouse
+     */
     @FXML
     void b2Clicked() {
         controllerInterpreter.execute("reset");
@@ -144,6 +177,9 @@ public class WarehouseController extends SubSceneController {
         userInterpreter.execute("selected " + offlineInfo.getSelectedItem());
     }
 
+    /**
+     * Sets to 'a3'(coin, servant, ...) the selected item in the OfflineInfo class and highlights the first row of the warehouse
+     */
     @FXML
     void a3Clicked() {
         controllerInterpreter.execute("reset");
@@ -152,7 +188,9 @@ public class WarehouseController extends SubSceneController {
     }
 
 
-
+    /**
+     * When clicking the green row, it puts the item (marble converted or supply) contained in the offlineInfo in the first row of the warehouse
+     */
     @FXML
     void active1Clicked() {
         //this should never happen
@@ -171,6 +209,9 @@ public class WarehouseController extends SubSceneController {
         controllerInterpreter.execute("reset");
     }
 
+    /**
+     * When clicking the green row, it puts the item (marble converted or supply) contained in the offlineInfo in the second row of the warehouse
+     */
     @FXML
     void active2Clicked() {
         //this should never happen
@@ -189,6 +230,9 @@ public class WarehouseController extends SubSceneController {
         controllerInterpreter.execute("reset");
     }
 
+    /**
+     * When clicking the green row, it puts the item (marble converted or supply) contained in the offlineInfo in the third row of the warehouse
+     */
     @FXML
     void active3Clicked() {
         //this should never happen
@@ -207,6 +251,9 @@ public class WarehouseController extends SubSceneController {
         controllerInterpreter.execute("reset");
     }
 
+    /**
+     * Selects the first row or make the swap with the row already selected
+     */
     @FXML
     void swap1Clicked() {
         //if no rows were selected, select this row
@@ -220,6 +267,9 @@ public class WarehouseController extends SubSceneController {
         }
     }
 
+    /**
+     * Selects the second row or make the swap with the row already selected
+     */
     @FXML
     void swap2Clicked() {
         //if no rows were selected, select this row
@@ -233,6 +283,9 @@ public class WarehouseController extends SubSceneController {
         }
     }
 
+    /**
+     * Selects the third row or make the swap with the row already selected
+     */
     @FXML
     void swap3Clicked() {
         //if no rows were selected, select this row

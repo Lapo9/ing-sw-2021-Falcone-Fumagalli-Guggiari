@@ -1024,7 +1024,10 @@ public class Dashboard implements HasStatus{
 
 
 
-    /*Gets the status of the dashboard and send it to all of the observers.*/
+
+    /**
+     * Gets the status of the dashboard and send it to all of the observers
+     */
     public void notifyViews(){
         //get the status of the dashboard
         ArrayList<Integer> status = new ArrayList<>(getStatus());
@@ -1052,27 +1055,35 @@ public class Dashboard implements HasStatus{
     }
 
 
-
+    /**
+     * Finds the index of the leader pick corresponding to the chosen player's leader (1 or 2)
+     * @param status array representing the status of the dashboard
+     * @param number index of the leader card of the player (1 or 2)
+     * @return the index of the leader pick
+     */
     private int findIndex(int[] status, int number) {
+        //leader1id
         if(number == 1) {
-            if(status[107] == status[143])
+            if(status[107] == status[143]) //leader1id (ID) == leaderPick1 (ID)
                 return 0;
-            else if (status[107] == status[158])
+            else if (status[107] == status[158]) //leader1id (ID) == leaderPick2 (ID)
                 return 1;
-            else if (status[107] == status[173])
+            else if (status[107] == status[173]) //leader1id (ID) == leaderPick3 (ID)
                 return 2;
-            else if (status[107] == status[188])
+            else if (status[107] == status[188]) //leader1id (ID) == leaderPick4 (ID)
                 return 3;
             else
                 return 0;
-        } else if (number == 2) {
-            if(status[122] == status[143])
+        }
+        //leader2id
+        else if (number == 2) {
+            if(status[122] == status[143]) //leader2id (ID) == leaderPick1 (ID)
                 return 0;
-            else if (status[122] == status[158])
+            else if (status[122] == status[158]) //leader2id (ID) == leaderPick2 (ID)
                 return 1;
-            else if (status[122] == status[173])
+            else if (status[122] == status[173]) //leader2id (ID) == leaderPick3 (ID)
                 return 2;
-            else if (status[122] == status[188])
+            else if (status[122] == status[188]) //leader2id (ID) == leaderPick4 (ID)
                 return 3;
             else
                 return 0;

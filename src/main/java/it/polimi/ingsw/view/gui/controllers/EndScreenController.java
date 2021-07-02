@@ -9,8 +9,7 @@ import javafx.fxml.FXML;
 public class EndScreenController extends SceneController{
 
     /**
-     * Does nothing
-     * @param completeUpdate (nothing)
+     * Unused method of the superClass
      */
     @Override
     public void update(int[] completeUpdate) {
@@ -27,7 +26,7 @@ public class EndScreenController extends SceneController{
     }
 
     /**
-     * Does nothing
+     * Unused method of the superClass
      */
     @Override
     public void initializeSubScenes() {
@@ -35,7 +34,7 @@ public class EndScreenController extends SceneController{
     }
 
     /**
-     * Does nothing
+     * Unused method of the superClass
      */
     @Override
     public void setPlayers(String players) {
