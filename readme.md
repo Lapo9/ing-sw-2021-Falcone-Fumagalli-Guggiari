@@ -94,3 +94,6 @@ The rules of the game specified in the game instruction document were sometimes 
 * **Advancement order**: in the rules it isn't specified in what order the players should move on the faith track, once an opponent has discarded any marble. We chose to advance every player by one tile simultaneously, and to trigger the Vatican report at the end of the one-tile advancement (not at the end of all of the advancements).
 * **Faith track points**: in the rules it isn't clear if the points gained thanks to the faith track are cumulative or only the ones given by the last tile reached. We chose cumulative.
 * **Marble discard**: rules in Italian and English, specify different things: Italian rules says that marbles can be discarded only if they don't fit in the warehouse, whereas English ones states that a player can discard marbles at his will. We chose English rules here.
+
+## Documentation
+To look at the javadoc please open `allclasses-index.html` in `deliverables/javadoc`.
